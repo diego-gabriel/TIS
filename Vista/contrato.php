@@ -1,4 +1,13 @@
 <!DOCTYPE html>
+
+<?php
+
+    include '../Modelo/conexion.php';
+   
+    $con=new conexion();
+    
+?>
+
 <html>
 
 <head>
@@ -161,7 +170,7 @@
                          <li>
                             <a href="#"><i class="fa fa-tasks fa-fw"></i> Tareas<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                                 <li>
+                                <li>
                                     <a href="contrato.php">Emitir Contrato </a>
                                 </li>
                                 <li>
@@ -178,7 +187,7 @@
                                             
                                         </li>
                                         <li>
-                                            <a href="#">Modalidades de Calificaci&oacute;n</a>
+                                            <a href="CrearModalidadCalificacion.php">Modalidades de Calificaci&oacute;n</a>
                                         </li>
                                         <li>
                                             <a id="Seguimiento" href="#">Seguimiento</a>
@@ -186,6 +195,9 @@
   
                                     </ul>
                                     <!-- /.nav-third-level -->
+                                </li>
+                                <li>
+                                            <a href="evaluacionFinal.php"> Evaluar Grupo Empresa </a>   
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -213,98 +225,81 @@
             <!-- /.navbar-static-side -->
         </nav>
 
-        <div class="modal fade modalRegistroAsistencia" role="dialog" data-backdrop="static" aria-hidden="true">
-            <div class="modal-dialog modal-md">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title">Asistencia</h4>
-                    </div>
-                    <div class="modal-body">
-                        
-                    </div>
 
-                </div>
+<!-------------------------------------------NUEVAS PUBLICACIONES------------------------------------------>
+<div id="page-wrapper">
+           
+<form id = "econtrato" method = "post" action="" role="form" >
+    <div class ="form-horizontal">
+         <div class="row">
+            <div class="col-lg-12">
+               <h1> Emitir Contrato <small></small></h1>           
             </div>
+         </div><!-- /.row -->
+    </div>    
+                <!--Descripcion de la publicacion--> 
+                
+ </form>               
+
+    <div class="form-group">
+    Grupo Empresa:
+    <form method="POST" action="emtirContrato.php" enctype="Multipart/form-data">
+        <select name="grupoempresa" class="form-control">
+            <option>Seleccione una grupo empresa</option>
+            <?php
+                $idAsesor='leticia';
+                $c1="SELECT ge.`NOMBRE_LARGO_GE` FROM `inscripcion` AS i,`asesor` AS a,`grupo_empresa` AS `ge`,`gestion` AS g,`proyecto` AS p WHERE i.`NOMBRE_UA` = a.`NOMBRE_U` AND i.`NOMBRE_UGE` = ge.`NOMBRE_U` AND i.`ID_G` = g.`ID_G` AND i.`CODIGO_P` = p.`CODIGO_P` AND a.`NOMBRE_U` LIKE '$idAsesor'";
+                $a1=$con->consulta($c1);
+                
+                while($v1 =  mysql_fetch_array($a1)){
+                    echo "<option>".$v1[0]."</option>";
+                }
+                echo "<input type='hidden' name='idAsesor' value='$idAsesor'>";
+            
+                ?>
+        </select><br>
+         <div class   ="col-sm-8">
+             <input class ="btn btn-primary" type="submit" value= "Generar PDF" id= "Generar PDF" name="Generar PDF" onclick ="this.form.action='../Controlador/emitirContrato.php?id=0'"></input> &nbsp;&nbsp;              
         </div>
-
-        <div class="modal fade modalRegistroReportes" role="dialog" data-backdrop="static" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title">Reportes</h4>
-                    </div>
-                    <div class="modal-body">
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="page-wrapper">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header"  >Bienvenido a SAETIS!</h1>
-                </div>
-                <!-- /.col-lg-12 -->
-            </div>
-            <!-- /.row -->
-            <div class="row">
-                <div class="col-lg-8">
-                  
-                    <div class="col-lg-12">
-                                
-                        <img  src="../Librerias/images/SAETIS.png" alt="portadaInicio" class=" img-thumbnail">
-                        
-                    </div>  
-                    
-                    <!-- /.panel -->
-                </div>
-                <!-- /.col-lg-8 -->
-                <div class="col-lg-4">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <i class="fa fa-bell fa-fw"></i> Panel de Notificaciones
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-                            <div class="list-group">
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-comment fa-fw"></i> Notificacion 1
-                                    <span class="pull-right text-muted small"><em>4 minutes ago</em>
-                                    </span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-comment fa-fw"></i> Notificacion 2
-                                    <span class="pull-right text-muted small"><em>12 minutes ago</em>
-                                    </span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-comment fa-fw"></i> Notificacion 3
-                                    <span class="pull-right text-muted small"><em>27 minutes ago</em>
-                                    </span>
-                                </a>
-                                
-                                
-                            </div>
-                            <!-- /.list-group -->
-                            <a href="#" class="btn btn-default btn-block">Ver Todas las Alertas</a>
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
-                    <!-- /.panel -->
-                </div>
-                <!-- /.col-lg-4 -->
-            </div>
-            <!-- /.row -->
-        </div>
-        <!-- /#page-wrapper -->
-
+    </form>
     </div>
+    
+    <div class   ="form-group">
+      
+    </div><!--end/submit-->
+                
+      
+    
 
+             
+    <!--Modal para adjuntar recursos/documentos-->
+         
+      
+    </div>
+    <!-- /#wrapper -->
+    
+
+    <!-- Core Scripts - Include with every page -->
+ 
+ 
+
+    <script src="../Librerias/js/bootstrap.min.js"></script>
     <script src="../Librerias/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+
+
+    <!-- SB Admin Scripts - Include with every page -->
     <script src="../Librerias/js/sb-admin.js"></script>
+  
+    <!-- Page-Level Demo Scripts - Dashboard - Use for reference -->
+    <script src="../Librerias/js/demo/dashboard-demo.js"></script>
+    <!-- Combo Box scripts -->
+ 
+  
+<script type="text/javascript">
+    
+     
+});
+</script>
 </body>
 
 </html>
