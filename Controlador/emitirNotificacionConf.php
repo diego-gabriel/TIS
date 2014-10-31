@@ -2,7 +2,7 @@
 <?php
 
 include '../Modelo/conexion_pd.php';
-include '../Modelo/crear_oc_pdf.php';
+
 $conexion = new conexion();
 $nombreAsesor = 'leticia' ;
 
@@ -17,27 +17,7 @@ if (isset($_POST['lista'])) {
 				$lugar=$_POST['lugar'];
 				$arr=$_POST['text'];
 				
-				$calificaciones = array();
-				$observaciones =array();
-				$encontrados=false;
-				$indice=1;
-				while (!$encontrados)
-				{
-					if(isset($_POST['nombre'.$indice]))
-					{
-					$observaciones[]=$_POST['nombre'.$indice];
-					}
-					else {
-					$encontrados=true;
-					}
-					$indice++;
-				}
-				if($observaciones == NULL){
-				 //	echo "<script type=\"text/javascript\">alert('Se requiere al menos una observaci\u00f3n '); window.location='ordendecambioEmpresas.php';</script>";
-
-				}
-				else{
-			 
+				$calificaciones = array();						 
 			
 				$queryStat = "SELECT ge.`NOMBRE_U` FROM `grupo_empresa` AS ge WHERE ge.`NOMBRE_LARGO_GE` LIKE '$nombreEmpresa'";
 				$stmt      = $conexion->query($queryStat);
@@ -77,8 +57,6 @@ if (isset($_POST['lista'])) {
                                         'quinto_p'             => '[[quinto-puntaje]]',
                                         'sexto_p'              => '[[sexto-puntaje]]',
                                         'septimo_p'            => '[[septimo-puntaje]]',
-                                        'obs_det'              => '[[obs-detalle]]',
-                                        'obs_det_item'         => '[[obs-detalle-item]]',
                                      );
 
 
@@ -95,43 +73,18 @@ if (isset($_POST['lista'])) {
                                     $remplazo['sexto_p'] = $calificaciones[5];
                                     $remplazo['septimo_p'] = $calificaciones[6];
 					
-
-                                    $obsDetalle = "[".count($observaciones)."]{";
-                                    
-                                    for ($i=0;$i<count($observaciones);$i++)
-                                    {
-                                        if($i!=0)
-                                        {
-                                            $obsDetalle = $obsDetalle." \item #".($i+1);
-                                        }
-                                        else
-                                        {
-                                            $obsDetalle = $obsDetalle."\item #".($i+1);
-                                        }
-                                    }
-                                    $obsDetalle = $obsDetalle."}";
-                                    $remplazo['obs_det'] = $obsDetalle;              
-                                    
-                                    $obsDetalleItem = "";
-                                    
-                                    for ($i=0;$i<count($observaciones);$i++)
-                                    {
-                                        $obsDetalleItem = $obsDetalleItem."{".$observaciones[$i]."}";         
-                                    }
-                                    
-                                    $remplazo['obs_det_item'] = $obsDetalleItem;
                                 
                                     $ruta = "..\\Repositorio\\asesor";
                                     chdir($ruta);
         
-                                    $id = "OrdenCambio";
+                                    $id = "NotificacionConformidad";
                                     $tex = $id.".tex";
                                     $log = $id.".log"; 
                                     $aux = $id.".aux";
                                     $pdf = $id.".pdf"; 
                                     
 
-                                    $plantilla = "OrdenCambio.tex";
+                                    $plantilla = "NotificacionConformidad.tex";
 
                                     $texto = file_get_contents($plantilla);
                                     $textoAux = file_get_contents($plantilla);
@@ -148,9 +101,6 @@ if (isset($_POST['lista'])) {
                                     $texto = str_replace($buscar['quinto_p'], $remplazo['quinto_p'], $texto);
                                     $texto = str_replace($buscar['sexto_p'], $remplazo['sexto_p'], $texto);
                                     $texto = str_replace($buscar['septimo_p'], $remplazo['septimo_p'], $texto);
-                                    $texto = str_replace($buscar['obs_det'], $remplazo['obs_det'], $texto);
-                                    $texto = str_replace($buscar['obs_det_item'], $remplazo['obs_det_item'], $texto);
-                                    
                                     
                                     file_put_contents($tex,$texto);
                                     
@@ -161,20 +111,20 @@ if (isset($_POST['lista'])) {
                                     unlink($aux);
                                     
                                     
-                                    $rutaDirectorio="../".$nombreEmpresa."/OC/";
+                                    $rutaDirectorio="../".$nombreEmpresa."/NC/";
 
-                               	    $file = "OrdenCambio".'_'.$nombreEmpresa.'.pdf';
+                               	    $file = "NotificacionConformidad".'_'.$nombreEmpresa.'.pdf';
         
                                     if (!file_exists($rutaDirectorio)) 
                                     {
                                         mkdir($rutaDirectorio, 0777,TRUE);
                                     }
                                     
-                                    rename("OrdenCambio.pdf", $file);
+                                    rename("NotificacionConformidad.pdf", $file);
                                     rename($file, $rutaDirectorio.$pdf );
 					
 				}
-				}
+				
 			}
 		 
 			

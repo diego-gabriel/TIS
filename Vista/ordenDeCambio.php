@@ -1,10 +1,17 @@
 <!DOCTYPE html>
+
+<?php
+
+    require '../Modelo/conexion.php';
+   
+    $con=new conexion();
+    
+?>
+
 <html>
 
 <head>
-    
-    
-    
+       
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -222,7 +229,17 @@
                       <label class="col-sm-2 control-label">Grupo Empresa</label>
                         <div class="col-xs-4">
                           <select name="lista" class="form-control">
-                              {llenar_GE}
+                            <option>Seleccione una grupo empresa</option>
+                            <?php
+                                $idAsesor='leticia';
+                                $c1="SELECT ge.`NOMBRE_LARGO_GE` FROM `inscripcion` AS i,`asesor` AS a,`grupo_empresa` AS `ge`,`gestion` AS g,`proyecto` AS p WHERE i.`NOMBRE_UA` = a.`NOMBRE_U` AND i.`NOMBRE_UGE` = ge.`NOMBRE_U` AND i.`ID_G` = g.`ID_G` AND i.`CODIGO_P` = p.`CODIGO_P` AND a.`NOMBRE_U` LIKE '$idAsesor'";
+                                $a1=$con->consulta($c1);
+
+                                while($v1 =  mysql_fetch_array($a1)){
+                                    echo "<option>".$v1[0]."</option>";
+                                }
+                                echo "<input type='hidden' name='idAsesor' value='$idAsesor'>";           
+                            ?>
                             </select>
                         </div>
                       </div><!--end/grupoempresas-->
@@ -306,24 +323,29 @@
                         </div>
                       </div><!--end/campoDescripcion-->
 
+                 
+                      
                       <div class="form-group">
-                        <label class="col-xs-2 control-label">Fecha</label>
-                        <div class="col-sm-1" >
-                        <input type="text" class="form-control" style="width:100px;heigth:30px;" id="fecha" name="fecha" readonly="readonly">
+                        <label class="col-xs-2 control-label">Fecha de la reuni&oacute;n:</label>
+                        <div class="col-sm-1">
+                        <input class="form-control" style="width:500px;heigth:30px;" name="fecha" id="fecha"  >
                         </div>
-                        
-                        <div>
-                        <label class="col-sm-1 control-label">Hora</label>
-                        <input type="text" class="form-control" style="width:100px;heigth:30px;" id="hora" name="hora" readonly="readonly">
-                        </div>
-                        
+      
                     </div><!--end/fecha-->
 
+                     <div class="form-group">
+                        <label class="col-xs-2 control-label">Hora de la reuni&oacute;n:</label>
+                        <div class="col-sm-1" >
+                        <input class="form-control" style="width:500px;heigth:30px;"  name="hora" id="hora"  placeholder="HH:MM" readonly="readonly">
+                    </div>
+      
+                    </div><!--end/fecha-->
+                    
                     <div class="form-group">
-                        <label class="col-xs-2 control-label">Lugar</label>
+                        <label class="col-xs-2 control-label">Lugar de la reuni&oacute;n:</label>
                         <div class="col-sm-2" >
-                        <input type="text" class="form-control" style="width:200px;heigth:30px;" id="lugar" name="lugar" >
-                        </div>
+                        <input class="form-control" style="width:500px;heigth:30px;"  name="lugar">
+                      </div>
                         
                     </div><!--end/lugar-->
 
@@ -339,8 +361,8 @@
 
                     <div class   ="form-group">
                        <div class   ="col-sm-8">
-                      <input class ="btn btn-primary" type="submit" value= "Enviar" id= "enviar" name="enviar" onclick ="this.form.action='../Controlador/ordendecambio.php?id=0'"></input> &nbsp;&nbsp;
-                      <input class ="btn btn-primary" type="submit" value= "Ver" id= "ver" name="ver" onclick ="this.form.action='../Controlador/ordendecambio.php?id=1'"></input> 
+                      <input class ="btn btn-primary" type="submit" value= "Generar" id= "enviar" name="enviar" onclick ="this.form.action='../Controlador/ordendecambio.php?id=0'"></input> &nbsp;&nbsp;
+
                       
                       </div>
                     </div><!--end/submit-->
@@ -362,7 +384,8 @@
     <!-- Core Scripts - Include with every page -->
  
  
-
+    <script type="text/javascript" src="../Librerias/calendario2/jquery.js"></script>
+    <script type="text/javascript" src="../Librerias/calendario2/jquery.datetimepicker.js"></script>
     <script src="../Librerias/js/bootstrap.min.js"></script>
     <script src="../Librerias/js/plugins/metisMenu/jquery.metisMenu.js"></script>
 

@@ -24,6 +24,7 @@ if (isset($_POST['grupoempresa'])) {
             'asesor'               => '[[asesor]]',
             'fecha_actual'         => '[[fecha-actual]]',
             'hora_actual'          => '[[hora-actual]]',
+         
         );
 
 
@@ -35,15 +36,16 @@ if (isset($_POST['grupoempresa'])) {
 
         $ruta = "..\\Repositorio\\asesor";
         chdir($ruta);
-        $id = "contrato";
-
+        
+        $id = "Contrato";
         $tex = $id.".tex"; 
         $log = $id.".log"; 
-        $aux = $id.".aux"; 
-        $pdf = $id.".pdf"; 
+        $aux = $id.".aux";
+        $nombCorto = str_replace(' ', '', $nombreCorto);
+        $pdf = $id.$nombCorto.".pdf"; 
 
 
-        $plantilla = "contrato.tex";
+        $plantilla = "Contrato.tex";
 
         $texto = file_get_contents($plantilla);
         $textoAux = file_get_contents($plantilla);
@@ -62,9 +64,8 @@ if (isset($_POST['grupoempresa'])) {
         file_put_contents($tex, $textoAux);
         unlink($log);
         unlink($aux);
+        rename("Contrato.pdf", $pdf);
         
-        
-       header("location:../Vista/contrato.php");
     }
     else{        
        echo"<script type=\"text/javascript\">alert('Seleccione una grupo empresa'); window.location='../Vista/contrato.php';</script>";  

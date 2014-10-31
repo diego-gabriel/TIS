@@ -19,7 +19,7 @@
 		}
 		//echo $empresas; 
 		
-
-		$template = file_get_contents("../Vista/ordenDeCambio.php");
+		$template = file_get_contents("../Vista/ordenDeCambio.php"); //***
 		$template = str_replace('{llenar_GE}',$empresas, $template);
 		print($template); 
+                ?>

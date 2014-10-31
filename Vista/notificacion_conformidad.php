@@ -2,7 +2,7 @@
 
 <?php
 include "../Modelo/conexion.php";
-
+ $con=new conexion();
 date_default_timezone_set('America/Argentina/Tucuman');
 $fecha=  date('Y-m-d');
 $hora= date('G:H:i');
@@ -211,100 +211,191 @@ $resultado = $clas->consulta("SELECT ge.`NOMBRE_LARGO_GE` FROM `asesor` AS a,`gr
         </nav>
 
         
-	
-        
-        
-        <div id="page-wrapper">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h2 class="page-header">Emitir Notificaci&oacute;n de Conformidad</h2>
-                    <div class="col-lg-6" >
-                        <form name="formulario1" role=form" method="post" enctype="multipart/data-form" onsubmit="return validarCampos(this)">
-                            <div class="form-group">
-                                <label>Escoja el Nombre de La Grupo Empresa:</label>
-                                <select name="lista" class="form-control">
-                                                <?php
-                                                
-                                                
-                                                
-                                                 while ($i = mysql_fetch_array($resultado))
-                                                    {
-                                                        echo "<option value = '".$i['0']."'>".$i[0]."</option>";
-                                                    }
-                                                    echo "<input type='hidden' name='idUsuarioAsesor' value='$idAsesor'>";
-                                                ?>
-                                </select><br>
-                                
-                                
-                                <!--llenamos los puntos-->
-                                <label>Califique la puntuaci&oacute;n:<br><br></label><br>
-                                <label>Cumplimiento de especificaciones del proponente (sobre 15 puntos):</label>
-                                <input class="form-control" name="cali1" onkeypress="return validarNumeros(event)">
-                                <label>Claridad en la organizaci&oacute;n de la empresa proponente (sobre 10 puntos):</label>
-                                <input class="form-control" name="cali2" onkeypress="return validarNumeros(event)">
-                                <label>Cumplimiento de especificaciones t&eacute;cnicas (sobre 30 puntos):</label>
-                                <input class="form-control" name="cali3" onkeypress="return validarNumeros(event)">
-                                <label>Claridad en el proceso de desarrollo (sobre 10 puntos):</label>
-                                <input class="form-control" name="cali4" onkeypress="return validarNumeros(event)">
-                                <label>Plazo de ejecuci&oacute;n (sobre 10 puntos):</label>
-                                <input class="form-control" name="cali5" onkeypress="return validarNumeros(event)">
-                                <label>Precio total (sobre 15 puntos):</label>
-                                <input class="form-control" name="cali6" onkeypress="return validarNumeros(event)">
-                                <label>Uso de herramientas en el proceso de desarrollo (sobre 10 puntos):</label>
-                                <input class="form-control" name="cali7" onkeypress="return validarNumeros(event)">
-                                
-                                <label>Fecha de la reuni&oacute;n:</label>
-                                <input class="form-control" name="fecha" id="fecha"  placeholder="AAAA-MM-DD" readonly="readonly">
-                                <label>Hora de la reuni&oacute;n:</label>
-                                <input class="form-control" name="hora" id="hora"  placeholder="HH:MM" readonly="readonly">
-                                <label>Lugar de la reuni&oacute;n:</label>
-                                <input class="form-control" name="lugar">
-                                <br>
-                                <button type="submit" onclick="this.form.action='enviar_notificacion_conformidad_pdf.php'" class="btn btn-primary">Emitir</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <button type="submit" onclick="this.form.action='ver_notificacion_conformidad_pdf.php'" class="btn btn-primary" >Ver Modelo del Documento</button>
-                                
-                            </div>
-                        </form>
-                        <script type="text/javascript" src="../Librerias/calendario2/jquery.js"></script>
-                        <script type="text/javascript" src="../Librerias/calendario2/jquery.datetimepicker.js"></script>
-                    </div>
+	<!----------------------------------------------------------------------------------------------->
+ <div id="page-wrapper">
+           
+<form id = "ordenc" method = "post" action="" role="form" enctype="multipart/data-form" onsubmit="return validarCampos(ordenc)">
+        <div class ="form-horizontal">
+                <div class="row">
+              <div class="col-lg-12">
+                <h1> Emitir Notificacion de Conformidad <small></small></h1>
+                 
                 </div>
-                <!-- /.col-lg-12 -->
-            </div>
-            <!-- /.row -->
-        </div>
+            </div><!-- /.row -->
+               
+                <!--Descripcion de la publicacion-->                 
+               
+                    
+                      <div class="form-group">
+                      <label class="col-sm-2 control-label">Grupo Empresa</label>
+                        <div class="col-xs-4">
+                          <select name="lista" class="form-control">
+                            <option>Seleccione una grupo empresa</option>
+                            <?php
+                                $idAsesor='leticia';
+                                $c1="SELECT ge.`NOMBRE_LARGO_GE` FROM `inscripcion` AS i,`asesor` AS a,`grupo_empresa` AS `ge`,`gestion` AS g,`proyecto` AS p WHERE i.`NOMBRE_UA` = a.`NOMBRE_U` AND i.`NOMBRE_UGE` = ge.`NOMBRE_U` AND i.`ID_G` = g.`ID_G` AND i.`CODIGO_P` = p.`CODIGO_P` AND a.`NOMBRE_U` LIKE '$idAsesor'";
+                                $a1=$con->consulta($c1);
 
+                                while($v1 =  mysql_fetch_array($a1)){
+                                    echo "<option>".$v1[0]."</option>";
+                                }
+                                echo "<input type='hidden' name='idAsesor' value='$idAsesor'>";           
+                            ?>
+                            </select>
+                        </div>
+                      </div><!--end/grupoempresas-->
+                  </br>
+                      <!--Campo de descripcion-->
+                      <div class="form-group">
+                        <label class="col-sm-2 control-label">Puntuacion</label>
+                        <div class="col-sm-8">
+                         <table class="table form-group ">                                                          
+                          <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>Descripción</th>
+                          <th>Puntaje Referencial</th>
+                          <th>Puntaje Obtenido</th>
+                          
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>1</td>
+                          <td>Cumplimiento de especificaciones del proponente</td>
+                          <td>15 puntos</td>
+                          <td> 
+                           <input type="text" class="form-control" style ="width:45px;height:45px;" name="text[1]" id="textfield1" onkeypress="return validarNumeros(event)">
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>2</td>
+                          <td>Claridad en la organizaci&oacute;n de la empresa proponente</td>
+                          <td>10 puntos</td>
+                          <td>
+                              <input type="text" class="form-control" style ="width:45px;height:45px;" name="text[2]" id="textfield2" onkeypress="return validarNumeros(event)">
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>3</td>
+                          <td>Cumplimiento de especificaciones t&eacute;cnicas</td>
+                          <td>30 puntos</td>
+                          <td>
+                              <input type="text" class="form-control" style ="width:45px;height:45px;" name="text[3]" id="textfield3" onkeypress="return validarNumeros(event)">
+                          </td>
+                        </tr>
+
+                        <tr>
+                          <td>4</td>
+                          <td>Claridad en el proceso de desarrollo</td>
+                          <td>10 puntos</td>
+                          <td>
+                              <input type="text" class="form-control" style ="width:45px;height:45px;" name="text[4]" id="textfield4" onkeypress="return validarNumeros(event)">
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>5</td>
+                          <td>Plazo de Ejecuci&oacute;n</td>
+                          <td>10 puntos</td>
+                          <td>
+                              <input type="text" class="form-control" style ="width:45px;height:45px;" name="text[5]" id="textfield5" onkeypress="return validarNumeros(event)">
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>6</td>
+                          <td>Precio total</td>
+                          <td>15 puntos</td>
+                          <td>
+                              <input type="text" class="form-control" style ="width:45px;height:45px;" name="text[6]" id="textfield6" onkeypress="return validarNumeros(event)">
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>7</td>
+                          <td>Uso de herramientas en el proceso de desarrollo</td>
+                          <td>10 puntos</td>
+                          <td>
+                              <input type="text" class="form-control" style ="width:45px;height:45px;" name="text[7]" id="textfield7" onkeypress="return validarNumeros(event)">
+                          </td>
+                        </tr>
+
+                </tbody>
+                         </table> 
+                        
+                        </div>
+                      </div><!--end/campoDescripcion-->
+
+                 
+                      
+                      <div class="form-group">
+                        <label class="col-xs-2 control-label">Fecha de la reuni&oacute;n:</label>
+                        <div class="col-sm-1">
+                        <input class="form-control" style="width:500px;heigth:30px;" name="fecha" id="fecha"  >
+                        </div>
+      
+                    </div><!--end/fecha-->
+
+                     <div class="form-group">
+                        <label class="col-xs-2 control-label">Hora de la reuni&oacute;n:</label>
+                        <div class="col-sm-1" >
+                        <input class="form-control" style="width:500px;heigth:30px;"  name="hora" id="hora"  placeholder="HH:MM" readonly="readonly">
+                    </div>
+      
+                    </div><!--end/fecha-->
+                    
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label">Lugar de la reuni&oacute;n:</label>
+                        <div class="col-sm-2" >
+                        <input class="form-control" style="width:500px;heigth:30px;"  name="lugar">
+                      </div>
+                        
+                    </div><!--end/lugar-->
+
+
+
+                    <div class   ="form-group">
+                       <div class   ="col-sm-8">
+                      <input class ="btn btn-primary" type="submit" value= "Generar" id= "enviar" name="enviar" onclick ="this.form.action='../Controlador/emitirNotificacionConf.php?id=0'"></input> &nbsp;&nbsp;
+                       </div>
+                    </div><!--end/submit-->
+
+                   
+                 </div> 
+
+    </form>
+    
+
+             
+    <!--Modal para adjuntar recursos/documentos-->
+         
+      
     </div>
     <!-- /#wrapper -->
+    
 
     <!-- Core Scripts - Include with every page -->
-   <!--<script src="js/jquery-1.10.2.js"></script>-->
-    
-    
-    
-    
-    
-    
-    
+ 
+ 
+     <script type="text/javascript" src="../Librerias/calendario2/jquery.js"></script>
+     <script type="text/javascript" src="../Librerias/calendario2/jquery.datetimepicker.js"></script>
     <script src="../Librerias/js/bootstrap.min.js"></script>
-   
-    
-    
-    
-    
     <script src="../Librerias/js/plugins/metisMenu/jquery.metisMenu.js"></script>
 
-    <!-- Page-Level Plugin Scripts - Dashboard -->
-    <script src="../Librerias/js/plugins/morris/raphael-2.1.0.min.js"></script>
-    <script src="../Librerias/js/plugins/morris/morris.js"></script>
 
     <!-- SB Admin Scripts - Include with every page -->
     <script src="../Librerias/js/sb-admin.js"></script>
-
+  
     <!-- Page-Level Demo Scripts - Dashboard - Use for reference -->
     <script src="../Librerias/js/demo/dashboard-demo.js"></script>
+    <!-- Combo Box scripts -->
+ 
+  
+<script type="text/javascript">
      
-    
+});
+</script>
 </body>
 
 </html>
+       
+        
+   
