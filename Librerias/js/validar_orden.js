@@ -56,10 +56,17 @@ function validarNumeros(e)
   
 function validarCampos(formulario) {
         
+                
+        if(formulario.lista.selectedIndex == 0) 
+        {
+            alert('Por favor, seleccione una grupo empresa');
+            return false;
+        }
+        
         if(indice==0){alert('Se requiere al menos una Observaci\u00f3n');
         
         return false;}
-        
+    
         //Controlar campos vacios y caracteres invalidos del nombre largo de la empresa
         if(formulario.textfield1.value.length==0) {  
             formulario.textfield1.focus();    
@@ -308,6 +315,8 @@ function validarCampos(formulario) {
         return false;  
         }
         
+
+    
         return true; 
 
       

@@ -11,7 +11,8 @@ if (isset($_POST['lista'])) {
 		if (isset($_POST['hora'])) {
 			if (isset($_POST['lugar'])) {
 				
-				$nombreEmpresa=$_POST['lista'];
+                            $nombreEmpresa=$_POST['lista'];
+                            if(strnatcasecmp($nombreEmpresa, "Seleccione una grupo empresa")!=0){
 				$fecha=$_POST['fecha'];
 				$hora=$_POST['hora'];
 				$lugar=$_POST['lugar'];
@@ -87,13 +88,13 @@ if (isset($_POST['lista'])) {
                                     $remplazo['hora_actual']  = $hora;
                                     $remplazo['lugar'] = $lugar;
                                    
-                                    $remplazo['primer_p'] = $calificaciones[0];
-                                    $remplazo['segundo_p'] = $calificaciones[1];
-                                    $remplazo['tercer_p'] = $calificaciones[2];
-                                    $remplazo['cuarto_p'] = $calificaciones[3];
-                                    $remplazo['quinto_p'] = $calificaciones[4];
-                                    $remplazo['sexto_p'] = $calificaciones[5];
-                                    $remplazo['septimo_p'] = $calificaciones[6];
+                                    $remplazo['primer_p'] = intval($calificaciones[0]);
+                                    $remplazo['segundo_p'] = intval($calificaciones[1]);
+                                    $remplazo['tercer_p'] = intval($calificaciones[2]);
+                                    $remplazo['cuarto_p'] = intval($calificaciones[3]);
+                                    $remplazo['quinto_p'] = intval($calificaciones[4]);
+                                    $remplazo['sexto_p'] = intval($calificaciones[5]);
+                                    $remplazo['septimo_p'] = intval($calificaciones[6]);
 					
 
                                     $obsDetalle = "[".count($observaciones)."]{";
@@ -172,11 +173,13 @@ if (isset($_POST['lista'])) {
                                     
                                     rename("OrdenCambio.pdf", $file);
                                     rename($file, $rutaDirectorio.$pdf );
+                                    header("location:../Vista/ordenDeCambio.php");
 					
 				}
 				}
 			}
-		 
+                        
+                        }
 			
 		}
 		

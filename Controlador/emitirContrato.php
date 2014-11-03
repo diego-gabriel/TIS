@@ -65,10 +65,10 @@ if (isset($_POST['grupoempresa'])) {
         unlink($log);
         unlink($aux);
         rename("Contrato.pdf", $pdf);
-        
+        header("location:../Vista/contrato.php");
     }
     else{        
-       echo"<script type=\"text/javascript\">alert('Seleccione una grupo empresa'); window.location='../Vista/contrato.php';</script>";  
+       echo"<script type=\"text/javascript\">alert('Por favor, seleccione una grupo empresa'); window.location='../Vista/contrato.php';</script>";  
     }
     
     

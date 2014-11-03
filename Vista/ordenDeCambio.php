@@ -225,21 +225,22 @@
                 <!--Descripcion de la publicacion-->                 
                
                     
-                      <div class="form-group">
+                      <div class="form-group" >
                       <label class="col-sm-2 control-label">Grupo Empresa</label>
-                        <div class="col-xs-4">
+                        <div class="col-xs-4"> 
                           <select name="lista" class="form-control">
-                            <option>Seleccione una grupo empresa</option>
+                            <option selected value="0">Seleccione una grupo empresa </option>
                             <?php
                                 $idAsesor='leticia';
                                 $c1="SELECT ge.`NOMBRE_LARGO_GE` FROM `inscripcion` AS i,`asesor` AS a,`grupo_empresa` AS `ge`,`gestion` AS g,`proyecto` AS p WHERE i.`NOMBRE_UA` = a.`NOMBRE_U` AND i.`NOMBRE_UGE` = ge.`NOMBRE_U` AND i.`ID_G` = g.`ID_G` AND i.`CODIGO_P` = p.`CODIGO_P` AND a.`NOMBRE_U` LIKE '$idAsesor'";
                                 $a1=$con->consulta($c1);
-
-                                while($v1 =  mysql_fetch_array($a1)){
-                                    echo "<option>".$v1[0]."</option>";
+                                
+                                while($grupoE =  mysql_fetch_array($a1)){
+                                    echo "<option>".$grupoE[0]."</option>";
                                 }
                                 echo "<input type='hidden' name='idAsesor' value='$idAsesor'>";           
                             ?>
+                            
                             </select>
                         </div>
                       </div><!--end/grupoempresas-->
@@ -358,12 +359,11 @@
                          <div id = "observaciones" style="height: 200px;width:600px;overflow: scroll">
                          </div>
                       </div><!--end/observaciones-->
-
+                     
+                    
                     <div class   ="form-group">
-                       <div class   ="col-sm-8">
-                      <input class ="btn btn-primary" type="submit" value= "Generar" id= "enviar" name="enviar" onclick ="this.form.action='../Controlador/ordendecambio.php?id=0'"></input> &nbsp;&nbsp;
-
-                      
+                      <div class   ="col-sm-8">
+                         <input class ="btn btn-primary" type="submit" value= "Generar" id= "enviar" name="enviar" onclick ="this.form.action='../Controlador/ordendecambio.php?id=0'"></input> &nbsp;&nbsp;                      
                       </div>
                     </div><!--end/submit-->
 

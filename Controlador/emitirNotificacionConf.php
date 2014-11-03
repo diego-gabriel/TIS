@@ -2,7 +2,7 @@
 <?php
 
 include '../Modelo/conexion_pd.php';
-
+include '../Modelo/crear_oc_pdf.php';
 $conexion = new conexion();
 $nombreAsesor = 'leticia' ;
 
@@ -11,14 +11,15 @@ if (isset($_POST['lista'])) {
 		if (isset($_POST['hora'])) {
 			if (isset($_POST['lugar'])) {
 				
-				$nombreEmpresa=$_POST['lista'];
+                            $nombreEmpresa=$_POST['lista'];
+                            if(strnatcasecmp($nombreEmpresa, "Seleccione una grupo empresa")!=0){
 				$fecha=$_POST['fecha'];
 				$hora=$_POST['hora'];
 				$lugar=$_POST['lugar'];
 				$arr=$_POST['text'];
 				
-				$calificaciones = array();						 
-			
+				$calificaciones = array();
+										 			
 				$queryStat = "SELECT ge.`NOMBRE_U` FROM `grupo_empresa` AS ge WHERE ge.`NOMBRE_LARGO_GE` LIKE '$nombreEmpresa'";
 				$stmt      = $conexion->query($queryStat);
 				$row       = $stmt->fetchObject();
@@ -65,13 +66,13 @@ if (isset($_POST['lista'])) {
                                     $remplazo['hora_actual']  = $hora;
                                     $remplazo['lugar'] = $lugar;
                                    
-                                    $remplazo['primer_p'] = $calificaciones[0];
-                                    $remplazo['segundo_p'] = $calificaciones[1];
-                                    $remplazo['tercer_p'] = $calificaciones[2];
-                                    $remplazo['cuarto_p'] = $calificaciones[3];
-                                    $remplazo['quinto_p'] = $calificaciones[4];
-                                    $remplazo['sexto_p'] = $calificaciones[5];
-                                    $remplazo['septimo_p'] = $calificaciones[6];
+                                    $remplazo['primer_p'] = intval($calificaciones[0]);
+                                    $remplazo['segundo_p'] = intval($calificaciones[1]);
+                                    $remplazo['tercer_p'] = intval($calificaciones[2]);
+                                    $remplazo['cuarto_p'] = intval($calificaciones[3]);
+                                    $remplazo['quinto_p'] = intval($calificaciones[4]);
+                                    $remplazo['sexto_p'] = intval($calificaciones[5]);
+                                    $remplazo['septimo_p'] = intval($calificaciones[6]);
 					
                                 
                                     $ruta = "..\\Repositorio\\asesor";
@@ -100,7 +101,7 @@ if (isset($_POST['lista'])) {
                                     $texto = str_replace($buscar['cuarto_p'], $remplazo['cuarto_p'], $texto);
                                     $texto = str_replace($buscar['quinto_p'], $remplazo['quinto_p'], $texto);
                                     $texto = str_replace($buscar['sexto_p'], $remplazo['sexto_p'], $texto);
-                                    $texto = str_replace($buscar['septimo_p'], $remplazo['septimo_p'], $texto);
+                                    $texto = str_replace($buscar['septimo_p'], $remplazo['septimo_p'], $texto);                                  
                                     
                                     file_put_contents($tex,$texto);
                                     
@@ -122,16 +123,14 @@ if (isset($_POST['lista'])) {
                                     
                                     rename("NotificacionConformidad.pdf", $file);
                                     rename($file, $rutaDirectorio.$pdf );
+                                    header("location:../Vista/notificacion_conformidad.php");
 					
-				}
-				
-			}
-		 
+				}	
+			}               
+                        }
 			
-		}
-		
+		}		
 	}
-
 }
 
 ?>

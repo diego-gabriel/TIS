@@ -259,7 +259,7 @@
                 ?>
         </select><br>
          <div class   ="col-sm-8">
-             <input class ="btn btn-primary" type="submit" value= "Generar PDF" id= "Generar PDF" name="Generar PDF" onclick ="this.form.action='../Controlador/emitirContrato.php?id=0'"></input> &nbsp;&nbsp;              
+             <input class ="btn btn-primary" type="submit" value= "Generar" id= "Generar PDF" name="Generar PDF" onclick ="this.form.action='../Controlador/emitirContrato.php?id=0'"></input> &nbsp;&nbsp;              
         </div>
     </form>
     </div>
