@@ -46,11 +46,6 @@
     <script type="text/javascript" src="../Librerias/calendario2/jquery.datetimepicker.js"></script>
     <script type="text/javascript" src="../Librerias/js/validar_orden.js"></script>
     <script type="text/javascript" src="../Librerias/js/masked_input.js"></script>
-    
-    
-    
-    
-  
       
 </head>
 
@@ -161,6 +156,9 @@
                          <li>
                             <a href="#"><i class="fa fa-tasks fa-fw"></i> Tareas<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
+                                 <li>
+                                    <a href="contrato.php">Emitir Contrato </a>
+                                </li>
                                 <li>
                                     <a href="ordendecambioempresas.php">Emitir Orden de Cambio</a>
                                 </li>

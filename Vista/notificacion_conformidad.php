@@ -161,6 +161,9 @@ $resultado = $clas->consulta("SELECT ge.`NOMBRE_LARGO_GE` FROM `asesor` AS a,`gr
                             <a href="#"><i class="fa fa-tasks fa-fw"></i> Tareas<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
+                                    <a href="contrato.php">Emitir Contrato </a>
+                                </li>
+                                <li>
                                     <a href="ordendecambioempresas.php">Emitir Orden de Cambio</a>
                                 </li>
                                 <li>

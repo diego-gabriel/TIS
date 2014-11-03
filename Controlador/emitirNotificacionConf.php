@@ -124,7 +124,8 @@ if (isset($_POST['lista'])) {
                                     rename("NotificacionConformidad.pdf", $file);
                                     rename($file, $rutaDirectorio.$pdf );
                                     header("location:../Vista/notificacion_conformidad.php");
-					
+				 
+                                    
 				}	
 			}               
                         }
