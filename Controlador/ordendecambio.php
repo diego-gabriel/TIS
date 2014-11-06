@@ -1,4 +1,12 @@
 
+<html>
+    
+    <head>
+        <script src="../Librerias/js/bootstrap-dialog.js"></script>
+  
+    </head>
+</html>>
+
 <?php
 
 include '../Modelo/conexion_pd.php';
@@ -10,8 +18,16 @@ if (isset($_POST['lista'])) {
 	if (isset($_POST['fecha'])) {
 		if (isset($_POST['hora'])) {
 			if (isset($_POST['lugar'])) {
-				
-                            $nombreEmpresa=$_POST['lista'];
+			
+                            $existeFile = FALSE;
+                            $nombre_fichero = '../Repositorio/asesor/OrdenCambio.tex';
+                            if (file_exists($nombre_fichero)) {
+                                $existeFile = TRUE;
+                            }
+                            
+                           if($existeFile){
+                            $nombreEmpresa=$_POST['lista']; 
+                           
                             if(strnatcasecmp($nombreEmpresa, "Seleccione una grupo empresa")!=0){
 				$fecha=$_POST['fecha'];
 				$hora=$_POST['hora'];
@@ -26,16 +42,26 @@ if (isset($_POST['lista'])) {
 				{
 					if(isset($_POST['nombre'.$indice]))
 					{
-					$observaciones[]=$_POST['nombre'.$indice];
+					 $observaciones[]=$_POST['nombre'.$indice];
 					}
 					else {
-					$encontrados=true;
+					 $encontrados=true;
 					}
 					$indice++;
 				}
-				if($observaciones == NULL){
-				 //	echo "<script type=\"text/javascript\">alert('Se requiere al menos una observaci\u00f3n '); window.location='ordendecambioEmpresas.php';</script>";
-
+                                $vacio =FALSE;
+                                for ($i=0;$i<count($observaciones);$i++)
+                                {
+                                        if($observaciones[$i]==null || $observaciones[$i]=="")
+                                        {
+                                            $vacio = TRUE;
+                                        }
+                                }
+                                    
+				if($observaciones == NULL || $vacio == TRUE){
+                                // echo "<script>  BootstrapDialog.alert('Las observaciones no pueden estar en blanco'); </script>";
+				 echo "<script type=\"text/javascript\">alert('Las observaciones no pueden estar en blanco '); window.location='../Vista/ordenDeCambio.php';</script>";
+                                 
 				}
 				else{
 			 
@@ -178,8 +204,13 @@ if (isset($_POST['lista'])) {
 				}
 				}
 			}
-                        
                         }
+                        else{
+                             echo"<script type=\"text/javascript\">alert('Por favor, suba la plantilla del Orden de cambio a su repositorio); window.location='../Vista/ordenDeCambio.php';</script>";
+                                 
+                        }
+                        
+                     }
 			
 		}
 		

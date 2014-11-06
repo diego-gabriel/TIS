@@ -10,7 +10,14 @@ if (isset($_POST['lista'])) {
 	if (isset($_POST['fecha'])) {
 		if (isset($_POST['hora'])) {
 			if (isset($_POST['lugar'])) {
-				
+                           
+                            $existeFile = FALSE;
+                            $nombre_fichero = '../Repositorio/asesor/NotificacionConformidad.tex';
+                            if (file_exists($nombre_fichero)) {
+                                $existeFile = TRUE;
+                            }
+                            
+                           if($existeFile){
                             $nombreEmpresa=$_POST['lista'];
                             if(strnatcasecmp($nombreEmpresa, "Seleccione una grupo empresa")!=0){
 				$fecha=$_POST['fecha'];
@@ -129,9 +136,14 @@ if (isset($_POST['lista'])) {
 				}	
 			}               
                         }
+                        else
+                        {
+                            echo"<script type=\"text/javascript\">alert('Por favor, suba la plantilla de Notificacion de conformidad a su repositorio); window.location='../Vista/notificacion_conformidad.php';</script>";
+           
+                        }
 			
 		}		
 	}
 }
-
+}
 ?>

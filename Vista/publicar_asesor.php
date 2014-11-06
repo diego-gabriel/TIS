@@ -1,4 +1,11 @@
 <!DOCTYPE html>
+<?php
+
+    include '../Modelo/conexion.php';
+   
+    $con=new conexion();
+    
+?>
 <html>
 
 <head>
@@ -23,6 +30,20 @@
     <link href="../Librerias/css/sb-admin.css" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="../Librerias/css/jquery-te-1.4.0.css">
     <script type="../Librerias/js/jquery.min.js"></script>
+    <script src="../Librerias/js/jquery-1.10.2.js"></script>
+    
+      <link rel="stylesheet" type="text/css" media="all" href="../Librerias/calendario/daterangepicker-bs3.css" />
+      <script type="text/javascript" src="../Librerias/calendario/moment.js"></script>
+      <script type="text/javascript" src="../Librerias/calendario/daterangepicker.js"></script>
+      <link rel="stylesheet" type="text/css" href="../Librerias/calendario2/jquery.datetimepicker.css"/>
+      <script type="text/javascript" src="../Librerias/js/calendario_notacion_conformidad.js"></script>
+      
+    <script type="text/javascript" src="../Librerias/calendario2/jquery.js"></script>
+    <script type="text/javascript" src="../Librerias/calendario2/jquery.datetimepicker.js"></script>
+    <script type="text/javascript" src="../Librerias/js/validar_orden.js"></script>
+    <script type="text/javascript" src="../Librerias/js/masked_input.js"></script>
+    
+    
     
 
 </head>
@@ -33,7 +54,7 @@
     <div id="wrapper">
        
         
-		<!--<h2>design by <a href="#" title="flash templates">flash-templates-today.com</a></h2>-->
+        <!--<h2>design by <a href="#" title="flash templates">flash-templates-today.com</a></h2>-->
         
         
      
@@ -164,7 +185,7 @@
                         </li>
                         
                         <li>
-                            <a href="#"><i class="fa fa-warning fa-fw"></i> Notificaciones</a>
+                            <a href="lista-de-noticias.php"><i class="fa fa-comment"></i> Foro</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-building-o fa-fw"></i> Actividades<span class="fa arrow"></span></a>
@@ -190,53 +211,102 @@
            
     <form id = "publicar" method = "POST" action="../Controlador/publicar.php" onsubmit = "return validarCampos(this);">
         <div class ="form-horizontal">
-                <div class="row">
-              <div class="col-lg-12">
-                <h2> Publicar Recursos</h2>
+            <div class="row">
+                    <div class="col-lg-12">
+                          <h2> Publicar Recursos</h2>
                  
-                </div>
+                   </div>
             </div><!-- /.row -->
                
                 <!--Descripcion de la publicacion-->                 
                 <fieldset class="campos-border">
                   <legend class="campos-border">Informaci&oacute;n</legend>
-                    
+
+
+
                       <div class="form-group">
+                        <label class="col-sm-2 control-label">Destinatario</label>
+                           <div class="col-lg-8 ">
+                    
+                                <form method="POST" action="#" enctype="Multipart/form-data" action="forms/actions/configurarFechaRecepcionCO.php">
+                                    <select name="grupoempresa" class="form-control" >
+                                        <option>Seleccione un destinatario</option>
+                                        <?php
+                                            $idAsesor='leticia';
+                                            
+                                            $c1="SELECT ge.`NOMBRE_LARGO_GE` FROM `inscripcion` AS i,`asesor` AS a,`grupo_empresa` AS `ge`,`gestion` AS g,`proyecto` AS p WHERE i.`NOMBRE_UA` = a.`NOMBRE_U` AND i.`NOMBRE_UGE` = ge.`NOMBRE_U` AND i.`ID_G` = g.`ID_G` AND i.`CODIGO_P` = p.`CODIGO_P` AND a.`NOMBRE_U` LIKE '$idAsesor'";
+                                            $a1=$con->consulta($c1);
+                                            echo "<option>TODOS</option>";
+                                            while($v1 =  mysql_fetch_array($a1)){
+                                                echo "<option>".$v1[0]."</option>";
+                                            }
+                                            echo "<input type='hidden' name='idAsesor' value='$idAsesor'>";
+                                        ?>
+                                    </select><br>
+                                    
+                                </form>
+                            </div>
+                        
+                    </div>
+               
+  
+
+                    
+                    <div class="form-group">
                       <label class="col-sm-2 control-label">Titulo</label>
-                        <div class="col-xs-2">
-                              <input id= "campoTitulo" type="text" name= "campoTitulo"  class="form-control"  data-toggle="tooltip" data-placement="right" title="T&iacute;tulo con el que se mostrar&aacute; el recurso">
-                        </div>
-                      </div>
-                  </br>
+                             <div class="col-xs-8">
+                                  <input id= "campoTitulo" type="text" name= "campoTitulo"  class="form-control"  data-toggle="tooltip" data-placement="right" title="T&iacute;tulo con el que se mostrar&aacute; el recurso">
+
+                            </div>
+                   </div>
+
+                 
+
+                   
+                  
                       <!--Campo de descripcion-->
                       <div class="form-group">
-                        <label class="col-sm-2 control-label">Descripcion</label>
-                        <div class="col-sm-8">
-                        <textarea class="jqte-test" name="campoDescripcion" id="campoDescripcion" rows="4" style="overflow: auto;"></textarea>
-                        </div>
+                            <label class="col-sm-2 control-label">Descripcion</label>
+                                <div class="col-sm-8">
+                                     <textarea class="jqte-test" name="campoDescripcion" id="campoDescripcion" rows="4" style="overflow: auto;"></textarea>
+                                </div>
                       </div>
+
+
+                      <div class="form-group">
+                       <label class="col-sm-2 control-label" name="fecha1">Fecha de publicacion:</label>
+                        <div class="col-xs-8">
+                              
+                                <input class="form-control" type="date">
+                            </div>
+                        </div>
+                            
+ 
+ <div class="form-group">
+                        <label class="col-sm-2 control-label" name="hora1">Hora de publicacion:</label>
+                        <div class="col-sm-8" >
+                        <input class="form-control" type="time">
+                    </div>
+      
+                    </div><!--end/fecha-->
+                        
+                                 
+
                       <div class="form-group">
                         <label class="col-sm-2 control-label">Adjuntar Recurso</label>
                         <div class="col-sm-8">
                         
                               <input id= "recurso" type="text" name= "recurso"  class="form-control"   data-toggle="tooltip" data-placement="right" title="Adjuntar un recurso" readonly="readonly">
-                         
-                        </textarea>
+                                 </textarea>
                         <br>
                         <a data-toggle="modal" class="link-dos" href="javascript:void('')" data-target="#myModal"><span class="glyphicon glyphicon-folder-open"></span>
                         Adjuntar</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <input class="btn-primary" type="submit" value= "Publicar" id= "publicar"name="enviar" onClick()="update()"  >      </input> 
+
                        </div>
                         </div>
                            
-                                <div class="form-group">
-                                
-                                <div class="col-sm-8">
-                                </div>
-                                </div>
-                                
-                                </fieldset>
-                                </div>
+                              
     </form>
     <!--Modal para adjuntar recursos/documentos-->
                          
@@ -266,6 +336,16 @@
             <!-- /.row -->
          
 </div>
+   <script src="../Librerias/js/bootstrap.min.js"></script>
+    <script src="../Librerias/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+
+
+    <!-- SB Admin Scripts - Include with every page -->
+    <script src="../Librerias/js/sb-admin.js"></script>
+  
+    <!-- Page-Level Demo Scripts - Dashboard - Use for reference -->
+    <script src="../Librerias/js/demo/dashboard-demo.js"></script>
+    <!-- Combo Box scripts -->
                                     
     <!-- /#wrapper -->
 
@@ -312,7 +392,10 @@
 
 
     <!-- Core Scripts - Include with every page -->
- 
+  <script type="text/javascript" src="../Librerias/calendario2/jquery.js"></script>
+    <script type="text/javascript" src="../Librerias/calendario2/jquery.datetimepicker.js"></script>
+    <script src="../Librerias/js/bootstrap.min.js"></script>
+    <script src="../Librerias/js/plugins/metisMenu/jquery.metisMenu.js"></script>
  
 
    <script src="../Librerias/js/jquery-1.10.2.js"></script>

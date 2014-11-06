@@ -5,6 +5,13 @@ include '../Modelo/conexion.php';
 $con = new conexion();
 
 if (isset($_POST['grupoempresa'])) {
+    
+    $nombre_fichero = '../Repositorio/asesor/Contrato.tex';
+    $existeFile = FALSE;
+    if (file_exists($nombre_fichero)) {
+         $existeFile = TRUE;
+    }
+    if($existeFile){
     $nombreLargo = $_REQUEST['grupoempresa'];
     if(strnatcasecmp($nombreLargo, "Seleccione una grupo empresa")!=0)
     {
@@ -13,7 +20,11 @@ if (isset($_POST['grupoempresa'])) {
         $vv1 =  mysql_fetch_array($aa1);
         $nombreCorto = $vv1[0]; 
         $asesor = 'Leticia Blanco';
-        $representante = "Representante";
+        
+        $cc2="SELECT `REPRESENTANTE_LEGAL_GE` FROM `grupo_empresa` WHERE `NOMBRE_LARGO_GE` = '$nombreLargo'";            
+        $aa2= $con->consulta($cc2);
+        $vv2 =  mysql_fetch_array($aa2);
+        $representante = $vv2[0];
         //$sistema = "SISTEMA DE APOYO A LA EMPRESA TIS";
         //$convocatoria = "CPTIS-1707-2014";
 
@@ -70,7 +81,12 @@ if (isset($_POST['grupoempresa'])) {
     else{        
        echo"<script type=\"text/javascript\">alert('Por favor, seleccione una grupo empresa'); window.location='../Vista/contrato.php';</script>";  
     }
-    
+    }
+    else
+    {
+         echo"<script type=\"text/javascript\">alert('Por favor, suba la plantilla del Contrato a su repositorio); window.location='../Vista/contrato.php';</script>";
+                            
+    }
     
 
 }

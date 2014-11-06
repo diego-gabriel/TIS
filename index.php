@@ -20,6 +20,11 @@
     <!-- SB Admin CSS - Include with every page -->
     <link href="Librerias/css/sb-admin.css" rel="stylesheet">
 
+    
+    
+    		<link href="css/style.css" rel="stylesheet" type="text/css" />
+		<link href="css/tabla-div.css" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet" type="text/css" href="css/coin-slider.css" />
 </head>
 
 <body>
@@ -85,36 +90,200 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header"  >Bienvenido a SAETIS!</h1>
+                    
+                    
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
             <div class="row">
-                <div class="col-lg-12">
-                    <button class="btn-primary" onclick="location='Vista/inicio_grupo_empresa.php'">Grupo Empresa</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <button class="btn-primary" onclick="location='Vista/inicio_asesor.php'">Asesor</button>
+                
+                
+                
+    
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+
+
+		
+			<div class="content">
+				<div class="content_resize">
+					<div class="mainbar">
+						<div class="article">
+							<h2><span>Empresa TIS</span></h2>
+							<p class="infopost">&nbsp;</p>
+							<div class="img">
+								<img src="images/img1.jpg" width="179" height="176" alt="" class="fl" />
+							</div>
+							<div class="post_content">
+								<p>&nbsp;</p>
+								<p>Empresa tis,es una organización conformada por socios que están abocados al área de informática y sistemas, quienes tienen inquietudes sobre diferentes temas.</p>
+								<p class="spec">La Empresa TIS buscan a grupos q desarrollen software para solucionar sus inquietudes  </p>
+								<p class="spec"><a href="#" class="rm">&bull; Leer mas</a></p>
+							</div>
+							
+							<div class="clr"></div>
+						</div>
+						
+						<div class="article">
+							<h2><span>Registrarse</span></h2>
+							<p class="infopost">&nbsp;</p>
+							
+                                                        
+                                                        
+                                                     	<form action="vista/RegistrarUsuario.php" method="post">
+									<center>
+										
+                                                                            <p> No eres usuario ? </p><BR>
+                                                             
+													<input type="submit" value="Registrate">
+                                                                                                        <p>  </p><BR>
+							
+									</center>	
+
+								</form>
+                                                                                                                
+                                                        <form action="vista/RegistrarGrupoEmpresa.php" method="post">
+									<center>
+										
+                                                                     
+                                                             
+													<input type="submit" value="Registrate como Grupo Empresa">
+							
+									</center>	
+
+								</form>
+                                                        
+						</div>
+					</div>
+			
+                                    <form method="post" action="Vista/login.php">
+						<div class="sidebar">
+							<h2 class="star"><span>Ingresar</span></h2>
+							<p align="right">Codigo 
+								<input type="text" name="usuario" value="" />
+							</p>
+							<p align="right">Password 
+								<input type="password" name="contrasena" value="" />
+							</p>
+							<div class="clr">
+								<div align="center">
+									<input type="submit" name="ingresar" id="ingresar" value="Enviar" />
+								</div>
+							</div>
+					
+					<br>
+                                      			
+		
+				<div class="gadget">
+					<h2 class="star"><span>Paginas Universitarias</span></h2>
+					<div class="clr"></div>
+					<ul class="ex_menu">
+					
+					<div class="contenedor-tabla">
+						<div class="contenedor-fila">
+							<div class="contenedor-columna2"><img src="images/logo-websiss.jpg" width="29" height="29" alt="" longdesc=\/></div>
+							<div class="contenedor-columna3"><li><a href="http://websis.umss.edu.bo/">WebSys UMSS</a><br/> 
+							Pagina principal de la UMSS</li></div>
+						</div>
+					</div>
+					
+					<div class="contenedor-tabla">
+						<div class="contenedor-fila">
+							<div class="contenedor-columna2"><img src="images/logo-cs.bmp" width="29" height="29" alt="" longdesc=\/></div>
+							<div class="contenedor-columna3"><li><a href="http://www.cs.umss.edu.bo//">Cs</a><br/>
+							Pagina principal de la CS</li>
+							</div>
+						</div>
+					</div>
+					
+					<div class="contenedor-tabla">
+						<div class="contenedor-fila">
+							<div class="contenedor-columna2"><img src="images/logo-fcyt.gif" width="29" height="29" alt="" longdesc=\/></div>
+							<div class="contenedor-columna3"><li><a href="http://direcciondelaFCYT/">FYCT</a><br/>
+							Pagina principal de la FCYT</li>
+							</div>
+						</div>
+					</div>
+					
+					<div class="contenedor-tabla">
+						<div class="contenedor-fila">
+							<div class="contenedor-columna2"><img src="images/userpic.gif" width="29" height="29" alt="" longdesc=\/></div>
+							<div class="contenedor-columna3"><li><a href="http://direcciondemoodle/">moodle2</a><br/>
+							Pagina de moodle2</li>
+							</div>
+						</div>
+					</div>
+				</div>	
+				
+			</div>
+                         </form>               
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+		</div>
+			<div class="clr"></div>
+			<div class="fbg">
+			
+		</div>	
+                        <br><br>
+		<div class="footer">
+			<div class="footer_resize">
+				<p class="lf"></p>
+				<div style="clear:both;"></div>
+				</div>
+			</div>
+		<div align=center>
+			Esta pagina desarrollada por  <a class="registrar" href=''>Bittle.S.R.L.</a>
                 </div>
-                <!-- /.col-lg-12 -->
+
+
+
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
             </div>
+            
+            
         </div>
         <!-- /#page-wrapper -->
 
     </div>
     <!-- /#wrapper -->
 
-    <!-- Core Scripts - Include with every page -->
-    <script src="Librerias/js/jquery-1.10.2.js"></script>
-    <script src="Librerias/js/bootstrap.min.js"></script>
-    <script src="Librerias/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-
-    <!-- Page-Level Plugin Scripts - Dashboard -->
-    <script src="Librerias/js/plugins/morris/raphael-2.1.0.min.js"></script>
-    <script src="Librerias/js/plugins/morris/morris.js"></script>
-
-    <!-- SB Admin Scripts - Include with every page -->
-    <script src="Librerias/js/sb-admin.js"></script>
-
-    <!-- Page-Level Demo Scripts - Dashboard - Use for reference -->
-    <script src="Librerias/js/demo/dashboard-demo.js"></script>
+ 
 
 </body>
 

@@ -65,8 +65,7 @@
 <body>
 
    
-    <div id="wrapper">
-       
+           
         
 		<!--<h2>design by <a href="#" title="flash templates">flash-templates-today.com</a></h2>-->
         
@@ -170,11 +169,11 @@
                          <li>
                             <a href="#"><i class="fa fa-tasks fa-fw"></i> Tareas<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                                <li>
+                                 <li>
                                     <a href="contrato.php">Emitir Contrato </a>
                                 </li>
                                 <li>
-                                    <a href="ordendecambioempresas.php">Emitir Orden de Cambio</a>
+                                    <a href="ordenDeCambio.php">Emitir Orden de Cambio</a>
                                 </li>
                                 <li>
                                     <a href="notificacion_conformidad.php">Emitir Notificaci&oacute;n de Conformidad</a>
@@ -187,7 +186,7 @@
                                             
                                         </li>
                                         <li>
-                                            <a href="CrearModalidadCalificacion.php">Modalidades de Calificaci&oacute;n</a>
+                                            <a href="#">Modalidades de Calificaci&oacute;n</a>
                                         </li>
                                         <li>
                                             <a id="Seguimiento" href="#">Seguimiento</a>
@@ -195,9 +194,6 @@
   
                                     </ul>
                                     <!-- /.nav-third-level -->
-                                </li>
-                                <li>
-                                            <a href="evaluacionFinal.php"> Evaluar Grupo Empresa </a>   
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -224,7 +220,6 @@
             </div>
             <!-- /.navbar-static-side -->
         </nav>
-
 
 <!-------------------------------------------NUEVAS PUBLICACIONES------------------------------------------>
 <div id="page-wrapper">

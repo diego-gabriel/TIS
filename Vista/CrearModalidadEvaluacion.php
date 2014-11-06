@@ -29,13 +29,11 @@
 <body>
 
    
-    <div id="wrapper">
-       
+          
         
 		<!--<h2>design by <a href="#" title="flash templates">flash-templates-today.com</a></h2>-->
         
 	
-      
         <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
@@ -135,8 +133,11 @@
                          <li>
                             <a href="#"><i class="fa fa-tasks fa-fw"></i> Tareas<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
+                                 <li>
+                                    <a href="contrato.php">Emitir Contrato </a>
+                                </li>
                                 <li>
-                                    <a href="ordendecambioempresas.php">Emitir Orden de Cambio</a>
+                                    <a href="ordenDeCambio.php">Emitir Orden de Cambio</a>
                                 </li>
                                 <li>
                                     <a href="notificacion_conformidad.php">Emitir Notificaci&oacute;n de Conformidad</a>
@@ -152,7 +153,7 @@
                                             <a href="#">Modalidades de Calificaci&oacute;n</a>
                                         </li>
                                         <li>
-                                            <a id="Seguimiento" href="inicio_asesor.php">Seguimiento</a>
+                                            <a id="Seguimiento" href="#">Seguimiento</a>
                                         </li>
   
                                     </ul>
