@@ -16,12 +16,16 @@ mysql_select_db("saetis",$conexion);
 $peticion = mysql_query("SELECT u.NOMBRE_U, u.PASSWORD_U, r.ROL_R FROM usuario u, usuario_rol r
 WHERE u.NOMBRE_U=r.NOMBRE_U");
 
-while($fila = mysql_fetch_array($peticion))
+$peticion1 = mysql_query("SELECT `LOGIN_S`,`PASSWORD_S` FROM `socio`");
+
+
+while(($fila = mysql_fetch_array($peticion)) or ($fila = mysql_fetch_array($peticion1)))
 {
 	
 	$usuariobd=$fila['NOMBRE_U'];
 	$contrasenabd=$fila['PASSWORD_U'];
         $permisosenbase = $fila['ROL_R'];   
+
 
 	if($usuario == $usuariobd && $contrasena == $contrasenabd && $permiso==$permisosenbase )
 	{   
@@ -76,9 +80,9 @@ while($fila = mysql_fetch_array($peticion))
 	//Si el resultado es positivo, entonces asignar
 
 		
-		$_SESSION['grupoEmpresa'] = $usuario;
+		$_SESSION['usuario'] = $usuario;
 		$_SESSION['contrasena'] = $contrasena;
-                $_SESSION['administrador'] = $permisosenbase;
+                $_SESSION['grupoEmpresa'] = $permisosenbase;
 		
 
 		echo'
@@ -96,30 +100,71 @@ while($fila = mysql_fetch_array($peticion))
 	}
         else
             {
+            
+               while($fila = mysql_fetch_array($peticion1))
+{
+		$sociol=$fila['LOGIN_S'];
+	     $sociop=$fila['PASSWORD_S'];
+
+         if($usuario == $sociol && $contrasena == $sociop )
+	{   
+	//Si el resultado es positivo, entonces asignar
+
+		
+		$_SESSION['socio'] = $usuario;
+		$_SESSION['contrasena'] = $contrasena;
+                $_SESSION['socio'] = $permisosenbase;
+		
+
+		echo'
+
+		<html>
+			<head>
+				<meta http-equiv="REFRESH" content="0;url=inicio_grupo_empresa.php">
+                        
+			</head>
+		</html>
+
+		';
+          
+
+	}else{
                        
             		echo'
 
 		<html>
 			<head>
-				<meta http-equiv="REFRESH" content="1;url=../index2.php">
+				<meta http-equiv="REFRESH" content="1;url=../index.php">
                         
 			</head>
 		</html>
 
 		';
             
-            }
-            }        
+               }
+                    
             
  
             
-        }
+          }
+
+                   
+            
+      }
+                   
+            
+ 
+            
+   }
+
+
+
+ }
+
 
 
 
 }
-
-
 //Cerramos base de datos
 
 ?>

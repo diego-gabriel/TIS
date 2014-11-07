@@ -1,12 +1,14 @@
 <?php
-    $nombreU = "camaleon";
+session_start();
+  
+    $nombreU = $_SESSION['usuario']  ;
     $nombreUS = $_POST['nombreU'];
     $nombreS = $_POST['nombre'];
     $apellidoS = $_POST['apellido'];
     $contrasenaS = $_POST['contrasena1'];
 
     include '../Modelo/conexion.php';
-    
+   
     $conect = new conexion();
 
     $VerificarUsuario = $conect->consulta("SELECT LOGIN_S FROM socio WHERE LOGIN_S = '$nombreU' ");

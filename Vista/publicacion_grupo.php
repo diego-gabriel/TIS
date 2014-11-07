@@ -175,11 +175,17 @@
 
 
                                 <?php
-                       
-                                 //$idGrupo=$_POST['nombreUsuarioG'];
+
+                     session_start();
+                     if (isset($_SESSION['nombre_usr'])) { $idGrupo=$_POST['NOMBRE_U'];}
+
+
+                                
+                                 echo $idGrupo;
                                
-                                        $c_3="SELECT DISTINCT `NOMBRE_R`,`RUTA_D`,`DESCRIPCION_D` FROM `registro` AS r,`documento` AS d,`descripcion` AS e WHERE r.`ID_R` = d.`ID_R` AND r.`ID_R` = e.`ID_R` AND r.`TIPO_T` LIKE 'publicaciones' AND r.`NOMBRE_U` LIKE 'leticia'";
+                                        $c_3="SELECT DISTINCT `NOMBRE_R`,`RUTA_D`,`DESCRIPCION_D`,`fecha_p`,`hora_p` FROM `registro` AS r,`documento` AS d,`descripcion` AS e,`periodo` AS p WHERE r.`ID_R` = d.`ID_R` AND r.`ID_R` = e.`ID_R` AND r.`ID_R` = p.`ID_R` AND r.`TIPO_T` LIKE 'publicaciones' AND r.`NOMBRE_U` LIKE 'leticia'";
                                         $r3=$con->consulta($c_3);
+                                       // var_dump($c_3);
                                        
                                                 
                                   
@@ -219,6 +225,12 @@
                                            // $com=$r5."/".$r6."/".$r7;
                                             $size=strlen($ubi);
                                             $com=substr($ubi, $ini,$size);
+                                            $fep=$var3[4];
+                                           // $hop=$var3[5];
+                                            $fecha       = date('Y-m-d');
+                                            $hora        =  date("G:H:i");
+                                           if($fecha>$fep)
+                                             {     // if()
 
                    ?>
                                         
@@ -231,7 +243,8 @@
                                                      
 
                                             <?php
-                                       
+                                       }
+                                       else{}
                                        
                                            }
                                      }

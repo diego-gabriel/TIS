@@ -120,6 +120,16 @@
                     $result->execute();
 
 
+                     $sql = 'INSERT INTO usuario_rol (NOMBRE_U, ROL_R) VALUES (:nombre, :rol)';
+
+                    $result = $conn->prepare($sql);
+
+                    $result->bindValue(':nombre', $nombreUGE, PDO::PARAM_STR);
+                    $result->bindValue(':rol', 'grupoEmpresa', PDO::PARAM_STR);
+
+
+                    $result->execute();
+                    
                     $conn->commit();
                     echo"<script type=\"text/javascript\">alert('El registro ha sido satisfactorio'); window.location='RegistrarGrupoEmpresa.php';</script>";
                     /*echo '<script>
