@@ -218,8 +218,13 @@ include '../Modelo/conexion.php';
                                 <li>
                                     <a href="seleccionar_asesor.php">Seleccionar Asesor</a>
                                 </li>
+                                
                                  <li>
                                      <a href="AnadirSocio.php">Añadir socios</a>
+                                </li>
+                                
+                                <li>
+                                    <a href="AnadirRL.php">Seleccionar Representante legal</a>
                                 </li>
                                 
                             </ul>

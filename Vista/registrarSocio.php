@@ -34,11 +34,6 @@ session_start();
 
                     try {
 
-                    // tabla 1
-//      $conect->consulta("INSERT INTO socio(socio.NOMBRE_U, socio.NOMBRES_S, socio.APELLIDOS_S,
-//       socio.LOGIN_S, socio.PASSWORD_S) VALUES('$nombreUS', '$nombreS', '$apellidoS', '$nombreUS, 
-//       '$contrasenaS')"); 
-   
                     $sql = 'INSERT INTO socio (NOMBRE_U, NOMBRES_S, APELLIDOS_S, LOGIN_S, PASSWORD_S) VALUES (:nombreU, :nombreS, :apellidoS, :loginS, :passwordS);';
 
                     $result = $conn->prepare($sql);

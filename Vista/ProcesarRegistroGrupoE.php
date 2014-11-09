@@ -3,7 +3,7 @@
     $nombreUGE = $_POST['nombreU'];
     $nombreLGE = $_POST['nombreL'];
     $nombreCGE = $_POST['nombreC'];
-    $nombreRGE = $_POST['nombreR'];
+    $nombreRGE = "";
     $correoGE = $_POST['correo'];
     $telefonoGE = $_POST['telefono'];
     $direccionGE = $_POST['direccion'];

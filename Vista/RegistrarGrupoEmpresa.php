@@ -114,14 +114,14 @@
                                             </div>
                                         </div>
                                         
-                                        <div class="form-group">
+<!--                                        <div class="form-group">
                                             <div class="input-group">
                                                 <span class="input-group-addon">
                                                   <span class="glyphicon glyphicon-user"></span>
                                                 </span>
                                                 <input class="form-control" type="text" name="nombreR" id="nombreR" placeholder="Nombre representante legal" minlength="7" pattern=".{3,}" title="Nombre corto muy corto. Ej: Ana Medrano" required  onkeypress="return validarLetras(event)">
                                             </div>
-                                        </div>
+                                        </div>-->
                                         
                                         <div class="form-group">
                                             <div class="input-group">
