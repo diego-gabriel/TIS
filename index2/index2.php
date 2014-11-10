@@ -44,11 +44,46 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-             
+                <a class="navbar-brand" href="index.php">Inicio </a>
             </div>
             <!-- /.navbar-header -->
 
-      
+            <ul class="nav navbar-top-links navbar-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-envelope fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                    </a>
+                </li>
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-tasks fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                    </a>
+                </li>
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-bell fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                    </a>
+                </li>
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
         </nav>
 
         <div id="page-wrapper">
@@ -95,55 +130,47 @@
 								<p>&nbsp;</p>
 								<p>Empresa tis,es una organización conformada por socios que están abocados al área de informática y sistemas, quienes tienen inquietudes sobre diferentes temas.</p>
 								<p class="spec">La Empresa TIS buscan a grupos q desarrollen software para solucionar sus inquietudes  </p>
-								
+								<p class="spec"><a href="#" class="rm">&bull; Leer mas</a></p>
 							</div>
 							
 							<div class="clr"></div>
 						</div>
 						
 						<div class="article">
-							<h2><span>Registrate como Grupo Empresa</span></h2>
-                                                        <p class="infopost">&nbsp;</p><br><br>
+							<h2><span>Registrarse</span></h2>
+							<p class="infopost">&nbsp;</p>
 							
                                                         
-                                            <div class="form-group">
-                                            <div align="center">
-                                                <button type="submit" name="ingresar"  class="btn btn-primary"  onclick=" location.href='vista/RegistrarGrupoEmpresa.php' " id="btn-registrarUser"> <span class="glyphicon glyphicon-ok" ></span> REGISTRATE</button>
-                                        </div></div>
-                                                     
+                                                        
+                                                     	<form action="vista/RegistrarUsuario.php" method="post">
+									<center>
+										
+                                                                            <p> no eres usuario ? </p><BR>
+                                                             
+													<input type="submit" value="Registrate">
+							
+									</center>	
+
+								</form>
+                                                        
+                                                        
 						</div>
 					</div>
 			
                                     <form method="post" action="Vista/login.php">
 						<div class="sidebar">
-                                                    
-							<h2 class="star"><span>Ingresar al Sistema</span></h2>
-                                                        
-                                                        
-                                         <div class="form-group">
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                  <span class="glyphicon glyphicon-user"></span>
-                                                </span>
-                                                <input class="form-control" type="text" name="usuario" id="UserName" placeholder="Nombre de Usuario"   required>
-                                            </div>
-                                        </div>
-                                              <div class="form-group">
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                  <span class="glyphicon glyphicon-lock"></span>
-                                                </span>
-                                                <input class="form-control" type="password" name="contrasena" id="UserPassword" placeholder="Contraseña" minlength="5"   required>
-                                            </div>
-                                        </div>                                                  
-                                                        
-                                        <div class="form-group">
-                                            <a href="vista/RegistrarUsuario.php"><font color='green' size="1.5%">no eres usuario todavia? REGISTRATE</font></a>
-                                            <div align="right"> <hr>
-                                            <button type="submit" name="ingresar" class="btn btn-primary" id="btn-registrarUser"> <span class="glyphicon glyphicon-ok"></span> Ingresar</button>
-                                        </div></div>
-                                 
-						
+							<h2 class="star"><span>Ingresar</span></h2>
+							<p align="right">Codigo 
+								<input type="text" name="usuario" value="" />
+							</p>
+							<p align="right">Password 
+								<input type="password" name="contrasena" value="" />
+							</p>
+							<div class="clr">
+								<div align="center">
+									<input type="submit" name="ingresar" id="ingresar" value="Enviar" />
+								</div>
+							</div>
 					
 					<br>
                                       			
@@ -215,7 +242,26 @@
 
 
 
-                 
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
                 
             </div>
             
