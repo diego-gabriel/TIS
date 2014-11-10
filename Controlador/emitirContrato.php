@@ -1,7 +1,7 @@
 <?php
 
 include '../Modelo/conexion.php';
-
+session_start();
 $con = new conexion();
 
 if (isset($_POST['grupoempresa'])) {
@@ -19,7 +19,11 @@ if (isset($_POST['grupoempresa'])) {
         $aa1= $con->consulta($cc1);
         $vv1 =  mysql_fetch_array($aa1);
         $nombreCorto = $vv1[0]; 
-        $asesor = 'Leticia Blanco';
+        $nombreUA = $_SESSION['usuario'] ;
+        $nomAp = $con->consulta("SELECT NOMBRES_A, APELLIDOS_A FROM asesor WHERE NOMBRE_U =  '$nombreUA' ");
+        $nombreAp = mysql_fetch_row($nomAp);
+        $asesor = $nombreAp[0]." ".$nombreAp[1] ;
+        //$asesor = 'Leticia Blanco';
         
         $cc2="SELECT `REPRESENTANTE_LEGAL_GE` FROM `grupo_empresa` WHERE `NOMBRE_LARGO_GE` = '$nombreLargo'";            
         $aa2= $con->consulta($cc2);

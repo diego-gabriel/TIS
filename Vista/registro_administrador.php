@@ -1,4 +1,4 @@
-<?php 
+        <?php 
 session_start();
 
 
@@ -142,110 +142,87 @@ session_start();
      			<div class="content">
 				<div class="content_resize">
 					<div class="mainbar">
-                                            <div class="article"><br><br>
+                                            <div class="article">
 							
 
                                                 
                                                 
-							<h2><span>Registro Usuario</span></h2>
-							<h3><p>Debe de rellenar todos los campos correctamente</p></h3>
-							<div id="contenido">
-			
-								<form action="crear_administrador.php" method="post" enctype="multipart/form-data">
-									<center>
-										<table border=0 width=80%>
-											<tr>
-												<td >
-													<p style="text-align:right;">Login:</p>
-												</td>
-												<td>
-													<input type="text" size=25% required name="usuario"/>
-												</td>
-											</tr>
-											<tr>
-												<td >
-													<p style="text-align:right;">Password:</p>
-												</td>
-												<td>
-													<input type="password" size=25% required name="contrasena"/>
-												</td>
-											</tr>
-			
-											<tr>
-												<td >
-													<p style="text-align:right;">Nombres:</p>
-												</td>
-												<td>
-													<input type="text" size=25% required name="nombre"/>
-												</td>
-											</tr>
-											<tr>
-												<td >
-													<p style="text-align:right;">Apellidos:</p>
-												</td>
-												<td>
-													<input type="text" size=25% required name="apellido"/>
-												</td>
-											</tr
-			
-											<tr>
-												<td>
-													<p style="text-align:right;">Telefono:</p>
-												</td>
-												<td>
-                                                                                                    <input type="text"  size=25% required name="telefono" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>                                                                                                  
-												</td>
-											</tr>
-
-											
-											<tr>
-												<td>
-													<p style="text-align:right;">Introduce tu email:</p>
-												</td>
-												<td>
-													<input type="email" size=25%  required name="email"/>
-												</td>
-											</tr>
-
-											<tr>
-												<td>
-												</td>
-												<td>
-													<input type="submit" value="Registrar">
-												</td>
-											</tr>
-										</table>
-									</center>	
-
-								</form>
-							</div>
-							
-							
 						
-						
-				
-			
-	      
-                                                        
-                                                        
-                                                        
-                                                        
-                                                        
-                                                        
-                                                        
-                                                        
-                                                        
-                                                        
-                                                        
-                                                        
-                                                        
-                                                        
-                                                        
-                                                        
-                                                        
-                                                        
-                                                        
-                                                        
+								
+									
+                                                                    
+                                                                    
+                                                        <div class="row">
+                <div class="col-lg-12">
+                    <h2 class="page-header">Registrar Usuario:</h2>
+                    <div class="col-lg-6" >
+                                    <form action="crear_administrador.php" method="post" enctype="multipart/form-data">
+                                        
+                                        
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                  <span class="glyphicon glyphicon-user"></span>
+                                                </span>
+                                                <input class="form-control" type="text" name="usuario" id="UserName" placeholder="Nombre de Usuario" pattern="\b[a-zA-z]{5}[a-zA-z0-9]{0,9}" title="Minimo 5 y Maximo 14 caracteres...Ejm: Bittle123, Bitle" required>
+                                            </div>
+                                        </div>
+                                           <div class="form-group">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                  <span class="glyphicon glyphicon-lock"></span>
+                                                </span>
+                                                <input class="form-control" type="password" name="contrasena" id="UserPassword" placeholder="Contraseña" minlength="5" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$" title="la contraseña debe contener mayusculas, minusculas, caracteres y numeros" required>
+                                            </div>
+                                        </div>                                     
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                  <span class="glyphicon glyphicon-user"></span>
+                                                </span>
+                                                <input class="form-control" type="text" name="nombre" id="RealName" placeholder="Nombre" pattern="\b[A-Z]{1}[a-z]{2,20}" title="Ejm: Alejandra, Ivan, Ana" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                  <span class="glyphicon glyphicon-user"></span>
+                                                </span>
+                                                <input class="form-control" type="text" name="apellido" id="LastName" placeholder="Apellido" pattern="\b[A-Z]{1}[a-z]{3,20}\b" title="Ejm: Vargas, Morales, Medrano" required>
+                                            </div>
+                                        </div>
+                                        
+
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                  <span class="glyphicon glyphicon-earphone"></span>
+                                                </span>
+                                                <input class="form-control" type="text" name="telefono" id="UserPhone" placeholder="Telefono" title="Ejm: 4022371" pattern="\b[4][0-9]{6}" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                  <span class="glyphicon glyphicon-envelope"></span>
+                                                </span>
+                                                <input class="form-control" type="email" name="email" id="UserEmail" placeholder="Correo" pattern="^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <button type="submit" name="submit" class="btn btn-primary" id="btn-registrarUser"> <span class="glyphicon glyphicon-ok"></span> Registrarme</button>
+                                        </div>
+                                    </form>              
+                            <div id="panelResultado">
+                                
+                            </div>        
+                        </div>
+                </div>
+            </div><!-- /.row -->                          
+                                                                    
+                                                                  
+                                
                                                         
                                                         
 						</div>
@@ -345,7 +322,7 @@ session_start();
                            		
                         </div></div>
                         </div>
-            <div class="clr"></div>	<br><br>
+            <div class="clr"></div>	<br><br><br><br><br><br><br><br><br><br>
 			<div class="footer">
 			<div class="footer_resize">
 				<p class="lf"></p>

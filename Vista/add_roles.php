@@ -145,7 +145,10 @@ session_start();
                                                          
 					<div class="mainbar">
 						<div class="article">
-							<h2><span>Nuevo Rol</span></h2>
+                                                                                                   
+                                                        <div class="row">
+                                                            <div class="col-lg-12"></div>
+							<h2><span>Nuevo Rol</span><br></h2>
 
 								<form action='crear_rol.php' method='POST'>
 									<div class="contenedor-fila">
@@ -153,13 +156,17 @@ session_start();
 										<p style="text-align:right;">Rol :</p>
 										</div>
 										<div class="contenedor-columna">
-											<input type='text' required name='rol'>
+											<input type='text' required name='rol' class="form-control">
 										</div>
-										<div class="contenedor-columna">
-											<input type='submit'value="Actualizar" >
-										</div>
+                                                                                      <div class="contenedor-columna">
+                                            <button type="submit"  class="btn btn-primary" id="btn-registrarUser"> <span class="glyphicon glyphicon-ok"></span> Actualizar</button>
+                                        </div>
+                                                                            
+											
+										
 									</div>
 								</form>
+                                                        
 							<h2><span>Listado Roles</span></h2>
 							<div class="contenedor-fila2">
 		
@@ -222,7 +229,7 @@ session_start();
 			
 					
 			<div class="sidebar">
-                            <br><br>
+                            <br>
 				<h2 class="star">Usuario :  <?php echo $_SESSION['usuario'] ?></h2>
 			
                
@@ -310,7 +317,7 @@ session_start();
        		
                         </div></div>
                         </div>
-			<div class="clr"></div>	<br><br><br><br><br><br>
+            <div class="clr"></div>	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 			<div class="footer">
 			<div class="footer_resize">
 				<p class="lf"></p>

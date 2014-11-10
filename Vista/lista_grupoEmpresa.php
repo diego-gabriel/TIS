@@ -146,7 +146,9 @@ session_start();
      			<div class="content">
 				<div class="content_resize">
 					<div class="mainbar">
-                                            <div class="article"><br><br>
+                                            <div class="article"><br>
+                                                       <div class="row">
+                                                           <div class="col-lg-12"></div>
 							<h2><span>Escoger Grupo Emresa</span></h2>	
 						</div>
                                             
@@ -165,7 +167,7 @@ session_start();
 													<p style="text-align:right;"> Grupo Empresa :</p>
 												</td>
 												<td>
-                                                                                                    <select required name="NOMBRE_U" ><option  value="">---Seleccione Un grupo Empresa---</option>
+                                                                                                    <select required name="NOMBRE_U" class="form-control"><option  value="">Seleccione Un grupo Empresa</option>
 													<?php 
 														$link=mysql_connect("localhost","root",""); 
 														mysql_select_db("saetis",$link); 
@@ -178,9 +180,9 @@ session_start();
                                                                                                         ?>    
                                                                                                      
                                                                                                        </select> 
-												</td>
-												<td>
-													<input type="submit" value="Seleccionar" > 
+                                                                                                </td>
+                                                                                                <td>&nbsp;
+													<input type="submit" value="Seleccionar"  class="btn btn-primary"> 
 												</td>    
 											</tr>
 										</table>
@@ -298,7 +300,7 @@ session_start();
 			
 					
 			<div class="sidebar">
-                            <br><br>
+                            <br>
 				<h2 class="star">Usuario :  <?php echo $_SESSION['usuario'] ?></h2>
 			
                
@@ -386,7 +388,7 @@ session_start();
        		
                         </div></div>
                         </div>
-			<div class="clr"></div>	<br><br><br><br><br><br>
+			<div class="clr"></div>	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 			<div class="footer">
 			<div class="footer_resize">
 				<p class="lf"></p>

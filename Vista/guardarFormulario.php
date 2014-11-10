@@ -1,12 +1,10 @@
 <?php  
 
-
-//var_dump($_POST['EvaEscogidos']);
-//var_dump($_POST['CritEscogidos']);
-
 include '../Modelo/conexion.php';
 
-    $asesor="Leticia";
+    session_start();
+
+    $UsuarioActivo = $_SESSION['usuario'];
 
     $nameForm = $_POST['nombreFormulario'];
                                                   
@@ -17,19 +15,34 @@ include '../Modelo/conexion.php';
 
     $puntaje = $_POST['PuntajeForm'];
 
-    //var_dump($puntaje);
+    $buscador=0;
 
 
-    if (($_POST['nombreFormulario']) != "") {
+    for ($v=0; $v < count($EvaEscogidos) ; $v++) { 
+
+            for ($b=0; $b < count($EvaEscogidos) ; $b++) { 
+
+                if (($EvaEscogidos[$v] == $EvaEscogidos[$b])) {
+                     
+                    $buscador++;
+                }
         
-        $VerificarNombre = $conect->consulta("SELECT * FROM FORMULARIO WHERE Name_Form = '$nameForm' ");
+            }
+    }
+
+    if ($buscador > count($EvaEscogidos)) {
+        
+        echo'<script>BootstrapDialog.alert("No puede evaluar el mismo criterio mas de una vez");</script>';
+    
+    }else{
+
+        $VerificarNombre = $conect->consulta("SELECT NOMBRE_FORM FROM formulario WHERE NOMBRE_FORM = '$nameForm' AND NOMBRE_U = '$UsuarioActivo' ");
         
         $ResultadoVerificacion = mysql_fetch_row($VerificarNombre);
         
         if(!is_array($ResultadoVerificacion))
         {
-            if($puntaje[0] != "")
-            {
+            
                 $resultado=0;
             
                 for($z=0;$z<count($puntaje);$z++)
@@ -37,39 +50,79 @@ include '../Modelo/conexion.php';
                     $resultado = $resultado + $puntaje[$z]; 
                 }
                 
-
-                    if($resultado > 0 and $resultado == 100)
+                    if($resultado == 100)
                     {
-                        for ($i=0; $i < count($EvaEscogidos) ; $i++) { 
 
-                            $resultado = $conect->consulta("INSERT INTO formulario(Name_Form, Form_Asesor, Form_CE, Form_TC, Puntaje_Form, Form_Estado) VALUES('$nameForm', '$asesor', '$EvaEscogidos[$i]', '$CritEscogidos[$i]', '$puntaje[$i]', 'Deshabilitado')");
+                        $InsertarFormulario = $conect->consulta("INSERT INTO formulario(NOMBRE_U, NOMBRE_FORM, ESTADO_FORM) VALUES('$UsuarioActivo', '$nameForm', 'Deshabilitado')");
+
+                        $SeleccionID =$conect->consulta("SELECT MAX(ID_FORM) FROM formulario WHERE NOMBRE_U = '$UsuarioActivo'");
+
+                        $MaxIdForm = mysql_fetch_row($SeleccionID);
+
+                        for ($cont1=0; $cont1 < count($EvaEscogidos); $cont1++) { 
+
+                            if ($CritEscogidos[$cont1] == 4) {
+
+                                echo "aqui";
+                                die();
+
+                                $InsertarCritC = $conect->consulta("INSERT INTO from_crit_c(ID_CRITERIO_C, ID_FORM) VALUES('4','$MaxIdForm[0]') ");
+                                $SeleccionIDE = $conect->consulta("SELECT ID_CRITERIO_E FROM criterio_evaluacion WHERE NOMBRE_CRITERIO_E = '$EvaEscogidos[$cont1]' AND NOMBRE_U = '$UsuarioActivo'");
+                                $idE = mysql_fetch_row($SeleccionIDE);
+                                $InsertarCritE = $conect->consulta("INSERT INTO form_crit_e(ID_FORM, ID_CRITERIO_E) VALUES('$MaxIdForm[0]','$idE[0]') ");
+                                $InsertarPuntaje = $conect->consulta("INSERT INTO puntaje(ID_FORM, PUNTAJE) VALUES('$MaxIdForm[0]','$puntaje[$cont1]')");
+
+                            }else{
+
+                                $SeleccionIDE = $conect->consulta("SELECT ID_CRITERIO_E FROM criterio_evaluacion WHERE NOMBRE_CRITERIO_E = '$EvaEscogidos[$cont1]' AND NOMBRE_U = '$UsuarioActivo'");
+                            
+                                $SeleccionIDC = $conect->consulta("SELECT ID_CRITERIO_C FROM criteriocalificacion WHERE NOMBRE_CRITERIO_C = '$CritEscogidos[$cont1]' AND NOMBRE_U = '$UsuarioActivo'");
+
+                                $idE = mysql_fetch_row($SeleccionIDE);
+
+                                $idC = mysql_fetch_row($SeleccionIDC);
+
+                                //var_dump($idC);
+
+                                $InsertarCritE = $conect->consulta("INSERT INTO form_crit_e(ID_FORM, ID_CRITERIO_E) VALUES('$MaxIdForm[0]','$idE[0]') ");
+
+                                $InsertarCritC = $conect->consulta("INSERT INTO from_crit_c(ID_CRITERIO_C, ID_FORM) VALUES('$idC[0]','$MaxIdForm[0]') ");
+
+                                $InsertarPuntaje = $conect->consulta("INSERT INTO puntaje(ID_FORM, PUNTAJE) VALUES('$MaxIdForm[0]','$puntaje[$cont1]')");
+                            }                            
                         }
 
-                        if($resultado)
+                    
+                        if($InsertarFormulario and $InsertarCritE and $InsertarCritC and $InsertarPuntaje)
                         {
-                            echo '<script>alert("Se Guardo en la BD")</script>';
+                        
+                            echo'<script>BootstrapDialog.alert("Se guardo el formulario correctamente");</script>';
                         }
 
                     }
                     else{
-                        echo '<script>alert("La sumatoria de puntajes en el formulario no puede ser mayor ni menor a 100")</script>';
+                        
+                        echo'<script>BootstrapDialog.alert("La sumatoria de puntajes en el formulario no puede ser mayor ni menor a 100");</script>';
                     }
-            }
-            else {
-                echo '<script>alert("debe llenar el/los campo Puntaje en el formulario")</script>';
-            }
+           
                 
        }
        else
        {
-            echo '<script>alert("Ya existe un formulario con ese nombre registrado")</script>';
+        
+            echo'<script>BootstrapDialog.alert("Ya existe un formulario con ese nombre registrado");</script>';
      
        }
+    }
+
+    
+
+
+
+
+
+
+        
             
-    }
-    else
-    {
-         echo '<script>alert("debe ingresar un nombre para su formulario")</script>';
-    }
 
 ?>

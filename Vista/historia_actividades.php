@@ -64,7 +64,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="../index.php">Inicio </a>
+                <a class="navbar-brand" href="inicio_grupo_empresa.php">Inicio </a>
             </div>
             <!-- /.navbar-header -->
 
@@ -164,13 +164,7 @@
                                 <li>
                                     <a href="#">Seguimiento Grupo Empresa <span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
-                                        <li>
-                                            <a href="CrearModalidadEvaluacion.php"> Modalidad de Evaluaci&oacute;n </a>
-                                            
-                                        </li>
-                                        <li>
-                                            <a href="#">Modalidades de Calificaci&oacute;n</a>
-                                        </li>
+                        
                                         <li>
                                             <a id="Seguimiento" href="../Vista/inicio_asesor.php">Seguimiento</a>
                                         </li>
@@ -178,12 +172,45 @@
                                     </ul>
                                     <!-- /.nav-third-level -->
                                 </li>
+                                <li>
+                                        <a href="#">Evaluacion Grupo Empresa<span class="fa arrow"></span></a>
+                                            <ul class="nav nav-third-level">
+                                                <li>
+                                                    <a href="CrearModalidadEvaluacion.php">Criterio de Evaluaci&oacute;n </a>                             
+                                                </li>
+                                                <li>
+                                                    <a href="CrearModalidadCalificacion.php"> Criterio de Calificaci&oacute;n</a>
+                                                </li>
+                                                 <li>
+                                                    <a href="EliminarCriterioCalificacion.php"> Eliminar Criterio de Calificaci&oacute;n</a>
+                                                </li>
+                                                <li>
+                                                    <a href="CrearFormulario.php">Crear Formulario de Evaluacion</a>
+                                                </li>
+                                                <li>
+                                                    <a href="EliminarFormulario.php">Eliminar Formulario de Evaluacion</a>
+                                                </li>
+                                                <li>
+                                                    <a href="SeleccionarFormulario.php"> Seleccionar Formulario de Evaluacion </a>   
+                                                </li>
+                                                <li>
+                                                    <a href="EvaluarGrupoEmpresa.php">Evaluar Grupo Empresa </a>   
+                                                </li>
+                                            </ul>
+                                </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
                         
                         <li>
                             <a href="#"><i class="fa fa-warning fa-fw"></i> Notificaciones</a>
+                                                        <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="historia_actividades.php">Historia de actividades</a>
+                                </li>
+                                
+                            </ul>  
+                            
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-building-o fa-fw"></i> Actividades<span class="fa arrow"></span></a>
@@ -210,7 +237,7 @@
 <form id = "ordenc" method = "post" action="" role="form" enctype="multipart/data-form" onsubmit="return validarCampos(ordenc)">
         <div class ="form-horizontal">
                         <div class="col-lg-12">
-                            <h1> HISTORIA DE ACTIVIDADES</h1><br><br><br><br>
+                            <h1> HISTORIA DE ACTIVIDADES</h1><br><br>
                 </div>
 
                     <div class="historia">
@@ -311,6 +338,116 @@
                                                       </div>	
 					
 						
+					
+           
+    <hr>
+                    
+
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+        <div class ="form-horizontal">
+
+                    <div class="historia">
+                        
+                               <h2><span>HISTORIAL DE DOCUMENTOS</span></h2>
+			</div>
+                   <hr>
+                                <div class="historia1">
+							<div class="contenedor-fila2">
+									
+								<div class="contenedor-columna">
+									<?php
+										echo "ID ";
+									?>
+								</div>	
+								<div class="contenedor-columna">
+									<?php
+										echo "Asesor";
+									?>
+								</div>
+		
+								<div class="contenedor-columna">
+									<?php
+										echo "Descripcion";
+									?>
+								</div>
+								<div class="contenedor-columna">
+									<?php
+										echo "Fecha ";
+									?>
+								</div>
+								<div class="contenedor-columna">
+									<?php
+										echo "Hora";
+									?>
+								</div>
+							</div>  
+							<?php
+								//crear conexion---------------------------
+								$conexion = mysql_connect("localhost","root","","saetis");
+								//Control
+								if(!$conexion){die('La conexion ha fallado por:'.mysql_error());}
+								//Seleccion
+								mysql_select_db("saetis",$conexion);
+								//Peticion
+								$peticion = mysql_query("SELECT `ID_R`,`NOMBRE_U`,`NOMBRE_R`,`FECHA_R`,`HORA_R` FROM `registro` WHERE `TIPO_T`='publicaciones' and `NOMBRE_U`='leticia'
+               ");
+							
+
+								while($fila = mysql_fetch_array($peticion))
+								{
+							?>
+								<div class="contenedor-fila">
+									   <div class="contenedor-columna">
+										<?php
+											echo $fila['ID_R'];
+										?>
+									</div>
+									
+									<div class="contenedor-columna">
+										<?php
+											echo $fila['NOMBRE_U'];
+										?>
+									</div>
+			
+									<div class="contenedor-columna">
+										<?php
+											echo $fila['NOMBRE_R'];
+										?>
+									</div>
+									
+									<div class="contenedor-columna">
+										<?php
+											echo $fila['FECHA_R'];
+										?>
+									</div>
+									
+									<div class="contenedor-columna">
+										<?php
+											echo $fila['HORA_R'];
+										?>
+									</div>
+                                                                      
+									
+								</div>
+								<?php
+								}
+
+								//Cerrar
+								mysql_close($conexion);
+							
+				
+						?>	
+                                                      </div>	
+					
+						
 					</div>
            
     <hr>
@@ -327,8 +464,6 @@
                     
                  
   </form>
-    
-
              
     <!--Modal para adjuntar recursos/documentos-->
          

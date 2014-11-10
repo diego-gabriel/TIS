@@ -142,8 +142,9 @@ session_start();
      			<div class="content">
 				<div class="content_resize">
 					<div class="mainbar">
-                                            <div class="article"><br><br>
-                                                
+                                            <div class="article"><br>
+                                                       <div class="row">
+                                                           <div class="col-lg-12"></div>
                                                 
 					<h2><span>Asignar Permisos</span></h2>	
 							
@@ -165,7 +166,7 @@ session_start();
 													<p style="text-align:right;">Rol :</p>
 												</td>
 												<td>
-												<select required name="id_rol"><option  value="">---Seleccione Rol---</option>
+												<select required name="id_rol" class="form-control"><option  value="" >Seleccione Rol</option>
 													<?php 
 														$link=mysql_connect("localhost","root",""); 
 														mysql_select_db("saetis",$link); 
@@ -179,7 +180,7 @@ session_start();
 													<p style="text-align:right;">Menu :</p>
 												</td>
 												<td>
-												<select required name="id_menu"><option  value="">---Seleccione Menu---</option>
+												<select required name="id_menu" class="form-control"><option  value="" >Seleccione Menu</option>
 													<?php 
 														$link=mysql_connect("localhost","root",""); 
 														mysql_select_db("saetis",$link); 
@@ -190,8 +191,9 @@ session_start();
 																 .$row["nom_menu"]."</option>"; 
 													?>
 												</td>
-												<td>
-													<input type="submit" value="Registrar">
+												<td>    
+                                                                                                     &nbsp;&nbsp;   <button type="submit" name="submit" class="btn btn-primary" id="btn-registrarUser"> <span class="glyphicon glyphicon-ok"></span>&nbsp; Registrar</button>
+													
 												</td>
 											</tr>
 										</table>
@@ -286,7 +288,7 @@ where p.menu_id_menu=m.id_menu and r.ROL_R=p.ROL_R
 			
 					
 			<div class="sidebar">
-                            <br><br>
+                            <br>
 				<h2 class="star">Usuario :  <?php echo $_SESSION['usuario'] ?></h2>
 			
                
@@ -374,7 +376,7 @@ where p.menu_id_menu=m.id_menu and r.ROL_R=p.ROL_R
        		
                         </div></div>
                         </div>
-			<div class="clr"></div>	<br><br><br><br><br><br>
+			<div class="clr"></div>	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 			<div class="footer">
 			<div class="footer_resize">
 				<p class="lf"></p>

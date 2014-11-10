@@ -7,10 +7,6 @@
     $rol = $_POST['UsuarioRol'];
     $apellidoUsuario = $_POST['apellido'];
     $telefonoUsuario = $_POST['telefono'];
-    
-    echo $name;
-    echo $password;
-    echo $emailUsuario;
 
     include '../Modelo/conexion.php';
     require '../Vista/PHPMailerAutoload.php';
@@ -67,14 +63,12 @@
 
 
             $conect->consulta("INSERT INTO usuario(NOMBRE_U, ESTADO_E, PASSWORD_U, TELEFONO_U, CORREO_ELECTRONICO_U) VALUES('$name','Deshabilitado','$password','$telefonoUsuario','$emailUsuario')"); 
-//             $conect->consulta("INSERT INTO usuario_rol(ROL_R) 
 
+            $conect->consulta("INSERT INTO asesor(NOMBRE_U, NOMBRES_A, APELLIDOS_A) VALUES('$name','$RealName','$apellidoUsuario')");  
+            $conect->consulta("INSERT INTO usuario_rol(NOMBRE_U, ROL_R) VALUES('$name','$rol')");  
+            $conect->consulta("INSERT INTO criteriocalificacion(NOMBRE_U,NOMBRE_CRITERIO_C,TIPO_CRITERIO) VALUES('$name','PUNTAJE','4')");
 
-
-
-            //$conect->consulta("INSERT INTO asesor(NOMBRE_U, NOMBRES_A, APELLIDOS_A) VALUES('$Realname','$Realname','$apellidoUsuario')");  
-
-            echo "Enviado!";
+          
             echo '<script>
                               BootstrapDialog.show({
                                   title: "Envio de solicitud",

@@ -44,9 +44,9 @@ if($contador == 0){
 	//Peticion
 	
         
-        $peticion1 = mysql_query("INSERT INTO `saetis`.`usuario` (`NOMBRE_U`, `ESTADO_E`, `PASSWORD_U`, `TELEFONO_U`, `CORREO_ELECTRONICO_U`) VALUES ('$addUsuario', 'habilitado', '$addContrasena', '$addTelefono', '$addEmail');");
+        $peticion1 = mysql_query("INSERT INTO `saetis`.`usuario` (`NOMBRE_U`, `ESTADO_E`, `PASSWORD_U`, `TELEFONO_U`, `CORREO_ELECTRONICO_U`) VALUES ('$addUsuario', 'Habilitado', '$addContrasena', '$addTelefono', '$addEmail');");
         $peticion2 = mysql_query("INSERT INTO `saetis`.`usuario_rol` (`NOMBRE_U`, `ROL_R`) VALUES ('$addUsuario', 'administrador');");
-        $peticion3 = mysql_query("INSERT INTO `saetis`.`asesor` (`NOMBRE_U`, `NOMBRES_A`, `APELLIDOS_A`) VALUES ('$addUsuario', '$addNombre ', '$addApellido');");
+        $peticion3 = mysql_query("INSERT INTO `saetis`.`administrador` (`NOMBRE_U`, `NOMBRES_AD`, `APELLIDOS_AD`) VALUES ('$addUsuario', '$addNombre ', '$addApellido');");
 	
          //cerrar conexion--------------------------
 	 mysql_close($conexion);

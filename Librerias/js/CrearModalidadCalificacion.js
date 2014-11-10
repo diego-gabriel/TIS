@@ -28,7 +28,7 @@ $(document).ready(function(){
 
                     $('#Textos').empty()
 
-                    $('#Textos').append('<div><div class="form-group" id="primero">Indicador:&nbsp<input type="text" name="Indicador[]" required>&nbspPuntaje:&nbsp<input type="text" name="ValorNumerico[]" pattern="^[1-9][0-9]{0,2}$" required>&nbsp<button type="button" class="eliminarBox"> <span class="glyphicon glyphicon-minus"></span> </button></div></div>   <div class="form-group"><button type="button" class="btnIndicador"><span class="glyphicon glyphicon-plus"></span> Agregar</button></div>');
+                    $('#Textos').append('<div><div class="form-group" id="primero">Indicador:&nbsp<input type="text" name="Indicador[]" required>&nbspPuntaje:&nbsp<input type="text" name="ValorNumerico[]" required>&nbsp<button type="button" class="eliminarBox"> <span class="glyphicon glyphicon-minus"></span> </button></div></div>   <div class="form-group"><button type="button" class="btnIndicador"><span class="glyphicon glyphicon-plus"></span> Agregar</button></div>');
                     $('#Textos').append('<div class="form-group"><button type="submit" class="btn btn-default" id="btn-guardar"><span class="glyphicon glyphicon-floppy-disk"></span> Guardar</button></div>')
                 }
 
@@ -38,11 +38,11 @@ $(document).ready(function(){
 
     
                     $('#Textos').append('<div class="form-group"><input type="hidden" name="Indicador[]" value="Verdadero"></div>')
-                    $('#Textos').append('<div class="form-group">Verdadero:&nbsp<input type="text" name="ValorNumerico[]" placeholder="Puntaje: 70,80,90" pattern="^[1-9][0-9]{0,2}$" required></div>')
+                    $('#Textos').append('<div class="form-group">Verdadero:&nbsp<input type="text" name="ValorNumerico[]" placeholder="Puntaje: 70,80,90" required></div>')
                     
 
                     $('#Textos').append('<div class="form-group"><input type="hidden" name="Indicador[]" value="Falso"></div>')
-                    $('#Textos').append('<div class="form-group">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspFalso:&nbsp<input type="text" name="ValorNumerico[]" placeholder="Puntaje: 10,20,30" pattern="^[1-9][0-9]{0,2}$" required></div>')
+                    $('#Textos').append('<div class="form-group">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspFalso:&nbsp<input type="text" name="ValorNumerico[]" placeholder="Puntaje: 10,20,30" required></div>')
                    
 
                     $('#Textos').append('<div class="form-group"><button type="submit" class="btn btn-default" id="btn-guardar"><span class="glyphicon glyphicon-floppy-disk"></span> Guardar</button></div>')
@@ -55,11 +55,11 @@ $(document).ready(function(){
 
     
                     $('#Textos').append('<div class="form-group"><input type="hidden" name="Indicador[]" value="Si"></div>')
-                    $('#Textos').append('<div class="form-group">&nbspSi:&nbsp<input type="text" name="ValorNumerico[]" placeholder="Puntaje: 70,80,90" pattern="^[1-9][0-9]{0,2}$" required></div>')
+                    $('#Textos').append('<div class="form-group">&nbspSi:&nbsp<input type="text" name="ValorNumerico[]" placeholder="Puntaje: 70,80,90" required></div>')
                     
 
                     $('#Textos').append('<div class="form-group"><input type="hidden" name="Indicador[]" value="No"></div>')
-                    $('#Textos').append('<div class="form-group">No:&nbsp<input type="text" name="ValorNumerico[]" placeholder="Puntaje: 10,20,30" pattern="^[1-9][0-9]{0,2}$" required></div>')
+                    $('#Textos').append('<div class="form-group">No:&nbsp<input type="text" name="ValorNumerico[]" placeholder="Puntaje: 10,20,30" required></div>')
                    
 
                     $('#Textos').append('<div class="form-group"><button type="submit" class="btn btn-default" id="btn-guardar"><span class="glyphicon glyphicon-floppy-disk"></span> Guardar</button></div>')

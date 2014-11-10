@@ -1,3 +1,13 @@
+<?php  
+   
+    session_start();
+
+    $UsuarioActivo = $_SESSION['usuario'];
+
+    
+?>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,7 +56,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="../index.php">Inicio </a>
+               <a class="navbar-brand" href="inicio_asesor.php">Inicio </a>
             </div>
             <!-- /.navbar-header -->
 
@@ -159,10 +169,13 @@
                                         <a href="#">Evaluacion Grupo Empresa<span class="fa arrow"></span></a>
                                             <ul class="nav nav-third-level">
                                                 <li>
-                                                    <a href="CrearModalidadEvaluacion.php"> Criterio de Evaluaci&oacute;n </a>                             
+                                                    <a href="CrearModalidadEvaluacion.php">Criterio de Evaluaci&oacute;n </a>                             
                                                 </li>
                                                 <li>
-                                                    <a href="CrearModalidadCalificacion.php">Criterio de Calificaci&oacute;n</a>
+                                                    <a href="CrearModalidadCalificacion.php"> Criterio de Calificaci&oacute;n</a>
+                                                </li>
+                                                 <li>
+                                                    <a href="EliminarCriterioCalificacion.php"> Eliminar Criterio de Calificaci&oacute;n</a>
                                                 </li>
                                                 <li>
                                                     <a href="CrearFormulario.php">Crear Formulario de Evaluacion</a>
@@ -221,22 +234,22 @@
 
                             $conect = new conexion();
                             
-                            $VerificarFormulario = $conect->consulta("SELECT DISTINCT Name_Form FROM formulario WHERE Form_Estado = 'Habilitado'");
+                            $VerificarHabilitado = $conect->consulta("SELECT ID_FORM FROM formulario WHERE ESTADO_FORM = 'Habilitado' AND NOMBRE_U = '$UsuarioActivo'");
                             
-                            $resultadoverificacion = mysql_fetch_row($VerificarFormulario);
-                            
-                            //echo $resultadoverificacion;
-                            
-                            
-                            if(is_array($resultadoverificacion)) 
+                            $IdForm = mysql_fetch_row($VerificarHabilitado);
+
+                            $IdForm2 = $IdForm[0];
+
+                            /**************************************************************/
+                            if(is_array($IdForm)) 
                             {
                             
-                                $consultaGrupos = "SELECT NOMBRE_CORTO_GE FROM grupo_empresa";
+                                $consultaGrupos = "SELECT NOMBRE_CORTO_GE FROM grupo_empresa";//Agregar ASesor
                                 $resultadoConsulta = $conect->consulta($consultaGrupos);
                                     
                                 echo '<div class="form-group">';
                                 echo '<label><h4>Seleccione la Grupo Empresa a evaluar:</h4></label>';
-                                echo '<select name="GrupoEscogido" class="form-control" id="">';
+                                echo '<select name="GrupoEscogido" class="form-control" id="" required>';
                         
                                                 
                                 while($v1 = mysql_fetch_array($resultadoConsulta)){
@@ -246,83 +259,71 @@
                                 echo "</select>";
                                 echo '</div></div></div>';//Panel default---Panel-body
 
-                                /****************************************************************/
-                                $Puntajes = $conect->consulta("SELECT Puntaje_Form FROM formulario WHERE Form_Estado = 'Habilitado'");
+                                /***********************************************************/
 
-                                while($PuntajesRes = mysql_fetch_row($Puntajes)){
-                                    $PuntajesRes2[] = $PuntajesRes;
+                                $SeleccionIdE = $conect->consulta("SELECT ID_CRITERIO_E FROM form_crit_e WHERE ID_FORM ='$IdForm2'");
+
+                                while ($RowCritE = mysql_fetch_row($SeleccionIdE)) {
+
+                                    $IdCritE[] = $RowCritE; 
+                                    
                                 }
 
-                                /***************************************************************/
-                           
-                                $CriteriosCalificacion = $conect->consulta("SELECT FORM_TC FROM formulario WHERE Form_Estado = 'Habilitado'");
+                                for ($i=0; $i <count($IdCritE) ; $i++) { 
 
-                                while($crits = mysql_fetch_row($CriteriosCalificacion)){
-                                    $criterios[] = $crits;
+                                    $SeleccionNomE = $conect->consulta('SELECT NOMBRE_CRITERIO_E FROM criterio_evaluacion WHERE ID_CRITERIO_E = '.$IdCritE[$i][0].'');
+
+                                    $NomCE[] = mysql_fetch_row($SeleccionNomE);
+                        
                                 }
 
                                 /**************************************************************/
 
-                                $CriteriosEvaluacion = $conect->consulta("SELECT FORM_CE FROM formulario WHERE Form_Estado = 'Habilitado'");
+                                $SeleccionPuntaje = $conect->consulta("SELECT PUNTAJE FROM puntaje WHERE ID_FORM = '$IdForm2'");
 
-                                while($eval = mysql_fetch_row($CriteriosEvaluacion)){
-                                    $critEva[] = $eval;
+                                while($rowPuntaje = mysql_fetch_row($SeleccionPuntaje))
+                                {
+                                    $puntajes[] = $rowPuntaje;
                                 }
 
-                                if(isset($critEva))
-                                {
 
-                                    for ($i=0; $i < count($critEva) ; $i++) { 
+                                /************************************************************/
+
+                                $SeleccionIdC = $conect->consulta("SELECT ID_CRITERIO_C FROM from_crit_c WHERE ID_FORM = '$IdForm2'");
+
+                                while ($RowCritC = mysql_fetch_row($SeleccionIdC)) {
+
+                                    $IdCritC[] = $RowCritC;
+                
+                                }
+
+                                /**************************************************/
+
+
+                               for ($j=0; $j < count($IdCritC) ; $j++) { 
+                                    
+                                    $SeleccionTipoE = $conect->consulta('SELECT TIPO_CRITERIO FROM criteriocalificacion WHERE ID_CRITERIO_C ='.$IdCritC[$j][0].'');
+
+                                    $TipoC[] = mysql_fetch_row($SeleccionTipoE);
+                                }
+
+                                /*************************************************************/
+                                 //$SeleccionTipoE = $conect->consulta('SELECT TIPO_CRITERIO FROM criteriocalificacion WHERE ID_CRITERIO_C ='.$IdCritC[$i][0].'');
+
+                                 //$TipoC[] = mysql_fetch_row($SeleccionTipoE);
+
+                                    for ($i=0; $i < count($NomCE) ; $i++) { 
 
                                         echo "<div>";
                                             echo '<div class="panel panel-default">';
                                                 echo '<div class="panel-body">';
                                                     echo '<div class="form-group">';
-                                                        echo '<strong>'.$i.'. '.$critEva[$i][0].'</strong>'.' ('.$PuntajesRes2[$i][0].' puntos)';
-                                                        echo '<input type="hidden" name="valoresFormulario[]" value="'.$PuntajesRes2[$i][0].'">';
+                                                        echo '<strong>'.$i.'. '.$NomCE[$i][0].'</strong>'.' ('.$puntajes[$i][0].' puntos)';
+                                                        echo '<input type="hidden" name="valoresFormulario[]" value="'.$puntajes[$i][0].'">';
                                                     echo '</div>';
 
-                                        /*if($criterios[$i][0] == 1)
-                                        {
-                                                    echo'<div class="form-group">';
-                                                        echo'<div class="checkbox">';
-                                                            echo'<label for="">';
-                                                            echo'<input type="checkbox" name="valorInput[]" value="100">Si';
-                                                            echo'</label>';
-                                                        echo'</div>';
 
-                                                        echo'<div class="checkbox">';
-                                                            echo'<label for="">';
-                                                            echo'<input type="checkbox" name="valorInput[]" value="0">No';
-                                                            echo'</label>';
-                                                        echo'</div>';
-                                                    echo'</div>';
-                                                echo '</div>';
-                                            echo '</div>';
-                                        }
-                                        else
-                                        {*/
-                                            /*if($criterios[$i][0] == 2)
-                                            {
-                                                    echo'<div class="form-group" id="1">';
-                                                        echo'<div class="checkbox">';
-                                                           // echo'<label for="">';
-                                                                echo'<input type="checkbox" name="valorInput[]" value="100">Verdadero';
-                                                            //echo'</label>';
-                                                        echo'</div>';
-
-                                                        echo'<div class="checkbox">';
-                                                            //echo'<label for="">';
-                                                            echo'<input type="checkbox" name="valorInput[]" value="0">Falso';
-                                                            //echo'</label>';
-                                                        echo'</div>';
-                                                    echo'</div>';
-                                                echo'</div>';
-                                            echo'</div>';
-                                            }
-                                            else
-                                            {*/
-                                                if ($criterios[$i][0] == 4) {
+                                                if ($TipoC[$i][0] == 4) {
 
                                                         echo'<div class="form-group">';
                                                             echo'<input type="text" name="valorInput[]" pattern="^[0-9]{1,3}" required>';
@@ -331,29 +332,28 @@
                                                 echo'</div>';
                                                 }
                                                 else
-                                                {
-                                                    $criterioUsar = $criterios[$i][0];
+                                                {      
+
+                                                    /*******************************************************************/
                                                     
-                                                    //echo $criterioUsar;
-                                                    
-                                                    //ahora busco los indicadores
-                                                    $indicadores = $conect->consulta("SELECT Indicador FROM criterio_calificacion WHERE nombre_criterio_calif = '$criterioUsar'");
-                                                    $valores = $conect->consulta("SELECT Puntaje_Criterio FROM criterio_calificacion WHERE nombre_criterio_calif = '$criterioUsar'");
+                                                    $indicadores = $conect->consulta('SELECT NOMBRE_INDICADOR FROM indicador WHERE ID_CRITERIO_C = '.$IdCritC[$i][0].'');
 
                                                     while($ResIndicadores = mysql_fetch_row($indicadores)){
 
                                                         $ResIndicadores2[] = $ResIndicadores;
                                                     }
-                                                    
-                                                    //var_dump($ResIndicadores2);
 
-                                                    while($ResValores = mysql_fetch_row($valores)){
+                                                    /*****************************************************************/
 
-                                                        $ResValores2[] = $ResValores;
+                                                    $valores = $conect->consulta('SELECT PUNTAJE_INDICADOR FROM indicador WHERE ID_CRITERIO_C = '.$IdCritC[$i][0].'');
+                                                
+                                                    while ($rowP = mysql_fetch_row($valores)) {
+
+                                                        $puntajesC[] = $rowP;
+                                            
                                                     }
-                                                    //var_dump($ResValores2);
-                                                    
-                                                    //echo (count($ResIndicadores2));
+
+                                                    /**********************************************************************/
                                                     
                                                     echo '<div id='.$i.'>';
 
@@ -361,7 +361,7 @@
 
                                                         echo'<div class="checkbox">';
                                                             
-                                                            echo'<input type="checkbox" id="'.$z.'" name="valorInput[]" value="'.$ResValores2[$z][0].'">'.$ResIndicadores2[$z][0].' ('.$ResValores2[$z][0].')';
+                                                            echo'<input type="checkbox" id="'.$z.'" name="valorInput[]" value="'.$puntajesC[$z][0].'">'.$ResIndicadores2[$z][0].' ('.$puntajesC[$z][0].')';
                                                            
                                                         echo'</div>';
                                                     }
@@ -370,7 +370,7 @@
                                                 echo '</div>';
                                                 
                                                 unset($ResIndicadores2);
-                                                unset($ResValores2);
+                                                unset($puntajesC);
                                                 
                                                 }
 
@@ -385,8 +385,9 @@
                                     echo '<div class="form-group">
                                                 <button type="submit" name="submit" class="btn btn-primary btn-sm" id="btn-evaluar">Evaluar</button>
                                           </div>';  
-                                }
+                                //}
                             }
+                            
                             else
                             {
                                 echo 'No tiene ningun formulario habilitado<br>';
@@ -395,6 +396,9 @@
                                 
                             }
                             ?>
+
+
+
 
                 </form>
                   
@@ -422,4 +426,3 @@
 </body>
 
 </html>
-

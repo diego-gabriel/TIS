@@ -1,3 +1,12 @@
+<?php  
+   
+    session_start();
+
+    $UsuarioActivo = $_SESSION['usuario'];
+
+    
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,7 +36,10 @@
     <script type="text/javascript" src="../Librerias/js/validar_orden.js"></script>
     <script type="text/javascript" src="../Librerias/js/masked_input.js"></script>
     <script src="../Librerias/js/jquery-2.1.0.min.js"></script>
-    <script src="../Librerias/js/CrearFormulario.js"></script>  
+    <script src="../Librerias/js/CrearFormulario.js"></script> 
+    <link href="../Librerias/css/bootstrap-dialog.css" rel="stylesheet">
+    <script src="../Librerias/js/bootstrap-dialog.js"></script>
+    <script src="../Librerias/js/bootstrap.min.js"></script> 
 </head>
 
 <body>
@@ -46,7 +58,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="../index.php">Inicio </a>
+            <a class="navbar-brand" href="inicio_asesor.php">Inicio </a>
             </div>
             <!-- /.navbar-header -->
 
@@ -161,6 +173,9 @@
                                                 <li>
                                                     <a href="CrearModalidadCalificacion.php"> Criterio de Calificaci&oacute;n</a>
                                                 </li>
+                                                 <li>
+                                                    <a href="EliminarCriterioCalificacion.php"> Eliminar Criterio de Calificaci&oacute;n</a>
+                                                </li>
                                                 <li>
                                                     <a href="CrearFormulario.php">Crear Formulario de Evaluacion</a>
                                                 </li>
@@ -215,7 +230,7 @@
                                             <div class="panel panel-default">
                                                 <div class="panel-body">
                                                     <label for=""><h4>Ingrese un nombre para su formulario:</h4></label>
-                                                    <input type="text" title="Debe ingresar un nombre de la siguiente forma: formulario1" name="nombreFormulario" id="" pattern="^[a-z]+[1-9]$" class="form-control" required >
+                                                    <input type="text" title="Solo use minusculas y numeros: Ejm...formulario1" name="nombreFormulario" id="" pattern="[a-z]{3,20}[0-9]{1,2}" class="form-control" required >
                                                 </div>
                                             </div>
                                         </div>
@@ -228,16 +243,16 @@
                          
                                                     $conect = new conexion();                                               
 
-                                                    $CriteriosEvaluacion = $conect->consulta("SELECT CRITERIO_E FROM criterio_evaluacion");
+                                                    $CriteriosEvaluacion = $conect->consulta("SELECT NOMBRE_CRITERIO_E FROM criterio_evaluacion WHERE NOMBRE_U = '$UsuarioActivo'");
 
-                                                    $CriteriosCalificacion = $conect->consulta("SELECT DISTINCT nombre_criterio_calif FROM criterio_calificacion WHERE nombre_asesor_calif ='$asesor'");
+                                                    $CriteriosCalificacion = $conect->consulta("SELECT DISTINCT NOMBRE_CRITERIO_C FROM criteriocalificacion WHERE NOMBRE_U ='$UsuarioActivo'");
 
                                                     echo '<div id="todos">';
                                                         echo '<div id="escogidos">';
                                                             echo '<div class="form-group">';
                                                                 echo 'Seleccione el criterios a evaluar:';
-                                                                echo '<select class="form-control" name="EvaEscogidos[]">';
-                                                        //echo '<option value="">Seleccion un Criterio a Evaluar</option>';
+                                                                echo '<select class="form-control" name="EvaEscogidos[]" required>';
+                                                                echo '<option value="">Seleccione un Criterio a Evaluar</option>';
 
                                                     while ($v2 = mysql_fetch_row($CriteriosEvaluacion)) {
 
@@ -248,9 +263,9 @@
                                                     /***************************************************************/
 
                                                             echo '<div class="form-group">';
-                                                                echo '<select class="form-control" name="CritEscogidos[]">';
-                                                                // echo '<option value="">Seleccione un Tipo de Calificacion</option
-                                                                    echo '<option value="4">Puntaje</option>';
+                                                                echo '<select class="form-control" name="CritEscogidos[]" required>';
+                                                                echo '<option value="">Seleccione un Tipo de Calificacion</option>';
+                                                                    
 
                                                     while ($v3 = mysql_fetch_row($CriteriosCalificacion)) {
 
@@ -263,7 +278,7 @@
 
                                                             echo '<div class="form-group">';
                                                                 echo 'Puntaje en el formulario: ';
-                                                                echo '<input type="text" name="PuntajeForm[]">';
+                                                                echo '<input type="text" name="PuntajeForm[]" pattern="\b[1-9][0-9]" title="el puntaje no puede ser mayor ni igual a 100"  required>';
                                                             echo '</div>';
                                                             echo '<hr>';
                                                         echo '</div>';
@@ -278,10 +293,9 @@
                                                 </div> 
 
                                                 <div class="form-group">
-                                                            <div class="btn-group">
-                                                                <button type="button" class="btn btn-primary btn-sm" id="btn-guardar">Guardar</button>
-                                                             
-                                                            </div>
+                                                    <div class="btn-group">
+                                                        <button type="submit" class="btn btn-primary btn-sm" id="btn-guardar">Guardar</button>         
+                                                    </div>
                                                 </div>                                         
                                     </form>                                                
 

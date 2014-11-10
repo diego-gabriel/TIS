@@ -1,3 +1,7 @@
+<?php  
+session_start();
+$UsuarioActivo = $_SESSION['usuario'];
+?>
 <!DOCTYPE html>
 <html>
 
@@ -10,38 +14,23 @@
 
     <!-- Core CSS - Include with every page -->
     <link href="../Librerias/css/bootstrap.min.css" rel="stylesheet">
+     <link href="../Librerias/css/bootstrap-dialog.css" rel="stylesheet">
+
     <link href="../Librerias/font-awesome/css/font-awesome.css" rel="stylesheet">
 
     <!-- Page-Level Plugin CSS - Dashboard -->
     <!--link href="../Librerias/css/plugins/morris/morris-0.4.3.min.css" rel="stylesheet"-->
     <link href="../Librerias/css/plugins/timeline/timeline.css" rel="stylesheet">
 
-    <link href="../Librerias/css/bootstrap-dialog.css" rel="stylesheet">
-   
 
     <!-- SB Admin CSS - Include with every page -->
     <link href="../Librerias/css/sb-admin.css" rel="stylesheet">
+
     <script src="../Librerias/js/jquery-2.1.0.min.js"></script>
     <script src="../Librerias/js/CrearModalidadCalificacion.js"></script>
-
-   
+    <script src="../Librerias/js/bootstrap.min.js"></script><!--Necesario para modal-->
    
     <script src="../Librerias/js/bootstrap-dialog.js"></script>
-
-    <script>
-
-    $(document).ready(function() {
-
-        $('#prueba').click(function(event) {
-
-            BootstrapDialog.alert('I want banana!');
-
-            /* Act on the event */
-        });
-        
-    });
-
-    </script>
         
 </head>
 
@@ -58,11 +47,12 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="../index.php">Inicio </a>
+                <a class="navbar-brand" href="inicio_asesor.php">Inicio </a>
             </div>
             <!-- /.navbar-header -->
 
             <ul class="nav navbar-top-links navbar-right">
+
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-envelope fa-fw"></i>  <i class="fa fa-caret-down"></i>
@@ -75,11 +65,7 @@
                     </a>
                 </li>
                 <!-- /.dropdown -->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-bell fa-fw"></i>  <i class="fa fa-caret-down"></i>
-                    </a>
-                </li>
+         
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -168,10 +154,13 @@
                                         <a href="#">Evaluacion Grupo Empresa<span class="fa arrow"></span></a>
                                             <ul class="nav nav-third-level">
                                                 <li>
-                                                    <a href="CrearModalidadEvaluacion.php"> Criterio de Evaluaci&oacute;n </a>                             
+                                                    <a href="CrearModalidadEvaluacion.php">Criterio de Evaluaci&oacute;n </a>                             
                                                 </li>
                                                 <li>
-                                                    <a href="CrearModalidadCalificacion.php">Criterio de Calificaci&oacute;n</a>
+                                                    <a href="CrearModalidadCalificacion.php"> Criterio de Calificaci&oacute;n</a>
+                                                </li>
+                                                 <li>
+                                                    <a href="EliminarCriterioCalificacion.php"> Eliminar Criterio de Calificaci&oacute;n</a>
                                                 </li>
                                                 <li>
                                                     <a href="CrearFormulario.php">Crear Formulario de Evaluacion</a>
@@ -240,17 +229,17 @@
                                                 <option value="3">Si/No</option>
                                             </select>
                                         </div>
-                                        <input type="hidden" name="NombreAsesor" value="Leticia">
                                     </div>
-
-                                    <button type="button" id="prueba">pruea</button>
 
                                     <div class="panel-body">
                                         <div id="Textos" class="form-group">
                                         
                                         </div>                     
                                     </div>   
-                                </form> 
+                                </form>
+                                    <div id="panelResultado" class="form-group">
+                                        
+                                    </div>       
 
                             <!--div-->     
                         </div><!--panel panel-default-->
@@ -262,21 +251,12 @@
 
     
     
-    <script src="../Librerias/js/jquery-1.10.2.js"></script>
-    <script src="../Librerias/js/bootstrap.min.js"></script>
+    
     <script src="../Librerias/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-
-    <!-- Page-Level Plugin Scripts - Dashboard -->
-    <script src="../Librerias/js/plugins/morris/raphael-2.1.0.min.js"></script>
-    <script src="../Librerias/js/plugins/morris/morris.js"></script>
-
     <!-- SB Admin Scripts - Include with every page -->
     <script src="../Librerias/js/sb-admin.js"></script>
-
+  
     <!-- Page-Level Demo Scripts - Dashboard - Use for reference -->
-    <script src="../Librerias/js/demo/dashboard-demo.js"></script>
-
-
 
 </body>
 

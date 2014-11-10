@@ -6,12 +6,20 @@ include '../Modelo/conexion.php';
                                                   
     $conect = new conexion();
     
-    $resutado = $conect->consulta("DELETE FROM formulario WHERE Name_Form = '$formulario'");
+    $EliminarCE = $conect->consulta("DELETE FROM form_crit_e WHERE ID_FORM = '$formulario'");
+
+    $EliminarCC = $conect->consulta("DELETE FROM from_crit_c WHERE ID_FORM = '$formulario'");
+
+    $EliminarPuntaje = $conect->consulta("DELETE FROM puntaje WHERE ID_FORM = '$formulario'");
+
+    $EliminarFormulario = $conect->consulta("DELETE FROM formulario WHERE ID_FORM = '$formulario'");
     
-    if($resutado) 
+    if($EliminarCE and $EliminarCC and $EliminarPuntaje and $EliminarFormulario) 
     {
-        echo '<script>alert("Se elimino el formulario Correctamente")</script>';
-        echo '<script>location.reload()</script>';
+
+    	echo "<script>BootstrapDialog.alert('Se elimino el formulario correctamente');</script>";
+ 
+        //echo '<script>location.reload()</script>';
     }
     
 ?>

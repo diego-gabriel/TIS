@@ -27,7 +27,7 @@ $addFecha= $_POST['fec'];
 	  
         
         
-	$peticion2 = mysql_query("UPDATE `usuario` SET `ESTADO_E`='habilitado' WHERE `NOMBRE_U`='$addDestino'");
+	$peticion2 = mysql_query("UPDATE `usuario` SET `ESTADO_E`='Habilitado' WHERE `NOMBRE_U`='$addDestino'");
 
 
 //cerrar conexion--------------------------

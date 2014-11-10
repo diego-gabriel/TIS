@@ -2,11 +2,13 @@
 
 <?php
 include "../Modelo/conexion.php";
+session_start();
  $con=new conexion();
 date_default_timezone_set('America/Argentina/Tucuman');
 $fecha=  date('Y-m-d');
 $hora= date('G:H:i');
 $clas = new conexion();
+
 $idAsesor='leticia';
 $resultado = $clas->consulta("SELECT ge.`NOMBRE_LARGO_GE` FROM `asesor` AS a,`grupo_empresa` AS ge,`gestion` AS g,`inscripcion` AS i WHERE a.`NOMBRE_U` = i.`NOMBRE_UA` AND ge.`NOMBRE_U` = i.`NOMBRE_UGE` AND g.`ID_G` = i.`ID_G` AND g.`FECHA_FIN_G` >= '$fecha' AND g.`FECHA_INICIO_G` <= '$fecha' AND a.`NOMBRE_U` LIKE '$idAsesor'");
 
@@ -70,7 +72,7 @@ $resultado = $clas->consulta("SELECT ge.`NOMBRE_LARGO_GE` FROM `asesor` AS a,`gr
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="../index.php">Inicio </a>
+                <a class="navbar-brand" href="inicio_asesor.php">Inicio </a>
             </div>
             <!-- /.navbar-header -->
 
@@ -173,19 +175,39 @@ $resultado = $clas->consulta("SELECT ge.`NOMBRE_LARGO_GE` FROM `asesor` AS a,`gr
                                 <li>
                                     <a href="#">Seguimiento Grupo Empresa <span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
-                                        <li>
-                                            <a href="CrearModalidadEvaluacion.php"> Modalidad de Evaluaci&oacute;n </a>
-                                            
-                                        </li>
-                                        <li>
-                                            <a href="#">Modalidades de Calificaci&oacute;n</a>
-                                        </li>
+                                        
                                         <li>
                                             <a id="Seguimiento" href="#">Seguimiento</a>
                                         </li>
   
                                     </ul>
                                     <!-- /.nav-third-level -->
+                                </li>
+                                <li>
+                                        <a href="#">Evaluacion Grupo Empresa<span class="fa arrow"></span></a>
+                                            <ul class="nav nav-third-level">
+                                                <li>
+                                                    <a href="CrearModalidadEvaluacion.php">Criterio de Evaluaci&oacute;n </a>                             
+                                                </li>
+                                                <li>
+                                                    <a href="CrearModalidadCalificacion.php"> Criterio de Calificaci&oacute;n</a>
+                                                </li>
+                                                 <li>
+                                                    <a href="EliminarCriterioCalificacion.php"> Eliminar Criterio de Calificaci&oacute;n</a>
+                                                </li>
+                                                <li>
+                                                    <a href="CrearFormulario.php">Crear Formulario de Evaluacion</a>
+                                                </li>
+                                                <li>
+                                                    <a href="EliminarFormulario.php">Eliminar Formulario de Evaluacion</a>
+                                                </li>
+                                                <li>
+                                                    <a href="SeleccionarFormulario.php"> Seleccionar Formulario de Evaluacion </a>   
+                                                </li>
+                                                <li>
+                                                    <a href="EvaluarGrupoEmpresa.php">Evaluar Grupo Empresa </a>   
+                                                </li>
+                                            </ul>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -236,7 +258,7 @@ $resultado = $clas->consulta("SELECT ge.`NOMBRE_LARGO_GE` FROM `asesor` AS a,`gr
                           <select name="lista" class="form-control">
                             <option selected value="0">Seleccione una grupo empresa </option>
                             <?php
-                                $idAsesor='leticia';
+                                $idAsesor= $_SESSION['usuario']  ;
                                 $c1="SELECT ge.`NOMBRE_LARGO_GE` FROM `inscripcion` AS i,`asesor` AS a,`grupo_empresa` AS `ge`,`gestion` AS g,`proyecto` AS p WHERE i.`NOMBRE_UA` = a.`NOMBRE_U` AND i.`NOMBRE_UGE` = ge.`NOMBRE_U` AND i.`ID_G` = g.`ID_G` AND i.`CODIGO_P` = p.`CODIGO_P` AND a.`NOMBRE_U` LIKE '$idAsesor'";
                                 $a1=$con->consulta($c1);
                                 

@@ -48,7 +48,7 @@ session_start();
 
 
                     $conn->commit();
-                    echo"<script type=\"text/javascript\">alert('El registro ha sido satisfactorio'); window.location='RegistrarGrupoEmpresa.php';</script>";
+                    echo"<script type=\"text/javascript\">alert('El registro ha sido satisfactorio'); window.location='AnadirSocio.php';</script>";
                     /*echo '<script>
                       BootstrapDialog.show({
                       title: "Registro",
@@ -67,7 +67,7 @@ session_start();
      }
      else
      {
-          echo"<script type=\"text/javascript\">alert('El nombre de usuario ya esta registrado'); window.location='RegistrarGrupoEmpresa.php';</script>";
+          echo"<script type=\"text/javascript\">alert('El nombre de usuario ya esta registrado'); window.location='AnadirSocio.php';</script>";
        /* 
         echo '<script>
         BootstrapDialog.show({

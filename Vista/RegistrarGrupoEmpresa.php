@@ -23,33 +23,6 @@
     <!--script src="../Librerias/js/jquery-ui.js"></script-->
     <script src="../Librerias/js/bootstrap-dialog.js"></script>
     
-<!--    <script>
-        $(document).ready(function(){
-            
-            $('#btn-registrarUser').click(function(){
-                               
-                if($("form")[0].checkValidity()) 
-                {
-                    var url = "ProcesarRegistroGrupoE.php"
-
-                    $.ajax({
-                        url: url,
-                        type: 'POST',
-                        data: $('#FormularioRegistroUsuarioGE').serialize(),
-
-                        success: function(data){
-
-                            $('#panelResultadoGE').html(data)
-
-                        }
-                    });
-
-                        return false;
-                }
-       
-            });      
-        });
-    </script>-->
 </head>
 
 <body>
@@ -114,14 +87,6 @@
                                             </div>
                                         </div>
                                         
-<!--                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                  <span class="glyphicon glyphicon-user"></span>
-                                                </span>
-                                                <input class="form-control" type="text" name="nombreR" id="nombreR" placeholder="Nombre representante legal" minlength="7" pattern=".{3,}" title="Nombre corto muy corto. Ej: Ana Medrano" required  onkeypress="return validarLetras(event)">
-                                            </div>
-                                        </div>-->
                                         
                                         <div class="form-group">
                                             <div class="input-group">

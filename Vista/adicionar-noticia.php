@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <?php
     include '../Modelo/conexion.php';
+    $conexion = mysql_connect("localhost","root","");
+	//Control
+	if(!$conexion){die('La conexion ha fallado por:'.mysql_error());}
+	mysql_select_db("saetis",$conexion);
+   session_start();
+ $UsuarioActivo = $_SESSION['usuario'];
+ 
 
 ?>
 <html>
@@ -45,7 +52,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="../index.php">Inicio </a>
+               <a class="navbar-brand" href="inicio_asesor.php">Inicio </a> 
             </div>
             <!-- /.navbar-header -->
 
@@ -159,30 +166,33 @@
 
 <?php
 
-
-include('config.php');
+  
+error_reporting(E_ALL ^ E_NOTICE);
 // Mensaje con campos vacios
 if (!empty($_POST) AND (empty($_POST['titulo']) OR empty($_POST['texto']))) {
     echo "<font color=\"#ff0000\">Por Favor llene los campos vacios</font>";
 } else {
-//$titulo = $_POST["titulo"];
-        if (empty($_GET['titulo'])) { $titulo="";} else { $titulo=$_GET['titulo'];}
+if (isset($_POST['titulo'])) {
+          $titulo = $_POST["titulo"];
+        }
 
-       //$autor = $_POST["autor"];
-       
+
+      
           //$texto = $_POST["texto"];
-       if (empty($_GET['texto'])) { $texto="";} else { $texto=$_GET['texto'];}
+       if (isset($_POST['texto'])) {
+        $texto = $_POST['texto'];
+       }
 if($titulo == "" && $texto == ""){} else {
 // Adiciona a Noticia 
-$news_add = "INSERT INTO noticias (NOMBRE_U,TITULO, FECHA_N, VIEWS, TEXTO) VALUES ('leticia','".addslashes(mysql_real_escape_string($_POST["titulo"]))."', NOW(), '0', '".addslashes(mysql_real_escape_string($_POST['texto']))."')";
+$news_add = "INSERT INTO noticias (NOMBRE_U,TITULO, FECHA_N, VIEWS, TEXTO) VALUES ('$UsuarioActivo','".addslashes(mysql_real_escape_string($_POST["titulo"]))."', NOW(), '0', '".addslashes(mysql_real_escape_string($_POST['texto']))."')";
 
 $news_add = mysql_query($news_add)
 or die ("Error.");
 echo "Tema Adicionado";
 
 }
-}
 
+}
 ?>
 
 <form name="input" action="adicionar-noticia.php" method="post">

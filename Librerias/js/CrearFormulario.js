@@ -1,27 +1,33 @@
 $(document).ready(function() {
+
 	$('#btn-agregar').on('click', function(event) {
-		$('#escogidos').clone().appendTo('#todos')
-		/* Act on the event */
+    
+        $('#escogidos').clone().appendTo('#todos')
+		
 	});
 
-	$('#btn-guardar').on('click', function(event) {
+    $('#btn-guardar').on('click', function(event) {
 
-		var url = "guardarFormulario.php"
 
-            $.ajax({
-                url: url,
-                type: 'POST',
-                data: $('#criteriosEscogidos').serialize(),
+            if($("form")[0].checkValidity()) 
+            {
+                var url = "GuardarFormulario.php"
 
-                success: function(data){
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    data: $('#criteriosEscogidos').serialize(),
 
-                $('#panelResultado').html(data)
+                    success: function(data){
 
-                }
+                    $('#panelResultado').html(data)
 
-            });
+                    }
 
-        return false;
+                });
+
+                return false;
+
+            }
     });
-	
 });

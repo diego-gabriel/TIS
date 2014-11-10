@@ -29,10 +29,6 @@ function consulta($consulta) {
     return $resultado;
     
 }
-function ultimo()
-{
-   return mysql_insert_id();
-}
 
 function cerrarConexion() {
     global $link;

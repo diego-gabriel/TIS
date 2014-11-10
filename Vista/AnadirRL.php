@@ -49,7 +49,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="../index.php">Inicio </a>
+                   <a class="navbar-brand" href="inicio_grupo_empresa.php">Inicio </a>
             </div>
             <!-- /.navbar-header -->
 

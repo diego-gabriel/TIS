@@ -1,18 +1,17 @@
 <?php
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+session_start();
+$UsuarioActivo = $_SESSION['usuario'];
 
-$formulario = $_POST['formulario'];
 
 include '../Modelo/conexion.php';
+
+$formulario = $_POST['formulario'];
                                                   
     $conect = new conexion();
     
-    $resutado = $conect->consulta("UPDATE formulario SET Form_Estado = 'Habilitado' WHERE Name_Form = '$formulario'");
-    $resultado2 = $conect->consulta("UPDATE formulario SET Form_Estado = 'Inhabilitado' WHERE Name_Form <> '$formulario'");
+    $resutado = $conect->consulta("UPDATE formulario SET ESTADO_FORM = 'Habilitado' WHERE NOMBRE_FORM = '$formulario' AND NOMBRE_U = '$UsuarioActivo'");
+    $resultado2 = $conect->consulta("UPDATE formulario SET ESTADO_FORM = 'Deshabilitado' WHERE NOMBRE_FORM <> '$formulario' AND NOMBRE_U = '$UsuarioActivo'");
     
     if($resutado and $resultado2) 
     {

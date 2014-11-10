@@ -1,10 +1,18 @@
 
 <?php
 
+
 include '../Modelo/conexion_pd.php';
 include '../Modelo/crear_oc_pdf.php';
 $conexion = new conexion();
-$nombreAsesor = 'leticia' ;
+
+session_start();
+$nombreUA = $_SESSION['usuario'] ;
+$nomAp = $conexion->query("SELECT NOMBRES_A, APELLIDOS_A FROM asesor WHERE NOMBRE_U =  '$nombreUA' ");
+$nombreAp = $nomAp->fetchObject();
+$nomA = $nombreAp->NOMBRES_A;
+$apeA = $nombreAp->APELLIDOS_A;
+$nombreAsesor = $nomA." ".$apeA ;
 
 if (isset($_POST['lista'])) {
 	if (isset($_POST['fecha'])) {
@@ -130,6 +138,7 @@ if (isset($_POST['lista'])) {
                                     
                                     rename("NotificacionConformidad.pdf", $file);
                                     rename($file, $rutaDirectorio.$pdf );
+                                 
                                     header("location:../Vista/notificacion_conformidad.php");
 				 
                                     

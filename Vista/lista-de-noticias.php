@@ -1,6 +1,12 @@
 !DOCTYPE html>
 <?php
     include '../Modelo/conexion.php';
+    $conexion = mysql_connect("localhost","root","");
+	//Control
+	if(!$conexion){die('La conexion ha fallado por:'.mysql_error());}
+	mysql_select_db("saetis",$conexion);
+   session_start();
+ $UsuarioActivo = $_SESSION['usuario'];
 
 ?>
 <html>
@@ -45,7 +51,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="../index.php">Inicio </a>
+                <a class="navbar-brand" href="inicio_asesor.php">Inicio </a>
             </div>
             <!-- /.navbar-header -->
 
@@ -151,7 +157,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h2 class="page-header">FORO</h2>
-                    <div class="col-lg-6" >
+                    <div class="col-lg-12" >
 
                           <div class="panel panel-default">
                         <div class="panel-heading">
@@ -165,9 +171,9 @@
                             <div class="list-group">
 
                                    <?php
+ 
 
-
-                                        include('config.php');
+                                       // include('config.php');
                                          // Seleciona la tabla de noticias
                                         $selecionar_db = "SELECT * FROM noticias ORDER BY ID_N DESC";
 

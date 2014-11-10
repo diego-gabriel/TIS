@@ -1,3 +1,8 @@
+<?php  
+session_start();
+$UsuarioActivo = $_SESSION['usuario'];
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,12 +14,13 @@
 
     <!-- Core CSS - Include with every page -->
     <link href="../Librerias/css/bootstrap.min.css" rel="stylesheet">
+   
     <link href="../Librerias/font-awesome/css/font-awesome.css" rel="stylesheet">
 
     <!-- ComboBox estilizado ;) -->
     
     <!-- Page-Level Plugin CSS - Dashboard -->
-    <link href="../Librerias/css/plugins/morris/morris-0.4.3.min.css" rel="stylesheet">
+    
     <link href="../Librerias/css/plugins/timeline/timeline.css" rel="stylesheet">
    
 
@@ -23,34 +29,39 @@
     <link type="text/css" rel="stylesheet" href="../Librerias/css/jquery-te-1.4.0.css">
     
     <script src="../Librerias/js/jquery-1.10.2.js"></script>
-    
-    <script type="text/javascript" src="../Librerias/js/validar_orden.js"></script>
     <script type="text/javascript" src="../Librerias/js/masked_input.js"></script>
     <script src="../Librerias/js/jquery-2.1.0.min.js"></script>
+     
+    <script src="../Librerias/js/evaluar.js"></script>
+    <link href="../Librerias/css/bootstrap-dialog.css" rel="stylesheet">
+    <script src="../Librerias/js/bootstrap-dialog.js"></script>
     
     <script>
+
         $(document).ready(function(){
             $('#btn-eliminarForm').on('click', function(){
-                
-                var url = "EliminarFormulario2.php"
 
-                $.ajax({
-                    url: url,
-                    type: 'POST',
-                    data: $('#EliminarFormulario').serialize(),
+                if($("form")[0].checkValidity())
+                {
+                    var url = "EliminarFormulario2.php"
 
-                    success: function(data){
+                    $.ajax({
+                        url: url,
+                        type: 'POST',
+                        data: $('#EliminarFormulario').serialize(),
 
-                    $('#panelResultado').html(data)
+                        success: function(data){
 
-                    }
+                        $('#panelResultado').html(data)
 
-                });
+                        }
 
-                return false;
-                
+                    });
+
+                    return false;
+
+                }   
             });
-            
         });
         
     </script>
@@ -74,7 +85,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="../index.php">Inicio </a>
+               <a class="navbar-brand" href="inicio_asesor.php">Inicio </a>
             </div>
             <!-- /.navbar-header -->
 
@@ -189,33 +200,34 @@
                                 </li>
                                 
                                 <li>
-                                    
-                                    <a href="#">Evaluacion Grupo Empresa<span class="fa arrow"></span></a>
-                                    <ul class="nav nav-third-level">
-                                        <li>
-                                            <a href="CrearModalidadEvaluacion.php">Criterio de Evaluaci&oacute;n </a>
-                                            
-                                        </li>
-                                        <li>
-                                            <a href="CrearModalidadCalificacion.php">Criterio de Calificaci&oacute;n</a>
-                                        </li>
-                                        <li>
+                                        <a href="#">Evaluacion Grupo Empresa<span class="fa arrow"></span></a>
+                                            <ul class="nav nav-third-level">
+                                                <li>
+                                                    <a href="CrearModalidadEvaluacion.php">Criterio de Evaluaci&oacute;n </a>                             
+                                                </li>
+                                                <li>
+                                                    <a href="CrearModalidadCalificacion.php"> Criterio de Calificaci&oacute;n</a>
+                                                </li>
+                                                 <li>
+                                                    <a href="EliminarCriterioCalificacion.php"> Eliminar Criterio de Calificaci&oacute;n</a>
+                                                </li>
+                                                <li>
                                                     <a href="CrearFormulario.php">Crear Formulario de Evaluacion</a>
-                                        </li>
-                                        <li>
-                                            <a href="EliminarFormulario.php">Eliminar Formulario de Evaluacion</a>
-                                        </li>
-                                        <li>
-                                            <a href="SeleccionarFormulario.php"> Seleccionar Formulario de Evaluacion </a>   
-                                        </li>
-                                        <li>
-                                            <a href="EvaluarGrupoEmpresa.php">Evaluar Grupo Empresa </a>   
-                                        </li>
-                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <a href="EliminarFormulario.php">Eliminar Formulario de Evaluacion</a>
+                                                </li>
+                                                <li>
+                                                    <a href="SeleccionarFormulario.php"> Seleccionar Formulario de Evaluacion </a>   
+                                                </li>
+                                                <li>
+                                                    <a href="EvaluarGrupoEmpresa.php">Evaluar Grupo Empresa </a>   
+                                                </li>
+                                            </ul>
                                 </li>
                                    
                                     <!-- /.nav-third-level -->
-                                </li>
+                            
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
@@ -255,14 +267,15 @@
 
                                 <div class="form-group">
                                     <label for=""><h4>Seleccione un Formulario:</h4></label>
-                                    <select name="EscogidoEliminar" id="" class="form-control">
+                                    <select name="EscogidoEliminar" id="" class="form-control" required>
+                                        <option value="">Seleccion un formulario</option>
                                             	     
                                     <?php 
                                     
                                         include '../Modelo/conexion.php';
-					$conect = new conexion();
+					                    $conect = new conexion();
 
-					$EliminarFormulario = $conect->consulta('SELECT DISTINCT Name_Form FROM formulario');
+					                    $EliminarFormulario = $conect->consulta("SELECT NOMBRE_FORM FROM formulario WHERE NOMBRE_U = '$UsuarioActivo'");
                                         
                                         while ($row = mysql_fetch_array($EliminarFormulario)) {
                                             
@@ -270,9 +283,16 @@
                                             
                                         }
 
+                                        $SeleccionarIdFormulario = $conect->consulta("SELECT ID_FORM FROM formulario WHERE NOMBRE_U = '$UsuarioActivo'");
+
+                                        while ($rowID = mysql_fetch_row($SeleccionarIdFormulario)) {
+                                
+                                            $IdFormulario[] = $rowID;
+                                        }
+
                                         for ($i=0; $i <count($Eliminar) ; $i++){
 
-                                            echo '<option>'.$Eliminar[$i][0].'</option>'; 
+                                            echo '<option value='.$IdFormulario[$i][0].'>'.$Eliminar[$i][0].'</option>'; 
 													
 					}
 
@@ -284,7 +304,7 @@
 
 
                                 <div class="form-group">
-                                    <button type="button" class="btn btn-primary btn-sm" id="btn-eliminarForm">Eliminar</button>
+                                    <button type="submit" class="btn btn-primary btn-sm" id="btn-eliminarForm">Eliminar</button>
                                 </div>                                              
                             </form>                                                
 
@@ -304,7 +324,6 @@
     <!-- Page-Level Demo Scripts - Dashboard - Use for reference -->
     <script src="../Librerias/js/demo/dashboard-demo.js"></script>
     <!-- Combo Box scripts -->
-
     
  
 </body>

@@ -167,7 +167,7 @@ session_start();
 									mysql_select_db("saetis",$conexion);
 
 									//Peticion
-										$peticion = mysql_query("SELECT u.NOMBRE_U,u.PASSWORD_U,u.TELEFONO_U,u.CORREO_ELECTRONICO_U,a.NOMBRES_A,a.APELLIDOS_A FROM  usuario u, asesor a WHERE u.NOMBRE_U=a.NOMBRE_U  and u.NOMBRE_U='$usuario'");
+										$peticion = mysql_query("SELECT u.NOMBRE_U,u.PASSWORD_U,u.TELEFONO_U,u.CORREO_ELECTRONICO_U,a.NOMBRES_AD,a.APELLIDOS_AD FROM  usuario u, administrador a WHERE u.NOMBRE_U=a.NOMBRE_U  and u.NOMBRE_U='$usuario'");
 									//cerrar conexion--------------------------
 									 mysql_close($conexion);
 								while($fila = mysql_fetch_array($peticion))
@@ -179,51 +179,104 @@ session_start();
 										<table border=0 width=80%>
 											<tr>
 												<td >
-													<p style='text-align:right;'>login :</p>
+													<p style='text-align:left;'>login    :</p>
 												</td>
 												<td>
-													<input type='text' size=25% required name='login' readonly='readonly'  value='".$fila['NOMBRE_U']."'/>
-												</td>
+                                                              
+                                        <div class='form-group'>
+                                            <div class='input-group'>
+                                                <span class='input-group-addon'>
+                                                  <span class='glyphicon glyphicon-user'></span>
+                                                </span>
+                                                <input class='form-control' type='text' name='login' id='UserName'  value='".$fila['NOMBRE_U']."' readonly='readonly' required/>
+                                            </div>
+                                        </div>
+	                                                                          </td>
 											</tr>
-											<tr>
-												<td >
-													<p style='text-align:right;'>password :</p>
-												</td>
-												<td>
-													<input type='text' size=25% required name='password' value='".$fila['PASSWORD_U']."'/>
+                                                                                        <tr>
+										   <td >
+                                                                                   
+							<p style='text-align:left;'>password:</p>
+										</td>
+										<td>
+                                          <div class='form-group'>
+                                            <div class='input-group'>
+                                                <span class='input-group-addon'>
+                                                  <span class='glyphicon glyphicon-lock'></span>
+                                                </span>
+                                                <input class='form-control' type='text' name='password' id='UserPassword'    minlength='5' pattern='^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$' title='la contraseña debe contener mayusculas, minusculas, caracteres y numeros' value='".$fila['PASSWORD_U']."' required/>
+                                            </div>
+                                        </div>  
+
+										
 												</td>
 											</tr
 											<tr>
 												<td >
-													<p style='text-align:right;'>Nombres :</p>
+													<p style='text-align:left;'>Nombres:</p>
 												</td>
 												<td>
-													<input type='text' size=25% required name='nombre' value='".$fila['NOMBRES_A']."'/>
+                                        <div class='form-group'>
+                                            <div class='input-group'>
+                                                <span class='input-group-addon'>
+                                                  <span class='glyphicon glyphicon-user'></span>
+                                                </span>
+                                                <input class='form-control' type='text' name='nombre' id='RealName' placeholder='Nombre' pattern='\b[A-Z]{1}[a-z]{2,20}' title='Ejm: Alejandra, Ivan, Ana'	 value='".$fila['NOMBRES_AD']."' required />
+                                            </div>
+                                        </div>                                                                                                
+
+
+												
 												</td>
 											</tr>
 											<tr>
 												<td >
-													<p style='text-align:right;'>Apellidos :</p>
+													<p style='text-align:left;'>Apellidos:</p>
 												</td>
 												<td>
-													<input type='text' size=25% required name='apellido' value='".$fila['APELLIDOS_A']."'/>
+                                        <div class='form-group'>
+                                            <div class='input-group'>
+                                                <span class='input-group-addon'>
+                                                  <span class='glyphicon glyphicon-user'></span>
+                                                </span>
+                                                <input class='form-control' type='text' name='apellido' id='LastName' placeholder='Apellido' pattern='\b[A-Z]{1}[a-z]{3,20}\b' title='Ejm: Vargas, Morales, Medrano' value='".$fila['APELLIDOS_AD']."' required>
+                                            </div>
+                                        </div>                                                                                                
+
 												</td>
 											</tr>
 											<tr>
 												<td>
-													<p style='text-align:right;'>telefono:</p>
+													<p style='text-align:left;'>telefono:</p>
 												</td>
 												<td>
+                                         <div class='form-group'>
+                                            <div class='input-group'>
+                                                <span class='input-group-addon'>
+                                                  <span class='glyphicon glyphicon-earphone'></span>
+                                                </span>
+                                                <input class='form-control' type='text' name='telefono' id='UserPhone' placeholder='Telefono' title='Ejm: 4022371' pattern='\b[4][0-9]{6}' value='".$fila['TELEFONO_U']."' required/>
+                                            </div>
+                                        </div>                                                                                               
 													
-                                                                                                        <input type='text'  size=25% required name='telefono' value='".$fila['TELEFONO_U']."' onkeypress='return event.charCode >= 48 && event.charCode <= 57'>  
-												</td>
+                                                                                           </td>
 											</tr>
 											<tr>
 												<td>
-													<p style='text-align:right;'>Email:</p>
+													<p style='text-align:left;'>Email:</p>
 												</td>
 												<td >
-												<input type='mail' size=25% required name='email' value='".$fila['CORREO_ELECTRONICO_U']."'/>
+                                                                                                
+                                        <div class='form-group'>
+                                            <div class='input-group'>
+                                                <span class='input-group-addon'>
+                                                  <span class='glyphicon glyphicon-envelope'></span>
+                                                </span>
+                                                <input class='form-control' type='email' name='email' id='UserEmail' placeholder='Correo' pattern='^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$' value='".$fila['CORREO_ELECTRONICO_U']."' required/>
+                                            </div>
+                                        </div>
+
+
 												</td>
 											</tr>
 											
@@ -231,7 +284,12 @@ session_start();
 												<td>
 												</td>
 												<td>
-													<input type='submit' value='Actualizar'>
+                                                                                                
+                                        <div class='form-group'>
+                                            <button type='submit'  class='btn btn-primary' id='btn-registrarUser'> <span class='glyphicon glyphicon-ok'></span> Actualizar</button>
+                                        </div>
+
+													
 												</td>
 											</tr>
 										</table>
@@ -369,7 +427,7 @@ session_start();
                            		
                         </div></div>
                         </div>
-            <div class="clr"></div>	<br><br>
+            <div class="clr"></div>	<br><br><br><br><br><br><br><br><br>
 			<div class="footer">
 			<div class="footer_resize">
 				<p class="lf"></p>

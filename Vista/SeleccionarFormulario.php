@@ -1,3 +1,9 @@
+<?php  
+    session_start();    
+
+    $UsuarioActivo = $_SESSION['usuario'];
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,27 +37,30 @@
     <script src="../Librerias/js/bootstrap-dialog.js"></script>
     <script>
         $(document).ready(function(){
+
             $('#btn-aceptar').on('click', function(){
-                
-                var url = "HabilitarFormulario.php"
 
-                $.ajax({
-                    url: url,
-                    type: 'POST',
-                    data: $('#HabilitarFormulario').serialize(),
+                if($("form")[0].checkValidity()) 
+                {
+                    var url = "HabilitarFormulario.php"
 
-                    success: function(data){
+                    $.ajax({
+                        url: url,
+                        type: 'POST',
+                        data: $('#HabilitarFormulario').serialize(),
 
-                    $('#panelResultado').html(data)
+                        success: function(data){
 
-                    }
+                        $('#panelResultado').html(data)
 
-                });
+                        }
 
-                return false;
-                
+                    });
+
+                    return false;
+
+                } 
             });
-            
         });
         
     </script>
@@ -73,7 +82,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="../index.php">Inicio </a>
+               <a class="navbar-brand" href="inicio_asesor.php">Inicio </a>
             </div>
             <!-- /.navbar-header -->
 
@@ -183,10 +192,13 @@
                                         <a href="#">Evaluacion Grupo Empresa<span class="fa arrow"></span></a>
                                             <ul class="nav nav-third-level">
                                                 <li>
-                                                    <a href="CrearModalidadEvaluacion.php"> Criterio de Evaluaci&oacute;n </a>                             
+                                                    <a href="CrearModalidadEvaluacion.php">Criterio de Evaluaci&oacute;n </a>                             
                                                 </li>
                                                 <li>
                                                     <a href="CrearModalidadCalificacion.php"> Criterio de Calificaci&oacute;n</a>
+                                                </li>
+                                                 <li>
+                                                    <a href="EliminarCriterioCalificacion.php"> Eliminar Criterio de Calificaci&oacute;n</a>
                                                 </li>
                                                 <li>
                                                     <a href="CrearFormulario.php">Crear Formulario de Evaluacion</a>
@@ -238,41 +250,55 @@
                     <h2 class="page-header">Seleccionar Formulario:</h2>
                         <div class="col-lg-6">
                             <form method = "post" id="HabilitarFormulario">   
-
-                                <div class="form-group">
-                                    <label for=""><h4>Seleccione un Formulario para evaluacion:</h4></label>
-                                    <select name="formulario" id="" class="form-control">
-                                            	     
+            	     
                                     <?php 
                                     
                                         include '../Modelo/conexion.php';
-					$conect = new conexion();
+					                    
+                                        $conect = new conexion();
 
-					$SeleccionarFormulario = $conect->consulta('SELECT DISTINCT Name_Form FROM formulario');
+					                    $SeleccionarFormulario = $conect->consulta("SELECT NOMBRE_FORM FROM formulario WHERE NOMBRE_U = '$UsuarioActivo'");
                                         
                                         while ($row = mysql_fetch_row($SeleccionarFormulario)) {
                                             
                                             $seleccionar[] = $row; 
                                         }
+
+                                        if(isset($seleccionar) and is_array($seleccionar)){
+
+                                            echo '<div class="form-group">
+                                                  <label for=""><h4>Seleccione un Formulario para evaluacion:</h4></label>
+                                                  <select name="formulario" id="SeleccionarFormulario" class="form-control" required>
+                                                    <option value="">Seleccione un Formulario</option>'; 
+
+                                                    for ($i=0; $i <count($seleccionar) ; $i++){
+
+                                                        echo '<option value='.$seleccionar[$i][0].'>'.$seleccionar[$i][0].'</option>'; 
+                                                    }
+
+                                                echo '</select>';
+                                                echo '</div>';
+
+                                                echo '<div class="form-group">
+                                                        <button type="submit" class="btn btn-primary btn-sm" id="btn-aceptar">Aceptar</button>
+                                                      </div>
+
+                                                      <div class="form-group">
+                                                        <a href="EvaluarGrupoEmpresa.php" class="btn btn-primary btn-sm">Ir al formulario</a>
+                                                      </div> ' ;
+                                        }else
+                                        {
+                                            echo "No tienen ningun formulario registrado...vaya al siguiente link para crear uno";
+
+                                            echo '<a href="http://localhost/saetis/Vista/CrearFormulario.php" class="btn btn-default btn-xs">Crear Formulario</a>';
                                   
-                                        for ($i=0; $i <count($seleccionar) ; $i++){
 
-                                            echo '<option>'.$seleccionar[$i][0].'</option>'; 
-													
-					}
 
-                                        echo '</select>';
-                                        echo '</div>';
+                                        }
 
-                                        
+                                          
                                     ?>
-
-                                <div class="form-group">
-                                    <button type="button" class="btn btn-primary btn-sm" id="btn-aceptar">Aceptar</button>
-                                </div>
-                                <div class="form-group">
-                                    <a href="EvaluarGrupoEmpresa.php" class="btn btn-primary btn-sm">Ir al formulario</a>
-                                </div>  
+                                 
                             </form>                                                
 
                             <div id="panelResultado">

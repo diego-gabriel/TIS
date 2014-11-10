@@ -179,20 +179,37 @@ session_start();
 										<table border=0 width=80%>
 											<tr>
 												<td >
-													<p style='text-align:right;'>Nombre :&nbsp;&nbsp;</p>
+													<p style='text-align:left;'>Nombre:</p>
 												</td>
 												<td>
-													<input type='text' size=25% required name='Nombre' readonly='readonly'  value='".$fila['NOMBRE_U']."'/>
+                                         <div class='form-group'>
+                                            <div class='input-group'>
+                                                <span class='input-group-addon'>
+                                                  <span class='glyphicon glyphicon-user'></span>
+                                                </span>
+                                                <input class='form-control' type='text' name='Nombre' id='UserName'  value='".$fila['NOMBRE_U']."' readonly='readonly'  required/>
+                                            </div>
+                                        </div>                                                                                               
+
 												</td>
 											</tr>
 											<tr>
 												<td >
-													<p style='text-align:right;'>Estado&nbsp; :&nbsp;&nbsp;</p>
+													<p style='text-align:left;'>Estado :</p>
 												</td>
                                                                                                 
 
 												<td>
-													<input type='text' size=25% required name='Estado'  readonly='readonly' value='".$fila['ESTADO_E']."'/>
+                                                                                                
+                                          <div class='form-group'>
+                                            <div class='input-group'>
+                                                <span class='input-group-addon'>
+                                                  <span class='glyphicon glyphicon-lock'></span>
+                                                </span>
+                                                <input class='form-control' type='text' name='Estado' id='UserPassword' readonly='readonly' value='".$fila['ESTADO_E']."'   required/>
+                                            </div>
+                                        </div>  
+											
 												</td>
                                                                                                 
 
@@ -201,11 +218,18 @@ session_start();
 											</tr
 											<tr>
 												<td >
-													<p style='text-align:right;'>Rol &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;</p>
+													<p style='text-align:left;'>Rol :</p>
 												</td>
 												<td>
-													<input type='text' size=25% required name='rol'  readonly='readonly' value='".$fila['ROL_R']."'/>
-                                                                                                           
+                                                                                                
+                                          <div class='form-group'>
+                                            <div class='input-group'>
+                                                <span class='input-group-addon'>
+                                                  <span class='glyphicon glyphicon-lock'></span>
+                                                </span>
+                                                <input class='form-control' type='text' name='rol' id='UserPassword' readonly='readonly' value='".$fila['ROL_R']."'   required/>
+                                            </div>
+                                        </div>  
 												</td> 
 											</tr>
 											
@@ -236,7 +260,7 @@ session_start();
 													<p style="text-align:right;"> Estado :&nbsp;&nbsp;&nbsp;</p>
 												</td>
 												<td>
-                                                                                                    <select required="seleccione un estado" name="estado" ><option  value=" ">-Seleccione Un Estado-</option>
+                                                                                                    <select required="seleccione un estado" name="estado" class="form-control" ><option  value=" ">Seleccione Un Estado</option>
 													<?php 
 														$link=mysql_connect("localhost","root",""); 
 														mysql_select_db("saetis",$link); 
@@ -256,7 +280,7 @@ session_start();
 												    <p style="text-align:right;"> Rol :&nbsp;&nbsp;&nbsp;</p>
                                                                                                  </td>
                                                                                                  <td>
-                                                                                                     <select required="seleccione un rol" name="roll" ><option  value=" ">---Seleccione Un Rol---</option>
+                                                                                                     <select required="seleccione un rol" name="roll" class="form-control"><option  value=" ">Seleccione Un Rol</option>
 													<?php 
 														$link=mysql_connect("localhost","root",""); 
 														mysql_select_db("saetis",$link); 
@@ -278,7 +302,9 @@ session_start();
 												    <p style="text-align:right;">&nbsp;&nbsp;&nbsp; </p>
                                                                                                  </td>
                                                                                      						<td>
-                                                                                                  <input type="submit" value="Seleccionar" align="middle" > 
+                                                                                                                                    
+                                                                                                <button type="submit"  align="middle" class="btn btn-primary" id="btn-registrarUser"> <span class="glyphicon glyphicon-ok"></span> Actualizar</button>
+                                                                                                  
 												</td>    
                                                                                      </tr>  
                                                                                      

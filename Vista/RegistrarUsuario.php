@@ -151,7 +151,8 @@
                                                     include '../Modelo/conexion.php';
         
                                                     $conect = new conexion();
-                                                    $ResRoles = $conect->consulta("SELECT ROL_R FROM rol");
+                                                    $ResRoles = $conect->consulta("SELECT * FROM `rol`
+WHERE ROL_R != 'administrador' and  ROL_R != 'grupoEmpresa' ");
                                                   
                                                     while($row = mysql_fetch_row($ResRoles))
                                                     {

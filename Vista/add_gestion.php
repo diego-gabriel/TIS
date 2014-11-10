@@ -142,10 +142,12 @@ session_start();
      			<div class="content">
 				<div class="content_resize">
                                             
-                                                         
+                                                         <br>
 					<div class="mainbar">
 						<div class="article">
-							<h2><span>Nueva Gestion</span></h2>
+                                                           <div class="row">
+                                                               <div class="col-lg-12"></div>
+                                                               <h2><span>Nueva Gestion</span></h2>
 
 								<form action='crear_gestion.php' method='POST'>
 									
@@ -156,7 +158,7 @@ session_start();
 										<p style="text-align:right;">Fecha Inicio :</p>
 										</div>
 										<div class="contenedor-columna">
-											<input type='date' required name='ini'>
+											<input type='date' class="form-control" required name='ini'>
 										</div>
                                                                              </td> 
                                                                             </tr>  <tr>
@@ -165,7 +167,7 @@ session_start();
 										<p style="text-align:right;">Fecha Fin :</p>
 										</div>
 										<div class="contenedor-columna">
-                                                                                    <input type='date' required name='fin'>
+                                                                                    <input type='date' class="form-control" required name='fin'>
                                                                                     </div>
                                                                             </td> 
                                                                             </tr>
@@ -178,13 +180,15 @@ session_start();
  										<p style="text-align:right;">Gestion :</p>
 										</div>
 										<div class="contenedor-columna">
-											<input type='text' size=16% required name='rol' >
+											<input type='text' size=16%  class="form-control" required name='rol' >
 										</div> 
                                                                                   </td> 
                                                                             
                                                                                 <td>  
 										<div class="contenedor-columna">
-											<input type='submit' align="middle" value="Crear Gestion" >
+                                                                                    
+                                                                                     <button type="submit"  class="btn btn-primary" align="middle" id="btn-registrarUser"> <span class="glyphicon glyphicon-ok"></span> Crear gestion</button>
+											
 										</div>
                                                                               </td> 
                                                                             </tr>
@@ -269,7 +273,7 @@ session_start();
 			
 					
 			<div class="sidebar">
-                            <br><br>
+                            <br>
 				<h2 class="star">Usuario :  <?php echo $_SESSION['usuario'] ?></h2>
 			
                
@@ -357,7 +361,7 @@ session_start();
        		
                         </div></div>
                         </div>
-			<div class="clr"></div>	<br><br><br><br><br><br>
+			<div class="clr"></div>	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>    
 			<div class="footer">
 			<div class="footer_resize">
 				<p class="lf"></p>
@@ -371,7 +375,7 @@ session_start();
         </div>
         <!-- /#page-wrapper -->
 
-    </div>
+ 
 
     <script src="../Librerias/js/plugins/metisMenu/jquery.metisMenu.js"></script>
     <script src="../Librerias/js/sb-admin.js"></script>

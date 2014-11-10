@@ -1,8 +1,12 @@
 <?php
     include '../Modelo/conexion.php';
-    $con=new conexion();
-    
-    //$x="camaleon";
+   
+  $conexion = mysql_connect("localhost","root","");
+	//Control
+	if(!$conexion){die('La conexion ha fallado por:'.mysql_error());}
+	mysql_select_db("saetis",$conexion);
+   session_start();
+ $UsuarioActivo = $_SESSION['usuario'];
 ?>
 
 <html>
@@ -50,7 +54,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="../index.php">Inicio </a>
+         <a class="navbar-brand" href="inicio_grupo_empresa.php">Inicio </a>
             </div>
             <!-- /.navbar-header -->
 

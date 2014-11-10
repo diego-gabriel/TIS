@@ -157,8 +157,12 @@ session_start();
         <div id="page-wrapper">
      			<div class="content">
 				<div class="content_resize">
+                                            
+                                                         <br>
 					<div class="mainbar">
-                                            <div class="article"><br><br>
+						<div class="article">
+                                                           <div class="row">
+                                                               <div class="col-lg-12"></div>
 							<h2><span>Enviar Email</span></h2>	
 							
                                                         
@@ -171,10 +175,10 @@ session_start();
 										<table border=0 width=100%>
 											<tr>
 												<td >
-													<p style="text-align:right;"  >Destinatario :</p>
+                                                                                                    <p style="text-align:left;"  >Destinatario:</p><br>
 												</td>
 												<td>
-													<select required name='dest' ><option value="" >-     Seleccione Destinatario     -</option>
+													<select required name='dest' class="form-control"  ><option value="" >-     Seleccione Destinatario     -</option>
 													<?php 
 														$link=mysql_connect("localhost","root",""); 
 														mysql_select_db("saetis",$link); 
@@ -188,26 +192,46 @@ session_start();
 
 											</tr>
                                                                                                                                                        <td >
-													<p style="text-align:right;" >Fecha :</p>
+													<p style="text-align:left;" >Fecha :</p>
 												</td>
 												<td>
-													<input type="date"  required name="fec"/>
+		
+                                                                                                        
+                                            <div class="form-group">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                  <span class="glyphicon glyphicon-envelope"></span>
+                                                </span>
+                                                <input class="form-control" type="date" name="fec" size=48% id="UserEmail" placeholder="fecha"  required>
+                                            </div>
+                                        </div>                                                                                                         
+                                                                                                        
+                                                                                                        
 												</td>
 											<tr>
 												<td >
-													<p style="text-align:right;">Asunto :</p>
+													<p style="text-align:left;">Asunto :</p>
 												</td>
 												<td>
-                                                                                                    <input type="text" size=48% required name="asunto"/><br>
+                                                                                                    
+                                            <div class="form-group">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                  <span class="glyphicon glyphicon-envelope"></span>
+                                                </span>
+                                                <input class="form-control" type="text" name="asunto" size=48% id="UserEmail" placeholder="Asunto"  required>
+                                            </div>
+                                        </div>                                              
+                                                                                                    
 												</td>
 						
 											</tr>
 											<tr>
 												<td >
-                                                                                                    <p style="text-align:right;">Contenido :</p><br><br><br><br><br><br><br>
+                                                                                                    <p style="text-align:left;">Contenido :</p><br><br><br><br><br><br><br>
 												</td>
 												<td>
-                                                                                                    <textarea name='area_info' cols='50' rows='8' >Usted solicito un registro en saetis,   Ha sido validado satisfactoriamente, verifique haciendo click en el siguiente enlace: http://localhost:8080/freevalue/saetis/index2.php</textarea>
+                                                                                                    <textarea name='area_info' class="form-control" cols='50' rows='8' >Usted solicito un registro en saetis,   Ha sido validado satisfactoriamente, verifique haciendo click en el siguiente enlace: http://localhost:8080/freevalue/saetis/index2.php</textarea>
 												</td>
 											</tr>
 							
@@ -215,7 +239,11 @@ session_start();
 												<td>
 												</td>
                                                                                                 <td>  <br>
-													<input type="submit" value="Enviar Email">
+                                                                                                    
+                                             <div class="form-group">
+                                            <button type="submit" name="submit" class="btn btn-primary" id="btn-registrarUser"> <span class="glyphicon glyphicon-ok"></span> Enviar Email</button>
+                                        </div>
+													
 												</td>
 											</tr>
 										</table>
@@ -224,23 +252,20 @@ session_start();
 								</form>
 							</div>
 							                                                   
-                                                        
-                                                        
-                                                        
+                                                           </div>     
                                                         
 						</div>
 						
-					</div>
-			
+                                        </div>
 					
-			<div class="sidebar">
-                            <br><br>
+<div class="sidebar">
+                            
 				<h2 class="star">Usuario :  <?php echo $_SESSION['usuario'] ?></h2>
 			
                
             <div class="navbar-default navbar-static-side" role="navigation">
                 <div class="sidebar-collapse">
-                    <ul class="nav" id="side-menu">
+                                       <ul class="nav" id="side-menu">
                         
                         
                         <li>
@@ -302,10 +327,10 @@ session_start();
                             <!-- /.nav-second-level -->
                         </li>
                          <li>
-                            <a href="#"><i class="fa fa-building-o fa-fw"></i>Enviar mensaje validacion<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-building-o fa-fw"></i>Enviar mensaje <span class="fa arrow"></span></a>
                                         <ul class="nav nav-third-level">
                                         <li>
-                                            <a href="enviar_mail.php">enviar mensaje</a>
+                                            <a href="enviar_mail.php">nuevo mensaje</a>
                                             
                                         </li>
 
@@ -321,38 +346,11 @@ session_start();
                 <!-- /.sidebar-collapse -->
             </div>
                                 
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
+                            
                            		
                         </div></div>
                         </div>
-			<div class="clr"></div>	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+            <div class="clr"></div>	<br><br><br><br><br><br><br><br>
 			<div class="footer">
 			<div class="footer_resize">
 				<p class="lf"></p>
@@ -367,7 +365,7 @@ session_start();
         </div>
         <!-- /#page-wrapper -->
 
-    </div>
+  
 
     <script src="../Librerias/js/plugins/metisMenu/jquery.metisMenu.js"></script>
     <script src="../Librerias/js/sb-admin.js"></script>

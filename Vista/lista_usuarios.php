@@ -349,7 +349,7 @@ WHERE  u.NOMBRE_U = r.NOMBRE_U ");
        		
                         </div></div>
                         </div>
-			<div class="clr"></div>	<br><br><br><br><br><br><br><br><br><br><br><br><br>
+			<div class="clr"></div>	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 			<div class="footer">
 			
 			<div class="footer_resize">

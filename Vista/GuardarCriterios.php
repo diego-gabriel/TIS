@@ -2,11 +2,14 @@
 
 	require_once '../Modelo/conexion.php';
 
+    session_start();
+
+    $UsuarioActivo = $_SESSION['usuario'];
+
 	$con = new conexion();
 
 	$con->conectar();
 
-	$Asesor = $_POST['NombreAsesor'];
         
         $tipoSelect = $_POST['tipoSelect'];
         
@@ -18,104 +21,117 @@
         $cont=0;
         $cont2=0;
 
-        var_dump($valores);
+        $buscador=0;
+
         
         $nombre="";
 
-        echo(count($valores));
-
-        /*if(count($valores) > 1)
-        {
-
-       		for ($n=0; $n < count($valores); $n++) { 
-
-       			if(in_array($valores[$n], $valores))
-       			{
-       				$cont2++;
-       			}
-       		}
-
-       		if($cont2 > 1)
-       		{
-       			echo'<script>alert("No puede registrar 2 puntajes iguales")</script>';
-
-       		}
-
-        }*/
-
-
-        /*if(count($Indicadores) > 1)
-        {
-        	for ($p=0; $p < count($Indicadores) ; $p++) { 
-
-        		
-        		if(in_array(strtoupper($Indicadores[$p]), $Indicadores))
-        		{
-        			$cont++;
-        		}
-        	}
-
-        	if($cont > 1)
-        	{
-        		echo'<script>alert("No puede registrar 2 indicadores iguales")</script>';
-        	}
-        }*/
-
         $cont5=0;
+        /***********************************************/
 
-        for ($t=0; $t < count($valores) ; $t++) { 
+        for ($v=0; $v < count($Indicadores) ; $v++) { 
 
-        	if($valores[$t] <= 100)
-        	{
-        		$cont5++;
+            for ($b=0; $b < count($Indicadores) ; $b++) { 
 
-        	}
+                if ((strtoupper(trim($Indicadores[$v])) == strtoupper(trim($Indicadores[$b])) or ($valores[$v] == $valores[$b]))) {
+                     
+                    $buscador++;
+                }
+        
+            }
         }
 
-        if($cont5 == count($valores))
-        {
+            if ($buscador > count($Indicadores)) {
+                
+                echo'<script>BootstrapDialog.alert("No puede registrar 2 indicadores o puntajes iguales");</script>';
 
+                die();
 
-        }
-        else
-        {
-        	echo'<script>alert("funcion")</script>';
-        }
+            }else{
 
+                for ($t=0; $t < count($valores) ; $t++) { 
 
+                if($valores[$t] <= 100)
+                {
+                    $cont5++;
 
+                }
+            }
 
+                if($cont5 == count($valores))
+                {
 
+                    for ($j=0; $j <count($Indicadores) ; $j++) { 
 
-        for ($j=0; $j <count($Indicadores) ; $j++) { 
-
-            $nombre = $nombre.$Indicadores[$j].'('.$valores[$j].')';	
-        }
-              
-	$ConsultaNombreCriterio = $con->consulta("SELECT nombre_criterio_calif FROM criterio_calificacion WHERE nombre_criterio_calif = '$nombre'");
-	$ArregloCriterios = mysql_fetch_array($ConsultaNombreCriterio);//Si no hay valores se vuelve false, si existen se vuelve un arreglo
-							
-	if (!is_array($ArregloCriterios)) {//Si es un arreglo significa que el nombre de criterio ya existe;
-
-		for ($i=0; $i<count($Indicadores); $i++) {
-
-                    if (isset($Indicadores[$i]) and isset($valores[$i])) {
-
-                        $con2 = new conexion();
-                        $con2->consulta("INSERT INTO CRITERIO_CALIFICACION(nombre_asesor_calif, nombre_criterio_calif, tipo_criterio, Indicador, Puntaje_Criterio) VALUES('$Asesor', '$nombre', '$tipoSelect', '$Indicadores[$i]', '$valores[$i]')");
-
+                        $nombre = $nombre.$Indicadores[$j].'('.$valores[$j].')';    
                     }
-		}			
-								
-		if(isset($con2)){
-                    echo'<script>alert("Se registraron los datos correctamente")</script>';
-		}
+                      
+                    $ConsultaNombreCriterio = $con->consulta("SELECT NOMBRE_CRITERIO_C FROM criteriocalificacion WHERE NOMBRE_CRITERIO_C = '$nombre' AND NOMBRE_U='$UsuarioActivo'");
+               
+                    $ArregloCriterios = mysql_fetch_row($ConsultaNombreCriterio);
+                               
+            
+                    if (!is_array($ArregloCriterios)) {
 
-	}
-	else
-	{
-		echo'<script>alert("Ya existe un criterio de ese tipo en la base de datos")</script>';
-	}
+                            $con2 = new conexion();
+                            $con2->consulta("INSERT INTO criteriocalificacion(NOMBRE_CRITERIO_C, NOMBRE_U, TIPO_CRITERIO) VALUES('$nombre', '$UsuarioActivo', '$tipoSelect')");
+
+                            $maxIdRes = $con2->consulta("SELECT MAX(ID_CRITERIO_C) FROM criteriocalificacion WHERE NOMBRE_U = '$UsuarioActivo'");
+
+                             $maxID = mysql_fetch_row($maxIdRes);
+
+                        for ($i=0; $i<count($Indicadores); $i++) {
+
+                            if (isset($Indicadores[$i]) and isset($valores[$i])) {
+
+                                $con2->consulta("INSERT INTO indicador( ID_CRITERIO_C, NOMBRE_INDICADOR,PUNTAJE_INDICADOR) VALUES('$maxID[0]','$Indicadores[$i]', '$valores[$i]')");
+
+                            }
+                        }
+
+                
+                            if(isset($con2)){
+                    
+                                echo'<script>BootstrapDialog.alert("Se registraron los datos correctamente");</script>';
+                            }      
+                        }          
+                                        
+                        else
+                        {
+                        echo   '<script>
+                            BootstrapDialog.show({
+                                type: BootstrapDialog.TYPE_DANGER,
+                                title: "Error",
+                                message: "Ya existe un criterio de ese tipo"
+                            });
+                            </script>';
+                    }
+                }
+                else
+                {
+                    echo '<script>
+                                        BootstrapDialog.show({
+                                            type: BootstrapDialog.TYPE_DANGER,
+                                            title: "Error",
+                                            message: "El puntaje no puede ser mayor a 100"
+                                        });
+                            </script>';
+                }
+            }
+        
+
+
+
+        /***********************************************/
+
+        
+
+
+
+
+
+
+        
 						
 
 ?>

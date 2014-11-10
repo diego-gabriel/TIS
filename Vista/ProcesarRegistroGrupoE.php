@@ -1,5 +1,4 @@
 <?php
-
     $nombreUGE = $_POST['nombreU'];
     $nombreLGE = $_POST['nombreL'];
     $nombreCGE = $_POST['nombreC'];
@@ -9,13 +8,11 @@
     $direccionGE = $_POST['direccion'];
     $contrasenaGE = $_POST['contrasena1'];
     
-
     include '../Modelo/conexion.php';
     require '../Vista/PHPMailerAutoload.php';
     require '../Vista/class.phpmailer.php';
     
     $conect = new conexion();
-
     $VerificarUsuario = $conect->consulta("SELECT NOMBRE_U FROM usuario WHERE NOMBRE_U = '$nombreUGE' ");
     $VerificarUsuario2 = mysql_fetch_row($VerificarUsuario);
     
@@ -24,7 +21,6 @@
      {
              $VerificarNC = $conect->consulta("SELECT NOMBRE_CORTO_GE FROM grupo_empresa WHERE NOMBRE_CORTO_GE = '$nombreCGE' ");
              $VerificarNC2 = mysql_fetch_row($VerificarNC);
-
          if(!is_array($VerificarNC2))
          {
                  $VerificarNL = $conect->consulta("SELECT NOMBRE_LARGO_GE FROM grupo_empresa WHERE NOMBRE_LARGO_GE = '$nombreLGE' ");
@@ -67,67 +63,41 @@
                     //Y por si nos bloquean el contenido HTML (algunos correos lo hacen por seguridad) una versión alternativa en texto plano (también será válida para lectores de pantalla)
                     $mail->AltBody = 'This is a plain-text message body';
                     //Enviamos el correo
-
                     if(!$mail->Send()) {
                       echo "Error: " . $mail->ErrorInfo;
                     } else {
                                    
                     $db = 'saetis';
-
                     $host = 'localhost';
-
                     $user = 'root';
-
                     $pass = '';
-
                     $conn = new PDO("mysql:dbname=".$db.";host=".$host,$user, $pass);
-
                     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                     // iniciar transacción
-
                      $conn->beginTransaction();
-
                     try {
-
                     // tabla 1
-
                     $sql = 'INSERT INTO usuario (NOMBRE_U, ESTADO_E, PASSWORD_U, TELEFONO_U, CORREO_ELECTRONICO_U) VALUES (:value, :estado, :contrasena, :telefono, :correo);';
-
                     $result = $conn->prepare($sql);
-
                     $result->bindValue(':value', $nombreUGE, PDO::PARAM_STR);
                     $result->bindValue(':estado', 'Habilitado', PDO::PARAM_STR);
                     $result->bindValue(':contrasena', $contrasenaGE, PDO::PARAM_STR);
                     $result->bindValue(':telefono', $telefonoGE, PDO::PARAM_STR);
                     $result->bindValue(':correo', $correoGE, PDO::PARAM_STR);
-
                     $result->execute();
-
                     //$lastId = $conn->lastInsertId();
-
-
-
                     $sql = 'INSERT INTO grupo_empresa (NOMBRE_U, NOMBRE_CORTO_GE, NOMBRE_LARGO_GE, DIRECCION_GE, REPRESENTANTE_LEGAL_GE) VALUES (:a_id, :nombreC, :nombreL, :direccion, :representante)';
-
                     $result = $conn->prepare($sql);
-
                     $result->bindValue(':a_id', $nombreUGE, PDO::PARAM_STR);
                     $result->bindValue(':nombreC', $nombreCGE, PDO::PARAM_STR);
                     $result->bindValue(':nombreL', $nombreLGE, PDO::PARAM_STR);
                     $result->bindValue(':direccion', $direccionGE, PDO::PARAM_STR);
                     $result->bindValue(':representante', $nombreRGE, PDO::PARAM_STR);
-
                     $result->execute();
-
-
                      $sql = 'INSERT INTO usuario_rol (NOMBRE_U, ROL_R) VALUES (:nombre, :rol)';
-
                     $result = $conn->prepare($sql);
-
                     $result->bindValue(':nombre', $nombreUGE, PDO::PARAM_STR);
                     $result->bindValue(':rol', 'grupoEmpresa', PDO::PARAM_STR);
-
-
                     $result->execute();
                     
                     $conn->commit();
@@ -142,17 +112,13 @@
                 } catch (PDOException $e) {
                     // si ocurre un error hacemos rollback para anular todos los insert
                     $conn->rollback();
-
                     echo $e->getMessage();
-
                 }
                                                 
                         
                    //   $conect->consulta("INSERT INTO usuario(`NOMBRE_U`, `ESTADO_E`, `PASSWORD_U`, `TELEFONO_U`, `CORREO_ELECTRONICO_U`) VALUES('$nombreUGE','Habilitado','$contrasenaGE','$telefonoGE','$correoGE')");
                      // $conect->consulta("INSERT INTO grupo_empresa ($VARIABLE, `NOMBRE_CORTO_GE`, `NOMBRE_LARGO_GE`, `DIRECCION_GE`, `REPRESENTANTE_LEGAL_GE`) VALUES ('$nombreUGE, '$nombreCGE', '$nombreLGE', '$direccionGE', '$nombreRGE')");
-
                       
-
                     }
                     
              }
@@ -195,6 +161,4 @@
         </script>';*/
      }
     
-
-
 ?>

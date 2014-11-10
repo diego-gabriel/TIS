@@ -1,7 +1,12 @@
 <?php
     include '../Modelo/conexion.php';
-    $con=new conexion();
-    
+    //$con=new conexion();
+     $conexion = mysql_connect("localhost","root","");
+	//Control
+	if(!$conexion){die('La conexion ha fallado por:'.mysql_error());}
+	mysql_select_db("saetis",$conexion);
+   session_start();
+ $UsuarioActivo = $_SESSION['usuario'];
     //$x="camaleon";
 ?>
 
@@ -210,8 +215,9 @@ $autor = $comentario_db["NOMBRE_U"];
 $nor = $comentario_db["ID_N"];
 $comentario = $comentario_db["COMENTARIO"];
 $date = $comentario_db["FECHA_C"];
+$autor_c=$comentario_db["AUTOR_C"];
 
-echo "<b>$autor</b> el <b>$date</b> comento:$comentario</br>";
+echo "<b>$autor_c</b> el <b>$date</b> comento:$comentario</br>";
 echo "</br>";
 }
 ?>
@@ -227,7 +233,7 @@ if (!empty($_POST) AND empty($_POST['comentario'])) {
 if (empty($_POST['comentario'])) { $mensagem="";} else { $mensagem=$_POST['comentario'];}
 if($mensagem == ""){} else {
 // Adiciona comentario
-$comentario_add = "INSERT INTO comentarios (NOMBRE_U,ID_N,COMENTARIO,FECHA_C,AUTOR_C) VALUES ('leticia','".addslashes(mysql_real_escape_string($_GET['id']))."', '".addslashes(mysql_real_escape_string(strip_tags($_POST['comentario'])))."', NOW(), 'luis')";
+$comentario_add = "INSERT INTO comentarios (NOMBRE_U,ID_N,COMENTARIO,FECHA_C,AUTOR_C) VALUES ('leticia','".addslashes(mysql_real_escape_string($_GET['id']))."', '".addslashes(mysql_real_escape_string(strip_tags($_POST['comentario'])))."', NOW(), '$UsuarioActivo')";
 
 $comentario_add = mysql_query($comentario_add)
 or die ("Erro ao Adicionar Comentário.");

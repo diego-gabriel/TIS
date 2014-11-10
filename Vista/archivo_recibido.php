@@ -162,16 +162,36 @@
                                 <li>
                                     <a href="#">Seguimiento Grupo Empresa <span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
-                                        <li>
-                                            <a href="CrearModalidadEvaluacion.php"> Modalidad de Evaluaci&oacute;n </a>
-                                            
-                                        </li>
-                                        <li>
-                                            <a href="#">Modalidades de Calificaci&oacute;n</a>
-                                        </li>
+                                        
   
                                     </ul>
                                     <!-- /.nav-third-level -->
+                                </li>
+                                <li>
+                                        <a href="#">Evaluacion Grupo Empresa<span class="fa arrow"></span></a>
+                                            <ul class="nav nav-third-level">
+                                                <li>
+                                                    <a href="CrearModalidadEvaluacion.php">Criterio de Evaluaci&oacute;n </a>                             
+                                                </li>
+                                                <li>
+                                                    <a href="CrearModalidadCalificacion.php"> Criterio de Calificaci&oacute;n</a>
+                                                </li>
+                                                 <li>
+                                                    <a href="EliminarCriterioCalificacion.php"> Eliminar Criterio de Calificaci&oacute;n</a>
+                                                </li>
+                                                <li>
+                                                    <a href="CrearFormulario.php">Crear Formulario de Evaluacion</a>
+                                                </li>
+                                                <li>
+                                                    <a href="EliminarFormulario.php">Eliminar Formulario de Evaluacion</a>
+                                                </li>
+                                                <li>
+                                                    <a href="SeleccionarFormulario.php"> Seleccionar Formulario de Evaluacion </a>   
+                                                </li>
+                                                <li>
+                                                    <a href="EvaluarGrupoEmpresa.php">Evaluar Grupo Empresa </a>   
+                                                </li>
+                                            </ul>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
