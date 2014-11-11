@@ -1,8 +1,8 @@
 <?php  
    
     session_start();
-
     $UsuarioActivo = $_SESSION['usuario'];
+    include("controlSesion.php");
 
     
 ?>
@@ -29,25 +29,23 @@
 
     <!-- SB Admin CSS - Include with every page -->
     <link href="../Librerias/css/sb-admin.css" rel="stylesheet">
-    <link type="text/css" rel="stylesheet" href="../Librerias/css/jquery-te-1.4.0.css">
+    <!--link type="text/css" rel="stylesheet" href="../Librerias/css/jquery-te-1.4.0.css"-->
     
-    <script src="../Librerias/js/jquery-1.10.2.js"></script>
+    <!--script src="../Librerias/js/jquery-1.10.2.js"></script-->
     
-    <script type="text/javascript" src="../Librerias/js/validar_orden.js"></script>
-    <script type="text/javascript" src="../Librerias/js/masked_input.js"></script>
+    <!--script type="text/javascript" src="../Librerias/js/validar_orden.js"></script-->
+    <!--script type="text/javascript" src="../Librerias/js/masked_input.js"></script-->
     <script src="../Librerias/js/jquery-2.1.0.min.js"></script>
     <script src="../Librerias/js/CrearFormulario.js"></script> 
+    
     <link href="../Librerias/css/bootstrap-dialog.css" rel="stylesheet">
     <script src="../Librerias/js/bootstrap-dialog.js"></script>
     <script src="../Librerias/js/bootstrap.min.js"></script> 
 </head>
 
 <body>
-
-   
     <div id="wrapper">
        
-        
     <!--<h2>design by <a href="#" title="flash templates">flash-templates-today.com</a></h2>-->
         
         <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
@@ -58,7 +56,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-            <a class="navbar-brand" href="inicio_asesor.php">Inicio </a>
+                <a class="navbar-brand" href="inicio_asesor.php">Inicio </a>
             </div>
             <!-- /.navbar-header -->
 
@@ -88,10 +86,13 @@
                     <ul class="dropdown-menu dropdown-user">
                         <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
                         </li>
+
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
+
                         <li class="divider"></li>
-                        <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+
+                        <li><a href="unlog.php"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -215,6 +216,7 @@
             </div>
             <!-- /.navbar-static-side -->
         </nav>
+    </div>
 
 <!-------------------------------------------NUEVAS PUBLICACIONES------------------------------------------>
 <div id="page-wrapper">
@@ -239,8 +241,7 @@
 
                                                     include '../Modelo/conexion.php';
 
-                                                    $asesor="Leticia";
-                         
+                                                                 
                                                     $conect = new conexion();                                               
 
                                                     $CriteriosEvaluacion = $conect->consulta("SELECT NOMBRE_CRITERIO_E FROM criterio_evaluacion WHERE NOMBRE_U = '$UsuarioActivo'");
@@ -286,17 +287,17 @@
 
                                                     ?>
 
+                                                <div id="pruebas">
+                                                    
+                                                </div>     
+
 
 
                                                 <div class="form-group">
-                                                    <button type="button" class="btn btn-default btn-sm" id="btn-agregar">Agregar</button>
+                                                    <button type="button" class="btn btn-primary" id="btn-probar"><span class="glyphicon glyphicon-th-list"></span>&nbsp&nbspAgregar</button>
+                                                    <button type="submit" class="btn btn-primary" id="btn-guardar"> <span class="glyphicon glyphicon-ok"></span>&nbsp&nbspGuardar</button> 
                                                 </div> 
-
-                                                <div class="form-group">
-                                                    <div class="btn-group">
-                                                        <button type="submit" class="btn btn-primary btn-sm" id="btn-guardar">Guardar</button>         
-                                                    </div>
-                                                </div>                                         
+                                                                                
                                     </form>                                                
 
                             <div id="panelResultado">
@@ -304,7 +305,8 @@
                             </div>        
                         </div>
                 </div>
-            </div><!-- /.row -->                   
+            </div><!-- /.row -->
+        </div>                       
     <script src="../Librerias/js/bootstrap.min.js"></script>
     <script src="../Librerias/js/plugins/metisMenu/jquery.metisMenu.js"></script>
 
@@ -315,8 +317,6 @@
     <!-- Page-Level Demo Scripts - Dashboard - Use for reference -->
     <script src="../Librerias/js/demo/dashboard-demo.js"></script>
     <!-- Combo Box scripts -->
-
-    
  
 </body>
 

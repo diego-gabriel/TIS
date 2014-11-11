@@ -247,7 +247,7 @@
         <div class ="form-horizontal">
             <div class="row">
                 <div class="col-lg-12">
-                    <h2 class="page-header">Seleccionar Formulario:</h2>
+                    <h2 class="page-header">Habilitar Formulario:</h2>
                         <div class="col-lg-6">
                             <form method = "post" id="HabilitarFormulario">   
             	     
@@ -280,12 +280,11 @@
                                                 echo '</div>';
 
                                                 echo '<div class="form-group">
-                                                        <button type="submit" class="btn btn-primary btn-sm" id="btn-aceptar">Aceptar</button>
-                                                      </div>
-
-                                                      <div class="form-group">
+                                                        <button type="submit" class="btn btn-primary btn-sm" id="btn-aceptar"><span class="glyphicon glyphicon-ok"></span>&nbsp&nbspAceptar</button>
                                                         <a href="EvaluarGrupoEmpresa.php" class="btn btn-primary btn-sm">Ir al formulario</a>
-                                                      </div> ' ;
+                                                      </div>';
+
+                                                 
                                         }else
                                         {
                                             echo "No tienen ningun formulario registrado...vaya al siguiente link para crear uno";

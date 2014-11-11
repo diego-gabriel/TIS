@@ -17,7 +17,6 @@ include '../Modelo/conexion.php';
 
     $buscador=0;
 
-
     for ($v=0; $v < count($EvaEscogidos) ; $v++) { 
 
             for ($b=0; $b < count($EvaEscogidos) ; $b++) { 

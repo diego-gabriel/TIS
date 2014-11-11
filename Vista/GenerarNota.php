@@ -48,18 +48,35 @@
 		        $nota = $nota + ($puntajes[$i][0] * ($prueba[$i]*0.01));
 
             }
-                $ResNomU = $conect->consulta("SELECT NOMBRE_U FROM grupo_empresa WHERE NOMBRE_CORTO_GE = '$grupo'");
+                //$ResNomU = $conect->consulta("SELECT NOMBRE_U FROM grupo_empresa WHERE NOMBRE_CORTO_GE = '$grupo'");
 
-                $NombreUGE = mysql_fetch_row($ResNomU);
-            
-                $conect->consulta('INSERT INTO nota(NOMBRE_U, CALIF_N) VALUES("'.$NombreUGE[0].'","'.$nota.'")');
+                //$NombreUGE = mysql_fetch_row($ResNomU);
 
-		echo    '<script>
+                $VerificarNota = $conect->consulta("SELECT * FROM nota WHERE NOMBRE_U = '$grupo'");
+
+                $Verificar = mysql_fetch_row($VerificarNota);
+
+                if (is_array($Verificar)) {
+
+                    echo    '<script>
                     BootstrapDialog.show({
-			             title: "Resultado de la Evaluacion",
-			             message: "Se proceso el formulario...su nota obtenida es de '.$nota.' puntos"
-			        });
+                         title: "Error en el Registro",
+                         message: "Ya registro una nota anteriormente"
+                    });
                 </script>';
+                }else{
+
+                    $conect->consulta('INSERT INTO nota(NOMBRE_U, CALIF_N) VALUES("'.$grupo.'","'.$nota.'")');
+
+                echo    '<script>
+                            BootstrapDialog.show({
+                                 title: "Resultado de la Evaluacion",
+                                message: "Se proceso el formulario...su nota obtenida es de '.$nota.' puntos"
+                            });
+                        </script>';
+
+
+                }
         }
         else{
             

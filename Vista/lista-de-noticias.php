@@ -161,7 +161,7 @@
 
                           <div class="panel panel-default">
                         <div class="panel-heading">
-                            <i ></i> Temas
+                            <i ></i><h2> Temas</h2>
                         </div>
                             
 
@@ -202,10 +202,11 @@
 
 
                                 <a href="#" class="list-group-item">
-                                    <i ></i> <?php echo $titulo?> 
-                                    <i ></i> - <?php echo $views?> Visualizaciones -
-                                    <i ></i> <?php echo $comentarios?> Comentarios -
-                                    <i ></i> Posteado por <?php echo $usuario?> -
+                                    <i ></i> <p size="5"><font size="3"><b><?php echo $titulo?></b><p></p>
+                                    <i ></i> Posteado por <b><?php echo $usuario?></b> -
+                                    <i ></i> <b> <?php echo $views?></b> Visualizaciones -
+                                    <i ></i> <b><?php echo $comentarios?></b> Comentarios -
+                                   
                                     <i ></i> <?php echo $f?>
                                     <span class="pull-right text-muted small"><em><?php echo "<td> <a  class='link-dos'href=\"excluir-noticia.php?id=$id\">Eliminar</a></td>"; ?></em>
                                     </span>
@@ -234,7 +235,7 @@
 
             
 <br>
-<a  class='link-dos' href="adicionar-noticia.php">Adicionar nuevo  tema</a>
+<b><a  class='link-dos' href="adicionar-noticia.php">Adicionar nuevo  tema</a></b>
                     </div>
                 </div>
                 <!-- /.col-lg-12 -->

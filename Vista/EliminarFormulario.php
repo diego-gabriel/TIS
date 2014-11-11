@@ -1,6 +1,7 @@
 <?php  
 session_start();
 $UsuarioActivo = $_SESSION['usuario'];
+include("controlSesion.php");
 ?>
 
 <!DOCTYPE html>
@@ -118,7 +119,7 @@ $UsuarioActivo = $_SESSION['usuario'];
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="unlog.php"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -304,7 +305,7 @@ $UsuarioActivo = $_SESSION['usuario'];
 
 
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-primary btn-sm" id="btn-eliminarForm">Eliminar</button>
+                                    <button type="submit" class="btn btn-primary" id="btn-eliminarForm"><span class="glyphicon glyphicon-trash"></span>&nbsp&nbspEliminar</button>
                                 </div>                                              
                             </form>                                                
 

@@ -2,6 +2,7 @@
 
 <?php
 include "../Modelo/conexion.php";
+//include("controlSesion.php");
 session_start();
  $con=new conexion();
 date_default_timezone_set('America/Argentina/Tucuman');
@@ -105,7 +106,7 @@ $resultado = $clas->consulta("SELECT ge.`NOMBRE_LARGO_GE` FROM `asesor` AS a,`gr
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="unlog.php"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->

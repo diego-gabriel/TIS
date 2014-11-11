@@ -3,7 +3,7 @@
 <?php
 
     include '../Modelo/conexion.php';
-   session_start();
+    session_start();
     $con=new conexion();
     
 ?>
@@ -65,7 +65,7 @@
 <body>
 
    
-           
+       
         
 		<!--<h2>design by <a href="#" title="flash templates">flash-templates-today.com</a></h2>-->
         
@@ -78,7 +78,6 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                
                 <a class="navbar-brand" href="inicio_asesor.php">Inicio </a>
             </div>
             <!-- /.navbar-header -->
@@ -112,7 +111,7 @@
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="unlog.php"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -182,6 +181,7 @@
                                 <li>
                                     <a href="#">Seguimiento Grupo Empresa <span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
+                                        
                                         <li>
                                             <a id="Seguimiento" href="#">Seguimiento</a>
                                         </li>

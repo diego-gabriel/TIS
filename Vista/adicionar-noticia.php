@@ -132,7 +132,7 @@
                         </li>
                         
                         <li>
-                            <a href="#"><i class="fa fa-warning fa-fw"></i> Notificaciones</a>
+                            <a href="lista-de-noticias.php"><i class="fa fa-comment"></i> Foro</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-building-o fa-fw"></i> Actividades<span class="fa arrow"></span></a>
@@ -204,7 +204,7 @@ echo "Tema Adicionado";
 <br>
 <textarea name="texto" rows="5" cols="50"></textarea>
 <br>
-<input type="submit" value="Adicionar Tema">
+<input type="submit" class="btn btn-primary" value="Adicionar Tema">
 </form>
                     </div>
                 </div>

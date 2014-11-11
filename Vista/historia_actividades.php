@@ -1,3 +1,20 @@
+<?php 
+session_start();
+ $usuario= $_SESSION['usuario'];
+
+ 
+ 
+  							$conexion = mysql_connect("localhost","root","","saetis");
+								//Control
+								if(!$conexion){die('La conexion ha fallado por:'.mysql_error());}
+								//Seleccion
+								mysql_select_db("saetis",$conexion);
+								//Peticion
+								$peticion22 = mysql_query("SELECT `NOMBRE_UA` FROM `inscripcion` WHERE `NOMBRE_UGE`='$usuario'");
+                                                                     while ($correo = mysql_fetch_array($peticion22))
+                                                                       {        
+                                                                              $asesor=$correo["NOMBRE_UA"];} 
+?>
 <!DOCTYPE html>
 <html>
 
@@ -97,7 +114,7 @@
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="unlog.php"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -397,7 +414,7 @@
 								//Seleccion
 								mysql_select_db("saetis",$conexion);
 								//Peticion
-								$peticion = mysql_query("SELECT `ID_R`,`NOMBRE_U`,`NOMBRE_R`,`FECHA_R`,`HORA_R` FROM `registro` WHERE `TIPO_T`='publicaciones' and `NOMBRE_U`='leticia'
+								$peticion = mysql_query("SELECT `ID_R`,`NOMBRE_U`,`NOMBRE_R`,`FECHA_R`,`HORA_R` FROM `registro` WHERE `TIPO_T`='publicaciones' and `NOMBRE_U`='$asesor'
                ");
 							
 

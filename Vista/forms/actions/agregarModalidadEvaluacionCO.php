@@ -9,7 +9,8 @@ $idCrit=1;
 $idReg=1;
 
 $existeCampo="vacio";
-$usuarioActivo="Leticia";
+session_start();
+$usuarioActivo=$_SESSION['usuario'];
 
 
 if(isset($Agregar))
@@ -19,7 +20,7 @@ if(isset($Agregar))
                 
                  $SQL= "SELECT NOMBRE_CRITERIO_E".
                           " FROM criterio_evaluacion". 
-                          " WHERE NOMBRE_CRITERIO_E =  '$textDescripcionD'";
+                          " WHERE NOMBRE_CRITERIO_E =  '$textDescripcionD' AND NOMBRE_U = '$usuarioActivo'";
                   $registros=$co->consulta("$SQL",$co);
 
                     while ($row = mysql_fetch_row($registros)) 

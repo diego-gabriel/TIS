@@ -13,7 +13,7 @@ if(!$conexion){die('La conexion ha fallado por:'.mysql_error());}
 //Seleccion
 mysql_select_db("saetis",$conexion);
 //Peticion
-$peticion = mysql_query("SELECT u.NOMBRE_U, u.PASSWORD_U, r.ROL_R FROM usuario u, usuario_rol r
+$peticion = mysql_query("SELECT u.NOMBRE_U,u.ESTADO_E, u.PASSWORD_U, r.ROL_R FROM usuario u, usuario_rol r
 WHERE u.NOMBRE_U=r.NOMBRE_U");
 
 $peticion1 = mysql_query("SELECT `LOGIN_S`,`PASSWORD_S` FROM `socio`");
@@ -23,11 +23,12 @@ while(($fila = mysql_fetch_array($peticion)) or ($fila = mysql_fetch_array($peti
 {
 	
 	$usuariobd=$fila['NOMBRE_U'];
+        $estadobd=$fila['ESTADO_E'];
 	$contrasenabd=$fila['PASSWORD_U'];
         $permisosenbase = $fila['ROL_R'];   
 
 
-	if($usuario == $usuariobd && $contrasena == $contrasenabd && $permiso==$permisosenbase )
+	if($usuario == $usuariobd && $contrasena == $contrasenabd && $permiso==$permisosenbase && "Habilitado" == $estadobd )
 	{   
 	//Si el resultado es positivo, entonces asignar
 
@@ -51,7 +52,7 @@ while(($fila = mysql_fetch_array($peticion)) or ($fila = mysql_fetch_array($peti
 
 	}
         else{
-  	if($usuario == $usuariobd && $contrasena == $contrasenabd && $permiso2==$permisosenbase )
+  	if($usuario == $usuariobd && $contrasena == $contrasenabd && $permiso2==$permisosenbase && "Habilitado" == $estadobd )
 	{   
 	//Si el resultado es positivo, entonces asignar
 
@@ -75,7 +76,7 @@ while(($fila = mysql_fetch_array($peticion)) or ($fila = mysql_fetch_array($peti
 
         }  else
             {
-            	if($usuario == $usuariobd && $contrasena == $contrasenabd && $permiso3==$permisosenbase )
+            	if($usuario == $usuariobd && $contrasena == $contrasenabd && $permiso3==$permisosenbase && "Habilitado" == $estadobd )
 	{   
 	//Si el resultado es positivo, entonces asignar
 
@@ -111,7 +112,7 @@ while(($fila = mysql_fetch_array($peticion)) or ($fila = mysql_fetch_array($peti
 	//Si el resultado es positivo, entonces asignar
 
 		
-		$_SESSION['socio'] = $usuario;
+		$_SESSION['usuario'] = $usuario;
 		$_SESSION['contrasena'] = $contrasena;
                 $_SESSION['socio'] = $permisosenbase;
 		

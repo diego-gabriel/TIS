@@ -10,6 +10,8 @@
     //$x="camaleon";
 ?>
 
+
+
 <html>
 
 <head>
@@ -55,7 +57,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="../index.php">Inicio </a>
+         <a class="navbar-brand" href="inicio_grupo_empresa.php">Inicio </a>
             </div>
             <!-- /.navbar-header -->
 
@@ -135,7 +137,13 @@
                         </li>
                         
                         <li>
-                            <a href="lista-de-noticias-grupo.php"><i class="fa fa-comment"></i> Foro</a>
+                            <a href="#"><i class="fa fa-warning fa-fw"></i> Notificaciones</a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="historia_actividades.php">Historia de actividades</a>
+                                </li>
+                                
+                            </ul>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-building-o fa-fw"></i> Actividades<span class="fa arrow"></span></a>
@@ -149,6 +157,10 @@
                                 
                             </ul>
                             <!-- /.nav-second-level -->
+                        </li>
+                        
+                        <li>
+                            <a href="lista-de-noticias-grupo.php"><i class="fa fa-comment"></i> Foro</a>
                         </li>
                     </ul>
                     <!-- /#side-menu -->
@@ -237,19 +249,24 @@ $comentario_add = "INSERT INTO comentarios (NOMBRE_U,ID_N,COMENTARIO,FECHA_C,AUT
 
 $comentario_add = mysql_query($comentario_add)
 or die ("Erro ao Adicionar Comentário.");
-echo "Comentario Adicionado  | <a  class='link-dos' href=\"noticia.php?id=".$_GET['id']."\">Actualizar Página para ver su comentario</a>";
-
+//echo "Comentario Adicionado  | <a  class='link-dos' href=\"noticia.php?id=".$_GET['id']."\">Actualizar Página para ver su comentario</a>";
+?>
+<script>
+  location.href="noticia.php?id=<?php echo $_GET['id']; ?>";
+</script>
+<?php
 }
 }
 
 ?>
 <form name="input" action="noticia.php?id=<?php echo $_GET['id']; ?>" method="post">
 
-<label>Comentario:</label>
+
 <br>
 <textarea name="comentario" rows="5" cols="50"></textarea>
 <br>
-<input type="submit" value="Enviar Comentario">
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;          <input type="submit"  class="btn btn-primary" value="Enviar Comentario">
 </form>
 
 

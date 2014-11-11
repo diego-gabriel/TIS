@@ -1,8 +1,8 @@
 <?php  
    
     session_start();
-
     $UsuarioActivo = $_SESSION['usuario'];
+    include("controlSesion.php");
 
     
 ?>
@@ -31,6 +31,8 @@
     <!-- SB Admin CSS - Include with every page -->
     <link href="../Librerias/css/sb-admin.css" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="../Librerias/css/jquery-te-1.4.0.css">
+
+    <!--link rel="stylesheet" href="../Librerias/css/awesome-bootstrap-checkbox.css"-->
     
     <script src="../Librerias/js/jquery-1.10.2.js"></script>
     <script type="text/javascript" src="../Librerias/js/masked_input.js"></script>
@@ -89,7 +91,7 @@
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="unlog.php"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -230,7 +232,7 @@
                             <?php 
                             include '../Modelo/conexion.php';
 
-                            $asesor="Leticia";
+                            
 
                             $conect = new conexion();
                             
@@ -244,8 +246,11 @@
                             if(is_array($IdForm)) 
                             {
                             
-                                $consultaGrupos = "SELECT NOMBRE_CORTO_GE FROM grupo_empresa";//Agregar ASesor
+                                $consultaGrupos = "SELECT DISTINCT NOMBRE_UGE FROM inscripcion WHERE NOMBRE_UA = '$UsuarioActivo'";
+
                                 $resultadoConsulta = $conect->consulta($consultaGrupos);
+
+                        
                                     
                                 echo '<div class="form-group">';
                                 echo '<label><h4>Seleccione la Grupo Empresa a evaluar:</h4></label>';
@@ -318,7 +323,7 @@
                                             echo '<div class="panel panel-default">';
                                                 echo '<div class="panel-body">';
                                                     echo '<div class="form-group">';
-                                                        echo '<strong>'.$i.'. '.$NomCE[$i][0].'</strong>'.' ('.$puntajes[$i][0].' puntos)';
+                                                        echo '<strong>'.'* '.$NomCE[$i][0].'</strong>'.' ('.$puntajes[$i][0].' puntos)';
                                                         echo '<input type="hidden" name="valoresFormulario[]" value="'.$puntajes[$i][0].'">';
                                                     echo '</div>';
 
@@ -326,7 +331,7 @@
                                                 if ($TipoC[$i][0] == 4) {
 
                                                         echo'<div class="form-group">';
-                                                            echo'<input type="text" name="valorInput[]" pattern="^[0-9]{1,3}" required>';
+                                                            echo'<input type="text" name="valorInput[]" class="form-control" pattern="^[0-9]{1,3}" required>';
                                                         echo'</div>';
                                                     echo'</div>';
                                                 echo'</div>';
@@ -364,6 +369,15 @@
                                                             echo'<input type="checkbox" id="'.$z.'" name="valorInput[]" value="'.$puntajesC[$z][0].'">'.$ResIndicadores2[$z][0].' ('.$puntajesC[$z][0].')';
                                                            
                                                         echo'</div>';
+
+                                                        /*echo '<div class="checkbox checkbox-primary">
+                                                                <input type="checkbox" id="checkbox'.$z.'" name="valorInput[]" value="'.$puntajesC[$z][0].'">
+                                                                <label for="checkbox'.$z.'">'
+                                                                    .$ResIndicadores2[$z][0].' ('.$puntajesC[$z][0].')'.
+                                                                '</label>
+                                                              </div>';*/
+
+
                                                     }
                                                     echo '</div>';
                                                 echo '</div>';

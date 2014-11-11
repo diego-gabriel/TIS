@@ -1,7 +1,10 @@
 <?php
     
    // include 'forms/actions/agregarModalidadEvaluacionCO.php';
+    session_start();
+    $UsuarioActivo = $_SESSION['usuario'];
     include '../Modelo/conexion.php';
+    include("controlSesion.php");
 ?>
 <!DOCTYPE html>
 <html>
@@ -77,7 +80,7 @@
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="unlog.php"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->

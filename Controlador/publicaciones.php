@@ -1,9 +1,16 @@
 <?php
 //include('../Vista/recursosasesor.php');
 include('../Modelo/crearimagen.php');
-$usuario ='leticia';
 
-	$graficorecurso     = new Recurso($usuario);
+    $conexion = mysql_connect("localhost","root","");
+	//Control
+	if(!$conexion){die('La conexion ha fallado por:'.mysql_error());}
+	mysql_select_db("saetis",$conexion);
+   session_start();
+ $UsuarioActivo = $_SESSION['usuario'];
+//$usuario ='leticia';
+
+	$graficorecurso     = new Recurso($UsuarioActivo);
 	$indice = 1;
 	$descripcion  =	$graficorecurso->obtenerPropiedades();
 	$tabla ='';

@@ -131,7 +131,7 @@
                         </li>
                         
                         <li>
-                            <a href="#"><i class="fa fa-warning fa-fw"></i> Notificaciones</a>
+                            <a href="lista-de-noticias.php"><i class="fa fa-comment"></i> Foro</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-building-o fa-fw"></i> Actividades<span class="fa arrow"></span></a>
@@ -195,7 +195,7 @@ echo "<a  class='link-dos' href='lista-de-noticias.php'>Ver todos los temas</a>"
 echo "<title>$titulo</title>";
 echo "<h1>$titulo</h1><p>Postado por <b>$autor</b>  <b>$date</b> - <b>$views</b> Visualizaciones | <b>$comentarios</b> Comentarios | ";
 echo "______________________________________________________________________________________________________________________________________________________________________";
-echo "<h3>$comentarios Comentários:</h3>";
+echo "<h3>$comentarios Comentarios:</h3>";
 
 }
 ?>
@@ -236,8 +236,13 @@ $comentario_add = "INSERT INTO comentarios (NOMBRE_U,ID_N,COMENTARIO,FECHA_C,AUT
 
 $comentario_add = mysql_query($comentario_add)
 or die ("Error al Adicionar Comentario.");
-echo "Comentario Adicionado  | <a  class='link-dos' href=\"noticia.php?id=".$_GET['id']."\">Actualizar Página para ver su comentario</a>";
+//echo "Comentario Adicionado  | <a  class='link-dos' href=\"noticia.php?id=".$_GET['id']."\">Actualizar Página para ver su comentario</a>";
+?>
 
+<script>
+  location.href="noticia.php?id=<?php echo $_GET['id']; ?>";
+</script>
+<?php
 }
 }
 
@@ -248,7 +253,8 @@ echo "Comentario Adicionado  | <a  class='link-dos' href=\"noticia.php?id=".$_GE
 <br>
 <textarea name="comentario" rows="5" cols="50"></textarea>
 <br>
-<input type="submit" value="Enviar Comentario">
+<br>
+   &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;   <input type="submit" class="btn btn-primary" value="Enviar Comentario">
 </form>
                       
                     </div>

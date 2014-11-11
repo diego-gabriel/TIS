@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <?php
 include '../Modelo/conexion.php';
+include("controlSesion.php");
 session_start();
 ?>
 <html>
@@ -258,6 +259,13 @@ session_start();
                         <li>
                             <a href="#"><i class="fa fa-question-circle fa-fw"></i> Ayuda <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
+                                
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        
+                        <li>
+                            <a href="lista-de-noticias-grupo.php"><i class="fa fa-comment"></i> Foro</a>
                                 
                             </ul>
                             <!-- /.nav-second-level -->
@@ -559,6 +567,9 @@ include '../Modelo/conexion.php';
                                 
                             </ul>
                             <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                           <a href="lista-de-noticias-grupo.php"><i class="fa fa-comment"></i> Foro</a>
                         </li>
                     </ul>
                     <!-- /#side-menu -->

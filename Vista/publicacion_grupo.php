@@ -1,12 +1,13 @@
 <?php
     include '../Modelo/conexion.php';
     $con=new conexion();
-    $conexion = mysql_connect("localhost","root","");
-    if(!$conexion){die('La conexion ha fallado por:'.mysql_error());}
-    mysql_select_db("saetis",$conexion);
-    session_start();
-    $UsuarioActivo = $_SESSION['usuario'];
-   
+     $conexion = mysql_connect("localhost","root","");
+	                         if(!$conexion){die('La conexion ha fallado por:'.mysql_error());}
+	                         mysql_select_db("saetis",$conexion);
+                                 session_start();
+                                 $UsuarioActivo = $_SESSION['usuario'];
+    
+    
 ?>
 
 <html>
@@ -161,85 +162,97 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h1>Documentos recibidos</h1>
-                    <div class="panel panel-default" >                             
-                            /<table class="table form-group" >
-                                                    <tr>
+                    <div class="panel panel-default" >
+
+              
+                        
+                         
+
+                             
+                            <table class="table form-group" >
+                                 
+                                                     <tr bgcolor="#888888">
+                                                          <th> Nº</th>
                                                           <th >Nombre<th>
-                                                          <th >Descripcion</th>   
+                                                          <th >Descripcion</th>  
+                                                          <th></th>
+                                                          
                                                      </tr> 
 
-
+ 
                                 <?php
-                                        $c_3="SELECT DISTINCT `NOMBRE_R`,`RUTA_D`,`DESCRIPCION_D`,`fecha_p` ,`hora_p` FROM `registro` AS r,`documento` AS d,`descripcion` AS e,`periodo` AS p WHERE r.`ID_R` = d.`ID_R` AND r.`ID_R` = e.`ID_R` AND r.`ID_R` = p.`ID_R` AND r.`TIPO_T` LIKE 'publicaciones' AND r.`NOMBRE_U` LIKE '$UsuarioActivo'";
-                                        $r3=$con->consulta($c_3);
-                                        var_dump($r3);
-                                        
+                                
+                                     $c_3="SELECT DISTINCT `NOMBRE_R`,`RUTA_D`,`DESCRIPCION_D`,`fecha_p` ,`hora_p` FROM `registro` AS r,`documento` AS d,`descripcion` AS e,`periodo` AS p WHERE r.`ID_R` = d.`ID_R` AND r.`ID_R` = e.`ID_R` AND r.`ID_R` = p.`ID_R` AND r.`TIPO_T` LIKE 'publicaciones' ";
+                                     $r3=$con->consulta($c_3);
+                                    
+                                       
+                                                
+                                  
                                     if(mysql_num_rows($r3) != 0)
-                                    {
-                                                   
-                                    while($var3 = mysql_fetch_array($r3))
-                                    {
-                                            
+                                    {    $i=1;
+                                           while($var3 = mysql_fetch_array($r3))
+                                          {
                                             $aux=$var3['2'];
                                             $findme = "*";
                                             $tam=strlen($aux);
                                             $pos = strpos($aux,$findme);
                                             $pose=$pos+1;
                                             $numero=substr($aux, $pose,$tam);
-                                            echo $numero;
                                             $pos2=$pos-1;
-
+                                            
                                             $des=substr($aux, 0,$pos2);
-                                            $destinatario="SELECT NOMBRE_U FROM grupo_empresa WHERE NOMBRE_LARGO_GE LIKE '$numero'";
-                                            $r5=$con->consulta($destinatario);
-                                            $user =  mysql_fetch_array($r5);
-                                       
-                                           // var_dump($r5);
-                                            if($numero=="TODOS" || strnatcasecmp($user[0],$UsuarioActivo)==0)
+                                            if($numero=="TODOS" || $numero==$UsuarioActivo)
                                             {
-
-                                            $ubi= $var3[1];
-                                            $ini="32"+1;
-                                            $size=strlen($ubi);
-                                            $com=substr($ubi, $ini,$size);
-                                            $fep=$var3[3];
-                                           $hop=$var3[4];
-                                          // echo $fep."fecha";
-                                          // echo $hop."</br>";
-                                            $fecha       = date('Y-m-d');
-                                           // echo $fecha."</br>";
-                                            $hora        =  date("G:H:i");
-                                            //echo $hora."   es la hora a";
-                                           if($fecha >= $fep )
-                                            {      if($hora >= $hop || $hora <= $hop){
+                                                $ubi= $var3[1];
+                                                $ini="32"+1;
+                                                $size=strlen($ubi);
+                                                $com=substr($ubi, $ini,$size);
+                                                $fep=$var3[3];
+                                                $hop=$var3[4];
+                                                $fecha       = date('Y-m-d');
+                                                $hora        =  date("G:H:i");
+                                           
+                                                if($fecha >= $fep )
+                                                {     
+                                                    if($hora >= $hop || $hora <= $hop){
                                                 
                                                 ?>
-                                                     <?php echo $numero; ?>
                                                       <tr> 
+                                                          <td><?php echo $i?></td> 
                                                           <td><a class="link-dos" href="../<?php echo $com ?>"><?php echo $var3[0]?></a><td>
 
                                                           <td><?php echo $des?></td> 
-                                                          
+                                                          <td> </td>
+                                                         
                                                      </tr>
                                                <?php 
                                             }
 
-                                       
+                   ?>
+                                        
+                                          
+                                                     
+                                                     
+
+                                            <?php
                                        }
                                       else{}
-                                       
+                                               $i++;    
                                           }
+                                          
                                     
                                      }
                                        ?>
                                        </table>
                                       
                                        <?php
-                                         
+                                            //echo "</form>";
+                                    //$tabla.="</table>";
+                                     //echo $tabla;
                                     }
                                     else
                                     {
-                                        echo  "<b>--- ERROR! NO SE ENCONTRO DOCUMENTOS</b><br><br> ";
+                                        echo  "<b>--- ERROR! NO SE ENCONTRO DOCUMENTOS</b><br><br><a class='btn btn-primary' href='documentos_recibidos.php'>VOLVER ATRAS</a> ";
                                     }
                                      
                                    
