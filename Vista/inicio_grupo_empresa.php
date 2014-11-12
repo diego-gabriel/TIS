@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <?php
 include '../Modelo/conexion.php';
-include("controlSesion.php");
 session_start();
+ include("controlSesion.php");
+
 ?>
 <html>
 
@@ -117,6 +118,12 @@ session_start();
             </ul>
             <!-- /.navbar-top-links -->
 
+            
+            
+            
+            
+            
+            
             <div class="navbar-default navbar-static-side" role="navigation">
                 <div class="sidebar-collapse">
                     <ul class="nav" id="side-menu">
@@ -275,6 +282,16 @@ session_start();
                 </div>
                 <!-- /.sidebar-collapse -->
             </div>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
             <!-- /.navbar-static-side -->
         </nav>
 
@@ -577,7 +594,7 @@ include '../Modelo/conexion.php';
                 <!-- /.sidebar-collapse -->
             </div>
             <!-- /.navbar-static-side -->
-        </nav>
+        </nav>xx
 
         <div id="page-wrapper">
             <div class="row">

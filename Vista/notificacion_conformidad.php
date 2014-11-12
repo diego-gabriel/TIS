@@ -9,9 +9,7 @@ date_default_timezone_set('America/Argentina/Tucuman');
 $fecha=  date('Y-m-d');
 $hora= date('G:H:i');
 $clas = new conexion();
-
-$idAsesor='leticia';
-$resultado = $clas->consulta("SELECT ge.`NOMBRE_LARGO_GE` FROM `asesor` AS a,`grupo_empresa` AS ge,`gestion` AS g,`inscripcion` AS i WHERE a.`NOMBRE_U` = i.`NOMBRE_UA` AND ge.`NOMBRE_U` = i.`NOMBRE_UGE` AND g.`ID_G` = i.`ID_G` AND g.`FECHA_FIN_G` >= '$fecha' AND g.`FECHA_INICIO_G` <= '$fecha' AND a.`NOMBRE_U` LIKE '$idAsesor'");
+$UsuarioActivo = $_SESSION['usuario'];
 
 ?>
 <html>
@@ -60,7 +58,10 @@ $resultado = $clas->consulta("SELECT ge.`NOMBRE_LARGO_GE` FROM `asesor` AS a,`gr
 <body>
 
    
-           
+ 
+   
+       <div id="wrapper">
+       
         
 		<!--<h2>design by <a href="#" title="flash templates">flash-templates-today.com</a></h2>-->
         
@@ -78,6 +79,7 @@ $resultado = $clas->consulta("SELECT ge.`NOMBRE_LARGO_GE` FROM `asesor` AS a,`gr
             <!-- /.navbar-header -->
 
             <ul class="nav navbar-top-links navbar-right">
+            
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-envelope fa-fw"></i>  <i class="fa fa-caret-down"></i>
@@ -98,7 +100,7 @@ $resultado = $clas->consulta("SELECT ge.`NOMBRE_LARGO_GE` FROM `asesor` AS a,`gr
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                        <?php echo $UsuarioActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
                         <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
@@ -106,7 +108,7 @@ $resultado = $clas->consulta("SELECT ge.`NOMBRE_LARGO_GE` FROM `asesor` AS a,`gr
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="unlog.php"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                       <li><a href="unlog.php"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -215,7 +217,7 @@ $resultado = $clas->consulta("SELECT ge.`NOMBRE_LARGO_GE` FROM `asesor` AS a,`gr
                         </li>
                         
                         <li>
-                            <a href="#"><i class="fa fa-warning fa-fw"></i> Notificaciones</a>
+                            <a href="lista-de-noticias.php"><i class="fa fa-comment"></i> Foro</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-building-o fa-fw"></i> Actividades<span class="fa arrow"></span></a>

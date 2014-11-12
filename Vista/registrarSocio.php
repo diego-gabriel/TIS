@@ -11,7 +11,7 @@ session_start();
    
     $conect = new conexion();
 
-    $VerificarUsuario = $conect->consulta("SELECT LOGIN_S FROM socio WHERE LOGIN_S = '$nombreU' ");
+    $VerificarUsuario = $conect->consulta("SELECT LOGIN_S FROM socio WHERE LOGIN_S = '$nombreUS' ");
     $VerificarUsuario2 = mysql_fetch_row($VerificarUsuario);
     
      if (!is_array($VerificarUsuario2)) 

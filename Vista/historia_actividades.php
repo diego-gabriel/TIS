@@ -123,44 +123,31 @@ session_start();
             </ul>
             <!-- /.navbar-top-links -->
 
+            
+            
+            
+            
+      
+            
             <div class="navbar-default navbar-static-side" role="navigation">
                 <div class="sidebar-collapse">
                     <ul class="nav" id="side-menu">
                         
-                        
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-files-o "></i> Documentos <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                                <li>
-                                            <a  href="../Vista/subirarchivoasesor.php">Subir Documentos</a>
-                                </li>
                                 
                                 <li>
-                                    <a href="#">Publicaci&oacute;n Documentos <span class="fa arrow"></span></a>
+                                    <a href="#" >Subir Documentos <span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
                                         
-                                        
-                                        <li>
-                                            <a href="../Vista/publicar_asesor.php">Nueva Publicaci&oacute;n </a>
-                                        </li>
-                                        <li>
-                                            <a href="../Controlador/publicaciones.php">Publicaciones </a>
-                                        </li>
-                                       
                                     </ul>
-                                    <!-- /.nav-third-level -->
                                 </li>
                                 <li>
                                     <a href="#">Recepci&oacute;n Documentos <span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
-                                        <li>
-                                            <a href="documentos_recibidos.php">Documentos Recibidos</a>
-                                        </li>
-                                        <li>
-                                            <a href="ConfiguracionFechasRecepcion.php" ><span class="fa fa-calendar-o"></span> Configuraci&oacute;n de Fechas para la Recepci&oacute;n de Documentos</a>
-                                            
-                                        </li>
-         
+                                        
+                                       
                                     </ul>
                                 </li>
                                
@@ -172,62 +159,15 @@ session_start();
                          <li>
                             <a href="#"><i class="fa fa-tasks fa-fw"></i> Tareas<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="ordendecambioempresas.php">Emitir Orden de Cambio</a>
-                                </li>
-                                <li>
-                                    <a href="notificacion_conformidad.php">Emitir Notificaci&oacute;n de Conformidad</a>
-                                </li>
-                                <li>
-                                    <a href="#">Seguimiento Grupo Empresa <span class="fa arrow"></span></a>
-                                    <ul class="nav nav-third-level">
-                        
-                                        <li>
-                                            <a id="Seguimiento" href="../Vista/inicio_asesor.php">Seguimiento</a>
-                                        </li>
-  
-                                    </ul>
-                                    <!-- /.nav-third-level -->
-                                </li>
-                                <li>
-                                        <a href="#">Evaluacion Grupo Empresa<span class="fa arrow"></span></a>
-                                            <ul class="nav nav-third-level">
-                                                <li>
-                                                    <a href="CrearModalidadEvaluacion.php">Criterio de Evaluaci&oacute;n </a>                             
-                                                </li>
-                                                <li>
-                                                    <a href="CrearModalidadCalificacion.php"> Criterio de Calificaci&oacute;n</a>
-                                                </li>
-                                                 <li>
-                                                    <a href="EliminarCriterioCalificacion.php"> Eliminar Criterio de Calificaci&oacute;n</a>
-                                                </li>
-                                                <li>
-                                                    <a href="CrearFormulario.php">Crear Formulario de Evaluacion</a>
-                                                </li>
-                                                <li>
-                                                    <a href="EliminarFormulario.php">Eliminar Formulario de Evaluacion</a>
-                                                </li>
-                                                <li>
-                                                    <a href="SeleccionarFormulario.php"> Seleccionar Formulario de Evaluacion </a>   
-                                                </li>
-                                                <li>
-                                                    <a href="EvaluarGrupoEmpresa.php">Evaluar Grupo Empresa </a>   
-                                                </li>
-                                            </ul>
-                                </li>
+                                
+                                
+                                
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
                         
                         <li>
                             <a href="#"><i class="fa fa-warning fa-fw"></i> Notificaciones</a>
-                                                        <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="historia_actividades.php">Historia de actividades</a>
-                                </li>
-                                
-                            </ul>  
-                            
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-building-o fa-fw"></i> Actividades<span class="fa arrow"></span></a>
@@ -237,7 +177,9 @@ session_start();
                         
                         <li>
                             <a href="#"><i class="fa fa-question-circle fa-fw"></i> Ayuda <span class="fa arrow"></span></a>
-                            
+                            <ul class="nav nav-second-level">
+                                
+                            </ul>
                             <!-- /.nav-second-level -->
                         </li>
                     </ul>
@@ -245,6 +187,11 @@ session_start();
                 </div>
                 <!-- /.sidebar-collapse -->
             </div>
+            
+            
+            
+            
+            
             <!-- /.navbar-static-side -->
         </nav>
 

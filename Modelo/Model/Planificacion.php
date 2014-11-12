@@ -24,9 +24,9 @@
 
 	    function constructor($usuario) {
 	    	$this->conexion->conectar();
-	        $datosPlanificacion = $this->conexion->consultarTabla("SELECT nombre_u, estado_e, fecha_inicio_p, fecha_fin_p
-											                       FROM PLANIFICACION
-											                       WHERE nombre_u = '$usuario';");
+	        $datosPlanificacion = $this->conexion->consultarTabla("SELECT NOMBRE_U, ESTADO_E, FECHA_INICIO_P, FECHA_FIN_P
+											                       FROM planificacion
+											                       WHERE NOMBRE_U = '$usuario';");
 	        $this->usuario = $datosPlanificacion[0][0];
 	        $this->estado = $datosPlanificacion[0][1];
 	        $this->fechaInicio = $datosPlanificacion[0][2];
@@ -36,7 +36,7 @@
 
 	    function insertarBD() {
 	        $this->conexion->conectar();
-	        $this->conexion->consulta("INSERT INTO PLANIFICACION(nombre_u, estado_e, fecha_inicio_p, fecha_fin_p)
+	        $this->conexion->consulta("INSERT INTO PLANIFICACION(NOMBRE_U, ESTADO_E, FECHA_INICIO_P, FECHA_FIN_P)
 	        							VALUES('$this->usuario', '$this->estado', '$this->fechaInicio', '$this->fechaFin');");
 	        $this->conexion->cerrarConexion();
 	    }
@@ -44,8 +44,8 @@
 	    public function modificarBD() {
 	        $this->conexion->conectar();
 	        $this->conexion->consulta("UPDATE PLANIFICACION
-	        						   SET estado_e = '$this->estado', fecha_inicio_p = '$this->fechaInicio', fecha_fin_p = '$this->fechaFin'
-	        						   WHERE nombre_u = '$this->usuario';");
+	        						   SET ESTADO_E = '$this->estado',  FECHA_INICIO_P = '$this->fechaInicio', FECHA_FIN_P = '$this->fechaFin'
+	        						   WHERE NOMBRE_U = '$this->usuario';");
 	        $this->conexion->cerrarConexion();
 	    }
 

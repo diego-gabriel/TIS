@@ -1,7 +1,7 @@
 <?php
     include '../Modelo/conexion.php';
-    $con=new conexion();
     
+    $con=new conexion();
 ?>
 
 <html>
@@ -34,12 +34,14 @@
 
 <body>
 
-<div id="wrapper">
+   
+    <div id="wrapper">
        
         
-        <!--<h2>design by <a href="#" title="flash templates">flash-templates-today.com</a></h2>-->
+		<!--<h2>design by <a href="#" title="flash templates">flash-templates-today.com</a></h2>-->
         
-    
+	
+        
         <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
@@ -48,7 +50,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                   <a class="navbar-brand" href="inicio_grupo_empresa.php">Inicio </a>
+                  <a class="navbar-brand" href="inicio_grupo_empresa.php">Inicio </a>
             </div>
             <!-- /.navbar-header -->
 
@@ -94,7 +96,6 @@
                 <div class="sidebar-collapse">
                     <ul class="nav" id="side-menu">
                         
-                        
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-files-o "></i> Documentos <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
@@ -102,74 +103,15 @@
                                 <li>
                                     <a href="#" >Subir Documentos <span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
-                                        <?php
-                                        try{
-                                                 //creamos la conexion a la base de datos
-                                                 $conexion = new conexion();
-                                                 $idUsuarioAsesor='leticia';
-                                                 $idUsuarioG='freevalue';
-                                                 $consulta=$conexion->consulta("SELECT r.NOMBRE_R,r.`NOMBRE_U` FROM registro AS r,plazo AS p,descripcion AS d,`estado` AS e,`tipo` AS t WHERE r.ID_R = d.ID_R AND r.TIPO_T = t.TIPO_T AND r.ID_R = p.ID_R AND e.`ESTADO_E` = r.`ESTADO_E` AND r.`ESTADO_E` LIKE 'habilitado' AND r.TIPO_T LIKE 'documento requerido' AND r.NOMBRE_U LIKE '$idUsuarioAsesor'");
-                                                 $indice=1;
-                                                 while($fila = mysql_fetch_array($consulta))
-                                                {
-                                                     //aqui introducimos atraves de codigo php los enlaces de opciones
-                                                     if(!stripos($fila['0'], "modif"))
-                                                     {
-                                                     $temporal=$fila['1'];
-                                                         echo   "<form name='formulario$indice' action='subir_documento.php' enctype='multipart/form-data' method='POST'>"
-                                                                 . "<input type='hidden' name='nombreUsuarioAsesor' value='$temporal'>"
-                                                                 . "<input type='hidden' name='nombreRegistro' value='".$fila['0']."'>"
-                                                                 . "<input type='hidden' name='nombreUsuarioG' value='$idUsuarioG'>"
-                                                                 . "</form>"
-                                                                 . "<li>"
-                                                                 . "<a href='javascript:document.formulario$indice.submit();'>".$fila['0']."</a>"                                       
-                                                                 . "</li>";
-                                                         
-                                                     $indice++;
-                                                     }
                                         
-                                                }
-                                                
-                                                $consultaDos=$conexion->consulta("SELECT r.NOMBRE_R,r.`NOMBRE_U` FROM registro AS r,plazo AS p,descripcion AS d,`estado` AS e,`tipo` AS t WHERE r.ID_R = d.ID_R AND r.TIPO_T = t.TIPO_T AND r.ID_R = p.ID_R AND e.`ESTADO_E` = r.`ESTADO_E` AND r.`ESTADO_E` LIKE 'habilitado' AND r.TIPO_T LIKE 'documento requerido' AND r.NOMBRE_U LIKE '$idUsuarioAsesor' AND LOWER(r.`NOMBRE_R`) LIKE '%modif%'");
-                                                //$consultaTres=$conexion->consulta("SELECT r.`NOMBRE_R` FROM registro AS r,`tipo` AS t, `documento` AS d,`estado` AS e WHERE r.`ID_R` = d.`ID_R` AND r.`TIPO_T` = t.`TIPO_T` AND r.`ESTADO_E` = e.`ESTADO_E` AND t.`TIPO_T` LIKE 'orden de cambio' AND r.`NOMBRE_U` LIKE '$idUsuarioG'");
-                                                if (mysql_num_rows($consultaDos) != 0) {
-                                                    
-                                                    while($filaDos = mysql_fetch_array($consultaDos))
-                                                {
-                                                     //aqui introducimos atraves de codigo php los enlaces de opciones de subir propuesta modificada
-                                                     
-                                                     
-                                                     $temporalDos=$filaDos['1'];
-                                                         echo   "<form name='formulario$indice' action='subir_documento.php' enctype='multipart/form-data' method='POST'>"
-                                                                 . "<input type='hidden' name='nombreUsuarioAsesor' value='$temporalDos'>"
-                                                                 . "<input type='hidden' name='nombreRegistro' value='".$filaDos['0']."'>"
-                                                                 . "<input type='hidden' name='nombreUsuarioG' value='$idUsuarioG'>"
-                                                                 . "</form>"
-                                                                 . "<li>"
-                                                                 . "<a href='javascript:document.formulario$indice.submit();'>".$filaDos['0']."</a>"                                       
-                                                                 . "</li>";
-                                                         
-                                                     $indice++;
-                                                     
-                                        
-                                                }
-                                                    
-                                                    
-                                                }
-                                                
-                                                $conexion->cerrarConexion();
-                                               
-                                            }
-                                        catch (ErrorException $e)
-                                        {
-                                              echo $e;
-                                        }
-                                    ?>
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="publicacion_grupo.php">Recepci&oacute;n Documentos </a>
-                                    
+                                    <a href="#">Recepci&oacute;n Documentos <span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                        
+                                       
+                                    </ul>
                                 </li>
                                
                             </ul>
@@ -180,27 +122,8 @@
                          <li>
                             <a href="#"><i class="fa fa-tasks fa-fw"></i> Tareas<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                                <?php
-                                echo   ""
-                                     . "<form name='formularioNombre' action='verificar_nombre.php' enctype='multipart/form-data' method='POST'>"
-                                     . "<input type='hidden' name='nombreGrupo' value='$idUsuarioG'>"
-                                     . "<input type='hidden' name='nombreAsesor' value='$idUsuarioAsesor'>"
-                                     . "</form>"
-                                     . "<li>"
-                                     . "<a href='javascript:document.formularioNombre.submit();'>Verificar Nombre de Empresa</a>"
-                                     . "</li>";
-                                ?>
-                                <li>
-                                    <a href="seleccionar_asesor.php">Seleccionar Asesor</a>
-                                </li>
                                 
-                                 <li>
-                                     <a href="AnadirSocio.php">Añadir socios</a>
-                                </li>
                                 
-                                <li>
-                                    <a href="AnadirRL.php">Seleccionar Representante legal</a>
-                                </li>
                                 
                             </ul>
                             <!-- /.nav-second-level -->
@@ -208,37 +131,16 @@
                         
                         <li>
                             <a href="#"><i class="fa fa-warning fa-fw"></i> Notificaciones</a>
-                                                    
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="historia_actividades.php">Historia de actividades</a>
-                                </li>
-                                
-                            </ul>  
-                            </li>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-building-o fa-fw"></i> Actividades<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a id="registrarPlanificacion" href="#">
-                                        <i class="fa fa-pencil-square-o fa-fw"></i>Registrar Planificaci&oacute;n
-                                    </a>
-                                </li>
-                            </ul>
+                            
                             <!-- /.nav-second-level -->
                         </li>
                         
                         <li>
                             <a href="#"><i class="fa fa-question-circle fa-fw"></i> Ayuda <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                                
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                        
-                        <li>
-                            <a href="lista-de-noticias-grupo.php"><i class="fa fa-comment"></i> Foro</a>
                                 
                             </ul>
                             <!-- /.nav-second-level -->
@@ -251,7 +153,7 @@
             <!-- /.navbar-static-side -->
         </nav>
 <!-------------------------------------------NUEVAS PUBLICACIONES------------------------------------------>
-       <div id="page-wrapper">
+               <div id="page-wrapper">
            
 <form id = "econtrato" method = "post" action="" role="form" >
     <div class ="form-horizontal">
@@ -292,39 +194,30 @@
     <div class   ="form-group">
       
     </div><!--end/submit-->
-                
-      
-    
 
-             
-    <!--Modal para adjuntar recursos/documentos-->
-         
-      
     </div>
     <!-- /#wrapper -->
-    
+
+
+
+
+
 
     <!-- Core Scripts - Include with every page -->
- 
- 
-
+    <script src="../Librerias/js/jquery-1.10.2.js"></script>
     <script src="../Librerias/js/bootstrap.min.js"></script>
     <script src="../Librerias/js/plugins/metisMenu/jquery.metisMenu.js"></script>
 
+    <!-- Page-Level Plugin Scripts - Dashboard -->
+    <script src="../Librerias/js/plugins/morris/raphael-2.1.0.min.js"></script>
+    <script src="../Librerias/js/plugins/morris/morris.js"></script>
 
     <!-- SB Admin Scripts - Include with every page -->
     <script src="../Librerias/js/sb-admin.js"></script>
-  
+
     <!-- Page-Level Demo Scripts - Dashboard - Use for reference -->
     <script src="../Librerias/js/demo/dashboard-demo.js"></script>
-    <!-- Combo Box scripts -->
- 
-  
-<script type="text/javascript">
-    
-     
-});
-</script>
+
 </body>
 
 </html>
