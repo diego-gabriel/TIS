@@ -255,6 +255,7 @@
                                 echo '<div class="form-group">';
                                 echo '<label><h4>Seleccione la Grupo Empresa a evaluar:</h4></label>';
                                 echo '<select name="GrupoEscogido" class="form-control" id="" required>';
+                                    echo '<option value="">Seleccione una grupo empresa</option>';
                         
                                                 
                                 while($v1 = mysql_fetch_array($resultadoConsulta)){
@@ -398,7 +399,10 @@
                                     }
                                     echo '<div class="form-group">
                                                 <button type="submit" name="submit" class="btn btn-primary btn-sm" id="btn-evaluar">Evaluar</button>
-                                          </div>';  
+                                                <button type="button" class="btn btn-primary btn-sm" id="btn-nuevo">Nuevo</button>
+                                          </div>';
+                                    
+                                    
                                 //}
                             }
                             

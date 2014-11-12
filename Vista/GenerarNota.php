@@ -18,6 +18,7 @@
         $IdForm = mysql_fetch_row($VerificarHabilitado);
 
         $IdForm2 = $IdForm[0];
+        $cont2=0;
 
         /*********************************************************/
         
@@ -43,14 +44,24 @@
         
         if(count($puntajes) == count($prueba))
         {
-            for ($i=0; $i <count($puntajes) ; $i++) { 
 
-		        $nota = $nota + ($puntajes[$i][0] * ($prueba[$i]*0.01));
 
+            for ($y=0; $y < count($prueba) ; $y++) { 
+
+                if ($prueba[$y] <= 100) {
+
+                    $cont2++;
+                    
+                }
             }
-                //$ResNomU = $conect->consulta("SELECT NOMBRE_U FROM grupo_empresa WHERE NOMBRE_CORTO_GE = '$grupo'");
 
-                //$NombreUGE = mysql_fetch_row($ResNomU);
+            if ($cont2 == count($puntajes)) {
+
+                for ($i=0; $i <count($puntajes) ; $i++) { 
+
+                    $nota = $nota + ($puntajes[$i][0] * ($prueba[$i]*0.01));
+
+                }
 
                 $VerificarNota = $conect->consulta("SELECT * FROM nota WHERE NOMBRE_U = '$grupo'");
 
@@ -59,34 +70,50 @@
                 if (is_array($Verificar)) {
 
                     echo    '<script>
-                    BootstrapDialog.show({
-                         title: "Error en el Registro",
-                         message: "Ya registro una nota anteriormente"
-                    });
-                </script>';
-                }else{
+                                BootstrapDialog.show({
+                                    type: BootstrapDialog.TYPE_DANGER,
+                                    title: "Error en el Registro",
+                                    message: "Ya registro una nota anteriormente"
+                                });
+                            </script>';
+
+                }
+                else
+                {
 
                     $conect->consulta('INSERT INTO nota(NOMBRE_U, CALIF_N) VALUES("'.$grupo.'","'.$nota.'")');
 
-                echo    '<script>
-                            BootstrapDialog.show({
-                                 title: "Resultado de la Evaluacion",
-                                message: "Se proceso el formulario...su nota obtenida es de '.$nota.' puntos"
-                            });
-                        </script>';
-
-
+                    echo    '<script>
+                                BootstrapDialog.show({
+                                     title: "Resultado de la Evaluacion",
+                                     message: "Se proceso el formulario...su nota obtenida es de '.$nota.' puntos"
+                                });
+                            </script>';
+                   
                 }
+        
+            }
+            else
+            {
+
+                echo    '<script>
+                        BootstrapDialog.show({
+                        type: BootstrapDialog.TYPE_DANGER,
+                        title: "Error",
+                        message: "El valor del puntaje no puede ser mayor a 100"
+                        });
+                    </script>';
+            }
         }
         else{
             
             echo    '<script>
                         BootstrapDialog.show({
-                        title: "Resultado de la Evaluacion",
+                        type: BootstrapDialog.TYPE_DANGER,
+                        title: "Error",
                         message: "Debe seleccionar una opcion en la seleccion multiple"
                         });
                     </script>';
-
         }
 
 ?>

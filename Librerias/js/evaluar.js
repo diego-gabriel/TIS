@@ -1,6 +1,13 @@
 
 $(document).ready(function() {
     
+    $('#btn-nuevo').click(function(){
+        
+        location.reload();
+        
+        
+    });
+    
     $('input[type=checkbox]').on('click', function(){ 
 
         //alert($(this).parent().parent().attr('id'));
