@@ -82,7 +82,10 @@
             echo '<script>
                               BootstrapDialog.show({
                                   title: "Envio de solicitud",
-                                  message: "Su solicitud se envio correctamente...se le enviara un link a su correo electronico para activar su cuenta en un plazo de 24 horas"
+                                  message: "Su solicitud se envio correctamente",
+                                  onhide: function(dialogRef){
+                                        location.reload();
+                                    }
                               });
                   </script>';
 

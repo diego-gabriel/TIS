@@ -135,6 +135,10 @@
                                 <li>
                                             <a href="../Vista/subirarchivoasesor.php">Subir Documentos</a>
                                 </li>
+                                <li>
+                                    <a href="../Vista/RegistrarDocumentosRequeridos.php">Registrar Documentos</a>
+                                </li>
+
                                 
                                 <li>
                                     <a href="#">Publicaci&oacute;n Documentos <span class="fa arrow"></span></a>
@@ -157,6 +161,7 @@
                                         <li>
                                             <a href="documentos_recibidos.php">Documentos Recibidos</a>
                                         </li>
+
                                         <li>
                                             <a href="ConfiguracionFechasRecepcion.php" ><span class="fa fa-calendar-o"></span> Configuraci&oacute;n de Fechas para la Recepci&oacute;n de Documentos</a>
                                             

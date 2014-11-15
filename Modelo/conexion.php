@@ -18,6 +18,7 @@ $servidor = 'localhost';
 $userName = 'root';
 $password = '';
 $bdName = 'saetis';
+//$bdName = 'freevalue';
 global $link;
     $link =  mysql_connect($servidor, $userName, $password) or die('no se pudo conectar al servidor' . mysql_error());
     mysql_select_db($bdName,$link) or die('no se pudo encontrar la base de datos');

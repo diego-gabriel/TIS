@@ -112,6 +112,9 @@
                                 <li>
                                             <a href="../Vista/subirarchivoasesor.php">Subir Documentos</a>
                                 </li>
+                                 <li>
+                                    <a href="../Vista/RegistrarDocumentosRequeridos.php">Registrar Documentos</a>
+                                </li>
                                 
                                 <li>
                                     <a href="#">Publicaci&oacute;n Documentos <span class="fa arrow"></span></a>
@@ -307,7 +310,6 @@
                 </div>
             </div><!-- /.row -->
         </div>                       
-    <script src="../Librerias/js/bootstrap.min.js"></script>
     <script src="../Librerias/js/plugins/metisMenu/jquery.metisMenu.js"></script>
 
 

@@ -1,3 +1,10 @@
+<?php
+    
+   session_start();
+   $UsuarioActivo = $_SESSION['usuario'];
+   include("controlSesion.php");
+  
+?>
 <!DOCTYPE html>
 <html>
 
@@ -14,25 +21,27 @@
 
     <!-- Page-Level Plugin CSS - Dashboard -->
     <link href="../Librerias/css/plugins/morris/morris-0.4.3.min.css" rel="stylesheet">
-    <link href="../Librerias/css/plugins/timeline/timeline.css" rel="stylesheet">
-   
+    <link href="../Librerias/css/plugins/timeline/timeline.css" rel="stylesheet">   
+    
+    <link rel="stylesheet" type="text/css" media="all" href="../Librerias/calendario/daterangepicker-bs3.css" />
+     <script type="text/javascript" src="../Librerias/js/jquery.min.js"></script> 
+      <script type="text/javascript" src="../Librerias/js/bootstrap.min.js"></script>
+      <script type="text/javascript" src="../Librerias/calendario/moment.js"></script>
+      
+      <script type="text/javascript" src="../Librerias/calendario/daterangepicker.js"></script>
 
     <!-- SB Admin CSS - Include with every page -->
     <link href="../Librerias/css/sb-admin.css" rel="stylesheet">
-    <link href="../Librerias/css/dropzone.css" type="text/css" rel="stylesheet" />
-    <script src="../Librerias/js/dropzone.min.js"></script>
+    
+    <link rel="stylesheet" type="text/css" href="../Librerias/calendario2/jquery.datetimepicker.css"/>
+    <script type="text/javascript" src="js/validacionCamposFecha.js"></script>
+    <script type="text/javascript">
+      
+    </script>
 </head>
 
 <body>
-
-   
-    <div id="wrapper">
-       
-        
-        <!--<h2>design by <a href="#" title="flash templates">flash-templates-today.com</a></h2>-->
-        
-    
-         <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
                     <span class="sr-only">Toggle navigation</span>
@@ -40,7 +49,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="../index.php">Inicio </a>
+                <a class="navbar-brand" href="inicio_asesor.php">Inicio </a>
             </div>
             <!-- /.navbar-header -->
 
@@ -65,7 +74,7 @@
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                        <?php echo $UsuarioActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
                         <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
@@ -73,7 +82,7 @@
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                       <li><a href="unlog.php"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -204,55 +213,99 @@
             </div>
             <!-- /.navbar-static-side -->
         </nav>
-        
-
-<!---------------------------------------------------------------------SUBIR-ARCHIVO-ASESOR------------------------------------------------------>
+    <!---->
         <div id="page-wrapper">
-            
             <div class="row">
                 <div class="col-lg-12">
-                    <h2 class="page-header"> Subir Documentos </h2>
+                    <h2 class="page-header"  >Registrar Documentos Requeridos</h2>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
             <div class="row">
                 <div class="col-lg-8">
-                  
-                    <div class="col-lg-12">
-            <fieldset>
-            <legend> Desplazar o Buscar Documento </legend>
-            <form action="../Modelo/upload.php" class="dropzone" data-toggle="tooltip" data-placement="right" title="Arrastre documentos a esta &aacute;rea">
-            
-            </form>
-            <div class="col-sm-8">
+                  <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default" id="configuracionFechas">
+                        <div class="panel-body"> 
+                            <form  method="POST" name="formulario" id="formulario" action="GuardarDocumento.php">
+                                <p>
+                                    <label class="default" >Escriba el nombre del documento requerido</label>
+                                </p>
+                                 
+                                 <div class="form-group">
+                                     <input type="text" name="nombreDocumento" id="" class="form-control" pattern="^[a-zA-Z\s]*$" required>
+                                 </div> 
                         
-                           
-                    <a data-toggle="modal" class="btn btn-primary" href="javascript:void('')" data-target="#myModal"><span class="glyphicon glyphicon-folder-open"></span>
-                    Repositorio</a>
+                                <p>
+                                    <label for="fechaInicioE"></label>
+                                </p>
+
+                                <div class="row show-grid">
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="default" for="fechaInicioE">Fecha Inicio de  Entrega</label>
+                                            
+                                            <div class="form-group">
+                                                <label>
+                                                <input class ="form-control" placeholder="AAAA-MM-DD" type="date" name="fechaInicioE" id="fechaInicioE" required/>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                            <label class="default">
+                                               Hora Inicio de Entrega:<span id="sprytextfield1"></label>
+                                            <div class="form-group">
+                                                <label for="horaInicioE">
+                                                <input  class ="form-control" placeholder="HH:MM"  type="text" name="   horaInicioE" pattern="^(?:\d|[01]\d|2[0-3]):[0-5]\d$" required />
+                                                </label>
+                                            </div>
+                                    </div>
+                                        
+                                </div> 
+                                 
+                                        
+                                <div class="row show-grid">
+                                      <div class="col-md-6">
+                                          <label class="default" for="fechaFinalE">Fecha Final de Entrega</label>
+                                        <div class="form-group">
+                                            <label>
+                                            <input  class ="form-control" placeholder="AAAA-MM-DD"  type="date" name="fechaFinalE" pattern= "^(?:\d|[01]\d|2[0-3]):[0-5]\d$" required/>
+                                            </label>
+                                        </div>
+                                        
+
+                                      </div>
+
+                                       <div class="col-md-6">
+                                        <label class="default">
+                                            Hora Final de Entrega :<td><span id="sprytextfield2"></label>
+                                        <div class="form-group">
+                                            <label for="horaLimite">
+                                            <input  class ="form-control"  placeholder="HH:MM" type="text" name="horaFinalE" id="horaFinalE" required/>
+                                            </label>
+                                        </div>
+                                        
+                                        </div>
+                                </div>
+                                  <p>&nbsp;</p>
+                                  <p>
+                                      <input type="submit" class="btn btn-primary" name="aceptarFecha" id="aceptarFecha" value="Aceptar"/>
+                                      
+                                      <input type="reset"class="btn btn-default" name="btnVover2" id="btnVover2" value="Limpiar Formulario" />
+                                  </p>
+                            </form>                
                     </div>
-                        <div style="display: none;" aria-hidden="true" class="modal fade" id="myModal">
-                        <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-                        <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h4 class="modal-title">Buscador</h4>
-                        </div>
-                        <div class="modal-body" style="padding:0px; margin:0px; width: 560px;">
-                        <iframe src="../Librerias/filemanager/dialogo.php?type=0" style="overflow: scroll; overflow-x: hidden; overflow-y: scroll; " frameborder="0" height="500" width="896"></iframe>
-                        </div>
-                        </div><!-- /.modal-content -->
-                        </div><!-- /.modal-dialog -->
-                        </div><!-- /.modal -->
-                    </fieldset>
-                        
-                    </div>  
-                    
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-6 -->      
+            </div>
                     <!-- /.panel -->
                 </div>
                 <!-- /.col-lg-8 -->
-         
-                <!-- /.col-lg-4 -->
+                
             </div>
             <!-- /.row -->
         </div>
@@ -262,8 +315,9 @@
     <!-- /#wrapper -->
 
     <!-- Core Scripts - Include with every page -->
-    <script src="../Librerias/js/jquery-1.10.2.js"></script>
-    <script src="../Librerias/js/bootstrap.min.js"></script>
+   <!-- <script src="js/jquery-1.10.2.js"></script>-->
+   
+    <!--script src="../Librerias/js/bootstrap.min.js"></script-->
     <script src="../Librerias/js/plugins/metisMenu/jquery.metisMenu.js"></script>
 
     <!-- Page-Level Plugin Scripts - Dashboard -->
@@ -279,3 +333,5 @@
 </body>
 
 </html>
+
+

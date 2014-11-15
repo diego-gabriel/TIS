@@ -89,10 +89,14 @@
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-files-o "></i> Documentos <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="../Vista/RegistrarDocumentosRequeridos.php">Registrar Documentos</a>
+                                </li>
                                 
                                 <li>
                                     <a href="#">Publicaci&oacute;n Documentos <span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
+
                                         <li>
                                             <a href="#" > Formato Documento </a>
                                             
@@ -100,6 +104,7 @@
                                         <li>
                                             <a href="#">Subir Documento </a>
                                         </li>
+                                        
                                         <li>
                                             <a href="#">Publicaci&oacute;n Documentos </a>
                                         </li>

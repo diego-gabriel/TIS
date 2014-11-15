@@ -102,13 +102,13 @@
                         
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-files-o "></i> Documentos <span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                
+                            
+                            <ul class="nav nav-second-level">    
                                 <li>
-                                    <a href="#" >Subir Documentos <span class="fa arrow"></span></a>
-                                    <ul class="nav nav-third-level">
-                                        
-                                    </ul>
+                                    <a href="#" >Subir Documentos</a>
+                                </li>
+                                <li>
+                                    <a href="../Vista/RegistrarDocumentosRequeridos.php">Registrar Documentos</a>
                                 </li>
                                 <li>
                                     <a href="#">Recepci&oacute;n Documentos <span class="fa arrow"></span></a>

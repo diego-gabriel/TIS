@@ -52,7 +52,16 @@
 
 	if ($EliminarIndicadores and $EliminarCriterio) {
 
-		echo'<script>BootstrapDialog.alert("Se elimino el criterio correctamente");</script>';
+		
+		 echo    '<script>
+                                BootstrapDialog.show({
+                                   
+                                     message: "Se elimino el criterio correctamente",
+                                     onhide: function(dialogRef){
+                                        location.reload();
+                                    }
+                                });
+                            </script>';
 		
 	}
 

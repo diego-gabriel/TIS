@@ -93,6 +93,7 @@
                             if(isset($con2)){
                     
                                 echo'<script>BootstrapDialog.alert("Se registraron los datos correctamente");</script>';
+                                
                             }      
                         }          
                                         

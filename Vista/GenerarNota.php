@@ -73,10 +73,9 @@
                                 BootstrapDialog.show({
                                     type: BootstrapDialog.TYPE_DANGER,
                                     title: "Error en el Registro",
-                                    message: "Ya registro una nota anteriormente"
+                                    message: "Ya registro una nota anteriormente",
                                 });
                             </script>';
-
                 }
                 else
                 {
@@ -86,9 +85,13 @@
                     echo    '<script>
                                 BootstrapDialog.show({
                                      title: "Resultado de la Evaluacion",
-                                     message: "Se proceso el formulario...su nota obtenida es de '.$nota.' puntos"
+                                     message: "Se proceso el formulario...su nota obtenida es de '.$nota.' puntos",
+                                     onhide: function(dialogRef){
+                                        location.reload();
+                                    }
                                 });
                             </script>';
+
                    
                 }
         
@@ -111,7 +114,7 @@
                         BootstrapDialog.show({
                         type: BootstrapDialog.TYPE_DANGER,
                         title: "Error",
-                        message: "Debe seleccionar una opcion en la seleccion multiple"
+                        message: "Debe seleccionar llenar todos los campos"
                         });
                     </script>';
         }

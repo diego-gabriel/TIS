@@ -222,11 +222,11 @@
             <!-- /.navbar-static-side -->
         </nav>
 
-<!-------------------------------------------NUEVAS PUBLICACIONES------------------------------------------>
+<!----------------------------------------NUEVAS PUBLICACIONES------------------------------------------>
 <div id="page-wrapper">
     <div class="row">
         <div class="col-lg-12">
-            <h2 class="page-header">Evaluar Grupo Empresa</h2>
+            <h2 class="page-header">ReEvaluar Grupo Empresa</h2>
             <div class="col-lg-6">   
                 <form method = "post" id="FormEvaluar">
                     <div class="panel panel-default">
@@ -238,6 +238,20 @@
                             
 
                             $conect = new conexion();
+
+
+                            /***********************************************/
+
+
+                            $SeleccionarMarcados= $conect->consulta("SELECT Puntaje_nota FROM nota WHERE NOMBRE_U = 'Bittle'");
+
+                            while ($rowMarcados = mysql_fetch_row($SeleccionarMarcados)) {
+                                
+                                $Marcados[] = $rowMarcados;
+                            }
+
+                            
+                            /*********************************************/
                             
                             $VerificarHabilitado = $conect->consulta("SELECT ID_FORM FROM formulario WHERE ESTADO_FORM = 'Habilitado' AND NOMBRE_U = '$UsuarioActivo'");
                             
@@ -317,10 +331,7 @@
                                 }
 
                                 /*************************************************************/
-                                 //$SeleccionTipoE = $conect->consulta('SELECT TIPO_CRITERIO FROM criteriocalificacion WHERE ID_CRITERIO_C ='.$IdCritC[$i][0].'');
-
-                                 //$TipoC[] = mysql_fetch_row($SeleccionTipoE);
-
+                              
                                     for ($i=0; $i < count($NomCE) ; $i++) { 
 
                                         echo "<div>";
@@ -391,11 +402,6 @@
                                                 unset($puntajesC);
                                                 
                                                 }
-
-                                            //}
-
-                                        //}
-
                                         echo "</div>";
                                         
                                         
@@ -404,9 +410,6 @@
                                                 <button type="submit" name="submit" class="btn btn-primary btn-sm" id="btn-evaluar">Evaluar</button>
                                                 <button type="button" class="btn btn-primary btn-sm" id="btn-nuevo">Nuevo</button>
                                           </div>';
-                                    
-                                    
-                                //}
                             }
                             
                             else
@@ -417,10 +420,6 @@
                                 
                             }
                             ?>
-
-
-
-
                 </form>
                   
                     <div id="ResultadoNota">

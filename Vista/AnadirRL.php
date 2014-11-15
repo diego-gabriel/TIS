@@ -26,9 +26,6 @@
     <link href="../Librerias/css/sb-admin.css" rel="stylesheet">
     
     <script type="text/javascript" src="../Librerias/js/validar_registroS.js"></script>
-    
-    
-    
 
 </head>
 
@@ -105,6 +102,9 @@
                                     <ul class="nav nav-third-level">
                                         
                                     </ul>
+                                </li>
+                                <li>
+                                    <a href="../Vista/RegistrarDocumentosRequeridos.php">Registrar Documentos</a>
                                 </li>
                                 <li>
                                     <a href="#">Recepci&oacute;n Documentos <span class="fa arrow"></span></a>

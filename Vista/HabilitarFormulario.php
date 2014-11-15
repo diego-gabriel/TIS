@@ -18,7 +18,10 @@ $formulario = $_POST['formulario'];
         echo '<script>
                 BootstrapDialog.show({
                     title: "Habilitacion de Formulario",
-                    message: "El formulario esta habilitado para su uso"
+                    message: "El formulario esta habilitado para su uso",
+                    onhide: function(dialogRef){
+                        location.reload();
+                    }
                 });
               </script>';
     }
