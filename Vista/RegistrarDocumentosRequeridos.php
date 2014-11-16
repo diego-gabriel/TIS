@@ -236,6 +236,9 @@
                                  <div class="form-group">
                                      <input type="text" name="nombreDocumento" id="" class="form-control" pattern="^[a-zA-Z\s]*$" required>
                                  </div> 
+                                 <div class="form-group">
+                                     <input type="text" name="DescripcionDocumento" id="" class="form-control" placeholder="Descripcion" pattern="^[a-zA-Z\s]*$" required>
+                                 </div> 
                         
                                 <p>
                                     <label for="fechaInicioE"></label>

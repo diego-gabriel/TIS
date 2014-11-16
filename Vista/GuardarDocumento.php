@@ -12,6 +12,7 @@ $FechaInicioEntrega = $_POST['fechaInicioE'];
 $HoraInicioEntrega = $_POST['horaInicioE'];
 $FechaFinalEntrega = $_POST['fechaFinalE'];
 $HoraFinalEntrega = $_POST['horaFinalE'];
+$DescripcionDocumento = $_POST['DescripcionDocumento'];
 
 
 $HoraRegistrado = date("H:i:s");
@@ -35,9 +36,10 @@ else{
 	$DocId = mysql_fetch_row($SeleccionDocumentoID);
 
 	$InsertarPlazo = $conect->consulta("INSERT INTO plazo VALUES('$DocId[0]','$FechaInicioEntrega','$FechaFinalEntrega','$HoraInicioEntrega','$HoraFinalEntrega')");
+	$InsertarDescripcion = $conect->consulta("INSERT INTO descripcion VALUES('$DocId[0]','$DescripcionDocumento')");
 
 
-	if ($InsertarDocumento and $InsertarPlazo) {
+	if ($InsertarDocumento and $InsertarPlazo and $InsertarDescripcion) {
 
 			echo "<SCRIPT LANGUAGE='javascript'>". 
 		            " alert('Exito, el registro del documento se realizo exitosamente.');".
