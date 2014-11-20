@@ -14,7 +14,6 @@ $FechaFinalEntrega = $_POST['fechaFinalE'];
 $HoraFinalEntrega = $_POST['horaFinalE'];
 $DescripcionDocumento = $_POST['DescripcionDocumento'];
 
-
 $HoraRegistrado = date("H:i:s");
 $FechaRegistrado = date('Y:m:j');
 
@@ -36,7 +35,8 @@ else{
 	$DocId = mysql_fetch_row($SeleccionDocumentoID);
 
 	$InsertarPlazo = $conect->consulta("INSERT INTO plazo VALUES('$DocId[0]','$FechaInicioEntrega','$FechaFinalEntrega','$HoraInicioEntrega','$HoraFinalEntrega')");
-	$InsertarDescripcion = $conect->consulta("INSERT INTO descripcion VALUES('$DocId[0]','$DescripcionDocumento')");
+
+	$InsertarDescripcion  = $conect->consulta("INSERT INTO descripcion VALUES('$DocId[0]', '$DescripcionDocumento')");
 
 
 	if ($InsertarDocumento and $InsertarPlazo and $InsertarDescripcion) {

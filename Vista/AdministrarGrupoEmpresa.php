@@ -226,206 +226,55 @@
 <div id="page-wrapper">
     <div class="row">
         <div class="col-lg-12">
-            <h2 class="page-header">ReEvaluar Grupo Empresa</h2>
-            <div class="col-lg-6">   
-                <form method = "post" id="FormEvaluar">
-                    <div class="panel panel-default">
-                        <div class="panel-body">     
-                                            
-                            <?php 
-                            include '../Modelo/conexion.php';
+            <h2 class="page-header">Administrar Grupo Empresas</h2>
+            <!--div class="col-lg-6"-->   
+                <form method = "post" id="FormEvaluar">   
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Grupo Empresa</th>
+                                <th>Estado</th>
+                                <th>Accion</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                    <?php 
+                        include '../Modelo/conexion.php';
+                        $conect = new conexion();
+                        $SeleccionarGruposInscritos = $conect->consulta("SELECT NOMBRE_UGE FROM INSCRIPCION 
+                        WHERE NOMBRE_UA='$UsuarioActivo'");
 
-                            $conect = new conexion();
+                        while ($rowGrupos = mysql_fetch_row($SeleccionarGruposInscritos)) {
 
+                            $GruposInscritos[] = $rowGrupos[0];
+                    
+                        }  
 
-                            /***********************************************/
+                        for ($i=0; $i < count($GruposInscritos) ; $i++) { 
 
-
-                            $SeleccionarMarcados= $conect->consulta("SELECT Puntaje_nota FROM nota WHERE NOMBRE_U = 'Bittle'");
-
-                            while ($rowMarcados = mysql_fetch_row($SeleccionarMarcados)) {
-                                
-                                $Marcados[] = $rowMarcados;
-                            }
-
-                            
-                            /*********************************************/
-                            
-                            $VerificarHabilitado = $conect->consulta("SELECT ID_FORM FROM formulario WHERE ESTADO_FORM = 'Habilitado' AND NOMBRE_U = '$UsuarioActivo'");
-                            
-                            $IdForm = mysql_fetch_row($VerificarHabilitado);
-
-                            $IdForm2 = $IdForm[0];
-
-                            /**************************************************************/
-                            if(is_array($IdForm)) 
-                            {
-                            
-                                $consultaGrupos = "SELECT DISTINCT NOMBRE_UGE FROM inscripcion WHERE NOMBRE_UA = '$UsuarioActivo'";
-
-                                $resultadoConsulta = $conect->consulta($consultaGrupos);
-
-                        
-                                    
-                                echo '<div class="form-group">';
-                                echo '<label><h4>Seleccione la Grupo Empresa a evaluar:</h4></label>';
-                                echo '<select name="GrupoEscogido" class="form-control" id="" required>';
-                                    echo '<option value="">Seleccione una grupo empresa</option>';
-                        
-                                                
-                                while($v1 = mysql_fetch_array($resultadoConsulta)){
-                                    echo "<option>".$v1[0]."</option>";
-                                }
-
-                                echo "</select>";
-                                echo '</div></div></div>';//Panel default---Panel-body
-
-                                /***********************************************************/
-
-                                $SeleccionIdE = $conect->consulta("SELECT ID_CRITERIO_E FROM form_crit_e WHERE ID_FORM ='$IdForm2'");
-
-                                while ($RowCritE = mysql_fetch_row($SeleccionIdE)) {
-
-                                    $IdCritE[] = $RowCritE; 
-                                    
-                                }
-
-                                for ($i=0; $i <count($IdCritE) ; $i++) { 
-
-                                    $SeleccionNomE = $conect->consulta('SELECT NOMBRE_CRITERIO_E FROM criterio_evaluacion WHERE ID_CRITERIO_E = '.$IdCritE[$i][0].'');
-
-                                    $NomCE[] = mysql_fetch_row($SeleccionNomE);
-                        
-                                }
-
-                                /**************************************************************/
-
-                                $SeleccionPuntaje = $conect->consulta("SELECT PUNTAJE FROM puntaje WHERE ID_FORM = '$IdForm2'");
-
-                                while($rowPuntaje = mysql_fetch_row($SeleccionPuntaje))
-                                {
-                                    $puntajes[] = $rowPuntaje;
-                                }
-
-
-                                /************************************************************/
-
-                                $SeleccionIdC = $conect->consulta("SELECT ID_CRITERIO_C FROM from_crit_c WHERE ID_FORM = '$IdForm2'");
-
-                                while ($RowCritC = mysql_fetch_row($SeleccionIdC)) {
-
-                                    $IdCritC[] = $RowCritC;
-                
-                                }
-
-                                /**************************************************/
-
-
-                               for ($j=0; $j < count($IdCritC) ; $j++) { 
-                                    
-                                    $SeleccionTipoE = $conect->consulta('SELECT TIPO_CRITERIO FROM criteriocalificacion WHERE ID_CRITERIO_C ='.$IdCritC[$j][0].'');
-
-                                    $TipoC[] = mysql_fetch_row($SeleccionTipoE);
-                                }
-
-                                /*************************************************************/
-                              
-                                    for ($i=0; $i < count($NomCE) ; $i++) { 
-
-                                        echo "<div>";
-                                            echo '<div class="panel panel-default">';
-                                                echo '<div class="panel-body">';
-                                                    echo '<div class="form-group">';
-                                                        echo '<strong>'.'* '.$NomCE[$i][0].'</strong>'.' ('.$puntajes[$i][0].' puntos)';
-                                                        echo '<input type="hidden" name="valoresFormulario[]" value="'.$puntajes[$i][0].'">';
-                                                    echo '</div>';
-
-
-                                                if ($TipoC[$i][0] == 4) {
-
-                                                        echo'<div class="form-group">';
-                                                            echo'<input type="text" name="valorInput[]" class="form-control" pattern="^[0-9]{1,3}" required>';
-                                                        echo'</div>';
-                                                    echo'</div>';
-                                                echo'</div>';
-                                                }
-                                                else
-                                                {      
-
-                                                    /*******************************************************************/
-                                                    
-                                                    $indicadores = $conect->consulta('SELECT NOMBRE_INDICADOR FROM indicador WHERE ID_CRITERIO_C = '.$IdCritC[$i][0].'');
-
-                                                    while($ResIndicadores = mysql_fetch_row($indicadores)){
-
-                                                        $ResIndicadores2[] = $ResIndicadores;
-                                                    }
-
-                                                    /*****************************************************************/
-
-                                                    $valores = $conect->consulta('SELECT PUNTAJE_INDICADOR FROM indicador WHERE ID_CRITERIO_C = '.$IdCritC[$i][0].'');
-                                                
-                                                    while ($rowP = mysql_fetch_row($valores)) {
-
-                                                        $puntajesC[] = $rowP;
-                                            
-                                                    }
-
-                                                    /**********************************************************************/
-                                                    
-                                                    echo '<div id='.$i.'>';
-
-                                                    for ($z=0; $z < count($ResIndicadores2) ; $z++) { 
-
-                                                        echo'<div class="checkbox">';
-                                                            
-                                                            echo'<input type="checkbox" id="'.$z.'" name="valorInput[]" value="'.$puntajesC[$z][0].'">'.$ResIndicadores2[$z][0].' ('.$puntajesC[$z][0].')';
-                                                           
-                                                        echo'</div>';
-
-                                                        /*echo '<div class="checkbox checkbox-primary">
-                                                                <input type="checkbox" id="checkbox'.$z.'" name="valorInput[]" value="'.$puntajesC[$z][0].'">
-                                                                <label for="checkbox'.$z.'">'
-                                                                    .$ResIndicadores2[$z][0].' ('.$puntajesC[$z][0].')'.
-                                                                '</label>
-                                                              </div>';*/
-
-
-                                                    }
-                                                    echo '</div>';
-                                                echo '</div>';
-                                                echo '</div>';
-                                                
-                                                unset($ResIndicadores2);
-                                                unset($puntajesC);
-                                                
-                                                }
-                                        echo "</div>";
-                                        
-                                        
-                                    }
-                                    echo '<div class="form-group">
-                                                <button type="submit" name="submit" class="btn btn-primary btn-sm" id="btn-evaluar">Evaluar</button>
-                                                <button type="button" class="btn btn-primary btn-sm" id="btn-nuevo">Nuevo</button>
-                                          </div>';
-                            }
-                            
-                            else
-                            {
-                                echo 'No tiene ningun formulario habilitado<br>';
-                                echo 'Vaya al siguiente link para habilitar uno<br> ';
-                                echo '<a href="http://localhost/saetis/Vista/SeleccionarFormulario.php" class="btn btn-default btn-xs">Habilitar Formulario</a>';
-                                
-                            }
-                            ?>
+                            echo '<tr>
+                                    <td>'.$i.'</td>
+                                    <td>'.$GruposInscritos[$i].'</td>
+                                    <td>Habilitado</td>
+                                    <td>
+                                        <a href="EliminarGrupoEmpresa.php?id_gp='.$GruposInscritos[$i].'" 
+                                        class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove" 
+                                        aria-hidden="true"></span></a>
+                                    </td>
+                                 </tr>'; 
+                        }
+                    ?> 
+                        </tbody>
+                    </table>
                 </form>
                   
-                    <div id="ResultadoNota">
-                        <div class="form-group">
+                <div id="ResultadoNota">
+                    <div class="form-group">
                                         
-                        </div>
-                    </div>                                      
-            </div><!--Col-lg6-->
+                    </div>
+                </div>                                      
+            <!--/div--><!--Col-lg6-->
         </div><!--Col lg 12-->
     </div><!-- /.row -->  
 

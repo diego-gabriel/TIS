@@ -88,7 +88,7 @@
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="unlog.php"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -207,7 +207,7 @@
                                             $pos2=$pos-1;
                                             
                                             $des=substr($aux, 0,$pos2);
-                                            if($numero=="TODOS" || $numero==$UsuarioActivo)
+                                            if($numero=="TODOS" || $numero==$UsuarioActivo || $numero=="PUBLICO")
                                             {
                                                 $ubi= $var3[1];
                                                 $ini="32"+1;

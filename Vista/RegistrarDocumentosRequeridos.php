@@ -232,12 +232,11 @@
                                 <p>
                                     <label class="default" >Escriba el nombre del documento requerido</label>
                                 </p>
-                                 
                                  <div class="form-group">
                                      <input type="text" name="nombreDocumento" id="" class="form-control" pattern="^[a-zA-Z\s]*$" required>
-                                 </div> 
+                                 </div>
                                  <div class="form-group">
-                                     <input type="text" name="DescripcionDocumento" id="" class="form-control" placeholder="Descripcion" pattern="^[a-zA-Z\s]*$" required>
+                                     <input type="text" name="DescripcionDocumento" id="" class="form-control" pattern="^[a-zA-Z\s]*$" placeholder="Descripcion" required>
                                  </div> 
                         
                                 <p>

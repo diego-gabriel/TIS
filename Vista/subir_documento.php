@@ -79,7 +79,7 @@
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="unlog.php"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -103,11 +103,8 @@
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="#">Recepci&oacute;n Documentos <span class="fa arrow"></span></a>
-                                    <ul class="nav nav-third-level">
-                                        
-                                       
-                                    </ul>
+                                    <a href="publicacion_grupo.php">Recepci&oacute;n Documentos </a>
+                                   
                                 </li>
                                
                             </ul>
