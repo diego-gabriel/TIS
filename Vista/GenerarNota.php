@@ -6,9 +6,8 @@
 
     $UsuarioActivo = $_SESSION['usuario'];
 	$grupo = $_POST['GrupoEscogido'];
+    $FormularioUtilizado = $_POST['IdFormularioUtilizado'];
 
-
-        
         $nota = 0;
 
         $conect = new conexion();
@@ -67,34 +66,75 @@
 
                 $Verificar = mysql_fetch_row($VerificarNota);
 
-                if (is_array($Verificar)) {
+                $op = $_POST['Operacion'];
 
-                    echo    '<script>
-                                BootstrapDialog.show({
-                                    type: BootstrapDialog.TYPE_DANGER,
-                                    title: "Error en el Registro",
-                                    message: "Ya registro una nota anteriormente",
-                                });
-                            </script>';
-                }
-                else
+                if($op == 'ReEvaluar')
                 {
 
-                    $conect->consulta('INSERT INTO nota(NOMBRE_U, CALIF_N) VALUES("'.$grupo.'","'.$nota.'")');
+                    $conect->consulta("UPDATE nota SET CALIF_N = '$nota' WHERE NOMBRE_U='$grupo'");
+
+                    $SeleccionarIdNota = $conect->consulta("SELECT MAX(ID_N) FROM NOTA WHERE NOMBRE_U='$grupo'");
+
+                    $IdNota = mysql_fetch_row($SeleccionarIdNota);
+
+                        for ($i=0; $i < count($prueba) ; $i++) { 
+                            
+                            $conect->consulta("UPDATE PUNTAJE_GE SET CALIFICACION = '$prueba[$i]' WHERE ID_N ='$IdNota[0]' AND  NUM_CE ='$i'");
+                    
+                        }
 
                     echo    '<script>
-                                BootstrapDialog.show({
-                                     title: "Resultado de la Evaluacion",
-                                     message: "Se proceso el formulario...su nota obtenida es de '.$nota.' puntos",
-                                     onhide: function(dialogRef){
-                                        location.reload();
-                                    }
-                                });
-                            </script>';
+                                    BootstrapDialog.show({
+                                         title: "Modificar Nota",
+                                         message: "Se proceso el formulario...su nota obtenida es de '.$nota.' puntos",
+                                         onhide: function(dialogRef){
+                                            location.reload();
+                                        }
+                                    });
+                                </script>';  
 
-                   
+
                 }
-        
+                
+                if($op == 'Evaluar')
+                {
+                    if (is_array($Verificar)) {
+
+                        echo    '<script>
+                                    BootstrapDialog.show({
+                                        type: BootstrapDialog.TYPE_DANGER,
+                                        title: "Error en el Registro",
+                                        message: "Ya registro una nota anteriormente",
+                                    });
+                                </script>';
+                    }
+                    else
+                    {
+
+                        $conect->consulta('INSERT INTO nota(ID_FORM, NOMBRE_U, CALIF_N) VALUES("'.$FormularioUtilizado.'","'.$grupo.'","'.$nota.'")');
+
+                        $SeleccionarIdNota = $conect->consulta("SELECT MAX(ID_N) FROM NOTA WHERE NOMBRE_U='$grupo'");
+
+                        $IdNota = mysql_fetch_row($SeleccionarIdNota);
+
+                        for ($i=0; $i < count($prueba) ; $i++) { 
+                            $conect->consulta('INSERT INTO PUNTAJE_GE(ID_N, NUM_CE, CALIFICACION) VALUES("'.$IdNota[0].'","'.$i.'","'.$prueba[$i].'")');
+
+                        }
+
+                        
+                        echo    '<script>
+                                    BootstrapDialog.show({
+                                         title: "Resultado de la Evaluacion",
+                                         message: "Se proceso el formulario...su nota obtenida es de '.$nota.' puntos",
+                                         onhide: function(dialogRef){
+                                            location.reload();
+                                        }
+                                    });
+                                </script>';  
+                    }
+
+                }
             }
             else
             {

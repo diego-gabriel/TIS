@@ -36,7 +36,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="../index.php">Inicio </a>
+                <a class="navbar-brand" href="../vista/inicio_asesor.php">Inicio </a>
             </div>
             <!-- /.navbar-header -->
 
@@ -69,7 +69,7 @@
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="unlog.php"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="../Vista/unlog.php"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -186,10 +186,17 @@
                             <!-- /.nav-second-level -->
                         </li>
                         
-                        <li>
+                          <li>
+                              <a href="#"><i class="fa fa-tasks fa-fw"></i>Informacion Personal<span class="fa arrow"></span> </a>  
+                                              <ul class="nav nav-third-level">
+                                                <li>
+                                                    <a href="modificar_asesor.php">Modificar Datos Personales </a>                             
+                                                </li>       
+                                            </ul>
+                          </li>
+                          <li>
                             <a href="#"><i class="fa fa-question-circle fa-fw"></i> Ayuda <span class="fa arrow"></span></a>
-                            
-                            <!-- /.nav-second-level -->
+   
                         </li>
                     </ul>
                     <!-- /#side-menu -->

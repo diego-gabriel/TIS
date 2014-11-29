@@ -87,7 +87,7 @@ session_start();
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="../index.php">Inicio </a>
+                <a class="navbar-brand" href="principal.php">Inicio </a>
             </div>
             <!-- /.navbar-header -->
 
@@ -294,15 +294,14 @@ where p.menu_id_menu=m.id_menu and r.ROL_R=p.ROL_R
                
             <div class="navbar-default navbar-static-side" role="navigation">
                 <div class="sidebar-collapse">
- <ul class="nav" id="side-menu">
+                    <ul class="nav" id="side-menu">
                         
-                        
+                                <li>
+                                    <a href="../Vista/registro_administrador.php"><i class="fa fa-bar-chart-o fa-files-o "></i> nueva cuenta<span class="fa arrow"></span></a>
+                                </li>                        
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-files-o "></i> Informacion personal <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="../Vista/registro_administrador.php">nueva cuenta</a>
-                                </li>
                                 <li>
                                     <a href="../Vista/modificar_administrador.php">privacidad</a>
                                 </li>
@@ -325,7 +324,7 @@ where p.menu_id_menu=m.id_menu and r.ROL_R=p.ROL_R
                                 </li>
                                 <li>
                                      <a href="add_gestion.php">Añadir  Gestion</a>
-                                </li>                                
+                                </li>
                                  <li>
                                     <a href="lista_roles.php">Asignar Permisos Roles</a>
                                 </li>
@@ -334,6 +333,30 @@ where p.menu_id_menu=m.id_menu and r.ROL_R=p.ROL_R
                                     <ul class="nav nav-third-level">
                                         <li>
                                             <a href="lista_grupoEmpresa.php"> integrantes </a>
+                                            
+                                        </li>
+                                        <li>
+                                            <a href="ListaGrupoEmpresas.php"> Lista de Grupo Empresas </a>
+                                            
+                                        </li>
+                                    </ul>
+                                    <!-- /.nav-third-level -->
+                                </li>
+                                 <li>
+                                    <a href="#">Administrador <span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                        <li>
+                                            <a href="lista_administradores.php"> Lista de Administadores </a>
+                                            
+                                        </li>
+                                    </ul>
+                                    <!-- /.nav-third-level -->
+                                </li>
+                                 <li>
+                                    <a href="#">Asesor <span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                        <li>
+                                            <a href="lista_asesores.php"> Lista de Asesores </a>
                                             
                                         </li>
                                     </ul>
@@ -366,8 +389,9 @@ where p.menu_id_menu=m.id_menu and r.ROL_R=p.ROL_R
   
                                     </ul>
                             <!-- /.nav-second-level -->
-                        </li>
- 
+                        </li>                       
+                        
+
                     </ul>
                     <!-- /#side-menu -->
                 </div>

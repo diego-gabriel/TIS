@@ -8,7 +8,7 @@
 	require_once '../Modelo/Model/Entrega.php';
 	require_once '../Modelo/Model/Pago.php';
 
-	$usuario = 'freevalue';
+	$usuario = 'Bittle';
     $planificacion = new Planificacion($usuario);
     $estado = $planificacion->getEstado();
 

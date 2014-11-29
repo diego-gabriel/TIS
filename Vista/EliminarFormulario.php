@@ -181,7 +181,10 @@ include("controlSesion.php");
                             <a href="#"><i class="fa fa-tasks fa-fw"></i> Tareas<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="ordendecambioempresas.php">Emitir Orden de Cambio</a>
+                                    <a href="contrato.php">Emitir Contrato </a>
+                                </li>
+                                <li>
+                                    <a href="ordendecambio.php">Emitir Orden de Cambio</a>
                                 </li>
                                 <li>
                                     <a href="notificacion_conformidad.php">Emitir Notificaci&oacute;n de Conformidad</a>
@@ -235,20 +238,27 @@ include("controlSesion.php");
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
-                        
-                        <li>
-                            <a href="#"><i class="fa fa-warning fa-fw"></i> Notificaciones</a>
-                        </li>
+
                         <li>
                             <a href="#"><i class="fa fa-building-o fa-fw"></i> Actividades<span class="fa arrow"></span></a>
                             
                             <!-- /.nav-second-level -->
                         </li>
                         
-                        <li>
+                          <li>
+                              <a href="#"><i class="fa fa-tasks fa-fw"></i>Informacion Personal<span class="fa arrow"></span> </a>  
+                                              <ul class="nav nav-third-level">
+                                                <li>
+                                                    <a href="modificar_asesor.php">Modificar Datos Personales </a>                             
+                                                </li>       
+                                            </ul>
+                          </li>
+                          <li>
+                            <a href="lista-de-noticias.php"><i class="fa fa-comment"></i> Foro</a>
+                         </li>
+                          <li>
                             <a href="#"><i class="fa fa-question-circle fa-fw"></i> Ayuda <span class="fa arrow"></span></a>
-                            
-                            <!-- /.nav-second-level -->
+   
                         </li>
                     </ul>
                     <!-- /#side-menu -->

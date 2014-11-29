@@ -5,7 +5,7 @@
     require_once '../Modelo/Model/Precio.php';
     require_once '../Modelo/Model/FechaRealizacion.php';
 
-    $usuario = 'freevalue';
+    $usuario = 'Bittle';
     $planificacion = new Planificacion($usuario);
     $estado = $planificacion->getEstado();
 	

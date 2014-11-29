@@ -40,7 +40,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="../index.php">Inicio </a>
+                <a class="navbar-brand" href="inicio_asesor.php">Inicio </a>
             </div>
             <!-- /.navbar-header -->
 
@@ -73,7 +73,7 @@
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="unlog.php"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -182,20 +182,27 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
-                        
-                        <li>
-                            <a href="#"><i class="fa fa-warning fa-fw"></i> Notificaciones</a>
-                        </li>
+                      
                         <li>
                             <a href="#"><i class="fa fa-building-o fa-fw"></i> Actividades<span class="fa arrow"></span></a>
                             
                             <!-- /.nav-second-level -->
                         </li>
                         
-                        <li>
+                          <li>
+                              <a href="#"><i class="fa fa-tasks fa-fw"></i>Informacion Personal<span class="fa arrow"></span> </a>  
+                                              <ul class="nav nav-third-level">
+                                                <li>
+                                                    <a href="modificar_asesor.php">Modificar Datos Personales </a>                             
+                                                </li>       
+                                            </ul>
+                          </li>
+                          <li>
+                            <a href="lista-de-noticias.php"><i class="fa fa-comment"></i> Foro</a>
+                          </li>
+                          <li>
                             <a href="#"><i class="fa fa-question-circle fa-fw"></i> Ayuda <span class="fa arrow"></span></a>
-                            
-                            <!-- /.nav-second-level -->
+   
                         </li>
                     </ul>
                     <!-- /#side-menu -->

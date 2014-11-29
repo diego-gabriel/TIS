@@ -229,16 +229,6 @@
             <h2 class="page-header">Administrar Grupo Empresas</h2>
             <!--div class="col-lg-6"-->   
                 <form method = "post" id="FormEvaluar">   
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Grupo Empresa</th>
-                                <th>Estado</th>
-                                <th>Accion</th>
-                            </tr>
-                        </thead>
-                        <tbody>
                     <?php 
                         include '../Modelo/conexion.php';
                         $conect = new conexion();
@@ -249,21 +239,80 @@
 
                             $GruposInscritos[] = $rowGrupos[0];
                     
-                        }  
-
-                        for ($i=0; $i < count($GruposInscritos) ; $i++) { 
-
-                            echo '<tr>
-                                    <td>'.$i.'</td>
-                                    <td>'.$GruposInscritos[$i].'</td>
-                                    <td>Habilitado</td>
-                                    <td>
-                                        <a href="EliminarGrupoEmpresa.php?id_gp='.$GruposInscritos[$i].'" 
-                                        class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove" 
-                                        aria-hidden="true"></span></a>
-                                    </td>
-                                 </tr>'; 
                         }
+
+                        if(isset($GruposInscritos))
+                        {
+            
+                            echo '<table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Grupo Empresa</th>
+                                            <th>Rep. Legal</th>
+                                            <th>Estado</th>
+                                            <th>Accion</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>';
+
+                            $SeleccionarEstado  = $conect->consulta("SELECT ESTADO_INSCRIPCION FROM inscripcion WHERE NOMBRE_UA ='$UsuarioActivo'");
+
+                            while ($rowEstados = mysql_fetch_row($SeleccionarEstado) ) {
+
+                            $Estado[] = $rowEstados[0];
+                        
+                            }
+
+                            for ($i=0; $i <count($GruposInscritos) ; $i++) { 
+                                $SeleccionarRepresentante = $conect->consulta("SELECT REPRESENTANTE_LEGAL_GE FROM GRUPO_EMPRESA WHERE NOMBRE_U = '$GruposInscritos[$i]'");
+                                $SeleccionarNota = $conect->consulta("SELECT CALIF_N FROM NOTA WHERE NOMBRE_U = '$GruposInscritos[$i]'");
+                                
+                                while($rowRepresentante = mysql_fetch_row($SeleccionarRepresentante))
+                                {
+                                    $Representante[] = $rowRepresentante[0];
+                                }
+                                while($rowNota = mysql_fetch_row($SeleccionarNota))
+                                {
+                                    $Nota[] = $rowNota[0];
+                                }
+                            }
+
+                            for ($i=0; $i < count($GruposInscritos) ; $i++) { 
+
+                                echo '<tr>
+                                        <td>'.$i.'</td>
+                                        <td>'.$GruposInscritos[$i].'</td>
+                                        <td>'.$Representante[$i].'</td>
+                                        <td>'.$Estado[$i].'</td>
+
+                                    
+                                        <td>
+                                            <a href="HabilitarGrupoEmpresa.php?GE='.$GruposInscritos[$i].'&Operacion=Habilitar" 
+                                            class="btn btn-default btn-xs">Habilitar</a>
+
+                                            <a href="HabilitarGrupoEmpresa.php?GE='.$GruposInscritos[$i].'&Operacion=Deshabilitar" 
+                                            class="btn btn-default btn-xs">Deshabilitar</a>
+
+                                            <a href="ModificarEvaluacionGrupoEmpresa.php?GE='.$GruposInscritos[$i].'" 
+                                            class="btn btn-default btn-xs">Modificar Evaluacion</a>
+                                        </td>   
+                                     </tr>'; 
+                            }
+                        }else{
+
+                            echo "No tiene ninguna empresa inscrita";
+                        }
+
+
+                        
+
+                    
+
+
+                   
+
+                        
                     ?> 
                         </tbody>
                     </table>

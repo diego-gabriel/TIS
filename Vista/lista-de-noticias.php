@@ -2,12 +2,10 @@
 <?php
     include '../Modelo/conexion.php';
     $conexion = mysql_connect("localhost","root","");
-	//Control
-	if(!$conexion){die('La conexion ha fallado por:'.mysql_error());}
-	mysql_select_db("saetis",$conexion);
-   session_start();
- $UsuarioActivo = $_SESSION['usuario'];
-
+    if(!$conexion){die('La conexion ha fallado por:'.mysql_error());}
+    mysql_select_db("saetis",$conexion);
+    session_start();
+    $UsuarioActivo = $_SESSION['usuario'];
 ?>
 <html>
 
@@ -34,15 +32,13 @@
 </head>
 
 <body>
-
    
-    <div id="wrapper">
+       <div id="wrapper">
        
         
 		<!--<h2>design by <a href="#" title="flash templates">flash-templates-today.com</a></h2>-->
         
 	
-        
         <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
@@ -56,6 +52,7 @@
             <!-- /.navbar-header -->
 
             <ul class="nav navbar-top-links navbar-right">
+            
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-envelope fa-fw"></i>  <i class="fa fa-caret-down"></i>
@@ -76,7 +73,7 @@
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                        <?php echo $UsuarioActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
                         <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
@@ -84,7 +81,7 @@
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                       <li><a href="unlog.php"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -97,19 +94,43 @@
                 <div class="sidebar-collapse">
                     <ul class="nav" id="side-menu">
                         
+                        
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-files-o "></i> Documentos <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
+                                <li>
+                                            <a href="../Vista/subirarchivoasesor.php">Subir Documentos</a>
+                                </li>
+                                <li>
+                                    <a href="../Vista/RegistrarDocumentosRequeridos.php">Registrar Documentos</a>
+                                </li>
                                 
                                 <li>
-                                    <a href="../Vista/subirarchivoasesor.php">Subir Documentos</a>
-                                    
+                                    <a href="#">Publicaci&oacute;n Documentos <span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                        
+                                        
+                                        <li>
+                                            <a href="../Vista/publicar_asesor.php">Nueva Publicaci&oacute;n </a>
+                                        </li>
+                                        <li>
+                                            <a href="../Controlador/publicaciones.php">Publicaciones </a>
+                                        </li>
+                                       
+                                    </ul>
+                                    <!-- /.nav-third-level -->
                                 </li>
                                 <li>
                                     <a href="#">Recepci&oacute;n Documentos <span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
-                                        
-                                       
+                                        <li>
+                                            <a href="documentos_recibidos.php">Documentos Recibidos</a>
+                                        </li>
+                                        <li>
+                                            <a href="ConfiguracionFechasRecepcion.php" ><span class="fa fa-calendar-o"></span> Configuraci&oacute;n de Fechas para la Recepci&oacute;n de Documentos</a>
+                                            
+                                        </li>
+         
                                     </ul>
                                 </li>
                                
@@ -121,30 +142,78 @@
                          <li>
                             <a href="#"><i class="fa fa-tasks fa-fw"></i> Tareas<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                                
-                                
-                                
+                                 <li>
+                                    <a href="contrato.php">Emitir Contrato </a>
+                                </li>
+                                <li>
+                                    <a href="ordenDeCambio.php">Emitir Orden de Cambio</a>
+                                </li>
+                                <li>
+                                    <a href="notificacion_conformidad.php">Emitir Notificaci&oacute;n de Conformidad</a>
+                                </li>
+                                <li>
+                                    <a href="#">Seguimiento Grupo Empresa <span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                        
+                                        <li>
+                                            <a id="Seguimiento" href="#">Seguimiento</a>
+                                        </li>
+  
+                                    </ul>
+                                    <!-- /.nav-third-level -->
+                                </li>
+                                <li>
+                                        <a href="#">Evaluacion Grupo Empresa<span class="fa arrow"></span></a>
+                                            <ul class="nav nav-third-level">
+                                                <li>
+                                                    <a href="CrearModalidadEvaluacion.php">Criterio de Evaluaci&oacute;n </a>                             
+                                                </li>
+                                                <li>
+                                                    <a href="CrearModalidadCalificacion.php"> Criterio de Calificaci&oacute;n</a>
+                                                </li>
+                                                 <li>
+                                                    <a href="EliminarCriterioCalificacion.php"> Eliminar Criterio de Calificaci&oacute;n</a>
+                                                </li>
+                                                <li>
+                                                    <a href="CrearFormulario.php">Crear Formulario de Evaluacion</a>
+                                                </li>
+                                                <li>
+                                                    <a href="EliminarFormulario.php">Eliminar Formulario de Evaluacion</a>
+                                                </li>
+                                                <li>
+                                                    <a href="SeleccionarFormulario.php"> Seleccionar Formulario de Evaluacion </a>   
+                                                </li>
+                                                <li>
+                                                    <a href="EvaluarGrupoEmpresa.php">Evaluar Grupo Empresa </a>   
+                                                </li>
+                                            </ul>
+                                </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
                         
-                        <li>
-                            <a href="lista-de-noticias.php"><i class="fa fa-comment"></i> Foro</a>
-                        </li>
+                     
                         <li>
                             <a href="#"><i class="fa fa-building-o fa-fw"></i> Actividades<span class="fa arrow"></span></a>
                             
                             <!-- /.nav-second-level -->
                         </li>
                         
-                        <li>
+                          <li>
+                              <a href="#"><i class="fa fa-tasks fa-fw"></i>Informacion Personal<span class="fa arrow"></span> </a>  
+                                              <ul class="nav nav-third-level">
+                                                <li>
+                                                    <a href="modificar_asesor.php">Modificar Datos Personales </a>                             
+                                                </li>       
+                                            </ul>
+                          </li>
+                          <li>
+                            <a href="lista-de-noticias.php"><i class="fa fa-comment"></i> Foro</a>
+                         </li>
+                          <li>
                             <a href="#"><i class="fa fa-question-circle fa-fw"></i> Ayuda <span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                
-                            </ul>
-                            <!-- /.nav-second-level -->
+   
                         </li>
-                        
                     </ul>
                     <!-- /#side-menu -->
                 </div>
@@ -152,7 +221,9 @@
             </div>
             <!-- /.navbar-static-side -->
         </nav>
-        
+    
+<!-------------------------------------------NUEVAS PUBLICACIONES------------------------------------------>
+
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">

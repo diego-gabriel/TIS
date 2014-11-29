@@ -90,7 +90,7 @@
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="unlog.php"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -251,7 +251,7 @@ if (!empty($_POST) AND empty($_POST['comentario'])) {
 if (empty($_POST['comentario'])) { $mensagem="";} else { $mensagem=$_POST['comentario'];}
 if($mensagem == ""){} else {
 // Adiciona comentario
-$comentario_add = "INSERT INTO comentarios (NOMBRE_U,ID_N,COMENTARIO,FECHA_C,AUTOR_C) VALUES ('leticia','".addslashes(mysql_real_escape_string($_GET['id']))."', '".addslashes(mysql_real_escape_string(strip_tags($_POST['comentario'])))."', NOW(), '$UsuarioActivo')";
+$comentario_add = "INSERT INTO comentarios (NOMBRE_U,ID_N,COMENTARIO,FECHA_C,AUTOR_C) VALUES ('$autor','".addslashes(mysql_real_escape_string($_GET['id']))."', '".addslashes(mysql_real_escape_string(strip_tags($_POST['comentario'])))."', NOW(), '$UsuarioActivo')";
 
 $comentario_add = mysql_query($comentario_add)
 or die ("Erro ao Adicionar Comentário.");

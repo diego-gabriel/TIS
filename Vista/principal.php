@@ -64,7 +64,7 @@ include("controlSesion.php");
     
     
        		<title>Bienvenidos a SATIS</title>
-		<link href="css/style.css" rel="stylesheet" type="text/css" />
+                    <link href="css/style.css" rel="stylesheet" type="text/css" />
 
 </head>
 
@@ -85,7 +85,7 @@ include("controlSesion.php");
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="../index.php">Inicio </a>
+              
             </div>
             <!-- /.navbar-header -->
 
@@ -157,13 +157,12 @@ include("controlSesion.php");
                 <div class="sidebar-collapse">
                     <ul class="nav" id="side-menu">
                         
-                        
+                                <li>
+                                    <a href="../Vista/registro_administrador.php"><i class="fa fa-bar-chart-o fa-files-o "></i> nueva cuenta<span class="fa arrow"></span></a>
+                                </li>                        
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-files-o "></i> Informacion personal <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="../Vista/registro_administrador.php">nueva cuenta</a>
-                                </li>
                                 <li>
                                     <a href="../Vista/modificar_administrador.php">privacidad</a>
                                 </li>
@@ -195,6 +194,30 @@ include("controlSesion.php");
                                     <ul class="nav nav-third-level">
                                         <li>
                                             <a href="lista_grupoEmpresa.php"> integrantes </a>
+                                            
+                                        </li>
+                                        <li>
+                                            <a href="ListaGrupoEmpresas.php"> Lista de Grupo Empresas </a>
+                                            
+                                        </li>
+                                    </ul>
+                                    <!-- /.nav-third-level -->
+                                </li>
+                                 <li>
+                                    <a href="#">Administrador <span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                        <li>
+                                            <a href="lista_administradores.php"> Lista de Administadores </a>
+                                            
+                                        </li>
+                                    </ul>
+                                    <!-- /.nav-third-level -->
+                                </li>
+                                 <li>
+                                    <a href="#">Asesor <span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                        <li>
+                                            <a href="lista_asesores.php"> Lista de Asesores </a>
                                             
                                         </li>
                                     </ul>

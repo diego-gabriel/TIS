@@ -191,20 +191,28 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
-                        
-                        <li>
-                            <a href="#"><i class="fa fa-warning fa-fw"></i> Notificaciones</a>
-                        </li>
+        
                         <li>
                             <a href="#"><i class="fa fa-building-o fa-fw"></i> Actividades<span class="fa arrow"></span></a>
                             
                             <!-- /.nav-second-level -->
                         </li>
                         
-                        <li>
+                          <li>
+                              <a href="#"><i class="fa fa-tasks fa-fw"></i>Informacion Personal<span class="fa arrow"></span> </a>  
+                                              <ul class="nav nav-third-level">
+                                                <li>
+                                                    <a href="modificar_asesor.php">Modificar Datos Personales </a>                             
+                                                </li>       
+                                            </ul>
+                          </li>
+                          <li>
+                            <a href="lista-de-noticias.php"><i class="fa fa-comment"></i> Foro</a>
+                         </li>
+                          
+                          <li>
                             <a href="#"><i class="fa fa-question-circle fa-fw"></i> Ayuda <span class="fa arrow"></span></a>
-                            
-                            <!-- /.nav-second-level -->
+   
                         </li>
                     </ul>
                     <!-- /#side-menu -->
@@ -232,11 +240,9 @@
                                 <p>
                                     <label class="default" >Escriba el nombre del documento requerido</label>
                                 </p>
+                                 
                                  <div class="form-group">
                                      <input type="text" name="nombreDocumento" id="" class="form-control" pattern="^[a-zA-Z\s]*$" required>
-                                 </div>
-                                 <div class="form-group">
-                                     <input type="text" name="DescripcionDocumento" id="" class="form-control" pattern="^[a-zA-Z\s]*$" placeholder="Descripcion" required>
                                  </div> 
                         
                                 <p>

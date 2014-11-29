@@ -1,10 +1,12 @@
+
+<!DOCTYPE html>
 <?php
     include '../Modelo/conexion.php';
+    session_start();
+    $UsuarioActivo = $_SESSION['usuario'];
+    include("controlSesion.php");
     $con=new conexion();
-    
-    $x="camaleon";
 ?>
-
 <html>
 
 <head>
@@ -14,28 +16,55 @@
 
     <title>Sistema de Apoyo a la Empresa TIS</title>
 
-    <!-- Core CSS - Include with every page -->
-    <link href="../Librerias/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../Librerias/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <!-- JQuery -->
+    <script type="text/javascript" src="../Librerias/lib/jquery-2.1.0.min.js"></script>
+    <!-- icheck -->
+    <link href="../Librerias/icheck/skins/square/green.css" rel="stylesheet">
+    <script src="../Librerias/lib/icheck.min.js"></script>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="../Librerias/css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" src="../Librerias/lib/bootstrap.js"></script>
+    <!-- Docs -->
+    <link rel="stylesheet" type="text/css" href="../Librerias/lib/css/docs.css">
+    <!-- Font-Awesome -->
+    <link rel="stylesheet" type="text/css" href="../Librerias/font-awesome/css/font-awesome.css">
+    <!-- Bootstrap-datetimepicker -->
+    <link rel="stylesheet" type="text/css" href="../Librerias/lib/css/bootstrap-datetimepicker.css">
+    <script type="text/javascript" src="../Librerias/lib/bootstrap-datetimepicker.js"></script>
+    <script type="text/javascript" src="../Librerias/lib/bootstrap-datetimepicker.es.js"></script>
+    <!-- Bootstrap-multiselect -->
+    <link rel="stylesheet" type="text/css" href="../Librerias/lib/css/bootstrap-multiselect.css">
+    <script type="text/javascript" src="../Librerias/lib/bootstrap-multiselect.js"></script>
+    <!-- Bootstrap-validator -->
+    <link rel="stylesheet" type="text/css" href="../Librerias/lib/css/bootstrapValidator.css">
+    <script type="text/javascript" src="../Librerias/lib/bootstrapValidator.js"></script>
+    <!-- Validators -->
+    <script type="text/javascript" src="../Librerias/lib/validator/diferenteActividadPlanificacion.js"></script>
+    <script type="text/javascript" src="../Librerias/lib/validator/diferenteEntregable.js"></script>
+    <script type="text/javascript" src="../Librerias/lib/validator/stringLength.js"></script>
+    <script type="text/javascript" src="../Librerias/lib/validator/notEmpty.js"></script>
+    <script type="text/javascript" src="../Librerias/lib/validator/callback.js"></script
+    <script type="text/javascript" src="../Librerias/lib/validator/date.js"></script>
+    <script type="text/javascript" src="../Librerias/lib/validator/numeric.js"></script>
+    <script type="text/javascript" src="../Librerias/lib/validator/porcentajeMax.js"></script>
+    <script type="text/javascript" src="../Librerias/lib/validator/porcentajeMin.js"></script>
+    <!-- JS -->
+    <script type="text/javascript" src="../Librerias/lib/funcion.js"></script>
+    
+
+
 
     <!-- Page-Level Plugin CSS - Dashboard -->
     <link href="../Librerias/css/plugins/morris/morris-0.4.3.min.css" rel="stylesheet">
     <link href="../Librerias/css/plugins/timeline/timeline.css" rel="stylesheet">
-   
-
     <!-- SB Admin CSS - Include with every page -->
     <link href="../Librerias/css/sb-admin.css" rel="stylesheet">
-    
-    
-    
-    
-
 </head>
 
 <body>
 
    
-   <div id="wrapper">
+    <div id="wrapper">
        
         
         <!--<h2>design by <a href="#" title="flash templates">flash-templates-today.com</a></h2>-->
@@ -49,7 +78,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                  <a class="navbar-brand" href="inicio_grupo_empresa.php">Inicio </a>
+                   <a class="navbar-brand" href="inicio_grupo_empresa.php">Inicio </a>
             </div>
             <!-- /.navbar-header -->
 
@@ -91,6 +120,17 @@
             </ul>
             <!-- /.navbar-top-links -->
 
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
             <div class="navbar-default navbar-static-side" role="navigation">
                 <div class="sidebar-collapse">
                     <ul class="nav" id="side-menu">
@@ -99,75 +139,10 @@
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-files-o "></i> Documentos <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                              
                                 
                                 <li>
                                     <a href="#" >Subir Documentos <span class="fa arrow"></span></a>
-                                    <ul class="nav nav-third-level">
-                                        <?php
-                                        try{
-                                                 //creamos la conexion a la base de datos
-                                                 $conexion = new conexion();
-                                                 $idUsuarioAsesor='leticia';
-                                                 $idUsuarioG='freevalue';
-                                                 $consulta=$conexion->consulta("SELECT r.NOMBRE_R,r.`NOMBRE_U` FROM registro AS r,plazo AS p,descripcion AS d,`estado` AS e,`tipo` AS t WHERE r.ID_R = d.ID_R AND r.TIPO_T = t.TIPO_T AND r.ID_R = p.ID_R AND e.`ESTADO_E` = r.`ESTADO_E` AND r.`ESTADO_E` LIKE 'habilitado' AND r.TIPO_T LIKE 'documento requerido' AND r.NOMBRE_U LIKE '$idUsuarioAsesor'");
-                                                 $indice=1;
-                                                 while($fila = mysql_fetch_array($consulta))
-                                                {
-                                                     //aqui introducimos atraves de codigo php los enlaces de opciones
-                                                     if(!stripos($fila['0'], "modif"))
-                                                     {
-                                                     $temporal=$fila['1'];
-                                                         echo   "<form name='formulario$indice' action='subir_documento.php' enctype='multipart/form-data' method='POST'>"
-                                                                 . "<input type='hidden' name='nombreUsuarioAsesor' value='$temporal'>"
-                                                                 . "<input type='hidden' name='nombreRegistro' value='".$fila['0']."'>"
-                                                                 . "<input type='hidden' name='nombreUsuarioG' value='$idUsuarioG'>"
-                                                                 . "</form>"
-                                                                 . "<li>"
-                                                                 . "<a href='javascript:document.formulario$indice.submit();'>".$fila['0']."</a>"                                       
-                                                                 . "</li>";
-                                                         
-                                                     $indice++;
-                                                     }
-                                        
-                                                }
-                                                
-                                                $consultaDos=$conexion->consulta("SELECT r.NOMBRE_R,r.`NOMBRE_U` FROM registro AS r,plazo AS p,descripcion AS d,`estado` AS e,`tipo` AS t WHERE r.ID_R = d.ID_R AND r.TIPO_T = t.TIPO_T AND r.ID_R = p.ID_R AND e.`ESTADO_E` = r.`ESTADO_E` AND r.`ESTADO_E` LIKE 'habilitado' AND r.TIPO_T LIKE 'documento requerido' AND r.NOMBRE_U LIKE '$idUsuarioAsesor' AND LOWER(r.`NOMBRE_R`) LIKE '%modif%'");
-                                                //$consultaTres=$conexion->consulta("SELECT r.`NOMBRE_R` FROM registro AS r,`tipo` AS t, `documento` AS d,`estado` AS e WHERE r.`ID_R` = d.`ID_R` AND r.`TIPO_T` = t.`TIPO_T` AND r.`ESTADO_E` = e.`ESTADO_E` AND t.`TIPO_T` LIKE 'orden de cambio' AND r.`NOMBRE_U` LIKE '$idUsuarioG'");
-                                                if (mysql_num_rows($consultaDos) != 0) {
-                                                    
-                                                    while($filaDos = mysql_fetch_array($consultaDos))
-                                                {
-                                                     //aqui introducimos atraves de codigo php los enlaces de opciones de subir propuesta modificada
-                                                     
-                                                     
-                                                     $temporalDos=$filaDos['1'];
-                                                         echo   "<form name='formulario$indice' action='subir_documento.php' enctype='multipart/form-data' method='POST'>"
-                                                                 . "<input type='hidden' name='nombreUsuarioAsesor' value='$temporalDos'>"
-                                                                 . "<input type='hidden' name='nombreRegistro' value='".$filaDos['0']."'>"
-                                                                 . "<input type='hidden' name='nombreUsuarioG' value='$idUsuarioG'>"
-                                                                 . "</form>"
-                                                                 . "<li>"
-                                                                 . "<a href='javascript:document.formulario$indice.submit();'>".$filaDos['0']."</a>"                                       
-                                                                 . "</li>";
-                                                         
-                                                     $indice++;
-                                                     
-                                        
-                                                }
-                                                    
-                                                    
-                                                }
-                                                
-                                                $conexion->cerrarConexion();
-                                               
-                                            }
-                                        catch (ErrorException $e)
-                                        {
-                                              echo $e;
-                                        }
-                                    ?>
-                                    </ul>
+                                 
                                 </li>
                                 <li>
                                     <a href="publicacion_grupo.php">Recepci&oacute;n Documentos </a>
@@ -183,6 +158,8 @@
                             <a href="#"><i class="fa fa-tasks fa-fw"></i> Tareas<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <?php
+                                                 $idUsuarioAsesor='leticia';
+                                                 $idUsuarioG='freevalue';
                                 echo   ""
                                      . "<form name='formularioNombre' action='verificar_nombre.php' enctype='multipart/form-data' method='POST'>"
                                      . "<input type='hidden' name='nombreGrupo' value='$idUsuarioG'>"
@@ -209,7 +186,7 @@
                         </li>
                         
                         <li>
-                            <a href="#"><i class="fa fa-warning fa-fw"></i> Notificaciones</a>
+                            <a href="#"><i class="fa fa-warning fa-fw"></i> Notificaciones<span class="fa arrow"></span></a>
                                                     
                             <ul class="nav nav-second-level">
                                 <li>
@@ -238,18 +215,39 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
+                        
+                        <li>
+                            <a href="lista-de-noticias-grupo.php"><i class="fa fa-comment"></i> Foro</a>
+                                
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
                     </ul>
                     <!-- /#side-menu -->
                 </div>
                 <!-- /.sidebar-collapse -->
             </div>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
             <!-- /.navbar-static-side -->
         </nav>
-        
-        <div id="page-wrapper">
+
+           <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h2 class="page-header">Escoja un Asesor </h2>
+                    <h2 class="page-header">Eliga un Asesor </h2>
                     <div class="col-lg-4" >
                         
                             <div class="form-group">
@@ -266,7 +264,7 @@
                                         ?>
                                     </select>
                                     <br>
-                                    <input type='hidden' name='ge' value=<?php echo $x; ?>>
+                                    <input type='hidden' name='ge' value=<?php echo $UsuarioActivo; ?>>
                                     <input type='submit' class='btn btn-primary' name='registrar' value='Registrar'>
                                             
                                 </form>
@@ -278,25 +276,19 @@
             </div>
             <!-- /.row -->
         </div>
+        <!-- /#page-wrapper -->
 
     </div>
     <!-- /#wrapper -->
 
     <!-- Core Scripts - Include with every page -->
-    <script src="../Librerias/js/jquery-1.10.2.js"></script>
-    <script src="../Librerias/js/bootstrap.min.js"></script>
+    
+    <!--script src="../Librerias/js/bootstrap.min.js"></script-->
     <script src="../Librerias/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-
-    <!-- Page-Level Plugin Scripts - Dashboard -->
-    <script src="../Librerias/js/plugins/morris/raphael-2.1.0.min.js"></script>
-    <script src="../Librerias/js/plugins/morris/morris.js"></script>
 
     <!-- SB Admin Scripts - Include with every page -->
     <script src="../Librerias/js/sb-admin.js"></script>
 
-    <!-- Page-Level Demo Scripts - Dashboard - Use for reference -->
-    <script src="../Librerias/js/demo/dashboard-demo.js"></script>
-
 </body>
 
-</html>
+</html><!DOCTYPE html>

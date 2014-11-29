@@ -48,16 +48,16 @@ include('../Modelo/crearimagen.php');
 		               <img class="img-rounded" width="35px" height="35px" alt=" " src="'.$icono.'"></img>
                        </td>
 			           <td>
-                       <a class="link-dos" href="../'.$com.'" onclick="">'.$key['NOMBRE_R'].'<span class="instancename">
+                       <a class="link-dos" href="../'.$com.'" onclick="">'.$key['NOMBRE_R'].'<span class="instancename">    
  
                        <span class="accesshide "></span></a>
                        </td>
 			           <td>'.$nombre.'
 			           </td>
 			           </tr>';
-
-			$indice++;
-		}
+                                  
+			 $indice++;
+		}  
 	}else{		$tabla = 'No existen publicaciones';
 	
 	}

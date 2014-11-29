@@ -10,11 +10,8 @@
 
     <!-- Core CSS - Include with every page -->
     <link href="Librerias/css/bootstrap.min.css" rel="stylesheet">
-    <link href="Librerias/font-awesome/css/font-awesome.css" rel="stylesheet">
 
     <!-- Page-Level Plugin CSS - Dashboard -->
-    <link href="Librerias/css/plugins/morris/morris-0.4.3.min.css" rel="stylesheet">
-    <link href="Librerias/css/plugins/timeline/timeline.css" rel="stylesheet">
    
 
     <!-- SB Admin CSS - Include with every page -->
@@ -22,9 +19,14 @@
 
     
     
-    		<link href="css/style.css" rel="stylesheet" type="text/css" />
-		<link href="css/tabla-div.css" rel="stylesheet" type="text/css" />
-		<link rel="stylesheet" type="text/css" href="css/coin-slider.css" />
+    		<link href="Librerias/css/style11.css" rel="stylesheet" type="text/css" />
+		<link href="Librerias/css/tabla-div.css" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet" type="text/css" href="Librerias/css/coin-slider.css" />
+                
+                
+                    <link href="archivos/estilos.css" rel="stylesheet" type="text/css">
+        <script language="JavaScript" src="archivos/script.js" type="text/javascript"></script>
+
 </head>
 
 <body>
@@ -38,13 +40,9 @@
 	
         <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-             
+ 
+                <h2 ><IMG SRC="images/umss.png"><font color='white'> <strong>UNIVERSIDAD MAYOR DE SAN SIMON &nbsp;&nbsp;&nbsp;</strong></h2>
+                
             </div>
             <!-- /.navbar-header -->
 
@@ -54,7 +52,7 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header"  >Bienvenido a SAETIS!</h1>
+                    <h1 class="page-header"  ></h1>
                     
                     
                 </div>
@@ -85,34 +83,164 @@
 			<div class="content">
 				<div class="content_resize">
 					<div class="mainbar">
-						<div class="article">
-							<h2><span>Empresa TIS</span></h2>
-							<p class="infopost">&nbsp;</p>
-							<div class="img">
-								<img src="images/img1.jpg" width="179" height="176" alt="" class="fl" />
-							</div>
-							<div class="post_content">
-								<p>&nbsp;</p>
-								<p>Empresa tis,es una organización conformada por socios que están abocados al área de informática y sistemas, quienes tienen inquietudes sobre diferentes temas.</p>
-								<p class="spec">La Empresa TIS buscan a grupos q desarrollen software para solucionar sus inquietudes  </p>
-								
-							</div>
-							
-							<div class="clr"></div>
-						</div>
+                                            
+                                            
+                                            
+                                            
+                                            <h2><span>Avisos Empresa TIS</span></h2>
+                                            
+                                            
+                                         
+             <?php                                  
+
+                                                                        $valor='0';
+								$conexion = mysql_connect("localhost","root","","saetis");
+								if(!$conexion){die('La conexion ha fallado por:'.mysql_error());}
+								mysql_select_db("saetis",$conexion);
+        $peticion11 = mysql_query("select count(*)
+  from registro
+  where TIPO_T='publico'"); 
+        while($fila = mysql_fetch_array($peticion11))
+                $valor= $fila["count(*)"];                         
+                              
+       ?>                                        
+                                            
+                                         
+   <table width="70%" border="0" cellpadding="4" cellspacing="0" class="fondo_central " align="center">
+
+    <tr><td height="10"></td></tr>
+    
+    <script language="JavaScript" type="text/javascript">
+    <!--
+
+    var nume= <?php echo $valor; ?>   
+    setTamAviso( 130 );
+    setNumAvisos( nume );
+    timerID = setTimeout("moverAvisos()", 1000);         
+    -->
+    </script>
+    <tr><td>
+            <table width="100%" cellpadding="0" cellspacing="0"><tr>
+                <td style="width: 97%" onmouseover="normal()">
+                        <div style="position:relative; overflow:hidden; width:100%; height:390px;">
+                                
+                         
+                        			        <?php
+                                                           $numero='0';
+								//crear conexion---------------------------
+								$conexion = mysql_connect("localhost","root","","saetis");
+								//Control
+								if(!$conexion){die('La conexion ha fallado por:'.mysql_error());}
+								//Seleccion
+								mysql_select_db("saetis",$conexion);
+								//Peticion
+								$peticion = mysql_query("SELECT registro.NOMBRE_U,registro.NOMBRE_R,registro.FECHA_R,registro.HORA_R, asesor.NOMBRES_A, asesor.APELLIDOS_A , documento.RUTA_D	
+FROM registro , asesor , documento
+WHERE registro.NOMBRE_U=asesor.NOMBRE_U and  `TIPO_T`='publico' and documento.ID_R=registro.ID_R");
+                                                                
+                                                                $peticion1 = mysql_query("select registro.HORA_R, registro.FECHA_R, registro.NOMBRE_R, asesor.NOMBRES_A,asesor.APELLIDOS_A
+from registro, asesor
+where not exists 
+(select documento.ID_R
+ from documento 
+ where documento.ID_R=registro.ID_R) and TIPO_T='publico' and registro.NOMBRE_U=asesor.NOMBRE_U");
+                                                                
+								while($fila = mysql_fetch_array($peticion))
+                                  {  
+							?>       
+ 
+                            <div class="caja_aviso" id="aviso<?php echo $numero ?>" style="position:absolute; height:130px; top:0px; width:95%; left:2.5%;">
+                                <div class="subtitulo_aviso" ><strong>Docente: </strong> <?php echo $fila['NOMBRES_A']; ?>&nbsp;&nbsp;<?php echo $fila['APELLIDOS_A']; ?>
+                                &nbsp;&nbsp;&nbsp;<strong> </strong> </div>                           
+                                <div  class="titulo_aviso">
+                                 Aviso
+                                </div>    
+                                <div class="letra_aviso" >
+                                     <?php echo $fila['NOMBRE_R']; ?>&nbsp;&nbsp;&nbsp;
+                                     <a class="link-dos" href="<?php echo $fila['RUTA_D']; ?>" onclick="">Descargar</a>
+         
+                                </div>
+                                <div class="pie_aviso">Publicado el   <?php       echo $fila['FECHA_R']; ?>  &nbsp;&nbsp; Hora:<?php       echo $fila['HORA_R']; ?> </div>
+                            </div>         
+                                					<?php
+                                                                $numero++;	}
+                                                                
+								while($fila1 = mysql_fetch_array($peticion1))
+                                  {  
+							?>       
+ 
+                            <div class="caja_aviso" id="aviso<?php echo $numero ?>" style="position:absolute; height:130px; top:0px; width:95%; left:2.5%;">
+                                <div class="subtitulo_aviso" ><strong>Docente: </strong> <?php echo $fila1['NOMBRES_A']; ?>&nbsp;&nbsp;<?php echo $fila1['APELLIDOS_A']; ?>
+                                &nbsp;&nbsp;&nbsp;<strong> </strong> </div>                           
+                                <div  class="titulo_aviso">
+                                 Aviso
+                                </div>    
+                                <div class="letra_aviso" >
+                                     <?php echo $fila1['NOMBRE_R']; ?>&nbsp;&nbsp;&nbsp;
+                                   
+         
+                                </div>
+                                <div class="pie_aviso">Publicado el   <?php       echo $fila1['FECHA_R']; ?>  &nbsp;&nbsp; Hora:<?php       echo $fila1['HORA_R']; ?> </div>
+                            </div>         
+                                					<?php
+                                                                $numero++;	}                                                                
+                                                                
+                                                                
+                                                                
+
+								//Cerrar
+								mysql_close($conexion);
+				?>
+                        </div>
+                    </td>
+                    
+                    <td style="width: 3%">
+                        <table style="height: 390px" border="0" cellpadding="0" cellspacing="0">
+                            <tr style="height: 20%"><td><img id="masarriba" alt="Arriba Rapido" src="imagenes/masarriba.jpg" style="opacity:0.3; filter:alpha(opacity=29);" onmouseover="control_aviso('masarriba')" onmousedown="control_aviso('masarriba')" onmouseout="control_salir_aviso('masarriba')" /></td></tr>
+                            <tr style="height: 20%"><td><img id="arriba" alt="Arriba" src="imagenes/arriba.jpg" style="opacity:0.3; filter:alpha(opacity=29)" onmouseover="control_aviso('arriba')" onmousedown="control_aviso('arriba')" onmouseout="control_salir_aviso('arriba')" /></td></tr>
+                            <tr style="height: 20%"><td><img id="alto" alt="Detener" src="imagenes/alto.jpg" style="opacity:0.3; filter:alpha(opacity=29)" onmouseover="control_aviso('alto')" onmousedown="control_aviso('alto')" onmouseout="control_salir_aviso('alto')" /></td></tr>
+                            <tr style="height: 20%"><td><img id="abajo" alt="Abajo" src="imagenes/abajo.jpg" style="opacity:0.3; filter:alpha(opacity=29)" onmouseover="control_aviso('abajo')" onmousedown="control_aviso('abajo')" onmouseout="control_salir_aviso('abajo')" /></td></tr>
+                            <tr style="height: 20%"><td><img id="masabajo" alt="Abajo Rapido" src="imagenes/masabajo.jpg" style="opacity:0.3; filter:alpha(opacity=29)" onmouseover="control_aviso('masabajo')" onmousedown="control_aviso('masabajo')" onmouseout="control_salir_aviso('masabajo')" /></td></tr>
+                        </table></table></table>
+                                      
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                    
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
 						
 						<div class="article">
 							<h2><span>Registrate como Grupo Empresa</span></h2>
-                                                        <p class="infopost">&nbsp;</p><br><br>
+                                                        <p class="infopost"></p>
 							
                                                         
                                             <div class="form-group">
                                             <div align="center">
                                                 <button type="submit" name="ingresar"  class="btn btn-primary"  onclick=" location.href='vista/RegistrarGrupoEmpresa.php' " id="btn-registrarUser"> <span class="glyphicon glyphicon-ok" ></span> REGISTRATE</button>
                                         </div></div>
-                                                     
+                                                        </div>     
 						</div>
-					</div>
+					
 			
                                     <form method="post" action="Vista/login.php">
 						<div class="sidebar">
@@ -156,15 +284,15 @@
 					<div class="contenedor-tabla">
 						<div class="contenedor-fila">
 							<div class="contenedor-columna2"><img src="images/logo-websiss.jpg" width="29" height="29" alt="" longdesc=\/></div>
-							<div class="contenedor-columna3"><li><a href="http://websis.umss.edu.bo/">WebSys UMSS</a><br/> 
-							Pagina principal de la UMSS</li></div>
+							<div class="contenedor-columna3"><li><a href="http://websis.umss.edu.bo/">webSISS Sistema de Información San Simón</a><br/> 
+							webSISS UMSS</li></div>
 						</div>
 					</div>
 					
 					<div class="contenedor-tabla">
 						<div class="contenedor-fila">
 							<div class="contenedor-columna2"><img src="images/logo-cs.bmp" width="29" height="29" alt="" longdesc=\/></div>
-							<div class="contenedor-columna3"><li><a href="http://www.cs.umss.edu.bo//">Cs</a><br/>
+							<div class="contenedor-columna3"><li><a href="http://www.cs.umss.edu.bo//">Carreras de Informática y Sistemas UMSS</a><br/>
 							Pagina principal de la CS</li>
 							</div>
 						</div>
@@ -173,7 +301,7 @@
 					<div class="contenedor-tabla">
 						<div class="contenedor-fila">
 							<div class="contenedor-columna2"><img src="images/logo-fcyt.gif" width="29" height="29" alt="" longdesc=\/></div>
-							<div class="contenedor-columna3"><li><a href="http://direcciondelaFCYT/">FYCT</a><br/>
+							<div class="contenedor-columna3"><li><a href="http://direcciondelaFCYT/">Facultad de Ciencias y Tecnologia</a><br/>
 							Pagina principal de la FCYT</li>
 							</div>
 						</div>
@@ -182,7 +310,7 @@
 					<div class="contenedor-tabla">
 						<div class="contenedor-fila">
 							<div class="contenedor-columna2"><img src="images/userpic.gif" width="29" height="29" alt="" longdesc=\/></div>
-							<div class="contenedor-columna3"><li><a href="http://direcciondemoodle/">moodle2</a><br/>
+							<div class="contenedor-columna3"><li><a href="http://direcciondemoodle/">MOODLE 2 - UMSS</a><br/>
 							Pagina de moodle2</li>
 							</div>
 						</div>
@@ -210,7 +338,7 @@
 				</div>
 			</div>
 		<div align=center>
-			Esta pagina desarrollada por  <a class="registrar" href=''>Bittle.S.R.L.</a>
+			<font color='black'>Esta pagina desarrollada por  <a class="registrar" href=''>Bittle.S.R.L.</a>
                 </div>
 
 
