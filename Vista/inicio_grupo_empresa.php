@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 <?php
+
+
 include '../Modelo/conexion.php';
 session_start();
+$UsuarioActivo = $_SESSION['usuario'];
  include("controlSesion.php");
+ $conexion = new conexion();
 
 ?>
 <html>
@@ -146,9 +150,13 @@ session_start();
                                         <?php
                                         try{
                                                  //creamos la conexion a la base de datos
-                                                 $conexion = new conexion();
-                                                 $idUsuarioAsesor='leticia';
-                                                 $idUsuarioG='freevalue';
+                                                 //$conexion = new conexion();
+                                                 $idUsuarioAsesor1=$conexion->consulta("SELECT i.`NOMBRE_UA` FROM inscripcion AS i WHERE i.NOMBRE_UGE LIKE '$UsuarioActivo'");
+                                                 $f=mysql_fetch_array($idUsuarioAsesor1);//$idUsuarioG='bolivia';
+                                                 $nombre_a=$f['NOMBRE_UA'];
+                                                 //$idUsuarioAsesor=$conexion->consulta("SELECT `NOMBRE_UA` FROM inscripcion WHERE NOMBRE_UGE LIKE '$UsuarioActivo'");
+                                                $idUsuarioAsesor=$nombre_a;
+                                                $idUsuarioG=$UsuarioActivo;
                                                  $consulta=$conexion->consulta("SELECT r.NOMBRE_R,r.`NOMBRE_U` FROM registro AS r,plazo AS p,descripcion AS d,`estado` AS e,`tipo` AS t WHERE r.ID_R = d.ID_R AND r.TIPO_T = t.TIPO_T AND r.ID_R = p.ID_R AND e.`ESTADO_E` = r.`ESTADO_E` AND r.`ESTADO_E` LIKE 'habilitado' AND r.TIPO_T LIKE 'documento requerido' AND r.NOMBRE_U LIKE '$idUsuarioAsesor'");
                                                  $indice=1;
                                                  while($fila = mysql_fetch_array($consulta))
@@ -205,6 +213,7 @@ session_start();
                                         {
                                               echo $e;
                                         }
+                                        
                                     ?>
                                     </ul>
                                 </li>

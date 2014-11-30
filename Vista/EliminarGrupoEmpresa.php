@@ -15,7 +15,6 @@ if(isset($_GET['op']))
 	if($operacion == 'si')
 	{
             
-            
 		//comentarios
 		$EliminarComentarioGE = $conect->consulta("DELETE FROM comentarios WHERE NOMBRE_U = '$GrupoEmpresa' ");
 
@@ -39,25 +38,23 @@ if(isset($_GET['op']))
 		//Eliminar de usuario_rol
 		$EliminarRolGE = $conect->consulta("DELETE FROM usuario_rol WHERE NOMBRE_U = '$GrupoEmpresa' ");
                 
-                
-                /****************************/
-            $SeleccionarIdRegistroGE = $conect->consulta("SELECT ID_R FROM REGISTRO WHERE NOMBRE_U='$GrupoEmpresa'");
-            $IdRegistroGE = mysql_fetch_row($SeleccionarIdRegistroGE);
-            
-            while ($rowIdRegistroGE = mysql_fetch_row($IdRegistroGE))
-            {
-                //Eliminar de documento
-		$EliminarDocumentoGE = $conect->consulta("DELETE FROM documento WHERE ID_R = '$rowIdRegistroGE[0]' ");
-		$EliminarFechaRealizacion = $conect->consulta("DELETE FROM fecha_realizacion WHERE ID_R='$rowIdRegistroGE[0]'");
+                /****************************************************/
+                $SeleccionarIdRegistroGE = $conect->consulta("SELECT ID_R FROM REGISTRO WHERE NOMBRE_U='$GrupoEmpresa'");
+        
+                while ($rowIdRegistroGE = mysql_fetch_row($SeleccionarIdRegistroGE))
+                {
+                    //Eliminar de documento
+                    $EliminarDocumentoGE = $conect->consulta("DELETE FROM documento WHERE ID_R = '$rowIdRegistroGE[0]' ");
+                    $EliminarFechaRealizacion = $conect->consulta("DELETE FROM fecha_realizacion WHERE ID_R='$rowIdRegistroGE[0]'");
 
-		//Eliminar de entrega
-		$EliminarEntregaGE = $conect->consulta("DELETE FROM entrega WHERE ID_R='$rowIdRegistroGE[0]'");
+                    //Eliminar de entrega
+                    $EliminarEntregaGE = $conect->consulta("DELETE FROM entrega WHERE ID_R='$rowIdRegistroGE[0]'");
 
-		//Eliminar de asistencia//con id registro
-		$EliminarAsistencia = $conect->consulta("DELETE FROM asistencia WHERE ID_R='$rowIdRegistroGE[0]'");
-                
-            }
-            /************************/
+                    //Eliminar de asistencia//con id registro
+                    $EliminarAsistencia = $conect->consulta("DELETE FROM asistencia WHERE ID_R='$rowIdRegistroGE[0]'");
+
+                }
+                /*****************************************************/
             
 		//Eliminar Registro//Guarda 2 registros al guardar en planificacion//Pago planificacion y actividad planificacion
 		$EliminarRegistroGE = $conect->consulta("DELETE FROM registro WHERE NOMBRE_U = '$GrupoEmpresa' ");
@@ -107,6 +104,7 @@ else
 {
     $EliminarComentarioGE = $conect->consulta("DELETE FROM comentarios WHERE NOMBRE_U = '$GrupoEmpresa' ");
     $EliminarInscripcionGE = $conect->consulta("DELETE FROM inscripcion WHERE NOMBRE_UGE = '$GrupoEmpresa' ");
+    $EliminarSesionGE = $conect->consulta("DELETE FROM sesion WHERE NOMBRE_U = '$GrupoEmpresa' ");
     $EliminarGE =$conect->consulta("DELETE FROM grupo_empresa WHERE NOMBRE_U = '$GrupoEmpresa' ");
     $EliminarUsuarioGE = $conect->consulta("DELETE FROM usuario WHERE NOMBRE_U = '$GrupoEmpresa' ");
 

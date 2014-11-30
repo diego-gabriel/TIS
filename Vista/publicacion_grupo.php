@@ -277,7 +277,7 @@
  
                                 <?php
                                 
-                                     $c_3="SELECT DISTINCT `NOMBRE_R`,`RUTA_D`,`DESCRIPCION_D`,`fecha_p` ,`hora_p` FROM `registro` AS r,`documento` AS d,`descripcion` AS e,`periodo` AS p WHERE r.`ID_R` = d.`ID_R` AND r.`ID_R` = e.`ID_R` AND r.`ID_R` = p.`ID_R` AND r.`TIPO_T` LIKE 'publicaciones' ";
+                                     $c_3="SELECT DISTINCT `NOMBRE_R`,`RUTA_D`,`DESCRIPCION_D`,`fecha_p` ,`hora_p` , `RECEPTOR_R`  FROM `registro` AS r,`documento` AS d,`descripcion` AS e,`periodo` AS p , `receptor` AS t WHERE r.`ID_R` = d.`ID_R` AND r.`ID_R` = e.`ID_R` AND r.`ID_R` = p.`ID_R`  AND r.`ID_R` = t.`ID_R` AND r.`TIPO_T` LIKE 'publicaciones' ";
                                      $r3=$con->consulta($c_3);
                                     
                                        
@@ -287,21 +287,13 @@
                                     {    $i=1;
                                            while($var3 = mysql_fetch_array($r3))
                                           {
-                                            $aux=$var3['2'];
-                                            $findme = "*";
-                                            $tam=strlen($aux);
-                                            $pos = strpos($aux,$findme);
-                                            $pose=$pos+1;
-                                            $numero=substr($aux, $pose,$tam);
-                                            $pos2=$pos-1;
+                                            $destinatario=$var3['5'];
                                             
-                                            $des=substr($aux, 0,$pos2);
-                                            if($numero=="TODOS" || $numero==$UsuarioActivo)
+                                            
+                                            if($destinatario=="TODOS" || $destinatario==$UsuarioActivo)
                                             {
                                                 $ubi= $var3[1];
-                                                $ini="32"+1;
-                                                $size=strlen($ubi);
-                                                $com=substr($ubi, $ini,$size);
+                                               echo $ubi;
                                                 $fep=$var3[3];
                                                 $hop=$var3[4];
                                                 $fecha       = date('Y-m-d');
@@ -314,9 +306,9 @@
                                                 ?>
                                                       <tr> 
                                                           <td><?php echo $i?></td> 
-                                                          <td><a class="link-dos" href="../<?php echo $com ?>"><?php echo $var3[0]?></a><td>
-
-                                                          <td><?php echo $des?></td> 
+                                                          <td><a class="link-dos" href="../<?php echo $ubi ?>"><?php echo $var3[0]?></a><td>
+ 
+                                                          <td><?php echo $var3[2] ?></td> 
                                                           <td> </td>
                                                          
                                                      </tr>

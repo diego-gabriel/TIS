@@ -31,7 +31,7 @@
     <!-- SB Admin CSS - Include with every page -->
     <link href="../Librerias/css/sb-admin.css" rel="stylesheet">
     <script type="text/javascript" src="../Librerias/js/subir_documento.js"></script>
-
+<link href="css/style.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -125,21 +125,71 @@
                             <a href="#"><i class="fa fa-tasks fa-fw"></i> Tareas<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 
-                                
+                                <li>
+                                    <a href="contrato.php">Emitir Contrato </a>
+                                </li>
+                                <li>
+                                    <a href="ordenDeCambio.php">Emitir Orden de Cambio</a>
+                                </li>
+                                <li>
+                                    <a href="notificacion_conformidad.php">Emitir Notificaci&oacute;n de Conformidad</a>
+                                </li>
+                                <li>
+                                    <a href="#">Seguimiento Grupo Empresa <span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                        
+                                        <li>
+                                            <a id="Seguimiento" href="#">Seguimiento</a>
+                                        </li>
+  
+                                    </ul>
+                                    <!-- /.nav-third-level -->
+                                </li>
+                                <li>
+                                        <a href="#">Evaluacion Grupo Empresa<span class="fa arrow"></span></a>
+                                            <ul class="nav nav-third-level">
+                                                <li>
+                                                    <a href="CrearModalidadEvaluacion.php">Criterio de Evaluaci&oacute;n </a>                             
+                                                </li>
+                                                <li>
+                                                    <a href="CrearModalidadCalificacion.php"> Criterio de Calificaci&oacute;n</a>
+                                                </li>
+                                                 <li>
+                                                    <a href="EliminarCriterioCalificacion.php"> Eliminar Criterio de Calificaci&oacute;n</a>
+                                                </li>
+                                                <li>
+                                                    <a href="CrearFormulario.php">Crear Formulario de Evaluacion</a>
+                                                </li>
+                                                <li>
+                                                    <a href="EliminarFormulario.php">Eliminar Formulario de Evaluacion</a>
+                                                </li>
+                                                <li>
+                                                    <a href="SeleccionarFormulario.php"> Seleccionar Formulario de Evaluacion </a>   
+                                                </li>
+                                                <li>
+                                                    <a href="EvaluarGrupoEmpresa.php">Evaluar Grupo Empresa </a>   
+                                                </li>
+                                            </ul>
+                                </li>
                                 
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
                         
-                        <li>
-                            <a href="lista-de-noticias.php"><i class="fa fa-comment"></i> Foro</a>
-                        </li>
+                        
                         <li>
                             <a href="#"><i class="fa fa-building-o fa-fw"></i> Actividades<span class="fa arrow"></span></a>
                             
                             <!-- /.nav-second-level -->
                         </li>
                         
+                          <li>
+                            <a href="lista-de-noticias.php"><i class="fa fa-comment"></i> Foro</a>
+                        </li>
+                        <li>
+                              <a href="lista_doc_subidos.php"><i class="fa fa-tasks fa-fw"></i>Documentos Subidos </a>  
+                                              
+                          </li>
                         <li>
                             <a href="#"><i class="fa fa-question-circle fa-fw"></i> Ayuda <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
@@ -159,11 +209,18 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h2 class="page-header">Nuevo</h2>
+                   
+                    
+
                     <div class="col-lg-6" >
                        
+                           <div class="article"><br>
+                             
                             
-
+                            <div class="panel-heading">
+                            <i ></i><h2> Nuevo </h2>
+                        </div>
+                        </div>
 <?php
 
   
@@ -196,15 +253,33 @@ echo "Tema Adicionado";
 ?>
 
 <form name="input" action="adicionar-noticia.php" method="post">
-<label>Titulo:</label>
+
+  <div class="form-group">
+                      <label class="col-sm-2 control-label">Titulo:</label>
+                             <div class="col-xs-12">
+                             </br>
+                                  <input id= "campoTitulo" type="text" name= "titulo"  class="form-control"  data-toggle="tooltip" data-placement="right" title="T&iacute;tulo con el que se mostrar&aacute; el recurso">
+
+                            </div>
+                   </div>
+</br></br>
+
+ <div class="form-group">
+ </br>
+                            <label class="col-sm-2 control-label">Texto:</label>
+                        </br>
+                                <div class="col-sm-12">
+                                     <textarea class="jqte-test"  type="text" name="texto" id="campoDescripcion" rows="8" cols="101" data-toggle="tooltip" data-placement="right" style="overflow: auto;"></textarea>
+                                </div>
+                      </div>
 <br>
-<input name="titulo" class="text" />
+
 <br>
-<label>Texto:</label>
+
 <br>
-<textarea name="texto" rows="5" cols="50"></textarea>
-<br>
+<div class="col-xs-12">
 <input type="submit" class="btn btn-primary" value="Adicionar Tema">
+</div>
 </form>
                     </div>
                 </div>

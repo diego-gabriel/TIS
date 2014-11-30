@@ -1,4 +1,5 @@
  <?php  
+ 
 session_start();
  $UsuarioActivo = $_SESSION['usuario'];
  include("controlSesion.php");
@@ -55,7 +56,10 @@ session_start();
     <link href="../Librerias/css/plugins/timeline/timeline.css" rel="stylesheet">
     <!-- SB Admin CSS - Include with every page -->
     <link href="../Librerias/css/sb-admin.css" rel="stylesheet">
+ <link href="css/style.css" rel="stylesheet" type="text/css" />
+<link href="css/tabla-div.css" rel="stylesheet" type="text/css" />
 
+<link href="css/style.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -64,9 +68,9 @@ session_start();
     <div id="wrapper">
        
         
-		<!--<h2>design by <a href="#" title="flash templates">flash-templates-today.com</a></h2>-->
+        <!--<h2>design by <a href="#" title="flash templates">flash-templates-today.com</a></h2>-->
         
-	
+    
         <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
@@ -121,9 +125,7 @@ session_start();
             <div class="navbar-default navbar-static-side" role="navigation">
                 <div class="sidebar-collapse">
                     <ul class="nav" id="side-menu">
-                        <li>
-                            <a href="AdministrarGrupoEmpresa.php"><i class="fa fa-book"></i> Administrar Grupo Empresas</a>
-                        </li>
+                        
                         
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-files-o "></i> Documentos <span class="fa arrow"></span></a>
@@ -241,10 +243,10 @@ session_start();
                           <li>
                             <a href="lista-de-noticias.php"><i class="fa fa-comment"></i> Foro</a>
                         </li>
-                         <li>
-                              <a href="lista_doc_subidos.php"><i class="fa fa-tasks fa-fw"></i>Documentos Subidos </a>  
-                                              
-                          </li>
+                          <li>
+                            <a href="lista_doc_subidos.php">Documentos Subidos</a>
+   
+                        </li>
                           <li>
                             <a href="#"><i class="fa fa-question-circle fa-fw"></i> Ayuda <span class="fa arrow"></span></a>
    
@@ -289,19 +291,153 @@ session_start();
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header"  >Bienvenido a SAETIS!</h1>
+                    
+                  
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
             <div class="row">
-                <div class="col-lg-8">
+                <div class="col-lg-6">
+                       <div class="mainbar">
+                                            <div class="article"><br><br>
+                            <h2><span>Documentos Subidos</span></h2>   
+                            
+                        </div>
+                        
+                    </div>
                   
                     <div class="col-lg-12">
+
+
+                         <div class="historia1">
+                            <div class="contenedor-fila2">
+                                    
+                                <div class="contenedor-columna">
+                                    <?php
+                                        echo "NOMBRE";
+                                    ?>
+                                </div>  
+                               <div class="contenedor-columna">
+                                    <?php
+                                        echo " FECHA";
+                                    ?>
+                                </div> 
+                                <div class="contenedor-columna">
+                                    <?php
+                                        echo "HORA";
+                                    ?>
+                                </div> 
+                               
+                                                        </div>  
+                            <?php
+                               include '../Modelo/conexion.php';
+    $con=new conexion();
+
+                              
+                           error_reporting(E_ALL ^ E_NOTICE);
+
+                                 
+                                 $consulta_subidos1="SELECT  `RUTA_D` , `NOMBRE_R`,FECHA_R,HORA_R FROM `registro` AS r,`documento` AS d WHERE r.`ID_R` = d.`ID_R` AND r.`TIPO_T` LIKE 'documento subido' AND r.`NOMBRE_U` LIKE '$UsuarioActivo' ";
+                                 $r3=$con->consulta($consulta_subidos1);
+                                 //var_dump($r3);
+                               
+                                  
                                 
-                        <img  src="../Librerias/images/SAETIS.png" alt="portadaInicio" class=" img-thumbnail">
+                                                while($var4 = mysql_fetch_array($r3))
+                                               {
+                                                
+                                                 $aux=$var4['0'];
+                                               
+                                           //echo $aux."entra</br>";
+                                                 
+                                                 $consulta_subidos="SELECT  `RUTA_D` FROM `registro` AS r,`documento` AS d,`descripcion` AS e WHERE r.`ID_R` = d.`ID_R` AND r.`ID_R` = e.`ID_R` AND r.`TIPO_T` LIKE 'publicaciones' AND r.`NOMBRE_U` LIKE '$UsuarioActivo' ";
+                                                 $r4=$con->consulta($consulta_subidos);
+                                                 
+
+                                                 while($var5 = mysql_fetch_array($r4))
+                                               {
+                                                
+                                                 $aux1=$var5['0'];
+                                                 //$com=substr($aux1, '0','20');
+                                                 //echo $aux1."segunda"."</br";
+                                                 if(strcmp ($aux,$aux1))
+                                                 {
+                                                    ?>
+
+
+                                          <div class="contenedor-fila">
+                                                      <div class="contenedor-columna">
+                                                      
+                                                      <?php
+                                                            echo "<a href='#' class='link-dos'
+                                                           >$var4[1]</a>";
+                                                      
+                                                   ?>
+                                                   </div>
+                                                     <div class="contenedor-columna">
+                                                      
+                                                      <?php
+                                                    
+                                                            echo $var4['2'];
+                                                      
+                                                   ?>
+                                                   </div>
+                                                  
+                                                     <div class="contenedor-columna">
+                                                      
+                                                      <?php
+                                                    
+                                                            echo $var4['3'];
+                                                      
+                                                   ?>
+                                                   </div>
+
+                                                   
+
+                                                   
+                                                     <div class="contenedor-columna">
+                                                      
+                                                      <?php
+                                                      $ruta="..".$var4['0'];
+                                                            echo "<a class='link-dos' href='".$ruta."'
+                                                          ><font color='blue'></font>Ver</a>";
+                                                      
+                                                   ?>
+                                                   </div>
+
+                                                     <div class="contenedor-columna">
+                                                      
+                                                      <?php
+                                                      $variable=$var4['1'];
+                                                            echo "<a class='link-dos' href='eliminarDocumentoSubido.php?id_us=".$variable."'
+                                                           ><font color='blue'></font>Eliminar</a>";
+                                                      
+                                                   ?>
+                                                   </div>
+
+
+
+                                                     </div >
+
+<?php
+                                                    
+                                                 }
+                                                 else{
+
+                                                 }
+                                               }
+                                               }
+                                       
+
+
+                                
+                                                       ?>  
+                                                           
+                                                      
+            
                         
-                    </div>  
+                  
                     
                     <!-- /.panel -->
                 </div>
@@ -314,9 +450,10 @@ session_start();
         <!-- /#page-wrapper -->
 
     </div>
+</div>
 
     <script src="../Librerias/js/plugins/metisMenu/jquery.metisMenu.js"></script>
     <script src="../Librerias/js/sb-admin.js"></script>
 </body>
 
-</html>
+</html>              
