@@ -316,6 +316,22 @@ where not exists
 						</div>
 					</div>
 				</div>	
+                                        
+                                 <div class="gadget">
+                                     <h2 class="star"><span>Verificar Nombre G.E.</h2>
+					<div class="clr"></div>
+					<ul class="ex_menu">
+					
+					<div class="contenedor-tabla">
+						<div class="contenedor-fila">
+							
+							<div class="contenedor-columna3"><li><a href="Vista/verificar_nombre.php">Verificar Nombre Grupo Empresa</a><br/> 
+							Verificar Nombre de Grupo Empresa Disponible</li></div>
+						</div>
+					</div>
+					
+			
+				</div>	
 				
 			</div>
                          </form>               

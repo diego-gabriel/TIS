@@ -46,7 +46,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="../index.php">Inicio </a>
+                <a class="navbar-brand" href="inicio_grupo_empresa.php">Inicio </a>
             </div>
             <!-- /.navbar-header -->
 
@@ -87,10 +87,17 @@
                 <!-- /.dropdown -->
             </ul>
             <!-- /.navbar-top-links -->
+            
+            
+            
+            
+            
+            
 
-            <div class="navbar-default navbar-static-side" role="navigation">
+<div class="navbar-default navbar-static-side" role="navigation">
                 <div class="sidebar-collapse">
                     <ul class="nav" id="side-menu">
+                        
                         
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-files-o "></i> Documentos <span class="fa arrow"></span></a>
@@ -98,16 +105,11 @@
                                 
                                 <li>
                                     <a href="#" >Subir Documentos <span class="fa arrow"></span></a>
-                                    <ul class="nav nav-third-level">
-                                        
-                                    </ul>
+                                    
                                 </li>
                                 <li>
-                                    <a href="#">Recepci&oacute;n Documentos <span class="fa arrow"></span></a>
-                                    <ul class="nav nav-third-level">
-                                        
-                                       
-                                    </ul>
+                                    <a href="publicacion_grupo.php">Recepci&oacute;n Documentos </a>
+                                    
                                 </li>
                                
                             </ul>
@@ -118,19 +120,54 @@
                          <li>
                             <a href="#"><i class="fa fa-tasks fa-fw"></i> Tareas<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
+                                <?php
+                                                 $idUsuarioAsesor='leticia';
+                                                 $idUsuarioG='freevalue';
+                                echo   ""
+                                     . "<form name='formularioNombre' action='verificar_nombre.php' enctype='multipart/form-data' method='POST'>"
+                                     . "<input type='hidden' name='nombreGrupo' value='$idUsuarioG'>"
+                                     . "<input type='hidden' name='nombreAsesor' value='$idUsuarioAsesor'>"
+                                     . "</form>"
+                                     . "<li>"
+                                     . "<a href='javascript:document.formularioNombre.submit();'>Verificar Nombre de Empresa</a>"
+                                     . "</li>";
+                                ?>
+                                <li>
+                                    <a href="seleccionar_asesor.php">Seleccionar Asesor</a>
+                                </li>
                                 
+                                 <li>
+                                     <a href="AnadirSocio.php">Añadir socios</a>
+                                </li>
                                 
+                                <li>
+                                    <a href="AnadirRL.php">Seleccionar Representante legal</a>
+                                </li>
                                 
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
                         
                         <li>
-                            <a href="#"><i class="fa fa-warning fa-fw"></i> Notificaciones</a>
+                            <a href="#"><i class="fa fa-warning fa-fw"></i> Notificaciones<span class="fa arrow"></span></a>
+                                                    
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="historia_actividades.php">Historia de actividades</a>
+                                </li>
+                                
+                            </ul>  
+                            </li>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-building-o fa-fw"></i> Actividades<span class="fa arrow"></span></a>
-                            
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a id="registrarPlanificacion" href="#">
+                                        <i class="fa fa-pencil-square-o fa-fw"></i>Registrar Planificaci&oacute;n
+                                    </a>
+                                </li>
+                            </ul>
                             <!-- /.nav-second-level -->
                         </li>
                         
@@ -142,11 +179,21 @@
                             <!-- /.nav-second-level -->
                         </li>
                         
+                        <li>
+                            <a href="lista-de-noticias-grupo.php"><i class="fa fa-comment"></i> Foro</a>
+                                
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
                     </ul>
                     <!-- /#side-menu -->
                 </div>
                 <!-- /.sidebar-collapse -->
             </div>
+            
+            
+            
+            
             <!-- /.navbar-static-side -->
         </nav>
         

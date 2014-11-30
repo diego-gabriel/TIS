@@ -242,13 +242,13 @@ WHERE  u.NOMBRE_U = r.NOMBRE_U ");
                     <ul class="nav" id="side-menu">
                         
                                 <li>
-                                    <a href="../Vista/registro_administrador.php"><i class="fa fa-bar-chart-o fa-files-o "></i> nueva cuenta<span class="fa arrow"></span></a>
+                                    <a href="../Vista/registro_administrador.php"><i class="fa fa-bar-chart-o fa-files-o "></i> Nueva Cuenta<span class="fa arrow"></span></a>
                                 </li>                        
                         <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-files-o "></i> Informacion personal <span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-bar-chart-o fa-files-o "></i> Informacion Personal <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="../Vista/modificar_administrador.php">privacidad</a>
+                                    <a href="../Vista/modificar_administrador.php">Privacidad</a>
                                 </li>
                             </ul>
                             
@@ -274,10 +274,14 @@ WHERE  u.NOMBRE_U = r.NOMBRE_U ");
                                     <a href="lista_roles.php">Asignar Permisos Roles</a>
                                 </li>
                                 <li>
-                                    <a href="#">grupo empresa <span class="fa arrow"></span></a>
+                                    <a href="#">Grupo Empresa <span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
                                         <li>
-                                            <a href="lista_grupoEmpresa.php"> integrantes </a>
+                                            <a href="lista_grupoEmpresa.php"> Integrantes </a>
+                                            
+                                        </li>
+                                        <li>
+                                            <a href="ListaGrupoEmpresas.php"> Lista de Grupo Empresas </a>
                                             
                                         </li>
                                     </ul>
@@ -311,7 +315,7 @@ WHERE  u.NOMBRE_U = r.NOMBRE_U ");
                             <a href="#"><i class="fa fa-building-o fa-fw"></i>Bitacora de ingresos <span class="fa arrow"></span></a>
                                         <ul class="nav nav-third-level">
                                         <li>
-                                            <a href="bitacora_ingreso.php">registro</a>
+                                            <a href="bitacora_ingreso.php">Registro</a>
                                             
                                         </li>
 
@@ -323,7 +327,7 @@ WHERE  u.NOMBRE_U = r.NOMBRE_U ");
                             <a href="#"><i class="fa fa-building-o fa-fw"></i>Enviar mensaje <span class="fa arrow"></span></a>
                                         <ul class="nav nav-third-level">
                                         <li>
-                                            <a href="enviar_mail.php">nuevo mensaje</a>
+                                            <a href="enviar_mail.php">Nuevo Mensaje</a>
                                             
                                         </li>
 
