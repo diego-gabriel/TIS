@@ -39,7 +39,7 @@ session_start();
     <script type="text/javascript" src="../Librerias/lib/validator/diferenteEntregable.js"></script>
     <script type="text/javascript" src="../Librerias/lib/validator/stringLength.js"></script>
     <script type="text/javascript" src="../Librerias/lib/validator/notEmpty.js"></script>
-    <script type="text/javascript" src="../Librerias/lib/validator/callback.js"></script
+    <script type="text/javascript" src="../Librerias/lib/validator/callback.js"></script>
     <script type="text/javascript" src="../Librerias/lib/validator/date.js"></script>
     <script type="text/javascript" src="../Librerias/lib/validator/numeric.js"></script>
     <script type="text/javascript" src="../Librerias/lib/validator/porcentajeMax.js"></script>
@@ -160,17 +160,23 @@ session_start();
                         <div class="historia1">
 							<div class="contenedor-fila2">
 								<div class="contenedor-columna">
-                                    <h4><strong>Usuario</strong><h4>
+                                                                    <h4><strong>Grupo Empresa</strong><h4>
 								</div>	
 								<div class="contenedor-columna">
-                                    <h4><strong>Nombre Corto</strong><h4>
+                                                                    <h4><strong>Nombre Corto</strong><h4>
 								</div>
 		
 								<div class="contenedor-columna">
-                                    <h4><strong>Nombre Largo</strong><h4>
+                                                                    <h4><strong>Nombre Largo</strong><h4>
 								</div>
 								<div class="contenedor-columna">
 								    <h4><strong>Repr. Legal</strong><h4>
+								</div>
+                                                                <div class="contenedor-columna">
+								    <h4><strong>Telefono</strong><h4>
+								</div>
+                                                                <div class="contenedor-columna">
+								    <h4><strong>e-mail</strong><h4>
 								</div>
                             </div>  
 							<?php
@@ -181,15 +187,15 @@ session_start();
 								//Seleccion
 								mysql_select_db("saetis",$conexion);
 								//Peticion
-								$peticion = mysql_query("SELECT NOMBRE_U, NOMBRE_CORTO_GE, NOMBRE_LARGO_GE, REPRESENTANTE_LEGAL_GE FROM grupo_empresa");
+								$peticion = mysql_query("SELECT usuario.NOMBRE_U, NOMBRE_CORTO_GE, NOMBRE_LARGO_GE, REPRESENTANTE_LEGAL_GE, TELEFONO_U, CORREO_ELECTRONICO_U FROM grupo_empresa, usuario WHERE grupo_empresa.NOMBRE_U = usuario.NOMBRE_U");
 							
 
 								while($fila = mysql_fetch_array($peticion))
 								{
-                                    $grupo = $fila['NOMBRE_U'];
+                                                                    $grupo = $fila['NOMBRE_U'];
 							?>
 								<div class="contenedor-fila">
-									   <div class="contenedor-columna">
+									<div class="contenedor-columna">
 										<?php
 											echo $fila['NOMBRE_U'];
 										?>
@@ -212,7 +218,17 @@ session_start();
 											echo $fila['REPRESENTANTE_LEGAL_GE'];
 										?>
 									</div>
-                                    <div class="contenedor-columna">
+                                                                        <div class="contenedor-columna">
+										<?php
+											echo $fila['TELEFONO_U'];
+										?>
+									</div>
+                                                                        <div class="contenedor-columna">
+										<?php
+											echo $fila['CORREO_ELECTRONICO_U'];
+										?>
+									</div>
+                                                                <div class="contenedor-columna">
                                         <?php
                                             echo '<a href = "EliminarGrupoEmpresa.php?id_us='.$grupo.'" class="verificar" ><font color="blue">Eliminar</font></a>';
                                         

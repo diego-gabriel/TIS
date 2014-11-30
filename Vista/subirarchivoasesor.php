@@ -86,6 +86,10 @@
                 <div class="sidebar-collapse">
                     <ul class="nav" id="side-menu">
                         
+                        <li>
+                            <a href="AdministrarGrupoEmpresa.php"><i class="fa fa-book"></i> Administrar Grupo Empresas</a>
+                        </li>
+                        
                         
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-files-o "></i> Documentos <span class="fa arrow"></span></a>
