@@ -103,9 +103,7 @@
             <div class="navbar-default navbar-static-side" role="navigation">
                 <div class="sidebar-collapse">
                     <ul class="nav" id="side-menu">
-                        <li>
-                            <a href="AdministrarGrupoEmpresa.php"><i class="fa fa-book"></i> Administrar Grupo Empresas</a>
-                        </li>
+                        
                         
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-files-o "></i> Documentos <span class="fa arrow"></span></a>
@@ -155,10 +153,7 @@
                             <a href="#"><i class="fa fa-tasks fa-fw"></i> Tareas<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="contrato.php">Emitir Contrato </a>
-                                </li>
-                                <li>
-                                    <a href="ordendecambio.php">Emitir Orden de Cambio</a>
+                                    <a href="ordendecambioempresas.php">Emitir Orden de Cambio</a>
                                 </li>
                                 <li>
                                     <a href="notificacion_conformidad.php">Emitir Notificaci&oacute;n de Conformidad</a>
@@ -205,31 +200,19 @@
                             <!-- /.nav-second-level -->
                         </li>
                         
-
+                        <li>
+                            <a href="#"><i class="fa fa-warning fa-fw"></i> Notificaciones</a>
+                        </li>
                         <li>
                             <a href="#"><i class="fa fa-building-o fa-fw"></i> Actividades<span class="fa arrow"></span></a>
                             
                             <!-- /.nav-second-level -->
                         </li>
                         
-                          <li>
-                              <a href="#"><i class="fa fa-tasks fa-fw"></i>Informacion Personal<span class="fa arrow"></span> </a>  
-                                              <ul class="nav nav-third-level">
-                                                <li>
-                                                    <a href="modificar_asesor.php">Modificar Datos Personales </a>                             
-                                                </li>       
-                                            </ul>
-                          </li>
-                          <li>
-                            <a href="lista-de-noticias.php"><i class="fa fa-comment"></i> Foro</a>
-                         </li>
-                         <li>
-                              <a href="lista_doc_subidos.php"><i class="fa fa-tasks fa-fw"></i>Documentos Subidos </a>  
-                                              
-                          </li>
-                          <li>
+                        <li>
                             <a href="#"><i class="fa fa-question-circle fa-fw"></i> Ayuda <span class="fa arrow"></span></a>
-   
+                            
+                            <!-- /.nav-second-level -->
                         </li>
                     </ul>
                     <!-- /#side-menu -->
@@ -248,6 +231,7 @@
                 <form method = "post" id="FormEvaluar">
                     <div class="panel panel-default">
                         <div class="panel-body">     
+
                                             
                             <?php 
                             include '../Modelo/conexion.php';
@@ -261,6 +245,11 @@
                             $IdForm = mysql_fetch_row($VerificarHabilitado);
 
                             $IdForm2 = $IdForm[0];
+
+                            echo '<input type="hidden" name="IdFormularioUtilizado" value="'.$IdForm2.'">';
+                            echo '<input type="hidden" name="Operacion" value="Evaluar">';
+
+
 
                             /**************************************************************/
                             if(is_array($IdForm)) 
