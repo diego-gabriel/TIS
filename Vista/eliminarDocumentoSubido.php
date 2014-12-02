@@ -36,14 +36,14 @@ $idgp = $_GET['id_us'];
 	 mysql_close($conexion);
 	 //volver a la pagina---------------
 	
-	// echo'
-//	<html>
-//		<head>
-//			<meta http-equiv="REFRESH" content="0;url=lista_doc_subidos.php">
-//		</head>
-//	</html>
+	echo'
+	<html>
+		<head>
+			<meta http-equiv="REFRESH" content="0;url=lista_doc_subidos.php">
+		</head>
+	</html>
 
-	//';
+	';
 
  
 ?>

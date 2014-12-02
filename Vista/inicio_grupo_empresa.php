@@ -246,6 +246,10 @@ session_start();
                                 </li>
                                 
                                  <li>
+                                     <a href="InscripcionGEProyecto.php">Inscribirse a proyecto</a>
+                                </li>
+                                
+                                <li>
                                      <a href="AnadirSocio.php">Añadir socios</a>
                                 </li>
                                 

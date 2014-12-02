@@ -226,8 +226,16 @@
                          }
                          else
                          {
-                         $fila = mysql_fetch_array($consulta);
                             
+                            $VerificarIns= $con->consulta("SELECT NOMBRE_U FROM inscripcion_proyecto WHERE NOMBRE_U = '$UsuarioActivo' ");
+                            $VerificarIns2 = mysql_fetch_row($VerificarIns);
+                            if (!is_array($VerificarIns2))
+                            {
+                                echo "<h4>Para subir su propuesta primero debe inscribirse a un proyecto</h4>";
+                            }
+                            else{       
+                             
+                             $fila = mysql_fetch_array($consulta);
                              
                              if (($fila['2'] == $fecha && $hora <= $fila['4']) || ($fila['3'] == $fecha && $hora >= $fila['5'] )) {
                                  echo "<h4>La opci&oacuten $titulo no esta disponible</h4>";
@@ -256,6 +264,7 @@
                             }
                                         
                             }
+                        }
                          
                             $conexion->cerrarConexion();
                         }
