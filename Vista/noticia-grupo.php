@@ -36,7 +36,7 @@
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
    
     <link href="css/estiloTabla.css" rel="stylesheet" type="text/css" />
-
+<link href="css/style.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -107,20 +107,11 @@
                             <a href="#"><i class="fa fa-bar-chart-o fa-files-o "></i> Documentos <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                            <a href="../Vista/subirarchivoasesor.php">Subir Documentos</a>
+                                            <a href="#">Subir Documentos</a>
                                 </li>
+                               
                                 <li>
-                                    <a href="../Vista/RegistrarDocumentosRequeridos.php">Registrar Documentos</a>
-                                </li>
-                                
-                                <li>
-                                    <a href="#" >Subir Documentos <span class="fa arrow"></span></a>
-                                    <ul class="nav nav-third-level">
-                                        
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="#">Recepci&oacute;n Documentos <span class="fa arrow"></span></a>
+                                    <a href="publicacion_grupo.php">Recepci&oacute;n Documentos </a>
                                     <ul class="nav nav-third-level">
                                         
                                        
@@ -136,7 +127,29 @@
                             <a href="#"><i class="fa fa-tasks fa-fw"></i> Tareas<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 
+                                <?php
+                                                 $idUsuarioAsesor='leticia';
+                                                 $idUsuarioG='freevalue';
+                                echo   ""
+                                     . "<form name='formularioNombre' action='verificar_nombre.php' enctype='multipart/form-data' method='POST'>"
+                                     . "<input type='hidden' name='nombreGrupo' value='$idUsuarioG'>"
+                                     . "<input type='hidden' name='nombreAsesor' value='$idUsuarioAsesor'>"
+                                     . "</form>"
+                                     . "<li>"
+                                     . "<a href='javascript:document.formularioNombre.submit();'>Verificar Nombre de Empresa</a>"
+                                     . "</li>";
+                                ?>
+                                <li>
+                                    <a href="seleccionar_asesor.php">Seleccionar Asesor</a>
+                                </li>
                                 
+                                 <li>
+                                     <a href="AnadirSocio.php">Añadir socios</a>
+                                </li>
+                                
+                                <li>
+                                    <a href="AnadirRL.php">Seleccionar Representante legal</a>
+                                </li>
                                 
                             </ul>
                             <!-- /.nav-second-level -->
@@ -153,8 +166,22 @@
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-building-o fa-fw"></i> Actividades<span class="fa arrow"></span></a>
-                            
+                              <ul class="nav nav-second-level">
+                                <li>
+                                    <a id="registrarPlanificacion" href="#">
+                                        <i class="fa fa-pencil-square-o fa-fw"></i>Registrar Planificaci&oacute;n
+                                    </a>
+                                </li>
+                            </ul>
                             <!-- /.nav-second-level -->
+                        </li>
+                         <li>
+                            <a href="#"><i class="fa fa-tasks fa-fw"></i>Informacion Personal<span class="fa arrow"></span> </a>  
+                                <ul class="nav nav-third-level">
+                                    <li>
+                                        <a href="ModificarGrupoEmpresa.php">Modificar Datos Personales </a>                             
+                                    </li>       
+                                </ul>
                         </li>
                         
                         <li>
@@ -179,9 +206,16 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h2 class="page-header">FORO</h2>
+                    
                     <div class="col-lg-6" >
-                       <?php
+                         <div class="mainbar">
+                                            <div class="article"><br><br>
+                            <h2><span>Foro</span></h2>   
+                            
+                        </div>
+                        
+                    </div>
+                      <?php
 
 include('config.php');
 
@@ -212,11 +246,18 @@ $comentarios_db = mysql_query($comentarios_db);
 $comentarios = mysql_num_rows($comentarios_db);
 
 
-echo "<a  class='link-dos' href='lista-de-noticias-grupo.php'>Ver todos los temas</a>";
+
 echo "<title>$titulo</title>";
 echo "<h1>$titulo</h1><p>Postado por <b>$autor</b>  <b>$date</b> - <b>$views</b> Visualizaciones | <b>$comentarios</b> Comentarios | ";
-echo "______________________________________________________________________________________________________________________________________________________________________";
-echo "<h3>$comentarios Comentarios:</h3>";
+//echo "______________________________________________________________________________________________________________________________________________________________________";
+//echo "<h3>$comentarios Comentarios:</h3>";
+?>
+<div class="mainbar">
+                                            <div class="article"><br><br>
+                            <h2><span>Comentarios</span></h2>   
+                            
+                        </div>
+<?php
 
 }
 ?>
@@ -239,7 +280,7 @@ echo "<b>$autor_c</b> el <b>$date</b> comento:$comentario</br>";
 echo "</br>";
 }
 ?>
-______________________________________________________________________________________________________________________________________________________________________
+
 <h3>Comentar:</h3>
 <?php
 // Mensage  campos vacios
@@ -268,13 +309,13 @@ or die ("Erro ao Adicionar Comentário.");
 <form name="input" action="noticia.php?id=<?php echo $_GET['id']; ?>" method="post">
 
 
+<label>Comentario:</label>
 <br>
 <textarea name="comentario" rows="5" cols="50"></textarea>
-<br>
-<br>
+</br>
+</br>
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;          <input type="submit"  class="btn btn-primary" value="Enviar Comentario">
 </form>
-
 
                       
                     </div>

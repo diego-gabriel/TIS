@@ -125,7 +125,9 @@ session_start();
             <div class="navbar-default navbar-static-side" role="navigation">
                 <div class="sidebar-collapse">
                     <ul class="nav" id="side-menu">
-                        
+                        <li>
+                            <a href="AdministrarGrupoEmpresa.php"><i class="fa fa-book"></i> Administrar Grupo Empresas</a>
+                        </li>
                         
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-files-o "></i> Documentos <span class="fa arrow"></span></a>
@@ -335,10 +337,10 @@ session_start();
     $con=new conexion();
 
                               
-                           error_reporting(E_ALL ^ E_NOTICE);
+                           //error_reporting(E_ALL ^ E_NOTICE);
 
                                  
-                                 $consulta_subidos1="SELECT  `RUTA_D` , `NOMBRE_R`,FECHA_R,HORA_R FROM `registro` AS r,`documento` AS d WHERE r.`ID_R` = d.`ID_R` AND r.`TIPO_T` LIKE 'documento subido' AND r.`NOMBRE_U` LIKE '$UsuarioActivo' ";
+                                 $consulta_subidos1="SELECT DISTINCT  `RUTA_D` , `NOMBRE_R`,FECHA_R,HORA_R FROM `registro` AS r,`documento` AS d WHERE r.`ID_R` = d.`ID_R` AND r.`TIPO_T` LIKE 'documento subido' AND r.`NOMBRE_U` LIKE '$UsuarioActivo' ";
                                  $r3=$con->consulta($consulta_subidos1);
                                  //var_dump($r3);
                                
@@ -351,20 +353,26 @@ session_start();
                                                
                                            //echo $aux."entra</br>";
                                                  
-                                                 $consulta_subidos="SELECT  `RUTA_D` FROM `registro` AS r,`documento` AS d,`descripcion` AS e WHERE r.`ID_R` = d.`ID_R` AND r.`ID_R` = e.`ID_R` AND r.`TIPO_T` LIKE 'publicaciones' AND r.`NOMBRE_U` LIKE '$UsuarioActivo' ";
+                                                 $consulta_subidos="SELECT DISTINCT   `RUTA_D` FROM `registro` AS r,`documento` AS d,`descripcion` AS e WHERE r.`ID_R` = d.`ID_R` AND r.`ID_R` = e.`ID_R` AND r.`TIPO_T` LIKE 'publicaciones' AND r.`NOMBRE_U` LIKE '$UsuarioActivo' ";
                                                  $r4=$con->consulta($consulta_subidos);
-                                                 
-
+                                                 $tam=mysql_num_rows($r4);
+ $cont=0;
                                                  while($var5 = mysql_fetch_array($r4))
                                                {
                                                 
                                                  $aux1=$var5['0'];
                                                  //$com=substr($aux1, '0','20');
                                                  //echo $aux1."segunda"."</br";
-                                                 if(strcmp ($aux,$aux1))
+                                                 
+                                                 if($aux != $aux1)
                                                  {
-                                                    ?>
-
+                                                    $cont=$cont+1;
+                                                    //echo $cont."es cont"."</br>";
+                                                   
+                                                 }
+                                             }
+                                             if($cont==$tam){
+                                                 ?>
 
                                           <div class="contenedor-fila">
                                                       <div class="contenedor-columna">
@@ -427,7 +435,7 @@ session_start();
 
                                                  }
                                                }
-                                               }
+                                               
                                        
 
 

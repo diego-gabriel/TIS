@@ -25,10 +25,7 @@ include('../Modelo/crearimagen.php');
 		 
 		 $aux=$key['DESCRIPCION_D'];
          //$delimitador = "*";
-         $findme = "*";
-         $pos = strpos($aux,$findme);
-         $pose=$pos-1;
-         $nombre=substr($aux, 0,$pose);
+       
          
             //list ($nombre,$numero) = explode($delimitador,$aux);
 
@@ -38,9 +35,7 @@ include('../Modelo/crearimagen.php');
                //$com=$r5."/".$r6."/".$r7;
                //echo $com."</br>";
                  
-                 $ini="32"+1;
-                 $size=strlen($ubi);
-                 $com=substr($ubi, $ini,$size);
+                
 
 			$tabla .= '<tr>
 			           <td>'.$indice.'</td>
@@ -48,13 +43,14 @@ include('../Modelo/crearimagen.php');
 		               <img class="img-rounded" width="35px" height="35px" alt=" " src="'.$icono.'"></img>
                        </td>
 			           <td>
-                       <a class="link-dos" href="../'.$com.'" onclick="">'.$key['NOMBRE_R'].'<span class="instancename">    
+                       <a class="link-dos" href="../'.$ubi.'" onclick="">'.$key['NOMBRE_R'].'<span class="instancename">    
  
                        <span class="accesshide "></span></a>
                        </td>
-			           <td>'.$nombre.'
+			           <td>'.$aux.'
 			           </td>
 			           </tr>';
+
                                   
 			 $indice++;
 		}  

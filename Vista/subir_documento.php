@@ -207,85 +207,62 @@
                         <!-- introducimos el titulo y la descripcion del documento a subir -->
                         <form name="formulario1" >
                             <div class="form-group">
-                               
-                                <select name="proyecto" class="form-control">
-                                    <option>Seleccione un proyecto</option>
-                                    <?php
-                                        $idGE= $_SESSION['usuario']  ;
-
-                                        $conGestion="SELECT id_g "
-                                                . "FROM gestion "
-                                                . "WHERE DATE (NOW()) > DATE(FECHA_INICIO_G) and DATE(NOW()) < DATE(FECHA_FIN_G)";
-                                        $conGestion_=$con->consulta($conGestion);
-                                        $idGestion=mysql_fetch_row($conGestion_);
-                                        $idGestion_=$idGestion[0];
-                                                                       
-                                        $c1="SELECT p.`NOMBRE_P` FROM `proyecto` AS `p`, `gestion` AS `g` WHERE p.`ID_G` = g.`ID_G` AND p.`ID_G` LIKE '".$idGestion_."'";
-                                 
-                                        $a1=$con->consulta($c1);
-                
-                                        while($v1 =  mysql_fetch_array($a1)){
-                                            echo "<option>".$v1[0]."</option>";
-                                        }
-                                    echo "<input type='hidden' name='idGE' value='$idGE'>";
-            
-                                 ?>
-                                </select><br>
                                 <?php
                                 //recuperamos las variables enviadas por subir_documentos.php
-                                $idAsesor=$_POST["nombreUsuarioAsesor"];
-                                $titulo=$_POST["nombreRegistro"];
-                                $idGrupo=$_POST['nombreUsuarioG'];
-                                try{
-                                    //creamos la conexion y recuperamos los datos de titulo y descripcion del documento
-                                 $conexion = new conexion();
-                                 date_default_timezone_set('America/Argentina/Tucuman');
-                                 $fecha=  date('Y-m-d');
-                                 $hora= date('G:H:i');
-                                 $consulta=$conexion->consulta("SELECT r.NOMBRE_R,d.`DESCRIPCION_D`,p.`FECHA_INICIO_PL`,p.`FECHA_FIN_PL`,p.`HORA_INICIO_PL`,p.`HORA_FIN_PL` FROM registro AS r,plazo AS p,descripcion AS d,`estado` AS e,`tipo` AS t WHERE r.ID_R = d.ID_R AND r.`TIPO_T` = t.`TIPO_T` AND r.ID_R = p.ID_R AND e.`ESTADO_E` = r.`ESTADO_E` AND r.`ESTADO_E` LIKE 'habilitado' AND r.NOMBRE_U LIKE '$idAsesor' AND p.`FECHA_INICIO_PL` <= '$fecha' AND p.`FECHA_FIN_PL` >= '$fecha' AND t.`TIPO_T` LIKE 'documento requerido' AND r.`NOMBRE_R` LIKE '$titulo'");
-                                 if (mysql_num_rows($consulta) == 0)
-                                 {
-                                     echo "<h4>La opci&oacuten $titulo ya no est&aacute; disponible</h4>";
-                                 }
-                                 else
-                                 {
-                                 while($fila = mysql_fetch_array($consulta))
-                                    {
-
-                                     if (($fila['2'] == $fecha && $hora <= $fila['4']) || ($fila['3'] == $fecha && $hora >= $fila['5'] )) {
-                                         echo "<h4>La opci&oacuten $titulo no esta disponible</h4>";
-
-                                     }
-                                     else
-                                     { 
-                                       
-                                       
-                                     //insertamos los datos recuperados y hacemos llamada al script subir_documento.js donde se encuentra todo lo que maneja la subida del documento 
-                                     $temp=  str_replace(" ", "/", $fila['0']);
-                                     echo   "<h4>".$fila['0']."</h4>"
-                                            . "<h5>".$fila['1']."</h5>"
-                                            . "<form id='subir_archivoA' method='POST' enctype='multipart/form-data'>"
-                                                . "<fieldset>"
-                                                    . "<input name='archivoA' id='archivoA' type='file' class = 'btn btn-primary' /><br>"
-                                                    . "<input type='button' value='Subir Documento' class= 'btn btn-primary' onclick= uploadFileA('".$idGrupo."','".$temp."')><br>"
-                                                    . "<br><progress id='progressBar' class='progress progress-striped active' value='0' max='100' style='width:300px;'></progress>"
-                                                    . "<h3 id='status'></h3>"
-                                                    . "<p id='loaded_n_total'></p>"
-                                                    . "<h5>La entrega esta disponible desde la fecha: ".$fila['2']."/".$fila['4']." hasta la fecha: ".$fila['3']."/".$fila['5']." </h5>"
-                                                   
-                                                . "</fieldset>"
-                                             . "</form>";
-
-                                    }
-
-                                    }
-                                 }
-                                    $conexion->cerrarConexion();
-                                }
-                                catch (ErrorException $e)
-                                {
-                                    echo $e;
-                                }
+                        $idAsesor=$_POST["nombreUsuarioAsesor"];
+                       
+                        $titulo=$_POST["nombreRegistro"];
+                        $idGrupo=$_POST['nombreUsuarioG'];
+                        try{
+                            //creamos la conexion y recuperamos los datos de titulo y descripcion del documento
+                         $conexion = new conexion();
+                         date_default_timezone_set('America/Argentina/Tucuman');
+                         $fecha=  date('Y-m-d');
+                         $hora= date('G:H:i');
+                         $consulta=$conexion->consulta("SELECT r.NOMBRE_R,d.`DESCRIPCION_D`,p.`FECHA_INICIO_PL`,p.`FECHA_FIN_PL`,p.`HORA_INICIO_PL`,p.`HORA_FIN_PL` FROM registro AS r,plazo AS p,descripcion AS d,`estado` AS e,`tipo` AS t WHERE r.ID_R = d.ID_R AND r.`TIPO_T` = t.`TIPO_T` AND r.ID_R = p.ID_R AND e.`ESTADO_E` = r.`ESTADO_E` AND r.`ESTADO_E` LIKE 'habilitado' AND r.NOMBRE_U LIKE '$idAsesor' AND p.`FECHA_INICIO_PL` <= '$fecha' AND p.`FECHA_FIN_PL` >= '$fecha' AND t.`TIPO_T` LIKE 'documento requerido' AND r.`NOMBRE_R` LIKE '$titulo'");
+                         if (mysql_num_rows($consulta) == 0)
+                         {
+                             echo "<h4>La opci&oacuten $titulo ya no est&aacute; disponible</h4>";
+                         }
+                         else
+                         {
+                         $fila = mysql_fetch_array($consulta);
+                            
+                             
+                             if (($fila['2'] == $fecha && $hora <= $fila['4']) || ($fila['3'] == $fecha && $hora >= $fila['5'] )) {
+                                 echo "<h4>La opci&oacuten $titulo no esta disponible</h4>";
+                                 
+                             }
+                             else
+                             {
+                            //insertamos los datos recuperados y hacemos llamada al script subir_documento.js donde se encuentra todo lo que maneja la subida del documento 
+                             $temp=  str_replace(" ", "/", $fila['0']);
+                             echo   "<h4>".$fila['0']."</h4>"
+                                    . "<h5>".$fila['1']."</h5>"
+                                    . "<form id='subir_archivoA' method='POST' enctype='multipart/form-data'>"
+                                        . "<fieldset>"
+                                            . "<input name='archivoA' id='archivoA' type='file' class = 'btn btn-primary' /><br>"
+                                            ."<input type='hidden' name='autor' value='".$idAsesor."'>"
+                                             ."<input type='hidden' name='titulo' value='".$titulo."'>"
+                                            . "<input type='button' value='Subir Documento' class= 'btn btn-primary' onclick= uploadFileA('".$idGrupo."','".$temp."')><br>"
+                                            . "<br><progress id='progressBar' class='progress progress-striped active' value='0' max='100' style='width:300px;'></progress>"
+                                            . "<h3 id='status'></h3>"
+                                            . "<p id='loaded_n_total'></p>";
+                    
+                                            echo "<h5>La entrega esta disponible desde la fecha: ".$fila['2']."/".$fila['4']." hasta la fecha: ".$fila['3']."/".$fila['5']." </h5>"
+                                        . "</fieldset>"
+                                     . "</form>";
+                             
+                            }
+                                        
+                            }
+                         
+                            $conexion->cerrarConexion();
+                        }
+                        catch (ErrorException $e)
+                        {
+                            echo $e;
+                        }
                         
                         
                         ?>

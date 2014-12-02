@@ -30,7 +30,7 @@
     <!-- SB Admin CSS - Include with every page -->
     <link href="../Librerias/css/sb-admin.css" rel="stylesheet">
     <script type="text/javascript" src="../Librerias/js/subir_documento.js"></script>
-
+<link href="css/style.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -96,7 +96,9 @@
             <div class="navbar-default navbar-static-side" role="navigation">
                 <div class="sidebar-collapse">
                     <ul class="nav" id="side-menu">
-                        
+                        <li>
+                            <a href="AdministrarGrupoEmpresa.php"><i class="fa fa-book"></i> Administrar Grupo Empresas</a>
+                        </li>
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-files-o "></i> Documentos <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
@@ -136,15 +138,27 @@
                             <!-- /.nav-second-level -->
                         </li>
                         
-                        <li>
-                            <a href="lista-de-noticias.php"><i class="fa fa-comment"></i> Foro</a>
-                        </li>
+                       
                         <li>
                             <a href="#"><i class="fa fa-building-o fa-fw"></i> Actividades<span class="fa arrow"></span></a>
                             
                             <!-- /.nav-second-level -->
                         </li>
-                        
+                        <li>
+                              <a href="#"><i class="fa fa-tasks fa-fw"></i>Informacion Personal<span class="fa arrow"></span> </a>  
+                                              <ul class="nav nav-third-level">
+                                                <li>
+                                                    <a href="modificar_asesor.php">Modificar Datos Personales </a>                             
+                                                </li>       
+                                            </ul>
+                          </li>
+                         <li>
+                            <a href="lista-de-noticias.php"><i class="fa fa-comment"></i> Foro</a>
+                         </li>
+                          <li>
+                              <a href="lista_doc_subidos.php"><i class="fa fa-tasks fa-fw"></i>Documentos Subidos </a>  
+                                              
+                          </li>
                         <li>
                             <a href="#"><i class="fa fa-question-circle fa-fw"></i> Ayuda <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
@@ -164,9 +178,16 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h2 class="page-header">FORO</h2>
+                   
                     <div class="col-lg-6" >
-                       <?php
+                         <div class="mainbar">
+                                            <div class="article"><br><br>
+                            <h2><span>Foro</span></h2>   
+                            
+                        </div>
+                        
+                    </div>
+                        <?php
 
 include('config.php');
 
@@ -197,15 +218,20 @@ $comentarios_db = mysql_query($comentarios_db);
 $comentarios = mysql_num_rows($comentarios_db);
 
 
-echo "<a  class='link-dos' href='lista-de-noticias.php'>Ver todos los temas</a>";
+
 echo "<title>$titulo</title>";
 echo "<h1>$titulo</h1><p>Postado por <b>$autor</b>  <b>$date</b> - <b>$views</b> Visualizaciones | <b>$comentarios</b> Comentarios | ";
-echo "______________________________________________________________________________________________________________________________________________________________________";
-echo "<h3>$comentarios Comentarios:</h3>";
-
-}
+//echo "______________________________________________________________________________________________________________________________________________________________________";
 ?>
+ <div class="mainbar">
+                                            <div class="article"><br><br>
+                            <h2><span>Comentarios</span></h2>   
+                            
+                        </div>
+
 <?php
+}
+
 
 $id = $_GET['id'];
 $selecionar_db_comentarios = "SELECT * FROM comentarios WHERE ID_N = '$id' ORDER BY ID_N DESC";
@@ -243,6 +269,14 @@ $comentario_add = "INSERT INTO comentarios (NOMBRE_U,ID_N,COMENTARIO,FECHA_C,AUT
 $comentario_add = mysql_query($comentario_add)
 or die ("Error al Adicionar Comentario.");
 //echo "Comentario Adicionado  | <a  class='link-dos' href=\"noticia.php?id=".$_GET['id']."\">Actualizar Página para ver su comentario</a>";
+echo'
+    <html>
+    <head>
+        <meta http-equiv="REFRESH" content="0;url=lista_asesores.php">
+    </head>
+    </html>
+
+    ';
 ?>
 
 <script>
