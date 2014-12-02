@@ -36,7 +36,7 @@
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
    
     <link href="css/estiloTabla.css" rel="stylesheet" type="text/css" />
-<link href="css/style.css" rel="stylesheet" type="text/css" />
+
 </head>
 
 <body>
@@ -179,16 +179,8 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-
-                              
+                    <h2 class="page-header">FORO</h2>
                     <div class="col-lg-6" >
-                        <div class="mainbar">
-                                            <div class="article"><br><br>
-                            <h2><span>Foro</span></h2>   
-                            
-                        </div>
-                        
-                    </div>
                        <?php
 
 include('config.php');
@@ -220,18 +212,11 @@ $comentarios_db = mysql_query($comentarios_db);
 $comentarios = mysql_num_rows($comentarios_db);
 
 
-
+echo "<a  class='link-dos' href='lista-de-noticias-grupo.php'>Ver todos los temas</a>";
 echo "<title>$titulo</title>";
 echo "<h1>$titulo</h1><p>Postado por <b>$autor</b>  <b>$date</b> - <b>$views</b> Visualizaciones | <b>$comentarios</b> Comentarios | ";
-//echo "______________________________________________________________________________________________________________________________________________________________________";
-//echo "<h3>$comentarios Comentarios:</h3>";
-?>
-<div class="mainbar">
-                                            <div class="article"><br><br>
-                            <h2><span>Comentarios</span></h2>   
-                            
-                        </div>
-<?php
+echo "______________________________________________________________________________________________________________________________________________________________________";
+echo "<h3>$comentarios Comentarios:</h3>";
 
 }
 ?>
@@ -254,7 +239,7 @@ echo "<b>$autor_c</b> el <b>$date</b> comento:$comentario</br>";
 echo "</br>";
 }
 ?>
-
+______________________________________________________________________________________________________________________________________________________________________
 <h3>Comentar:</h3>
 <?php
 // Mensage  campos vacios
@@ -283,11 +268,10 @@ or die ("Erro ao Adicionar Comentário.");
 <form name="input" action="noticia.php?id=<?php echo $_GET['id']; ?>" method="post">
 
 
-<label>Comentario:</label>
 <br>
 <textarea name="comentario" rows="5" cols="50"></textarea>
-</br>
-</br>
+<br>
+<br>
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;          <input type="submit"  class="btn btn-primary" value="Enviar Comentario">
 </form>
 

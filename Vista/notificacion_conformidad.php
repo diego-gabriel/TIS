@@ -124,6 +124,7 @@ $UsuarioActivo = $_SESSION['usuario'];
                             <a href="AdministrarGrupoEmpresa.php"><i class="fa fa-book"></i> Administrar Grupo Empresas</a>
                         </li>
                         
+                        
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-files-o "></i> Documentos <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
@@ -239,10 +240,6 @@ $UsuarioActivo = $_SESSION['usuario'];
                           <li>
                             <a href="lista-de-noticias.php"><i class="fa fa-comment"></i> Foro</a>
                          </li>
-                         <li>
-                              <a href="lista_doc_subidos.php"><i class="fa fa-tasks fa-fw"></i>Documentos Subidos </a>  
-                                              
-                          </li>
                           <li>
                             <a href="#"><i class="fa fa-question-circle fa-fw"></i> Ayuda <span class="fa arrow"></span></a>
    
@@ -279,7 +276,9 @@ $UsuarioActivo = $_SESSION['usuario'];
                             <option selected value="0">Seleccione una grupo empresa </option>
                             <?php
                                 $idAsesor= $_SESSION['usuario']  ;
-                                $c1="SELECT ge.`NOMBRE_LARGO_GE` FROM `inscripcion` AS i,`asesor` AS a,`grupo_empresa` AS `ge`,`gestion` AS g,`proyecto` AS p WHERE i.`NOMBRE_UA` = a.`NOMBRE_U` AND i.`NOMBRE_UGE` = ge.`NOMBRE_U` AND i.`ID_G` = g.`ID_G` AND i.`CODIGO_P` = p.`CODIGO_P` AND a.`NOMBRE_U` LIKE '$idAsesor'";
+                                $estado = "Habilitado";
+                                $c1="SELECT ge.`NOMBRE_LARGO_GE` FROM `inscripcion` AS i,`asesor` AS a,`grupo_empresa` AS `ge` WHERE i.`NOMBRE_UA` = a.`NOMBRE_U` AND i.`NOMBRE_UGE` = ge.`NOMBRE_U` AND a.`NOMBRE_U` LIKE '$idAsesor' AND i.`ESTADO_INSCRIPCION` LIKE '$estado'";                              
+                                
                                 $a1=$con->consulta($c1);
                                 
                                 while($grupoE =  mysql_fetch_array($a1)){

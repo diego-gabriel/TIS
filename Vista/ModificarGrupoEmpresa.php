@@ -224,7 +224,21 @@
             <!-- /.navbar-static-side -->
         </nav>
 <!-------------------------------------------NUEVAS PUBLICACIONES------------------------------------------>
-        <?php
+        
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2 class="page-header">Modificar Informacion Personal:</h2>
+                    <div class="col-lg-6" >
+                        
+                        
+                        
+                        
+                        
+                        
+                                    
+                                        
+                                        <?php
             $nombreLargo;
             $nombreCorto;
             $correo;
@@ -240,6 +254,27 @@
             //Peticion
             $peticion = mysql_query("SELECT G.NOMBRE_LARGO_GE, G.NOMBRE_CORTO_GE, U.CORREO_ELECTRONICO_U, U.TELEFONO_U, G.DIRECCION_GE, U.PASSWORD_U
                         FROM grupo_empresa G, usuario U WHERE G.NOMBRE_U=U.NOMBRE_U AND U.NOMBRE_U='$UsuarioActivo'");         
+           
+            $VerificarTipoUsuario = mysql_query("SELECT LOGIN_S FROM socio WHERE LOGIN_S ='$UsuarioActivo'");
+            
+            $TIpoUsuario = mysql_fetch_row($VerificarTipoUsuario);
+            
+         
+            
+            if(is_array($TIpoUsuario))
+            {
+                
+                
+            }
+            else{
+                
+              
+                                       
+            }
+            
+            
+          
+            
             //cerrar conexion--------------------------
             mysql_close($conexion);
             
@@ -252,21 +287,15 @@
                 $direccion = $fila["DIRECCION_GE"];
                 $contrasena = $fila["PASSWORD_U"];
             }
-           ?>        
-
-        <div id="page-wrapper">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h2 class="page-header">Modificar Informacion Personal:</h2>
-                    <div class="col-lg-6" >
-                                    <form method = "post" id="FormularioRegistroUsuarioGE">
-                                        
+           ?>       
+                        
+                        <form method = "post" id="FormularioRegistroUsuarioGE">    
                                         <div class="form-group">
                                             <div class="input-group">
                                                 <span class="input-group-addon">
                                                   <span class="glyphicon glyphicon-user"></span>
                                                 </span>
-                                                <input class="form-control" type="text" name="nombreU" id="nombreU" value="<?php echo $UsuarioActivo ?>" readonly='readonly' pattern="\b[a-zA-z]{5}[a-zA-z0-9]{0,9}" title="Minimo 5 y Maximo 14 caracteres...Ejm: Bittle123, Bitle" required>
+                                                <input class="form-control" type="text" name="nombreU" id="nombreU" value=<?php echo $UsuarioActivo?> " readonly="readonly" pattern="\b[a-zA-z]{5}[a-zA-z0-9]{0,9}" title="Minimo 5 y Maximo 14 caracteres...Ejm: Bittle123, Bitle" required>
                                             </div>
                                         </div>
                                         
@@ -275,7 +304,7 @@
                                                 <span class="input-group-addon">
                                                   <span class="glyphicon glyphicon-user"></span>
                                                 </span>
-                                                <input class="form-control" type="text" name="nombreL" id="nombreL" value="<?php echo $nombreLargo ?>"readonly='readonly' minlength="3" pattern=".{3,}" title="Nombre largo muy corto" required  onkeypress="return validarLetras(event)">
+                                                <input class="form-control" type="text" name="nombreL" id="nombreL" value="<?php echo $nombreLargo ?>"readonly="readonly" minlength="3" pattern=".{3,}" title="Nombre largo muy corto" required  onkeypress="return validarLetras(event)">
                                             </div>
                                         </div>
                                         
@@ -284,7 +313,7 @@
                                                 <span class="input-group-addon">
                                                   <span class="glyphicon glyphicon-user"></span>
                                                 </span>
-                                                <input class="form-control" type="text" name="nombreC" id="nombreC" value="<?php echo $nombreCorto ?>" readonly='readonly' minlength="3" pattern=".{3,}" title="Nombre corto muy corto" required  onkeypress="return validarLetras(event)">
+                                                <input class="form-control" type="text" name="nombreC" id="nombreC" value="<?php echo $nombreCorto ?>" readonly="readonly" minlength="3" pattern=".{3,}" title="Nombre corto muy corto" required  onkeypress="return validarLetras(event)">
                                             </div>
                                         </div>
                                         
@@ -329,7 +358,9 @@
                                             <button type="submit" name="submit" class="btn btn-primary" onclick="this.form.action='ModificarGE.php'">  <span class="glyphicon glyphicon-ok"></span> Actualizar</button>
                                         </div>
                                         
-                                     </form>              
+                                     </form> 
+
+                                
                             <div id="panelResultadoGE">
                                 
                             </div>        

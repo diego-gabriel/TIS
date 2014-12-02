@@ -111,9 +111,7 @@
                 <div class="sidebar-collapse">
                     <ul class="nav" id="side-menu">
                         
-                         <li>
-                            <a href="AdministrarGrupoEmpresa.php"><i class="fa fa-book"></i> Administrar Grupo Empresas</a>
-                        </li>
+                        
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-files-o "></i> Documentos <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
@@ -227,10 +225,6 @@
                           <li>
                             <a href="lista-de-noticias.php"><i class="fa fa-comment"></i> Foro</a>
                          </li>
-                        <li>
-                              <a href="lista_doc_subidos.php"><i class="fa fa-tasks fa-fw"></i>Documentos Subidos </a>  
-                                              
-                          </li>
                           <li>
                             <a href="#"><i class="fa fa-question-circle fa-fw"></i> Ayuda <span class="fa arrow"></span></a>
    
@@ -271,11 +265,16 @@
                                         <?php
                                             
                                             
-                                            $c1="SELECT ge.`NOMBRE_LARGO_GE` FROM `inscripcion` AS i,`asesor` AS a,`grupo_empresa` AS `ge`,`gestion` AS g,`proyecto` AS p WHERE i.`NOMBRE_UA` = a.`NOMBRE_U` AND i.`NOMBRE_UGE` = ge.`NOMBRE_U` AND i.`ID_G` = g.`ID_G` AND i.`CODIGO_P` = p.`CODIGO_P` AND a.`NOMBRE_U` LIKE '$UsuarioActivo'";
+                                            $c1="SELECT i.`NOMBRE_UGE` FROM `inscripcion` AS i WHERE i.`NOMBRE_UA` = '$UsuarioActivo'";
                                             $a1=$con->consulta($c1);
+                                            echo "<option>PUBLICO</option>";
                                             echo "<option>TODOS</option>";
                                             while($v1 =  mysql_fetch_array($a1)){
-                                                echo "<option>".$v1[0]."</option>";
+                                                $nom=$v1[0];
+                                                $cnom="SELECT g.`NOMBRE_LARGO_GE` FROM `grupo_empresa` AS g WHERE i.`NOMBRE_UGE` = '$nom'";
+                                                $a1=$con->consulta($c1);
+                                                $nom1=mysql_fetch_row($a1);
+                                                echo "<option>".$nom1[0]."</option>";
                                             }
                                             echo "<input type='hidden' name='idAsesor' value='$UsuarioActivo'>";
                                         ?>

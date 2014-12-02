@@ -40,9 +40,9 @@ var_dump($comentario_add);
  var_dump($row);
  echo $id;
  $guardar_doc = mysql_query("INSERT INTO documento (ID_R,TAMANIO_D,RUTA_D,VISUALIZABLE_D,DESCARGABLE_D)
-		VALUES('$id','1024','$new_ruta','$visualizable','$descargable')");
+		VALUES('$id','1024','$ruta','$visualizable','$descargable')");
  $des_D=mysql_query("INSERT INTO descripcion (ID_R,DESCRIPCION_D)
-		VALUES('$id','$des')");
+		VALUES('$id','$descripcion')");
   $destinatario=mysql_query("INSERT INTO receptor (ID_R,RECEPTOR_R)
 		VALUES('$id','$grupo')");
 $guardar = mysql_query("INSERT INTO periodo (ID_R,fecha_p,hora_p) VALUES ('$id','$fechap','$horap')") or

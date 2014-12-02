@@ -103,6 +103,9 @@
             <div class="navbar-default navbar-static-side" role="navigation">
                 <div class="sidebar-collapse">
                     <ul class="nav" id="side-menu">
+                        <li>
+                            <a href="AdministrarGrupoEmpresa.php"><i class="fa fa-book"></i> Administrar Grupo Empresas</a>
+                        </li>
                         
                         
                         <li>
@@ -199,15 +202,23 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
-                        
-                        <li>
-                            <a href="#"><i class="fa fa-warning fa-fw"></i> Notificaciones</a>
-                        </li>
+                     
                         <li>
                             <a href="#"><i class="fa fa-building-o fa-fw"></i> Actividades<span class="fa arrow"></span></a>
                             
                             <!-- /.nav-second-level -->
                         </li>
+                        <li>
+                              <a href="#"><i class="fa fa-tasks fa-fw"></i>Informacion Personal<span class="fa arrow"></span> </a>  
+                                              <ul class="nav nav-third-level">
+                                                <li>
+                                                    <a href="modificar_asesor.php">Modificar Datos Personales </a>                             
+                                                </li>       
+                                            </ul>
+                          </li>
+                        <li>
+                            <a href="lista-de-noticias.php"><i class="fa fa-comment"></i> Foro</a>
+                         </li>
                         
                         <li>
                             <a href="#"><i class="fa fa-question-circle fa-fw"></i> Ayuda <span class="fa arrow"></span></a>
@@ -263,7 +274,7 @@
                                     
                                 echo '<div class="form-group">';
                                 echo '<label><h4>Seleccione la Grupo Empresa a evaluar:</h4></label>';
-                                echo '<select name="GrupoEscogido" class="form-control" id="" required>';
+                                echo '<select name="GrupoEscogido" class="form-control" title="Debe seleccionar una grupo empresa" required>';
                                     echo '<option value="">Seleccione una grupo empresa</option>';
                         
                                                 
@@ -341,7 +352,7 @@
                                                 if ($TipoC[$i][0] == 4) {
 
                                                         echo'<div class="form-group">';
-                                                            echo'<input type="text" name="valorInput[]" class="form-control" pattern="^[0-9]{1,3}" required>';
+                                                            echo'<input type="text" name="valorInput[]" class="form-control" pattern="^[0-9]{1,3}" title="Debe llenar el campo puntaje con un valor numerico valido" required>';
                                                         echo'</div>';
                                                     echo'</div>';
                                                 echo'</div>';
@@ -419,7 +430,7 @@
                             {
                                 echo 'No tiene ningun formulario habilitado<br>';
                                 echo 'Vaya al siguiente link para habilitar uno<br> ';
-                                echo '<a href="http://localhost/saetis/Vista/SeleccionarFormulario.php" class="btn btn-default btn-xs">Habilitar Formulario</a>';
+                                echo '<a href="../Vista/SeleccionarFormulario.php" class="btn btn-default btn-xs">Habilitar Formulario</a>';
                                 
                             }
                             ?>

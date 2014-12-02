@@ -201,10 +201,7 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
-                        
-                        <li>
-                            <a href="#"><i class="fa fa-warning fa-fw"></i> Notificaciones</a>
-                        </li>
+    
                         
                           <li>
                             <a href="#"><i class="fa fa-building-o fa-fw"></i> Actividades<span class="fa arrow"></span></a>

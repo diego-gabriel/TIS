@@ -104,7 +104,6 @@
             <div class="navbar-default navbar-static-side" role="navigation">
                 <div class="sidebar-collapse">
                     <ul class="nav" id="side-menu">
-                        
                         <li>
                             <a href="AdministrarGrupoEmpresa.php"><i class="fa fa-book"></i> Administrar Grupo Empresas</a>
                         </li>
@@ -220,10 +219,6 @@
                           <li>
                             <a href="lista-de-noticias.php"><i class="fa fa-comment"></i> Foro</a>
                          </li>
-                         <li>
-                              <a href="lista_doc_subidos.php"><i class="fa fa-tasks fa-fw"></i>Documentos Subidos </a>  
-                                              
-                          </li>
                           <li>
                             <a href="#"><i class="fa fa-question-circle fa-fw"></i> Ayuda <span class="fa arrow"></span></a>
    

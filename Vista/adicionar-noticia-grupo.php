@@ -33,7 +33,7 @@
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
    
     <link href="css/estiloTabla.css" rel="stylesheet" type="text/css" />
-<link href="css/style.css" rel="stylesheet" type="text/css" />
+
 </head>
 
 <body>
@@ -170,15 +170,9 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                   
+                    <h2 class="page-header">Nuevo</h2>
                     <div class="col-lg-6" >
-                         <div class="article"><br>
-                             
-                            
-                            <div class="panel-heading">
-                            <i ></i><h2> Nuevo </h2>
-                        </div>
-                        </div>
+                       
                             
 
 <?php
@@ -214,34 +208,16 @@ echo "Tema Adicionado";
 ?>
 
 <form name="input" action="adicionar-noticia.php" method="post">
-  <div class="form-group">
-                      <label class="col-sm-2 control-label">Titulo:</label>
-                             <div class="col-xs-12">
-                             </br>
-                                  <input id= "campoTitulo" type="text" name= "titulo"  class="form-control"  data-toggle="tooltip" data-placement="right" title="T&iacute;tulo con el que se mostrar&aacute; el recurso">
-
-                            </div>
-                   </div>
-</br></br>
-
- <div class="form-group">
- </br>
-                            <label class="col-sm-2 control-label">Texto:</label>
-                        </br>
-                                <div class="col-sm-12">
-                                     <textarea class="jqte-test"  type="text" name="texto" id="campoDescripcion" rows="8" cols="101" data-toggle="tooltip" data-placement="right" style="overflow: auto;"></textarea>
-                                </div>
-                      </div>
-</br>
-
-</br>
-
-</br>
-<div class="col-xs-12">
-</br>
-<input type="submit" class="btn btn-primary" value="Adicionar Tema">
-</div>
-
+<label>Titulo:</label>
+<br>
+<input class="form-control"  name="titulo" type="text" />
+<br>
+<label>Texto:</label>
+<br>
+<textarea name="texto" rows="5" cols="105" class="jqte-test"></textarea>
+<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<input type="submit"  class="btn btn-primary" value="Adicionar Tema">
 </form>
                     </div>
                 </div>

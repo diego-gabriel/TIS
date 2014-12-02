@@ -35,7 +35,7 @@ $con=new conexion();
                     $nombre_asesor=  mysql_fetch_row($nombre);
                     $nombre_u=$nombre_asesor[0];
 
-                    $b1="INSERT INTO inscripcion(NOMBRE_UA, NOMBRE_UGE, ID_G, CODIGO_P) VALUES ('".$nombre_u."','".$b."','".$id_gestion_."','1')";
+                    $b1="INSERT INTO inscripcion(NOMBRE_UA, NOMBRE_UGE) VALUES ('".$nombre_u."','".$b."')";
                     //$b1="INSERT INTO inscripcion(NOMBRE_UA, NOMBRE_UGE, ID_G) VALUES ('".$nombre_u."','".$b."','".$id_gestion_."')";
                     $con->consulta($b1);
                     echo"<script type=\"text/javascript\">alert('Asesor elegido'); window.history.back();</script>";

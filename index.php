@@ -98,11 +98,11 @@
 								if(!$conexion){die('La conexion ha fallado por:'.mysql_error());}
 								mysql_select_db("saetis",$conexion);
         $peticion11 = mysql_query("select count(*)
-  from registro
-  where TIPO_T='publico'"); 
+  from receptor
+  where RECEPTOR_R='PUBLICO'"); 
         while($fila = mysql_fetch_array($peticion11))
-                $valor= $fila["count(*)"];                         
-                              
+                $valor= $fila["count(*)"] ;                         
+                      
        ?>                                        
                                             
                                          
@@ -135,15 +135,15 @@
 								mysql_select_db("saetis",$conexion);
 								//Peticion
 								$peticion = mysql_query("SELECT registro.NOMBRE_U,registro.NOMBRE_R,registro.FECHA_R,registro.HORA_R, asesor.NOMBRES_A, asesor.APELLIDOS_A , documento.RUTA_D	
-FROM registro , asesor , documento
-WHERE registro.NOMBRE_U=asesor.NOMBRE_U and  `TIPO_T`='publico' and documento.ID_R=registro.ID_R");
+FROM registro , asesor , documento , receptor
+WHERE registro.NOMBRE_U=asesor.NOMBRE_U and  `TIPO_T`='publicaciones' and documento.ID_R=registro.ID_R and receptor.ID_R=registro.ID_R and RECEPTOR_R='PUBLICO'");
                                                                 
                                                                 $peticion1 = mysql_query("select registro.HORA_R, registro.FECHA_R, registro.NOMBRE_R, asesor.NOMBRES_A,asesor.APELLIDOS_A
 from registro, asesor
 where not exists 
 (select documento.ID_R
  from documento 
- where documento.ID_R=registro.ID_R) and TIPO_T='publico' and registro.NOMBRE_U=asesor.NOMBRE_U");
+ where documento.ID_R=registro.ID_R) and TIPO_T='publicaciones' and registro.NOMBRE_U=asesor.NOMBRE_U");
                                                                 
 								while($fila = mysql_fetch_array($peticion))
                                   {  
@@ -156,13 +156,14 @@ where not exists
                                  Aviso
                                 </div>    
                                 <div class="letra_aviso" >
-                                     <?php echo $fila['NOMBRE_R']; ?>&nbsp;&nbsp;&nbsp;
-                                     <a class="link-dos" href="<?php echo $fila['RUTA_D']; ?>" onclick="">Descargar</a>
-         
+                                     <?php echo $fila['NOMBRE_R']; echo $fila['RUTA_D'];?>&nbsp;&nbsp;&nbsp;
+                                     <a href="../<?php echo $fila['RUTA_D']; ?>" ><font color='blue'>Descargar</a>
+                                     
+                                 
                                 </div>
                                 <div class="pie_aviso">Publicado el   <?php       echo $fila['FECHA_R']; ?>  &nbsp;&nbsp; Hora:<?php       echo $fila['HORA_R']; ?> </div>
                             </div>         
-                                					<?php
+                                					<?php 
                                                                 $numero++;	}
                                                                 
 								while($fila1 = mysql_fetch_array($peticion1))
