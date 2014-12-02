@@ -22,7 +22,7 @@ if (isset($_POST['proyecto'])) {
             $conect->consulta("INSERT INTO inscripcion_proyecto(CODIGO_P, NOMBRE_U) VALUES('$codProy','$nombreU')"); 
 
 
-            echo"<script type=\"text/javascript\">alert('Se registro la seleccion'); window.location='../Vista/inicio_grupo_empresa.php';</script>";  
+            echo"<script type=\"text/javascript\">alert('Su inscripcion a sido satisfactoria'); window.location='../Vista/inicio_grupo_empresa.php';</script>";  
 
         }
         else{        

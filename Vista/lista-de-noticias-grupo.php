@@ -3,10 +3,13 @@
    
   $conexion = mysql_connect("localhost","root","");
 	//Control
-	if(!$conexion){die('La conexion ha fallado por:'.mysql_error());}
-	mysql_select_db("saetis",$conexion);
-   session_start();
- $UsuarioActivo = $_SESSION['usuario'];
+  if(!$conexion){die('La conexion ha fallado por:'.mysql_error());}
+  mysql_select_db("saetis",$conexion);
+  session_start();
+  $UsuarioActivo = $_SESSION['usuario'];
+  $conexion = new conexion();
+  $VerificarUsuario = $conexion->consulta("SELECT NOMBRE_U FROM usuario WHERE NOMBRE_U = '$UsuarioActivo' ");
+  $VerificarUsuario2 = mysql_fetch_row($VerificarUsuario);
 ?>
 
 <html>
@@ -69,13 +72,7 @@
 
    <link href="css/estiloTabla.css" rel="stylesheet" type="text/css" />
     <div id="wrapper">
-       
-        
-        <!--<h2>design by <a href="#" title="flash templates">flash-templates-today.com</a></h2>-->
-        
-    
-        
-        <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
+                      <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
                     <span class="sr-only">Toggle navigation</span>
@@ -83,61 +80,49 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-         <a class="navbar-brand" href="inicio_grupo_empresa.php">Inicio </a>
+                   <a class="navbar-brand" href="inicio_grupo_empresa.php">Inicio </a>
             </div>
             <!-- /.navbar-header -->
 
             <ul class="nav navbar-top-links navbar-right">
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-envelope fa-fw"></i>  <i class="fa fa-caret-down"></i>
-                    </a>
-                </li>
-                <!-- /.dropdown -->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-tasks fa-fw"></i>  <i class="fa fa-caret-down"></i>
-                    </a>
-                </li>
-                <!-- /.dropdown -->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-bell fa-fw"></i>  <i class="fa fa-caret-down"></i>
-                    </a>
-                </li>
-                <!-- /.dropdown -->
-                <li class="dropdown">
+                               <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        <?php
+                            if (is_array($VerificarUsuario2)) {   
+                        ?>
+                        <li><a href="ModificarGrupoEmpresa.php"><i class="fa fa-user fa-fw"></i> Modificar Datos personales</a>
                         </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        <?php
+                            }else{
+                        ?>
+                        <li><a href="ModificarSocio.php"><i class="fa fa-user fa-fw"></i> Modificar Datos personales</a>
                         </li>
+                         <?php
+                              }        
+                         ?>
                         <li class="divider"></li>
-                        <li><a href="unlog.php"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="unlog.php"><i class="fa fa-sign-out fa-fw"></i>Salir</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
                 </li>
-                <!-- /.dropdown -->
             </ul>
             <!-- /.navbar-top-links -->
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
 
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
             <div class="navbar-default navbar-static-side" role="navigation">
                 <div class="sidebar-collapse">
                     <ul class="nav" id="side-menu">
@@ -149,19 +134,89 @@
                                 
                                 <li>
                                     <a href="#" >Subir Documentos <span class="fa arrow"></span></a>
-                                 
+                                    <ul class="nav nav-third-level">
+                                        <?php
+                                        try{
+                                                  //creamos la conexion a la base de datos
+                                                 $conexion = new conexion();
+                                                 $idUsuarioAsesor1=$conexion->consulta("SELECT i.`NOMBRE_UA` FROM inscripcion AS i WHERE i.NOMBRE_UGE LIKE '$UsuarioActivo'");
+                                                 $f=mysql_fetch_array($idUsuarioAsesor1);//$idUsuarioG='bolivia';
+                                                 $nombre_a=$f['NOMBRE_UA'];
+                                                 //$idUsuarioAsesor=$conexion->consulta("SELECT `NOMBRE_UA` FROM inscripcion WHERE NOMBRE_UGE LIKE '$UsuarioActivo'");
+                                                $idUsuarioAsesor=$nombre_a;
+                                                $idUsuarioG=$UsuarioActivo;
+                                                 $consulta=$conexion->consulta("SELECT r.NOMBRE_R,r.`NOMBRE_U` FROM registro AS r,plazo AS p,descripcion AS d,`estado` AS e,`tipo` AS t WHERE r.ID_R = d.ID_R AND r.TIPO_T = t.TIPO_T AND r.ID_R = p.ID_R AND e.`ESTADO_E` = r.`ESTADO_E` AND r.`ESTADO_E` LIKE 'habilitado' AND r.TIPO_T LIKE 'documento requerido' AND r.NOMBRE_U LIKE '$idUsuarioAsesor'");
+                                                 $indice=1;
+                                                 while($fila = mysql_fetch_array($consulta))
+                                                {
+                                                     //aqui introducimos atraves de codigo php los enlaces de opciones
+                                                     if(!stripos($fila['0'], "modif"))
+                                                     {
+                                                     $temporal=$fila['1'];
+                                                         echo   "<form name='formulario$indice' action='subir_documento.php' enctype='multipart/form-data' method='POST'>"
+                                                                 . "<input type='hidden' name='nombreUsuarioAsesor' value='$temporal'>"
+                                                                 . "<input type='hidden' name='nombreRegistro' value='".$fila['0']."'>"
+                                                                 . "<input type='hidden' name='nombreUsuarioG' value='$idUsuarioG'>"
+                                                                 . "</form>"
+                                                                 . "<li>"
+                                                                 . "<a href='javascript:document.formulario$indice.submit();'>".$fila['0']."</a>"                                       
+                                                                 . "</li>";
+                                                         
+                                                     $indice++;
+                                                     }
+                                        
+                                                }
+                                                
+                                                $consultaDos=$conexion->consulta("SELECT r.NOMBRE_R,r.`NOMBRE_U` FROM registro AS r,plazo AS p,descripcion AS d,`estado` AS e,`tipo` AS t WHERE r.ID_R = d.ID_R AND r.TIPO_T = t.TIPO_T AND r.ID_R = p.ID_R AND e.`ESTADO_E` = r.`ESTADO_E` AND r.`ESTADO_E` LIKE 'habilitado' AND r.TIPO_T LIKE 'documento requerido' AND r.NOMBRE_U LIKE '$idUsuarioAsesor' AND LOWER(r.`NOMBRE_R`) LIKE '%modif%'");
+                                                //$consultaTres=$conexion->consulta("SELECT r.`NOMBRE_R` FROM registro AS r,`tipo` AS t, `documento` AS d,`estado` AS e WHERE r.`ID_R` = d.`ID_R` AND r.`TIPO_T` = t.`TIPO_T` AND r.`ESTADO_E` = e.`ESTADO_E` AND t.`TIPO_T` LIKE 'orden de cambio' AND r.`NOMBRE_U` LIKE '$idUsuarioG'");
+                                                if (mysql_num_rows($consultaDos) != 0) {
+                                                    
+                                                    while($filaDos = mysql_fetch_array($consultaDos))
+                                                {
+                                                     //aqui introducimos atraves de codigo php los enlaces de opciones de subir propuesta modificada
+                                                     
+                                                     
+                                                     $temporalDos=$filaDos['1'];
+                                                         echo   "<form name='formulario$indice' action='subir_documento.php' enctype='multipart/form-data' method='POST'>"
+                                                                 . "<input type='hidden' name='nombreUsuarioAsesor' value='$temporalDos'>"
+                                                                 . "<input type='hidden' name='nombreRegistro' value='".$filaDos['0']."'>"
+                                                                 . "<input type='hidden' name='nombreUsuarioG' value='$idUsuarioG'>"
+                                                                 . "</form>"
+                                                                 . "<li>"
+                                                                 . "<a href='javascript:document.formulario$indice.submit();'>".$filaDos['0']."</a>"                                       
+                                                                 . "</li>";
+                                                         
+                                                     $indice++;
+                                                     
+                                        
+                                                }
+                                                    
+                                                    
+                                                }
+                                                
+                                                $conexion->cerrarConexion();
+                                               
+                                            }
+                                        catch (ErrorException $e)
+                                        {
+                                              echo $e;
+                                        }
+                                    ?>
+                                    </ul>
                                 </li>
                                 <li>
                                     <a href="publicacion_grupo.php">Recepci&oacute;n Documentos </a>
                                     
-                                </li>
-                               
+                                </li> 
                             </ul>
-                            
+                      
                             <!-- /.nav-second-level -->
                         </li>
-                        
+                        <?php
+                            if (is_array($VerificarUsuario2)) {   
+                        ?>
                          <li>
+                             
                             <a href="#"><i class="fa fa-tasks fa-fw"></i> Tareas<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <?php
@@ -176,22 +231,29 @@
                                      . "<a href='javascript:document.formularioNombre.submit();'>Verificar Nombre de Empresa</a>"
                                      . "</li>";
                                 ?>
+                                
                                 <li>
                                     <a href="seleccionar_asesor.php">Seleccionar Asesor</a>
                                 </li>
                                 
                                  <li>
+                                     <a href="InscripcionGEProyecto.php">Inscribirse a proyecto</a>
+                                </li>
+                                
+                                <li>
                                      <a href="AnadirSocio.php">Añadir socios</a>
                                 </li>
                                 
                                 <li>
                                     <a href="AnadirRL.php">Seleccionar Representante legal</a>
                                 </li>
-                                
+
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
-                        
+                        <?php
+                                }
+                        ?>
                         <li>
                             <a href="#"><i class="fa fa-warning fa-fw"></i> Notificaciones<span class="fa arrow"></span></a>
                                                     
@@ -235,18 +297,10 @@
                 <!-- /.sidebar-collapse -->
             </div>
             
-            
-            
-            
-            
-            
-            
-            
-            
-            
+               
             <!-- /.navbar-static-side -->
         </nav>
-        
+
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">

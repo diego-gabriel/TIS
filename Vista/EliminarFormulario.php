@@ -195,13 +195,7 @@ include("controlSesion.php");
                                 <li>
                                     <a href="#">Seguimiento Grupo Empresa <span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
-                                        <li>
-                                            <a href="CrearModalidadEvaluacion.php"> Modalidad de Evaluaci&oacute;n </a>
-                                            
-                                        </li>
-                                        <li>
-                                            <a href="RecibirModalidadEvaluacion.php">Modalidades de Calificaci&oacute;n</a>
-                                        </li>
+                                        
                                         <li>
                                             <a id="Seguimiento" href="../Vista/inicio_asesor.php">Seguimiento</a>
                                         </li>

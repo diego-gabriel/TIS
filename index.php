@@ -102,7 +102,9 @@
   where RECEPTOR_R='PUBLICO'"); 
         while($fila = mysql_fetch_array($peticion11))
                 $valor= $fila["count(*)"] ;                         
-                      
+              $row_Recordset1='Descargar';
+              if($valor<'4'){ $valor='4'; }
+              
        ?>                                        
                                             
                                          
@@ -134,16 +136,16 @@
 								//Seleccion
 								mysql_select_db("saetis",$conexion);
 								//Peticion
-								$peticion = mysql_query("SELECT registro.NOMBRE_U,registro.NOMBRE_R,registro.FECHA_R,registro.HORA_R, asesor.NOMBRES_A, asesor.APELLIDOS_A , documento.RUTA_D	
-FROM registro , asesor , documento , receptor
-WHERE registro.NOMBRE_U=asesor.NOMBRE_U and  `TIPO_T`='publicaciones' and documento.ID_R=registro.ID_R and receptor.ID_R=registro.ID_R and RECEPTOR_R='PUBLICO'");
+								$peticion = mysql_query("SELECT registro.NOMBRE_U,registro.NOMBRE_R,registro.FECHA_R,registro.HORA_R, asesor.NOMBRES_A, asesor.APELLIDOS_A , documento.RUTA_D, descripcion.DESCRIPCION_D	
+FROM registro , asesor , documento , receptor , descripcion 
+WHERE registro.NOMBRE_U=asesor.NOMBRE_U and  `TIPO_T`='publicaciones' and documento.ID_R=registro.ID_R and descripcion.ID_R=registro.ID_R and receptor.ID_R=registro.ID_R and RECEPTOR_R='PUBLICO'");
                                                                 
-                                                                $peticion1 = mysql_query("select registro.HORA_R, registro.FECHA_R, registro.NOMBRE_R, asesor.NOMBRES_A,asesor.APELLIDOS_A
-from registro, asesor
+                                                                $peticion1 = mysql_query("select registro.HORA_R, registro.FECHA_R, registro.NOMBRE_R, asesor.NOMBRES_A,asesor.APELLIDOS_A, descripcion.DESCRIPCION_D
+from registro, asesor, descripcion 
 where not exists 
 (select documento.ID_R
  from documento 
- where documento.ID_R=registro.ID_R) and TIPO_T='publicaciones' and registro.NOMBRE_U=asesor.NOMBRE_U");
+ where documento.ID_R=registro.ID_R) and TIPO_T='publicaciones' and registro.NOMBRE_U=asesor.NOMBRE_U and registro.ID_R=descripcion.ID_R");
                                                                 
 								while($fila = mysql_fetch_array($peticion))
                                   {  
@@ -153,12 +155,15 @@ where not exists
                                 <div class="subtitulo_aviso" ><strong>Docente: </strong> <?php echo $fila['NOMBRES_A']; ?>&nbsp;&nbsp;<?php echo $fila['APELLIDOS_A']; ?>
                                 &nbsp;&nbsp;&nbsp;<strong> </strong> </div>                           
                                 <div  class="titulo_aviso">
-                                 Aviso
+                                 <?php echo $fila['NOMBRE_R']; ?>
                                 </div>    
                                 <div class="letra_aviso" >
-                                     <?php echo $fila['NOMBRE_R']; echo $fila['RUTA_D'];?>&nbsp;&nbsp;&nbsp;
-                                     <a href="../<?php echo $fila['RUTA_D']; ?>" ><font color='blue'>Descargar</a>
-                                     
+                                     <?php echo $fila['DESCRIPCION_D']; ?>&nbsp;&nbsp;&nbsp;
+     
+                                       
+                                     <?php  
+                                        echo "<a href='".$fila['RUTA_D']."' target='_blank'><font color='blue'>".$row_Recordset1."</a>"; 
+                                      ?>
                                  
                                 </div>
                                 <div class="pie_aviso">Publicado el   <?php       echo $fila['FECHA_R']; ?>  &nbsp;&nbsp; Hora:<?php       echo $fila['HORA_R']; ?> </div>
@@ -174,10 +179,10 @@ where not exists
                                 <div class="subtitulo_aviso" ><strong>Docente: </strong> <?php echo $fila1['NOMBRES_A']; ?>&nbsp;&nbsp;<?php echo $fila1['APELLIDOS_A']; ?>
                                 &nbsp;&nbsp;&nbsp;<strong> </strong> </div>                           
                                 <div  class="titulo_aviso">
-                                 Aviso
+                                 <?php echo $fila1['NOMBRE_R']; ?>
                                 </div>    
                                 <div class="letra_aviso" >
-                                     <?php echo $fila1['NOMBRE_R']; ?>&nbsp;&nbsp;&nbsp;
+                                     <?php echo $fila1['DESCRIPCION_D']; ?>&nbsp;&nbsp;&nbsp;
                                    
          
                                 </div>

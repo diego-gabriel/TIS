@@ -87,35 +87,28 @@ session_start();
             <!-- /.navbar-header -->
 
             <ul class="nav navbar-top-links navbar-right">
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-envelope fa-fw"></i>  <i class="fa fa-caret-down"></i>
-                    </a>
-                </li>
-                <!-- /.dropdown -->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-tasks fa-fw"></i>  <i class="fa fa-caret-down"></i>
-                    </a>
-                </li>
-                <!-- /.dropdown -->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-bell fa-fw"></i>  <i class="fa fa-caret-down"></i>
-                    </a>
-                </li>
+
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        <?php
+                            if (is_array($VerificarUsuario2)) {   
+                        ?>
+                        <li><a href="ModificarGrupoEmpresa.php"><i class="fa fa-user fa-fw"></i> Modificar Datos personales</a>
                         </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        <?php
+                            }else{
+                        ?>
+                        <li><a href="ModificarSocio.php"><i class="fa fa-user fa-fw"></i> Modificar Datos personales</a>
                         </li>
+                         <?php
+                              }        
+                         ?>
                         <li class="divider"></li>
-                        <li><a href="unlog.php"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="unlog.php"><i class="fa fa-sign-out fa-fw"></i>Salir</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -225,22 +218,15 @@ session_start();
                             
                             <!-- /.nav-second-level -->
                         </li>
-                        
+                        <?php
+                            if (is_array($VerificarUsuario2)) {   
+                        ?>
                          <li>
+                             
                             <a href="#"><i class="fa fa-tasks fa-fw"></i> Tareas<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                                <?php
-                                                 $idUsuarioAsesor='leticia';
-                                                 $idUsuarioG='freevalue';
-                                echo   ""
-                                     . "<form name='formularioNombre' action='verificar_nombre.php' enctype='multipart/form-data' method='POST'>"
-                                     . "<input type='hidden' name='nombreGrupo' value='$idUsuarioG'>"
-                                     . "<input type='hidden' name='nombreAsesor' value='$idUsuarioAsesor'>"
-                                     . "</form>"
-                                     . "<li>"
-                                     . "<a href='javascript:document.formularioNombre.submit();'>Verificar Nombre de Empresa</a>"
-                                     . "</li>";
-                                ?>
+                                
+                                
                                 <li>
                                     <a href="seleccionar_asesor.php">Seleccionar Asesor</a>
                                 </li>
@@ -256,11 +242,13 @@ session_start();
                                 <li>
                                     <a href="AnadirRL.php">Seleccionar Representante legal</a>
                                 </li>
-                                
+
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
-                        
+                        <?php
+                                }
+                        ?>
                         <li>
                             <a href="#"><i class="fa fa-warning fa-fw"></i> Notificaciones<span class="fa arrow"></span></a>
                                                     
@@ -282,28 +270,6 @@ session_start();
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
-                        </li>
-                        
-                        <li>
-                            <a href="#"><i class="fa fa-tasks fa-fw"></i>Informacion Personal<span class="fa arrow"></span> </a>  
-                                <ul class="nav nav-third-level">
-                                    <?php
-                                    if (is_array($VerificarUsuario2)) {   
-                                    ?>
-                                    <li>
-                                        <a href="ModificarGrupoEmpresa.php">Modificar Datos Personales </a>                             
-                                    </li>     
-                                    <?php
-                                    }
-                                    else{
-                                    ?>
-                                    <li>
-                                        <a href="ModificarSocio.php">Modificar Datos Personales </a>                             
-                                    </li>  
-                                     <?php
-                                    }        
-                                    ?>    
-                                </ul>
                         </li>
                         
                         <li>

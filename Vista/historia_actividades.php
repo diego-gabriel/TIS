@@ -1,20 +1,23 @@
 <!DOCTYPE html>
 <?php 
-session_start();
- $usuario= $_SESSION['usuario'];
-
- 
- 
-  							$conexion = mysql_connect("localhost","root","","saetis");
-								//Control
-								if(!$conexion){die('La conexion ha fallado por:'.mysql_error());}
-								//Seleccion
-								mysql_select_db("saetis",$conexion);
-								//Peticion
-								$peticion22 = mysql_query("SELECT `NOMBRE_UA` FROM `inscripcion` WHERE `NOMBRE_UGE`='$usuario'");
-                                                                     while ($correo = mysql_fetch_array($peticion22))
-                                                                       {        
-                                                                              $asesor=$correo["NOMBRE_UA"];} 
+    include '../Modelo/conexion.php';
+    session_start();
+    $usuario = $_SESSION['usuario'];
+    include("controlSesion.php");
+    $con=new conexion();
+    $VerificarUsuario = $con->consulta("SELECT NOMBRE_U FROM usuario WHERE NOMBRE_U = '$usuario' ");
+    $VerificarUsuario2 = mysql_fetch_row($VerificarUsuario);
+    
+    $conexion = mysql_connect("localhost","root","","saetis");
+        //Control
+        if(!$conexion){die('La conexion ha fallado por:'.mysql_error());}
+        //Seleccion
+        mysql_select_db("saetis",$conexion);
+        //Peticion
+        $peticion22 = mysql_query("SELECT `NOMBRE_UA` FROM `inscripcion` WHERE `NOMBRE_UGE`='$usuario'");
+             while ($correo = mysql_fetch_array($peticion22))
+               {        
+                      $asesor=$correo["NOMBRE_UA"];} 
 ?>
 
 <html>
@@ -90,7 +93,7 @@ session_start();
     <!--<h2>design by <a href="#" title="flash templates">flash-templates-today.com</a></h2>-->
         
  
-         <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
                     <span class="sr-only">Toggle navigation</span>
@@ -103,40 +106,30 @@ session_start();
             <!-- /.navbar-header -->
 
             <ul class="nav navbar-top-links navbar-right">
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-envelope fa-fw"></i>  <i class="fa fa-caret-down"></i>
-                    </a>
-                </li>
-                <!-- /.dropdown -->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-tasks fa-fw"></i>  <i class="fa fa-caret-down"></i>
-                    </a>
-                </li>
-                <!-- /.dropdown -->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-bell fa-fw"></i>  <i class="fa fa-caret-down"></i>
-                    </a>
-                </li>
-                <!-- /.dropdown -->
-                <li class="dropdown">
+                               <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        <?php
+                            if (is_array($VerificarUsuario2)) {   
+                        ?>
+                        <li><a href="ModificarGrupoEmpresa.php"><i class="fa fa-user fa-fw"></i> Modificar Datos personales</a>
                         </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        <?php
+                            }else{
+                        ?>
+                        <li><a href="ModificarSocio.php"><i class="fa fa-user fa-fw"></i> Modificar Datos personales</a>
                         </li>
+                         <?php
+                              }        
+                         ?>
                         <li class="divider"></li>
-                        <li><a href="unlog.php"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="unlog.php"><i class="fa fa-sign-out fa-fw"></i>Salir</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
                 </li>
-                <!-- /.dropdown -->
             </ul>
             <!-- /.navbar-top-links -->
 
@@ -144,9 +137,14 @@ session_start();
             
             
             
-      
             
-                        <div class="navbar-default navbar-static-side" role="navigation">
+            
+            
+            
+            
+            
+            
+            <div class="navbar-default navbar-static-side" role="navigation">
                 <div class="sidebar-collapse">
                     <ul class="nav" id="side-menu">
                         
@@ -172,20 +170,13 @@ session_start();
                          <li>
                             <a href="#"><i class="fa fa-tasks fa-fw"></i> Tareas<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                                <?php
-                                                 $idUsuarioAsesor='leticia';
-                                                 $idUsuarioG='freevalue';
-                                echo   ""
-                                     . "<form name='formularioNombre' action='verificar_nombre.php' enctype='multipart/form-data' method='POST'>"
-                                     . "<input type='hidden' name='nombreGrupo' value='$idUsuarioG'>"
-                                     . "<input type='hidden' name='nombreAsesor' value='$idUsuarioAsesor'>"
-                                     . "</form>"
-                                     . "<li>"
-                                     . "<a href='javascript:document.formularioNombre.submit();'>Verificar Nombre de Empresa</a>"
-                                     . "</li>";
-                                ?>
+                              
                                 <li>
                                     <a href="seleccionar_asesor.php">Seleccionar Asesor</a>
+                                </li>
+                                
+                                <li>
+                                     <a href="InscripcionGEProyecto.php">Inscribirse a proyecto</a>
                                 </li>
                                 
                                  <li>
@@ -242,6 +233,15 @@ session_start();
                 </div>
                 <!-- /.sidebar-collapse -->
             </div>
+            
+            
+            
+            
+            
+            
+            
+            
+            
             
             
             
