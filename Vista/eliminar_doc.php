@@ -296,7 +296,6 @@ session_start();
  
 $dir = "../Repositorio/asesor"; 
 $directorio=opendir($dir); 
-
 echo "<br><br>"; 
 while ($archivo = readdir($directorio)){ 
  if($archivo=='.' or $archivo=='..'){ 
@@ -305,11 +304,10 @@ while ($archivo = readdir($directorio)){
     
  $enlace =$dir.$archivo; 
  echo $enlace;
-
  echo "<ul type='square'><li>"; 
  echo "<a  class='link-dos' href=$enlace class='menu'>$archivo<br></a>" ; 
- 'eliminar_grupoEmpresa.php?id_us=".$fila['CODIGO_S']."'
-  echo "<a  class='link-dos' href='eliminacion.php?id_us="$enlace"'>Eliminar<br></a>" ; 
+ //'eliminar_grupoEmpresa.php?id_us=".$fila['CODIGO_S']."'  //ERROR
+ // echo "<a  class='link-dos' href='eliminacion.php?id_us="$enlace"'>Eliminar<br></a>" ; 
  echo "</li></ul>"; 
  
  } 

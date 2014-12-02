@@ -1,13 +1,11 @@
+
 <!DOCTYPE html>
 <?php
-include '../Modelo/conexion.php';
-session_start();
- include("controlSesion.php");
- $UsuarioActivo = $_SESSION['usuario'];
- $conexion = new conexion();
- $VerificarUsuario = $conexion->consulta("SELECT NOMBRE_U FROM usuario WHERE NOMBRE_U = '$UsuarioActivo' ");
- $VerificarUsuario2 = mysql_fetch_row($VerificarUsuario);
-
+    include '../Modelo/conexion.php';
+    session_start();
+    $UsuarioActivo = $_SESSION['usuario'];
+    include("controlSesion.php");
+    $con=new conexion();
 ?>
 <html>
 
@@ -41,13 +39,11 @@ session_start();
     <link rel="stylesheet" type="text/css" href="../Librerias/lib/css/bootstrapValidator.css">
     <script type="text/javascript" src="../Librerias/lib/bootstrapValidator.js"></script>
     <!-- Validators -->
-    
-    
     <script type="text/javascript" src="../Librerias/lib/validator/diferenteActividadPlanificacion.js"></script>
     <script type="text/javascript" src="../Librerias/lib/validator/diferenteEntregable.js"></script>
     <script type="text/javascript" src="../Librerias/lib/validator/stringLength.js"></script>
     <script type="text/javascript" src="../Librerias/lib/validator/notEmpty.js"></script>
-    <script type="text/javascript" src="../Librerias/lib/validator/callback.js"></script>
+    <script type="text/javascript" src="../Librerias/lib/validator/callback.js"></script
     <script type="text/javascript" src="../Librerias/lib/validator/date.js"></script>
     <script type="text/javascript" src="../Librerias/lib/validator/numeric.js"></script>
     <script type="text/javascript" src="../Librerias/lib/validator/porcentajeMax.js"></script>
@@ -146,75 +142,7 @@ session_start();
                                 
                                 <li>
                                     <a href="#" >Subir Documentos <span class="fa arrow"></span></a>
-                                    <ul class="nav nav-third-level">
-                                        <?php
-                                        try{
-                                                  //creamos la conexion a la base de datos
-                                                 $conexion = new conexion();
-                                                 $idUsuarioAsesor1=$conexion->consulta("SELECT i.`NOMBRE_UA` FROM inscripcion AS i WHERE i.NOMBRE_UGE LIKE '$UsuarioActivo'");
-                                                 $f=mysql_fetch_array($idUsuarioAsesor1);//$idUsuarioG='bolivia';
-                                                 $nombre_a=$f['NOMBRE_UA'];
-                                                 //$idUsuarioAsesor=$conexion->consulta("SELECT `NOMBRE_UA` FROM inscripcion WHERE NOMBRE_UGE LIKE '$UsuarioActivo'");
-                                                $idUsuarioAsesor=$nombre_a;
-                                                $idUsuarioG=$UsuarioActivo;
-                                                 $consulta=$conexion->consulta("SELECT r.NOMBRE_R,r.`NOMBRE_U` FROM registro AS r,plazo AS p,descripcion AS d,`estado` AS e,`tipo` AS t WHERE r.ID_R = d.ID_R AND r.TIPO_T = t.TIPO_T AND r.ID_R = p.ID_R AND e.`ESTADO_E` = r.`ESTADO_E` AND r.`ESTADO_E` LIKE 'habilitado' AND r.TIPO_T LIKE 'documento requerido' AND r.NOMBRE_U LIKE '$idUsuarioAsesor'");
-                                                 $indice=1;
-                                                 while($fila = mysql_fetch_array($consulta))
-                                                {
-                                                     //aqui introducimos atraves de codigo php los enlaces de opciones
-                                                     if(!stripos($fila['0'], "modif"))
-                                                     {
-                                                     $temporal=$fila['1'];
-                                                         echo   "<form name='formulario$indice' action='subir_documento.php' enctype='multipart/form-data' method='POST'>"
-                                                                 . "<input type='hidden' name='nombreUsuarioAsesor' value='$temporal'>"
-                                                                 . "<input type='hidden' name='nombreRegistro' value='".$fila['0']."'>"
-                                                                 . "<input type='hidden' name='nombreUsuarioG' value='$idUsuarioG'>"
-                                                                 . "</form>"
-                                                                 . "<li>"
-                                                                 . "<a href='javascript:document.formulario$indice.submit();'>".$fila['0']."</a>"                                       
-                                                                 . "</li>";
-                                                         
-                                                     $indice++;
-                                                     }
-                                        
-                                                }
-                                                
-                                                $consultaDos=$conexion->consulta("SELECT r.NOMBRE_R,r.`NOMBRE_U` FROM registro AS r,plazo AS p,descripcion AS d,`estado` AS e,`tipo` AS t WHERE r.ID_R = d.ID_R AND r.TIPO_T = t.TIPO_T AND r.ID_R = p.ID_R AND e.`ESTADO_E` = r.`ESTADO_E` AND r.`ESTADO_E` LIKE 'habilitado' AND r.TIPO_T LIKE 'documento requerido' AND r.NOMBRE_U LIKE '$idUsuarioAsesor' AND LOWER(r.`NOMBRE_R`) LIKE '%modif%'");
-                                                //$consultaTres=$conexion->consulta("SELECT r.`NOMBRE_R` FROM registro AS r,`tipo` AS t, `documento` AS d,`estado` AS e WHERE r.`ID_R` = d.`ID_R` AND r.`TIPO_T` = t.`TIPO_T` AND r.`ESTADO_E` = e.`ESTADO_E` AND t.`TIPO_T` LIKE 'orden de cambio' AND r.`NOMBRE_U` LIKE '$idUsuarioG'");
-                                                if (mysql_num_rows($consultaDos) != 0) {
-                                                    
-                                                    while($filaDos = mysql_fetch_array($consultaDos))
-                                                {
-                                                     //aqui introducimos atraves de codigo php los enlaces de opciones de subir propuesta modificada
-                                                     
-                                                     
-                                                     $temporalDos=$filaDos['1'];
-                                                         echo   "<form name='formulario$indice' action='subir_documento.php' enctype='multipart/form-data' method='POST'>"
-                                                                 . "<input type='hidden' name='nombreUsuarioAsesor' value='$temporalDos'>"
-                                                                 . "<input type='hidden' name='nombreRegistro' value='".$filaDos['0']."'>"
-                                                                 . "<input type='hidden' name='nombreUsuarioG' value='$idUsuarioG'>"
-                                                                 . "</form>"
-                                                                 . "<li>"
-                                                                 . "<a href='javascript:document.formulario$indice.submit();'>".$filaDos['0']."</a>"                                       
-                                                                 . "</li>";
-                                                         
-                                                     $indice++;
-                                                     
-                                        
-                                                }
-                                                    
-                                                    
-                                                }
-                                                
-                                                $conexion->cerrarConexion();
-                                               
-                                            }
-                                        catch (ErrorException $e)
-                                        {
-                                              echo $e;
-                                        }
-                                    ?>
-                                    </ul>
+                                 
                                 </li>
                                 <li>
                                     <a href="publicacion_grupo.php">Recepci&oacute;n Documentos </a>
@@ -281,28 +209,6 @@ session_start();
                         </li>
                         
                         <li>
-                            <a href="#"><i class="fa fa-tasks fa-fw"></i>Informacion Personal<span class="fa arrow"></span> </a>  
-                                <ul class="nav nav-third-level">
-                                    <?php
-                                    if (is_array($VerificarUsuario2)) {   
-                                    ?>
-                                    <li>
-                                        <a href="ModificarGrupoEmpresa.php">Modificar Datos Personales </a>                             
-                                    </li>     
-                                    <?php
-                                    }
-                                    else{
-                                    ?>
-                                    <li>
-                                        <a href="ModificarSocio.php">Modificar Datos Personales </a>                             
-                                    </li>  
-                                     <?php
-                                    }        
-                                    ?>    
-                                </ul>
-                        </li>
-                        
-                        <li>
                             <a href="#"><i class="fa fa-question-circle fa-fw"></i> Ayuda <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 
@@ -322,35 +228,55 @@ session_start();
                 <!-- /.sidebar-collapse -->
             </div>
             
-               
+          
+            
+           <!-- --------------------------------------------------------------------------------- --> 
+            
             <!-- /.navbar-static-side -->
         </nav>
 
-        <div id="page-wrapper">
+           <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header"  >Bienvenido a SAETIS!</h1>
+                    <h2 class="page-header">Inscribirse a un proyecto </h2>
+                    <div class="col-lg-4" >
+                        
+                            <div class="form-group">
+                                <form method="POST" <b>Proyectos disponibles :</b>
+                                    <select name="proyecto" class="form-control">
+                                    <option>Seleccione un proyecto</option>
+                                    <?php
+                                        $idGE= $_SESSION['usuario']  ;
+
+                                        $conGestion="SELECT id_g "
+                                                . "FROM gestion "
+                                                . "WHERE DATE (NOW()) > DATE(FECHA_INICIO_G) and DATE(NOW()) < DATE(FECHA_FIN_G)";
+                                        $conGestion_=$con->consulta($conGestion);
+                                        $idGestion=mysql_fetch_row($conGestion_);
+                                        $idGestion_=$idGestion[0];
+                                                                       
+                                        $c1="SELECT p.`NOMBRE_P` FROM `proyecto` AS `p`, `gestion` AS `g` WHERE p.`ID_G` = g.`ID_G` AND p.`ID_G` LIKE '".$idGestion_."'";
+                                 
+                                        $a1=$con->consulta($c1);
+                
+                                        while($v1 =  mysql_fetch_array($a1)){
+                                            echo "<option>".$v1[0]."</option>";
+                                        }
+                                    echo "<input type='hidden' name='idGE' value='$idGE'>";
+            
+                                    ?>
+                                     </select><br>
+                                    <br>
+                                    <input type='hidden' name='ge' value=<?php echo $UsuarioActivo; ?>>
+                                    <div class="form-group">
+                                        <button type="submit" name="submit" class="btn btn-primary" onclick="this.form.action='RegistrarProyectoGE.php'">  <span class="glyphicon glyphicon-ok"></span> Aceptar</button>
+                                   </div>       
+                                </form>
+                            </div>
+                        
+                    </div>
                 </div>
                 <!-- /.col-lg-12 -->
-            </div>
-            <!-- /.row -->
-            <div class="row">
-                <div class="col-lg-8">
-                  
-                    <div class="col-lg-12">
-                                
-                        <img  src="../Librerias/images/SAETIS.png" alt="portadaInicio" class=" img-thumbnail">
-                        
-                    </div>  
-                    
-                    <!-- /.panel -->
-                </div>
-                <!-- /.col-lg-8 -->
-                
-                
-                
-             
-                <!-- /.col-lg-4 -->
             </div>
             <!-- /.row -->
         </div>
