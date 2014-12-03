@@ -97,12 +97,10 @@
                         <?php echo $UsuarioActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        <li><a href="modificar_asesor.php"><i class="fa fa-user fa-fw"></i> Modificar Datos personales</a>
                         </li>
                         <li class="divider"></li>
-                       <li><a href="unlog.php"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="unlog.php"><i class="fa fa-sign-out fa-fw"></i>Salir</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -223,14 +221,7 @@
                             <!-- /.nav-second-level -->
                         </li>
                         
-                          <li>
-                              <a href="#"><i class="fa fa-tasks fa-fw"></i>Informacion Personal<span class="fa arrow"></span> </a>  
-                                              <ul class="nav nav-third-level">
-                                                <li>
-                                                    <a href="modificar_asesor.php">Modificar Datos Personales </a>                             
-                                                </li>       
-                                            </ul>
-                          </li>
+       
                           <li>
                             <a href="lista-de-noticias.php"><i class="fa fa-comment"></i> Foro</a>
                          </li>

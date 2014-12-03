@@ -2,7 +2,8 @@
 
 <?php
     include '../Modelo/conexion.php';
-    
+    session_start();
+    $UsuarioActivo = $_SESSION['usuario'];
     $con=new conexion();
 ?>
 <html>
@@ -25,11 +26,8 @@
 
     <!-- SB Admin CSS - Include with every page -->
     <link href="../Librerias/css/sb-admin.css" rel="stylesheet">
-    
-    
-    
-    
-
+    <link href="../Librerias/css/dropzone.css" type="text/css" rel="stylesheet" />
+    <script src="../Librerias/js/dropzone.min.js"></script>
 </head>
 
 <body>
@@ -71,12 +69,10 @@
                         <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                            <li><a href="modificar_asesor.php"><i class="fa fa-user fa-fw"></i> Modificar Datos personales</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="unlog.php"><i class="fa fa-sign-out fa-fw"></i>Salir</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -193,14 +189,7 @@
                             <!-- /.nav-second-level -->
                         </li>
                         
-                          <li>
-                              <a href="#"><i class="fa fa-tasks fa-fw"></i>Informacion Personal<span class="fa arrow"></span> </a>  
-                                              <ul class="nav nav-third-level">
-                                                <li>
-                                                    <a href="modificar_asesor.php">Modificar Datos Personales </a>                             
-                                                </li>       
-                                            </ul>
-                          </li>
+        
                           <li>
                             <a href="lista-de-noticias.php"><i class="fa fa-comment"></i> Foro</a>
                          </li>
@@ -214,9 +203,11 @@
                 <!-- /.sidebar-collapse -->
             </div>
             <!-- /.navbar-static-side -->
+            
         </nav>
-        
-        <div id="page-wrapper">
+    
+    
+         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
                     <h2 class="page-header">Recepci&oacute;n de Propuestas </h2>
@@ -228,7 +219,7 @@
                                     <select name="grupoempresa" class="form-control">
                                         <option>Seleccione una grupo empresa</option>
                                         <?php
-                                            $idAsesor='leticia';
+                                            $idAsesor=$UsuarioActivo;
                                             
                                             $c1="SELECT ge.`NOMBRE_LARGO_GE` FROM `inscripcion` AS i,`asesor` AS a,`grupo_empresa` AS `ge`,`gestion` AS g,`proyecto` AS p WHERE i.`NOMBRE_UA` = a.`NOMBRE_U` AND i.`NOMBRE_UGE` = ge.`NOMBRE_U` AND i.`ID_G` = g.`ID_G` AND i.`CODIGO_P` = p.`CODIGO_P` AND a.`NOMBRE_U` LIKE '$idAsesor'";
                                             $a1=$con->consulta($c1);
@@ -238,7 +229,8 @@
                                             }
                                             echo "<input type='hidden' name='idAsesor' value='$idAsesor'>";
                                         ?>
-                                    </select><br>
+                                    </select>
+                                    <br>
                                     <input type="submit" class="btn btn-primary" name="Enviar" value="Entrar" class="btn-primary">
                                 </form>
                             </div>
@@ -250,7 +242,8 @@
             <!-- /.row -->
         </div>
 
-    </div>
+
+    
     <!-- /#wrapper -->
 
     <!-- Core Scripts - Include with every page -->
