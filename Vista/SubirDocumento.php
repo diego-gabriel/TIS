@@ -7,6 +7,17 @@
     $UsuarioActivo = $_SESSION['usuario'];
     $VerificarUsuario = $con->consulta("SELECT NOMBRE_U FROM usuario WHERE NOMBRE_U = '$UsuarioActivo' ");
     $VerificarUsuario2 = mysql_fetch_row($VerificarUsuario);
+    
+    $UsuarioGE = $UsuarioActivo;
+    
+    if (!is_array($VerificarUsuario2)) {   
+    $consultaGE="SELECT `NOMBRE_U` FROM socio WHERE `NOMBRES_S` = '$UsuarioActivo'";
+    $conGE_=$con->consulta($consultaGE);
+    $NombreUsuario=mysql_fetch_row($conGE_);
+
+    $UsuarioGE=$NombreUsuario[0];
+
+}
 
 ?>
 <html>
@@ -109,7 +120,7 @@
                                       //include '../Modelo/conexion.php';
                                       $conect = new conexion();
                                       
-                                      $SeleccionrAsesor = $conect->consulta("SELECT NOMBRE_UA FROM inscripcion WHERE NOMBRE_UGE='$UsuarioActivo'");
+                                      $SeleccionrAsesor = $conect->consulta("SELECT NOMBRE_UA FROM inscripcion WHERE NOMBRE_UGE='$UsuarioGE'");
                                       
                                       $Asesor = mysql_fetch_row($SeleccionrAsesor);
                                       
@@ -223,15 +234,7 @@
                         date_default_timezone_set('America/Puerto_Rico');
                         $HoraActual = date("H:i:s");
                         $FechaActual = date('Y:m:j');
-                        $UsuarioGE = $UsuarioActivo;
-                        if (!is_array($VerificarUsuario2)) {   
-                            $consultaGE="SELECT `NOMBRE_U` FROM socio WHERE `NOMBRES_S` = '$UsuarioActivo'";
-                            $conGE_=$con->consulta($consultaGE);
-                            $NombreUsuario=mysql_fetch_row($conGE_);
-                            
-                            $UsuarioGE=$NombreUsuario[0];
-                            echo $UsuarioGE;
-                        }
+
                        
                         $VerificarIns= $con->consulta("SELECT NOMBRE_U FROM inscripcion_proyecto WHERE NOMBRE_U = '$UsuarioGE' ");
                             $VerificarIns2 = mysql_fetch_row($VerificarIns);

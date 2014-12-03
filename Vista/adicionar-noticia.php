@@ -56,36 +56,19 @@
             </div>
             <!-- /.navbar-header -->
 
-            <ul class="nav navbar-top-links navbar-right">
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-envelope fa-fw"></i>  <i class="fa fa-caret-down"></i>
-                    </a>
-                </li>
+          <ul class="nav navbar-top-links navbar-right">
+            
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-tasks fa-fw"></i>  <i class="fa fa-caret-down"></i>
-                    </a>
-                </li>
-                <!-- /.dropdown -->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-bell fa-fw"></i>  <i class="fa fa-caret-down"></i>
-                    </a>
-                </li>
-                <!-- /.dropdown -->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                        <?php echo $UsuarioActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+  
+                        <li><a href="modificar_asesor.php"><i class="fa fa-user fa-fw"></i> Modificar Datos personales</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="unlog.php"><i class="fa fa-sign-out fa-fw"></i>Salir</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -101,21 +84,43 @@
                             <a href="AdministrarGrupoEmpresa.php"><i class="fa fa-book"></i> Administrar Grupo Empresas</a>
                         </li>
                         
+                        
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-files-o "></i> Documentos <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
+                                <li>
+                                            <a href="../Vista/subirarchivoasesor.php">Subir Documentos</a>
+                                </li>
+                                <li>
+                                    <a href="../Vista/RegistrarDocumentosRequeridos.php">Registrar Documentos</a>
+                                </li>
                                 
                                 <li>
-                                    <a href="#" >Subir Documentos <span class="fa arrow"></span></a>
+                                    <a href="#">Publicaci&oacute;n Documentos <span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
                                         
+                                        
+                                        <li>
+                                            <a href="../Vista/publicar_asesor.php">Nueva Publicaci&oacute;n </a>
+                                        </li>
+                                        <li>
+                                            <a href="../Controlador/publicaciones.php">Publicaciones </a>
+                                        </li>
+                                       
                                     </ul>
+                                    <!-- /.nav-third-level -->
                                 </li>
                                 <li>
                                     <a href="#">Recepci&oacute;n Documentos <span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
-                                        
-                                       
+                                        <li>
+                                            <a href="documentos_recibidos.php">Documentos Recibidos</a>
+                                        </li>
+                                        <li>
+                                            <a href="ConfiguracionFechasRecepcion.php" ><span class="fa fa-calendar-o"></span> Configuraci&oacute;n de Fechas para la Recepci&oacute;n de Documentos</a>
+                                            
+                                        </li>
+         
                                     </ul>
                                 </li>
                                
@@ -135,6 +140,9 @@
                                 </li>
                                 <li>
                                     <a href="notificacion_conformidad.php">Emitir Notificaci&oacute;n de Conformidad</a>
+                                </li>
+                                <li>
+                                    <a href="InscripcionProyecto.php">Registrar Proyecto</a>
                                 </li>
                                 <li>
                                     <a href="#">Seguimiento Grupo Empresa <span class="fa arrow"></span></a>
@@ -173,36 +181,29 @@
                                                 </li>
                                             </ul>
                                 </li>
-                                
-                                
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
                         
-                        <li>
-                            <a href="lista-de-noticias.php"><i class="fa fa-comment"></i> Foro</a>
-                        </li>
+                       
                         <li>
                             <a href="#"><i class="fa fa-building-o fa-fw"></i> Actividades<span class="fa arrow"></span></a>
                             
                             <!-- /.nav-second-level -->
                         </li>
+                        
+
+
                          <li>
-                            <a href="lista-de-noticias.php"><i class="fa fa-comment"></i> Foro</a>
-                        </li>
-                        <li>
                               <a href="lista_doc_subidos.php"><i class="fa fa-tasks fa-fw"></i>Documentos Subidos </a>  
                                               
                           </li>
-                        
                         <li>
                             <a href="#"><i class="fa fa-question-circle fa-fw"></i> Ayuda <span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                
-                            </ul>
-                            <!-- /.nav-second-level -->
                         </li>
-                        
+                        <li>
+                            <a href="lista-de-noticias.php"><i class="fa fa-comment"></i> Foro</a>
+                        </li>
                     </ul>
                     <!-- /#side-menu -->
                 </div>

@@ -1,12 +1,27 @@
 <!DOCTYPE html>
 <?php 
     include '../Modelo/conexion.php';
-    session_start();
-    $usuario = $_SESSION['usuario'];
     include("controlSesion.php");
+    
+    session_start();
+    $UsuarioActivo = $_SESSION['usuario'];
+    
     $con=new conexion();
-    $VerificarUsuario = $con->consulta("SELECT NOMBRE_U FROM usuario WHERE NOMBRE_U = '$usuario' ");
+    $VerificarUsuario = $con->consulta("SELECT NOMBRE_U FROM usuario WHERE NOMBRE_U = '$UsuarioActivo' ");
     $VerificarUsuario2 = mysql_fetch_row($VerificarUsuario);
+    
+    $usuario = $UsuarioActivo;
+    
+    if (!is_array($VerificarUsuario2)) {   
+    $consultaGE="SELECT `NOMBRE_U` FROM socio WHERE `NOMBRES_S` = '$UsuarioActivo'";
+    $conGE_=$con->consulta($consultaGE);
+    $NombreUsuario=mysql_fetch_row($conGE_);
+
+    $usuario=$NombreUsuario[0];
+
+  }
+    
+    
     
     $conexion = mysql_connect("localhost","root","","saetis");
         //Control
@@ -108,7 +123,7 @@
             <ul class="nav navbar-top-links navbar-right">
                                <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <?php echo $usuario.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                        <?php echo $UsuarioActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
                         <?php
@@ -188,29 +203,37 @@
                             <!-- /.nav-second-level -->
                         </li>
                         
+                         <?php
+                            if (is_array($VerificarUsuario2)) {   
+                        ?>
                          <li>
+                             
                             <a href="#"><i class="fa fa-tasks fa-fw"></i> Tareas<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                              
+                                
+                                
                                 <li>
                                     <a href="seleccionar_asesor.php">Seleccionar Asesor</a>
                                 </li>
                                 
-                                <li>
+                                 <li>
                                      <a href="InscripcionGEProyecto.php">Inscribirse a proyecto</a>
                                 </li>
                                 
-                                 <li>
+                                <li>
                                      <a href="AnadirSocio.php">Añadir socios</a>
                                 </li>
                                 
                                 <li>
                                     <a href="AnadirRL.php">Seleccionar Representante legal</a>
                                 </li>
-                                
+
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
+                        <?php
+                                }
+                        ?>
                         
                         <li>
                             <a href="#"><i class="fa fa-warning fa-fw"></i> Notificaciones<span class="fa arrow"></span></a>

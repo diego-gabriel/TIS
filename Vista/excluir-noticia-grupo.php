@@ -18,5 +18,5 @@ alert ("Tema eliminado con exito.")
 3.
 </SCRIPT>
 <script>
-  location.href="lista-de-noticias.php";
+  location.href="lista-de-noticias-grupo.php";
 </script>

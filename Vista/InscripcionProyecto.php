@@ -274,7 +274,7 @@
                                 </p>
                                  
                                  <div class="form-group">
-                                     <input type="text" name="nombreProy" id="" class="form-control" pattern="^[a-zA-Z\s]*$" required>
+                                     <input type="text" name="nombreProy" id="" class="form-control" pattern="^[a-zA-Z0-9\s]*$" required>
                                  </div> 
                                 
                                 <p>
@@ -282,7 +282,7 @@
                                 </p>
                                  
                                  <div class="form-group">
-                                     <input type="text" name="desProy" id="" class="form-control" pattern="^[a-zA-Z\s]*$" required>
+                                     <input type="text" name="desProy" id="" class="form-control" pattern="^[a-zA-Z0-9\s]*$" required>
                                  </div> 
                                 </div>     
                                        

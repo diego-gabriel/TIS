@@ -1,12 +1,29 @@
 <?php
-    include '../Modelo/conexion.php';
+   include '../Modelo/conexion.php';
    
-  $conexion = mysql_connect("localhost","root","");
-	//Control
-	if(!$conexion){die('La conexion ha fallado por:'.mysql_error());}
-	mysql_select_db("saetis",$conexion);
    session_start();
- $UsuarioActivo = $_SESSION['usuario'];
+   $UsuarioActivo = $_SESSION['usuario'];
+   
+    $conexion = mysql_connect("localhost","root","");
+	//Control
+    if(!$conexion){die('La conexion ha fallado por:'.mysql_error());}
+    mysql_select_db("saetis",$conexion);
+
+    $con=new conexion();
+    $VerificarUsuario = $con->consulta("SELECT NOMBRE_U FROM usuario WHERE NOMBRE_U = '$UsuarioActivo' ");
+    $VerificarUsuario2 = mysql_fetch_row($VerificarUsuario);
+    
+    $usuario = $UsuarioActivo;
+    
+    if (!is_array($VerificarUsuario2)) {   
+    $consultaGE="SELECT `NOMBRE_U` FROM socio WHERE `NOMBRES_S` = '$UsuarioActivo'";
+    $conGE_=$con->consulta($consultaGE);
+    $NombreUsuario=mysql_fetch_row($conGE_);
+
+    $usuario=$NombreUsuario[0];
+
+  }
+
 ?>
 
 <html>
@@ -45,8 +62,7 @@
         <!--<h2>design by <a href="#" title="flash templates">flash-templates-today.com</a></h2>-->
         
     
-        
-        <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
+ <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
                     <span class="sr-only">Toggle navigation</span>
@@ -54,56 +70,58 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-         <a class="navbar-brand" href="inicio_grupo_empresa.php">Inicio </a>
+                   <a class="navbar-brand" href="inicio_grupo_empresa.php">Inicio </a>
             </div>
             <!-- /.navbar-header -->
 
             <ul class="nav navbar-top-links navbar-right">
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-envelope fa-fw"></i>  <i class="fa fa-caret-down"></i>
-                    </a>
-                </li>
-                <!-- /.dropdown -->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-tasks fa-fw"></i>  <i class="fa fa-caret-down"></i>
-                    </a>
-                </li>
-                <!-- /.dropdown -->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-bell fa-fw"></i>  <i class="fa fa-caret-down"></i>
-                    </a>
-                </li>
-                <!-- /.dropdown -->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                        <?php echo $UsuarioActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        <?php
+                            if (is_array($VerificarUsuario2)) {   
+                        ?>
+                        <li><a href="ModificarGrupoEmpresa.php"><i class="fa fa-user fa-fw"></i> Modificar Datos personales</a>
                         </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        <?php
+                            }else{
+                        ?>
+                        <li><a href="ModificarSocio.php"><i class="fa fa-user fa-fw"></i> Modificar Datos personales</a>
                         </li>
+                         <?php
+                              }        
+                         ?>
                         <li class="divider"></li>
-                        <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="unlog.php"><i class="fa fa-sign-out fa-fw"></i>Salir</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
                 </li>
-                <!-- /.dropdown -->
             </ul>
             <!-- /.navbar-top-links -->
 
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
             <div class="navbar-default navbar-static-side" role="navigation">
                 <div class="sidebar-collapse">
                     <ul class="nav" id="side-menu">
                         
+                        
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-files-o "></i> Documentos <span class="fa arrow"></span></a>
-                            
-                            <ul class="nav nav-second-level">    
+                            <ul class="nav nav-second-level">
+                                
                                 <li>
                                     <a href="#" >Subir Documentos <span class="fa arrow"></span></a>
                                     <ul class="nav nav-second-level">
@@ -113,7 +131,7 @@
                                         //include '../Modelo/conexion.php';
                                         $conect = new conexion();
                                         
-                                        $SeleccionrAsesor = $conect->consulta("SELECT NOMBRE_UA FROM inscripcion WHERE NOMBRE_UGE='$UsuarioActivo'");
+                                        $SeleccionrAsesor = $conect->consulta("SELECT NOMBRE_UA FROM inscripcion WHERE NOMBRE_UGE='$usuario'");
                                         
                                         $Asesor = mysql_fetch_row($SeleccionrAsesor);
                                         
@@ -130,14 +148,8 @@
                                  
                                 </li>
                                 <li>
-                                    <a href="../Vista/RegistrarDocumentosRequeridos.php">Registrar Documentos</a>
-                                </li>
-                                <li>
-                                    <a href="publicacion_grupo.php">Recepci&oacute;n Documentos <span class="fa arrow"></span></a>
-                                    <ul class="nav nav-third-level">
-                                        
-                                       
-                                    </ul>
+                                    <a href="publicacion_grupo.php">Recepci&oacute;n Documentos </a>
+                                    
                                 </li>
                                
                             </ul>
@@ -148,25 +160,47 @@
                          <li>
                             <a href="#"><i class="fa fa-tasks fa-fw"></i> Tareas<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
+                              
+                                <li>
+                                    <a href="seleccionar_asesor.php">Seleccionar Asesor</a>
+                                </li>
                                 
+                                <li>
+                                     <a href="InscripcionGEProyecto.php">Inscribirse a proyecto</a>
+                                </li>
                                 
+                                 <li>
+                                     <a href="AnadirSocio.php">Añadir socios</a>
+                                </li>
+                                
+                                <li>
+                                    <a href="AnadirRL.php">Seleccionar Representante legal</a>
+                                </li>
                                 
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
                         
                         <li>
-                            <a href="#"><i class="fa fa-warning fa-fw"></i> Notificaciones</a>
+                            <a href="#"><i class="fa fa-warning fa-fw"></i> Notificaciones<span class="fa arrow"></span></a>
+                                                    
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="historia_actividades.php">Historia de actividades</a>
                                 </li>
                                 
-                            </ul>
+                            </ul>  
+                            </li>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-building-o fa-fw"></i> Actividades<span class="fa arrow"></span></a>
-                            
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a id="registrarPlanificacion" href="#">
+                                        <i class="fa fa-pencil-square-o fa-fw"></i>Registrar Planificaci&oacute;n
+                                    </a>
+                                </li>
+                            </ul>
                             <!-- /.nav-second-level -->
                         </li>
                         
@@ -180,12 +214,29 @@
                         
                         <li>
                             <a href="lista-de-noticias-grupo.php"><i class="fa fa-comment"></i> Foro</a>
+                                
+                            </ul>
+                            <!-- /.nav-second-level -->
                         </li>
                     </ul>
                     <!-- /#side-menu -->
                 </div>
                 <!-- /.sidebar-collapse -->
             </div>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
             <!-- /.navbar-static-side -->
         </nav>
         
@@ -224,7 +275,7 @@ if (isset($_POST['titulo'])) {
        }
 if($titulo == "" && $texto == ""){} else {
 // Adiciona a Noticia 
-$news_add = "INSERT INTO noticias (NOMBRE_U,TITULO, FECHA_N, VIEWS, TEXTO) VALUES ('$UsuarioActivo','".addslashes(mysql_real_escape_string($_POST["titulo"]))."', NOW(), '0', '".addslashes(mysql_real_escape_string($_POST['texto']))."')";
+$news_add = "INSERT INTO noticias (NOMBRE_U,TITULO, FECHA_N, VIEWS, TEXTO) VALUES ('$usuario','".addslashes(mysql_real_escape_string($_POST["titulo"]))."', NOW(), '0', '".addslashes(mysql_real_escape_string($_POST['texto']))."')";
 
 $news_add = mysql_query($news_add)
 or die ("Error.");
