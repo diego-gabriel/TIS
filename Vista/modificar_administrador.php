@@ -57,16 +57,8 @@
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-       		<title>Bienvenidos a SATIS</title>
-		<link href="css/style.css" rel="stylesheet" type="text/css" />
+       	<title>Bienvenidos a SATIS</title>
+	<link href="css/style.css" rel="stylesheet" type="text/css" />
 
 </head>
 
