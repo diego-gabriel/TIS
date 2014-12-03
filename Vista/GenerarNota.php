@@ -21,7 +21,7 @@
 
         /*********************************************************/
         
-        $RecuperarPuntajes = $conect->consulta("SELECT PUNTAJE FROM puntaje WHERE ID_FORM = '$IdForm2'");
+        $RecuperarPuntajes = $conect->consulta("SELECT PUNTAJE FROM puntaje WHERE ID_FORM = '$FormularioUtilizado'");
                          
         while($row = mysql_fetch_row($RecuperarPuntajes))
         {
@@ -40,6 +40,7 @@
                 $cont++;
             }
         } 
+
         
         if(count($puntajes) == count($prueba))
         {

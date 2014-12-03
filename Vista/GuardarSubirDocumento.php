@@ -35,7 +35,9 @@ $clas = new conexion();
                 $hora=  date("G:H:i");
                 $clas->consulta("INSERT INTO `registro` (NOMBRE_U,TIPO_T,ESTADO_E,NOMBRE_R,FECHA_R,HORA_R)  VALUES ('$UsuarioActivo','documento subido','habilitado','$nombre','$fecha','$hora')");
                 $clas->consulta("INSERT INTO `documento` (ID_R,TAMANIO_D,RUTA_D,VISUALIZABLE_D,DESCARGABLE_D) VALUES ($idRegistro,$tamanio,'$rutaDocumento','$visualizable','$descargable')");
-                echo 'Documento cargado exitosamente';
+                echo '<script>alert("Documento subido exitosamente");
+                              location.href = "../Vista/inicio_grupo_empresa.php";
+                      </script>';
                 
             }
             }

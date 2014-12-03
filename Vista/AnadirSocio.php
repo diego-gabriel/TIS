@@ -133,6 +133,27 @@
                                 
                                 <li>
                                     <a href="#" >Subir Documentos <span class="fa arrow"></span></a>
+                                    <ul class="nav nav-second-level">
+                                    
+                                        <?php
+                                        
+                                        //include '../Modelo/conexion.php';
+                                        $conect = new conexion();
+                                        
+                                        $SeleccionrAsesor = $conect->consulta("SELECT NOMBRE_UA FROM inscripcion WHERE NOMBRE_UGE='$UsuarioActivo'");
+                                        
+                                        $Asesor = mysql_fetch_row($SeleccionrAsesor);
+                                        
+                                        $SeleccionarDocReq = $conect->consulta("SELECT NOMBRE_R FROM registro WHERE NOMBRE_U = '$Asesor[0]' AND TIPO_T='documento requerido' ");
+                                        
+                                        while ($rowDocs = mysql_fetch_row($SeleccionarDocReq))
+                                        {
+                                            echo '<li>
+                                                    <a href="SubirDocumento.php?doc='.$rowDocs[0].'">'.$rowDocs[0].'</a>
+                                                  </li>';    
+                                        }
+                                        ?>
+                                    </ul>
                                  
                                 </li>
                                 <li>

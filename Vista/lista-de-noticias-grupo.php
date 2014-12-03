@@ -134,75 +134,28 @@
                                 
                                 <li>
                                     <a href="#" >Subir Documentos <span class="fa arrow"></span></a>
-                                    <ul class="nav nav-third-level">
+                                    <ul class="nav nav-second-level">
+                                    
                                         <?php
-                                        try{
-                                                  //creamos la conexion a la base de datos
-                                                 $conexion = new conexion();
-                                                 $idUsuarioAsesor1=$conexion->consulta("SELECT i.`NOMBRE_UA` FROM inscripcion AS i WHERE i.NOMBRE_UGE LIKE '$UsuarioActivo'");
-                                                 $f=mysql_fetch_array($idUsuarioAsesor1);//$idUsuarioG='bolivia';
-                                                 $nombre_a=$f['NOMBRE_UA'];
-                                                 //$idUsuarioAsesor=$conexion->consulta("SELECT `NOMBRE_UA` FROM inscripcion WHERE NOMBRE_UGE LIKE '$UsuarioActivo'");
-                                                $idUsuarioAsesor=$nombre_a;
-                                                $idUsuarioG=$UsuarioActivo;
-                                                 $consulta=$conexion->consulta("SELECT r.NOMBRE_R,r.`NOMBRE_U` FROM registro AS r,plazo AS p,descripcion AS d,`estado` AS e,`tipo` AS t WHERE r.ID_R = d.ID_R AND r.TIPO_T = t.TIPO_T AND r.ID_R = p.ID_R AND e.`ESTADO_E` = r.`ESTADO_E` AND r.`ESTADO_E` LIKE 'habilitado' AND r.TIPO_T LIKE 'documento requerido' AND r.NOMBRE_U LIKE '$idUsuarioAsesor'");
-                                                 $indice=1;
-                                                 while($fila = mysql_fetch_array($consulta))
-                                                {
-                                                     //aqui introducimos atraves de codigo php los enlaces de opciones
-                                                     if(!stripos($fila['0'], "modif"))
-                                                     {
-                                                     $temporal=$fila['1'];
-                                                         echo   "<form name='formulario$indice' action='subir_documento.php' enctype='multipart/form-data' method='POST'>"
-                                                                 . "<input type='hidden' name='nombreUsuarioAsesor' value='$temporal'>"
-                                                                 . "<input type='hidden' name='nombreRegistro' value='".$fila['0']."'>"
-                                                                 . "<input type='hidden' name='nombreUsuarioG' value='$idUsuarioG'>"
-                                                                 . "</form>"
-                                                                 . "<li>"
-                                                                 . "<a href='javascript:document.formulario$indice.submit();'>".$fila['0']."</a>"                                       
-                                                                 . "</li>";
-                                                         
-                                                     $indice++;
-                                                     }
                                         
-                                                }
-                                                
-                                                $consultaDos=$conexion->consulta("SELECT r.NOMBRE_R,r.`NOMBRE_U` FROM registro AS r,plazo AS p,descripcion AS d,`estado` AS e,`tipo` AS t WHERE r.ID_R = d.ID_R AND r.TIPO_T = t.TIPO_T AND r.ID_R = p.ID_R AND e.`ESTADO_E` = r.`ESTADO_E` AND r.`ESTADO_E` LIKE 'habilitado' AND r.TIPO_T LIKE 'documento requerido' AND r.NOMBRE_U LIKE '$idUsuarioAsesor' AND LOWER(r.`NOMBRE_R`) LIKE '%modif%'");
-                                                //$consultaTres=$conexion->consulta("SELECT r.`NOMBRE_R` FROM registro AS r,`tipo` AS t, `documento` AS d,`estado` AS e WHERE r.`ID_R` = d.`ID_R` AND r.`TIPO_T` = t.`TIPO_T` AND r.`ESTADO_E` = e.`ESTADO_E` AND t.`TIPO_T` LIKE 'orden de cambio' AND r.`NOMBRE_U` LIKE '$idUsuarioG'");
-                                                if (mysql_num_rows($consultaDos) != 0) {
-                                                    
-                                                    while($filaDos = mysql_fetch_array($consultaDos))
-                                                {
-                                                     //aqui introducimos atraves de codigo php los enlaces de opciones de subir propuesta modificada
-                                                     
-                                                     
-                                                     $temporalDos=$filaDos['1'];
-                                                         echo   "<form name='formulario$indice' action='subir_documento.php' enctype='multipart/form-data' method='POST'>"
-                                                                 . "<input type='hidden' name='nombreUsuarioAsesor' value='$temporalDos'>"
-                                                                 . "<input type='hidden' name='nombreRegistro' value='".$filaDos['0']."'>"
-                                                                 . "<input type='hidden' name='nombreUsuarioG' value='$idUsuarioG'>"
-                                                                 . "</form>"
-                                                                 . "<li>"
-                                                                 . "<a href='javascript:document.formulario$indice.submit();'>".$filaDos['0']."</a>"                                       
-                                                                 . "</li>";
-                                                         
-                                                     $indice++;
-                                                     
+                                        //include '../Modelo/conexion.php';
+                                        $conect = new conexion();
                                         
-                                                }
-                                                    
-                                                    
-                                                }
-                                                
-                                                $conexion->cerrarConexion();
-                                               
-                                            }
-                                        catch (ErrorException $e)
+                                        $SeleccionrAsesor = $conect->consulta("SELECT NOMBRE_UA FROM inscripcion WHERE NOMBRE_UGE='$UsuarioActivo'");
+                                        
+                                        $Asesor = mysql_fetch_row($SeleccionrAsesor);
+                                        
+                                        $SeleccionarDocReq = $conect->consulta("SELECT NOMBRE_R FROM registro WHERE NOMBRE_U = '$Asesor[0]' AND TIPO_T='documento requerido' ");
+                                        
+                                        while ($rowDocs = mysql_fetch_row($SeleccionarDocReq))
                                         {
-                                              echo $e;
+                                            echo '<li>
+                                                    <a href="SubirDocumento.php?doc='.$rowDocs[0].'">'.$rowDocs[0].'</a>
+                                                  </li>';    
                                         }
-                                    ?>
+                                        ?>
                                     </ul>
+                                    
                                 </li>
                                 <li>
                                     <a href="publicacion_grupo.php">Recepci&oacute;n Documentos </a>
