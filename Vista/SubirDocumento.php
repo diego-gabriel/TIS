@@ -223,8 +223,17 @@
                         date_default_timezone_set('America/Puerto_Rico');
                         $HoraActual = date("H:i:s");
                         $FechaActual = date('Y:m:j');
-                        
-                        $VerificarIns= $con->consulta("SELECT NOMBRE_U FROM inscripcion_proyecto WHERE NOMBRE_U = '$UsuarioActivo' ");
+                        $UsuarioGE = $UsuarioActivo;
+                        if (!is_array($VerificarUsuario2)) {   
+                            $consultaGE="SELECT `NOMBRE_U` FROM socio WHERE `NOMBRES_S` = '$UsuarioActivo'";
+                            $conGE_=$con->consulta($consultaGE);
+                            $NombreUsuario=mysql_fetch_row($conGE_);
+                            
+                            $UsuarioGE=$NombreUsuario[0];
+                            echo $UsuarioGE;
+                        }
+                       
+                        $VerificarIns= $con->consulta("SELECT NOMBRE_U FROM inscripcion_proyecto WHERE NOMBRE_U = '$UsuarioGE' ");
                             $VerificarIns2 = mysql_fetch_row($VerificarIns);
                             if (!is_array($VerificarIns2))
                             {

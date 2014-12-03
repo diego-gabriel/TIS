@@ -1,7 +1,9 @@
 <?php 
-session_start();
-
-$conexion = mysql_connect("localhost","root","");
+    session_start();
+    $UsuarioActivo = $_SESSION['usuario'];
+    include("controlSesion.php");
+    
+    $conexion = mysql_connect("localhost","root","");
     //Control
     if(!$conexion){die('La conexion ha fallado por:'.mysql_error());}
     mysql_select_db("saetis",$conexion);
@@ -97,35 +99,18 @@ $conexion = mysql_connect("localhost","root","");
             <!-- /.navbar-header -->
 
             <ul class="nav navbar-top-links navbar-right">
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-envelope fa-fw"></i>  <i class="fa fa-caret-down"></i>
-                    </a>
-                </li>
+            
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-tasks fa-fw"></i>  <i class="fa fa-caret-down"></i>
-                    </a>
-                </li>
-                <!-- /.dropdown -->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-bell fa-fw"></i>  <i class="fa fa-caret-down"></i>
-                    </a>
-                </li>
-                <!-- /.dropdown -->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                        <?php echo $UsuarioActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+  
+                        <li><a href="modificar_administrador.php"><i class="fa fa-user fa-fw"></i> Modificar Datos personales</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="unlog.php"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="unlog.php"><i class="fa fa-sign-out fa-fw"></i>Salir</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -285,16 +270,6 @@ WHERE  u.NOMBRE_U = r.NOMBRE_U  AND r.ROL_R = 'asesor'");
                                 <li>
                                     <a href="../Vista/registro_administrador.php"><i class="fa fa-bar-chart-o fa-files-o "></i> Nueva Cuenta<span class="fa arrow"></span></a>
                                 </li>                        
-                        <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-files-o "></i> Informacion Personal <span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="../Vista/modificar_administrador.php">Privacidad</a>
-                                </li>
-                            </ul>
-                            
-                            <!-- /.nav-second-level -->
-                        </li>
                         
                          <li>
                             <a href="#"><i class="fa fa-tasks fa-fw"></i> Gestion de usuarios<span class="fa arrow"></span></a>
