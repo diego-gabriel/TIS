@@ -1,9 +1,12 @@
 <?php
-    
-   session_start();
-   $UsuarioActivo = $_SESSION['usuario'];
-   include("controlSesion.php");
-  
+ include '../Modelo/conexion.php';
+ session_start();
+ include("controlSesion.php");
+ $UsuarioActivo = $_SESSION['usuario'];
+ $conect = new conexion();
+ $VerificarUsuario = $conect->consulta("SELECT NOMBRE_U FROM usuario WHERE NOMBRE_U = '$UsuarioActivo' ");
+ $VerificarUsuario2 = mysql_fetch_row($VerificarUsuario);
+
 ?>
 
 <html>
@@ -85,35 +88,28 @@
             <!-- /.navbar-header -->
 
             <ul class="nav navbar-top-links navbar-right">
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-envelope fa-fw"></i>  <i class="fa fa-caret-down"></i>
-                    </a>
-                </li>
+
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-tasks fa-fw"></i>  <i class="fa fa-caret-down"></i>
-                    </a>
-                </li>
-                <!-- /.dropdown -->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-bell fa-fw"></i>  <i class="fa fa-caret-down"></i>
-                    </a>
-                </li>
-                <!-- /.dropdown -->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                        <?php echo $UsuarioActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        <?php
+                            if (is_array($VerificarUsuario2)) {   
+                        ?>
+                        <li><a href="ModificarGrupoEmpresa.php"><i class="fa fa-user fa-fw"></i> Modificar Datos personales</a>
                         </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        <?php
+                            }else{
+                        ?>
+                        <li><a href="ModificarSocio.php"><i class="fa fa-user fa-fw"></i> Modificar Datos personales</a>
                         </li>
+                         <?php
+                              }        
+                         ?>
                         <li class="divider"></li>
-                        <li><a href="unlog.php"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="unlog.php"><i class="fa fa-sign-out fa-fw"></i>Salir</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -138,9 +134,7 @@
                                     <ul class="nav nav-second-level">
                                     
                                         <?php
-                                        
-                                        include '../Modelo/conexion.php';
-                                        $conect = new conexion();
+
                                         
                                         $SeleccionrAsesor = $conect->consulta("SELECT NOMBRE_UA FROM inscripcion WHERE NOMBRE_UGE='$UsuarioActivo'");
                                         
@@ -168,36 +162,35 @@
                             <!-- /.nav-second-level -->
                         </li>
                         
+                         <?php
+                            if (is_array($VerificarUsuario2)) {   
+                        ?>
                          <li>
+                             
                             <a href="#"><i class="fa fa-tasks fa-fw"></i> Tareas<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                                <?php
-                                                 $idUsuarioAsesor='leticia';
-                                                 $idUsuarioG='freevalue';
-                                echo   ""
-                                     . "<form name='formularioNombre' action='verificar_nombre.php' enctype='multipart/form-data' method='POST'>"
-                                     . "<input type='hidden' name='nombreGrupo' value='$idUsuarioG'>"
-                                     . "<input type='hidden' name='nombreAsesor' value='$idUsuarioAsesor'>"
-                                     . "</form>"
-                                     . "<li>"
-                                     . "<a href='javascript:document.formularioNombre.submit();'>Verificar Nombre de Empresa</a>"
-                                     . "</li>";
-                                ?>
                                 <li>
                                     <a href="seleccionar_asesor.php">Seleccionar Asesor</a>
                                 </li>
                                 
                                  <li>
+                                     <a href="InscripcionGEProyecto.php">Inscribirse a proyecto</a>
+                                </li>
+                                
+                                <li>
                                      <a href="AnadirSocio.php">Añadir socios</a>
                                 </li>
                                 
                                 <li>
                                     <a href="AnadirRL.php">Seleccionar Representante legal</a>
                                 </li>
-                                
+
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
+                        <?php
+                                }
+                        ?>
                         
                         <li>
                             <a href="#"><i class="fa fa-warning fa-fw"></i> Notificaciones<span class="fa arrow"></span></a>

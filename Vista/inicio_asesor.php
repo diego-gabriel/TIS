@@ -1,5 +1,5 @@
  <?php  
-session_start();
+ session_start();
  $UsuarioActivo = $_SESSION['usuario'];
  include("controlSesion.php");
  ?> 
@@ -81,23 +81,6 @@ session_start();
 
             <ul class="nav navbar-top-links navbar-right">
             
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-envelope fa-fw"></i>  <i class="fa fa-caret-down"></i>
-                    </a>
-                </li>
-                <!-- /.dropdown -->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-tasks fa-fw"></i>  <i class="fa fa-caret-down"></i>
-                    </a>
-                </li>
-                <!-- /.dropdown -->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-bell fa-fw"></i>  <i class="fa fa-caret-down"></i>
-                    </a>
-                </li>
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -233,16 +216,16 @@ session_start();
                         </li>
                         
 
-                          <li>
-                            <a href="lista-de-noticias.php"><i class="fa fa-comment"></i> Foro</a>
-                        </li>
+
                          <li>
                               <a href="lista_doc_subidos.php"><i class="fa fa-tasks fa-fw"></i>Documentos Subidos </a>  
                                               
                           </li>
-                          <li>
+                        <li>
                             <a href="#"><i class="fa fa-question-circle fa-fw"></i> Ayuda <span class="fa arrow"></span></a>
-   
+                        </li>
+                        <li>
+                            <a href="lista-de-noticias.php"><i class="fa fa-comment"></i> Foro</a>
                         </li>
                     </ul>
                     <!-- /#side-menu -->

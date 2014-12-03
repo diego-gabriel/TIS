@@ -71,6 +71,8 @@ session_start();
         <!--<h2>design by <a href="#" title="flash templates">flash-templates-today.com</a></h2>-->
         
     
+                
+	
         <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
@@ -85,29 +87,13 @@ session_start();
 
             <ul class="nav navbar-top-links navbar-right">
             
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-envelope fa-fw"></i>  <i class="fa fa-caret-down"></i>
-                    </a>
-                </li>
-                <!-- /.dropdown -->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-tasks fa-fw"></i>  <i class="fa fa-caret-down"></i>
-                    </a>
-                </li>
-                <!-- /.dropdown -->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-bell fa-fw"></i>  <i class="fa fa-caret-down"></i>
-                    </a>
-                </li>
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <?php echo $UsuarioActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
+  
                         <li><a href="modificar_asesor.php"><i class="fa fa-user fa-fw"></i> Modificar Datos personales</a>
                         </li>
                         <li class="divider"></li>
@@ -126,6 +112,7 @@ session_start();
                         <li>
                             <a href="AdministrarGrupoEmpresa.php"><i class="fa fa-book"></i> Administrar Grupo Empresas</a>
                         </li>
+                        
                         
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-files-o "></i> Documentos <span class="fa arrow"></span></a>
@@ -184,6 +171,9 @@ session_start();
                                     <a href="notificacion_conformidad.php">Emitir Notificaci&oacute;n de Conformidad</a>
                                 </li>
                                 <li>
+                                    <a href="InscripcionProyecto.php">Registrar Proyecto</a>
+                                </li>
+                                <li>
                                     <a href="#">Seguimiento Grupo Empresa <span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
                                         
@@ -233,16 +223,15 @@ session_start();
                         
 
 
-                          <li>
-                            <a href="lista-de-noticias.php"><i class="fa fa-comment"></i> Foro</a>
-                        </li>
-                          <li>
-                            <a href="lista_doc_subidos.php">Documentos Subidos</a>
-   
-                        </li>
-                          <li>
+                         <li>
+                              <a href="lista_doc_subidos.php"><i class="fa fa-tasks fa-fw"></i>Documentos Subidos </a>  
+                                              
+                          </li>
+                        <li>
                             <a href="#"><i class="fa fa-question-circle fa-fw"></i> Ayuda <span class="fa arrow"></span></a>
-   
+                        </li>
+                        <li>
+                            <a href="lista-de-noticias.php"><i class="fa fa-comment"></i> Foro</a>
                         </li>
                     </ul>
                     <!-- /#side-menu -->
@@ -280,7 +269,9 @@ session_start();
                 </div>
             </div>
         </div>
-
+        
+    <!------------------------------------------------------------------------------------------------------->
+        
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <?php
-include '../Modelo/conexion.php';
-session_start();
+ include '../Modelo/conexion.php';
+ session_start();
  include("controlSesion.php");
  $UsuarioActivo = $_SESSION['usuario'];
  $conexion = new conexion();
@@ -91,7 +91,7 @@ session_start();
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                        <?php echo $UsuarioActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
                         <?php
@@ -121,7 +121,7 @@ session_start();
             
             
             
-            
+             
             
             
             

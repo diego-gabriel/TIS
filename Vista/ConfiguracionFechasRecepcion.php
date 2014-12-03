@@ -3,7 +3,10 @@
     error_reporting (5); 	
     include '../Modelo/conexion.php';
     include 'forms/actions/seleccionarDocumentoConfiguracionFechas.php';
-  
+
+    session_start();
+    $con=new conexion();
+    $UsuarioActivo = $_SESSION['usuario'];
 ?>
 <!DOCTYPE html>
 <html>
@@ -43,8 +46,9 @@
 
 <body>
 
-   
-     <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
+        
+	
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
                     <span class="sr-only">Toggle navigation</span>
@@ -57,30 +61,15 @@
             <!-- /.navbar-header -->
 
             <ul class="nav navbar-top-links navbar-right">
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-envelope fa-fw"></i>  <i class="fa fa-caret-down"></i>
-                    </a>
-                </li>
+            
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-tasks fa-fw"></i>  <i class="fa fa-caret-down"></i>
-                    </a>
-                </li>
-                <!-- /.dropdown -->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-bell fa-fw"></i>  <i class="fa fa-caret-down"></i>
-                    </a>
-                </li>
-                <!-- /.dropdown -->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                        <?php echo $UsuarioActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                          <li><a href="modificar_asesor.php"><i class="fa fa-user fa-fw"></i> Modificar Datos personales</a>
+  
+                        <li><a href="modificar_asesor.php"><i class="fa fa-user fa-fw"></i> Modificar Datos personales</a>
                         </li>
                         <li class="divider"></li>
                         <li><a href="unlog.php"><i class="fa fa-sign-out fa-fw"></i>Salir</a>
@@ -106,7 +95,7 @@
                                 <li>
                                             <a href="../Vista/subirarchivoasesor.php">Subir Documentos</a>
                                 </li>
-                                 <li>
+                                <li>
                                     <a href="../Vista/RegistrarDocumentosRequeridos.php">Registrar Documentos</a>
                                 </li>
                                 
@@ -157,8 +146,12 @@
                                     <a href="notificacion_conformidad.php">Emitir Notificaci&oacute;n de Conformidad</a>
                                 </li>
                                 <li>
+                                    <a href="InscripcionProyecto.php">Registrar Proyecto</a>
+                                </li>
+                                <li>
                                     <a href="#">Seguimiento Grupo Empresa <span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
+                                        
                                         <li>
                                             <a id="Seguimiento" href="#">Seguimiento</a>
                                         </li>
@@ -196,20 +189,24 @@
                             <!-- /.nav-second-level -->
                         </li>
                         
-                    
+                       
                         <li>
                             <a href="#"><i class="fa fa-building-o fa-fw"></i> Actividades<span class="fa arrow"></span></a>
                             
                             <!-- /.nav-second-level -->
                         </li>
                         
-           
-                          <li>
-                            <a href="lista-de-noticias.php"><i class="fa fa-comment"></i> Foro</a>
-                         </li>
-                          <li>
+
+
+                         <li>
+                              <a href="lista_doc_subidos.php"><i class="fa fa-tasks fa-fw"></i>Documentos Subidos </a>  
+                                              
+                          </li>
+                        <li>
                             <a href="#"><i class="fa fa-question-circle fa-fw"></i> Ayuda <span class="fa arrow"></span></a>
-   
+                        </li>
+                        <li>
+                            <a href="lista-de-noticias.php"><i class="fa fa-comment"></i> Foro</a>
                         </li>
                     </ul>
                     <!-- /#side-menu -->
@@ -218,8 +215,37 @@
             </div>
             <!-- /.navbar-static-side -->
         </nav>
+
+        <div class="modal fade modalRegistroAsistencia" role="dialog" data-backdrop="static" aria-hidden="true">
+            <div class="modal-dialog modal-md">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Asistencia</h4>
+                    </div>
+                    <div class="modal-body">
+                        
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade modalRegistroReportes" role="dialog" data-backdrop="static" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Reportes</h4>
+                    </div>
+                    <div class="modal-body">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
     
-    <!---->
+    <!---------------------------------------------------------------------------------------------->
     
         <div id="page-wrapper">
             <div class="row">

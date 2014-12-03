@@ -87,7 +87,7 @@
             <ul class="nav navbar-top-links navbar-right">
                                <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                        <?php echo $UsuarioActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
                         <?php
@@ -172,19 +172,6 @@
                              
                             <a href="#"><i class="fa fa-tasks fa-fw"></i> Tareas<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                                <?php
-                                                 $idUsuarioAsesor='leticia';
-                                                 $idUsuarioG='freevalue';
-                                echo   ""
-                                     . "<form name='formularioNombre' action='verificar_nombre.php' enctype='multipart/form-data' method='POST'>"
-                                     . "<input type='hidden' name='nombreGrupo' value='$idUsuarioG'>"
-                                     . "<input type='hidden' name='nombreAsesor' value='$idUsuarioAsesor'>"
-                                     . "</form>"
-                                     . "<li>"
-                                     . "<a href='javascript:document.formularioNombre.submit();'>Verificar Nombre de Empresa</a>"
-                                     . "</li>";
-                                ?>
-                                
                                 <li>
                                     <a href="seleccionar_asesor.php">Seleccionar Asesor</a>
                                 </li>
