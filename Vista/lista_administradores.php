@@ -45,7 +45,7 @@
     <script type="text/javascript" src="../Librerias/lib/validator/diferenteEntregable.js"></script>
     <script type="text/javascript" src="../Librerias/lib/validator/stringLength.js"></script>
     <script type="text/javascript" src="../Librerias/lib/validator/notEmpty.js"></script>
-    <script type="text/javascript" src="../Librerias/lib/validator/callback.js"></script
+    <script type="text/javascript" src="../Librerias/lib/validator/callback.js"></script>
     <script type="text/javascript" src="../Librerias/lib/validator/date.js"></script>
     <script type="text/javascript" src="../Librerias/lib/validator/numeric.js"></script>
     <script type="text/javascript" src="../Librerias/lib/validator/porcentajeMax.js"></script>

@@ -35,15 +35,11 @@ $idgp = $_GET['id_us'];
 	//cerrar conexion--------------------------
 	 mysql_close($conexion);
 	 //volver a la pagina---------------
+         
+         echo '<script>alert("Se elimino el documento correctamente");</script>';
+         echo '<script>window.location="../Vista/lista_doc_subidos.php";</script>';
 	
-	echo'
-	<html>
-		<head>
-			<meta http-equiv="REFRESH" content="0;url=lista_doc_subidos.php">
-		</head>
-	</html>
-
-	';
+	
 
  
 ?>
