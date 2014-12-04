@@ -20,6 +20,7 @@ $con=new conexion();
                 $cont=  mysql_fetch_row($consult);
                 $bandera=$cont[0];
                 if($bandera==0){
+                    
                     $a1="SELECT id_g "
                             . "FROM gestion "
                             . "WHERE DATE (NOW()) > DATE(FECHA_INICIO_G) and DATE(NOW()) < DATE(FECHA_FIN_G)";
@@ -28,16 +29,32 @@ $con=new conexion();
                     $id_gestion_=$id_gestion[0];
 
                     $separar=explode(' ', $a);
+                    $count = count($separar);
+                    $apellido = $separar[1];
+                    if( $count == 3)
+                    {
+                        $apellido = $apellido." ".$separar[2];
+                    }
+                    
+                    
                     $consult2="SELECT nombre_u "
                             . "FROM asesor "
-                            . "WHERE NOMBRES_A LIKE '". $separar[0]."' and APELLIDOS_A LIKE '".$separar[1]."'";
+                            . "WHERE NOMBRES_A LIKE '". $separar[0]."' and APELLIDOS_A LIKE '".$apellido."'";
                     $nombre=$con->consulta($consult2);
                     $nombre_asesor=  mysql_fetch_row($nombre);
                     $nombre_u=$nombre_asesor[0];
+                    
+                    
+                    //var_dump($nombre_u);
+                    
+                    
 
-                    $b1="INSERT INTO inscripcion(NOMBRE_UA, NOMBRE_UGE) VALUES ('".$nombre_u."','".$b."')";
+                    $b1="INSERT INTO inscripcion(NOMBRE_UA, NOMBRE_UGE, ESTADO_INSCRIPCION) VALUES ('".$nombre_u."','".$b."', 'Deshabilitado')";
                     //$b1="INSERT INTO inscripcion(NOMBRE_UA, NOMBRE_UGE, ID_G) VALUES ('".$nombre_u."','".$b."','".$id_gestion_."')";
+                    
                     $con->consulta($b1);
+                    
+                    
                     echo"<script type=\"text/javascript\">alert('Asesor elegido'); window.history.back();</script>";
                     
                 }else{

@@ -87,7 +87,7 @@
                     echo    '<script>
                                     BootstrapDialog.show({
                                          title: "Modificar Nota",
-                                         message: "Se proceso el formulario...su nota obtenida es de '.$nota.' puntos",
+                                         message: "Su nota obtenida es de '.$nota.' puntos",
                                          onhide: function(dialogRef){
                                             location.reload();
                                         }
@@ -127,7 +127,7 @@
                         echo    '<script>
                                     BootstrapDialog.show({
                                          title: "Resultado de la Evaluacion",
-                                         message: "Se proceso el formulario...su nota obtenida es de '.$nota.' puntos",
+                                         message: "Su nota obtenida es de '.$nota.' puntos",
                                          onhide: function(dialogRef){
                                             location.reload();
                                         }

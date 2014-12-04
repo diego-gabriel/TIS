@@ -355,7 +355,7 @@
                                                     $contador++;
 
                                                         echo'<div class="form-group">';
-                                                            echo'<input type="text" name="valorInput[]" class="form-control" pattern="^[0-9]{1,3}" value="'.$PuntajeGE[$i].'" required>';
+                                                            echo'<input type="text" name="valorInput[]" class="form-control" pattern="^[0-9]{1,3}" value="'.$PuntajeGE[$i].'" title="El campo solo admite numeros" required>';
                                                             echo '<input type="hidden" name="puntajeCriterio[]" value="'.$contador.'">';
                                                         
                                                         echo'</div>';

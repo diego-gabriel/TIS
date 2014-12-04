@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <?php 
     include '../Modelo/conexion.php';
-    include("controlSesion.php");
     
     session_start();
     $UsuarioActivo = $_SESSION['usuario'];

@@ -53,6 +53,17 @@
     <script type="text/javascript" src="../Librerias/lib/validator/porcentajeMin.js"></script>
     <!-- JS -->
     <script type="text/javascript" src="../Librerias/lib/funcion.js"></script>
+    <script>
+        jQuery(document).ready(function() {
+    
+            $(".verificar").on("click", function(e) {
+
+                return confirm('Esta seguro que quiere eliminar a la grupo empresa?');
+
+            });
+        });
+
+    </script>
 
 
 
@@ -133,7 +144,7 @@
                 <div class="content_resize">
                     <div class="mainbar">
                                             <div class="article"><br><br>
-                            <h2><span>Lista de Usuarios</span></h2> 
+                            <h2><span>Lista de Asesores</span></h2> 
                            
                         </div>
                                             
@@ -229,7 +240,7 @@ WHERE  u.NOMBRE_U = r.NOMBRE_U  AND r.ROL_R = 'asesor'");
                                     
                                        <div class="contenedor-columna">
                                         <?php
-                                            echo "<a href ='eliminar_asesor.php?id_us=".$fila['NOMBRE_U']."'><font color='blue'>Eliminar</font></a>";
+                                            echo "<a href ='eliminar_asesor.php?id_us=".$fila['NOMBRE_U']."' class='verificar'><font color='blue'>Eliminar</font></a>";
                                         ?>
                                     </div>
                                                                                                   

@@ -9,7 +9,6 @@ $contrasena = $_SESSION['contrasena'];
 
 $idgp = $_GET['id_us'];
 
-
 //conexion-------------
 	$conexion = mysql_connect("localhost","root","");
 	//Control
@@ -23,14 +22,10 @@ $idgp = $_GET['id_us'];
 	//cerrar conexion--------------------------
 	 mysql_close($conexion);
 	 //volver a la pagina---------------
-	 echo'
-	<html>
-		<head>
-			<meta http-equiv="REFRESH" content="0;url=lista_administradores.php">
-		</head>
-	</html>
-
-	';
-
+         
+         
+         echo '<script>alert("Se elimino al administrador correctamente");</script>';
+         echo '<script>window.location="../Vista/lista_administradores.php";</script>';
+	
  
 ?>

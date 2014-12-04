@@ -100,7 +100,7 @@
                     </a>
                     <ul class="dropdown-menu dropdown-user">
   
-                        <li><a href="modificar_asesor.php"><i class="fa fa-user fa-fw"></i> Modificar Datos personales</a>
+                        <li><a href="modificar_administrador.php"><i class="fa fa-user fa-fw"></i> Modificar Datos personales</a>
                         </li>
                         <li class="divider"></li>
                         <li><a href="unlog.php"><i class="fa fa-sign-out fa-fw"></i>Salir</a>

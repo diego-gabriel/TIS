@@ -88,7 +88,7 @@ if(isset($_GET['op']))
 	if($operacion == 'no')
 	{
 		header('location:../Vista/ListaGrupoEmpresas.php');
-        die();
+                die();
 	}
 
 }
@@ -116,9 +116,11 @@ else
 {
 
     $EliminarComentarioGE = $conect->consulta("DELETE FROM comentarios WHERE NOMBRE_U = '$GrupoEmpresa' ");
+    $EliminarInscripcionProyecto = $conect->consulta("DELETE FROM inscripcion_proyecto WHERE NOMBRE_U = '$GrupoEmpresa' ");
     $EliminarInscripcionGE = $conect->consulta("DELETE FROM inscripcion WHERE NOMBRE_UGE = '$GrupoEmpresa' ");
     $EliminarSesionGE = $conect->consulta("DELETE FROM sesion WHERE NOMBRE_U = '$GrupoEmpresa' ");
     $EliminarGE =$conect->consulta("DELETE FROM grupo_empresa WHERE NOMBRE_U = '$GrupoEmpresa' ");
+    $EliminarRolGE = $conect->consulta("DELETE FROM usuario_rol WHERE NOMBRE_U = '$GrupoEmpresa' ");
     $EliminarUsuarioGE = $conect->consulta("DELETE FROM usuario WHERE NOMBRE_U = '$GrupoEmpresa' ");
 
 	echo '<script>alert("Se elimino la grupo empresa correctamente!!")</script>';

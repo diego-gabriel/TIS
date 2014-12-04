@@ -282,7 +282,7 @@
                             if(is_array($IdForm)) 
                             {
                             
-                                $consultaGrupos = "SELECT DISTINCT NOMBRE_UGE FROM inscripcion WHERE NOMBRE_UA = '$UsuarioActivo'";
+                                $consultaGrupos = "SELECT DISTINCT NOMBRE_UGE FROM inscripcion WHERE NOMBRE_UA = '$UsuarioActivo' AND ESTADO_INSCRIPCION = 'Habilitado'";
 
                                 $resultadoConsulta = $conect->consulta($consultaGrupos);
 
