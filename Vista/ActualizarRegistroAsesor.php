@@ -29,7 +29,7 @@ mysql_query("UPDATE usuario_rol SET NOMBRE_U='$updLogin'
 WHERE  NOMBRE_U='$updLogin'");
 
 
-echo"<script type=\"text/javascript\">alert('el registro se realizo exitosamente'); window.location='inicio_asesor.php';</script>";
+echo"<script type=\"text/javascript\">alert('Se modificaron los datos satisfactoriamente'); window.location='inicio_asesor.php';</script>";
 mysql_close($conexion);
 
 
