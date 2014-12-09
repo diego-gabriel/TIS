@@ -61,35 +61,17 @@
             <!-- /.navbar-header -->
 
             <ul class="nav navbar-top-links navbar-right">
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-envelope fa-fw"></i>  <i class="fa fa-caret-down"></i>
-                    </a>
-                </li>
+             
                 <!-- /.dropdown -->
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-tasks fa-fw"></i>  <i class="fa fa-caret-down"></i>
-                    </a>
-                </li>
-                <!-- /.dropdown -->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-bell fa-fw"></i>  <i class="fa fa-caret-down"></i>
-                    </a>
-                </li>
-                <!-- /.dropdown -->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#"><?php echo "$UsuarioActivo"; ?>
                         <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                        </li>
+                        <li><a href="modificar_asesor.php"><i class="fa fa-user fa-fw"></i> Modificar Datos Personales</a>
+                        
                         <li class="divider"></li>
-                        <li><a href="unlog.php"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="unlog.php"><i class="fa fa-sign-out fa-fw"></i>Salir</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -175,25 +157,37 @@
                                         <a href="#">Evaluacion Grupo Empresa<span class="fa arrow"></span></a>
                                             <ul class="nav nav-third-level">
                                                 <li>
-                                                    <a href="CrearModalidadEvaluacion.php">Criterio de Evaluaci&oacute;n </a>                             
+                                                    <a href="../Vista/CrearModalidadEvaluacion.php">Criterio de Evaluaci&oacute;n </a>                             
+                                                </li>
+                                                
+                                                <li>
+                                                    <a href="#">Criterio de Calificaci&oacute;n<span class="fa arrow"></span></a>
+                                                    <ul class="nav nav-third-level">
+                                                        <li>
+                                                            <a href="../Vista/CrearModalidadCalificacion.php"> Crear Criterio de Calificaci&oacute;n</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="../Vista/EliminarCriterioCalificacion.php"> Eliminar Criterio de Calificaci&oacute;n</a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                 
+                                                <li>
+                                                    <a href="#">Formulario de Evaluacion<span class="fa arrow"></span></a>
+                                                    <ul class="nav nav-third-level">
+                                                        <li>
+                                                            <a href="../Vista/CrearFormulario.php">Crear Formulario de Evaluacion</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="../Vista/SeleccionarFormulario.php"> Habilitar Formulario de Evaluacion </a>   
+                                                        </li>
+                                                        <li>
+                                                            <a href="../Vista/EliminarFormulario.php">Eliminar Formulario de Evaluacion</a>
+                                                        </li>
+                                                    </ul>
                                                 </li>
                                                 <li>
-                                                    <a href="CrearModalidadCalificacion.php"> Criterio de Calificaci&oacute;n</a>
-                                                </li>
-                                                 <li>
-                                                    <a href="EliminarCriterioCalificacion.php"> Eliminar Criterio de Calificaci&oacute;n</a>
-                                                </li>
-                                                <li>
-                                                    <a href="CrearFormulario.php">Crear Formulario de Evaluacion</a>
-                                                </li>
-                                                <li>
-                                                    <a href="EliminarFormulario.php">Eliminar Formulario de Evaluacion</a>
-                                                </li>
-                                                <li>
-                                                    <a href="SeleccionarFormulario.php"> Seleccionar Formulario de Evaluacion </a>   
-                                                </li>
-                                                <li>
-                                                    <a href="EvaluarGrupoEmpresa.php">Evaluar Grupo Empresa </a>   
+                                                    <a href="../Vista/EvaluarGrupoEmpresa.php">Evaluar Grupo Empresa </a>   
                                                 </li>
                                             </ul>
                                 </li>
