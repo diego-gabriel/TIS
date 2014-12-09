@@ -136,10 +136,16 @@
                             <a href="#"><i class="fa fa-tasks fa-fw"></i> Tareas<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
+                                    <a href="contrato.php">Emitir Contrato </a>
+                                </li>
+                                <li>
                                     <a href="ordendecambioempresas.php">Emitir Orden de Cambio</a>
                                 </li>
                                 <li>
                                     <a href="notificacion_conformidad.php">Emitir Notificaci&oacute;n de Conformidad</a>
+                                </li>
+                                <li>
+                                    <a href="InscripcionProyecto.php">Registrar Proyecto</a>
                                 </li>
                                 <li>
                                     <a href="#">Seguimiento Grupo Empresa <span class="fa arrow"></span></a>
@@ -194,25 +200,18 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
+   
                         <li>
-                            <a href="#"><i class="fa fa-building-o fa-fw"></i> Actividades<span class="fa arrow"></span></a>
-                            
-                            <!-- /.nav-second-level -->
+                              <a href="lista_doc_subidos.php"><i class="fa fa-tasks fa-fw"></i>Documentos Subidos </a>  
+                                              
                         </li>
                         <li>
-                              <a href="#"><i class="fa fa-tasks fa-fw"></i>Informacion Personal<span class="fa arrow"></span> </a>  
-                                              <ul class="nav nav-third-level">
-                                                <li>
-                                                    <a href="modificar_asesor.php">Modificar Datos Personales </a>                             
-                                                </li>       
-                                            </ul>
-                          </li>
+                            <a href="lista-de-noticias.php"><i class="fa fa-comment"></i> Foro</a>
+                        </li>
+
                         
-                        <li>
-                            <a href="#"><i class="fa fa-question-circle fa-fw"></i> Ayuda <span class="fa arrow"></span></a>
-                            
-                            <!-- /.nav-second-level -->
-                        </li>
+                        
+                       
                     </ul>
                     <!-- /#side-menu -->
                 </div>

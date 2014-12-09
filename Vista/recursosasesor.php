@@ -191,22 +191,11 @@
                             <!-- /.nav-second-level -->
                         </li>
                         
-                       
-                        <li>
-                            <a href="#"><i class="fa fa-building-o fa-fw"></i> Actividades<span class="fa arrow"></span></a>
-                            
-                            <!-- /.nav-second-level -->
-                        </li>
-                        
-
-
                          <li>
                               <a href="../Vista/lista_doc_subidos.php"><i class="fa fa-tasks fa-fw"></i>Documentos Subidos </a>  
                                               
                           </li>
-                        <li>
-                            <a href="#"><i class="fa fa-question-circle fa-fw"></i> Ayuda <span class="fa arrow"></span></a>
-                        </li>
+                       
                         <li>
                             <a href="../Vista/lista-de-noticias.php"><i class="fa fa-comment"></i> Foro</a>
                         </li>

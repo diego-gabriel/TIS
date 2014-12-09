@@ -256,15 +256,7 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
-                        
-                        <li>
-                            <a href="#"><i class="fa fa-question-circle fa-fw"></i> Ayuda <span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                        
+  
                         <li>
                             <a href="lista-de-noticias-grupo.php"><i class="fa fa-comment"></i> Foro</a>
                                 
