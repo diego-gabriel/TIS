@@ -8,7 +8,11 @@
 	require_once '../Modelo/Model/Entrega.php';
 	require_once '../Modelo/Model/Pago.php';
 
-	$usuario = 'Bittle';
+	
+        session_start();
+        $usuario=$_SESSION['usuario'];
+        
+        /*$usuario = 'Bittle';*/
     $planificacion = new Planificacion($usuario);
     $estado = $planificacion->getEstado();
 

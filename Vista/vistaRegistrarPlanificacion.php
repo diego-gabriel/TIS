@@ -5,7 +5,13 @@
     require_once '../Modelo/Model/Precio.php';
     require_once '../Modelo/Model/FechaRealizacion.php';
 
-    $usuario = 'Bittle';
+    
+            session_start();
+        $usuario=$_SESSION['usuario'];
+        
+        
+        
+    /*$usuario = 'Bittle';*/
     $planificacion = new Planificacion($usuario);
     $estado = $planificacion->getEstado();
 	
@@ -29,7 +35,7 @@
                           <div class="form-group">
                               <label class="col-md-2 control-label">Fecha</label>
                               <div class="col-md-3">
-                                  <input type="text" class="form-control form_datetime" name="fecha" readonly>
+                                  <input type="date" class="form-control" name="fecha">
                               </div>
                           </div>
                           <div class="form-group">
