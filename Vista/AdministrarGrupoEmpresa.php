@@ -291,6 +291,7 @@
                             }
 
                             for ($i=0; $i <count($GruposInscritos) ; $i++) { 
+                                
                                 $SeleccionarRepresentante = $conect->consulta("SELECT REPRESENTANTE_LEGAL_GE FROM GRUPO_EMPRESA WHERE NOMBRE_U = '$GruposInscritos[$i]'");
                                 $SeleccionarNota = $conect->consulta("SELECT CALIF_N FROM NOTA WHERE NOMBRE_U = '$GruposInscritos[$i]'");
                                 
@@ -305,9 +306,10 @@
                             }
 
                             for ($i=0; $i < count($GruposInscritos) ; $i++) { 
+                                $j=$i+1;
 
                                 echo '<tr>
-                                        <td>'.$i.'</td>
+                                        <td>'.$j.'</td>
                                         <td>'.$GruposInscritos[$i].'</td>
                                         <td>'.$Representante[$i].'</td>
                                         <td>'.$Estado[$i].'</td>
