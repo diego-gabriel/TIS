@@ -21,8 +21,8 @@ return $CadenaRegulada2; //El básico return de una función
 
 $nombre=  LimpiaEspacios($_POST['nombre']);
 $nombreCorto=  LimpiaEspacios($_POST['nombreCorto']);
-$nombreAsesor=$_POST['nombreAsesor'];
-$nombreGrupo=$_POST['nombreGrupo'];
+//$nombreAsesor=$_POST['nombreAsesor'];
+//$nombreGrupo=$_POST['nombreGrupo'];
 date_default_timezone_set('America/La_Paz');
 $fecha=  date('Y-m-d');
 $hora=  date("G:H:i");
@@ -33,11 +33,11 @@ $existe=FALSE;
 $existe2=FALSE;
 while ($fila=  mysql_fetch_array($consulta))
 {
-    if($nombre== $fila[0])
+    if($nombre== $fila[0] || $nombre == $fila[1])
     {
         $existe=TRUE;
     }
-    if($nombreCorto==$fila[1])
+    if($nombreCorto==$fila[1] || $nombre == $fila[0])
     {
         $existe2=TRUE;
     }

@@ -68,21 +68,21 @@
                                         <button type="submit" class="btn btn-primary">Revisar</button><br><br>
                                         <!--<embed src='419701.pdf' width= '700' height='500'>  -->  
                                         <?php
-                                        $idAsesor=$_POST['nombreAsesor'];
-                                        $idGrupo=$_POST['nombreGrupo'];
-                                        echo "<input type='hidden' name='nombreAsesor' value='$idAsesor'>"
+                                      //  $idAsesor=$_POST['nombreAsesor'];
+                                        //$idGrupo=$_POST['nombreGrupo'];
+                                        /*echo "<input type='hidden' name='nombreAsesor' value='$idAsesor'>"
                                              . "<input type='hidden' name='nombreGrupo' value='$idGrupo'>";
-                                        ?>
+                                        */?>
                                          </form>
                                         
                                         <form action="ver_nombres.php" name="formulario2" role=form" method="post">
                                             <button type="submit" class="btn btn-primary">Ver Nombres Registrados</button><br><br>
                                             <?php
-                                            $idAsesor=$_POST['nombreAsesor'];
-                                            $idGrupo=$_POST['nombreGrupo'];
+                                            //$idAsesor=$_POST['nombreAsesor'];
+                                            /*$idGrupo=$_POST['nombreGrupo'];
                                             echo "<input type='hidden' name='nombreAsesor' value='$idAsesor'>"
                                                 . "<input type='hidden' name='nombreGrupo' value='$idGrupo'>";
-                                        ?>
+                                        */?>
                                         </form>
                                     </div>
                                

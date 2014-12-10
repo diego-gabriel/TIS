@@ -219,6 +219,9 @@
                             </ul>  
                             </li>
                         </li>
+                        <?php
+                            if (is_array($VerificarUsuario2)) {   
+                        ?>
                         <li>
                             <a href="#"><i class="fa fa-building-o fa-fw"></i> Actividades<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
@@ -230,8 +233,9 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
-
-                        
+                        <?php
+                        }
+                        ?>
                         <li>
                             <a href="lista-de-noticias-grupo.php"><i class="fa fa-comment"></i> Foro</a>
                                 
@@ -286,7 +290,8 @@
  
                                 <?php
                                 
-                                     $c_3="SELECT DISTINCT `NOMBRE_R`,`RUTA_D`,`DESCRIPCION_D`,`fecha_p` ,`hora_p` FROM `registro` AS r,`documento` AS d,`descripcion` AS e,`periodo` AS p WHERE r.`ID_R` = d.`ID_R` AND r.`ID_R` = e.`ID_R` AND r.`ID_R` = p.`ID_R` AND r.`TIPO_T` LIKE 'publicaciones' ";
+                                     $c_3="SELECT DISTINCT `NOMBRE_R`,`RUTA_D`,`DESCRIPCION_D`,`fecha_p` ,`hora_p`,`RECEPTOR_R` FROM `registro` AS r,`documento` AS d,`descripcion` AS e,`periodo` AS p,`receptor` AS w WHERE r.`ID_R` = d.`ID_R` AND r.`ID_R` = e.`ID_R` AND r.`ID_R` = p.`ID_R` AND r.`ID_R` = w.`ID_R` AND r.`TIPO_T` LIKE 'publicaciones' ";
+                                     
                                      $r3=$con->consulta($c_3);
                                     
                                        
@@ -297,20 +302,15 @@
                                            while($var3 = mysql_fetch_array($r3))
                                           {
                                             $aux=$var3['2'];
-                                            $findme = "*";
-                                            $tam=strlen($aux);
-                                            $pos = strpos($aux,$findme);
-                                            $pose=$pos+1;
-                                            $numero=substr($aux, $pose,$tam);
-                                            $pos2=$pos-1;
+                                            $numero=$var3[5];
+                                           
                                             
-                                            $des=substr($aux, 0,$pos2);
-                                            if($numero=="TODOS" || $numero==$UsuarioActivo)
+                                            
+                                            
+                                            if($numero=="TODOS" || $numero==$UsuarioActivo || $numero=="PUBLICO")
                                             {
                                                 $ubi= $var3[1];
-                                                $ini="32"+1;
-                                                $size=strlen($ubi);
-                                                $com=substr($ubi, $ini,$size);
+                                                
                                                 $fep=$var3[3];
                                                 $hop=$var3[4];
                                                 $fecha       = date('Y-m-d');
@@ -323,9 +323,9 @@
                                                 ?>
                                                       <tr> 
                                                           <td><?php echo $i?></td> 
-                                                          <td><a class="link-dos" href="../<?php echo $com ?>"><?php echo $var3[0]?></a><td>
+                                                          <td><a class="link-dos" href="<?php echo $var3[1] ?>"><?php echo $var3[0]?></a><td>
 
-                                                          <td><?php echo $des?></td> 
+                                                          <td><?php echo $var3[2]?></td> 
                                                           <td> </td>
                                                          
                                                      </tr>

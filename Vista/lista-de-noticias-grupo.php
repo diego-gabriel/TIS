@@ -205,6 +205,9 @@
                             </ul>  
                             </li>
                         </li>
+                        <?php
+                            if (is_array($VerificarUsuario2)) {   
+                        ?>
                         <li>
                             <a href="#"><i class="fa fa-building-o fa-fw"></i> Actividades<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
@@ -216,7 +219,9 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
-
+                        <?php
+                        }
+                        ?>
                         <li>
                             <a href="lista-de-noticias-grupo.php"><i class="fa fa-comment"></i> Foro</a>
                                 
@@ -283,7 +288,7 @@
 
                                 <a href="#" class="list-group-item">
                                        <i ></i> <p size="5"><font size="3"><b><?php echo $titulo?></b><p></p>
-                                    <i ></i> Posteado por <b><?php echo $usuario?></b> -
+                                    <i ></i> Posteado por <b><?php echo $UsuarioActivo?></b> -
                                     <i ></i> <b> <?php echo $views?></b> Visualizaciones -
                                     <i ></i> <b><?php echo $comentarios?></b> Comentarios -
                                    

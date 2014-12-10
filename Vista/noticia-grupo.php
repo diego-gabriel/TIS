@@ -3,14 +3,13 @@
     //$con=new conexion();
      $conexion = mysql_connect("localhost","root","");
 	//Control
-	if(!$conexion){die('La conexion ha fallado por:'.mysql_error());}
-	mysql_select_db("saetis",$conexion);
-   session_start();
- $UsuarioActivo = $_SESSION['usuario'];
-   $con = new conexion();
-  $VerificarUsuario = $con->consulta("SELECT NOMBRE_U FROM usuario WHERE NOMBRE_U = '$UsuarioActivo' ");
-  $VerificarUsuario2 = mysql_fetch_row($VerificarUsuario);
-    //$x="camaleon";
+     if(!$conexion){die('La conexion ha fallado por:'.mysql_error());}
+     mysql_select_db("saetis",$conexion);
+     session_start();
+    $UsuarioActivo = $_SESSION['usuario'];
+    $con = new conexion();
+    $VerificarUsuario = $con->consulta("SELECT NOMBRE_U FROM usuario WHERE NOMBRE_U = '$UsuarioActivo' ");
+    $VerificarUsuario2 = mysql_fetch_row($VerificarUsuario);
 ?>
 
 
@@ -180,6 +179,9 @@
                             </ul>  
                             </li>
                         </li>
+                        <?php
+                            if (is_array($VerificarUsuario2)) {   
+                        ?>
                         <li>
                             <a href="#"><i class="fa fa-building-o fa-fw"></i> Actividades<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
@@ -191,7 +193,9 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
-
+                        <?php
+                        }
+                        ?>
                         <li>
                             <a href="lista-de-noticias-grupo.php"><i class="fa fa-comment"></i> Foro</a>
                                 
@@ -304,14 +308,14 @@ or die ("Erro ao Adicionar Comentário.");
 //echo "Comentario Adicionado  | <a  class='link-dos' href=\"noticia.php?id=".$_GET['id']."\">Actualizar Página para ver su comentario</a>";
 ?>
 <script>
-  location.href="noticia.php?id=<?php echo $_GET['id']; ?>";
+  location.href="noticia-grupo.php?id=<?php echo $_GET['id']; ?>";
 </script>
 <?php
 }
 }
 
 ?>
-<form name="input" action="noticia.php?id=<?php echo $_GET['id']; ?>" method="post">
+<form name="input" action="noticia-grupo.php?id=<?php echo $_GET['id']; ?>" method="post">
 
 
 <label>Comentario:</label>

@@ -5,11 +5,25 @@
     require_once '../Modelo/Model/Precio.php';
     require_once '../Modelo/Model/FechaRealizacion.php';
 
+    require_once '../Modelo/conexion.php';
+    session_start();
+        
+    $UsuarioActivo = $_SESSION['usuario'];
+    $con = new conexion();
+    $VerificarUsuario = $con->consulta("SELECT NOMBRE_U FROM usuario WHERE NOMBRE_U = '$UsuarioActivo' ");
+    $VerificarUsuario2 = mysql_fetch_row($VerificarUsuario);
+        
+    $usuario = $UsuarioActivo;
     
-            session_start();
-        $usuario=$_SESSION['usuario'];
-        
-        
+    if (!is_array($VerificarUsuario2)) {   
+        $consultaGE="SELECT `NOMBRE_U` FROM socio WHERE `NOMBRES_S` = '$UsuarioActivo'";
+        $conGE_=$con->consulta($consultaGE);
+        $NombreUsuario=mysql_fetch_row($conGE_);
+
+        $usuario=$NombreUsuario[0];
+
+    }
+       
         
     /*$usuario = 'Bittle';*/
     $planificacion = new Planificacion($usuario);
@@ -22,7 +36,7 @@
                       <div class="bs-callout bs-callout-info">
                           <h4>Nota</h4>
                           <p>
-                              Registre una actividad de su planificacion...
+                              Registre una actividad de su planificacion... 
                           </p>
                       </div>
                       <form class="form-horizontal"> 

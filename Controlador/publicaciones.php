@@ -43,7 +43,7 @@ include('../Modelo/crearimagen.php');
 		               <img class="img-rounded" width="35px" height="35px" alt=" " src="'.$icono.'"></img>
                        </td>
 			           <td>
-                       <a class="link-dos" href="../'.$ubi.'" onclick="">'.$key['NOMBRE_R'].'<span class="instancename">    
+                       <a class="link-dos" href='.$ubi.' onclick="">'.$key['NOMBRE_R'].'<span class="instancename">    
  
                        <span class="accesshide "></span></a>
                        </td>
