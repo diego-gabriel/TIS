@@ -226,10 +226,10 @@
                         <?php
                         date_default_timezone_set('America/Puerto_Rico');
                         $HoraActual = date("H:i:s");
-                        $FechaActual = date('Y:m:j');
+                        $FechaActual = date('Y-m-j');
 
                        
-                        $VerificarIns= $con->consulta("SELECT NOMBRE_U FROM inscripcion_proyecto WHERE NOMBRE_U = '$UsuarioGE' ");
+                            $VerificarIns= $con->consulta("SELECT NOMBRE_U FROM inscripcion_proyecto WHERE NOMBRE_U = '$UsuarioGE' ");
                             $VerificarIns2 = mysql_fetch_row($VerificarIns);
                             if (!is_array($VerificarIns2))
                             {
@@ -239,7 +239,7 @@
 
                                 $Doc = $_GET['doc'];
 
-                                $SeleccionarIdDoc = $conect->consulta("SELECT ID_R from registro where NOMBRE_R = '$Doc'");
+                                $SeleccionarIdDoc = $conect->consulta("SELECT ID_R from registro where NOMBRE_R = '$Doc' AND NOMBRE_U ='$Asesor[0]'");
 
                                 $IdDoc = mysql_fetch_row($SeleccionarIdDoc);
 
@@ -247,43 +247,39 @@
 
                                 $fechas = mysql_fetch_row($SeleccionarFechas);
 
-                                //var_dump($fechas);
+                                $StampHoraActual = strtotime($HoraActual);
+                                $StampFechaActual = strtotime($FechaActual);
+                                $StampHoraInicio = strtotime($fechas[2]);
+                                $StampHoraFin = strtotime($fechas[3]);
+                                $StampFechaInicio = strtotime($fechas[0]);
+                                $StampFechaFin = strtotime($fechas[1]);
 
+                                    if (($StampFechaActual == $StampFechaInicio and $StampHoraActual < $StampHoraInicio) or ($StampFechaActual == $StampFechaFin and $StampHoraActual > $StampHoraFin)) {
 
-                                $VerificarDisponibilidad = $conect->consulta("SELECT * from plazo p WHERE ID_R = '$IdDoc[0]' AND FECHA_FIN_PL >='$FechaActual' AND HORA_FIN_PL >= '$HoraActual'");
+                                        echo "No esta disponible la subida del documento";
+                                    }
+                                    else
+                                    {
+                                       
+                                            echo '<div class="form-group">';
 
-                                $DocDisponible = mysql_fetch_row($VerificarDisponibilidad);
+                                            echo 'La entrega esta disponible desde la fecha '.$fechas[0].' a horas '.$fechas[2].' hasta la fecha '.$fechas[1].' a horas '.$fechas[3].'';
+                                            echo '</div>';
 
-                                if(is_array($DocDisponible))
-                                {
-                                    echo '<div class="form-group">';
-
-
-                                    echo 'La entrega esta disponible desde la fecha '.$fechas[0].' a horas '.$fechas[2].' hasta la fecha '.$fechas[1].' a horas '.$fechas[3].'';
-                                    echo '</div>';
-
-                                    echo '
-                                        <form action="GuardarSubirDocumento.php" method="POST" enctype="multipart/form-data">
-                                            <fieldset>
-                                                <div class="form-group">
-                                                    <input name="archivoA" id="archivoA" type="file" class = "btn btn-primary" required>
-                                                </div>
-                                            
-                                                <div class="form-group">
-                                                    <input type="submit" value="Subir Documento" class= "btn btn-primary">
-                                                </div>
-                                            </fieldset>
-                                        </form>';
-
-                                }else{
-
-                                    echo "No esta disponible la subida del documento";
-                                }
-
-
-
-
-                                
+                                            echo '
+                                                <form action="GuardarSubirDocumento.php" method="POST" enctype="multipart/form-data">
+                                                    <fieldset>
+                                                        <div class="form-group">
+                                                            <input name="archivoA" id="archivoA" type="file" class = "btn btn-primary" required>
+                                                        </div>
+                                                    
+                                                        <div class="form-group">
+                                                            <input type="submit" value="Subir Documento" class= "btn btn-primary">
+                                                        </div>
+                                                    </fieldset>
+                                                </form>';
+                                    }  
+    
                             }
                         
                         ?>

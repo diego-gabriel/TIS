@@ -14,9 +14,7 @@ if(isset($_GET['op']))
 
 	if($operacion == 'si')
 	{
-
-
-           
+   
 		//Eliminar Los puntajes
 		$SeleccionarIdFormulario = $conect->consulta("SELECT ID_N FROM NOTA WHERE NOMBRE_U='$GrupoEmpresa'"); 
 
@@ -114,11 +112,15 @@ if(is_array($IdRegistroGE))
 }
 else
 {
+	$EliminarPlanificacionGE = $conect->consulta("DELETE FROM planificacion WHERE NOMBRE_U = '$GrupoEmpresa' ");
+	$EliminarNoticia = $conect->consulta("DELETE FROM noticias WHERE NOMBRE_U = '$GrupoEmpresa' ");
 
     $EliminarComentarioGE = $conect->consulta("DELETE FROM comentarios WHERE NOMBRE_U = '$GrupoEmpresa' ");
+
     $EliminarInscripcionProyecto = $conect->consulta("DELETE FROM inscripcion_proyecto WHERE NOMBRE_U = '$GrupoEmpresa' ");
     $EliminarInscripcionGE = $conect->consulta("DELETE FROM inscripcion WHERE NOMBRE_UGE = '$GrupoEmpresa' ");
     $EliminarSesionGE = $conect->consulta("DELETE FROM sesion WHERE NOMBRE_U = '$GrupoEmpresa' ");
+    $EliminarSocioGE = $conect->consulta("DELETE FROM socio WHERE NOMBRE_U = '$GrupoEmpresa' ");
     $EliminarGE =$conect->consulta("DELETE FROM grupo_empresa WHERE NOMBRE_U = '$GrupoEmpresa' ");
     $EliminarRolGE = $conect->consulta("DELETE FROM usuario_rol WHERE NOMBRE_U = '$GrupoEmpresa' ");
     $EliminarUsuarioGE = $conect->consulta("DELETE FROM usuario WHERE NOMBRE_U = '$GrupoEmpresa' ");
