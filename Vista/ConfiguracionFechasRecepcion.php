@@ -29,7 +29,8 @@
     
     <link rel="stylesheet" type="text/css" media="all" href="../Librerias/calendario/daterangepicker-bs3.css" />
      <script type="text/javascript" src="../Librerias/js/jquery.min.js"></script> 
-      <script type="text/javascript" src="../Librerias/js/bootstrap.min.js"></script>
+      
+      
       <script type="text/javascript" src="../Librerias/calendario/moment.js"></script>
       
       <script type="text/javascript" src="../Librerias/calendario/daterangepicker.js"></script>
@@ -436,6 +437,7 @@
 
     <!-- Core Scripts - Include with every page -->
    <!-- <script src="js/jquery-1.10.2.js"></script>-->
+    <script type="text/javascript" src="../Librerias/js/bootstrap.min.js"></script>
    
      <script src="../Librerias/js/plugins/metisMenu/jquery.metisMenu.js"></script>
 
