@@ -11,10 +11,14 @@ session_start();
    
     $conect = new conexion();
 
-    $VerificarUsuario = $conect->consulta("SELECT LOGIN_S FROM socio WHERE LOGIN_S = '$nombreUS' ");
-    $VerificarUsuario2 = mysql_fetch_row($VerificarUsuario);
+    $VerificarUsuarioS = $conect->consulta("SELECT LOGIN_S FROM socio WHERE LOGIN_S = '$nombreUS' ");
+    $VerificarUsuarioS2 = mysql_fetch_row($VerificarUsuarioS);
     
-     if (!is_array($VerificarUsuario2)) 
+    
+    $VerificarUsuarioGE = $conect->consulta("SELECT NOMBRE_U FROM usuario WHERE NOMBRE_U = '$nombreUS' ");
+    $VerificarUsuarioGE2 = mysql_fetch_row($VerificarUsuarioGE);
+    
+     if (!is_array($VerificarUsuarioS2) && !is_array($VerificarUsuarioGE2)) 
      {
          
                     $db = 'saetis';
@@ -68,12 +72,5 @@ session_start();
      else
      {
           echo"<script type=\"text/javascript\">alert('El nombre de usuario ya esta registrado'); window.location='AnadirSocio.php';</script>";
-       /* 
-        echo '<script>
-        BootstrapDialog.show({
-            title: "Fallo en el Registro",
-            message: "El nombre de usuario ya esta registrado"
-        });
-        </script>';*/
      }
     ?>

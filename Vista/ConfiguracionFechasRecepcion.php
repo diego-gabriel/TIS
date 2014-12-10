@@ -47,6 +47,13 @@
 <body>
 
         
+ <div id="wrapper">
+       
+        
+		<!--<h2>design by <a href="#" title="flash templates">flash-templates-today.com</a></h2>-->
+        
+	
+               
 	
         <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
@@ -197,7 +204,6 @@
                                                 </li>
                                             </ul>
                                 </li>
-                                
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>

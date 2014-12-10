@@ -13,12 +13,17 @@
     require '../Vista/class.phpmailer.php';
     
     $conect = new conexion();
-    $VerificarUsuario = $conect->consulta("SELECT NOMBRE_U FROM usuario WHERE NOMBRE_U = '$nombreUGE' ");
-    $VerificarUsuario2 = mysql_fetch_row($VerificarUsuario);
+    $VerificarUsuarioS = $conect->consulta("SELECT LOGIN_S FROM socio WHERE LOGIN_S = '$nombreUGE' ");
+    $VerificarUsuarioS2 = mysql_fetch_row($VerificarUsuarioS);
     
     
-     if (!is_array($VerificarUsuario2)) 
+    $VerificarUsuarioGE = $conect->consulta("SELECT NOMBRE_U FROM usuario WHERE NOMBRE_U = '$nombreUGE' ");
+    $VerificarUsuarioGE2 = mysql_fetch_row($VerificarUsuarioGE);
+    
+     if (!is_array($VerificarUsuarioS2) && !is_array($VerificarUsuarioGE2)) 
      {
+         
+          
              $VerificarNC = $conect->consulta("SELECT NOMBRE_CORTO_GE FROM grupo_empresa WHERE NOMBRE_CORTO_GE = '$nombreCGE' ");
              $VerificarNC2 = mysql_fetch_row($VerificarNC);
          if(!is_array($VerificarNC2))

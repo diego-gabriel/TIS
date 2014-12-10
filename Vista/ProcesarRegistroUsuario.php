@@ -15,13 +15,16 @@
     $conect = new conexion();
     $mail = new PHPMailer();
    
-    $VerificarUsuario = $conect->consulta("SELECT NOMBRE_U FROM usuario WHERE NOMBRE_U = '$name' ");
+    $VerificarUsuarioS = $conect->consulta("SELECT LOGIN_S FROM socio WHERE LOGIN_S = '$name' ");
+    $VerificarUsuarioS2 = mysql_fetch_row($VerificarUsuarioS);
     
-    $VerificarUsuario2 = mysql_fetch_row($VerificarUsuario);
     
+    $VerificarUsuarioGE = $conect->consulta("SELECT NOMBRE_U FROM usuario WHERE NOMBRE_U = '$name' ");
+    $VerificarUsuarioGE2 = mysql_fetch_row($VerificarUsuarioGE);
     
-    if (!is_array($VerificarUsuario2)) {
-        
+     if (!is_array($VerificarUsuarioS2) && !is_array($VerificarUsuarioGE2)) 
+     {
+           
           //Definir que vamos a usar SMTP
           $mail->IsSMTP();
           //Esto es para activar el modo depuración. En entorno de pruebas lo mejor es 2, en producción siempre 0

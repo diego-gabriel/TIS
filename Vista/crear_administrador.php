@@ -1,6 +1,6 @@
 
 <?php
-
+include '../Modelo/conexion.php';
 session_start();
 
 //Crear variables--------------------------
@@ -25,15 +25,26 @@ mysql_select_db("saetis",$conexion);
 $peticion1 = mysql_query("SELECT * FROM usuario");
 $peticion2 = mysql_query("SELECT * FROM usuario_rol");
 $peticion3 = mysql_query("SELECT * FROM asesor");
-	while($fila = mysql_fetch_array($peticion1))
+	
+       /* while($fila = mysql_fetch_array($peticion1))
 	{
 		if($fila['NOMBRE_U']==$addUsuario)
 		{
 			$contador++;
 		}
 		else{}
-	}
-if($contador == 0){
+	}*/
+        
+    $conect = new conexion();
+    $VerificarUsuarioS = $conect->consulta("SELECT LOGIN_S FROM socio WHERE LOGIN_S = '$addUsuario' ");
+    $VerificarUsuarioS2 = mysql_fetch_row($VerificarUsuarioS);
+    
+    
+    $VerificarUsuarioGE = $conect->consulta("SELECT NOMBRE_U FROM usuario WHERE NOMBRE_U = '$addUsuario' ");
+    $VerificarUsuarioGE2 = mysql_fetch_row($VerificarUsuarioGE);
+    
+     if (!is_array($VerificarUsuarioS2) && !is_array($VerificarUsuarioGE2)) 
+     {
 //conexion-------------		
     
 	$conexion = mysql_connect("localhost","root","");
@@ -57,6 +68,6 @@ if($contador == 0){
  }
  else{
      
-   echo"<script type=\"text/javascript\">alert('el login ya fue registrado por favor cambie de nombre'); window.location='registro_administrador.php';</script>";  
+   echo"<script type=\"text/javascript\">alert('El nombre de usuario ya fue registrado por favor cambie de nombre'); window.location='registro_administrador.php';</script>";  
  }
 
