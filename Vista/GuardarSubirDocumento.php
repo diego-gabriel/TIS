@@ -2,10 +2,11 @@
 
 include '../Modelo/conexion.php';
 
-session_start();
-$UsuarioActivo = $_SESSION['usuario'];
+//session_start();
+//$UsuarioActivo = $_SESSION['usuario'];
+$UsuarioActivo = $_POST['Usuario'];
 $rutaDirectorio="../Repositorio/$UsuarioActivo";  //ruta de nuestro directorio
-$asesor = $UsuarioActivo;   
+//$asesor = $UsuarioActivo;   
 $clas = new conexion();
 
     if(!file_exists($rutaDirectorio))

@@ -133,28 +133,54 @@
                                 
                                 <li>
                                     <a href="#" >Subir Documentos <span class="fa arrow"></span></a>
-                                    <ul class="nav nav-second-level">
+                                    <ul class="nav nav-third-level">
+                                    <?php
                                     
-                                        <?php
-                                        
-                                        //include '../Modelo/conexion.php';
-                                        $conect = new conexion();
-                                        
-                                        $SeleccionrAsesor = $conect->consulta("SELECT NOMBRE_UA FROM inscripcion WHERE NOMBRE_UGE='$UsuarioActivo'");
-                                        
+                                   
+                                      $conect = new conexion();
+
+                                      $SeleccionarVerficarSocio = $conect->consulta("SELECT NOMBRES_S FROM socio WHERE NOMBRES_S = '$UsuarioActivo'");
+
+                                      $VerificarSocio = mysql_fetch_row($SeleccionarVerficarSocio);
+
+
+
+                                    if(is_array($VerificarSocio))
+                                    {
+                                        $SeleccionarUsuarioGE = $conect->consulta("SELECT NOMBRE_U FROM socio WHERE NOMBRES_S = '$VerificarSocio[0]'");
+
+                                        $UsuarioGE = mysql_fetch_row($SeleccionarUsuarioGE);
+
+                                        $SeleccionrAsesor = $conect->consulta("SELECT NOMBRE_UA FROM inscripcion WHERE NOMBRE_UGE='$UsuarioGE[0]'");
                                         $Asesor = mysql_fetch_row($SeleccionrAsesor);
-                                        
                                         $SeleccionarDocReq = $conect->consulta("SELECT NOMBRE_R FROM registro WHERE NOMBRE_U = '$Asesor[0]' AND TIPO_T='documento requerido' ");
                                         
                                         while ($rowDocs = mysql_fetch_row($SeleccionarDocReq))
                                         {
-                                            echo '<li>
-                                                    <a href="SubirDocumento.php?doc='.$rowDocs[0].'">'.$rowDocs[0].'</a>
-                                                  </li>';    
+                                          echo '<li>
+                                                   <a href="SubirDocumento.php?doc='.$rowDocs[0].'">'.$rowDocs[0].'</a>
+                                                </li>';    
                                         }
-                                        ?>
+
+                                    }
+                                    else
+                                    {
+                                        $SeleccionrAsesor = $conect->consulta("SELECT NOMBRE_UA FROM inscripcion WHERE NOMBRE_UGE='$UsuarioActivo'");
+                                      
+                                        $Asesor = mysql_fetch_row($SeleccionrAsesor);
+                                          
+                                        $SeleccionarDocReq = $conect->consulta("SELECT NOMBRE_R FROM registro WHERE NOMBRE_U = '$Asesor[0]' AND TIPO_T='documento requerido' ");
+                                          
+                                        while ($rowDocs = mysql_fetch_row($SeleccionarDocReq))
+                                        {
+                                            echo '<li>
+                                                      <a href="SubirDocumento.php?doc='.$rowDocs[0].'">'.$rowDocs[0].'</a>
+                                                   </li>';    
+                                        }
+
+                                    }      
+                                    ?>
                                     </ul>
-                                 
                                 </li>
                                 <li>
                                     <a href="publicacion_grupo.php">Recepci&oacute;n Documentos </a>

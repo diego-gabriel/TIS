@@ -29,18 +29,55 @@
 
     <title>Sistema de Apoyo a la Empresa TIS</title>
 
-    <!-- Core CSS - Include with every page -->
-    <link href="../Librerias/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../Librerias/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <!-- JQuery -->
+    <script type="text/javascript" src="../Librerias/lib/jquery-2.1.0.min.js"></script>
+    <!-- icheck -->
+    <link href="../Librerias/icheck/skins/square/green.css" rel="stylesheet">
+    <script src="../Librerias/lib/icheck.min.js"></script>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="../Librerias/css/bootstrap.min.css" rel="stylesheet">
+    <!--script type="text/javascript" src="../Librerias/lib/bootstrap.js"></script-->
+    <!-- Docs -->
+    <link rel="stylesheet" type="text/css" href="../Librerias/lib/css/docs.css">
+    <!-- Font-Awesome -->
+    <link rel="stylesheet" type="text/css" href="../Librerias/font-awesome/css/font-awesome.css">
+    <!-- Bootstrap-datetimepicker -->
+    <link rel="stylesheet" type="text/css" href="../Librerias/lib/css/bootstrap-datetimepicker.css">
+    <script type="text/javascript" src="../Librerias/lib/bootstrap-datetimepicker.js"></script>
+    <script type="text/javascript" src="../Librerias/lib/bootstrap-datetimepicker.es.js"></script>
+    <!-- Bootstrap-multiselect -->
+    <link rel="stylesheet" type="text/css" href="../Librerias/lib/css/bootstrap-multiselect.css">
+    <script type="text/javascript" src="../Librerias/lib/bootstrap-multiselect.js"></script>
+    <!-- Bootstrap-validator -->
+    <link rel="stylesheet" type="text/css" href="../Librerias/lib/css/bootstrapValidator.css">
+    <script type="text/javascript" src="../Librerias/lib/bootstrapValidator.js"></script>
+    <!-- Validators -->
+    
+    
+    <script type="text/javascript" src="../Librerias/lib/validator/diferenteActividadPlanificacion.js"></script>
+    <script type="text/javascript" src="../Librerias/lib/validator/diferenteEntregable.js"></script>
+    <script type="text/javascript" src="../Librerias/lib/validator/stringLength.js"></script>
+    <script type="text/javascript" src="../Librerias/lib/validator/notEmpty.js"></script>
+    <script type="text/javascript" src="../Librerias/lib/validator/callback.js"></script>
+    <script type="text/javascript" src="../Librerias/lib/validator/date.js"></script>
+    <script type="text/javascript" src="../Librerias/lib/validator/numeric.js"></script>
+    <script type="text/javascript" src="../Librerias/lib/validator/porcentajeMax.js"></script>
+    <script type="text/javascript" src="../Librerias/lib/validator/porcentajeMin.js"></script>
+    <!-- JS -->
+    <script type="text/javascript" src="../Librerias/lib/funcion.js"></script>
+    
+
+
 
     <!-- Page-Level Plugin CSS - Dashboard -->
     <link href="../Librerias/css/plugins/morris/morris-0.4.3.min.css" rel="stylesheet">
     <link href="../Librerias/css/plugins/timeline/timeline.css" rel="stylesheet">
-   
-
     <!-- SB Admin CSS - Include with every page -->
     <link href="../Librerias/css/sb-admin.css" rel="stylesheet">
-    <script type="text/javascript" src="../Librerias/js/subir_documento.js"></script>
+
+
+
+
 
 </head>
 
@@ -117,21 +154,49 @@
                                     <ul class="nav nav-third-level">
                                     <?php
                                     
-                                      //include '../Modelo/conexion.php';
+                                   
                                       $conect = new conexion();
-                                      
-                                      $SeleccionrAsesor = $conect->consulta("SELECT NOMBRE_UA FROM inscripcion WHERE NOMBRE_UGE='$UsuarioGE'");
-                                      
-                                      $Asesor = mysql_fetch_row($SeleccionrAsesor);
-                                      
-                                      $SeleccionarDocReq = $conect->consulta("SELECT NOMBRE_R FROM registro WHERE NOMBRE_U = '$Asesor[0]' AND TIPO_T='documento requerido' ");
-                                      
-                                      while ($rowDocs = mysql_fetch_row($SeleccionarDocReq))
-                                      {
+
+                                      $SeleccionarVerficarSocio = $conect->consulta("SELECT NOMBRES_S FROM socio WHERE NOMBRES_S = '$UsuarioActivo'");
+
+                                      $VerificarSocio = mysql_fetch_row($SeleccionarVerficarSocio);
+
+
+
+                                    if(is_array($VerificarSocio))
+                                    {
+                                        $SeleccionarUsuarioGE = $conect->consulta("SELECT NOMBRE_U FROM socio WHERE NOMBRES_S = '$VerificarSocio[0]'");
+
+                                        $UsuarioGrupoEmpresa = mysql_fetch_row($SeleccionarUsuarioGE);
+
+                                        $SeleccionrAsesor = $conect->consulta("SELECT NOMBRE_UA FROM inscripcion WHERE NOMBRE_UGE='$UsuarioGrupoEmpresa[0]'");
+                                        $Asesor = mysql_fetch_row($SeleccionrAsesor);
+                                        $SeleccionarDocReq = $conect->consulta("SELECT NOMBRE_R FROM registro WHERE NOMBRE_U = '$Asesor[0]' AND TIPO_T='documento requerido' ");
+                                        
+                                        while ($rowDocs = mysql_fetch_row($SeleccionarDocReq))
+                                        {
                                           echo '<li>
-                                                  <a href="SubirDocumento.php?doc='.$rowDocs[0].'">'.$rowDocs[0].'</a>
+                                                   <a href="SubirDocumento.php?doc='.$rowDocs[0].'">'.$rowDocs[0].'</a>
                                                 </li>';    
-                                      }
+                                        }
+
+                                    }
+                                    else
+                                    {
+                                        $SeleccionrAsesor = $conect->consulta("SELECT NOMBRE_UA FROM inscripcion WHERE NOMBRE_UGE='$UsuarioActivo'");
+                                      
+                                        $Asesor = mysql_fetch_row($SeleccionrAsesor);
+                                          
+                                        $SeleccionarDocReq = $conect->consulta("SELECT NOMBRE_R FROM registro WHERE NOMBRE_U = '$Asesor[0]' AND TIPO_T='documento requerido' ");
+                                          
+                                        while ($rowDocs = mysql_fetch_row($SeleccionarDocReq))
+                                        {
+                                            echo '<li>
+                                                      <a href="SubirDocumento.php?doc='.$rowDocs[0].'">'.$rowDocs[0].'</a>
+                                                   </li>';    
+                                        }
+
+                                    }      
                                     ?>
                                     </ul>
                                 </li>
@@ -228,7 +293,6 @@
                         $HoraActual = date("H:i:s");
                         $FechaActual = date('Y-m-j');
 
-                       
                             $VerificarIns= $con->consulta("SELECT NOMBRE_U FROM inscripcion_proyecto WHERE NOMBRE_U = '$UsuarioGE' ");
                             $VerificarIns2 = mysql_fetch_row($VerificarIns);
                             if (!is_array($VerificarIns2))
@@ -277,6 +341,7 @@
                                                             <input type="submit" value="Subir Documento" class= "btn btn-primary">
                                                         </div>
                                                     </fieldset>
+                                                    <input type = "hidden" name="Usuario" value="'.$UsuarioGE.'"">
                                                 </form>';
                                     }  
     
