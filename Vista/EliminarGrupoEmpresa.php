@@ -42,6 +42,7 @@ if(isset($_GET['op']))
 
                     //Eliminar de asistencia//con id registro
                     $EliminarAsistencia = $conect->consulta("DELETE FROM asistencia WHERE ID_R='$rowIdRegistroGE[0]'");
+                    $EliminarPago = $conect->consulta("DELETE FROM pago WHERE ID_R='$rowIdRegistroGE[0]'");
 
                 }
                 /*****************************************************/
@@ -51,9 +52,13 @@ if(isset($_GET['op']))
 		//Eliminar Registro
 		$EliminarRegistroGE = $conect->consulta("DELETE FROM registro WHERE NOMBRE_U = '$GrupoEmpresa' ");
 		//Eliminar Planificacion
-		$EliminarPlanificacionGE = $conect->consulta("DELETE FROM planificacion WHERE NOMBRE_U = '$GrupoEmpresa' ");
+		$EliminarPrecio = $conect->consulta("DELETE FROM precio WHERE NOMBRE_U='$GrupoEmpresa'");
 		//Eliminar Entregable
 		$EliminarEntregable = $conect->consulta("DELETE FROM entregable WHERE NOMBRE_U='$GrupoEmpresa'");
+		$EliminarPlanificacionGE = $conect->consulta("DELETE FROM planificacion WHERE NOMBRE_U = '$GrupoEmpresa' ");
+
+
+		
 		//reportes//pero si deberia borrar
 		$EliminarReporte = $conect->consulta("DELETE FROM reporte");
 		//comentarios
