@@ -1,4 +1,4 @@
-<?php
+e<?php
 
         
     
@@ -85,8 +85,7 @@ $addFecha= $_POST['fec'];
 //    $mail->MsgHTML('El usuario '.$addDestino.''.$addDestino.' con direccion '.$correo1.' desea registrarse como '.$addDestino.' contraseña: '.$addDestino.'');
     $mail->MsgHTML(' Asunto   :  '.$addAsunto.'.Enviado el     :.'.$addFecha.'............. '.$addContenido.'');
 
-//    
-//    
+  
 //    
     //Y por si nos bloquean el contenido HTML (algunos correos lo hacen por seguridad) una versión alternativa en texto plano (también será válida para lectores de pantalla)
     $mail->AltBody = 'This is a plain-text message body';
@@ -94,8 +93,7 @@ $addFecha= $_POST['fec'];
     if(!$mail->Send()) {
       echo "Error: " . $mail->ErrorInfo;
     } else {
-       echo "Enviado!";
-        echo"<script type=\"text/javascript\">alert('el mensaje se envio exitosamente'); window.location='principal.php';</script>";
+        echo"<script type=\"text/javascript\">alert('El mensaje se envio exitosamente'); window.location='principal.php';</script>";
     }
 
 

@@ -272,7 +272,7 @@ where not exists
                                         </div>                                                  
                                                         
                                         <div class="form-group">
-                                            <a href="vista/RegistrarUsuario.php"><font color='green' size="1.5%">no eres usuario todavia? REGISTRATE</font></a>
+                                            <a href="vista/RegistrarUsuario.php"><font color='green' size="1.5%">No eres usuario todavia? REGISTRATE</font></a>
                                             <div align="right"> <hr>
                                             <button type="submit" name="ingresar" class="btn btn-primary" id="btn-registrarUser"> <span class="glyphicon glyphicon-ok"></span> Ingresar</button>
                                         </div></div>
@@ -298,7 +298,7 @@ where not exists
 					<div class="contenedor-tabla">
 						<div class="contenedor-fila">
 							<div class="contenedor-columna2"><img src="images/logo-cs.bmp" width="29" height="29" alt="" longdesc=\/></div>
-							<div class="contenedor-columna3"><li><a href="http://www.cs.umss.edu.bo//">Carreras de Informática y Sistemas UMSS</a><br/>
+							<div class="contenedor-columna3"><li><a href="http://www.cs.umss.edu.bo/">Carreras de Informática y Sistemas UMSS</a><br/>
 							Pagina principal de la CS</li>
 							</div>
 						</div>
@@ -307,7 +307,7 @@ where not exists
 					<div class="contenedor-tabla">
 						<div class="contenedor-fila">
 							<div class="contenedor-columna2"><img src="images/logo-fcyt.gif" width="29" height="29" alt="" longdesc=\/></div>
-							<div class="contenedor-columna3"><li><a href="http://direcciondelaFCYT/">Facultad de Ciencias y Tecnologia</a><br/>
+							<div class="contenedor-columna3"><li><a href="http://www.fcyt.umss.edu.bo/">Facultad de Ciencias y Tecnologia</a><br/>
 							Pagina principal de la FCYT</li>
 							</div>
 						</div>
@@ -316,7 +316,7 @@ where not exists
 					<div class="contenedor-tabla">
 						<div class="contenedor-fila">
 							<div class="contenedor-columna2"><img src="images/userpic.gif" width="29" height="29" alt="" longdesc=\/></div>
-							<div class="contenedor-columna3"><li><a href="http://direcciondemoodle/">MOODLE 2 - UMSS</a><br/>
+							<div class="contenedor-columna3"><li><a href="http://enlinea.umss.edu.bo/moodle2/">MOODLE 2 - UMSS</a><br/>
 							Pagina de moodle2</li>
 							</div>
 						</div>
@@ -332,7 +332,7 @@ where not exists
 						<div class="contenedor-fila">
 							
 							<div class="contenedor-columna3"><li><a href="Vista/verificar_nombre.php">Verificar Nombre Grupo Empresa</a><br/> 
-							Verificar Nombre de Grupo Empresa Disponible</li></div>
+							
 						</div>
 					</div>
 					

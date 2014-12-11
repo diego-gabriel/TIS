@@ -26,14 +26,6 @@ $peticion1 = mysql_query("SELECT * FROM usuario");
 $peticion2 = mysql_query("SELECT * FROM usuario_rol");
 $peticion3 = mysql_query("SELECT * FROM asesor");
 	
-       /* while($fila = mysql_fetch_array($peticion1))
-	{
-		if($fila['NOMBRE_U']==$addUsuario)
-		{
-			$contador++;
-		}
-		else{}
-	}*/
         
     $conect = new conexion();
     $VerificarUsuarioS = $conect->consulta("SELECT LOGIN_S FROM socio WHERE LOGIN_S = '$addUsuario' ");
@@ -45,7 +37,6 @@ $peticion3 = mysql_query("SELECT * FROM asesor");
     
      if (!is_array($VerificarUsuarioS2) && !is_array($VerificarUsuarioGE2)) 
      {
-//conexion-------------		
     
 	$conexion = mysql_connect("localhost","root","");
 	//Control
@@ -63,7 +54,7 @@ $peticion3 = mysql_query("SELECT * FROM asesor");
 	 mysql_close($conexion);
 	 //volver a la pagina---------------
          
-    echo"<script type=\"text/javascript\">alert('el registro se realizo exitosamente'); window.location='principal.php';</script>";
+    echo"<script type=\"text/javascript\">alert('El registro se realizo exitosamente'); window.location='principal.php';</script>";
 	
  }
  else{
