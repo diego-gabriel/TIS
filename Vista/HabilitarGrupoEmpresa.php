@@ -16,17 +16,6 @@
             echo '<script>alert("Se habilito la grupo empresa correctamente");</script>';
             echo '<script>window.location="../Vista/AdministrarGrupoEmpresa.php";</script>';
                    
-            die();
-
-        	echo '<script>
-                    BootstrapDialog.show({
-                        title: "Habilitar Grupo Empresa",
-                        message: "Se habilito correctamente a la grupo empresa",
-                        onhide: function(dialogRef){
-                            location.reload();
-                        }
-                    });
-                  </script>';
         }
     }
 
@@ -40,17 +29,6 @@
             echo '<script>alert("Se Deshabilito la grupo empresa correctamente");</script>';
             echo '<script>window.location="../Vista/AdministrarGrupoEmpresa.php";</script>';
                    
-            die();
-
-            echo '<script>
-                    BootstrapDialog.show({
-                        title: "Habilitar Grupo Empresa",
-                        message: "Se habilito correctamente a la grupo empresa",
-                        onhide: function(dialogRef){
-                            location.reload();
-                        }
-                    });
-                  </script>';
         }
     }
 

@@ -240,6 +240,8 @@
                         <?php
                                 }
                         ?>
+
+
                         <li>
                             <a href="#"><i class="fa fa-warning fa-fw"></i> Notificaciones<span class="fa arrow"></span></a>
                                                     
@@ -251,19 +253,32 @@
                             </ul>  
                             </li>
                         </li>
-                        <li>
-                            <a href="#"><i class="fa fa-building-o fa-fw"></i> Actividades<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a id="registrarPlanificacion" href="#">
-                                        <i class="fa fa-pencil-square-o fa-fw"></i>Registrar Planificaci&oacute;n
-                                    </a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
 
-                        
+                        <?php  
+
+                            $SeleccionarVerficarSocio = $conect->consulta("SELECT NOMBRES_S FROM socio WHERE NOMBRES_S = '$UsuarioActivo'");
+
+                            $VerificarSocio = mysql_fetch_row($SeleccionarVerficarSocio);
+
+                            if(!is_array($VerificarSocio))
+                            {
+
+                                echo'<li>
+                                        <a href="#"><i class="fa fa-building-o fa-fw"></i> Actividades<span class="fa arrow"></span></a>
+                                        <ul class="nav nav-second-level">
+                                            <li>
+                                                <a id="registrarPlanificacion" href="#">
+                                                    <i class="fa fa-pencil-square-o fa-fw"></i>Registrar Planificaci&oacute;n
+                                                </a>
+                                            </li>
+                                        </ul>
+                                        <!-- /.nav-second-level -->
+                                    </li>';
+
+                            }
+
+                        ?>
+                    
                         <li>
                             <a href="lista-de-noticias-grupo.php"><i class="fa fa-comment"></i> Foro</a>
                                 

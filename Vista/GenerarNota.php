@@ -84,15 +84,9 @@
                     
                         }
 
-                    echo    '<script>
-                                    BootstrapDialog.show({
-                                         title: "Modificar Nota",
-                                         message: "Su nota obtenida es de '.$nota.' puntos",
-                                         onhide: function(dialogRef){
-                                            location.reload();
-                                        }
-                                    });
-                                </script>';  
+                    echo '<script>alert("Su nota obtenida es de '.$nota.' puntos");</script>';
+                    echo '<script>location.reload();</script>';
+
 
 
                 }
@@ -101,13 +95,7 @@
                 {
                     if (is_array($Verificar)) {
 
-                        echo    '<script>
-                                    BootstrapDialog.show({
-                                        type: BootstrapDialog.TYPE_DANGER,
-                                        title: "Error en el Registro",
-                                        message: "Ya registro una nota anteriormente",
-                                    });
-                                </script>';
+                        echo '<script>alert("Ya registro una nota anteriormente");</script>';
                     }
                     else
                     {
@@ -123,16 +111,9 @@
 
                         }
 
-                        
-                        echo    '<script>
-                                    BootstrapDialog.show({
-                                         title: "Resultado de la Evaluacion",
-                                         message: "Su nota obtenida es de '.$nota.' puntos",
-                                         onhide: function(dialogRef){
-                                            location.reload();
-                                        }
-                                    });
-                                </script>';  
+                        echo '<script>alert("Su nota obtenida es de '.$nota.' puntos");</script>';
+                        echo '<script>location.reload();</script>';
+
                     }
 
                 }
@@ -140,24 +121,14 @@
             else
             {
 
-                echo    '<script>
-                        BootstrapDialog.show({
-                        type: BootstrapDialog.TYPE_DANGER,
-                        title: "Error",
-                        message: "El valor del puntaje no puede ser mayor a 100"
-                        });
-                    </script>';
+                echo '<script>alert("El valor del puntaje no puede ser mayor a 100");</script>';
             }
         }
         else{
+
+
+            echo '<script>alert("Debe escoger una opcion en la seleccion multiple");</script>';
             
-            echo    '<script>
-                        BootstrapDialog.show({
-                        type: BootstrapDialog.TYPE_DANGER,
-                        title: "Error",
-                        message: "Debe seleccionar llenar todos los campos"
-                        });
-                    </script>';
         }
 
 ?>

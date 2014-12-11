@@ -81,28 +81,18 @@
             $conect->consulta("INSERT INTO usuario_rol(NOMBRE_U, ROL_R) VALUES('$name','$rol')");  
             $conect->consulta("INSERT INTO criteriocalificacion(NOMBRE_U,NOMBRE_CRITERIO_C,TIPO_CRITERIO) VALUES('$name','PUNTAJE','4')");
 
-          
-            echo '<script>
-                              BootstrapDialog.show({
-                                  title: "Envio de solicitud",
-                                  message: "Su solicitud se envio correctamente",
-                                  onhide: function(dialogRef){
-                                        location.reload();
-                                    }
-                              });
-                  </script>';
-
+            echo '<script>alert("Su solicitud se envio correctamente");</script>';
+            echo '<script>window.location="../Vista/RegistrarUsuario.php";</script>';
           }
         
     }
     else{
+
+
+        echo '<script>alert("El nombre de usuario ya esta registrado");</script>';
+        echo '<script>window.location="../Vista/RegistrarUsuario.php";</script>';
         
-        echo '<script>
-                BootstrapDialog.show({
-                    title: "Fallo en el Registro",
-                    message: "El nombre de usuario ya esta registrado"
-                });
-              </script>';
+
     }
    
 ?>

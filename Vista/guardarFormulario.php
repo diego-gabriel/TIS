@@ -30,8 +30,8 @@ include '../Modelo/conexion.php';
     }
 
     if ($buscador > count($EvaEscogidos)) {
-        
-        echo'<script>BootstrapDialog.alert("No puede evaluar el mismo criterio mas de una vez");</script>';
+
+        echo '<script>alert("No puede evaluar el mismo criterio mas de una vez");</script>';
     
     }else{
 
@@ -62,7 +62,7 @@ include '../Modelo/conexion.php';
 
                             if ($CritEscogidos[$cont1] == 4) {
 
-                                echo "aqui";
+                          
                                 die();
 
                                 $InsertarCritC = $conect->consulta("INSERT INTO from_crit_c(ID_CRITERIO_C, ID_FORM) VALUES('4','$MaxIdForm[0]') ");
@@ -94,22 +94,26 @@ include '../Modelo/conexion.php';
                     
                         if($InsertarFormulario and $InsertarCritE and $InsertarCritC and $InsertarPuntaje)
                         {
-                        
-                            echo'<script>BootstrapDialog.alert("Se guardo el formulario correctamente");</script>';
+
+                            echo '<script>alert("Se guardo el formulario correctamente");</script>';
+                      
                         }
 
                     }
                     else{
+                        echo '<script>alert("La sumatoria de puntajes en el formulario no puede ser mayor ni menor a 100");</script>';
                         
-                        echo'<script>BootstrapDialog.alert("La sumatoria de puntajes en el formulario no puede ser mayor ni menor a 100");</script>';
+                        
                     }
            
                 
        }
        else
        {
+
+            echo '<script>alert("Ya existe un formulario con ese nombre registrado");</script>';
         
-            echo'<script>BootstrapDialog.alert("Ya existe un formulario con ese nombre registrado");</script>';
+            
      
        }
     }

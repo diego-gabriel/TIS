@@ -264,7 +264,7 @@ session_start();
 													<?php 
 														$link=mysql_connect("localhost","root",""); 
 														mysql_select_db("saetis",$link); 
-														$sql="SELECT * FROM  estado "; 
+														$sql="SELECT ESTADO_E FROM  estado where ESTADO_E='Habilitado' or ESTADO_E='Deshabilitado' "; 
 														$result=mysql_query($sql); 
 															while($row=mysql_fetch_array($result)) 
 													echo "<option  value='".$row["ESTADO_E"]."'>".$row["ESTADO_E"]."</option>";  

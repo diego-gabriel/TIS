@@ -70,11 +70,11 @@ $addFecha= $_POST['fec'];
     //Introducimos nuestra contraseña de gmail
     $mail->Password   = "*bittletis*135*";
     //Definimos el remitente (dirección y, opcionalmente, nombre)
-    $mail->SetFrom('$correo1', '$addDestino');
+    $mail->SetFrom($correo1, $addDestino);
     //Esta línea es por si queréis enviar copia a alguien (dirección y, opcionalmente, nombre)
     //$mail->AddReplyTo('replyto@correoquesea.com','El de la réplica');
     //Y, ahora sí, definimos el destinatario (dirección y, opcionalmente, nombre)
-    $mail->AddAddress('attivanm@gmail.com', 'El Destinatario');
+    $mail->AddAddress($correo1, 'El Destinatario');
     //Definimos el tema del email
     $mail->Subject = 'Aceptacion de Registro';
     //Para enviar un correo formateado en HTML lo cargamos con la siguiente función. Si no, puedes meterle directamente una cadena de texto.

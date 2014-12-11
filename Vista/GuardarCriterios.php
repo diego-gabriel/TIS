@@ -42,11 +42,10 @@
         }
 
             if ($buscador > count($Indicadores)) {
-                
-                echo'<script>BootstrapDialog.alert("No puede registrar 2 indicadores o puntajes iguales");</script>';
 
+                echo '<script>alert("No puede registrar 2 indicadores o puntajes iguales");</script>';
                 die();
-
+                
             }else{
 
                 for ($t=0; $t < count($valores) ; $t++) { 
@@ -91,48 +90,27 @@
 
                 
                             if(isset($con2)){
-                    
-                                echo'<script>BootstrapDialog.alert("Se registraron los datos correctamente");</script>';
+
+                                echo '<script>alert("Se registraron los datos correctamente");</script>';
                                 
                             }      
-                        }          
+                    }          
                                         
-                        else
-                        {
-                        echo   '<script>
-                            BootstrapDialog.show({
-                                type: BootstrapDialog.TYPE_DANGER,
-                                title: "Error",
-                                message: "Ya existe un criterio de ese tipo"
-                            });
-                            </script>';
+                    else
+                    {
+
+                        echo '<script>alert("Ya existe un criterio de ese tipo");</script>';
+
                     }
                 }
                 else
                 {
-                    echo '<script>
-                                        BootstrapDialog.show({
-                                            type: BootstrapDialog.TYPE_DANGER,
-                                            title: "Error",
-                                            message: "El puntaje no puede ser mayor a 100"
-                                        });
-                            </script>';
+
+                    echo '<script>alert("El puntaje no puede ser mayor a 100");</script>';
+            
                 }
             }
         
-
-
-
-        /***********************************************/
-
-        
-
-
-
-
-
-
-        
-						
+		
 
 ?>

@@ -117,6 +117,12 @@ if(is_array($IdRegistroGE))
 }
 else
 {
+
+	$SeleccionarIdFormulario = $conect->consulta("SELECT ID_N FROM NOTA WHERE NOMBRE_U='$GrupoEmpresa'"); 
+	$IdFormulario = mysql_fetch_row($SeleccionarIdFormulario);
+	$EliminarPuntajes = $conect->consulta("DELETE FROM PUNTAJE_GE WHERE ID_N = '$IdFormulario[0]'");
+	$EliminarNotaGE = $conect->consulta("DELETE FROM nota WHERE NOMBRE_U = '$GrupoEmpresa' ");
+	
 	$EliminarPlanificacionGE = $conect->consulta("DELETE FROM planificacion WHERE NOMBRE_U = '$GrupoEmpresa' ");
 	$EliminarNoticia = $conect->consulta("DELETE FROM noticias WHERE NOMBRE_U = '$GrupoEmpresa' ");
 

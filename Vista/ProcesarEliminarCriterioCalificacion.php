@@ -11,7 +11,8 @@
 	$formularios = "";
 
 	if ($CritEliminar == 'PUNTAJE') {
-		echo'<script>BootstrapDialog.alert("No puede eliminar ese criterio");</script>';
+
+		echo '<script>alert("No puede eliminar ese criterio");</script>';
 		die();
 	}
 
@@ -41,7 +42,7 @@
 
 		//var_dump($formularios);
 
-		echo'<script>BootstrapDialog.alert("El Criterio esta un uso por los siguientes formularios:'.$NomForm[0].' primero debe eliminar esos formularios");</script>';
+		echo '<script>alert("El criterio esta en uso por los siguiente formularios: '.$NomForm[0].'");</script>';
 		die();
 	
 	}
@@ -52,16 +53,8 @@
 
 	if ($EliminarIndicadores and $EliminarCriterio) {
 
-		
-		 echo    '<script>
-                                BootstrapDialog.show({
-                                   
-                                     message: "Se elimino el criterio correctamente",
-                                     onhide: function(dialogRef){
-                                        location.reload();
-                                    }
-                                });
-                            </script>';
+		echo '<script>alert("Se elimino el criterio correctamente");</script>';
+		echo '<script>location.reload();</script>';
 		
 	}
 

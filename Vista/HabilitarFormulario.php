@@ -15,15 +15,11 @@ $formulario = $_POST['formulario'];
     
     if($resutado and $resultado2) 
     {
-        echo '<script>
-                BootstrapDialog.show({
-                    title: "Habilitacion de Formulario",
-                    message: "El formulario esta habilitado para su uso",
-                    onhide: function(dialogRef){
-                        location.reload();
-                    }
-                });
-              </script>';
+
+
+        echo '<script>alert("El formulario esta habilitado para su uso");</script>';
+        echo '<script>location.reload();</script>';
+      
     }
     
     

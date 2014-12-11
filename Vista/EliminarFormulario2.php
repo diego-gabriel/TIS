@@ -16,17 +16,9 @@ include '../Modelo/conexion.php';
 
     if(is_array($VerifNota))
     {
-        
-        echo    '<script>
-                                BootstrapDialog.show({
-                                    
-                                     message: "El formulario esta siendo usado y no puede ser eliminado",
-                                     onhide: function(dialogRef){
-                                        location.reload();
-                                    }
-                                });
-                            </script>';
 
+        echo '<script>alert("El formulario esta siendo usado y no puede ser eliminado");</script>';
+        echo '<script>location.reload();</script>';
     
     }
     else{
@@ -42,16 +34,9 @@ include '../Modelo/conexion.php';
         if($EliminarCE and $EliminarCC and $EliminarPuntaje and $EliminarFormulario) 
         {
 
-        
-        echo    '<script>
-                                BootstrapDialog.show({
-                                    
-                                     message: "Se elimino el formulario correctamente",
-                                     onhide: function(dialogRef){
-                                        location.reload();
-                                    }
-                                });
-                            </script>';
+
+            echo '<script>alert("Se elimino el formulario correctamente");</script>';
+            echo '<script>location.reload();</script>';
  
         
         }
