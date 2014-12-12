@@ -1,371 +1,102 @@
-<?php 
-    session_start();
-    $UsuarioActivo = $_SESSION['usuario'];
-    include("controlSesion.php");
+<?php
+
+        
+    
+$addDestino = $_POST['dest'];
+$addAsunto = $_POST['asunto'];
+$addContenido = $_POST['area_info'];
+$addFecha= $_POST['fec'];
+
+//Inserttamos la foto en una carpeta
+
+
+ 
+
+//conexion-------------     
+    
+    $conexion = mysql_connect("localhost","root","");
+    //Control
+    if(!$conexion){die('La conexion ha fallado por:'.mysql_error());}
+    //Seleccion
+    mysql_select_db("saetis",$conexion);
+    //Peticion
+    $peticion1 = mysql_query("SELECT `CORREO_ELECTRONICO_U` FROM `usuario` WHERE `NOMBRE_U`='$addDestino'"); 
+        while ($correo = mysql_fetch_array($peticion1))
+        {        
+        $correo1=$correo["CORREO_ELECTRONICO_U"];}
+      
+        
+        
+    $peticion2 = mysql_query("UPDATE `usuario` SET `ESTADO_E`='Habilitado' WHERE `NOMBRE_U`='$addDestino'");
+
+
+//cerrar conexion--------------------------
+     mysql_close($conexion);
+     //volver a la pagina---------------
+         
+          $correo;
+          $addFecha;
+          $addContenido;
+          $addAsunto;
+          $addDestino;
+          $correo1;
+         
+ 
+    include '../Modelo/conexion.php';
+    require '../Vista/PHPMailerAutoload.php';
+    require '../Vista/class.phpmailer.php';
+    
+    $conect = new conexion();
+   
+        //Crear una instancia de PHPMailer
+    $mail = new PHPMailer();
+    //Definir que vamos a usar SMTP
+    $mail->IsSMTP();
+    //Esto es para activar el modo depuración. En entorno de pruebas lo mejor es 2, en producción siempre 0
+    // 0 = off (producción)
+    // 1 = client messages
+    // 2 = client and server messages
+    $mail->SMTPDebug  = 0;
+    //Ahora definimos gmail como servidor que aloja nuestro SMTP
+    $mail->Host       = 'smtp.gmail.com';
+    //El puerto será el 587 ya que usamos encriptación TLS
+    $mail->Port       = 587;
+    //Definmos la seguridad como TLS
+    $mail->SMTPSecure = 'tls';
+    //Tenemos que usar gmail autenticados, así que esto a TRUE
+    $mail->SMTPAuth   = true;
+    //Definimos la cuenta que vamos a usar. Dirección completa de la misma
+    $mail->Username   = "bittlesrl@gmail.com";
+    //Introducimos nuestra contraseña de gmail
+    $mail->Password   = "*bittletis*135*";
+    //Definimos el remitente (dirección y, opcionalmente, nombre)
+    $mail->SetFrom($correo1, $addDestino);
+    //Esta línea es por si queréis enviar copia a alguien (dirección y, opcionalmente, nombre)
+    //$mail->AddReplyTo('replyto@correoquesea.com','El de la réplica');
+    //Y, ahora sí, definimos el destinatario (dirección y, opcionalmente, nombre)
+    $mail->AddAddress($correo1, 'El Destinatario');
+    //Definimos el tema del email
+    $mail->Subject = 'Aceptacion de Registro';
+    //Para enviar un correo formateado en HTML lo cargamos con la siguiente función. Si no, puedes meterle directamente una cadena de texto.
+    //$mail->MsgHTML(file_get_contents('correomaquetado.html'), dirname(ruta_al_archivo));
+    //
+    //
+    //
+//    $mail->MsgHTML('El usuario '.$addDestino.''.$addDestino.' con direccion '.$correo1.' desea registrarse como '.$addDestino.' contraseña: '.$addDestino.'');
+    $mail->MsgHTML(' Asunto   :  '.$addAsunto.'.Enviado el     :.'.$addFecha.'............. '.$addContenido.'');
+
+//    
+//    
+//    
+    //Y por si nos bloquean el contenido HTML (algunos correos lo hacen por seguridad) una versión alternativa en texto plano (también será válida para lectores de pantalla)
+    $mail->AltBody = 'This is a plain-text message body';
+    //Enviamos el correo
+    if(!$mail->Send()) {
+      echo "Error: " . $mail->ErrorInfo;
+    } else {
+       echo "Enviado!";
+        echo"<script type=\"text/javascript\">alert('el mensaje se envio exitosamente'); window.location='principal.php';</script>";
+    }
+
 
 ?>
-	<html>
-
-<head>
-
-    		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<link href="css/style.css" rel="stylesheet" type="text/css" />
-		<link href="css/tabla-div.css" rel="stylesheet" type="text/css" />
-		<link rel="stylesheet" type="text/css" href="css/coin-slider.css" />
-		
-		<script type="text/javascript" src="js/cufon-yui.js"></script>
-		<script type="text/javascript" src="js/cufon-aller.js"></script>
-		<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
-		<script type="text/javascript" src="js/script.js"></script>
-		<script type="text/javascript" src="js/coin-slider.min.js"></script>
-		<script type="text/javascript" src="js/iconos.js"></script>
-    
-    
-    
-    
-    
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
-
-    <!-- JQuery -->
-    <script type="text/javascript" src="../Librerias/lib/jquery-2.1.0.min.js"></script>
-    <!-- icheck -->
-    <link href="../Librerias/icheck/skins/square/green.css" rel="stylesheet">
-    <script src="../Librerias/lib/icheck.min.js"></script>
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="../Librerias/css/bootstrap.min.css" rel="stylesheet">
-    <script type="text/javascript" src="../Librerias/lib/bootstrap.js"></script>
-    <!-- Docs -->
-    <link rel="stylesheet" type="text/css" href="../Librerias/lib/css/docs.css">
-    <!-- Font-Awesome -->
-    <link rel="stylesheet" type="text/css" href="../Librerias/font-awesome/css/font-awesome.css">
-    <!-- Bootstrap-datetimepicker -->
-    <link rel="stylesheet" type="text/css" href="../Librerias/lib/css/bootstrap-datetimepicker.css">
-    <script type="text/javascript" src="../Librerias/lib/bootstrap-datetimepicker.js"></script>
-    <script type="text/javascript" src="../Librerias/lib/bootstrap-datetimepicker.es.js"></script>
-    <!-- Bootstrap-multiselect -->
-    <link rel="stylesheet" type="text/css" href="../Librerias/lib/css/bootstrap-multiselect.css">
-    <script type="text/javascript" src="../Librerias/lib/bootstrap-multiselect.js"></script>
-    <!-- Bootstrap-validator -->
-    <link rel="stylesheet" type="text/css" href="../Librerias/lib/css/bootstrapValidator.css">
-    <script type="text/javascript" src="../Librerias/lib/bootstrapValidator.js"></script>
-    <!-- Validators -->
-    <script type="text/javascript" src="../Librerias/lib/validator/diferenteActividadPlanificacion.js"></script>
-    <script type="text/javascript" src="../Librerias/lib/validator/diferenteEntregable.js"></script>
-    <script type="text/javascript" src="../Librerias/lib/validator/stringLength.js"></script>
-    <script type="text/javascript" src="../Librerias/lib/validator/notEmpty.js"></script>
-    <script type="text/javascript" src="../Librerias/lib/validator/callback.js"></script
-    <script type="text/javascript" src="../Librerias/lib/validator/date.js"></script>
-    <script type="text/javascript" src="../Librerias/lib/validator/numeric.js"></script>
-    <script type="text/javascript" src="../Librerias/lib/validator/porcentajeMax.js"></script>
-    <script type="text/javascript" src="../Librerias/lib/validator/porcentajeMin.js"></script>
-    <!-- JS -->
-    <script type="text/javascript" src="../Librerias/lib/funcion.js"></script>
-
-
-
-
-
-    <link href="../Librerias/css/plugins/timeline/timeline.css" rel="stylesheet">
-    <!-- SB Admin CSS - Include with every page -->
-    <link href="../Librerias/css/sb-admin.css" rel="stylesheet">
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-       		<title>Bienvenidos a SATIS</title>
-		<link href="css/style.css" rel="stylesheet" type="text/css" />
-
-</head>
-
-<body>
-
-   
-    <div id="wrapper">
-       
-        
-		<!--<h2>design by <a href="#" title="flash templates">flash-templates-today.com</a></h2>-->
-        
-	
-        <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="principal.php">Inicio </a>
-            </div>
-            <!-- /.navbar-header -->
-
-            <ul class="nav navbar-top-links navbar-right">
-            
-                <!-- /.dropdown -->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <?php echo $UsuarioActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-user">
-  
-                        <li><a href="modificar_administrador.php"><i class="fa fa-user fa-fw"></i> Modificar Datos personales</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li><a href="unlog.php"><i class="fa fa-sign-out fa-fw"></i>Salir</a>
-                        </li>
-                    </ul>
-                    <!-- /.dropdown-user -->
-                </li>
-                <!-- /.dropdown -->
-            </ul>
-            <!-- /.navbar-top-links -->
-
-    </nav>
-                <!-- /.sidebar-collapse -->
-            </div>
-            <!-- /.navbar-static-side -->
-      
-
-
-      
-
-        <div id="page-wrapper">
-     			<div class="content">
-				<div class="content_resize">
-                                            
-                                                         <br>
-					<div class="mainbar">
-						<div class="article">
-                                                           <div class="row">
-                                                               <div class="col-lg-12"></div>
-							<h2><span>Enviar Email</span></h2>	
-							
-                                                        
-                                        
-							<h3><p>Debe de rellenar todos los campos correctamente</p></h3>
-							<div id="contenido">
-			
-								<form action="crear_mail.php" method="post">
-									<center>
-										<table border=0 width=100%>
-											<tr>
-												<td >
-                                                                                                    <p style="text-align:left;"  >Destinatario:</p><br>
-												</td>
-												<td>
-													<select required name='dest' class="form-control"  ><option value="" >-     Seleccione Destinatario     -</option>
-													<?php 
-														$link=mysql_connect("localhost","root",""); 
-														mysql_select_db("saetis",$link); 
-														$sql="SELECT NOMBRE_U from usuario"; 
-														$result=mysql_query($sql); 
-															while($row=mysql_fetch_array($result)) 
-																echo "<option  value='".$row["NOMBRE_U"]."'>" 
-																 .$row["NOMBRE_U"]."</option>"; 
-													?>	
-												</td>
-
-											</tr>
-                                                                                                                                                       <td >
-													<p style="text-align:left;" >Fecha :</p>
-												</td>
-												<td>
-		
-                                                                                                        
-                                            <div class="form-group">
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                  <span class="glyphicon glyphicon-envelope"></span>
-                                                </span>
-                                                <input class="form-control" type="date" name="fec" size=48% id="UserEmail" placeholder="fecha"  required>
-                                            </div>
-                                        </div>                                                                                                         
-                                                                                                        
-                                                                                                        
-												</td>
-											<tr>
-												<td >
-													<p style="text-align:left;">Asunto :</p>
-												</td>
-												<td>
-                                                                                                    
-                                            <div class="form-group">
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                  <span class="glyphicon glyphicon-envelope"></span>
-                                                </span>
-                                                <input class="form-control" type="text" name="asunto" size=48% id="UserEmail" placeholder="Asunto"  required>
-                                            </div>
-                                        </div>                                              
-                                                                                                    
-												</td>
-						
-											</tr>
-											<tr>
-												<td >
-                                                                                                    <p style="text-align:left;">Contenido :</p><br><br><br><br><br><br><br>
-												</td>
-												<td>
-                                                                                                    <textarea name='area_info' class="form-control" cols='50' rows='8' >Usted solicito un registro en saetis,   Ha sido validado satisfactoriamente, verifique haciendo click en el siguiente enlace: http://localhost:8080/freevalue/saetis/index2.php</textarea>
-												</td>
-											</tr>
-							
-											<tr>
-												<td>
-												</td>
-                                                                                                <td>  <br>
-                                                                                                    
-                                             <div class="form-group">
-                                            <button type="submit" name="submit" class="btn btn-primary" id="btn-registrarUser"> <span class="glyphicon glyphicon-ok"></span> Enviar Email</button>
-                                        </div>
-													
-												</td>
-											</tr>
-										</table>
-									</center>	
-
-								</form>
-							</div>
-							                                                   
-                                                           </div>     
-                                                        
-						</div>
-						
-                                        </div>
-					
-<div class="sidebar">
-                            
-				<h2 class="star">Usuario :  <?php echo $_SESSION['usuario'] ?></h2>
-			
-               
-            <div class="navbar-default navbar-static-side" role="navigation">
-                <div class="sidebar-collapse">
-                    <ul class="nav" id="side-menu">
-                        
-                                <li>
-                                    <a href="../Vista/registro_administrador.php"><i class="fa fa-bar-chart-o fa-files-o "></i> Nueva Cuenta<span class="fa arrow"></span></a>
-                                </li>                        
-                        
-                         <li>
-                            <a href="#"><i class="fa fa-tasks fa-fw"></i> Gestion de usuarios<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="lista_usuarios.php">Usuarios Registrados</a>
-                                </li>
-                                <li>
-                                    <a href="asignar_permisos.php">Modificar Permisos Usuarios</a>
-                                </li>
-                                 <li>
-                                     <a href="add_roles.php">Añadir  Roles</a>
-                                </li>
-                                <li>
-                                     <a href="add_gestion.php">Añadir  Gestion</a>
-                                </li>
-                                 <li>
-                                    <a href="lista_roles.php">Asignar Permisos Roles</a>
-                                </li>
-                                <li>
-                                    <a href="#">Grupo Empresa <span class="fa arrow"></span></a>
-                                    <ul class="nav nav-third-level">
-                                        <li>
-                                            <a href="lista_grupoEmpresa.php"> Integrantes </a>
-                                            
-                                        </li>
-                                        <li>
-                                            <a href="ListaGrupoEmpresas.php"> Lista de Grupo Empresas </a>
-                                            
-                                        </li>
-                                    </ul>
-                                    <!-- /.nav-third-level -->
-                                </li>
-                                 <li>
-                                    <a href="#">Administrador <span class="fa arrow"></span></a>
-                                    <ul class="nav nav-third-level">
-                                        <li>
-                                            <a href="lista_administradores.php"> Lista de Administadores </a>
-                                            
-                                        </li>
-                                    </ul>
-                                    <!-- /.nav-third-level -->
-                                </li>
-                                 <li>
-                                    <a href="#">Asesor <span class="fa arrow"></span></a>
-                                    <ul class="nav nav-third-level">
-                                        <li>
-                                            <a href="lista_asesores.php"> Lista de Asesores </a>
-                                            
-                                        </li>
-                                    </ul>
-                                    <!-- /.nav-third-level -->
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-
-                        <li>
-                            <a href="#"><i class="fa fa-building-o fa-fw"></i>Bitacora de ingresos <span class="fa arrow"></span></a>
-                                        <ul class="nav nav-third-level">
-                                        <li>
-                                            <a href="bitacora_ingreso.php">Registro</a>
-                                            
-                                        </li>
-
-  
-                                    </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                         <li>
-                            <a href="#"><i class="fa fa-building-o fa-fw"></i>Enviar mensaje <span class="fa arrow"></span></a>
-                                        <ul class="nav nav-third-level">
-                                        <li>
-                                            <a href="enviar_mail.php">Nuevo Mensaje</a>
-                                            
-                                        </li>
-
-  
-                                    </ul>
-                            <!-- /.nav-second-level -->
-                        </li>                       
-                        
-
-                    </ul>
-                    <!-- /#side-menu -->
-                </div>
-                <!-- /.sidebar-collapse -->
-            </div>
-                                
-                            
-                           		
-                        </div></div>
-                        </div>
-            <div class="clr"></div>	<br><br><br><br><br><br><br><br>
-			<div class="footer">
-			<div class="footer_resize">
-				<p class="lf"></p>
-				<div style="clear:both;"></div>
-				</div>
-			</div>
-		<div align=center>
-			Esta pagina desarrollada por  <a class="registrar" href=''>Bittle.S.R.L.</a>
-                </div>
-                        
-            
-        </div>
-        <!-- /#page-wrapper -->
-
-  
-
-    <script src="../Librerias/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-    <script src="../Librerias/js/sb-admin.js"></script>
-</body>
-
-</html>

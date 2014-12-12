@@ -278,7 +278,7 @@
                                         $f = $noticias["FECHA_N"];
 
                                         $views = $noticias["VIEWS"];
-
+                                           $posteado=$noticias["POSTEADO"];
 
 
                                      // numero de comentarios
@@ -292,15 +292,26 @@
 
                                 <a href="#" class="list-group-item">
                                     <i ></i> <p size="5"><font size="3"><b><?php echo $titulo?></b><p></p>
-                                    <i ></i> Posteado por <b><?php echo $usuario?></b> -
+                                    <i ></i> Posteado por <b><?php echo $posteado?></b> -
                                     <i ></i> <b> <?php echo $views?></b> Visualizaciones -
                                     <i ></i> <b><?php echo $comentarios?></b> Comentarios -
                                    
                                     <i ></i> <?php echo $f?>
-                                    <span class="pull-right text-muted small"><em><?php echo "<td> <a  class='link-dos'href=\"excluir-noticia.php?id=$id\">Eliminar</a></td>"; ?></em>
+                                     <?php
+                                    if($posteado==$UsuarioActivo)
+                                        {?>
+                                     <span class="pull-right text-muted small"><em><?php echo"<td> <a  class='link-dos' href=\"noticia-grupo.php?id=$id\">Ver </a></td>";?></em>
                                     </span>
-                                    <span class="pull-right text-muted small"><em><?php echo"<td> <a  class='link-dos' href=\"noticia.php?id=$id\">Ver </a></td>";?></em>
+                                    <span class="pull-right text-muted small"><em><?php echo "<td> <a  class='link-dos'href=\"excluir-noticia-grupo.php?id=$id\">Eliminar</a></td>"; ?></em>
                                     </span>
+                                   
+                                    <?php } 
+                                    else { ?>
+                                     
+                                    <span class="pull-right text-muted small"><em><?php echo"<td> <a  class='link-dos' href=\"noticia-grupo.php?id=$id\">Ver </a></td>";?></em>
+                                    </span>
+                                    <?php
+                                } ?>
                                 </a>
                                 
                                 <?php

@@ -308,7 +308,7 @@ $titulo = $new["TITULO"];
 $date = $new["FECHA_N"];
 $views = $new["VIEWS"];
 $texto = $new["TEXTO"];
-
+$posteado=$new["POSTEADO"];
 
 $comentarios_db = "SELECT * FROM comentarios WHERE ID_N='$id'";
 $comentarios_db = mysql_query($comentarios_db);
@@ -317,7 +317,7 @@ $comentarios = mysql_num_rows($comentarios_db);
 
 
 echo "<title>$titulo</title>";
-echo "<h1>$titulo</h1><p>Postado por <b>$autor</b>  <b>$date</b> - <b>$views</b> Visualizaciones | <b>$comentarios</b> Comentarios | ";
+echo "<h1>$titulo</h1><p>Postado por <b>$posteado</b>  <b>$date</b> - <b>$views</b> Visualizaciones | <b>$comentarios</b> Comentarios | ";
 //echo "______________________________________________________________________________________________________________________________________________________________________";
 //echo "<h3>$comentarios Comentarios:</h3>";
 ?>
