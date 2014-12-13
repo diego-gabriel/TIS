@@ -20,6 +20,7 @@ if (isset($_POST['proyecto'])) {
             $codProy = $res[0]; 
 
             $conect->consulta("INSERT INTO inscripcion_proyecto(CODIGO_P, NOMBRE_U) VALUES('$codProy','$nombreU')"); 
+            $conect->consulta("INSERT INTO planificacion(NOMBRE_U, ESTADO_E, FECHA_INICIO_P, FECHA_FIN_P) VALUES ('$nombreU', 'registrar planificacion', '2014-12-12', '2020-12-12')");
 
 
             echo"<script type=\"text/javascript\">alert('Su inscripcion a sido satisfactoria'); window.location='../Vista/inicio_grupo_empresa.php';</script>";  

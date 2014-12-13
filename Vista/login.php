@@ -1,4 +1,6 @@
 <?php
+      include '../Modelo/conexion.php';
+    $conectar = new conexion();
 session_start();
 // obtener variables
 $usuario= $_POST['usuario'];
@@ -7,16 +9,12 @@ $permiso="administrador";
 $permiso2="asesor";
 $permiso3="grupoEmpresa";
 //crear conexion---------------------------
-$conexion = mysql_connect("localhost","root","");
-//Control
-if(!$conexion){die('La conexion ha fallado por:'.mysql_error());}
-//Seleccion
-mysql_select_db("saetis",$conexion);
+
 //Peticion
-$peticion = mysql_query("SELECT u.NOMBRE_U,u.ESTADO_E, u.PASSWORD_U, r.ROL_R FROM usuario u, usuario_rol r
+$peticion =$conectar->consulta("SELECT u.NOMBRE_U,u.ESTADO_E, u.PASSWORD_U, r.ROL_R FROM usuario u, usuario_rol r
 WHERE u.NOMBRE_U=r.NOMBRE_U");
 
-$peticion1 = mysql_query("SELECT `LOGIN_S`,`PASSWORD_S` FROM `socio`");
+$peticion1 = $conectar->consulta("SELECT `LOGIN_S`,`PASSWORD_S` FROM `socio`");
 
 
 while(($fila = mysql_fetch_array($peticion)) or ($fila = mysql_fetch_array($peticion1)))

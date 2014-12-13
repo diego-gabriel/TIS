@@ -2,12 +2,9 @@
 <?php
 
     include '../Modelo/conexion.php';
+ session_start();
    
-     $conexion = mysql_connect("localhost","root","");
-     //Control
-     if(!$conexion){die('La conexion ha fallado por:'.mysql_error());}
-     mysql_select_db("saetis",$conexion);
-     session_start();
+    
      $con=new conexion();
      $UsuarioActivo = $_SESSION['usuario'];
     
@@ -147,6 +144,10 @@
                                 <li>
                                     <a href="../Vista/RegistrarDocumentosRequeridos.php">Registrar Documentos</a>
                                 </li>
+                                                                <li>
+                                    <a href="../Vista/documentos_generados.php">Contratos Emitidos</a>
+                                </li>
+                                
                                 
                                 <li>
                                     <a href="#">Publicaci&oacute;n Documentos <span class="fa arrow"></span></a>
@@ -284,18 +285,13 @@
                                     <select name="grupoempresa" class="form-control" >
                                         <option>Seleccione un destinatario</option>
                                         <?php
-                                            
-                                            
-                                            $c1="SELECT i.`NOMBRE_UGE` FROM `inscripcion` AS i WHERE i.`NOMBRE_UA` = '$UsuarioActivo'";
+
+                                            $c1="SELECT ge.`NOMBRE_LARGO_GE` FROM `grupo_empresa` AS ge,`inscripcion` AS i WHERE i.`NOMBRE_UA` = '$UsuarioActivo' AND i.`NOMBRE_UGE` = ge.`NOMBRE_U`";
                                             $a1=$con->consulta($c1);
                                             echo "<option>PUBLICO</option>";
                                             echo "<option>TODOS</option>";
                                             
                                             while($v1 =  mysql_fetch_array($a1)){
-                                                //$nom=$v1[0];
-                                                //$cnom="SELECT g.`NOMBRE_LARGO_GE` FROM `grupo_empresa` AS g WHERE i.`NOMBRE_UGE` = '$nom'";
-                                                //$a1=$con->consulta($c1);
-                                                //$nom1=mysql_fetch_row($a1);
                                                 echo "<option>".$v1[0]."</option>";
                                             }
                                             echo "<input type='hidden' name='idAsesor' value='$UsuarioActivo'>";
@@ -414,6 +410,7 @@
         var permitidos = /^[0-9a-zA-Z\s/]+$/
         
         //Controlar campos vacios y caracteres invalidos
+
         if(formulario.campoTitulo.value.length==0) {  
             formulario.campoTitulo.focus();    
             alert('Por favor, ingresa un titulo');  

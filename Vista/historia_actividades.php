@@ -19,21 +19,24 @@
     $usuario=$NombreUsuario[0];
 
   }
+      
+  
     
     
-    
-    $conexion = mysql_connect("localhost","root","","saetis");
-        //Control
-        if(!$conexion){die('La conexion ha fallado por:'.mysql_error());}
-        //Seleccion
-        mysql_select_db("saetis",$conexion);
+
         //Peticion
-        $peticion22 = mysql_query("SELECT `NOMBRE_UA` FROM `inscripcion` WHERE `NOMBRE_UGE`='$usuario'");
+        $peticion22 = $con->consulta("SELECT `NOMBRE_UA` FROM `inscripcion` WHERE `NOMBRE_UGE`='$usuario'");
              while ($correo = mysql_fetch_array($peticion22))
                {        
-                      $asesor=$correo["NOMBRE_UA"];} 
-?>
+                      $asesor=$correo["NOMBRE_UA"];}
 
+         $peticion23 = $con->consulta("SELECT NOMBRE_CORTO_GE FROM grupo_empresa WHERE NOMBRE_U='$usuario'");
+             while ($correo1 = mysql_fetch_array($peticion23))
+               {        
+                      $grupoEmpresa=$correo1["NOMBRE_CORTO_GE"];}   
+                     
+?>
+   
 <html>
 <head>
 
@@ -175,23 +178,23 @@
                                     <?php
                                     
                                    
-                                      $conect = new conexion();
+                                      
 
-                                      $SeleccionarVerficarSocio = $conect->consulta("SELECT NOMBRES_S FROM socio WHERE NOMBRES_S = '$UsuarioActivo'");
+                                      $SeleccionarVerficarSocio = $con->consulta("SELECT NOMBRES_S FROM socio WHERE NOMBRES_S = '$UsuarioActivo'");
 
                                       $VerificarSocio = mysql_fetch_row($SeleccionarVerficarSocio);
-
+        
 
 
                                     if(is_array($VerificarSocio))
                                     {
-                                        $SeleccionarUsuarioGE = $conect->consulta("SELECT NOMBRE_U FROM socio WHERE NOMBRES_S = '$VerificarSocio[0]'");
+                                        $SeleccionarUsuarioGE = $con->consulta("SELECT NOMBRE_U FROM socio WHERE NOMBRES_S = '$VerificarSocio[0]'");
 
                                         $UsuarioGE = mysql_fetch_row($SeleccionarUsuarioGE);
 
-                                        $SeleccionrAsesor = $conect->consulta("SELECT NOMBRE_UA FROM inscripcion WHERE NOMBRE_UGE='$UsuarioGE[0]'");
+                                        $SeleccionrAsesor = $con->consulta("SELECT NOMBRE_UA FROM inscripcion WHERE NOMBRE_UGE='$UsuarioGE[0]'");
                                         $Asesor = mysql_fetch_row($SeleccionrAsesor);
-                                        $SeleccionarDocReq = $conect->consulta("SELECT NOMBRE_R FROM registro WHERE NOMBRE_U = '$Asesor[0]' AND TIPO_T='documento requerido' ");
+                                        $SeleccionarDocReq = $con->consulta("SELECT NOMBRE_R FROM registro WHERE NOMBRE_U = '$Asesor[0]' AND TIPO_T='documento requerido' ");
                                         
                                         while ($rowDocs = mysql_fetch_row($SeleccionarDocReq))
                                         {
@@ -203,11 +206,11 @@
                                     }
                                     else
                                     {
-                                        $SeleccionrAsesor = $conect->consulta("SELECT NOMBRE_UA FROM inscripcion WHERE NOMBRE_UGE='$UsuarioActivo'");
+                                        $SeleccionrAsesor = $con->consulta("SELECT NOMBRE_UA FROM inscripcion WHERE NOMBRE_UGE='$UsuarioActivo'");
                                       
                                         $Asesor = mysql_fetch_row($SeleccionrAsesor);
                                           
-                                        $SeleccionarDocReq = $conect->consulta("SELECT NOMBRE_R FROM registro WHERE NOMBRE_U = '$Asesor[0]' AND TIPO_T='documento requerido' ");
+                                        $SeleccionarDocReq = $con->consulta("SELECT NOMBRE_R FROM registro WHERE NOMBRE_U = '$Asesor[0]' AND TIPO_T='documento requerido' ");
                                           
                                         while ($rowDocs = mysql_fetch_row($SeleccionarDocReq))
                                         {
@@ -323,6 +326,18 @@
            
 <form id = "ordenc" method = "post" action="" role="form" enctype="multipart/data-form" onsubmit="return validarCampos(ordenc)">
         <div class ="form-horizontal">
+
+
+
+               <?php 
+                           $peticion333=$con->consulta("SELECT * FROM inscripcion WHERE NOMBRE_UGE='$grupoEmpresa' and ESTADO_INSCRIPCION='Habilitado'");
+                           $tamano=mysql_num_rows($peticion333);
+                        
+
+                           if($tamano>0){
+               ?>
+
+
                         <div class="col-lg-12">
                             <h1> HISTORIA DE ACTIVIDADES</h1><br><br>
                 </div>
@@ -330,103 +345,97 @@
                     <div class="historia">
                         
                                <h2><span>ACTIVIDADES EN LINEA</span></h2>
-			</div>
+            </div>
                    <hr>
                                 <div class="historia1">
-							<div class="contenedor-fila2">
-									
-								<div class="contenedor-columna">
-									<?php
-										echo "Nombre";
-									?>
-								</div>	
-								<div class="contenedor-columna">
-									<?php
-										echo "Fecha Inicio";
-									?>
-								</div>
-		
-								<div class="contenedor-columna">
-									<?php
-										echo "Hora Inicio";
-									?>
-								</div>
-								<div class="contenedor-columna">
-									<?php
-										echo "Fecha Fin ";
-									?>
-								</div>
-								<div class="contenedor-columna">
-									<?php
-										echo "Hora Fin";
-									?>
-								</div>
-							</div>  
-							<?php
-								//crear conexion---------------------------
-								$conexion = mysql_connect("localhost","root","","saetis");
-								//Control
-								if(!$conexion){die('La conexion ha fallado por:'.mysql_error());}
-								//Seleccion
-								mysql_select_db("saetis",$conexion);
-								//Peticion
-								$peticion = mysql_query("SELECT  r.nombre_r, p.fecha_inicio_pl, p.hora_inicio_pl, p.fecha_fin_pl, p.hora_fin_pl
+                            <div class="contenedor-fila2">
+                                    
+                                <div class="contenedor-columna">
+                                    <?php
+                                        echo "Nombre";
+                                    ?>
+                                </div>  
+                                <div class="contenedor-columna">
+                                    <?php
+                                        echo "Fecha Inicio";
+                                    ?>
+                                </div>
+        
+                                <div class="contenedor-columna">
+                                    <?php
+                                        echo "Hora Inicio";
+                                    ?>
+                                </div>
+                                <div class="contenedor-columna">
+                                    <?php
+                                        echo "Fecha Fin ";
+                                    ?>
+                                </div>
+                                <div class="contenedor-columna">
+                                    <?php
+                                        echo "Hora Fin";
+                                    ?>
+                                </div>
+                            </div>  
+                            <?php
+                    
+                                //Peticion
+                                $peticion = $con->consulta("SELECT  r.nombre_r, p.fecha_inicio_pl, p.hora_inicio_pl, p.fecha_fin_pl, p.hora_fin_pl
                 FROM plazo p, registro r, tipo t
                 WHERE t.TIPO_T = r.TIPO_T
                 AND p.ID_R = r.ID_R
                 AND r.TIPO_T =  'documento requerido' 
                 AND r.NOMBRE_U = '$asesor'
                ");
-							
+                            
 
-								while($fila = mysql_fetch_array($peticion))
-								{
-							?>
-								<div class="contenedor-fila">
-									   <div class="contenedor-columna">
-										<?php
-											echo $fila['nombre_r'];
-										?>
-									</div>
-									
-									<div class="contenedor-columna">
-										<?php
-											echo $fila['fecha_inicio_pl'];
-										?>
-									</div>
-			
-									<div class="contenedor-columna">
-										<?php
-											echo $fila['hora_inicio_pl'];
-										?>
-									</div>
-									
-									<div class="contenedor-columna">
-										<?php
-											echo $fila['fecha_fin_pl'];
-										?>
-									</div>
-									
-									<div class="contenedor-columna">
-										<?php
-											echo $fila['hora_fin_pl'];
-										?>
-									</div>
+                                while($fila = mysql_fetch_array($peticion))
+                                {
+                            ?>
+                                <div class="contenedor-fila">
+                                       <div class="contenedor-columna">
+                                        <?php
+                                            echo $fila['nombre_r'];
+                                        ?>
+                                    </div>
+                                    
+                                    <div class="contenedor-columna">
+                                        <?php
+                                            echo $fila['fecha_inicio_pl'];
+                                        ?>
+                                    </div>
+            
+                                    <div class="contenedor-columna">
+                                        <?php
+                                            echo $fila['hora_inicio_pl'];
+                                        ?>
+                                    </div>
+                                    
+                                    <div class="contenedor-columna">
+                                        <?php
+                                            echo $fila['fecha_fin_pl'];
+                                        ?>
+                                    </div>
+                                    
+                                    <div class="contenedor-columna">
+                                        <?php
+                                            echo $fila['hora_fin_pl'];
+                                        ?>
+                                    </div>
                                                                       
-									
-								</div>
-								<?php
-								}
+                                    
+                                </div>
+                                <?php
+                                }
 
-								//Cerrar
-								mysql_close($conexion);
-							
-				
-						?>	
-                                                      </div>	
-					
-						
-					
+                               
+                            
+                
+                        ?>  
+                                                      </div>    
+                    
+                        
+                    
            
     <hr>
                     
@@ -445,102 +454,101 @@
                     <div class="historia">
                         
                                <h2><span>HISTORIAL DE DOCUMENTOS</span></h2>
-			</div>
+            </div>
                    <hr>
                                 <div class="historia1">
-							<div class="contenedor-fila2">
-									
-								<div class="contenedor-columna">
-									<?php
-										echo "ID ";
-									?>
-								</div>	
-								<div class="contenedor-columna">
-									<?php
-										echo "Asesor";
-									?>
-								</div>
-		
-								<div class="contenedor-columna">
-									<?php
-										echo "Descripcion";
-									?>
-								</div>
-								<div class="contenedor-columna">
-									<?php
-										echo "Fecha ";
-									?>
-								</div>
-								<div class="contenedor-columna">
-									<?php
-										echo "Hora";
-									?>
-								</div>
-							</div>  
-							<?php
-								//crear conexion---------------------------
-								$conexion = mysql_connect("localhost","root","","saetis");
-								//Control
-								if(!$conexion){die('La conexion ha fallado por:'.mysql_error());}
-								//Seleccion
-								mysql_select_db("saetis",$conexion);
-								//Peticion
-								$peticion = mysql_query("SELECT `ID_R`,`NOMBRE_U`,`NOMBRE_R`,`FECHA_R`,`HORA_R` FROM `registro` WHERE `TIPO_T`='publicaciones' and `NOMBRE_U`='$asesor'
+                            <div class="contenedor-fila2">
+                                    
+                                <div class="contenedor-columna">
+                                    <?php
+                                        echo "ID ";
+                                    ?>
+                                </div>  
+                                <div class="contenedor-columna">
+                                    <?php
+                                        echo "Asesor";
+                                    ?>
+                                </div>
+        
+                                <div class="contenedor-columna">
+                                    <?php
+                                        echo "Descripcion";
+                                    ?>
+                                </div>
+                                <div class="contenedor-columna">
+                                    <?php
+                                        echo "Fecha ";
+                                    ?>
+                                </div>
+                                <div class="contenedor-columna">
+                                    <?php
+                                        echo "Hora";
+                                    ?>
+                                </div>
+                            </div>  
+                            <?php
+                                //crear conexion---------------------------
+              
+                                //Peticion
+                                $peticion = $con->consulta("SELECT `ID_R`,`NOMBRE_U`,`NOMBRE_R`,`FECHA_R`,`HORA_R` FROM `registro` WHERE `TIPO_T`='publicaciones' and `NOMBRE_U`='$asesor'
                ");
-							
+                            
 
-								while($fila = mysql_fetch_array($peticion))
-								{
-							?>
-								<div class="contenedor-fila">
-									   <div class="contenedor-columna">
-										<?php
-											echo $fila['ID_R'];
-										?>
-									</div>
-									
-									<div class="contenedor-columna">
-										<?php
-											echo $fila['NOMBRE_U'];
-										?>
-									</div>
-			
-									<div class="contenedor-columna">
-										<?php
-											echo $fila['NOMBRE_R'];
-										?>
-									</div>
-									
-									<div class="contenedor-columna">
-										<?php
-											echo $fila['FECHA_R'];
-										?>
-									</div>
-									
-									<div class="contenedor-columna">
-										<?php
-											echo $fila['HORA_R'];
-										?>
-									</div>
+                                while($fila = mysql_fetch_array($peticion))
+                                {
+                            ?>
+                                <div class="contenedor-fila">
+                                       <div class="contenedor-columna">
+                                        <?php
+                                            echo $fila['ID_R'];
+                                        ?>
+                                    </div>
+                                    
+                                    <div class="contenedor-columna">
+                                        <?php
+                                            echo $fila['NOMBRE_U'];
+                                        ?>
+                                    </div>
+            
+                                    <div class="contenedor-columna">
+                                        <?php
+                                            echo $fila['NOMBRE_R'];
+                                        ?>
+                                    </div>
+                                    
+                                    <div class="contenedor-columna">
+                                        <?php
+                                            echo $fila['FECHA_R'];
+                                        ?>
+                                    </div>
+                                    
+                                    <div class="contenedor-columna">
+                                        <?php
+                                            echo $fila['HORA_R'];
+                                        ?>
+                                    </div>
                                                                       
-									
-								</div>
-								<?php
-								}
+                                    
+                                </div>
+                                <?php
+                                }
 
-								//Cerrar
-								mysql_close($conexion);
-							
-				
-						?>	
-                                                      </div>	
-					
-						
-					</div>
+                                //Cerrar
+                           
+                            
+                
+                        ?>  
+                                                      </div>    
+                    
+                        
+                    </div>
            
     <hr>
                     
+     <?php }
+    else  { ?> <h3>  Su inscripcion no ha sido habilitada</h3    > <?php   } 
 
+     ?>
                     
                     
                     

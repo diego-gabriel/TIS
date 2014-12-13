@@ -2,9 +2,8 @@
 
 <?php
 include "../Modelo/conexion.php";
-//include("controlSesion.php");
 session_start();
- $con=new conexion();
+$con=new conexion();
 date_default_timezone_set('America/Argentina/Tucuman');
 $fecha=  date('Y-m-d');
 $hora= date('G:H:i');
@@ -156,6 +155,10 @@ $UsuarioActivo = $_SESSION['usuario'];
                                 <li>
                                     <a href="../Vista/RegistrarDocumentosRequeridos.php">Registrar Documentos</a>
                                 </li>
+                                                                <li>
+                                    <a href="../Vista/documentos_generados.php">Contratos Emitidos</a>
+                                </li>
+                                
                                 
                                 <li>
                                     <a href="#">Publicaci&oacute;n Documentos <span class="fa arrow"></span></a>

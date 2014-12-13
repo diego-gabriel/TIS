@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <?php
     include '../Modelo/conexion.php';
-    $conexion = mysql_connect("localhost","root","");
-	//Control
-    if(!$conexion){die('La conexion ha fallado por:'.mysql_error());}
-    mysql_select_db("saetis",$conexion);
-    session_start();
-    $UsuarioActivo = $_SESSION['usuario'];
+   $conect = new conexion();
+   session_start();
+   $UsuarioActivo = $_SESSION['usuario'];
  
 
 ?>
@@ -248,7 +245,7 @@ if($titulo == "" && $texto == ""){} else {
 // Adiciona a Noticia 
 $news_add = "INSERT INTO noticias (NOMBRE_U,TITULO, FECHA_N, VIEWS, TEXTO, POSTEADO) VALUES ('$UsuarioActivo','".addslashes(mysql_real_escape_string($_POST["titulo"]))."', NOW(), '0', '".addslashes(mysql_real_escape_string($_POST['texto']))."','$UsuarioActivo')";
 
-$news_add = mysql_query($news_add)
+$news_add = $conect->consulta($news_add)
 or die ("Error.");
 echo "Tema Adicionado";
 

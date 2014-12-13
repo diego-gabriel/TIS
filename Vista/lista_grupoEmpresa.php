@@ -1,7 +1,8 @@
  <?php  
     session_start();
     $UsuarioActivo = $_SESSION['usuario'];
-    include("controlSesion.php");
+      include '../Modelo/conexion.php';
+    $conectar = new conexion();
 		$addNomInte = '';						
 						
       
@@ -131,7 +132,7 @@
                                             <div class="article"><br>
                                                        <div class="row">
                                                            <div class="col-lg-12"></div>
-							<h2><span>Escoger Grupo Emresa</span></h2>	
+							<h2><span>Escoger Grupo Empresa</span></h2>	
 						</div>
                                             
                                             
@@ -151,11 +152,10 @@
 												<td>
                                                                                                     <select required name="NOMBRE_U" class="form-control"><option  value="">Seleccione Un grupo Empresa</option>
 													<?php 
-														$link=mysql_connect("localhost","root",""); 
-														mysql_select_db("saetis",$link); 
-														$sql="SELECT u.NOMBRE_U FROM usuario u, usuario_rol r WHERE  u.NOMBRE_U=r.NOMBRE_U and r.ROL_R='grupoempresa'"; 
-														$result=mysql_query($sql); 
-															while($row=mysql_fetch_array($result)) 
+														
+														$sql= $conectar->consulta("SELECT u.NOMBRE_U FROM usuario u, usuario_rol r WHERE  u.NOMBRE_U=r.NOMBRE_U and r.ROL_R='grupoempresa'"); 
+													
+															while($row=mysql_fetch_array($sql)) 
 													echo "<option  value='".$row["NOMBRE_U"]."'>".$row["NOMBRE_U"]."</option>";  
                                                                                                                       
                                                                                                              $addNomInte=$_REQUEST["NOMBRE_U"];
@@ -211,14 +211,9 @@
 							</div>
 							<?php     
                                                         								//crear conexion---------------------------
-								$conexion = mysql_connect("localhost","root","","saetis");
-								//Control
-								if(!$conexion){die('La conexion ha fallado por:'.mysql_error());}
-								//Seleccion
-								mysql_select_db("saetis",$conexion);
+							
 								//Peticion
-								$peticion = mysql_query(" SELECT CODIGO_S,NOMBRE_U, NOMBRES_S, APELLIDOS_S,LOGIN_S,PASSWORD_S FROM socio WHERE NOMBRE_U='$addNomInte'
-													");
+								$peticion = $conectar->consulta(" SELECT CODIGO_S,NOMBRE_U, NOMBRES_S, APELLIDOS_S,LOGIN_S,PASSWORD_S FROM socio WHERE NOMBRE_U='$addNomInte'");
 
 								while($fila = mysql_fetch_array($peticion))
 								{
@@ -265,7 +260,7 @@
 								<?php
 								}
 							//Cerrar
-							mysql_close($conexion);
+							
                                                       
                                                             
                                                             

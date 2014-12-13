@@ -1,6 +1,5 @@
  <?php  
- 
-session_start();
+ session_start();
  $UsuarioActivo = $_SESSION['usuario'];
  include("controlSesion.php");
  ?> 
@@ -161,6 +160,10 @@ session_start();
                                 <li>
                                     <a href="../Vista/RegistrarDocumentosRequeridos.php">Registrar Documentos</a>
                                 </li>
+                                                                <li>
+                                    <a href="../Vista/documentos_generados.php">Contratos Emitidos</a>
+                                </li>
+                                
                                 
                                 <li>
                                     <a href="#">Publicaci&oacute;n Documentos <span class="fa arrow"></span></a>
@@ -290,7 +293,7 @@ session_start();
             <div class="row">
                 <div class="col-lg-6">
                        <div class="mainbar">
-                                            <div class="article"><br><br>
+                            <div class="article"><br><br>
                             <h2><span>Documentos Subidos</span></h2>   
                             
                         </div>

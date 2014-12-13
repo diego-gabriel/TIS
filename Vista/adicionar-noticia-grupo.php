@@ -3,11 +3,7 @@
    
     session_start();
     $UsuarioActivo = $_SESSION['usuario'];
-   
-    $conexion = mysql_connect("localhost","root","");
-	//Control
-    if(!$conexion){die('La conexion ha fallado por:'.mysql_error());}
-    mysql_select_db("saetis",$conexion);
+  
 
     $con=new conexion();
     $VerificarUsuario = $con->consulta("SELECT NOMBRE_U FROM usuario WHERE NOMBRE_U = '$UsuarioActivo' ");
@@ -317,7 +313,7 @@
 <?php
 
 
-include('config.php');
+//include('config.php');
 error_reporting(E_ALL ^ E_NOTICE);
 // Mensaje con campos vacios
 if (!empty($_POST) AND (empty($_POST['titulo']) OR empty($_POST['texto']))) {
@@ -337,7 +333,7 @@ if($titulo == "" && $texto == ""){} else {
 // Adiciona a Noticia 
 $news_add = "INSERT INTO noticias (NOMBRE_U,TITULO, FECHA_N, VIEWS, TEXTO, POSTEADO) VALUES ('$usuario','".addslashes(mysql_real_escape_string($_POST["titulo"]))."', NOW(), '0', '".addslashes(mysql_real_escape_string($_POST['texto']))."','$UsuarioActivo')";
 
-$news_add = mysql_query($news_add)
+$news_add = $conect->consulta($news_add)
 or die ("Error.");
 echo "Tema Adicionado";
 

@@ -50,6 +50,7 @@ if (isset($_POST['grupoempresa'])) {
         $remplazo['fecha_actual']         = date('Y/m/d');
 
         $ruta = "..\\Repositorio\\asesor";
+        
         chdir($ruta);
         
         $id = "Contrato";
@@ -58,7 +59,9 @@ if (isset($_POST['grupoempresa'])) {
         $aux = $id.".aux";
         $nombCorto = str_replace(' ', '', $nombreCorto);
         $pdf = $id.$nombCorto.".pdf"; 
-
+        
+         
+        
 
         $plantilla = "Contrato.tex";
 
@@ -79,7 +82,24 @@ if (isset($_POST['grupoempresa'])) {
         file_put_contents($tex, $textoAux);
         unlink($log);
         unlink($aux);
-        rename("Contrato.pdf", $pdf);
+        
+        $rutaDirectorio="../".$nombreUA."/Contratos/";
+
+        $file = "Contrato".'_'.$nombreUA.'.pdf';
+        
+        if (!file_exists($rutaDirectorio)) 
+        {
+            mkdir($rutaDirectorio, 0777,TRUE);
+        }
+                                   
+        rename("Contrato.pdf", $file);
+        rename($file, $rutaDirectorio.$pdf );
+        
+        //rename("Contrato.pdf", $pdf);
+        //$rutaCompleta=$ruta.'/'.$pdf;
+        
+        
+        
         header("location:../Vista/contrato.php");
     }
     else{        
@@ -92,7 +112,7 @@ if (isset($_POST['grupoempresa'])) {
                             
     }
     
-
+ 
 }
 
 ?>

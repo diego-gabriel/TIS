@@ -13,11 +13,7 @@ $idgp = $_GET['id_us'];
 
 
 //conexion-------------
-    $conexion = mysql_connect("localhost","root","");
-    //Control
-    if(!$conexion){die('La conexion ha fallado por:'.mysql_error());}
-    //Seleccion
-    mysql_select_db("saetis",$conexion);
+    
     //Verificar registros
     $SeleccionarIdRegistroAsesor = $conect->consulta("SELECT ID_R FROM registro WHERE NOMBRE_U='$idgp'");
     $RegistroAsesor = mysql_fetch_row($SeleccionarIdRegistroAsesor);
@@ -30,19 +26,19 @@ $idgp = $_GET['id_us'];
         if($op == 'si')
         {
            
-            $peticion =mysql_num_rows( mysql_query(" SELECT * FROM `comentarios` WHERE NOMBRE_U ='$idgp'"));
+            $peticion =mysql_num_rows( $conect->consulta(" SELECT * FROM `comentarios` WHERE NOMBRE_U ='$idgp'"));
 
             if($peticion>0){
-                 $peticion1 = mysql_query(" DELETE FROM `comentarios` WHERE NOMBRE_U='$idgp'");
+                 $peticion1 = $conect->consulta(" DELETE FROM `comentarios` WHERE NOMBRE_U='$idgp'");
             }
 
-            $peticion2 =mysql_num_rows( mysql_query(" SELECT * FROM `noticias` WHERE NOMBRE_U ='$idgp'"));
+            $peticion2 =mysql_num_rows( $conect->consulta(" SELECT * FROM `noticias` WHERE NOMBRE_U ='$idgp'"));
 
             if($peticion2>0){
-                 $peticion3 = mysql_query(" DELETE FROM `noticias` WHERE NOMBRE_U='$idgp'");
+                 $peticion3 = $conect->consulta(" DELETE FROM `noticias` WHERE NOMBRE_U='$idgp'");
             }
             
-            $peticion_registro = mysql_query(" SELECT ID_R FROM `registro` WHERE NOMBRE_U ='$idgp'");
+            $peticion_registro =$conect->consulta(" SELECT ID_R FROM `registro` WHERE NOMBRE_U ='$idgp'");
             $peticion_regis=mysql_num_rows($peticion_registro);
             
            
@@ -53,8 +49,8 @@ $idgp = $_GET['id_us'];
                 {
                     $id=$fila[0];
 
-                    $des_eliminar=mysql_query(" DELETE FROM `descripcion` WHERE ID_R='$id'");
-                    $doc_eliminar=mysql_query(" DELETE FROM `documento` WHERE ID_R='$id'");
+                    $des_eliminar=$conect->consulta(" DELETE FROM `descripcion` WHERE ID_R='$id'");
+                    $doc_eliminar=$conect->consulta(" DELETE FROM `documento` WHERE ID_R='$id'");
 
                     $periodo_eliminar = $conect->consulta("DELETE FROM periodo WHERE ID_R = '$id' ");
                     $periodo_eliminar = $conect->consulta("DELETE FROM plazo WHERE ID_R = '$id' ");
@@ -64,7 +60,7 @@ $idgp = $_GET['id_us'];
 
              }
              
-             $peticion_formulario = mysql_query("SELECT ID_FORM FROM `formulario` WHERE NOMBRE_U ='$idgp'");
+             $peticion_formulario = $conect->consulta("SELECT ID_FORM FROM `formulario` WHERE NOMBRE_U ='$idgp'");
              $peticion_form=mysql_num_rows($peticion_formulario);
              
             if($peticion_form>0)
@@ -76,7 +72,7 @@ $idgp = $_GET['id_us'];
 
                     $id1=$fila1[0];
 
-                    $puntajeG= mysql_query("SELECT ID_N FROM nota WHERE ID_FORM ='$id1'");
+                    $puntajeG= $conect->consulta("SELECT ID_N FROM nota WHERE ID_FORM ='$id1'");
                     //var_dump($puntajeG);
                     $id_puntaje=mysql_fetch_array($puntajeG);
 
@@ -167,7 +163,7 @@ $idgp = $_GET['id_us'];
         
         
         
-        $peticion_formulario = mysql_query("SELECT ID_FORM FROM `formulario` WHERE NOMBRE_U ='$idgp'");
+        $peticion_formulario = $conect->consulta("SELECT ID_FORM FROM `formulario` WHERE NOMBRE_U ='$idgp'");
         $peticion_form=mysql_num_rows($peticion_formulario);
 
         if($peticion_form>0){
@@ -176,7 +172,7 @@ $idgp = $_GET['id_us'];
             {
                 $id1=$fila1[0];
 
-                $puntajeG= mysql_query("SELECT ID_N FROM nota WHERE ID_FORM ='$id1'");
+                $puntajeG= $conect->consulta("SELECT ID_N FROM nota WHERE ID_FORM ='$id1'");
                 //var_dump($puntajeG);
                 $id_puntaje=mysql_fetch_array($puntajeG);
 
@@ -214,8 +210,8 @@ $idgp = $_GET['id_us'];
         
         
         
-        $peticion1 = mysql_query(" DELETE FROM `comentarios` WHERE NOMBRE_U='$idgp'");
-        $peticion3 = mysql_query(" DELETE FROM `noticias` WHERE NOMBRE_U='$idgp'");
+        $peticion1 = $conect->consulta(" DELETE FROM `comentarios` WHERE NOMBRE_U='$idgp'");
+        $peticion3 = $conect->consulta(" DELETE FROM `noticias` WHERE NOMBRE_U='$idgp'");
      
         $rol_eliminar = $conect->consulta("DELETE FROM usuario_rol WHERE NOMBRE_U = '$idgp' ");
               
@@ -229,7 +225,7 @@ $idgp = $_GET['id_us'];
         
         $eliminar_usuario = $conect->consulta("DELETE FROM usuario WHERE NOMBRE_U = '$idgp' ");
         
-         mysql_close($conexion);
+        // mysql_close($conexion);
         
         
         echo '<script>alert("Se elimino al asesor correctamente!!")</script>';

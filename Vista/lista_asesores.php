@@ -1,14 +1,12 @@
 <?php 
+ include '../Modelo/conexion.php';
     session_start();
     $UsuarioActivo = $_SESSION['usuario'];
-    include("controlSesion.php");
     
-    $conexion = mysql_connect("localhost","root","");
-    //Control
-    if(!$conexion){die('La conexion ha fallado por:'.mysql_error());}
-    mysql_select_db("saetis",$conexion);
+   
+$conect = new conexion();
  
- $UsuarioActivo = $_SESSION['usuario'];
+ 
 ?>
     <html>
 
@@ -186,13 +184,9 @@
                                                         </div>  
                             <?php
                                 //crear conexion---------------------------
-                                $conexion = mysql_connect("localhost","root","","saetis");
-                                //Control
-                                if(!$conexion){die('La conexion ha fallado por:'.mysql_error());}
-                                //Seleccion
-                                mysql_select_db("saetis",$conexion);
+                                
                                 //Peticion
-                                $peticion = mysql_query("SELECT u.NOMBRE_U, u.ESTADO_E, u.PASSWORD_U, u.TELEFONO_U , u.CORREO_ELECTRONICO_U, r.ROL_R
+                                $peticion = $conect->consulta("SELECT u.NOMBRE_U, u.ESTADO_E, u.PASSWORD_U, u.TELEFONO_U , u.CORREO_ELECTRONICO_U, r.ROL_R
 FROM usuario u , usuario_rol r
 WHERE  u.NOMBRE_U = r.NOMBRE_U  AND r.ROL_R = 'asesor'");
                             
@@ -258,7 +252,7 @@ WHERE  u.NOMBRE_U = r.NOMBRE_U  AND r.ROL_R = 'asesor'");
                                 }
 
                                 //Cerrar
-                                mysql_close($conexion);
+                                
                         ?>  
                                                            
                                                       </div>                                         

@@ -1,12 +1,9 @@
 <?php
 
-
-	 $conexion = mysql_connect("localhost","root","");
-	 if(!$conexion){die('La conexion ha fallado por:'.mysql_error());}
-	 mysql_select_db("saetis",$conexion);
-         session_start();
+include '../Modelo/conexion.php';
+session_start();
+$conect = new conexion();
          $UsuarioActivo = $_SESSION['usuario'];
-         echo $UsuarioActivo;
          $grupo=$_POST['grupoempresa'];
          $identificador="*";
 	
@@ -29,31 +26,25 @@
         echo $eshora."</br>";
 	echo $fechap;
 	//echo $horap;		 
-	$comentario_add = mysql_query("INSERT INTO registro (NOMBRE_U,TIPO_T,ESTADO_E,NOMBRE_R,FECHA_R,HORA_R) VALUES ('$UsuarioActivo','publicaciones','Habilitado','$titulo','$fecha','$hora')")or
+	$comentario_add = $conect->consulta("INSERT INTO registro (NOMBRE_U,TIPO_T,ESTADO_E,NOMBRE_R,FECHA_R,HORA_R) VALUES ('$UsuarioActivo','publicaciones','Habilitado','$titulo','$fecha','$hora')")or
 			die("Error al s");
-var_dump($comentario_add);
-	$query= mysql_query("SELECT MAX(ID_R) AS 'ID_R' FROM registro");
+//var_dump($comentario_add);
+	$query= $conect->consulta("SELECT MAX(ID_R) AS 'ID_R' FROM registro");
  if ($row = mysql_fetch_row($query)) 
  {
    $id = trim($row[0]);
  }
  var_dump($row);
  echo $id;
- $guardar_doc = mysql_query("INSERT INTO documento (ID_R,TAMANIO_D,RUTA_D,VISUALIZABLE_D,DESCARGABLE_D)
+ $guardar_doc = $conect->consulta("INSERT INTO documento (ID_R,TAMANIO_D,RUTA_D,VISUALIZABLE_D,DESCARGABLE_D)
 		VALUES('$id','1024','$ruta','$visualizable','$descargable')");
- $des_D=mysql_query("INSERT INTO descripcion (ID_R,DESCRIPCION_D)
+ $des_D=$conect->consulta("INSERT INTO descripcion (ID_R,DESCRIPCION_D)
 		VALUES('$id','$descripcion')");
-  $destinatario=mysql_query("INSERT INTO receptor (ID_R,RECEPTOR_R)
+  $destinatario=$conect->consulta("INSERT INTO receptor (ID_R,RECEPTOR_R)
 		VALUES('$id','$grupo')");
-$guardar = mysql_query("INSERT INTO periodo (ID_R,fecha_p,hora_p) VALUES ('$id','$fechap','$horap')") or
+$guardar = $conect->consulta("INSERT INTO periodo (ID_R,fecha_p,hora_p) VALUES ('$id','$fechap','$horap')") or
 			die("Error al s");
- //$guardar = mysql_query("INSERT INTO `saetis`.`descripcion` (ID_R,DESCARGABLE_D) VALUES ('$id','$des')");
-var_dump($guardar);
-	
-	echo $titulo."</br>";
-	echo $id;
-	mysql_close($conexion);
+
         header("location:../Vista/publicar_asesor.php");
 	
- //echo"<script type=\"text/javascript\">alert('el registro se realizo exitosamente');
 ?>

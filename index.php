@@ -1,4 +1,9 @@
 <!DOCTYPE html>
+<?php 
+ 
+    include 'Modelo/conexion.php';
+    $conectar = new conexion();
+?>
 <html>
 
 <head>
@@ -93,11 +98,9 @@
                                          
              <?php                                  
 
-                                                                        $valor='0';
-								$conexion = mysql_connect("localhost","root","","saetis");
-								if(!$conexion){die('La conexion ha fallado por:'.mysql_error());}
-								mysql_select_db("saetis",$conexion);
-        $peticion11 = mysql_query("select count(*)
+                   $valor='0';
+			
+        $peticion11 = $conectar->consulta("select count(*)
   from receptor
   where RECEPTOR_R='PUBLICO'"); 
         while($fila = mysql_fetch_array($peticion11))
@@ -129,18 +132,13 @@
                          
                         			        <?php
                                                            $numero='0';
-								//crear conexion---------------------------
-								$conexion = mysql_connect("localhost","root","","saetis");
-								//Control
-								if(!$conexion){die('La conexion ha fallado por:'.mysql_error());}
-								//Seleccion
-								mysql_select_db("saetis",$conexion);
+						
 								//Peticion
-								$peticion = mysql_query("SELECT registro.NOMBRE_U,registro.NOMBRE_R,registro.FECHA_R,registro.HORA_R, asesor.NOMBRES_A, asesor.APELLIDOS_A , documento.RUTA_D, descripcion.DESCRIPCION_D	
+								$peticion = $conectar->consulta("SELECT registro.NOMBRE_U,registro.NOMBRE_R,registro.FECHA_R,registro.HORA_R, asesor.NOMBRES_A, asesor.APELLIDOS_A , documento.RUTA_D, descripcion.DESCRIPCION_D	
 FROM registro , asesor , documento , receptor , descripcion 
 WHERE registro.NOMBRE_U=asesor.NOMBRE_U and  `TIPO_T`='publicaciones' and documento.ID_R=registro.ID_R and descripcion.ID_R=registro.ID_R and receptor.ID_R=registro.ID_R and RECEPTOR_R='PUBLICO'");
                                                                 
-                                                                $peticion1 = mysql_query("select registro.HORA_R, registro.FECHA_R, registro.NOMBRE_R, asesor.NOMBRES_A,asesor.APELLIDOS_A, descripcion.DESCRIPCION_D
+                                                                $peticion1 = $conectar->consulta("select registro.HORA_R, registro.FECHA_R, registro.NOMBRE_R, asesor.NOMBRES_A,asesor.APELLIDOS_A, descripcion.DESCRIPCION_D
 from registro, asesor, descripcion 
 where not exists 
 (select documento.ID_R
@@ -195,7 +193,7 @@ where not exists
                                                                 
 
 								//Cerrar
-								mysql_close($conexion);
+								
 				?>
                         </div>
                     </td>
@@ -272,7 +270,7 @@ where not exists
                                         </div>                                                  
                                                         
                                         <div class="form-group">
-                                            <a href="vista/RegistrarUsuario.php"><font color='green' size="1.5%">No eres usuario todavia? REGISTRATE</font></a>
+                                            <a href="vista/RegistrarUsuario.php"><font color='green' size="1.5%">no eres usuario todavia? REGISTRATE</font></a>
                                             <div align="right"> <hr>
                                             <button type="submit" name="ingresar" class="btn btn-primary" id="btn-registrarUser"> <span class="glyphicon glyphicon-ok"></span> Ingresar</button>
                                         </div></div>
@@ -298,7 +296,7 @@ where not exists
 					<div class="contenedor-tabla">
 						<div class="contenedor-fila">
 							<div class="contenedor-columna2"><img src="images/logo-cs.bmp" width="29" height="29" alt="" longdesc=\/></div>
-							<div class="contenedor-columna3"><li><a href="http://www.cs.umss.edu.bo/">Carreras de Informática y Sistemas UMSS</a><br/>
+							<div class="contenedor-columna3"><li><a href="http://www.cs.umss.edu.bo//">Carreras de Informática y Sistemas UMSS</a><br/>
 							Pagina principal de la CS</li>
 							</div>
 						</div>
@@ -316,7 +314,7 @@ where not exists
 					<div class="contenedor-tabla">
 						<div class="contenedor-fila">
 							<div class="contenedor-columna2"><img src="images/userpic.gif" width="29" height="29" alt="" longdesc=\/></div>
-							<div class="contenedor-columna3"><li><a href="http://enlinea.umss.edu.bo/moodle2/">MOODLE 2 - UMSS</a><br/>
+							<div class="contenedor-columna3"><li><a href="enlinea.umss.edu.bo/moodle2/">MOODLE 2 - UMSS</a><br/>
 							Pagina de moodle2</li>
 							</div>
 						</div>
@@ -332,7 +330,7 @@ where not exists
 						<div class="contenedor-fila">
 							
 							<div class="contenedor-columna3"><li><a href="Vista/verificar_nombre.php">Verificar Nombre Grupo Empresa</a><br/> 
-							
+							Verificar Nombre de Grupo Empresa Disponible</li></div>
 						</div>
 					</div>
 					

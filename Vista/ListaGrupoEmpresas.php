@@ -2,6 +2,9 @@
     session_start();
     $UsuarioActivo = $_SESSION['usuario'];
     include("controlSesion.php");
+        include '../Modelo/conexion.php';
+   
+    $conect = new conexion();
  ?>
 	<html>
 
@@ -156,14 +159,9 @@
 								</div>
                             </div>  
 							<?php
-								//crear conexion---------------------------
-								$conexion = mysql_connect("localhost","root","","saetis");
-								//Control
-								if(!$conexion){die('La conexion ha fallado por:'.mysql_error());}
-								//Seleccion
-								mysql_select_db("saetis",$conexion);
+
 								//Peticion
-								$peticion = mysql_query("SELECT NOMBRE_U, NOMBRE_CORTO_GE, NOMBRE_LARGO_GE, REPRESENTANTE_LEGAL_GE FROM grupo_empresa");
+								$peticion = $conect->consulta("SELECT NOMBRE_U, NOMBRE_CORTO_GE, NOMBRE_LARGO_GE, REPRESENTANTE_LEGAL_GE FROM grupo_empresa");
 							
 
 								while($fila = mysql_fetch_array($peticion))
@@ -208,8 +206,7 @@
 								<?php
 								}
 
-								//Cerrar
-								mysql_close($conexion);
+							
 						?>	
                                                            
                         </div>                                         	

@@ -1,10 +1,9 @@
 
  !DOCTYPE html>
 <?php
-    include '../Modelo/conexion.php';
-    $conexion = mysql_connect("localhost","root","");
-    if(!$conexion){die('La conexion ha fallado por:'.mysql_error());}
-    mysql_select_db("saetis",$conexion);
+   include '../Modelo/conexion.php';
+$conect = new conexion();
+    
     session_start();
     $UsuarioActivo = $_SESSION['usuario'];
 ?>
@@ -41,7 +40,7 @@
         
     
                 
-	
+    
         <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
@@ -130,6 +129,10 @@
                                 <li>
                                     <a href="../Vista/RegistrarDocumentosRequeridos.php">Registrar Documentos</a>
                                 </li>
+                                                                <li>
+                                    <a href="../Vista/documentos_generados.php">Contratos Emitidos</a>
+                                </li>
+                                
                                 
                                 <li>
                                     <a href="#">Publicaci&oacute;n Documentos <span class="fa arrow"></span></a>
@@ -266,7 +269,7 @@
                                          // Seleciona la tabla de noticias
                                         $selecionar_db = "SELECT * FROM noticias ORDER BY ID_N DESC";
 
-                                        $final = mysql_query($selecionar_db)
+                                        $final = $conect->consulta($selecionar_db)
                                         or die ("<h1>Error</h1>");
 
 
@@ -283,7 +286,7 @@
 
                                      // numero de comentarios
                                       $comentarios_db = "SELECT * FROM comentarios WHERE ID_N='$id'";
-                                      $comentarios_db = mysql_query($comentarios_db);
+                                      $comentarios_db = $conect->consulta($comentarios_db);
                                       $comentarios = mysql_num_rows($comentarios_db);
 
                                     ?>
@@ -300,15 +303,15 @@
                                      <?php
                                     if($posteado==$UsuarioActivo)
                                         {?>
-                                     <span class="pull-right text-muted small"><em><?php echo"<td> <a  class='link-dos' href=\"noticia-grupo.php?id=$id\">Ver </a></td>";?></em>
+                                     <span class="pull-right text-muted small"><em><?php echo"<td> <a  class='link-dos' href=\"noticia.php?id=$id\">Ver </a></td>";?></em>
                                     </span>
-                                    <span class="pull-right text-muted small"><em><?php echo "<td> <a  class='link-dos'href=\"excluir-noticia-grupo.php?id=$id\">Eliminar</a></td>"; ?></em>
+                                    <span class="pull-right text-muted small"><em><?php echo "<td> <a  class='link-dos'href=\"excluir-noticia.php?id=$id\">Eliminar</a></td>"; ?></em>
                                     </span>
                                    
                                     <?php } 
                                     else { ?>
                                      
-                                    <span class="pull-right text-muted small"><em><?php echo"<td> <a  class='link-dos' href=\"noticia-grupo.php?id=$id\">Ver </a></td>";?></em>
+                                    <span class="pull-right text-muted small"><em><?php echo"<td> <a  class='link-dos' href=\"noticia.php?id=$id\">Ver </a></td>";?></em>
                                     </span>
                                     <?php
                                 } ?>

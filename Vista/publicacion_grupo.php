@@ -1,9 +1,7 @@
 <?php
     include '../Modelo/conexion.php';
     $con=new conexion();
-     $conexion = mysql_connect("localhost","root","");
-	                         if(!$conexion){die('La conexion ha fallado por:'.mysql_error());}
-	                         mysql_select_db("saetis",$conexion);
+    
                                  session_start();
                                  $UsuarioActivo = $_SESSION['usuario'];
  $VerificarUsuario = $con->consulta("SELECT NOMBRE_U FROM usuario WHERE NOMBRE_U = '$UsuarioActivo' ");
@@ -329,11 +327,11 @@
                                           {
                                             $aux=$var3['2'];
                                             $numero=$var3[5];
+           
+                                            $nombre_largo_actual=$con->consulta("SELECT `NOMBRE_LARGO_GE` FROM `grupo_empresa` WHERE `NOMBRE_U`='$UsuarioActivo'");
+                                            $nombreLargo = mysql_fetch_array($nombre_largo_actual)[0];
                                            
-                                            
-                                            
-                                            
-                                            if($numero=="TODOS" || $numero==$UsuarioActivo || $numero=="PUBLICO")
+                                            if($numero=="TODOS" || $numero==$nombreLargo || $numero=="PUBLICO")
                                             {
                                                 $ubi= $var3[1];
                                                 
@@ -382,7 +380,7 @@
                                     }
                                     else
                                     {
-                                        echo  "<b>--- ERROR! NO SE ENCONTRO DOCUMENTOS</b><br><br><a class='btn btn-primary' href='documentos_recibidos.php'>VOLVER ATRAS</a> ";
+                                        echo  "<b>NO SE ENCONTRO DOCUMENTOS</b><br><br>";
                                     }
                                      
                                    
@@ -392,51 +390,7 @@
                                 $con->cerrarConexion();
                                 
                                 
-                                /*$ax='';
-                                if(isset($_POST['grupoempresa'])){
-                                    
-                                    
-                                }else{
-                                    $ax="";
-                                }
-                                
-                                if($ax=="TODOS")
-                                {
-                                    
-                                    $c_3="SELECT DISTINCT r.`NOMBRE_R`,d.`RUTA_D` FROM `registro` AS r,`documento` AS d WHERE d.`ID_R` = r.`ID_R` AND r.`TIPO_T` LIKE 'documento subido' AND r.`NOMBRE_U` IN (SELECT ge.`NOMBRE_U` FROM `inscripcion` AS i,`asesor` AS a,`grupo_empresa` AS `ge`,`gestion` AS g,`proyecto` AS p WHERE i.`NOMBRE_UA` = a.`NOMBRE_U` AND i.`NOMBRE_UGE` = ge.`NOMBRE_U` AND i.`ID_G` = g.`ID_G` AND i.`CODIGO_P` = p.`CODIGO_P` AND a.`NOMBRE_U` LIKE '".$_POST['idAsesor']."')";
-                                    $r3=$con->consulta($c_3);
-                                    echo "<h2><center>Listado de propuestas</center></h2>";
-                                    echo "<form methodo='post' action='descargar_zip.php'>";
-                                    while($var3 =  mysql_fetch_array($r3)){
-                                            echo "<a class='btn btn-default btn-lg btn-block' href='..".$var3['1']."'>".$var3[0]."</a><br>";
-                                            
-                                        }
-                                    
-                                    echo "<button type='submit' class='btn btn-primary'>Haga Clic aqui para comprimir todos los documentos</button>";
-                                    echo "</form>";    
-                                }
 
-                                if(isset($_POST['Enviar'])){
-                                    $c_1="SELECT count(*) "
-                                            . "FROM usuario u, registro r "
-                                            . "WHERE u.nombre_u=r.nombre_u and u.nombre_u like '$ax'" ;
-                                    $r1=$con->consulta($c_1);
-                                    $res1= mysql_fetch_row($r1);
-                                    if($res1[0]==0 && $ax!="TODOS"){
-                                        echo  "<b>--- ERROR! NO SE ENCONTRO DOCUMENTOS</b><br><br><a class='btn btn-primary' href='documentos_recibidos.php'>VOLVER ATRAS</a> ";
-                                    }else{
-                                        //echo $ax . " SI HAY CANTIDAD ".$res1[0];
-                                        $c_2="SELECT r.nombre_r "
-                                                . "FROM registro r, usuario u "
-                                                . "WHERE r.nombre_u=u.nombre_u and u.nombre_u='".$ax."'";
-                                        $r2=$con->consulta($c_2);
-                                        
-                                        while($var=  mysql_fetch_array($r2)){
-                                            echo "<a class='btn btn-default btn-lg btn-block' href='archivos/".$var[0]."'>".$var[0]."</a><br>";
-                                            
-                                        }
-                                    }
-                                }*/
                                 ?>
                            
                         

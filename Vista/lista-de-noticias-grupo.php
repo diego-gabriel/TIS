@@ -1,11 +1,7 @@
 <?php
     include '../Modelo/conexion.php';
    
-  $conexion = mysql_connect("localhost","root","");
-	//Control
-  if(!$conexion){die('La conexion ha fallado por:'.mysql_error());}
-  mysql_select_db("saetis",$conexion);
-  session_start();
+   session_start();
   $UsuarioActivo = $_SESSION['usuario'];
   $conexion = new conexion();
   $VerificarUsuario = $conexion->consulta("SELECT NOMBRE_U FROM usuario WHERE NOMBRE_U = '$UsuarioActivo' ");
@@ -284,11 +280,11 @@
                                    <?php
 
 
-                                        include('config.php');
+                                       
                                          // Seleciona la tabla de noticias
                                         $selecionar_db = "SELECT * FROM noticias ORDER BY ID_N DESC";
 
-                                        $final = mysql_query($selecionar_db)
+                                        $final = $conect->consulta($selecionar_db)
                                         or die ("<h1>Error</h1>");
 
 
@@ -306,7 +302,7 @@
 
                                      // numero de comentarios
                                       $comentarios_db = "SELECT * FROM comentarios WHERE ID_N='$id'";
-                                      $comentarios_db = mysql_query($comentarios_db);
+                                      $comentarios_db = $conect->consulta($comentarios_db);
                                       $comentarios = mysql_num_rows($comentarios_db);
 
                                     ?>

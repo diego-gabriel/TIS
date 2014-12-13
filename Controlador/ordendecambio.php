@@ -77,7 +77,12 @@ if (isset($_POST['lista'])) {
 				$queryStat = "SELECT ge.`NOMBRE_U` FROM `grupo_empresa` AS ge WHERE ge.`NOMBRE_LARGO_GE` LIKE '$nombreEmpresa'";
 				$stmt      = $conexion->query($queryStat);
 				$row       = $stmt->fetchObject();
-				//$user      = $row->NOMBRE_U;
+				$nombreUGE      = $row->NOMBRE_U;
+                                
+                                $queryStat1 = "SELECT ge.`NOMBRE_CORTO_GE` FROM `grupo_empresa` AS ge WHERE ge.`NOMBRE_LARGO_GE` LIKE '$nombreEmpresa'";
+				$stmt1      = $conexion->query($queryStat1);
+				$row1       = $stmt1->fetchObject();
+				$nombreCGE = $row1->NOMBRE_CORTO_GE;  
 				
 				$email     = "SELECT u.`CORREO_ELECTRONICO_U` FROM `usuario` AS u WHERE u.`NOMBRE_U` LIKE '$nombreAsesor'";
 				$consulta  = $conexion->query($email);
@@ -196,7 +201,7 @@ if (isset($_POST['lista'])) {
                                     unlink($aux);
                                     
                                     
-                                    $rutaDirectorio="../".$nombreEmpresa."/OC/";
+                                    $rutaDirectorio="../".$nombreUGE."/OC/";
 
                                	    $file = "OrdenCambio".'_'.$nombreEmpresa.'.pdf';
         
@@ -205,8 +210,27 @@ if (isset($_POST['lista'])) {
                                         mkdir($rutaDirectorio, 0777,TRUE);
                                     }
                                     
-                                    rename("OrdenCambio.pdf", $file);
-                                    rename($file, $rutaDirectorio.$pdf );
+                                   // rename("OrdenCambio.pdf", $file);
+                                    rename("OrdenCambio.pdf", $rutaDirectorio.$pdf );
+                                    
+                                   $nruta="../Repositorio/".$nombreUGE."/OC/"."OrdenCambio.pdf";
+                                   $fecha       = date('Y-m-d');
+                                   $hora        =  date("G:H:i");
+                                   $visualizable="TRUE";
+                                   $descargable="TRUE";
+                                   $comentario_add = $conexion->query("INSERT INTO registro (NOMBRE_U,TIPO_T,ESTADO_E,NOMBRE_R,FECHA_R,HORA_R) VALUES ('$nombreUA','publicaciones','Habilitado','Orden de Cambio','$fecha','$hora')")or
+			           die("Error al s");
+                                   
+	                           $consultar= $conexion->query("SELECT MAX(ID_R) AS 'ID_R' FROM registro");
+                                   $row = $consultar->fetchObject();
+                                   $id = $row -> ID_R;
+                                   
+                                   $guardar_doc = $conexion->query("INSERT INTO documento (ID_R,TAMANIO_D,RUTA_D,VISUALIZABLE_D,DESCARGABLE_D) VALUES('$id','1024','$nruta','$visualizable','$descargable')");
+                                   $des_D=$conexion->query("INSERT INTO descripcion (ID_R,DESCRIPCION_D) VALUES('$id','Orden de Cambio')");
+                                   $destinatario=$conexion->query("INSERT INTO receptor (ID_R,RECEPTOR_R) VALUES('$id','$nombreEmpresa')");
+                                   $guardar = $conexion->query("INSERT INTO periodo (ID_R,fecha_p,hora_p) VALUES ('$id','$fecha','$hora')") or
+			           die("Error al s");
+                                    
                                     header("location:../Vista/ordenDeCambio.php");
 					
 				}

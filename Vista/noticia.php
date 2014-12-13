@@ -1,11 +1,9 @@
 !DOCTYPE html>
 <?php
+include '../Modelo/conexion.php';
     //include '../Modelo/conexion.php';
-    $conexion = mysql_connect("localhost","root","");
-	//Control
-    if(!$conexion){die('La conexion ha fallado por:'.mysql_error());}
-    mysql_select_db("saetis",$conexion);
-    session_start();
+session_start();
+   $conect = new conexion();
     $UsuarioActivo = $_SESSION['usuario'];
 
 ?>
@@ -259,19 +257,18 @@
                     </div>
                         <?php
 
-include('config.php');
 
 $id = $_GET['id'];
 // Adiciona +1 de Visualizaciones a cada pessoa que acessar a noticia
-$views_db = mysql_query("SELECT * FROM noticias WHERE ID_N = '$id'");
+$views_db = $conect->consulta("SELECT * FROM noticias WHERE ID_N = '$id'");
 $row = mysql_fetch_array($views_db);
 $view = $row['VIEWS'];
 $views = $view + 1;
-$views_db = mysql_query("UPDATE noticias SET VIEWS = '$views' WHERE ID_N = '$id'");
+$views_db = $conect->consulta("UPDATE noticias SET VIEWS = '$views' WHERE ID_N = '$id'");
 
 // Seleciona  noticia 
 $selecionar_db = "SELECT * FROM noticias WHERE ID_N = '$id'";
-$final = mysql_query($selecionar_db);
+$final = $conect->consulta($selecionar_db);
 
 // Pega los valores de noticia noticia
 while ($new=mysql_fetch_array($final)) { 
@@ -284,7 +281,7 @@ $texto = $new["TEXTO"];
 $posteado=$new["POSTEADO"];
 
 $comentarios_db = "SELECT * FROM comentarios WHERE ID_N='$id'";
-$comentarios_db = mysql_query($comentarios_db);
+$comentarios_db = $conect->consulta($comentarios_db);
 $comentarios = mysql_num_rows($comentarios_db);
 
 
@@ -305,7 +302,7 @@ echo "<h1>$titulo</h1><p>Postado por <b>$posteado</b>  <b>$date</b> - <b>$views<
 
 $id = $_GET['id'];
 $selecionar_db_comentarios = "SELECT * FROM comentarios WHERE ID_N = '$id' ORDER BY ID_N DESC";
-$selecionar_db_comentarios_final = mysql_query($selecionar_db_comentarios);
+$selecionar_db_comentarios_final = $conect->consulta($selecionar_db_comentarios);
 
 // muestra los valores da tabla 'comentarios'
 while ($comentario_db=mysql_fetch_array($selecionar_db_comentarios_final)) { 
@@ -336,7 +333,7 @@ if($mensagem == ""){} else {
     
 $comentario_add = "INSERT INTO comentarios (NOMBRE_U,ID_N,COMENTARIO,FECHA_C,AUTOR_C) VALUES ('$autor','".addslashes(mysql_real_escape_string($_GET['id']))."', '".addslashes(mysql_real_escape_string(strip_tags($_POST['comentario'])))."', NOW(), '$UsuarioActivo')";
 
-$comentario_add = mysql_query($comentario_add)
+$comentario_add = $conect->consulta($comentario_add)
 or die ("Error al Adicionar Comentario.");
 //echo "Comentario Adicionado  | <a  class='link-dos' href=\"noticia.php?id=".$_GET['id']."\">Actualizar Página para ver su comentario</a>";
 echo'

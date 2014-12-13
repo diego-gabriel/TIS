@@ -1,7 +1,8 @@
  <?php  
     session_start();
     $UsuarioActivo = $_SESSION['usuario'];
-    include("controlSesion.php");
+      include '../Modelo/conexion.php';
+    $conectar = new conexion();
  ?> 
 	<html>
 
@@ -151,11 +152,10 @@
 												<td>
 												<select required name="id_rol" class="form-control"><option  value="" >Seleccione Rol</option>
 													<?php 
-														$link=mysql_connect("localhost","root",""); 
-														mysql_select_db("saetis",$link); 
-														$sql="SELECT * FROM rol"; 
-														$result=mysql_query($sql); 
-															while($row=mysql_fetch_array($result)) 
+														
+														$sql=$conectar->consulta("SELECT * FROM rol"); 
+														
+															while($row=mysql_fetch_array($sql)) 
 																echo "<option  value='".$row["ROL_R"]."'>".$row["ROL_R"]."</option>"; 
 													?>
 												</td>
@@ -165,11 +165,10 @@
 												<td>
 												<select required name="id_menu" class="form-control"><option  value="" >Seleccione Menu</option>
 													<?php 
-														$link=mysql_connect("localhost","root",""); 
-														mysql_select_db("saetis",$link); 
-														$sql="SELECT * FROM menu"; 
-														$result=mysql_query($sql); 
-															while($row=mysql_fetch_array($result)) 
+														
+														$sql=$conectar->consulta("SELECT * FROM menu"); 
+														
+															while($row=mysql_fetch_array($sql)) 
 																echo "<option  value='".$row["id_menu"]."'>" 
 																 .$row["nom_menu"]."</option>"; 
 													?>
@@ -206,13 +205,9 @@
 							</div>
 							<?php
 								//crear conexion---------------------------
-								$conexion = mysql_connect("localhost","root","","saetis");
-								//Control
-								if(!$conexion){die('La conexion ha fallado por:'.mysql_error());}
-								//Seleccion
-								mysql_select_db("saetis",$conexion);
+		
 								//Peticion
-								$peticion = mysql_query("SELECT p.id_permiso,m.nom_menu, r.ROL_R  
+								$peticion = $conectar->consulta("SELECT p.id_permiso,m.nom_menu, r.ROL_R  
 
 FROM menu as m,rol as r, permisos as p
 where p.menu_id_menu=m.id_menu and r.ROL_R=p.ROL_R 
@@ -250,7 +245,7 @@ where p.menu_id_menu=m.id_menu and r.ROL_R=p.ROL_R
 								<?php
 								}
 							//Cerrar
-							mysql_close($conexion);
+						
 							
 							
 						?>	

@@ -1,6 +1,7 @@
-e<?php
+<?php
 
-        
+    include '../Modelo/conexion.php';
+    $conectar = new conexion();
     
 $addDestino = $_POST['dest'];
 $addAsunto = $_POST['asunto'];
@@ -14,24 +15,20 @@ $addFecha= $_POST['fec'];
 
 //conexion-------------		
     
-	$conexion = mysql_connect("localhost","root","");
-	//Control
-	if(!$conexion){die('La conexion ha fallado por:'.mysql_error());}
-	//Seleccion
-	mysql_select_db("saetis",$conexion);
+	
 	//Peticion
-	$peticion1 = mysql_query("SELECT `CORREO_ELECTRONICO_U` FROM `usuario` WHERE `NOMBRE_U`='$addDestino'"); 
+	$peticion1 = $conectar->consulta("SELECT `CORREO_ELECTRONICO_U` FROM `usuario` WHERE `NOMBRE_U`='$addDestino'"); 
         while ($correo = mysql_fetch_array($peticion1))
         {        
         $correo1=$correo["CORREO_ELECTRONICO_U"];}
 	  
         
         
-	$peticion2 = mysql_query("UPDATE `usuario` SET `ESTADO_E`='Habilitado' WHERE `NOMBRE_U`='$addDestino'");
+	$peticion2 = $conectar->consulta("UPDATE `usuario` SET `ESTADO_E`='Habilitado' WHERE `NOMBRE_U`='$addDestino'");
 
 
 //cerrar conexion--------------------------
-	 mysql_close($conexion);
+
 	 //volver a la pagina---------------
          
           $correo;
@@ -42,12 +39,11 @@ $addFecha= $_POST['fec'];
           $correo1;
          
  
-    include '../Modelo/conexion.php';
+   
     require '../Vista/PHPMailerAutoload.php';
     require '../Vista/class.phpmailer.php';
     
-    $conect = new conexion();
-   
+
         //Crear una instancia de PHPMailer
     $mail = new PHPMailer();
     //Definir que vamos a usar SMTP
@@ -74,7 +70,7 @@ $addFecha= $_POST['fec'];
     //Esta línea es por si queréis enviar copia a alguien (dirección y, opcionalmente, nombre)
     //$mail->AddReplyTo('replyto@correoquesea.com','El de la réplica');
     //Y, ahora sí, definimos el destinatario (dirección y, opcionalmente, nombre)
-    $mail->AddAddress($correo1, 'El Destinatario');
+    $mail->AddAddress($correo1, $addDestino);
     //Definimos el tema del email
     $mail->Subject = 'Aceptacion de Registro';
     //Para enviar un correo formateado en HTML lo cargamos con la siguiente función. Si no, puedes meterle directamente una cadena de texto.
@@ -85,7 +81,8 @@ $addFecha= $_POST['fec'];
 //    $mail->MsgHTML('El usuario '.$addDestino.''.$addDestino.' con direccion '.$correo1.' desea registrarse como '.$addDestino.' contraseña: '.$addDestino.'');
     $mail->MsgHTML(' Asunto   :  '.$addAsunto.'.Enviado el     :.'.$addFecha.'............. '.$addContenido.'');
 
-  
+//    
+//    
 //    
     //Y por si nos bloquean el contenido HTML (algunos correos lo hacen por seguridad) una versión alternativa en texto plano (también será válida para lectores de pantalla)
     $mail->AltBody = 'This is a plain-text message body';
@@ -93,7 +90,8 @@ $addFecha= $_POST['fec'];
     if(!$mail->Send()) {
       echo "Error: " . $mail->ErrorInfo;
     } else {
-        echo"<script type=\"text/javascript\">alert('El mensaje se envio exitosamente'); window.location='principal.php';</script>";
+      
+        echo"<script type=\"text/javascript\">alert('el mensaje se envio exitosamente'); window.location='principal.php';</script>";
     }
 
 

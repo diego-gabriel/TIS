@@ -1,8 +1,8 @@
 <?php 
-    session_start();
-    $UsuarioActivo = $_SESSION['usuario'];
-    include("controlSesion.php");
-
+session_start();
+$UsuarioActivo = $_SESSION['usuario'];
+   include '../Modelo/conexion.php';
+    $conectar = new conexion();
 ?>
 	<html>
 
@@ -80,7 +80,7 @@
 		<!--<h2>design by <a href="#" title="flash templates">flash-templates-today.com</a></h2>-->
         
 	
-  <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
                     <span class="sr-only">Toggle navigation</span>
@@ -139,22 +139,17 @@
 					                                $usuario= $_SESSION['usuario'];
 								
 
-                                                                        $usuario= $_SESSION['usuario'];
+                                                                    
 									$contrasena= $_SESSION['contrasena'];
                                                                          $idgp = $_GET['id_us'];
 									
 
-									//conexion-------------
-									$conexion = mysql_connect("localhost","root","");
-									//Control
-									if(!$conexion){die('La conexion ha fallado por:'.mysql_error());}
-									//Seleccion
-									mysql_select_db("saetis",$conexion);
+						
 
 									//Peticion
-										$peticion = mysql_query("SELECT u.NOMBRE_U,u.ESTADO_E, r.ROL_R FROM  usuario as u,usuario_rol as r  WHERE u.NOMBRE_U=r.NOMBRE_U and u.NOMBRE_U='$idgp'");
+										$peticion =$conectar->consulta("SELECT u.NOMBRE_U,u.ESTADO_E, r.ROL_R FROM  usuario as u,usuario_rol as r  WHERE u.NOMBRE_U=r.NOMBRE_U and u.NOMBRE_U='$idgp'");
 									//cerrar conexion--------------------------
-									 mysql_close($conexion);
+									 
 								while($fila = mysql_fetch_array($peticion))
 								{
 	
@@ -247,11 +242,10 @@
 												<td>
                                                                                                     <select required="seleccione un estado" name="estado" class="form-control" ><option  value=" ">Seleccione Un Estado</option>
 													<?php 
-														$link=mysql_connect("localhost","root",""); 
-														mysql_select_db("saetis",$link); 
-														$sql="SELECT ESTADO_E FROM  estado where ESTADO_E='Habilitado' or ESTADO_E='Deshabilitado' "; 
-														$result=mysql_query($sql); 
-															while($row=mysql_fetch_array($result)) 
+														
+														$sql=$conectar ->consulta("SELECT ESTADO_E FROM  estado WHERE ESTADO_E='Habilitado' or ESTADO_E='Deshabilitado' "); 
+														
+															while($row=mysql_fetch_array($sql)) 
 													echo "<option  value='".$row["ESTADO_E"]."'>".$row["ESTADO_E"]."</option>";  
                                                                                                                       
                                                                                                        
@@ -267,11 +261,9 @@
                                                                                                  <td>
                                                                                                      <select required="seleccione un rol" name="roll" class="form-control"><option  value=" ">Seleccione Un Rol</option>
 													<?php 
-														$link=mysql_connect("localhost","root",""); 
-														mysql_select_db("saetis",$link); 
-														$sql="SELECT * FROM  rol "; 
-														$result=mysql_query($sql); 
-															while($row=mysql_fetch_array($result)) 
+														$sql=$conectar ->consulta("SELECT * FROM  rol " );
+														
+															while($row=mysql_fetch_array($sql)) 
 													echo "<option  value='".$row["ROL_R"]."'>".$row["ROL_R"]."</option>";  
                                                                                                                       
                                                                                                        
@@ -342,16 +334,7 @@
                                 <li>
                                     <a href="../Vista/registro_administrador.php"><i class="fa fa-bar-chart-o fa-files-o "></i> Nueva Cuenta<span class="fa arrow"></span></a>
                                 </li>                        
-                        <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-files-o "></i> Informacion Personal <span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="../Vista/modificar_administrador.php">Privacidad</a>
-                                </li>
-                            </ul>
-                            
-                            <!-- /.nav-second-level -->
-                        </li>
+   
                         
                          <li>
                             <a href="#"><i class="fa fa-tasks fa-fw"></i> Gestion de usuarios<span class="fa arrow"></span></a>

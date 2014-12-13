@@ -1,5 +1,6 @@
 <?php
-
+    include '../Modelo/conexion.php';
+    $conectar = new conexion();
 session_start();
 
 //Crear variables--------------------------
@@ -15,22 +16,18 @@ $updApellido = $_POST['apellido'];
 $updTelefono = $_POST['telefono'];
 $updEmail= $_POST['email'];
 //conexion-------------
-$conexion = mysql_connect("localhost","root","");
-//Control
-if(!$conexion){die('La conexion ha fallado por:'.mysql_error());}
-//Seleccion
-mysql_select_db("saetis",$conexion);
+
 //Peticion
 //Peticion------------------------------------------
-mysql_query("UPDATE usuario SET NOMBRE_U='$updLogin',PASSWORD_U='$updPassword',TELEFONO_U='$updTelefono',CORREO_ELECTRONICO_U='$updEmail'
+$conectar->consulta("UPDATE usuario SET NOMBRE_U='$updLogin',PASSWORD_U='$updPassword',TELEFONO_U='$updTelefono',CORREO_ELECTRONICO_U='$updEmail'
 WHERE  NOMBRE_U='$updLogin'");
-mysql_query("UPDATE administrador SET NOMBRE_U='$updLogin',NOMBRES_AD='$updNombre',APELLIDOS_AD='$updApellido'
+$conectar->consulta("UPDATE administrador SET NOMBRE_U='$updLogin',NOMBRES_AD='$updNombre',APELLIDOS_AD='$updApellido'
 WHERE  NOMBRE_U='$updLogin'");
-mysql_query("UPDATE usuario_rol SET NOMBRE_U='$updLogin'
+$conectar->consulta("UPDATE usuario_rol SET NOMBRE_U='$updLogin'
 WHERE  NOMBRE_U='$updLogin'");
 
 
 echo"<script type=\"text/javascript\">alert('Se modificaron los datos satisfactoriamente'); window.location='principal.php';</script>";
-mysql_close($conexion);
+
  
 ?>

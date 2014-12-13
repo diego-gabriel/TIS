@@ -49,7 +49,7 @@
    
         
 	
-        <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
+       <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
                     <span class="sr-only">Toggle navigation</span>
@@ -132,12 +132,14 @@
                             <a href="#"><i class="fa fa-bar-chart-o fa-files-o "></i> Documentos <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                            <a href="../Vista/subirarchivoasesor.php">Subir Documentos</a>
+                                    <a href="../Vista/subirarchivoasesor.php">Subir Documentos</a>
                                 </li>
                                 <li>
                                     <a href="../Vista/RegistrarDocumentosRequeridos.php">Registrar Documentos</a>
                                 </li>
-                                
+                                <li>
+                                    <a href="../Vista/documentos_generados.php">Contratos Emitidos</a>
+                                </li>
                                 <li>
                                     <a href="#">Publicaci&oacute;n Documentos <span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
@@ -199,11 +201,10 @@
                                     <!-- /.nav-third-level -->
                                 </li>
                                 
-                                
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
-             
+
                          <li>
                               <a href="lista_doc_subidos.php"><i class="fa fa-tasks fa-fw"></i>Documentos Subidos </a>  
                                               
@@ -248,7 +249,6 @@
                 </div>
             </div>
         </div>
-
 <!----------------------------------------NUEVAS PUBLICACIONES------------------------------------------>
 <div id="page-wrapper">
     <div class="row">

@@ -1,7 +1,8 @@
 <?php
 
 session_start();
-
+   include '../Modelo/conexion.php';
+    $conectar = new conexion();
 //Crear variables--------------------------
 
 $usuario = $_SESSION['usuario'];
@@ -12,15 +13,9 @@ $addasesor = $_POST['id_rol'];
 
 
 //conexion-------------
-	$conexion = mysql_connect("localhost","root","");
-	//Control
-	if(!$conexion){die('La conexion ha fallado por:'.mysql_error());}
-	//Seleccion
-	mysql_select_db("saetis",$conexion);
-	//Peticion
-	$peticion = mysql_query("INSERT INTO `saetis`.`permisos` (`ROL_R`, `id_permiso`, `menu_id_menu`) VALUES ('$addasesor',NULL, '$addNomMenu');");
+
+	$peticion = $conectar->consulta("INSERT INTO `saetis`.`permisos` (`ROL_R`, `id_permiso`, `menu_id_menu`) VALUES ('$addasesor',NULL, '$addNomMenu');");
 	//cerrar conexion--------------------------
-	 mysql_close($conexion);
 	 //volver a la pagina---------------
 	 echo'
 	<html>

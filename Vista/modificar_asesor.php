@@ -2,7 +2,8 @@
     
    session_start();
    $UsuarioActivo = $_SESSION['usuario'];
-   include("controlSesion.php");
+    include '../Modelo/conexion.php';
+    $conectar = new conexion();
   
 ?>
 <!DOCTYPE html>
@@ -282,16 +283,11 @@
             $contrasena;
             $telefono;
             $correo;
-            //conexion-------------
-            $conexion = mysql_connect("localhost","root","");
-            //Control
-            if(!$conexion){die('La conexion ha fallado por:'.mysql_error());}
-            //Seleccion
-            mysql_select_db("saetis",$conexion);
+    
             //Peticion
-            $peticion = mysql_query("SELECT u.PASSWORD_U,u.TELEFONO_U,u.CORREO_ELECTRONICO_U,a.NOMBRES_A,a.APELLIDOS_A FROM  usuario u, asesor a WHERE u.NOMBRE_U=a.NOMBRE_U  and u.NOMBRE_U='$UsuarioActivo'");
+            $peticion = $conectar->consulta("SELECT u.PASSWORD_U,u.TELEFONO_U,u.CORREO_ELECTRONICO_U,a.NOMBRES_A,a.APELLIDOS_A FROM  usuario u, asesor a WHERE u.NOMBRE_U=a.NOMBRE_U  and u.NOMBRE_U='$UsuarioActivo'");
             //cerrar conexion--------------------------
-            mysql_close($conexion);
+           
             
             while($fila = mysql_fetch_array($peticion))
             {
