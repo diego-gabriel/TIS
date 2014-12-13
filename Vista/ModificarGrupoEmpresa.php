@@ -244,45 +244,21 @@
                         
                                     
                                         
-                                        <?php
+            <?php
             $nombreLargo;
             $nombreCorto;
             $correo;
             $telefono;
             $direccion;
             $contrasena;
-            //conexion-------------
-            $conexion = mysql_connect("localhost","root","");
-            //Control
-            if(!$conexion){die('La conexion ha fallado por:'.mysql_error());}
-            //Seleccion
-            mysql_select_db("saetis",$conexion);
-            //Peticion
-            $peticion = mysql_query("SELECT G.NOMBRE_LARGO_GE, G.NOMBRE_CORTO_GE, U.CORREO_ELECTRONICO_U, U.TELEFONO_U, G.DIRECCION_GE, U.PASSWORD_U
+
+            $peticion = $conect->consulta("SELECT G.NOMBRE_LARGO_GE, G.NOMBRE_CORTO_GE, U.CORREO_ELECTRONICO_U, U.TELEFONO_U, G.DIRECCION_GE, U.PASSWORD_U
                         FROM grupo_empresa G, usuario U WHERE G.NOMBRE_U=U.NOMBRE_U AND U.NOMBRE_U='$UsuarioActivo'");         
            
-            $VerificarTipoUsuario = mysql_query("SELECT LOGIN_S FROM socio WHERE LOGIN_S ='$UsuarioActivo'");
+            $VerificarTipoUsuario = $conect->consulta("SELECT LOGIN_S FROM socio WHERE LOGIN_S ='$UsuarioActivo'");
             
             $TIpoUsuario = mysql_fetch_row($VerificarTipoUsuario);
             
-         
-            
-            if(is_array($TIpoUsuario))
-            {
-                
-                
-            }
-            else{
-                
-              
-                                       
-            }
-            
-            
-          
-            
-            //cerrar conexion--------------------------
-            mysql_close($conexion);
             
             while($fila = mysql_fetch_array($peticion))
             {

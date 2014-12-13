@@ -240,16 +240,9 @@
             $nombre;
             $apellido;
             $contrasena;
-            //conexion-------------
-            $conexion = mysql_connect("localhost","root","");
-            //Control
-            if(!$conexion){die('La conexion ha fallado por:'.mysql_error());}
-            //Seleccion
-            mysql_select_db("saetis",$conexion);
-            //Peticion
-            $peticion = mysql_query("SELECT NOMBRES_S, APELLIDOS_S, PASSWORD_S FROM socio s WHERE LOGIN_S= '$UsuarioActivo'");
-            //cerrar conexion--------------------------
-            mysql_close($conexion);
+
+            $peticion = $con->consulta("SELECT NOMBRES_S, APELLIDOS_S, PASSWORD_S FROM socio s WHERE LOGIN_S= '$UsuarioActivo'");
+
             
             while($fila = mysql_fetch_array($peticion))
             {
