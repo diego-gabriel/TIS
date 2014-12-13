@@ -4,7 +4,7 @@
     session_start();
     $UsuarioActivo = $_SESSION['usuario'];
     include '../Modelo/conexion.php';
-    include("controlSesion.php");
+    //include("controlSesion.php");
 ?>
 <!DOCTYPE html>
 <html>
