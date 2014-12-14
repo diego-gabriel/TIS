@@ -124,7 +124,7 @@
                                             </div>
                                         </div>
                                         
-                                                <button type="submit" onclick="this.form.action='ProcesarRegistroGrupoE.php'" class="btn btn-primary"> <span class="glyphicon glyphicon-ok"></span> Registrarme</button
+                                        <button type="submit" onclick="this.form.action='ProcesarRegistroGrupoE.php'" class="btn btn-primary"> <span class="glyphicon glyphicon-ok"></span> Registrarme</button>
                                     </form>              
                             <div id="panelResultadoGE">
                                 

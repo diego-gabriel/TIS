@@ -15,21 +15,30 @@ if (isset($_POST['grupoempresa'])) {
     $nombreLargo = $_REQUEST['grupoempresa'];
     if(strnatcasecmp($nombreLargo, "Seleccione una grupo empresa")!=0)
     {
-        $cc1="SELECT `NOMBRE_CORTO_GE` FROM `grupo_empresa` WHERE `NOMBRE_LARGO_GE` = '$nombreLargo'";            
-        $aa1= $con->consulta($cc1);
-        $vv1 =  mysql_fetch_array($aa1);
-        $nombreCorto = $vv1[0]; 
+        $seleccionar="SELECT `NOMBRE_CORTO_GE` FROM `grupo_empresa` WHERE `NOMBRE_LARGO_GE` = '$nombreLargo'";            
+        $consulta= $con->consulta($seleccionar);
+        $nombreCorto =  mysql_fetch_array($consulta)[0];
+
         $nombreUA = $_SESSION['usuario'] ;
         $nomAp = $con->consulta("SELECT NOMBRES_A, APELLIDOS_A FROM asesor WHERE NOMBRE_U =  '$nombreUA' ");
         $nombreAp = mysql_fetch_row($nomAp);
         $asesor = $nombreAp[0]." ".$nombreAp[1] ;
-        //$asesor = 'Leticia Blanco';
         
-        $cc2="SELECT `REPRESENTANTE_LEGAL_GE` FROM `grupo_empresa` WHERE `NOMBRE_LARGO_GE` = '$nombreLargo'";            
-        $aa2= $con->consulta($cc2);
-        $vv2 =  mysql_fetch_array($aa2);
-        $representante = $vv2[0];
-        //$sistema = "SISTEMA DE APOYO A LA EMPRESA TIS";
+        
+        $seleccion = "SELECT `REPRESENTANTE_LEGAL_GE` FROM `grupo_empresa` WHERE `NOMBRE_LARGO_GE` = '$nombreLargo'";            
+        $consultar= $con->consulta($seleccion);
+        $representante = mysql_fetch_array($consultar)[0];
+        
+        $selNombreU = "SELECT `NOMBRE_U` FROM `grupo_empresa` WHERE `NOMBRE_LARGO_GE` = '$nombreLargo'";            
+        $conNombU= $con->consulta($selNombreU);
+        $nombreUGE = mysql_fetch_array($conNombU)[0];
+
+        
+        $selProyecto = "SELECT p.`NOMBRE_P` FROM `proyecto` AS p, `inscripcion_proyecto` AS ip WHERE ip.`NOMBRE_U` = '$nombreUGE' AND ip.`CODIGO_P` = p.`CODIGO_P`";
+        $conProy= $con->consulta($selProyecto);
+        $sistema = mysql_fetch_array($conProy)[0];
+        
+        $sistema = "SISTEMA";//SISTEMA DE APOYO A LA EMPRESA TIS
         //$convocatoria = "CPTIS-1707-2014";
 
         $buscar    = array(
@@ -39,6 +48,7 @@ if (isset($_POST['grupoempresa'])) {
             'asesor'               => '[[asesor]]',
             'fecha_actual'         => '[[fecha-actual]]',
             'hora_actual'          => '[[hora-actual]]',
+            'sistema'              => '[[sistema]]',
          
         );
 
@@ -48,7 +58,8 @@ if (isset($_POST['grupoempresa'])) {
         $remplazo['rep_legal']            = $representante;
         $remplazo['asesor']               = $asesor;
         $remplazo['fecha_actual']         = date('Y/m/d');
-
+        $remplazo['sistema']              = $sistema;
+        
         $ruta = "..\\Repositorio\\asesor";
         
         chdir($ruta);
@@ -74,7 +85,8 @@ if (isset($_POST['grupoempresa'])) {
         $texto = str_replace($buscar['rep_legal'], $remplazo['rep_legal'], $texto);
         $texto = str_replace($buscar['asesor'], $remplazo['asesor'], $texto);
         $texto = str_replace($buscar['fecha_actual'], $remplazo['fecha_actual'], $texto);
-
+        $texto = str_replace($buscar['sistema'], $remplazo['sistema'], $texto);
+        
         file_put_contents($tex,$texto);
 
         exec("pdflatex -interaction=nonstopmode $tex",$final);

@@ -297,7 +297,7 @@ function validarCampos(formulario) {
         
         if(contadorOcho == lugar.length)
         {
-            alert('Campo obligatorio');
+            alert('Por favor, ingrese el lugar de la reunion');
             return false;
         }
         

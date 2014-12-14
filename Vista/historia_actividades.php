@@ -20,9 +20,6 @@
 
   }
       
-  
-    
-    
 
         //Peticion
         $peticion22 = $con->consulta("SELECT `NOMBRE_UA` FROM `inscripcion` WHERE `NOMBRE_UGE`='$usuario'");
@@ -545,10 +542,15 @@
            
     <hr>
                     
-     <?php }
-    else  { ?> <h3>  Su inscripcion no ha sido habilitada</h3    > <?php   } 
-
-     ?>
+    <?php
+    }
+        else  { 
+            echo '<div class="alert alert-warning">
+                           <strong>Su inscripcion no ha sido habilitada</strong>
+             </div>';
+        }
+    ?> 
+    
                     
                     
                     

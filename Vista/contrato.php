@@ -280,7 +280,7 @@
     <div class ="form-horizontal">
          <div class="row">
             <div class="col-lg-12">
-               <h1> Emitir Contrato <small></small></h1>           
+                <h2 class="page-header">Emitir Contrato</h2>            
             </div>
          </div><!-- /.row -->
     </div>    
@@ -328,9 +328,7 @@
 
     <!-- Core Scripts - Include with every page -->
  
- 
 
-    <script src="../Librerias/js/bootstrap.min.js"></script>
     <script src="../Librerias/js/plugins/metisMenu/jquery.metisMenu.js"></script>
 
 

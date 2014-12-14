@@ -1,63 +1,57 @@
 <!DOCTYPE html>
 
 <?php
-include "../Modelo/conexion.php";
-session_start();
-$con=new conexion();
-date_default_timezone_set('America/Argentina/Tucuman');
-$fecha=  date('Y-m-d');
-$hora= date('G:H:i');
-$clas = new conexion();
-$UsuarioActivo = $_SESSION['usuario'];
 
+    include '../Modelo/conexion.php';
+    session_start();
+    $con=new conexion();
+    $UsuarioActivo = $_SESSION['usuario'];
+    
 ?>
+
 <html>
 
 <head>
+       
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Sistema de Apoyo a la Empresa TIS</title>
 
-    
-    
-    
+    <!-- Core CSS - Include with every page -->
     <link href="../Librerias/css/bootstrap.min.css" rel="stylesheet">
     <link href="../Librerias/font-awesome/css/font-awesome.css" rel="stylesheet">
 
+    <!-- ComboBox estilizado ;) -->
+    
     <!-- Page-Level Plugin CSS - Dashboard -->
     <link href="../Librerias/css/plugins/morris/morris-0.4.3.min.css" rel="stylesheet">
     <link href="../Librerias/css/plugins/timeline/timeline.css" rel="stylesheet">
    
-    
-    <link rel="stylesheet" type="text/css" media="all" href="../Librerias/calendario/daterangepicker-bs3.css" />
-    <script type="text/javascript" src="../Librerias/js/jquery.min.js"></script> 
-    <script type="text/javascript" src="../Librerias/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../Librerias/calendario/moment.js"></script>
-      
-    <script type="text/javascript" src="../Librerias/calendario/daterangepicker.js"></script>
 
     <!-- SB Admin CSS - Include with every page -->
     <link href="../Librerias/css/sb-admin.css" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="../Librerias/css/jquery-te-1.4.0.css">
+    <script type="../Librerias/js/jquery.min.js"></script>
     
-    <link rel="stylesheet" type="text/css" href="../Librerias/calendario2/jquery.datetimepicker.css"/>
-    <script type="text/javascript" src="../Librerias/js/validacionCamposFecha.js"></script>
+    <script src="../Librerias/js/jquery-1.10.2.js"></script>
     
-    
-    
-    
-    <script type="text/javascript" src="../Librerias/js/calendario_notacion_conformidad.js"></script>
-    
-        <script type="text/javascript" src="../Librerias/js/validar_notificacion.js"></script>
-    
-
+      <link rel="stylesheet" type="text/css" media="all" href="../Librerias/calendario/daterangepicker-bs3.css" />
+      <script type="text/javascript" src="../Librerias/calendario/moment.js"></script>
+      <script type="text/javascript" src="../Librerias/calendario/daterangepicker.js"></script>
+      <link rel="stylesheet" type="text/css" href="../Librerias/calendario2/jquery.datetimepicker.css"/>
+      <script type="text/javascript" src="../Librerias/js/calendario_notacion_conformidad.js"></script>
+      
+    <script type="text/javascript" src="../Librerias/calendario2/jquery.js"></script>
+    <script type="text/javascript" src="../Librerias/calendario2/jquery.datetimepicker.js"></script>
+    <script type="text/javascript" src="../Librerias/js/validar_notificacion.js"></script>
+    <script type="text/javascript" src="../Librerias/js/masked_input.js"></script>
+      
 </head>
 
 <body>
 
-   
- 
    
        <div id="wrapper">
        
@@ -65,7 +59,7 @@ $UsuarioActivo = $_SESSION['usuario'];
 		<!--<h2>design by <a href="#" title="flash templates">flash-templates-today.com</a></h2>-->
         
 	
-                
+               
 	
         <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
@@ -159,7 +153,6 @@ $UsuarioActivo = $_SESSION['usuario'];
                                     <a href="../Vista/documentos_generados.php">Contratos Emitidos</a>
                                 </li>
                                 
-                                
                                 <li>
                                     <a href="#">Publicaci&oacute;n Documentos <span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
@@ -224,7 +217,7 @@ $UsuarioActivo = $_SESSION['usuario'];
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
-   
+                        
                          <li>
                               <a href="lista_doc_subidos.php"><i class="fa fa-tasks fa-fw"></i>Documentos Subidos </a>  
                                               
@@ -269,17 +262,15 @@ $UsuarioActivo = $_SESSION['usuario'];
                 </div>
             </div>
         </div>
-        
-	<!----------------------------------------------------------------------------------------------->
- 
-        <div id="page-wrapper">
+<!-------------------------------------------NUEVAS PUBLICACIONES------------------------------------------>
+<div id="page-wrapper">
            
-        <form id = "notificacionc" method = "post" action="" role="form" enctype="multipart/data-form" onsubmit="return validarCampos(notificacionc)">
+<form id = "notificacionc" method = "post" action="" role="form" enctype="multipart/data-form" onsubmit="return validarCampos(notificacionc)">
         <div class ="form-horizontal">
                 <div class="row">
               <div class="col-lg-12">
-                <h1> Notificacion de conformidad <small></small></h1>
-                 
+                 <h2 class="page-header">Emitir Notificacion de Conformidad</h2>    
+                  </br>     
                 </div>
             </div><!-- /.row -->
                
@@ -290,12 +281,11 @@ $UsuarioActivo = $_SESSION['usuario'];
                       <label class="col-sm-2 control-label">Grupo Empresa</label>
                         <div class="col-xs-4"> 
                           <select name="lista" class="form-control">
-                            <option selected value="0">Seleccione una grupo empresa </option>
+                            <option>Seleccione una grupo empresa</option>
                             <?php
                                 $idAsesor= $_SESSION['usuario']  ;
                                 $estado = "Habilitado";
-                                $c1="SELECT ge.`NOMBRE_LARGO_GE` FROM `inscripcion` AS i,`asesor` AS a,`grupo_empresa` AS `ge` WHERE i.`NOMBRE_UA` = a.`NOMBRE_U` AND i.`NOMBRE_UGE` = ge.`NOMBRE_U` AND a.`NOMBRE_U` LIKE '$idAsesor' AND i.`ESTADO_INSCRIPCION` LIKE '$estado'";                              
-                                
+                                $c1="SELECT ge.`NOMBRE_LARGO_GE` FROM `inscripcion` AS i,`asesor` AS a,`grupo_empresa` AS `ge` WHERE i.`NOMBRE_UA` = a.`NOMBRE_U` AND i.`NOMBRE_UGE` = ge.`NOMBRE_U` AND a.`NOMBRE_U` LIKE '$idAsesor' AND i.`ESTADO_INSCRIPCION` LIKE '$estado'";
                                 $a1=$con->consulta($c1);
                                 
                                 while($grupoE =  mysql_fetch_array($a1)){
@@ -413,12 +403,9 @@ $UsuarioActivo = $_SESSION['usuario'];
                         
                     </div><!--end/lugar-->
 
-
                     <div class   ="form-group">
-                       <div class   ="col-sm-8">
-                      <input class ="btn btn-primary" type="submit" value= "Generar" id= "enviar" name="enviar" onclick ="this.form.action='../Controlador/emitirNotificacionConf.php?id=0'"></input> &nbsp;&nbsp;
-
-                      
+                      <div class   ="col-sm-8">
+                         <input class ="btn btn-primary" type="submit" value= "Generar" id= "enviar" name="enviar" onclick ="this.form.action='../Controlador/emitirNotificacionConf.php?id=0'"></input> &nbsp;&nbsp;                      
                       </div>
                     </div><!--end/submit-->
 
@@ -426,8 +413,8 @@ $UsuarioActivo = $_SESSION['usuario'];
                  </div> 
 
     </form>
-        
-        
+    
+
              
     <!--Modal para adjuntar recursos/documentos-->
          
@@ -439,8 +426,8 @@ $UsuarioActivo = $_SESSION['usuario'];
     <!-- Core Scripts - Include with every page -->
  
  
-     <script type="text/javascript" src="../Librerias/calendario2/jquery.js"></script>
-     <script type="text/javascript" src="../Librerias/calendario2/jquery.datetimepicker.js"></script>
+    <script type="text/javascript" src="../Librerias/calendario2/jquery.js"></script>
+    <script type="text/javascript" src="../Librerias/calendario2/jquery.datetimepicker.js"></script>
     <script src="../Librerias/js/bootstrap.min.js"></script>
     <script src="../Librerias/js/plugins/metisMenu/jquery.metisMenu.js"></script>
 
@@ -460,6 +447,3 @@ $UsuarioActivo = $_SESSION['usuario'];
 </body>
 
 </html>
-       
-        
-   

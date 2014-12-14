@@ -269,8 +269,8 @@
         <div class ="form-horizontal">
                 <div class="row">
               <div class="col-lg-12">
-                <h1> Emitir Orden de Cambio <small></small></h1>
-                 
+                 <h2 class="page-header">Emitir Orden de Cambio</h2>    
+                  </br>     
                 </div>
             </div><!-- /.row -->
                
@@ -281,7 +281,7 @@
                       <label class="col-sm-2 control-label">Grupo Empresa</label>
                         <div class="col-xs-4"> 
                           <select name="lista" class="form-control">
-                            <option selected value="0">Seleccione una grupo empresa </option>
+                            <option>Seleccione una grupo empresa</option>
                             <?php
                                 $idAsesor= $_SESSION['usuario']  ;
                                 $estado = "Habilitado";

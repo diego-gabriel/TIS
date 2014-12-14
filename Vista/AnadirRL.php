@@ -269,49 +269,41 @@
             <!-- /.navbar-static-side -->
         </nav>
 <!-------------------------------------------NUEVAS PUBLICACIONES------------------------------------------>
-               <div id="page-wrapper">
-           
-<form id = "econtrato" method = "post" action="" role="form" >
-    <div class ="form-horizontal">
-         <div class="row">
-            <div class="col-lg-12">
-               <h1> Representante Legal <small></small></h1>           
-            </div>
-         </div><!-- /.row -->
-    </div>    
-                <!--Descripcion de la publicacion--> 
-                
- </form>               
+ <div id="page-wrapper">
+     <div class="row">
+         <div class="col-lg-12">
+             <h2 class="page-header">Representante legal</h2>        
 
-    <div class="form-group">
-    Representante Legal:
-    <form method="POST" enctype="Multipart/form-data">
-        <select name="repLegal" class="form-control">
-            <option>Seleccione un representante legal </option>
-            <?php
-            session_start();
-                $idGE = $_SESSION['usuario']  ;
-                $c1="SELECT NOMBRES_S, APELLIDOS_S FROM `socio`WHERE NOMBRE_U LIKE '$idGE'";
-                $a1=$con->consulta($c1);
-                
-                while($v1 =  mysql_fetch_array($a1)){
-                    echo "<option>".$v1[0]." ".$v1[1]."</option>";
-                }
-                echo "<input type='hidden' name='idAsesor' value='$idGE'>";
-            
-                ?>
-        </select><br>
-         <div class   ="col-sm-8">
-             <input class ="btn btn-primary" type="submit" value= "aceptar" id= "aceptar" name="Aceptar" onclick ="this.form.action='../Vista/registrarRP.php?id=0'"></input> &nbsp;&nbsp;              
-        </div>
-    </form>
-    </div>
+            <div class="form-group">
+                Representante Legal:
+                <form method="POST" enctype="Multipart/form-data">
+                    <select name="repLegal" class="form-control">
+                        <option>Seleccione un representante legal </option>
+                        <?php
+                        session_start();
+                            $idGE = $_SESSION['usuario']  ;
+                            $c1="SELECT NOMBRES_S, APELLIDOS_S FROM `socio`WHERE NOMBRE_U LIKE '$idGE'";
+                            $a1=$con->consulta($c1);
+
+                            while($v1 =  mysql_fetch_array($a1)){
+                                echo "<option>".$v1[0]." ".$v1[1]."</option>";
+                            }
+                            echo "<input type='hidden' name='idAsesor' value='$idGE'>";
+
+                            ?>
+                    </select><br>
+                     <div class   ="col-sm-8">
+                         <input class ="btn btn-primary" type="submit" value= "Aceptar" id= "aceptar" name="Aceptar" onclick ="this.form.action='../Vista/registrarRP.php?id=0'"></input> &nbsp;&nbsp;              
+                    </div>
+                </form>
+            </div>
     
-    <div class   ="form-group">
+
       
     </div><!--end/submit-->
 
     </div>
+      </div>
     <!-- /#wrapper -->
 
 

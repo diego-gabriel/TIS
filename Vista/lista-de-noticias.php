@@ -1,9 +1,8 @@
 
  !DOCTYPE html>
 <?php
-   include '../Modelo/conexion.php';
-$conect = new conexion();
-    
+    include '../Modelo/conexion.php';
+    $conect = new conexion();
     session_start();
     $UsuarioActivo = $_SESSION['usuario'];
 ?>
@@ -129,7 +128,7 @@ $conect = new conexion();
                                 <li>
                                     <a href="../Vista/RegistrarDocumentosRequeridos.php">Registrar Documentos</a>
                                 </li>
-                                                                <li>
+                                 <li>
                                     <a href="../Vista/documentos_generados.php">Contratos Emitidos</a>
                                 </li>
                                 
@@ -264,9 +263,6 @@ $conect = new conexion();
 
                                    <?php
  
-
-                                       // include('config.php');
-                                         // Seleciona la tabla de noticias
                                         $selecionar_db = "SELECT * FROM noticias ORDER BY ID_N DESC";
 
                                         $final = $conect->consulta($selecionar_db)

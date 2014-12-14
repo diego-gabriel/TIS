@@ -236,9 +236,12 @@ if (isset($_POST['lista'])) {
 				}
 				}
 			}
+                        else{        
+                                 echo"<script type=\"text/javascript\">alert('Por favor, seleccione una grupo empresa'); window.location='../Vista/ordenDeCambio.php';</script>";  
+                            }
                         }
                         else{
-                             echo"<script type=\"text/javascript\">alert('Por favor, suba la plantilla del Orden de cambio a su repositorio); window.location='../Vista/ordenDeCambio.php';</script>";
+                             echo"<script type=\"text/javascript\">alert('Por favor, suba la plantilla de Orden de Cambio a su repositorio'); window.location='../Vista/ordenDeCambio.php';</script>"; 
                                  
                         }
                         

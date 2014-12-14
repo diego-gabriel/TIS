@@ -167,12 +167,15 @@ if (isset($_POST['lista'])) {
 				 
                                     
 				}	
-			}               
+			} 
+                            else{        
+                                 echo"<script type=\"text/javascript\">alert('Por favor, seleccione una grupo empresa'); window.location='../Vista/notificacion_conformidad.php';</script>";  
+                            }
                         }
                         else
                         {
-                            echo"<script type=\"text/javascript\">alert('Por favor, suba la plantilla de Notificacion de conformidad a su repositorio); window.location='../Vista/notificacion_conformidad.php';</script>";
-           
+                               echo"<script type=\"text/javascript\">alert('Por favor, suba la plantilla de Notificacion de Conformidad a su repositorio.'); window.location='../Vista/notificacion_conformidad.php';</script>";  
+                            
                         }
 			
 		}		
