@@ -217,7 +217,7 @@ $UsuarioActivo = $_SESSION['usuario'];
 										</table>
 									</center>
 								</form> 
-								";$rolAnt=$fila['ROL_R'];
+								";$rolAnt=$fila['ROL_R'];;$estado1=$fila['ESTADO_E'];
 								}
 								?>
                             
@@ -225,6 +225,7 @@ $UsuarioActivo = $_SESSION['usuario'];
                                                                 
                                                                     $_SESSION["Variable1"] =$rolAnt ;
                                                                     $_SESSION["Variable2"] = $idgp;
+                                                                      $_SESSION["Variable3"] =$estado1 ;
                                                                     
                                                                 ?>
 							</div>
@@ -240,16 +241,17 @@ $UsuarioActivo = $_SESSION['usuario'];
 													<p style="text-align:right;"> Estado :&nbsp;&nbsp;&nbsp;</p>
 												</td>
 												<td>
-                                                                                                    <select required="seleccione un estado" name="estado" class="form-control" ><option  value=" ">Seleccione Un Estado</option>
-													<?php 
+                                                                                                    <select required="seleccione un estado" name="estado" class="form-control" ><option value='' >Seleccione Un Estado</option>  
+													<?php     
 														
+                                                                                                              
 														$sql=$conectar ->consulta("SELECT ESTADO_E FROM  estado WHERE ESTADO_E='Habilitado' or ESTADO_E='Deshabilitado' "); 
 														
 															while($row=mysql_fetch_array($sql)) 
-													echo "<option  value='".$row["ESTADO_E"]."'>".$row["ESTADO_E"]."</option>";  
-                                                                                                                      
-                                                                                                       
+                                                                                                                        {echo "<option  value='".$row["ESTADO_E"]."'>".$row["ESTADO_E"]."</option>";}  
+                                                                                                                     
                                                                                                         ?>    
+                                                                                                        
                                                                                                      
                                                                                                        </select> 
                                                                                                 </td> 
@@ -259,12 +261,12 @@ $UsuarioActivo = $_SESSION['usuario'];
 												    <p style="text-align:right;"> Rol :&nbsp;&nbsp;&nbsp;</p>
                                                                                                  </td>
                                                                                                  <td>
-                                                                                                     <select required="seleccione un rol" name="roll" class="form-control"><option  value=" ">Seleccione Un Rol</option>
+                                                                                                     <select required="seleccione un rol" name="roll" class="form-control" ><option value='' >Seleccione Un Rol</option>
 													<?php 
 														$sql=$conectar ->consulta("SELECT * FROM  rol " );
 														
 															while($row=mysql_fetch_array($sql)) 
-													echo "<option  value='".$row["ROL_R"]."'>".$row["ROL_R"]."</option>";  
+                                                                                                                        {echo "<option  value='".$row["ROL_R"]."'>".$row["ROL_R"]."</option>";  }
                                                                                                                       
                                                                                                        
                                                                                                         ?>    

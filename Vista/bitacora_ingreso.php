@@ -216,10 +216,17 @@
 							
 				
 						?>	
-                                                                                                               <div class="contenedor-columna">
+                                                                        <div class="contenedor-columna">
 										<?php
+                                                                                      $peticion333=$conectar->consulta("SELECT * FROM `sesion`");
+                                                                                        $tamano=mysql_num_rows($peticion333);
+                        
+
+                                                                                       if($tamano>1){
+                                                                                    
 											echo "<a href ='eliminar_bitacora_total.php?id_us=".$fila['ID_S']."'><font color='blue'>Eliminar Todo</font></a>";
-										?>
+                                                                                       }
+                                                                                        ?>
 									</div>
                                                       </div>                                         
                                             

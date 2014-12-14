@@ -274,7 +274,14 @@
                 <div class="col-lg-12">
                     <h2 class="page-header">Inscribirse a un proyecto </h2>
                     <div class="col-lg-4" >
-                        
+                         <?php
+                         
+                          $seleccion = "SELECT NOMBRE_UA FROM inscripcion WHERE NOMBRE_UGE = '$UsuarioActivo'";
+                          $consultar = $con ->consulta($seleccion);
+                          $nombreUA = mysql_fetch_array($consultar)[0];
+                         
+                          if(strnatcasecmp($nombreUA, "") != 0){
+                        ?>
                             <div class="form-group">
                                 <form method="POST" <b>Proyectos disponibles :</b>
                                     <select name="proyecto" class="form-control">
@@ -307,6 +314,15 @@
                                    </div>       
                                 </form>
                             </div>
+                        <?php
+                          }
+                          else
+                          {
+                               echo '<div class="alert alert-warning">
+                                     <strong>Primero debe inscribirse con un asesor, en la opcion de "Seleccionar asesor"</strong>
+                             </div>';
+                          }
+                        ?>
                         
                     </div>
                 </div>
