@@ -69,19 +69,7 @@
                 
     
                 
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
+                           
 
 
 		
@@ -210,28 +198,7 @@ where not exists
                                             
                                             
                                             
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                    
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
+ 
 						
 						<div class="article">
 							<h2><span>Registrate como Grupo Empresa</span></h2>
@@ -296,7 +263,7 @@ where not exists
 					<div class="contenedor-tabla">
 						<div class="contenedor-fila">
 							<div class="contenedor-columna2"><img src="images/logo-cs.bmp" width="29" height="29" alt="" longdesc=\/></div>
-							<div class="contenedor-columna3"><li><a href="http://www.cs.umss.edu.bo//">Carreras de Informática y Sistemas UMSS</a><br/>
+							<div class="contenedor-columna3"><li><a href="http://www.cs.umss.edu.bo/">Carreras de Informática y Sistemas UMSS</a><br/>
 							Pagina principal de la CS</li>
 							</div>
 						</div>
@@ -314,7 +281,7 @@ where not exists
 					<div class="contenedor-tabla">
 						<div class="contenedor-fila">
 							<div class="contenedor-columna2"><img src="images/userpic.gif" width="29" height="29" alt="" longdesc=\/></div>
-							<div class="contenedor-columna3"><li><a href="enlinea.umss.edu.bo/moodle2/">MOODLE 2 - UMSS</a><br/>
+							<div class="contenedor-columna3"><li><a href="http://enlinea.umss.edu.bo/moodle2/">MOODLE 2 - UMSS</a><br/>
 							Pagina de moodle2</li>
 							</div>
 						</div>

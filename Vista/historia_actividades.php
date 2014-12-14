@@ -20,6 +20,9 @@
 
   }
       
+  
+    
+    
 
         //Peticion
         $peticion22 = $con->consulta("SELECT `NOMBRE_UA` FROM `inscripcion` WHERE `NOMBRE_UGE`='$usuario'");
@@ -327,7 +330,8 @@
 
 
                <?php 
-                           $peticion333=$con->consulta("SELECT * FROM inscripcion WHERE NOMBRE_UGE='$grupoEmpresa' and ESTADO_INSCRIPCION='Habilitado'");
+                 
+                           $peticion333=$con->consulta("SELECT * FROM inscripcion WHERE NOMBRE_UGE='$usuario' and ESTADO_INSCRIPCION='Habilitado'");
                            $tamano=mysql_num_rows($peticion333);
                         
 
@@ -542,15 +546,15 @@
            
     <hr>
                     
-    <?php
-    }
-        else  { 
-            echo '<div class="alert alert-warning">
-                           <strong>Su inscripcion no ha sido habilitada</strong>
-             </div>';
-        }
-    ?> 
-    
+   <?php
+     }
+     else
+     { 
+         echo '<div class="alert alert-warning">
+              <strong>Su inscripcion no ha sido habilitada</strong>
+         </div>';
+     }
+   ?> 
                     
                     
                     

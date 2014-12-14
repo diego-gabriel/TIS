@@ -125,7 +125,7 @@
                                 <li>
                                     <a href="../Vista/RegistrarDocumentosRequeridos.php">Registrar Documentos</a>
                                 </li>
-                                                                   <li>
+                                <li>
                                     <a href="../Vista/documentos_generados.php">Contratos Emitidos</a>
                                 </li>
                                 <li>

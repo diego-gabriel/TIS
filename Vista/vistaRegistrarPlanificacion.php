@@ -27,7 +27,7 @@
         
     /*$usuario = 'Bittle';*/
     
-    $VerificarInscripcion = $con->consulta("SELECT * FROM inscripcion WHERE NOMBRE_UGE = '$UsuarioActivo'");
+    $VerificarInscripcion = $con->consulta("SELECT * FROM inscripcion, inscripcion_proyecto WHERE NOMBRE_UGE = '$UsuarioActivo' and NOMBRE_U = '$UsuarioActivo'");
     $Inscripcion = mysql_fetch_row($VerificarInscripcion);
     
     if(is_array($Inscripcion))
@@ -290,7 +290,7 @@
     {
         echo '<div class="alert alert-warning">
                            <strong>Primero debe realizar el proceso de inscripcion</strong>
-                       </div>';
+         </div>';
     }	
     
 ?>

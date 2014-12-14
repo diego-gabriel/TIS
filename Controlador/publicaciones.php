@@ -18,7 +18,7 @@ include('../Modelo/crearimagen.php');
 	if($descripcion != null){
 		foreach($descripcion as $key ) {
 			$tipo  =strstr($key['RUTA_D'], '.');
-			echo $tipo;
+			
 			$icono = '../Librerias/images/ico/'.$tipo.'.jpg';
 		   
 		 // echo 'Nombre >>'  .$key['NOMBRE_R']. ' DESCRIPCION_D >> ' .$key['DESCRIPCION_D'].'RUTA >> '.$key['RUTA_D'].' ICONO >> '.$icono.'<br>';

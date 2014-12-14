@@ -36,16 +36,7 @@ while(($fila = mysql_fetch_array($peticion)) or ($fila = mysql_fetch_array($peti
                 $_SESSION['administrador'] = $permisosenbase;
 		
 
-		echo'
-
-		<html>
-			<head>
-				<meta http-equiv="REFRESH" content="0;url=principal.php">
-                        
-			</head>
-		</html>
-
-		';
+		echo'<html><head><meta http-equiv="REFRESH" content="0;url=principal.php"></head></html>';
           
 
 	}
@@ -60,49 +51,28 @@ while(($fila = mysql_fetch_array($peticion)) or ($fila = mysql_fetch_array($peti
                 $_SESSION['asesor'] = $permisosenbase;
 		
 
-		echo'
-
-		<html>
-			<head>
-				<meta http-equiv="REFRESH" content="0;url=inicio_asesor.php">
-                        
-			</head>
-		</html>
-
-		';
+		echo'<html><head><meta http-equiv="REFRESH" content="0;url=inicio_asesor.php"></head></html>';
           
 
         }  else
             {
             	if($usuario == $usuariobd && $contrasena == $contrasenabd && $permiso3==$permisosenbase && "Habilitado" == $estadobd )
 	{   
-	//Si el resultado es positivo, entonces asignar
-
-		
 		$_SESSION['usuario'] = $usuario;
 		$_SESSION['contrasena'] = $contrasena;
                 $_SESSION['grupoEmpresa'] = $permisosenbase;
 		
 
-		echo'
-
-		<html>
-			<head>
-				<meta http-equiv="REFRESH" content="0;url=inicio_grupo_empresa.php">
-                        
-			</head>
-		</html>
-
-		';
-          
-
+		echo'<html><head><meta http-equiv="REFRESH" content="0;url=inicio_grupo_empresa.php"></head></html>';
+       
 	}
         else
             {
+    
             
-               while($fila = mysql_fetch_array($peticion1))
+         while($fila = mysql_fetch_array($peticion1))
 {
-		$sociol=$fila['LOGIN_S'];
+	     $sociol=$fila['LOGIN_S'];
 	     $sociop=$fila['PASSWORD_S'];
 
          if($usuario == $sociol && $contrasena == $sociop )
@@ -115,35 +85,17 @@ while(($fila = mysql_fetch_array($peticion)) or ($fila = mysql_fetch_array($peti
                 $_SESSION['socio'] = $permisosenbase;
 		
 
-		echo'
-
-		<html>
-			<head>
-				<meta http-equiv="REFRESH" content="0;url=inicio_grupo_empresa.php">
-                        
-			</head>
-		</html>
-
-		';
+		echo'<html><head><meta http-equiv="REFRESH" content="0;url=inicio_grupo_empresa.php"> </head></html>';
           
 
 	}else{
                        
-            		echo'
-
-		<html>
-			<head>
-				<meta http-equiv="REFRESH" content="1;url=../index.php">
-                        
-			</head>
-		</html>
-
-		';
+            		echo'<html><head><meta http-equiv="REFRESH" content="1;url=../index.php"></head></html>';
             
                }
                     
             
- 
+ 	echo'<html><head><meta http-equiv="REFRESH" content="1;url=../index.php"></head></html>';   
             
           }
 

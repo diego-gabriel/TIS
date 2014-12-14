@@ -53,8 +53,7 @@
 
 <body>
 
-   
-    <div id="wrapper">
+  <div id="wrapper">
        
         
 		<!--<h2>design by <a href="#" title="flash templates">flash-templates-today.com</a></h2>-->
@@ -101,18 +100,58 @@
                         <li>
                             <a href="AdministrarGrupoEmpresa.php"><i class="fa fa-book"></i> Administrar Grupo Empresas</a>
                         </li>
+                        <li>
+                                        <a href="#"><i class="glyphicon glyphicon-th-list"></i> Evaluacion Grupo Empresa<span class="fa arrow"></span></a>
+                                            <ul class="nav nav-third-level">
+                                                <li>
+                                                    <a href="CrearModalidadEvaluacion.php">Criterio de Evaluaci&oacute;n </a>                             
+                                                </li>
+                                                
+                                                <li>
+                                                    <a href="#">Criterio de Calificaci&oacute;n<span class="fa arrow"></span></a>
+                                                    <ul class="nav nav-third-level">
+                                                        <li>
+                                                            <a href="CrearModalidadCalificacion.php"> Crear Criterio de Calificaci&oacute;n</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="EliminarCriterioCalificacion.php"> Eliminar Criterio de Calificaci&oacute;n</a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                 
+                                                <li>
+                                                    <a href="#">Formulario de Evaluacion<span class="fa arrow"></span></a>
+                                                    <ul class="nav nav-third-level">
+                                                        <li>
+                                                            <a href="CrearFormulario.php">Crear Formulario de Evaluacion</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="SeleccionarFormulario.php"> Habilitar Formulario de Evaluacion </a>   
+                                                        </li>
+                                                        <li>
+                                                            <a href="EliminarFormulario.php">Eliminar Formulario de Evaluacion</a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <a href="EvaluarGrupoEmpresa.php">Evaluar Grupo Empresa </a>   
+                                                </li>
+                                            </ul>
+                                </li>
                         
                         
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-files-o "></i> Documentos <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                            <a href="../Vista/subirarchivoasesor.php">Subir Documentos</a>
+                                    <a href="../Vista/subirarchivoasesor.php">Subir Documentos</a>
                                 </li>
                                 <li>
                                     <a href="../Vista/RegistrarDocumentosRequeridos.php">Registrar Documentos</a>
                                 </li>
-                                
+                                <li>
+                                    <a href="../Vista/documentos_generados.php">Contratos Emitidos</a>
+                                </li>
                                 <li>
                                     <a href="#">Publicaci&oacute;n Documentos <span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
@@ -173,52 +212,16 @@
                                     </ul>
                                     <!-- /.nav-third-level -->
                                 </li>
-                                <li>
-                                        <a href="#">Evaluacion Grupo Empresa<span class="fa arrow"></span></a>
-                                            <ul class="nav nav-third-level">
-                                                <li>
-                                                    <a href="CrearModalidadEvaluacion.php">Criterio de Evaluaci&oacute;n </a>                             
-                                                </li>
-                                                <li>
-                                                    <a href="CrearModalidadCalificacion.php"> Criterio de Calificaci&oacute;n</a>
-                                                </li>
-                                                 <li>
-                                                    <a href="EliminarCriterioCalificacion.php"> Eliminar Criterio de Calificaci&oacute;n</a>
-                                                </li>
-                                                <li>
-                                                    <a href="CrearFormulario.php">Crear Formulario de Evaluacion</a>
-                                                </li>
-                                                <li>
-                                                    <a href="EliminarFormulario.php">Eliminar Formulario de Evaluacion</a>
-                                                </li>
-                                                <li>
-                                                    <a href="SeleccionarFormulario.php"> Seleccionar Formulario de Evaluacion </a>   
-                                                </li>
-                                                <li>
-                                                    <a href="EvaluarGrupoEmpresa.php">Evaluar Grupo Empresa </a>   
-                                                </li>
-                                            </ul>
-                                </li>
+                                
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
-                        
-                       
-                        <li>
-                            <a href="#"><i class="fa fa-building-o fa-fw"></i> Actividades<span class="fa arrow"></span></a>
-                            
-                            <!-- /.nav-second-level -->
-                        </li>
-                        
-
 
                          <li>
                               <a href="lista_doc_subidos.php"><i class="fa fa-tasks fa-fw"></i>Documentos Subidos </a>  
                                               
                           </li>
-                        <li>
-                            <a href="#"><i class="fa fa-question-circle fa-fw"></i> Ayuda <span class="fa arrow"></span></a>
-                        </li>
+                        
                         <li>
                             <a href="lista-de-noticias.php"><i class="fa fa-comment"></i> Foro</a>
                         </li>
@@ -258,7 +261,6 @@
                 </div>
             </div>
         </div>
-                
        <!-- --------------------------------------------------------------------------- -->         
         
         <div id="page-wrapper">
