@@ -1,5 +1,5 @@
 <?php
-
+   
     include '../Modelo/conexion.php';
     $conectar = new conexion();
     
@@ -10,7 +10,8 @@ $addFecha= $_POST['fec'];
 
 //Inserttamos la foto en una carpeta
 
-
+   session_start();
+   $UsuarioActivo = $_SESSION['usuario'];
  
 
 //conexion-------------		
@@ -62,11 +63,11 @@ $addFecha= $_POST['fec'];
     //Tenemos que usar gmail autenticados, así que esto a TRUE
     $mail->SMTPAuth   = true;
     //Definimos la cuenta que vamos a usar. Dirección completa de la misma
-    $mail->Username   = "bittlesrl@gmail.com";
+    $mail->Username   = "saetis.oficial@gmail.com";
     //Introducimos nuestra contraseña de gmail
-    $mail->Password   = "*bittletis*135*";
+    $mail->Password   = "saetis.oficial1";
     //Definimos el remitente (dirección y, opcionalmente, nombre)
-    $mail->SetFrom($correo1, $addDestino);
+    $mail->SetFrom('saetis.oficial@gmail.com', $UsuarioActivo);
     //Esta línea es por si queréis enviar copia a alguien (dirección y, opcionalmente, nombre)
     //$mail->AddReplyTo('replyto@correoquesea.com','El de la réplica');
     //Y, ahora sí, definimos el destinatario (dirección y, opcionalmente, nombre)

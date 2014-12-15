@@ -142,7 +142,7 @@
 										<p style="text-align:right;">Fecha Inicio :</p>
 										</div>
 										<div class="contenedor-columna">
-											<input type='date' class="form-control" required name='ini'>
+											<input type='date' class="form-control" required name='ini' placeholder="AAAA-MM-DD">
 										</div>
                                                                              </td> 
                                                                             </tr>  <tr>
@@ -151,7 +151,7 @@
 										<p style="text-align:right;">Fecha Fin :</p>
 										</div>
 										<div class="contenedor-columna">
-                                                                                    <input type='date' class="form-control" required name='fin'>
+                                                                                    <input type='date' class="form-control" required name='fin' placeholder="AAAA-MM-DD">
                                                                                     </div>
                                                                             </td> 
                                                                             </tr>

@@ -186,7 +186,7 @@
                                                 <span class="input-group-addon">
                                                   <span class="glyphicon glyphicon-envelope"></span>
                                                 </span>
-                                                <input class="form-control" type="date" name="fec" size=48% id="UserEmail" placeholder="fecha"  required>
+                                                <input class="form-control" type="date" name="fec" size=48% id="UserEmail" placeholder="AAAA-MM-DD"  required>
                                             </div>
                                         </div>                                                                                                         
                                                                                                         
