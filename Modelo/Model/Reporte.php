@@ -31,7 +31,7 @@
 	    function constructor($idRegistro) {
 	    	$this->conexion->conectar();
 	        $datosReporte = $this->conexion->consultarTabla("SELECT id_r, rol_rr, actividad_r, hecho_r, resultado_r, conclusion_r, observacion_r
-											                 FROM REPORTE
+											                 FROM reporte
 											                 WHERE 	id_r = '$idRegistro';");
 	        $this->idRegistro = $datosReporte[0][0];
 	        $this->rol = $datosReporte[0][1];
@@ -45,7 +45,7 @@
 
 	    function insertarBD() {
 	        $this->conexion->conectar();
-	        $this->conexion->consulta("INSERT INTO REPORTE(id_r, rol_rr, actividad_r, hecho_r, resultado_r, conclusion_r, observacion_r)
+	        $this->conexion->consulta("INSERT INTO reporte(id_r, rol_rr, actividad_r, hecho_r, resultado_r, conclusion_r, observacion_r)
 	        						   VALUES($this->idRegistro, '$this->rol', '$this->actividad', $this->hecho, '$this->resultado', '$this->conclusion', '$this->observacion');");
 	        $this->conexion->cerrarConexion();
 	    }
@@ -54,7 +54,7 @@
 	        $conexion = new conexion();
 	        $conexion->conectar();
 	        $roles = $conexion->consultarArreglo("SELECT rol_rr 
-	        									  FROM ROL_REPORTE");
+	        									  FROM rol_reporte");
 	        $conexion->cerrarConexion();
 	        return $roles;
 	    }

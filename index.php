@@ -207,7 +207,7 @@ where not exists
                                                         
                                             <div class="form-group">
                                             <div align="center">
-                                                <button type="submit" name="ingresar"  class="btn btn-primary"  onclick=" location.href='vista/RegistrarGrupoEmpresa.php' " id="btn-registrarUser"> <span class="glyphicon glyphicon-ok" ></span> REGISTRATE</button>
+                                                <button type="submit" name="ingresar"  class="btn btn-primary"  onclick=" location.href='Vista/RegistrarGrupoEmpresa.php' " id="btn-registrarUser"> <span class="glyphicon glyphicon-ok" ></span> REGISTRATE</button>
                                         </div></div>
                                                         </div>     
 						</div>
@@ -237,7 +237,7 @@ where not exists
                                         </div>                                                  
                                                         
                                         <div class="form-group">
-                                            <a href="vista/RegistrarUsuario.php"><font color='green' size="1.5%">no eres usuario todavia? REGISTRATE</font></a>
+                                            <a href="Vista/RegistrarUsuario.php"><font color='green' size="1.5%">no eres usuario todavia? REGISTRATE</font></a>
                                             <div align="right"> <hr>
                                             <button type="submit" name="ingresar" class="btn btn-primary" id="btn-registrarUser"> <span class="glyphicon glyphicon-ok"></span> Ingresar</button>
                                         </div></div>

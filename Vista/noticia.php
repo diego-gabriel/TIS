@@ -290,10 +290,12 @@ $comentarios = mysql_num_rows($comentarios_db);
 
 echo "<title>$titulo</title>";
 echo "<h1>$titulo</h1><p>Postado por <b>$posteado</b>  <b>$date</b> - <b>$views</b> Visualizaciones | <b>$comentarios</b> Comentarios | ";
+echo "</br>";
+echo "<b>$texto</b>";
 //echo "______________________________________________________________________________________________________________________________________________________________________";
 ?>
  <div class="mainbar">
-                                            <div class="article"><br><br>
+                                            <div class="article"><br>
                             <h2><span>Comentarios</span></h2>   
                             
                         </div>

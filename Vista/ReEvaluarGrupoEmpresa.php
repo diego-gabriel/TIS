@@ -416,7 +416,7 @@
                             {
                                 echo 'No tiene ningun formulario habilitado<br>';
                                 echo 'Vaya al siguiente link para habilitar uno<br> ';
-                                echo '<a href="http://localhost/saetis/Vista/SeleccionarFormulario.php" class="btn btn-default btn-xs">Habilitar Formulario</a>';
+                                echo '<a href="../Vista/SeleccionarFormulario.php" class="btn btn-default btn-xs">Habilitar Formulario</a>';
                                 
                             }
                             ?>

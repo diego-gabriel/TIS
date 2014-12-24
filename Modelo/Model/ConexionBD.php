@@ -8,11 +8,11 @@
         }
         
         public function conectarMYSQL() {
-            mysql_connect('localhost', 'root','') or die("Error en el establecimiento de la conexion");
+            mysql_connect('192.168.2.5', 'mbittle','5rtZAGYq') or die("Error en el establecimiento de la conexion");
         }
 
         public function conectarBD() {
-            mysql_select_db('saetis') or die("Error en la conexion a la base de datos");
+            mysql_select_db('tis_mbittle') or die("Error en la conexion a la base de datos");
         }
 
         public function consultar($query) {

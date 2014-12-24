@@ -15,10 +15,10 @@
         	$conexion = new Conexion();
 			$conexion->conectar();
 			$u = $conexion->consultaUnDato("SELECT nombre_u
-			        						FROM REGISTRO
+			        						FROM registro
 			        						WHERE id_r = '$registro';");
 			$s = $conexion->consultarTabla("SELECT codigo_s, nombres_s, apellidos_s
-			        						FROM SOCIO
+			        						FROM socio
 			        						WHERE nombre_u = '$u';");
 			$conexion->cerrarConexion();
 			$filas = '';

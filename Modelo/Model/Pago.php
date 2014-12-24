@@ -23,7 +23,7 @@
 	    function constructor($id) {
 	        $this->conexion->conectar();
 			$datosPago = $this->conexion->consultarTabla("SELECT id_r, monto_p, porcentaje_del_total_p
-														  FROM PAGO
+														  FROM pago
 														  WHERE id_r = $id;");
             $this->idRegistro = $datosPago[0][0];
             $this->monto = $datosPago[0][1];
@@ -33,7 +33,7 @@
 
 	    function insertarBD() {
 	        $this->conexion->conectar();
-	        $this->conexion->consulta("INSERT INTO PAGO(id_r, monto_p, porcentaje_del_total_p)
+	        $this->conexion->consulta("INSERT INTO pago(id_r, monto_p, porcentaje_del_total_p)
 	        						   VALUES($this->idRegistro, $this->monto, $this->porcentajeDelTotal);");
 	        $this->conexion->cerrarConexion();
 	    }

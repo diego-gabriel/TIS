@@ -21,7 +21,7 @@
 	    function constructor($usuario) {
 	        $this->conexion->conectar();
 			$datosPrecio = $this->conexion->consultarTabla("SELECT nombre_u, precio_p
-														    FROM PRECIO
+														    FROM precio
 														    WHERE nombre_u = '$usuario';");
             $this->usuario = $datosPrecio[0][0];
             $this->precio = $datosPrecio[0][1];
@@ -30,7 +30,7 @@
 
 	    function insertarBD() {
 	        $this->conexion->conectar();
-	        $this->conexion->consulta("INSERT INTO PRECIO(nombre_u, precio_p)
+	        $this->conexion->consulta("INSERT INTO precio(nombre_u, precio_p)
 	        						   VALUES('$this->usuario', $this->precio);");
 	        $this->conexion->cerrarConexion();
 	    }

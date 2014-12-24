@@ -72,10 +72,10 @@
                       echo "Error: " . $mail->ErrorInfo;
                     } else {
                                    
-                    $db = 'saetis';
-                    $host = 'localhost';
-                    $user = 'root';
-                    $pass = '';
+                    $db = 'tis_mbittle';
+                    $host = '192.168.2.5';
+                    $user = 'mbittle';
+                    $pass = '5rtZAGYq';
                     $conn = new PDO("mysql:dbname=".$db.";host=".$host,$user, $pass);
                     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                     // iniciar transacción

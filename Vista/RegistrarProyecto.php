@@ -20,7 +20,7 @@
         echo"<script type=\"text/javascript\">alert('El registro ha sido satisfactorio'); window.location='InscripcionProyecto.php';</script>";    
     }
     else{
-       echo"<script type=\"text/javascript\">alert('No se pudo registrar el proyecto, primero debe registrar un proyecto'); window.location='InscripcionProyecto.php';</script>";    
+       echo"<script type=\"text/javascript\">alert('No se pudo registrar el proyecto, primero debe registrar una gestion'); window.location='InscripcionProyecto.php';</script>";    
     }
 
     ?>

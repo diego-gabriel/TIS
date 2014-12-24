@@ -74,13 +74,13 @@
 
                     $conect->consulta("UPDATE nota SET CALIF_N = '$nota' WHERE NOMBRE_U='$grupo'");
 
-                    $SeleccionarIdNota = $conect->consulta("SELECT MAX(ID_N) FROM NOTA WHERE NOMBRE_U='$grupo'");
+                    $SeleccionarIdNota = $conect->consulta("SELECT MAX(ID_N) FROM nota WHERE NOMBRE_U='$grupo'");
 
                     $IdNota = mysql_fetch_row($SeleccionarIdNota);
 
                         for ($i=0; $i < count($prueba) ; $i++) { 
                             
-                            $conect->consulta("UPDATE PUNTAJE_GE SET CALIFICACION = '$prueba[$i]' WHERE ID_N ='$IdNota[0]' AND  NUM_CE ='$i'");
+                            $conect->consulta("UPDATE puntaje_ge SET CALIFICACION = '$prueba[$i]' WHERE ID_N ='$IdNota[0]' AND  NUM_CE ='$i'");
                     
                         }
 
@@ -102,12 +102,12 @@
 
                         $conect->consulta('INSERT INTO nota(ID_FORM, NOMBRE_U, CALIF_N) VALUES("'.$FormularioUtilizado.'","'.$grupo.'","'.$nota.'")');
 
-                        $SeleccionarIdNota = $conect->consulta("SELECT MAX(ID_N) FROM NOTA WHERE NOMBRE_U='$grupo'");
+                        $SeleccionarIdNota = $conect->consulta("SELECT MAX(ID_N) FROM nota WHERE NOMBRE_U='$grupo'");
 
                         $IdNota = mysql_fetch_row($SeleccionarIdNota);
 
                         for ($i=0; $i < count($prueba) ; $i++) { 
-                            $conect->consulta('INSERT INTO PUNTAJE_GE(ID_N, NUM_CE, CALIFICACION) VALUES("'.$IdNota[0].'","'.$i.'","'.$prueba[$i].'")');
+                            $conect->consulta('INSERT INTO puntaje_ge(ID_N, NUM_CE, CALIFICACION) VALUES("'.$IdNota[0].'","'.$i.'","'.$prueba[$i].'")');
 
                         }
 

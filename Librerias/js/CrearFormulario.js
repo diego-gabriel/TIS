@@ -8,10 +8,9 @@ $(document).ready(function() {
 
     $('#btn-guardar').on('click', function(event) {
 
-
         if($("form")[0].checkValidity()) 
         {
-            var url = "GuardarFormulario.php"
+            var url = "../Vista/guardarFormulario.php"
 
             $.ajax({
                 url: url,

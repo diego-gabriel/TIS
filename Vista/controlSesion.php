@@ -14,11 +14,11 @@ $fecha= date ("Y-m-d");
 $navegador = $_SERVER["HTTP_USER_AGENT"];
 //conexion-------------		
     
-	$conexion = mysql_connect("localhost","root","");
+	$conexion = mysql_connect("192.168.2.5","mbittle","5rtZAGYq");
 	//Control
 	if(!$conexion){die('La conexion ha fallado por:'.mysql_error());}
 	//Seleccion
-	mysql_select_db("saetis",$conexion);
+	mysql_select_db("tis_mbittle",$conexion);
 	//Peticion
 	$peticion = mysql_query("INSERT INTO `sesion` (`ID_S`, `NOMBRE_U`, `FECHA_S`, `HORA_S`, `IP_S`)"
                 . " VALUES (NULL, '$usuariolog', '$fecha', '$hora', '$ip');");

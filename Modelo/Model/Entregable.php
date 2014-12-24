@@ -23,7 +23,7 @@
 	    function constructor($usuario, $entregable) {
 	    	$this->conexion->conectar();
             $datosEntregable = $this->conexion->consultarTabla("SELECT nombre_u, entregable_e, descripcion_e
-											                    FROM ENTREGABLE
+											                    FROM entregable
 											                    WHERE nombre_u = '$usuario' AND entregable_e = '$entregable';");
             $this->usuario = $datosEntregable[0][0];
             $this->entregable = $datosEntregable[0][1];
@@ -33,7 +33,7 @@
 
 	    function insertarBD() {
 	        $this->conexion->conectar();
-	        $this->conexion->consulta("INSERT INTO ENTREGABLE(nombre_u, entregable_e, descripcion_e)
+	        $this->conexion->consulta("INSERT INTO entregable(nombre_u, entregable_e, descripcion_e)
 	        						   VALUES('$this->usuario', '$this->entregable', '$this->descripcion');");
 	        $this->conexion->cerrarConexion();
 	    }
@@ -42,7 +42,7 @@
 	        $conexion = new Conexion();
 	        $conexion->conectar();
 	        $entregables = $conexion->consultarArreglo("SELECT entregable_e 
-	        										    FROM ENTREGABLE
+	        										    FROM entregable
 	        										    WHERE nombre_u = '$usuario';");
 	        $conexion->cerrarConexion();
 	        return $entregables;

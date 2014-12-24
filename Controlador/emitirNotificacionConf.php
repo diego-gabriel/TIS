@@ -1,4 +1,3 @@
-
 <?php
 
 
@@ -95,7 +94,8 @@ if (isset($_POST['lista'])) {
                                     $remplazo['septimo_p'] = intval($calificaciones[6]);
 					
                                 
-                                    $ruta = "..\\Repositorio\\asesor";
+                                   
+				    $ruta ="../Repositorio/asesor";
                                     chdir($ruta);
         
                                     $id = "NotificacionConformidad";
@@ -136,11 +136,17 @@ if (isset($_POST['lista'])) {
 
                                	    $file = "NotificacionConformidad".'_'.$nombreEmpresa.'.pdf';
         
-                                    if (!file_exists($rutaDirectorio)) 
+                                   if (!file_exists($rutaDirectorio)) 
                                     {
+                                        $oldmask = umask(0); 
                                         mkdir($rutaDirectorio, 0777,TRUE);
+                                        umask($oldmask);
+                                        chown($rutaDirectorio, "bittle2014"); 
+                                        chgrp($rutaDirectorio, "webtis");
+                                        
                                     }
-                                    
+
+                                     
                                     //rename("NotificacionConformidad.pdf", $file);
                                     rename("NotificacionConformidad.pdf", $rutaDirectorio.$pdf );
                                    

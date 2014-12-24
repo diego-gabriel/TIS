@@ -25,7 +25,7 @@
 	    function constructor($usuario) {
 	    	$this->conexion->conectar();
 	        $datosGrupoEmpresa = $this->conexion->consultarTabla("SELECT nombre_u, nombre_corto_ge, nombre_largo_ge, direccion_ge
-											                      FROM GRUPO_EMPRESA
+											                      FROM grupo_empresa
 											                      WHERE nombre_u = '$usuario';");
 	        $this->usuario = $datosGrupoEmpresa[0][0];
 	        $this->nombreCorto = $datosGrupoEmpresa[0][1];
@@ -36,14 +36,14 @@
 
 	    function insertarBD() {
 	        $this->conexion->conectar();
-	        $this->conexion->consulta("INSERT INTO GRUPO_EMPRESA(nombre_u, nombre_corto_ge, nombre_largo_ge, direccion_ge)
+	        $this->conexion->consulta("INSERT INTO grupo_empresa(nombre_u, nombre_corto_ge, nombre_largo_ge, direccion_ge)
 	        						   VALUES('$this->usuario', '$this->nombreCorto', '$this->nombreLargo', '$this->direccion');");
 	        $this->conexion->cerrarConexion();
 	    }
 
 	    public function modificarBD() {
 	        $this->conexion->conectar();
-	        $this->conexion->consulta("UPDATE GRUPO_EMPRESA
+	        $this->conexion->consulta("UPDATE grupo_empresa
 	        						   SET nombre_corto_ge = '$this->nombreCorto', nombre_largo_ge = '$this->nombreLargo', direccion_ge = '$this->direccion'
 	        						   WHERE nombre_u = '$this->usuario';");
 	        $this->conexion->cerrarConexion();

@@ -8,11 +8,11 @@
 	$conexion = new conexion();
 	$conexion->conectar();
 	
-        $ap = $conexion->consultarTabla("SELECT id_r, nombre_u, estado_e, nombre_r FROM REGISTRO , inscripcion WHERE tipo_t = 'actividad planificacion' AND estado_e = 'en proceso' and NOMBRE_UGE=nombre_u and NOMBRE_UA='$usuario';");
+        $ap = $conexion->consultarTabla("SELECT id_r, nombre_u, estado_e, nombre_r FROM registro , inscripcion WHERE tipo_t = 'actividad planificacion' AND estado_e = 'en proceso' and NOMBRE_UGE=nombre_u and NOMBRE_UA='$usuario';");
     $reportes = $conexion->consultarArreglo("SELECT DISTINCT id_r
-									  		 FROM REPORTE");
+									  		 FROM reporte");
     $asistencia = $conexion->consultarArreglo("SELECT DISTINCT id_r
-									  		   FROM ASISTENCIA");
+									  		   FROM asistencia");
 	$conexion->cerrarConexion();
 	$filas = '';
 	for ($i = 0; $i < count($ap); $i++) { 

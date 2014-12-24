@@ -5,7 +5,7 @@ $conect = new conexion();
 
 $GrupoEmpresa = $_GET['id_us'];
 
-$SeleccionarIdRegistroGE = $conect->consulta("SELECT ID_R FROM REGISTRO WHERE NOMBRE_U='$GrupoEmpresa'");
+$SeleccionarIdRegistroGE = $conect->consulta("SELECT ID_R FROM registro WHERE NOMBRE_U='$GrupoEmpresa'");
 $IdRegistroGE = mysql_fetch_row($SeleccionarIdRegistroGE);
 
 if(isset($_GET['op']))
@@ -16,20 +16,20 @@ if(isset($_GET['op']))
 	{
    
 		//Eliminar Los puntajes
-		$SeleccionarIdFormulario = $conect->consulta("SELECT ID_N FROM NOTA WHERE NOMBRE_U='$GrupoEmpresa'"); 
+		$SeleccionarIdFormulario = $conect->consulta("SELECT ID_N FROM nota WHERE NOMBRE_U='$GrupoEmpresa'"); 
 
 		$IdFormulario = mysql_fetch_row($SeleccionarIdFormulario);
 
 
 
-		$EliminarPuntajes = $conect->consulta("DELETE FROM PUNTAJE_GE WHERE ID_N = '$IdFormulario[0]'");
+		$EliminarPuntajes = $conect->consulta("DELETE FROM puntaje_ge WHERE ID_N = '$IdFormulario[0]'");
 		//Eliminar nota
 		$EliminarNotaGE = $conect->consulta("DELETE FROM nota WHERE NOMBRE_U = '$GrupoEmpresa' ");
 
 
 
                 /****************************************************/
-                $SeleccionarIdRegistroGE = $conect->consulta("SELECT ID_R FROM REGISTRO WHERE NOMBRE_U='$GrupoEmpresa'");
+                $SeleccionarIdRegistroGE = $conect->consulta("SELECT ID_R FROM registro WHERE NOMBRE_U='$GrupoEmpresa'");
         
                 while ($rowIdRegistroGE = mysql_fetch_row($SeleccionarIdRegistroGE))
                 {
@@ -43,6 +43,8 @@ if(isset($_GET['op']))
                     //Eliminar de asistencia//con id registro
                     $EliminarAsistencia = $conect->consulta("DELETE FROM asistencia WHERE ID_R='$rowIdRegistroGE[0]'");
                     $EliminarPago = $conect->consulta("DELETE FROM pago WHERE ID_R='$rowIdRegistroGE[0]'");
+                    $EliminarReporte = $conect->consulta("DELETE FROM reporte WHERE ID_R='$rowIdRegistroGE[0]'");
+
 
                 }
                 /*****************************************************/
@@ -59,8 +61,8 @@ if(isset($_GET['op']))
 
 
 		
-		//reportes//pero si deberia borrar
-		$EliminarReporte = $conect->consulta("DELETE FROM reporte");
+		
+		
 		//comentarios
 		$EliminarComentarioGE = $conect->consulta("DELETE FROM comentarios WHERE NOMBRE_U = '$GrupoEmpresa' ");
 		//noticia
@@ -118,9 +120,9 @@ if(is_array($IdRegistroGE))
 else
 {
 
-	$SeleccionarIdFormulario = $conect->consulta("SELECT ID_N FROM NOTA WHERE NOMBRE_U='$GrupoEmpresa'"); 
+	$SeleccionarIdFormulario = $conect->consulta("SELECT ID_N FROM nota WHERE NOMBRE_U='$GrupoEmpresa'"); 
 	$IdFormulario = mysql_fetch_row($SeleccionarIdFormulario);
-	$EliminarPuntajes = $conect->consulta("DELETE FROM PUNTAJE_GE WHERE ID_N = '$IdFormulario[0]'");
+	$EliminarPuntajes = $conect->consulta("DELETE FROM puntaje_ge WHERE ID_N = '$IdFormulario[0]'");
 	$EliminarNotaGE = $conect->consulta("DELETE FROM nota WHERE NOMBRE_U = '$GrupoEmpresa' ");
 	
 	$EliminarPlanificacionGE = $conect->consulta("DELETE FROM planificacion WHERE NOMBRE_U = '$GrupoEmpresa' ");
@@ -141,4 +143,4 @@ else
 
 }
 
-?>
+?>	

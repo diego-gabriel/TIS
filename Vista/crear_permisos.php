@@ -14,7 +14,7 @@ $addasesor = $_POST['id_rol'];
 
 //conexion-------------
 
-	$peticion = $conectar->consulta("INSERT INTO `saetis`.`permisos` (`ROL_R`, `id_permiso`, `menu_id_menu`) VALUES ('$addasesor',NULL, '$addNomMenu');");
+	$peticion = $conectar->consulta("INSERT INTO `permisos` (`ROL_R`, `id_permiso`, `menu_id_menu`) VALUES ('$addasesor',NULL, '$addNomMenu');");
 	//cerrar conexion--------------------------
 	 //volver a la pagina---------------
 	 echo'

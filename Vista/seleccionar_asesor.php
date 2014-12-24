@@ -275,11 +275,11 @@
                     <h2 class="page-header">Eliga un Asesor </h2>
                     <div class="col-lg-4" >
                         <?php
-                          $seleccion = "SELECT REPRESENTANTE_LEGAL_GE FROM grupo_empresa WHERE NOMBRE_U = '$UsuarioActivo'";
+                         $seleccion = "SELECT REPRESENTANTE_LEGAL_GE FROM grupo_empresa WHERE NOMBRE_U = '$UsuarioActivo'";
                           $consultar = $con ->consulta($seleccion);
-                          $repLegal = mysql_fetch_array($consultar)[0];
+                          $repLegal = mysql_fetch_array($consultar);
                          
-                          if(strnatcasecmp($repLegal, "") != 0){
+                          if(strnatcasecmp($repLegal[0], "") != 0){
                         ?>
                             <div class="form-group">
                                 <form method="POST" action="registrar_seleccion.php"><b>Asesor :</b>

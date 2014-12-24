@@ -259,7 +259,7 @@
                     <?php 
                         include '../Modelo/conexion.php';
                         $conect = new conexion();
-                        $SeleccionarGruposInscritos = $conect->consulta("SELECT NOMBRE_UGE FROM INSCRIPCION 
+                        $SeleccionarGruposInscritos = $conect->consulta("SELECT NOMBRE_UGE FROM inscripcion 
                         WHERE NOMBRE_UA='$UsuarioActivo'");
 
                         while ($rowGrupos = mysql_fetch_row($SeleccionarGruposInscritos)) {
@@ -293,8 +293,8 @@
 
                             for ($i=0; $i <count($GruposInscritos) ; $i++) { 
                                 
-                                $SeleccionarRepresentante = $conect->consulta("SELECT REPRESENTANTE_LEGAL_GE FROM GRUPO_EMPRESA WHERE NOMBRE_U = '$GruposInscritos[$i]'");
-                                $SeleccionarNota = $conect->consulta("SELECT CALIF_N FROM NOTA WHERE NOMBRE_U = '$GruposInscritos[$i]'");
+                                $SeleccionarRepresentante = $conect->consulta("SELECT REPRESENTANTE_LEGAL_GE FROM grupo_empresa WHERE NOMBRE_U = '$GruposInscritos[$i]'");
+                                $SeleccionarNota = $conect->consulta("SELECT CALIF_N FROM nota WHERE NOMBRE_U = '$GruposInscritos[$i]'");
                                 
                                 while($rowRepresentante = mysql_fetch_row($SeleccionarRepresentante))
                                 {

@@ -95,6 +95,7 @@
 
 
     <link href="css/tabla-div1.css" rel="stylesheet" type="text/css" />
+    <link href="css/tabla-div.css" rel="stylesheet" type="text/css" />
 </head>
     
     

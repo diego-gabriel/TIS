@@ -23,7 +23,7 @@
 	    function constructor($id) {
 	        $this->conexion->conectar();
 			$datosEntrega = $this->conexion->consultarTabla("SELECT id_r, entregable_p, entregado_p
-														     FROM ENTREGA
+														     FROM entrega
 														     WHERE id_r = $id;");
             $this->idRegistro = $datosEntrega[0][0];
             $this->entregable = $datosEntrega[0][1];
@@ -33,7 +33,7 @@
 
 	    function insertarBD() {
 	        $this->conexion->conectar();
-	        $this->conexion->consulta("INSERT INTO ENTREGA(id_r, entregable_p, entregado_p)
+	        $this->conexion->consulta("INSERT INTO entrega(id_r, entregable_p, entregado_p)
 	        						   VALUES($this->idRegistro, '$this->entregable', $this->entregado);");
 	        $this->conexion->cerrarConexion();
 	    }

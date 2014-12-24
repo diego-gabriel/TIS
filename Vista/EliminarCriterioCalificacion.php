@@ -329,7 +329,7 @@
                                         {
                                             echo "No tienen ningun criterio...vaya al siguiente link para crear uno";
 
-                                            echo '<a href="http://localhost/saetis/Vista/CrearModalidadCalificacion.php" class="btn btn-default btn-xs">Crear Criterio de Calificacion</a>';
+                                            echo '<a href="../Vista/CrearModalidadCalificacion.php" class="btn btn-default btn-xs">Crear Criterio de Calificacion</a>';
                                   
 
 

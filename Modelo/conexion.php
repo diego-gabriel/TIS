@@ -14,10 +14,10 @@ function __construct(){
 }
 
 function conectar(){   
-$servidor = 'localhost';
-$userName = 'root';
-$password = '';
-$bdName = 'saetis';
+$servidor = '192.168.2.5';
+$userName = 'mbittle';
+$password = '5rtZAGYq';
+$bdName = 'tis_mbittle';
 //$bdName = 'freevalue';
 global $link;
     $link =  mysql_connect($servidor, $userName, $password) or die('no se pudo conectar al servidor' . mysql_error());

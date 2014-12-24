@@ -25,7 +25,7 @@
 	    function constructor($idRegistro) {
 	    	$this->conexion->conectar();
 	        $datosAsistencia = $this->conexion->consultarTabla("SELECT id_r, codigo_socio_a, asistencia_a, licencia_a
-											                    FROM ASISTENCIA
+											                    FROM asistencia
 											                    WHERE id_r = $idRegistro;");
 	        $this->idRegistro = $datosAsistencia[0][0];
 	        $this->codigoSocio = $datosAsistencia[0][1];
@@ -36,7 +36,7 @@
 
 	    function insertarBD() {
 	        $this->conexion->conectar();
-	        $this->conexion->consulta("INSERT INTO ASISTENCIA(id_r, codigo_socio_a, asistencia_a, licencia_a)
+	        $this->conexion->consulta("INSERT INTO asistencia(id_r, codigo_socio_a, asistencia_a, licencia_a)
 	        						   VALUES($this->idRegistro, $this->codigoSocio, $this->asistencia, $this->licencia);");
 	        $this->conexion->cerrarConexion();    
 	    }

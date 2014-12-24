@@ -38,10 +38,10 @@
 	    function constructor($nombre) {
 	        $this->conexion->conectar();
 	        $usuarios = $this->conexion->consultarArreglo("SELECT nombre_u
-	                     								   FROM USUARIO;");
+	                     								   FROM usuario;");
 	        if (in_array($nombre, $usuarios)) {
 	            $datosUsuario = $this->conexion->consultarTabla("SELECT u.nombre_u, u.password_u, u.telefono_u, u.correo_electronico_u, u.estado_e, ur.rol_r
-											                     FROM USUARIO u, USUARIO_ROL ur
+											                     FROM usuario u, usuario_rol ur
 											                     WHERE u.nombre_u = ur.nombre_u AND u.nombre_u = '$nombre';");
 	            $this->nombre = $datosUsuario[0][0];
 	            $this->password = $datosUsuario[0][1];
@@ -59,7 +59,7 @@
 	        $res = false;
 	        $this->conexion->conectar();
 	        $vistaRol = $this->conexion->consultarArreglo("SELECT nombre_a 
-											        	   FROM ROL_APLICACION 
+											        	   FROM rol_aplicacion 
 											        	   WHERE rol_r = '$this->rol';");
 	        if (in_array($vista, $vistaRol)) {
 	            $res = true;
@@ -70,16 +70,16 @@
 
 	    function insertarBD() {
 	        $this->conexion->conectar();
-	        $this->conexion->consultar("INSERT INTO USUARIO(nombre_u,estado_e,password_u,telefono_u,correo_electronico_u)
+	        $this->conexion->consultar("INSERT INTO usuario(nombre_u,estado_e,password_u,telefono_u,correo_electronico_u)
 	        							VALUES('$this->nombre','$this->estado','$this->password','$this->telefono','$this->correoElectronico');");
-	        $this->conexion->consultar("INSERT INTO USUARIO_ROL (nombre_u,rol_r) 
+	        $this->conexion->consultar("INSERT INTO usuario_rol (nombre_u,rol_r) 
 		     							VALUES('$this->nombre','$this->rol');");
 	        $this->conexion->cerrarConexion();
 	    }
 
 	    public function modificarBD() {
 	        $this->conexion->conectar();
-	        $this->conexion->consultar("UPDATE USUARIO 
+	        $this->conexion->consultar("UPDATE usuario 
 	        							SET password_u='$this->password',estado_e='$this->estado',telefono_u='$this->telefono',correo_electronico_u='$this->correoElectronico' 
 	        							WHERE nombre_u = '$this->nombre';");
 	        $this->conexion->cerrarConexion();
@@ -90,7 +90,7 @@
 	        $conexion = new Conexion();
 	        $conexion->conectar();	        
 	        $valido = $conexion->consultaUnDato("SELECT nombre_u 
-									        	 FROM USUARIO 
+									        	 FROM usuario 
 									        	 WHERE nombre_u = '$nombre' AND password_u = '$password';");
 	        if ($valido != -1) {
 	            $existe = true;
@@ -104,7 +104,7 @@
 	        $conexion = new Conexion();
 	        $conexion->conectar();
 	        $res = $conexion->consultaUnDato("SELECT nombre_u 
-	        								  FROM USUARIO
+	        								  FROM usuario
 	        								  WHERE nombre_u = '$nombre';");
 	        if ($res > -1) {
 	            $existe = true;
@@ -117,7 +117,7 @@
 	        $conexion = new Conexion();
 	        $conexion->conectar();
 	        $usuarios = $conexion->consultarArreglo("SELECT nombre_u 
-	        										 FROM USUARIO");
+	        										 FROM usuario");
 	        $conexion->cerrarConexion();
 	        return $usuarios;
 	    }
@@ -126,7 +126,7 @@
 	        $conexion = new Conexion();
 	        $conexion->conectar();
 	        $roles = $conexion->consultarArreglo("SELECT rol_r 
-	        									  FROM ROL");
+	        									  FROM rol");
 	        $conexion->cerrarConexion();
 	        return $roles;
 	    }

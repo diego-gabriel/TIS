@@ -329,9 +329,9 @@
                                             $numero=$var3[5];
            
                                             $nombre_largo_actual=$con->consulta("SELECT `NOMBRE_LARGO_GE` FROM `grupo_empresa` WHERE `NOMBRE_U`='$UsuarioActivo'");
-                                            $nombreLargo = mysql_fetch_array($nombre_largo_actual)[0];
+                                            $nombreLargo = mysql_fetch_array($nombre_largo_actual);
                                            
-                                            if($numero=="TODOS" || $numero==$nombreLargo || $numero=="PUBLICO")
+                                            if($numero=="TODOS" || $numero==$nombreLargo[0] || $numero=="PUBLICO")
                                             {
                                                 $ubi= $var3[1];
                                                 

@@ -5,7 +5,9 @@ session_start();
 $con = new conexion();
 
 if (isset($_POST['grupoempresa'])) {
-    
+
+        
+		
     $nombre_fichero = '../Repositorio/asesor/Contrato.tex';
     $existeFile = FALSE;
     if (file_exists($nombre_fichero)) {
@@ -17,7 +19,7 @@ if (isset($_POST['grupoempresa'])) {
     {
         $seleccionar="SELECT `NOMBRE_CORTO_GE` FROM `grupo_empresa` WHERE `NOMBRE_LARGO_GE` = '$nombreLargo'";            
         $consulta= $con->consulta($seleccionar);
-        $nombreCorto =  mysql_fetch_array($consulta)[0];
+        $nombreCorto =  mysql_fetch_array($consulta);
 
         $nombreUA = $_SESSION['usuario'] ;
         $nomAp = $con->consulta("SELECT NOMBRES_A, APELLIDOS_A FROM asesor WHERE NOMBRE_U =  '$nombreUA' ");
@@ -27,16 +29,16 @@ if (isset($_POST['grupoempresa'])) {
         
         $seleccion = "SELECT `REPRESENTANTE_LEGAL_GE` FROM `grupo_empresa` WHERE `NOMBRE_LARGO_GE` = '$nombreLargo'";            
         $consultar= $con->consulta($seleccion);
-        $representante = mysql_fetch_array($consultar)[0];
+        $representante = mysql_fetch_array($consultar);
         
         $selNombreU = "SELECT `NOMBRE_U` FROM `grupo_empresa` WHERE `NOMBRE_LARGO_GE` = '$nombreLargo'";            
         $conNombU= $con->consulta($selNombreU);
-        $nombreUGE = mysql_fetch_array($conNombU)[0];
+        $nombreUGE = mysql_fetch_array($conNombU);
 
         
-        $selProyecto = "SELECT p.`NOMBRE_P` FROM `proyecto` AS p, `inscripcion_proyecto` AS ip WHERE ip.`NOMBRE_U` = '$nombreUGE' AND ip.`CODIGO_P` = p.`CODIGO_P`";
+        $selProyecto = "SELECT p.`NOMBRE_P` FROM `proyecto` AS p, `inscripcion_proyecto` AS ip WHERE ip.`NOMBRE_U` = '$nombreUGE[0]' AND ip.`CODIGO_P` = p.`CODIGO_P`";
         $conProy= $con->consulta($selProyecto);
-        $sistema = mysql_fetch_array($conProy)[0];
+        $sistema = mysql_fetch_array($conProy);
         
         $sistema = "SISTEMA";//SISTEMA DE APOYO A LA EMPRESA TIS
         //$convocatoria = "CPTIS-1707-2014";
@@ -54,21 +56,21 @@ if (isset($_POST['grupoempresa'])) {
 
 
         $remplazo['empresa_nombre_largo'] = $nombreLargo;
-        $remplazo['empresa_nombre_corto'] = $nombreCorto;
-        $remplazo['rep_legal']            = $representante;
+        $remplazo['empresa_nombre_corto'] = $nombreCorto[0];
+        $remplazo['rep_legal']            = $representante[0];
         $remplazo['asesor']               = $asesor;
         $remplazo['fecha_actual']         = date('Y/m/d');
-        $remplazo['sistema']              = $sistema;
+        $remplazo['sistema']              = $sistema[0];
         
-        $ruta = "..\\Repositorio\\asesor";
-        
+        $ruta = "../Repositorio/asesor";
+       // echo $ruta;
         chdir($ruta);
         
         $id = "Contrato";
         $tex = $id.".tex"; 
         $log = $id.".log"; 
         $aux = $id.".aux";
-        $nombCorto = str_replace(' ', '', $nombreCorto);
+        $nombCorto = str_replace(' ', '', $nombreCorto[0]);
         $pdf = $id.$nombCorto.".pdf"; 
         
          
@@ -95,7 +97,7 @@ if (isset($_POST['grupoempresa'])) {
         unlink($log);
         unlink($aux);
         
-        $rutaDirectorio="../".$nombreUA."/Contratos/";
+		$rutaDirectorio="../".$nombreUA."/Contratos/";
 
         $file = "Contrato".'_'.$nombreUA.'.pdf';
         
@@ -103,6 +105,7 @@ if (isset($_POST['grupoempresa'])) {
         {
             mkdir($rutaDirectorio, 0777,TRUE);
         }
+
                                    
         rename("Contrato.pdf", $file);
         rename($file, $rutaDirectorio.$pdf );
@@ -111,10 +114,10 @@ if (isset($_POST['grupoempresa'])) {
         //$rutaCompleta=$ruta.'/'.$pdf;
         
         
-        
-        header("location:../Vista/contrato.php");
+       header("location:../Vista/contrato.php");
     }
     else{        
+	
        echo"<script type=\"text/javascript\">alert('Por favor, seleccione una grupo empresa'); window.location='../Vista/contrato.php';</script>";  
     }
     }

@@ -215,7 +215,7 @@
                                                                                                     <p style="text-align:left;">Contenido :</p><br><br><br><br><br><br><br>
 												</td>
 												<td>
-                                                                                                    <textarea name='area_info' class="form-control" cols='50' rows='8' >Usted solicito un registro en saetis,   Ha sido validado satisfactoriamente, verifique haciendo click en el siguiente enlace: http://localhost/saetis/index.php</textarea>
+                                                                                                    <textarea name='area_info' class="form-control" cols='50' rows='8' >Usted solicito un registro en saetis,   Ha sido validado satisfactoriamente, verifique haciendo click en el siguiente enlace: http://bittle.cs.umss.edu.bo/index.php</textarea>
 												</td>
 											</tr>
 							

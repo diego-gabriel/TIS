@@ -1,4 +1,3 @@
-
 <html>
     
     <head>
@@ -161,9 +160,19 @@ if (isset($_POST['lista'])) {
                                     
                                     $remplazo['obs_det_item'] = $obsDetalleItem;
                                 
-                                    $ruta = "..\\Repositorio\\asesor";
+                                    //$ruta = "..\\Repositorio\\asesor";
+				    $ruta ="../Repositorio/asesor";
                                     chdir($ruta);
+                                    $rutaDirectorio="../".$nombreUGE."/OC/";
+
+                               	    $file = "OrdenCambio".'_'.$nombreEmpresa.'.pdf';
         
+                                    if (!file_exists($rutaDirectorio)) 
+                                    {
+                                        $oldmask = umask(0); 
+                                        mkdir($rutaDirectorio, 0777,TRUE);
+                                        umask($oldmask);
+                                    }
                                     $id = "OrdenCambio";
                                     $tex = $id.".tex";
                                     $log = $id.".log"; 
@@ -201,14 +210,7 @@ if (isset($_POST['lista'])) {
                                     unlink($aux);
                                     
                                     
-                                    $rutaDirectorio="../".$nombreUGE."/OC/";
-
-                               	    $file = "OrdenCambio".'_'.$nombreEmpresa.'.pdf';
-        
-                                    if (!file_exists($rutaDirectorio)) 
-                                    {
-                                        mkdir($rutaDirectorio, 0777,TRUE);
-                                    }
+                                   
                                     
                                    // rename("OrdenCambio.pdf", $file);
                                     rename("OrdenCambio.pdf", $rutaDirectorio.$pdf );

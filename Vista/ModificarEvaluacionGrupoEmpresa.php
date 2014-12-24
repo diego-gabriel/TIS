@@ -242,16 +242,16 @@
 
                             if(is_array($IdFormulario)){
 
-                                $SeleccionarNota = $conect->consulta("SELECT CALIF_N FROM NOTA WHERE NOMBRE_U='$GrupoEmpresa'");
+                                $SeleccionarNota = $conect->consulta("SELECT CALIF_N FROM nota WHERE NOMBRE_U='$GrupoEmpresa'");
 
                                 $Nota = mysql_fetch_row($SeleccionarNota);
 
 
                                 /******************************************************************/
-                                $SeleccionarIdNota = $conect->consulta("SELECT ID_N FROM NOTA WHERE NOMBRE_U='$GrupoEmpresa'");
+                                $SeleccionarIdNota = $conect->consulta("SELECT ID_N FROM nota WHERE NOMBRE_U='$GrupoEmpresa'");
                                 $IdNota = mysql_fetch_row($SeleccionarIdNota);
 
-                                $SeleccionarPuntateGE = $conect->consulta("SELECT CALIFICACION FROM PUNTAJE_GE WHERE ID_N='$IdNota[0]'");
+                                $SeleccionarPuntateGE = $conect->consulta("SELECT CALIFICACION FROM puntaje_ge WHERE ID_N='$IdNota[0]'");
 
                                 while ($rowPuntajeGE = mysql_fetch_row($SeleccionarPuntateGE)) {
                                     $PuntajeGE[] = $rowPuntajeGE[0];

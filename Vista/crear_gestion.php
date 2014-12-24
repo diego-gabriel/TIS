@@ -15,7 +15,7 @@ $addRol = $_POST['rol'];
 //conexion-------------
 
 	//Peticion
-	$peticion = $conectar->consulta("INSERT INTO `saetis`.`gestion` (`ID_G`, `NOM_G`, `FECHA_INICIO_G`, `FECHA_FIN_G`) VALUES (NULL, '$addRol', '$addini', '$addfin')");
+	$peticion = $conectar->consulta("INSERT INTO `gestion` (`ID_G`, `NOM_G`, `FECHA_INICIO_G`, `FECHA_FIN_G`) VALUES (NULL, '$addRol', '$addini', '$addfin')");
 	//cerrar conexion--------------------------
 	 
 	 //volver a la pagina---------------

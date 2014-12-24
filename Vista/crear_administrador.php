@@ -50,9 +50,9 @@ $peticion3 = $conectar ->consulta("SELECT * FROM asesor");
 
 	
         
-        $peticion1 = $conectar ->consulta("INSERT INTO `saetis`.`usuario` (`NOMBRE_U`, `ESTADO_E`, `PASSWORD_U`, `TELEFONO_U`, `CORREO_ELECTRONICO_U`) VALUES ('$addUsuario', 'Habilitado', '$addContrasena', '$addTelefono', '$addEmail');");
-        $peticion2 = $conectar ->consulta("INSERT INTO `saetis`.`usuario_rol` (`NOMBRE_U`, `ROL_R`) VALUES ('$addUsuario', 'administrador');");
-        $peticion3 = $conectar ->consulta("INSERT INTO `saetis`.`administrador` (`NOMBRE_U`, `NOMBRES_AD`, `APELLIDOS_AD`) VALUES ('$addUsuario', '$addNombre ', '$addApellido');");
+        $peticion1 = $conectar ->consulta("INSERT INTO `usuario` (`NOMBRE_U`, `ESTADO_E`, `PASSWORD_U`, `TELEFONO_U`, `CORREO_ELECTRONICO_U`) VALUES ('$addUsuario', 'Habilitado', '$addContrasena', '$addTelefono', '$addEmail');");
+        $peticion2 = $conectar ->consulta("INSERT INTO `usuario_rol` (`NOMBRE_U`, `ROL_R`) VALUES ('$addUsuario', 'administrador');");
+        $peticion3 = $conectar ->consulta("INSERT INTO `administrador` (`NOMBRE_U`, `NOMBRES_AD`, `APELLIDOS_AD`) VALUES ('$addUsuario', '$addNombre ', '$addApellido');");
 	
          //cerrar conexion--------------------------
 	

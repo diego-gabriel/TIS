@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <?php
     include '../Modelo/conexion.php';
@@ -317,6 +316,7 @@
                             else{  
 
                                 $Doc = $_GET['doc'];
+                                $VerificarDocumento = $conect->consulta("SELECT * FROM registro WHERE NOMBRE_U = '$UsuarioGE' AND NOMBRE_R = '$Doc'");
 
                                 $SeleccionarIdDoc = $conect->consulta("SELECT ID_R from registro where NOMBRE_R = '$Doc' AND NOMBRE_U ='$Asesor[0]'");
 
@@ -333,9 +333,26 @@
                                 $StampFechaInicio = strtotime($fechas[0]);
                                 $StampFechaFin = strtotime($fechas[1]);
 
+                                    $VerificarDoc = mysql_fetch_row($VerificarDocumento);
+
+                                    if(is_array($VerificarDoc))
+                                    {
+                                          
+                                          echo '<div class="alert alert-danger">
+                                                    <strong>Usted ya subio el documento correspondiente</strong>
+                                                </div>';
+                                    }
+                                    else
+
+                                    {
+
+ 
                                     if (($StampFechaActual == $StampFechaInicio and $StampHoraActual < $StampHoraInicio) or ($StampFechaActual == $StampFechaFin and $StampHoraActual > $StampHoraFin)) {
 
-                                        echo "No esta disponible la subida del documento";
+                                
+                                        echo '<div class="alert alert-danger">
+                                                    <strong>No esta disponible la subida del documento</strong>
+                                                </div>';
                                     }
                                     else
                                     {
@@ -351,14 +368,17 @@
                                                         <div class="form-group">
                                                             <input name="archivoA" id="archivoA" type="file" class = "btn btn-primary" required>
                                                         </div>
-                                                    
+                                                    <input type="hidden" name="Documento" value="'.$Doc.'">
                                                         <div class="form-group">
                                                             <input type="submit" value="Subir Documento" class= "btn btn-primary">
                                                         </div>
                                                     </fieldset>
                                                     <input type = "hidden" name="Usuario" value="'.$UsuarioGE.'"">
                                                 </form>';
-                                    }  
+
+                                               
+                                    } 
+                                   } 
     
                             }
                         
@@ -394,3 +414,4 @@
 </body>
 
 </html>
+					

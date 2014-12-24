@@ -23,7 +23,7 @@ $horaFinRegistrado="HorFin";
 
 
 $registros=$co->consulta("SELECT *".
-        " FROM Registro".
+        " FROM registro".
         " WHERE tipo_t= 'documento requerido'",$co) or
   die("Problemas en el select:".mysql_error());
 if(isset($documentoR))

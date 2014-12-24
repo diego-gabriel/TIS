@@ -4,10 +4,10 @@
 //require('guardarDocumento.php');
 session_start();
 
-$conexion = mysql_connect("localhost","root","");
+$conexion = mysql_connect("192.168.2.5","mbittle","5rtZAGYq");
     //Control
     if(!$conexion){die('La conexion ha fallado por:'.mysql_error());}
-    mysql_select_db("saetis",$conexion);
+    mysql_select_db("tis_mbittle",$conexion);
  
  $UsuarioActivo = $_SESSION['usuario'];
 
@@ -23,7 +23,6 @@ $asesor = $UsuarioActivo;
     $tempFile = $_FILES['file']['tmp_name'];          //3             
     
     $targetPath = dirname( __FILE__ ) . $rutaDirectorio ;  //absolute path of the destination folder.
-    
     $targetFile =  $targetPath. $_FILES['file']['name'];  //absolute path of the uploaded file destination.
     
     $subido = move_uploaded_file($tempFile,$targetFile); //6

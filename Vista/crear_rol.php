@@ -15,7 +15,7 @@ $addRol = $_POST['rol'];
 //conexion-------------
 
 	//Peticion
-	$peticion = $conectar-> consulta("INSERT INTO `saetis`.`rol` (`ROL_R`) VALUES ('$addRol');");
+	$peticion = $conectar-> consulta("INSERT INTO `rol` (`ROL_R`) VALUES ('$addRol');");
 	//cerrar conexion--------------------------
 	
 	 //volver a la pagina---------------

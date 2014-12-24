@@ -21,7 +21,7 @@
             	$this->conexion->conectar();
             	$this->id = $this->conexion->consultaUnDato("SELECT auto_increment
 															 FROM `information_schema`.tables
-															 WHERE TABLE_SCHEMA = 'saetis' AND TABLE_NAME = 'registro';");
+															 WHERE TABLE_SCHEMA = 'tis_mbittle' AND TABLE_NAME = 'registro';");
             	$this->conexion->cerrarConexion();
             	$this->usuario = $args[0];
             	$this->tipo = $args[1];
@@ -35,7 +35,7 @@
 	    function constructor($id) {
 	        $this->conexion->conectar();
 			$datosRegistro = $this->conexion->consultarTabla("SELECT id_r, nombre_u, tipo_t, estado_e, nombre_r, fecha_r, hora_r
-														      FROM REGISTRO
+														      FROM registro
 														      WHERE id_r = $id;");
             $this->id = $datosRegistro[0][0];
             $this->usuario = $datosRegistro[0][1];
@@ -49,14 +49,14 @@
 
 	    function insertarBD() {
 	        $this->conexion->conectar();
-	        $this->conexion->consulta("INSERT INTO REGISTRO(nombre_u, tipo_t, estado_e, nombre_r, fecha_r, hora_r)
+	        $this->conexion->consulta("INSERT INTO registro(nombre_u, tipo_t, estado_e, nombre_r, fecha_r, hora_r)
 	        						   VALUES('$this->usuario', '$this->tipo', '$this->estado', '$this->nombre', '$this->fecha', '$this->hora');");
 	        $this->conexion->cerrarConexion();
 	    }
 
 	    public function modificarBD() {
 	        $this->conexion->conectar();
-	        $this->conexion->consulta("UPDATE REGISTRO 
+	        $this->conexion->consulta("UPDATE registro 
 										SET nombre_u = '$this->usuario', tipo_t = '$this->tipo', estado_e = '$this->estado', nombre_r = '$this->nombre', fecha_r = '$this->fecha', hora_r = '$this->hora' 
 										WHERE id_r = '$this->id';");
 	        $this->conexion->cerrarConexion();
@@ -66,7 +66,7 @@
 	        $conexion = new Conexion();
 	        $conexion->conectar();
 	        $actividadesPlanificacion = $conexion->consultarTabla("SELECT id_r, nombre_r 
-	        										    		   FROM REGISTRO
+	        										    		   FROM registro
 	        										    		   WHERE nombre_u = '$usuario' AND tipo_t = 'actividad planificacion';");
 	        $conexion->cerrarConexion();
 	        return $actividadesPlanificacion;

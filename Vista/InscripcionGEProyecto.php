@@ -1,4 +1,4 @@
-
+	
 <!DOCTYPE html>
 <?php
     include '../Modelo/conexion.php';
@@ -278,9 +278,9 @@
                          
                           $seleccion = "SELECT NOMBRE_UA FROM inscripcion WHERE NOMBRE_UGE = '$UsuarioActivo'";
                           $consultar = $con ->consulta($seleccion);
-                          $nombreUA = mysql_fetch_array($consultar)[0];
+                          $nombreUA = mysql_fetch_array($consultar);
                          
-                          if(strnatcasecmp($nombreUA, "") != 0){
+                          if(strnatcasecmp($nombreUA[0], "") != 0){
                         ?>
                             <div class="form-group">
                                 <form method="POST" <b>Proyectos disponibles :</b>

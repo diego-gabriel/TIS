@@ -36,14 +36,14 @@
 
 	    function insertarBD() {
 	        $this->conexion->conectar();
-	        $this->conexion->consulta("INSERT INTO PLANIFICACION(NOMBRE_U, ESTADO_E, FECHA_INICIO_P, FECHA_FIN_P)
+	        $this->conexion->consulta("INSERT INTO planificacion(NOMBRE_U, ESTADO_E, FECHA_INICIO_P, FECHA_FIN_P)
 	        							VALUES('$this->usuario', '$this->estado', '$this->fechaInicio', '$this->fechaFin');");
 	        $this->conexion->cerrarConexion();
 	    }
 
 	    public function modificarBD() {
 	        $this->conexion->conectar();
-	        $this->conexion->consulta("UPDATE PLANIFICACION
+	        $this->conexion->consulta("UPDATE planificacion
 	        						   SET ESTADO_E = '$this->estado',  FECHA_INICIO_P = '$this->fechaInicio', FECHA_FIN_P = '$this->fechaFin'
 	        						   WHERE NOMBRE_U = '$this->usuario';");
 	        $this->conexion->cerrarConexion();
