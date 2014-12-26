@@ -8,7 +8,8 @@
         }
         
         public function conectarMYSQL() {
-            mysql_connect('192.168.2.5', 'mbittle','5rtZAGYq') or die("Error en el establecimiento de la conexion");
+           // mysql_connect('192.168.2.5', 'mbittle','5rtZAGYq') or die("Error en el establecimiento de la conexion");
+            mysql_connect('localhost', 'root','') or die("Error en el establecimiento de la conexion"); 
         }
 
         public function conectarBD() {

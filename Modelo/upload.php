@@ -4,10 +4,12 @@
 //require('guardarDocumento.php');
 session_start();
 
-$conexion = mysql_connect("192.168.2.5","mbittle","5rtZAGYq");
+//$conexion = mysql_connect("192.168.2.5","mbittle","5rtZAGYq");
+$conexion = mysql_connect("localhost","root","");
     //Control
     if(!$conexion){die('La conexion ha fallado por:'.mysql_error());}
-    mysql_select_db("tis_mbittle",$conexion);
+   // mysql_select_db("tis_mbittle",$conexion);
+     mysql_select_db("saetis",$conexion);
  
  $UsuarioActivo = $_SESSION['usuario'];
 

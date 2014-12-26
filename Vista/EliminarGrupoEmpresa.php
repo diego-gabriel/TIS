@@ -4,6 +4,7 @@ include '../Modelo/conexion.php';
 $conect = new conexion();
 
 $GrupoEmpresa = $_GET['id_us'];
+echo $GrupoEmpresa;
 
 $SeleccionarIdRegistroGE = $conect->consulta("SELECT ID_R FROM registro WHERE NOMBRE_U='$GrupoEmpresa'");
 $IdRegistroGE = mysql_fetch_row($SeleccionarIdRegistroGE);
@@ -15,6 +16,28 @@ if(isset($_GET['op']))
 	if($operacion == 'si')
 	{
    
+         //eliminar publicacion
+		 $nombre_largo_actual=$conect->consulta("SELECT NOMBRE_LARGO_GE FROM grupo_empresa WHERE NOMBRE_U='$GrupoEmpresa'");
+         $nombreLargo = mysql_fetch_array($nombre_largo_actual);
+echo ($nombreLargo[0]);
+		$peticion_registro =$conect->consulta(" SELECT ID_R FROM `receptor` WHERE RECEPTOR_R ='$nombreLargo[0]'");
+		 $peticion_regis=mysql_num_rows($peticion_registro);
+
+		 if($peticion_regis>0){
+       while( $peticion_regis=mysql_fetch_array($peticion_registro))
+{
+		$id=$peticion_regis[0];
+
+                    $des_eliminar=$conect->consulta(" DELETE FROM `descripcion` WHERE ID_R='$id'");
+                    $doc_eliminar=$conect->consulta(" DELETE FROM `documento` WHERE ID_R='$id'");
+
+                    $periodo_eliminar = $conect->consulta("DELETE FROM periodo WHERE ID_R = '$id' ");
+                    //$periodo_eliminar = $conect->consulta("DELETE FROM plazo WHERE ID_R = '$id' ");
+                    $receptor_eliminar = $conect->consulta("DELETE FROM receptor WHERE ID_R = '$id' ");
+                    $registro_eliminar = $conect->consulta("DELETE FROM registro WHERE ID_R = '$id' ");
+                    
+}
+}
 		//Eliminar Los puntajes
 		$SeleccionarIdFormulario = $conect->consulta("SELECT ID_N FROM nota WHERE NOMBRE_U='$GrupoEmpresa'"); 
 
@@ -60,7 +83,7 @@ if(isset($_GET['op']))
 		$EliminarPlanificacionGE = $conect->consulta("DELETE FROM planificacion WHERE NOMBRE_U = '$GrupoEmpresa' ");
 
 
-		
+
 		
 		
 		//comentarios
@@ -86,7 +109,7 @@ if(isset($_GET['op']))
 
 
 		echo '<script>alert("Se elimino la grupo empresa correctamente!!")</script>';
-		echo '<script>window.location="../Vista/ListaGrupoEmpresas.php";</script>';
+		//echo '<script>window.location="../Vista/ListaGrupoEmpresas.php";</script>';
 		die();
 	}
 

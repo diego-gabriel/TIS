@@ -1,5 +1,6 @@
 <?php
-    
+include '../Modelo/conexion.php';
+    $con=new conexion(); 
    session_start();
    $UsuarioActivo = $_SESSION['usuario'];
    //include("controlSesion.php");
@@ -270,6 +271,30 @@
                                  </div>
                                  <div class="form-group">
                                      <input type="text" name="DescripcionDocumento" id="" class="form-control" pattern="^[a-zA-Z\s]*$" placeholder="Descripcion" required>
+                                 </br>
+                                     <select name="proyecto" class="form-control">
+                                    <option>Seleccione un proyecto</option>
+                                    <?php
+                                        $idGE= $UsuarioActivo  ;
+
+                                        $conGestion="SELECT id_g "
+                                                . "FROM gestion "
+                                                . "WHERE DATE (NOW()) > DATE(FECHA_INICIO_G) and DATE(NOW()) < DATE(FECHA_FIN_G)";
+                                        $conGestion_=$con->consulta($conGestion);
+                                        $idGestion=mysql_fetch_row($conGestion_);
+                                        $idGestion_=$idGestion[0];
+                                                                       
+                                        $c1="SELECT p.`NOMBRE_P` FROM `proyecto` AS `p`, `gestion` AS `g` WHERE p.`ID_G` = g.`ID_G` AND p.`ID_G` LIKE '".$idGestion_."'";
+                                 
+                                        $a1=$con->consulta($c1);
+                
+                                        while($v1 =  mysql_fetch_array($a1)){
+                                            echo "<option>".$v1[0]."</option>";
+                                        }
+                                    echo "<input type='hidden' name='idGE' value='$idGE'>";
+            
+                                    ?>
+                                     </select><br>
                                  </div> 
                         
                                 <p>

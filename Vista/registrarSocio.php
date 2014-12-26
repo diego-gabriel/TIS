@@ -21,10 +21,17 @@ session_start();
      if (!is_array($VerificarUsuarioS2) && !is_array($VerificarUsuarioGE2)) 
      {
          
-                    $db = 'tis_mbittle';
+                   /* $db = 'tis_mbittle';
                     $host = '192.168.2.5';
                     $user = 'mbittle';
-                    $pass = '5rtZAGYq';
+                    $pass = '5rtZAGYq';*/
+                    $db = 'saetis';
+
+                    $host = 'localhost';
+
+                    $user = 'root';
+
+                    $pass = '';
                     $conn = new PDO("mysql:dbname=".$db.";host=".$host,$user, $pass);
 
                     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

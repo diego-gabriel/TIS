@@ -231,6 +231,7 @@
                               <th>Tipo</th>
                               <th>Nombre</th>
                               <th>Descripcion</th>
+                              <th>Accion</th>
                             </tr>
                          </thead>
                           <tbody>                                                    

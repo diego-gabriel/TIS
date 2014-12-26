@@ -277,48 +277,99 @@
             </div>
         </div>
 <!-------------------------------------------NUEVAS PUBLICACIONES------------------------------------------>
-<div id="page-wrapper">
-           
-<form id = "econtrato" method = "post" action="" role="form" >
-    <div class ="form-horizontal">
-         <div class="row">
-            <div class="mainbar">
-                 <div class="article"><br><br>
-                      <h2><span>Contratos Emitidos</span></h2>   
-                  </div>
-                </br>     
-            </div>
-         </div><!-- /.row -->
-    </div>    
-                <!--Descripcion de la publicacion--> 
-                
-             
 
+    <!-- /#wrapper -->  <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>Contratos</h1>
+                    <div class="panel panel-default" >
 
-                            <?php
-                            $carpeta="../Repositorio/".$UsuarioActivo."/Contratos/";
+              
+                        
+                         
+
+                             
+                            <table class="table form-group" >
+                                 
+                                                     <tr bgcolor="#888888">
+                                                          <th> Nº</th>
+                                                          <th >Nombre<th>
+                                                          <th >                  </th>  
+                                                          <th></th>
+                                                          
+                                                     </tr> 
+
+ 
+                                <?php
+                                
+                                     $c_3="SELECT DISTINCT `NOMBRE_R`,`RUTA_D`,`DESCRIPCION_D`,`fecha_p` ,`hora_p`,`RECEPTOR_R` FROM `registro` AS r,`documento` AS d,`descripcion` AS e,`periodo` AS p,`receptor` AS w WHERE r.`ID_R` = d.`ID_R` AND r.`ID_R` = e.`ID_R` AND r.`ID_R` = p.`ID_R` AND r.`ID_R` = w.`ID_R` AND r.`TIPO_T` LIKE 'publicaciones' ";
+                                     
+                                     $r3=$con->consulta($c_3);
+                                    
+                                        $carpeta="../Repositorio/".$UsuarioActivo."/Contratos/";
                              if(is_dir($carpeta)){
                                 if($dir = opendir($carpeta)){
+                                    $i=1;
                                      while(($archivo = readdir($dir)) !== false){
                                         if($archivo != '.' && $archivo != '..' && $archivo != '.htaccess'){
-                                            echo '<li><a class='."link-dos".' target="_blank" href="'.$carpeta.$archivo.'">'.$archivo.'</a></li>';
-                                        }   
+                                            ?>
+
+                                             <tr> 
+                                                          <td><?php echo $i?></td> 
+                                                      <td><b><?php echo $archivo ?></b><td>
+
+                                                          <td><a class="link-dos" target="_blank" href= <?php echo $carpeta.$archivo ?>>Ver            </td> 
+                                                          <td> </a> 
+                                                            <?php
+                                                            $direccion=$carpeta.$archivo;
+                                                            echo "<a class='link-dos' href='eliminar_contrato.php?id_us=".$direccion."'
+                                                           ><font color='blue'></font>         Eliminar</a>";
+                                                             ?> </td>
+                                                         
+                                            </tr>
+                                            <?php
+
+                                            //echo '<li><a class='."link-dos".' target="_blank" href="'.$carpeta.$archivo.'">'.$archivo.'</a></li>';
+                                              $i++;  
+                                        } 
+                                      
                                         }
            
                                 closedir($dir);
                             }
                         }
-                              
-                           
-                            ?>  
-     </form>  
+                                                
+                                  
+                                  
+                                    
+                                       ?>
+                                       </table>
+                                      
+                                       <?php
+                                            //echo "</form>";
+                                    //$tabla.="</table>";
+                                     //echo $tabla;
+                                    
+                                   
+                                    
+                                
+                                
+                                $con->cerrarConexion();
+                                
+                                
 
-             
-    <!--Modal para adjuntar recursos/documentos-->
-         
-      
-    </div>
-    <!-- /#wrapper -->
+                                ?>
+                           
+                        
+                          <script type="text/javascript" src="../Librerias/calendario2/jquery.js"></script>
+                        <script type="text/javascript" src="../Librerias/calendario2/jquery.datetimepicker.js"></script>
+                        
+                    </div>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+        </div>
     
 
     <!-- Core Scripts - Include with every page -->

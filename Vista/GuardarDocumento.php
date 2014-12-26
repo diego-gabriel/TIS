@@ -6,6 +6,7 @@ date_default_timezone_set('America/Puerto_Rico');
 
 session_start();
 $UsuarioActivo = $_SESSION['usuario'];
+$proyecto =$_POST['proyecto'];
 
 $nombreDoc = trim($_POST['nombreDocumento']);
 $FechaInicioEntrega = $_POST['fechaInicioE'];
@@ -37,8 +38,12 @@ else{
 	$InsertarPlazo = $conect->consulta("INSERT INTO plazo VALUES('$DocId[0]','$FechaInicioEntrega','$FechaFinalEntrega','$HoraInicioEntrega','$HoraFinalEntrega')");
 
 	$InsertarDescripcion  = $conect->consulta("INSERT INTO descripcion VALUES('$DocId[0]', '$DescripcionDocumento')");
-	
+	$proyecto_id = $conect->consulta("SELECT CODIGO_P FROM proyecto WHERE NOMBRE_P='$proyecto'");
+	$p_id = mysql_fetch_row($proyecto_id);
 
+	
+	
+  $InsertarProyecto = $conect->consulta("INSERT INTO documento_r VALUES('$DocId[0]', '$p_id[0]')");
 
 	if ($InsertarDocumento and $InsertarPlazo and $InsertarDescripcion) {
 
@@ -48,7 +53,7 @@ else{
 	}
 	else{
 	
-			echo "<SCRIPT LANGUAGE='javascript'>". 
+		echo "<SCRIPT LANGUAGE='javascript'>". 
 		            " alert('Error, no se pudo registrar el documento');".
 		            " document.location=('../Vista/RegistrarDocumentosRequeridos.php');</SCRIPT>";
 	}	
