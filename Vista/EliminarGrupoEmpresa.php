@@ -4,7 +4,6 @@ include '../Modelo/conexion.php';
 $conect = new conexion();
 
 $GrupoEmpresa = $_GET['id_us'];
-echo $GrupoEmpresa;
 
 $SeleccionarIdRegistroGE = $conect->consulta("SELECT ID_R FROM registro WHERE NOMBRE_U='$GrupoEmpresa'");
 $IdRegistroGE = mysql_fetch_row($SeleccionarIdRegistroGE);
@@ -19,8 +18,7 @@ if(isset($_GET['op']))
          //eliminar publicacion
 		 $nombre_largo_actual=$conect->consulta("SELECT NOMBRE_LARGO_GE FROM grupo_empresa WHERE NOMBRE_U='$GrupoEmpresa'");
          $nombreLargo = mysql_fetch_array($nombre_largo_actual);
-echo ($nombreLargo[0]);
-		$peticion_registro =$conect->consulta(" SELECT ID_R FROM `receptor` WHERE RECEPTOR_R ='$nombreLargo[0]'");
+		 $peticion_registro =$conect->consulta(" SELECT ID_R FROM `receptor` WHERE RECEPTOR_R ='$nombreLargo[0]'");
 		 $peticion_regis=mysql_num_rows($peticion_registro);
 
 		 if($peticion_regis>0){
@@ -35,6 +33,8 @@ echo ($nombreLargo[0]);
                     //$periodo_eliminar = $conect->consulta("DELETE FROM plazo WHERE ID_R = '$id' ");
                     $receptor_eliminar = $conect->consulta("DELETE FROM receptor WHERE ID_R = '$id' ");
                     $registro_eliminar = $conect->consulta("DELETE FROM registro WHERE ID_R = '$id' ");
+
+                    
                     
 }
 }

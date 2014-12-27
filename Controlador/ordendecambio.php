@@ -83,12 +83,12 @@ if (isset($_POST['lista'])) {
 				$row1       = $stmt1->fetchObject();
 				$nombreCGE = $row1->NOMBRE_CORTO_GE;  
 				
-				$email     = "SELECT u.`CORREO_ELECTRONICO_U` FROM `usuario` AS u WHERE u.`NOMBRE_U` LIKE '$nombreAsesor'";
+				$email     = "SELECT u.`CORREO_ELECTRONICO_U` FROM `usuario` AS u WHERE u.`NOMBRE_U` LIKE '$nombreUA'";
 				$consulta  = $conexion->query($email);
 				$row       = $consulta->fetchObject();
 				$correo    = $row->CORREO_ELECTRONICO_U;
 
-				$consultaNombre = "SELECT a.`NOMBRES_A`, a.`APELLIDOS_A` FROM `asesor` AS a WHERE a.`NOMBRE_U` LIKE '$nombreAsesor'";
+				$consultaNombre = "SELECT a.`NOMBRES_A`, a.`APELLIDOS_A` FROM `asesor` AS a WHERE a.`NOMBRE_U` LIKE '$nombreUA'";
 				$nombre        = $conexion->query($consultaNombre);
 				$row           = $nombre->fetchObject();
 				$nomAs = $row->NOMBRES_A;
@@ -161,7 +161,7 @@ if (isset($_POST['lista'])) {
                                     $remplazo['obs_det_item'] = $obsDetalleItem;
                                 
                                     //$ruta = "..\\Repositorio\\asesor";
-				    $ruta ="../Repositorio/asesor";
+				                    $ruta ="../Repositorio/asesor";
                                     chdir($ruta);
                                     $rutaDirectorio="../".$nombreUGE."/OC/";
 
@@ -172,6 +172,11 @@ if (isset($_POST['lista'])) {
                                         $oldmask = umask(0); 
                                         mkdir($rutaDirectorio, 0777,TRUE);
                                         umask($oldmask);
+                                        if(!file_exists("../".$nombreUGE."/index.html"))
+                                        {
+                                            fopen("../".$nombreUGE."/index.html", "x");
+                                        }
+                                    
                                     }
                                     $id = "OrdenCambio";
                                     $tex = $id.".tex";
@@ -232,8 +237,13 @@ if (isset($_POST['lista'])) {
                                    $destinatario=$conexion->query("INSERT INTO receptor (ID_R,RECEPTOR_R) VALUES('$id','$nombreEmpresa')");
                                    $guardar = $conexion->query("INSERT INTO periodo (ID_R,fecha_p,hora_p) VALUES ('$id','$fecha','$hora')") or
 			           die("Error al s");
-                                    
-                                    header("location:../Vista/ordenDeCambio.php");
+
+                                if (!file_exists("../".$nombreUGE."/OC/index.html")) {
+                                    # code...
+                                    fopen("../".$nombreUGE."/OC/index.html", "x");
+                                }
+
+                                echo"<script type=\"text/javascript\">alert('Se genero correctamente la orden de cambio'); window.location='../Vista/ordenDeCambio.php';</script>";  
 					
 				}
 				}

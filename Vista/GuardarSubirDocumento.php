@@ -24,7 +24,8 @@ $clas = new conexion();
             if ($resultado) {
                 
                 //recuperamos la idRegistro siguiente que se insertara en la BD de registro para enviarlo a documento
-                $resultadoUno=$clas->consulta("SELECT auto_increment FROM `information_schema`.tables WHERE TABLE_SCHEMA = 'tis_mbittle' AND TABLE_NAME = 'registro'");
+                //$resultadoUno=$clas->consulta("SELECT auto_increment FROM `information_schema`.tables WHERE TABLE_SCHEMA = 'tis_mbittle' AND TABLE_NAME = 'registro'");
+                $resultadoUno=$clas->consulta("SELECT auto_increment FROM `information_schema`.tables WHERE TABLE_SCHEMA = 'saetis' AND TABLE_NAME = 'registro'");
                 while ($filas = mysql_fetch_array($resultadoUno)) {
                     $idRegistro=(integer)$filas['0'];
                 }

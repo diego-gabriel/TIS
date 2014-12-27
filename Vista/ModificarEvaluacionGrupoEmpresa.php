@@ -428,7 +428,9 @@
 
                             }else{
 
-                                echo "la grupo empresa no ha sido evaluada";
+                                echo '<div class="alert alert-warning">
+                                                    <strong>La grupo empresa no ha sido evaluada</strong>
+                                                </div>';
                             }
 
                             

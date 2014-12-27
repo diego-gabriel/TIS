@@ -27,11 +27,27 @@
         
     /*$usuario = 'Bittle';*/
     
-    $VerificarInscripcion = $con->consulta("SELECT * FROM inscripcion, inscripcion_proyecto WHERE NOMBRE_UGE = '$UsuarioActivo' and NOMBRE_U = '$UsuarioActivo'");
+    $VerificarInscripcion = $con->consulta("SELECT NOMBRE_UA FROM inscripcion, inscripcion_proyecto WHERE NOMBRE_UGE = '$UsuarioActivo' and NOMBRE_U = '$UsuarioActivo'");
     $Inscripcion = mysql_fetch_row($VerificarInscripcion);
-    
+
+    //$SeleccionarDocumentosRequeridos = $con->consulta("SELECT * FROM registro WHERE NOMBRE_U='$Inscripcion[0]' AND TIPO_T='documento requerido'");
+    //$DocumentosRequeridos = mysql_num_rows($SeleccionarDocumentosRequeridos);
+
+    //$VerificarDocumentosSubidos = $con->consulta("SELECT * FROM registro WHERE NOMBRE_U = '$UsuarioActivo' AND TIPO_T='documento subido'");
+    //$DocumentosSubidos = mysql_num_rows($VerificarDocumentosSubidos);
+
+    $SeleccionarNombreLargo = $con->consulta("SELECT NOMBRE_LARGO_GE FROM grupo_empresa WHERE NOMBRE_U='$UsuarioActivo'");
+    $NombreLargo = mysql_fetch_row($SeleccionarNombreLargo);
+
+    $VerificarContrato = $con->consulta("SELECT * FROM registro, receptor WHERE NOMBRE_U='$Inscripcion[0]' AND TIPO_T='Contrato' AND RECEPTOR_R = '$NombreLargo[0]' AND registro.ID_R = receptor.ID_R");
+    $Contrato = mysql_num_rows($VerificarContrato);
+
     if(is_array($Inscripcion))
     {
+
+      if($Contrato >= 1)
+      {
+
         $planificacion = new Planificacion($usuario);
         $estado = $planificacion->getEstado();
     
@@ -284,13 +300,20 @@
                        </div>');
                 break;
         }
-        
+
+      }
+      else
+      {
+        echo '<div class="alert alert-warning">
+                <strong>Podra registrar su planificacion una vez haya firmado contrato</strong>
+              </div>';
+      }
     }
     else
     {
         echo '<div class="alert alert-warning">
-                           <strong>Primero debe realizar el proceso de inscripcion</strong>
-         </div>';
+                <strong>Primero debe inscribirse a un proyecto en la opcion "Inscribirse a proyecto"</strong>
+              </div>';
     }	
     
 ?>

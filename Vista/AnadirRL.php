@@ -155,15 +155,25 @@
 
                                         $SeleccionrAsesor = $conect->consulta("SELECT NOMBRE_UA FROM inscripcion WHERE NOMBRE_UGE='$UsuarioGE[0]'");
                                         $Asesor = mysql_fetch_row($SeleccionrAsesor);
-                                        $SeleccionarDocReq = $conect->consulta("SELECT NOMBRE_R FROM registro WHERE NOMBRE_U = '$Asesor[0]' AND TIPO_T='documento requerido' ");
+                                        $ins_proyecto = $conect->consulta("SELECT CODIGO_P FROM inscripcion_proyecto WHERE NOMBRE_U='$UsuarioGE[0]'");
+                                        $id_proyecto = mysql_fetch_row($ins_proyecto);
+                                        $SeleccionarDocReq = $conect->consulta("SELECT  `NOMBRE_R`,`CODIGO_P` FROM registro AS r,documento_r AS d WHERE r.ID_R=d.ID_R AND  `NOMBRE_U`='$Asesor[0]' AND TIPO_T='documento requerido' ");
+                                        
                                         
                                         while ($rowDocs = mysql_fetch_row($SeleccionarDocReq))
                                         {
-                                          echo '<li>
-                                                   <a href="SubirDocumento.php?doc='.$rowDocs[0].'">'.$rowDocs[0].'</a>
-                                                </li>';    
-                                        }
+                                            if($rowDocs[1] == $id_proyecto[0])
+                                            {
+                                                   echo '<li>
+                                                      <a href="SubirDocumento.php?doc='.$rowDocs[0].'">'.$rowDocs[0].'</a>
+                                                   </li>';  
+                                             }
+                                            else 
+                                            {
 
+                                            }
+                                            
+                                        }
                                     }
                                     else
                                     {
@@ -171,13 +181,24 @@
                                       
                                         $Asesor = mysql_fetch_row($SeleccionrAsesor);
                                           
-                                        $SeleccionarDocReq = $conect->consulta("SELECT NOMBRE_R FROM registro WHERE NOMBRE_U = '$Asesor[0]' AND TIPO_T='documento requerido' ");
+                                        $ins_proyecto = $conect->consulta("SELECT CODIGO_P FROM inscripcion_proyecto WHERE NOMBRE_U='$UsuarioActivo'");
+                                        $id_proyecto = mysql_fetch_row($ins_proyecto);
+                                          
+                                        $SeleccionarDocReq = $conect->consulta("SELECT  `NOMBRE_R`,`CODIGO_P` FROM registro AS r,documento_r AS d WHERE r.ID_R=d.ID_R AND  `NOMBRE_U`='$Asesor[0]' AND TIPO_T='documento requerido' ");
+                                          
                                           
                                         while ($rowDocs = mysql_fetch_row($SeleccionarDocReq))
                                         {
-                                            echo '<li>
+                                            if($rowDocs[1] == $id_proyecto[0])
+                                            {
+                                                   echo '<li>
                                                       <a href="SubirDocumento.php?doc='.$rowDocs[0].'">'.$rowDocs[0].'</a>
-                                                   </li>';    
+                                                   </li>';  
+                                             }
+                                            else 
+                                            {
+
+                                            }
                                         }
 
                                     }      
@@ -272,34 +293,55 @@
  <div id="page-wrapper">
      <div class="row">
          <div class="col-lg-12">
-             <h2 class="page-header">Representante legal</h2>        
+             <h2 class="page-header">Representante legal</h2> 
 
-            <div class="form-group">
-                Representante Legal:
-                <form method="POST" enctype="Multipart/form-data">
-                    <select name="repLegal" class="form-control">
-                        <option>Seleccione un representante legal </option>
-                        <?php
-                        session_start();
-                            $idGE = $_SESSION['usuario']  ;
-                            $c1="SELECT NOMBRES_S, APELLIDOS_S FROM `socio`WHERE NOMBRE_U LIKE '$idGE'";
-                            $a1=$con->consulta($c1);
+             <?php
 
-                            while($v1 =  mysql_fetch_array($a1)){
-                                echo "<option>".$v1[0]." ".$v1[1]."</option>";
-                            }
-                            echo "<input type='hidden' name='idAsesor' value='$idGE'>";
+             $VerificarCantidadSocios = $conect->consulta("SELECT * FROM socio WHERE NOMBRE_U='$UsuarioActivo'");
 
-                            ?>
-                    </select><br>
-                     <div class   ="col-sm-8">
-                         <input class ="btn btn-primary" type="submit" value= "Aceptar" id= "aceptar" name="Aceptar" onclick ="this.form.action='../Vista/registrarRP.php?id=0'"></input> &nbsp;&nbsp;              
+
+             $CantidadSocios = mysql_num_rows($VerificarCantidadSocios);  
+
+            if ($CantidadSocios < 3) {
+
+                echo '<div class="alert alert-warning">
+                           <strong>Primero debe completar el registro de socios en la opcion "Anadir Socios"</strong>
+                       </div>';
+            }
+            else
+            {
+
+            ?>
+
+                    <div class="form-group">
+                        Representante Legal:
+                        <form method="POST" enctype="Multipart/form-data">
+                            <select name="repLegal" class="form-control">
+                                <option>Seleccione un representante legal </option>
+                                <?php
+                                session_start();
+                                    $idGE = $_SESSION['usuario']  ;
+                                    $c1="SELECT NOMBRES_S, APELLIDOS_S FROM `socio`WHERE NOMBRE_U LIKE '$idGE'";
+                                    $a1=$con->consulta($c1);
+
+                                    while($v1 =  mysql_fetch_array($a1)){
+                                        echo "<option>".$v1[0]." ".$v1[1]."</option>";
+                                    }
+                                    echo "<input type='hidden' name='idAsesor' value='$idGE'>";
+
+                                    ?>
+                            </select><br>
+                             <div class   ="col-sm-8">
+                                 <input class ="btn btn-primary" type="submit" value= "Aceptar" id= "aceptar" name="Aceptar" onclick ="this.form.action='../Vista/registrarRP.php?id=0'"></input> &nbsp;&nbsp;              
+                            </div>
+                        </form>
                     </div>
-                </form>
-            </div>
-    
 
-      
+            <?php  
+
+            }
+
+            ?>
     </div><!--end/submit-->
 
     </div>

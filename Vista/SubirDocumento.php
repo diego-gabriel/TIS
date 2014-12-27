@@ -170,13 +170,25 @@
 
                                         $SeleccionrAsesor = $conect->consulta("SELECT NOMBRE_UA FROM inscripcion WHERE NOMBRE_UGE='$UsuarioGrupoEmpresa[0]'");
                                         $Asesor = mysql_fetch_row($SeleccionrAsesor);
-                                        $SeleccionarDocReq = $conect->consulta("SELECT NOMBRE_R FROM registro WHERE NOMBRE_U = '$Asesor[0]' AND TIPO_T='documento requerido' ");
+
+                                        $ins_proyecto = $conect->consulta("SELECT CODIGO_P FROM inscripcion_proyecto WHERE NOMBRE_U='$UsuarioGE[0]'");
+                                        $id_proyecto = mysql_fetch_row($ins_proyecto);
+                                        $SeleccionarDocReq = $conect->consulta("SELECT  `NOMBRE_R`,`CODIGO_P` FROM registro AS r,documento_r AS d WHERE r.ID_R=d.ID_R AND  `NOMBRE_U`='$Asesor[0]' AND TIPO_T='documento requerido' ");
+                                        
                                         
                                         while ($rowDocs = mysql_fetch_row($SeleccionarDocReq))
                                         {
-                                          echo '<li>
-                                                   <a href="SubirDocumento.php?doc='.$rowDocs[0].'">'.$rowDocs[0].'</a>
-                                                </li>';    
+                                            if($rowDocs[1] == $id_proyecto[0])
+                                            {
+                                                   echo '<li>
+                                                      <a href="SubirDocumento.php?doc='.$rowDocs[0].'">'.$rowDocs[0].'</a>
+                                                   </li>';  
+                                             }
+                                            else 
+                                            {
+
+                                            }
+                                            
                                         }
 
                                     }
@@ -186,13 +198,24 @@
                                       
                                         $Asesor = mysql_fetch_row($SeleccionrAsesor);
                                           
-                                        $SeleccionarDocReq = $conect->consulta("SELECT NOMBRE_R FROM registro WHERE NOMBRE_U = '$Asesor[0]' AND TIPO_T='documento requerido' ");
+                                        $ins_proyecto = $conect->consulta("SELECT CODIGO_P FROM inscripcion_proyecto WHERE NOMBRE_U='$UsuarioActivo'");
+                                        $id_proyecto = mysql_fetch_row($ins_proyecto);
+                                          
+                                        $SeleccionarDocReq = $conect->consulta("SELECT  `NOMBRE_R`,`CODIGO_P` FROM registro AS r,documento_r AS d WHERE r.ID_R=d.ID_R AND  `NOMBRE_U`='$Asesor[0]' AND TIPO_T='documento requerido' ");
+                                          
                                           
                                         while ($rowDocs = mysql_fetch_row($SeleccionarDocReq))
                                         {
-                                            echo '<li>
+                                            if($rowDocs[1] == $id_proyecto[0])
+                                            {
+                                                   echo '<li>
                                                       <a href="SubirDocumento.php?doc='.$rowDocs[0].'">'.$rowDocs[0].'</a>
-                                                   </li>';    
+                                                   </li>';  
+                                             }
+                                            else 
+                                            {
+
+                                            }
                                         }
 
                                     }      
@@ -338,7 +361,7 @@
                                     if(is_array($VerificarDoc))
                                     {
                                           
-                                          echo '<div class="alert alert-danger">
+                                          echo '<div class="alert alert-warning">
                                                     <strong>Usted ya subio el documento correspondiente</strong>
                                                 </div>';
                                     }
@@ -350,16 +373,16 @@
                                     if (($StampFechaActual == $StampFechaInicio and $StampHoraActual < $StampHoraInicio) or ($StampFechaActual == $StampFechaFin and $StampHoraActual > $StampHoraFin)) {
 
                                 
-                                        echo '<div class="alert alert-danger">
+                                        echo '<div class="alert alert-warning">
                                                     <strong>No esta disponible la subida del documento</strong>
                                                 </div>';
                                     }
                                     else
                                     {
                                        
-                                            echo '<div class="form-group">';
+                                            echo '<div class="alert alert-warning">';
 
-                                            echo 'La entrega esta disponible desde la fecha '.$fechas[0].' a horas '.$fechas[2].' hasta la fecha '.$fechas[1].' a horas '.$fechas[3].'';
+                                            echo '<strong>La entrega esta disponible desde la fecha '.$fechas[0].' a horas '.$fechas[2].' hasta la fecha '.$fechas[1].' a horas '.$fechas[3].'</strong>';
                                             echo '</div>';
 
                                             echo '
