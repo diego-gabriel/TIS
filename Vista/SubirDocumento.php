@@ -336,25 +336,31 @@
                             {
                                 echo "<h4>Para subir su propuesta primero debe inscribirse a un proyecto</h4>";
                             }
-                            else{  
+                            else{
 
-                                $Doc = $_GET['doc'];
-                                $VerificarDocumento = $conect->consulta("SELECT * FROM registro WHERE NOMBRE_U = '$UsuarioGE' AND NOMBRE_R = '$Doc'");
+                                $VerificarEstado = $con->consulta("SELECT * FROM inscripcion WHERE NOMBRE_UGE = '$UsuarioGE' AND ESTADO_INSCRIPCION='Habilitado'"); 
+                                $Estado = mysql_num_rows($VerificarEstado);
+                            
 
-                                $SeleccionarIdDoc = $conect->consulta("SELECT ID_R from registro where NOMBRE_R = '$Doc' AND NOMBRE_U ='$Asesor[0]'");
+                                if($Estado == 1)
+                                {
+                                    $Doc = $_GET['doc'];
+                                    $VerificarDocumento = $conect->consulta("SELECT * FROM registro WHERE NOMBRE_U = '$UsuarioGE' AND NOMBRE_R = '$Doc'");
 
-                                $IdDoc = mysql_fetch_row($SeleccionarIdDoc);
+                                    $SeleccionarIdDoc = $conect->consulta("SELECT ID_R from registro where NOMBRE_R = '$Doc' AND NOMBRE_U ='$Asesor[0]'");
 
-                                $SeleccionarFechas = $conect->consulta("SELECT FECHA_INICIO_PL, FECHA_FIN_PL, HORA_INICIO_PL, HORA_FIN_PL from registro r, plazo p WHERE r.ID_R = p.ID_R AND r.ID_R = '$IdDoc[0]' ");
+                                    $IdDoc = mysql_fetch_row($SeleccionarIdDoc);
 
-                                $fechas = mysql_fetch_row($SeleccionarFechas);
+                                    $SeleccionarFechas = $conect->consulta("SELECT FECHA_INICIO_PL, FECHA_FIN_PL, HORA_INICIO_PL, HORA_FIN_PL from registro r, plazo p WHERE r.ID_R = p.ID_R AND r.ID_R = '$IdDoc[0]' ");
 
-                                $StampHoraActual = strtotime($HoraActual);
-                                $StampFechaActual = strtotime($FechaActual);
-                                $StampHoraInicio = strtotime($fechas[2]);
-                                $StampHoraFin = strtotime($fechas[3]);
-                                $StampFechaInicio = strtotime($fechas[0]);
-                                $StampFechaFin = strtotime($fechas[1]);
+                                    $fechas = mysql_fetch_row($SeleccionarFechas);
+
+                                    $StampHoraActual = strtotime($HoraActual);
+                                    $StampFechaActual = strtotime($FechaActual);
+                                    $StampHoraInicio = strtotime($fechas[2]);
+                                    $StampHoraFin = strtotime($fechas[3]);
+                                    $StampFechaInicio = strtotime($fechas[0]);
+                                    $StampFechaFin = strtotime($fechas[1]);
 
                                     $VerificarDoc = mysql_fetch_row($VerificarDocumento);
 
@@ -370,39 +376,47 @@
                                     {
 
  
-                                    if (($StampFechaActual == $StampFechaInicio and $StampHoraActual < $StampHoraInicio) or ($StampFechaActual == $StampFechaFin and $StampHoraActual > $StampHoraFin)) {
+                                        if (($StampFechaActual == $StampFechaInicio and $StampHoraActual < $StampHoraInicio) or ($StampFechaActual == $StampFechaFin and $StampHoraActual > $StampHoraFin)) {
+
+                                    
+                                            echo '<div class="alert alert-warning">
+                                                        <strong>No esta disponible la subida del documento</strong>
+                                                    </div>';
+                                        }
+                                        else
+                                        {
+                                           
+                                                echo '<div class="alert alert-warning">';
+
+                                                echo '<strong>La entrega esta disponible desde la fecha '.$fechas[0].' a horas '.$fechas[2].' hasta la fecha '.$fechas[1].' a horas '.$fechas[3].'</strong>';
+                                                echo '</div>';
+
+                                                echo '
+                                                    <form action="GuardarSubirDocumento.php" method="POST" enctype="multipart/form-data">
+                                                        <fieldset>
+                                                            <div class="form-group">
+                                                                <input name="archivoA" id="archivoA" type="file" class = "btn btn-primary" required>
+                                                            </div>
+                                                        <input type="hidden" name="Documento" value="'.$Doc.'">
+                                                            <div class="form-group">
+                                                                <input type="submit" value="Subir Documento" class= "btn btn-primary">
+                                                            </div>
+                                                        </fieldset>
+                                                        <input type = "hidden" name="Usuario" value="'.$UsuarioGE.'"">
+                                                    </form>';
+
+                                                   
+                                        }    
+                                    }  
+                                }
+                                else
+                                {
+                                    echo '<div class="alert alert-warning">
+                                            <strong>Su inscripcion no ha sido habilitada</strong>
+                                          </div>';
+                                }
 
                                 
-                                        echo '<div class="alert alert-warning">
-                                                    <strong>No esta disponible la subida del documento</strong>
-                                                </div>';
-                                    }
-                                    else
-                                    {
-                                       
-                                            echo '<div class="alert alert-warning">';
-
-                                            echo '<strong>La entrega esta disponible desde la fecha '.$fechas[0].' a horas '.$fechas[2].' hasta la fecha '.$fechas[1].' a horas '.$fechas[3].'</strong>';
-                                            echo '</div>';
-
-                                            echo '
-                                                <form action="GuardarSubirDocumento.php" method="POST" enctype="multipart/form-data">
-                                                    <fieldset>
-                                                        <div class="form-group">
-                                                            <input name="archivoA" id="archivoA" type="file" class = "btn btn-primary" required>
-                                                        </div>
-                                                    <input type="hidden" name="Documento" value="'.$Doc.'">
-                                                        <div class="form-group">
-                                                            <input type="submit" value="Subir Documento" class= "btn btn-primary">
-                                                        </div>
-                                                    </fieldset>
-                                                    <input type = "hidden" name="Usuario" value="'.$UsuarioGE.'"">
-                                                </form>';
-
-                                               
-                                    } 
-                                   } 
-    
                             }
                         
                         ?>

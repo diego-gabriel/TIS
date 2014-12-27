@@ -39,7 +39,7 @@
     $SeleccionarNombreLargo = $con->consulta("SELECT NOMBRE_LARGO_GE FROM grupo_empresa WHERE NOMBRE_U='$UsuarioActivo'");
     $NombreLargo = mysql_fetch_row($SeleccionarNombreLargo);
 
-    $VerificarContrato = $con->consulta("SELECT * FROM registro, receptor WHERE NOMBRE_U='$Inscripcion[0]' AND TIPO_T='Contrato' AND RECEPTOR_R = '$NombreLargo[0]' AND registro.ID_R = receptor.ID_R");
+    $VerificarContrato = $con->consulta("SELECT ESTADO_CONTRATO FROM inscripcion_proyecto WHERE NOMBRE_U='$UsuarioActivo' AND ESTADO_CONTRATO='Firmado'");
     $Contrato = mysql_num_rows($VerificarContrato);
 
     if(is_array($Inscripcion))

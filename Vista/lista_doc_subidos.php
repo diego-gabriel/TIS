@@ -206,6 +206,9 @@
                                     <a href="contrato.php">Emitir Contrato </a>
                                 </li>
                                 <li>
+                                    <a href="../Vista/RegistrarFirma.php">Firma de Contratos</a>
+                                </li>
+                                <li>
                                     <a href="ordenDeCambio.php">Emitir Orden de Cambio</a>
                                 </li>
                                 <li>

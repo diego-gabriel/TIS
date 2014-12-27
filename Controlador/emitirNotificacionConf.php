@@ -70,14 +70,17 @@ if (isset($_POST['lista'])) {
         				}
 
                         /******************************************/
-                            $cons = "SELECT * FROM registro WHERE NOMBRE_U='$nombreUA' and TIPO_T='documento requerido'";
-                            $SeleccionarDocsRequeridos = $conexion->query($cons);
-                            $DocsRequeridos = $SeleccionarDocsRequeridos->rowCount();
+                            //$cons = "SELECT * FROM registro WHERE NOMBRE_U='$nombreUA' and TIPO_T='documento requerido'";
+                            //$SeleccionarDocsRequeridos = $conexion->query($cons);
+                            //$DocsRequeridos = $SeleccionarDocsRequeridos->rowCount();
 
-                            $SeleccionarDocsSubidos = $conexion->query("SELECT * FROM registro WHERE NOMBRE_U='$nombreUGE' AND TIPO_T='documento subido'");
+                            //$SeleccionarDocsSubidos = $conexion->query("SELECT * FROM registro WHERE NOMBRE_U='$nombreUGE' AND TIPO_T='documento subido'");
+                            //$DocsSubidos = $SeleccionarDocsSubidos->rowCount();
+
+                            $SeleccionarDocsSubidos = $conexion->query("SELECT * FROM registro,receptor WHERE NOMBRE_U='$nombreUA' AND NOMBRE_R='Orden de Cambio' AND registro.ID_R = receptor.ID_R");
                             $DocsSubidos = $SeleccionarDocsSubidos->rowCount();
 
-                            if($DocsRequeridos == $DocsSubidos)
+                            if($DocsSubidos>=1)
                             {
                                 if(isset($_GET['id'])){
                          
@@ -202,7 +205,7 @@ if (isset($_POST['lista'])) {
                             else
                             {
                         
-                                echo"<script type=\"text/javascript\">alert('La grupo empresa que ha escogido no ha registrado aun todos los documentos requeridos'); window.location='../Vista/notificacion_conformidad.php';</script>";  
+                                echo"<script type=\"text/javascript\">alert('Primero debe emitir una orden de cambio para la grupo empresa seleccionada'); window.location='../Vista/notificacion_conformidad.php';</script>";  
                             }			
 			        } 
                     else

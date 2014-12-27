@@ -53,6 +53,9 @@
     <!-- JS -->
     <script type="text/javascript" src="../Librerias/lib/funcion.js"></script>
 
+    <script src="../Librerias/js/bootstrap-dialog.js"></script>
+    <link href="../Librerias/css/bootstrap-dialog.css" rel="stylesheet">
+
 
 
 
@@ -205,6 +208,9 @@
                                     <a href="contrato.php">Emitir Contrato </a>
                                 </li>
                                 <li>
+                                    <a href="../Vista/RegistrarFirma.php">Firma de Contratos</a>
+                                </li>
+                                <li>
                                     <a href="ordenDeCambio.php">Emitir Orden de Cambio</a>
                                 </li>
                                 <li>
@@ -307,7 +313,9 @@
         </select><br>
          <div class   ="col-sm-8">
              <input class ="btn btn-primary" type="submit" value= "Generar" id= "Generar PDF" name="Generar PDF" onclick ="this.form.action='../Controlador/emitirContrato.php?id=0'"></input> &nbsp;&nbsp;              
+             
         </div>
+    
     </form>
     </div>
     
