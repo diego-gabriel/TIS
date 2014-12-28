@@ -1,13 +1,16 @@
 <?php  
-    session_start();    
-
+   
+    session_start();
     $UsuarioActivo = $_SESSION['usuario'];
+    //include("controlSesion.php");
+
+    
 ?>
+
 
 <!DOCTYPE html>
 <html>
 <head>
-    
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -15,68 +18,38 @@
 
     <!-- Core CSS - Include with every page -->
     <link href="../Librerias/css/bootstrap.min.css" rel="stylesheet">
+   
     <link href="../Librerias/font-awesome/css/font-awesome.css" rel="stylesheet">
 
     <!-- ComboBox estilizado ;) -->
     
     <!-- Page-Level Plugin CSS - Dashboard -->
-    <link href="../Librerias/css/plugins/morris/morris-0.4.3.min.css" rel="stylesheet">
+    
     <link href="../Librerias/css/plugins/timeline/timeline.css" rel="stylesheet">
    
 
     <!-- SB Admin CSS - Include with every page -->
     <link href="../Librerias/css/sb-admin.css" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="../Librerias/css/jquery-te-1.4.0.css">
-    <link href="../Librerias/css/bootstrap-dialog.css" rel="stylesheet">
+
+    <!--link rel="stylesheet" href="../Librerias/css/awesome-bootstrap-checkbox.css"-->
     
     <script src="../Librerias/js/jquery-1.10.2.js"></script>
-    
-    <script type="text/javascript" src="../Librerias/js/validar_orden.js"></script>
     <script type="text/javascript" src="../Librerias/js/masked_input.js"></script>
-    <script src="../Librerias/js/jquery-2.1.0.min.js"></script> 
+    <script src="../Librerias/js/jquery-2.1.0.min.js"></script>
+     
+    <script src="../Librerias/js/evaluar.js"></script>
+    <link href="../Librerias/css/bootstrap-dialog.css" rel="stylesheet">
     <script src="../Librerias/js/bootstrap-dialog.js"></script>
-    <script>
-        $(document).ready(function(){
-
-            $('#btn-aceptar').on('click', function(){
-
-                if($("form")[0].checkValidity()) 
-                {
-                    var url = "HabilitarFormulario.php"
-
-                    $.ajax({
-                        url: url,
-                        type: 'POST',
-                        data: $('#HabilitarFormulario').serialize(),
-
-                        success: function(data){
-
-                        $('#panelResultado').html(data)
-
-                        }
-
-                    });
-
-                    return false;
-
-                } 
-            });
-        });
-        
-    </script>
+   
 </head>
 
 <body>
 
    
-    <div id="wrapper">
-       
         
-    <!--<h2>design by <a href="#" title="flash templates">flash-templates-today.com</a></h2>-->
-        
-               
 	
-        <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
+       <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
                     <span class="sr-only">Toggle navigation</span>
@@ -162,7 +135,7 @@
                             <a href="#"><i class="fa fa-bar-chart-o fa-files-o "></i> Documentos <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                            <a href="../Vista/subirarchivoasesor.php">Subir Documentos</a>
+                                    <a href="../Vista/subirarchivoasesor.php">Subir Documentos</a>
                                 </li>
                                 <li>
                                     <a href="../Vista/RegistrarDocumentosRequeridos.php">Registrar Documentos</a>
@@ -170,7 +143,6 @@
                                 <li>
                                     <a href="../Vista/documentos_generados.php">Contratos Emitidos</a>
                                 </li>
-                                
                                 <li>
                                     <a href="#">Publicaci&oacute;n Documentos <span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
@@ -238,7 +210,7 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
- 
+
                          <li>
                               <a href="lista_doc_subidos.php"><i class="fa fa-tasks fa-fw"></i>Documentos Subidos </a>  
                                               
@@ -283,73 +255,114 @@
                 </div>
             </div>
         </div>
-
-<!-------------------------------------------NUEVAS PUBLICACIONES------------------------------------------>
+<!----------------------------------------NUEVAS PUBLICACIONES------------------------------------------>
 <div id="page-wrapper">
-           
-<!--form id = "ordenc" method = "post" action="" role="form" enctype="multipart/data-form" onsubmit="return validarCampos(ordenc)"-->
-        <div class ="form-horizontal">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h2 class="page-header">Habilitar Formulario:</h2>
-                        <div class="col-lg-6">
-                            <form method = "post" id="HabilitarFormulario">   
-            	     
-                                    <?php 
-                                    
-                                        include '../Modelo/conexion.php';
-					                    
-                                        $conect = new conexion();
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="page-header">Evaluacion Final</h2>
+            <div class="col-lg-6">   
+                <form method ="post" id="FormEvaluar" action="../Vista/RegistrarEvaluacionFinal.php"> 
 
-					                    $SeleccionarFormulario = $conect->consulta("SELECT NOMBRE_FORM FROM formulario WHERE NOMBRE_U = '$UsuarioActivo'");
-                                        
-                                        while ($row = mysql_fetch_row($SeleccionarFormulario)) {
-                                            
-                                            $seleccionar[] = $row; 
-                                        }
+                    <div class="form-group">
+                    
+                            <?php
+                            include '../Modelo/conexion.php';
+                            $conect = new conexion();  
+                            $GE = $_POST['GrupoEmpresa'];
 
-                                        if(isset($seleccionar) and is_array($seleccionar)){
+                            $SeleccionarNota= $conect->consulta("SELECT CALIF_N FROM nota WHERE NOMBRE_U='$GE'");
+                                $Nota = mysql_fetch_row($SeleccionarNota);
 
-                                            echo '<div class="form-group">
-                                                  <label for=""><h4>Seleccione un Formulario para evaluacion:</h4></label>
-                                                  <select name="formulario" id="SeleccionarFormulario" class="form-control" required>
-                                                    <option value="">Seleccione un Formulario</option>'; 
+                        
+                            if(is_array($Nota))
+                            {
 
-                                                    for ($i=0; $i <count($seleccionar) ; $i++){
+                                $Nota2da = 0;
 
-                                                        echo '<option value='.$seleccionar[$i][0].'>'.$seleccionar[$i][0].'</option>'; 
-                                                    }
+                                $SeleccionarIdPlanificacion = $conect->consulta("SELECT ID_R FROM registro WHERE NOMBRE_U='$GE' AND TIPO_T='actividad planificacion'");
+        
+                                while ($rowP = mysql_fetch_row($SeleccionarIdPlanificacion)) {
 
-                                                echo '</select>';
-                                                echo '</div>';
+                                    $IdPlanificacion[] = $rowP[0];
+                            
+                                }
 
-                                                echo '<div class="form-group">
-                                                        <button type="submit" class="btn btn-primary btn-sm" id="btn-aceptar"><span class="glyphicon glyphicon-ok"></span>&nbsp&nbspAceptar</button>
-                                                        <a href="EvaluarGrupoEmpresa.php" class="btn btn-primary btn-sm">Ir al formulario</a>
-                                                      </div>';
+                                for ($i=0; $i <count($IdPlanificacion) ; $i++) { 
+            
+                                    $SeleccionarEvaluacion2 = $conect->consulta("SELECT NOTA_E FROM evaluacion WHERE ID_R = '$IdPlanificacion[$i]'");
+                                   
+                                    while ($rowE = mysql_fetch_row($SeleccionarEvaluacion2)) {
 
-                                                 
-                                        }else
-                                        {
-                                            echo "No tienen ningun formulario registrado...vaya al siguiente link para crear uno";
-
-                                            echo '<a href="../Vista/CrearFormulario.php" class="btn btn-default btn-xs">Crear Formulario</a>';
-                                  
-
-
-                                        }
-
-                                          
-                                    ?>
-                                 
-                            </form>                                                
-
-                            <div id="panelResultado">
+                                        $Evaluacion2[] = $rowE[0];
                                 
-                            </div>        
-                        </div><!--Col-lg-6-->
-                </div><!--col-lg-12-->
-            </div><!-- /.row -->                   
+                                    }
+                                }
+
+                                for ($i=0; $i <count($Evaluacion2) ; $i++) { 
+
+                                    $Nota2da = $Nota2da + $Evaluacion2[$i];
+                                
+                                }
+
+                                echo '<input type="hidden" name="GrupoE" value="'.$GE.'">';
+                                
+
+                                echo '<div class="form-group has-success">';
+                                echo '<h4>Nota 2da etapa:</h4>';
+                                echo '<input type="text" value="'.$Nota2da. ' puntos" class="form-control" disabled>';
+                                echo '</div>';
+
+                                echo '<div class="form-group has-success">';
+                                echo '<h4>Nota 3era etapa:</h4>';
+                                echo '<input type="text" value="'.$Nota[0]. ' puntos" class="form-control" disabled>';
+                                echo '</div>';
+
+                                $NotaFinal = $Nota2da*0.60 + $Nota[0]*0.40;
+
+                                echo '<div class="form-group has-success">';
+                                echo '<h4>Nota Final:</h4>';
+                                echo '<input type="text" value="'.$NotaFinal. ' puntos" class="form-control" name="NotaF" readonly>';
+                                echo '</div>';
+
+                                echo '<div class="form-group">
+                                    <button type="submit" class="btn btn-primary">Registrar</button>
+                                    </div>';
+
+                                echo '<div class="form-group">';
+                                echo '<div class="alert alert-warning">';
+                                echo "* La nota final esta constituida por el 60% de la nota correspondiente a la 2da etapa y el 40% de la nota correspondiente a la 3era etapa";
+                                echo '</div>';
+                                echo '</div>';
+
+
+
+                            }
+                            else
+                            {
+                                echo '<div class="alert alert-warning">
+                                        <strong>Primero debe realizar la evaluacion correspondiente a la 3era etapa</strong>
+                                      </div>';
+
+                            }
+                            
+
+                            ?>  
+                    
+                    </div>
+                    
+                    
+                </form>
+                  
+                <div id="ResultadoNota">
+                    <div class="form-group">
+                                        
+                    </div>
+                </div>                                      
+            </div><!--Col-lg6-->
+        </div><!--Col lg 12-->
+    </div><!-- /.row -->  
+
+</div><!--Page-Wrapper-->               
     <script src="../Librerias/js/bootstrap.min.js"></script>
     <script src="../Librerias/js/plugins/metisMenu/jquery.metisMenu.js"></script>
 
@@ -360,9 +373,7 @@
     <!-- Page-Level Demo Scripts - Dashboard - Use for reference -->
     <script src="../Librerias/js/demo/dashboard-demo.js"></script>
     <!-- Combo Box scripts -->
-
     
- 
 </body>
 
 </html>

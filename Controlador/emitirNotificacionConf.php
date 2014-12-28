@@ -70,17 +70,14 @@ if (isset($_POST['lista'])) {
         				}
 
                         /******************************************/
-                            //$cons = "SELECT * FROM registro WHERE NOMBRE_U='$nombreUA' and TIPO_T='documento requerido'";
-                            //$SeleccionarDocsRequeridos = $conexion->query($cons);
-                            //$DocsRequeridos = $SeleccionarDocsRequeridos->rowCount();
+                            $cons = "SELECT * FROM registro WHERE NOMBRE_U='$nombreUA' and TIPO_T='documento requerido'";
+                            $SeleccionarDocsRequeridos = $conexion->query($cons);
+                            $DocsRequeridos = $SeleccionarDocsRequeridos->rowCount();
 
-                            //$SeleccionarDocsSubidos = $conexion->query("SELECT * FROM registro WHERE NOMBRE_U='$nombreUGE' AND TIPO_T='documento subido'");
-                            //$DocsSubidos = $SeleccionarDocsSubidos->rowCount();
-
-                            $SeleccionarDocsSubidos = $conexion->query("SELECT * FROM registro,receptor WHERE NOMBRE_U='$nombreUA' AND NOMBRE_R='Orden de Cambio' AND registro.ID_R = receptor.ID_R");
+                            $SeleccionarDocsSubidos = $conexion->query("SELECT * FROM registro WHERE NOMBRE_U='$nombreUGE' AND TIPO_T='documento subido'");
                             $DocsSubidos = $SeleccionarDocsSubidos->rowCount();
 
-                            if($DocsSubidos>=1)
+                            if($DocsRequeridos == $DocsSubidos)
                             {
                                 if(isset($_GET['id'])){
                          
@@ -187,6 +184,7 @@ if (isset($_POST['lista'])) {
                                       $nombDoc = $row->NOMBRE_R;
                                         
                                    }
+
                                    if (strcasecmp($nombreDoc, $nombDoc)!=0) 
                                    {
                                         $comentario_add = $conexion->query("INSERT INTO registro (NOMBRE_U,TIPO_T,ESTADO_E,NOMBRE_R,FECHA_R,HORA_R) VALUES ('$nombreUA','publicaciones','Habilitado','$nombreDoc','$fecha','$hora')")or
@@ -202,6 +200,8 @@ if (isset($_POST['lista'])) {
                                         $guardar = $conexion->query("INSERT INTO periodo (ID_R,fecha_p,hora_p) VALUES ('$id','$fecha','$hora')") or
                                         die("Error");
                                    }
+
+                                
 
                                     $directorioIndex = "../".$nombreUGE."/NC/index.html";
         
@@ -219,7 +219,7 @@ if (isset($_POST['lista'])) {
                             else
                             {
                         
-                                echo"<script type=\"text/javascript\">alert('Primero debe emitir una orden de cambio para la grupo empresa seleccionada'); window.location='../Vista/notificacion_conformidad.php';</script>";  
+                                echo"<script type=\"text/javascript\">alert('La grupo empresa seleccionada aun no ha subido todos los documentos requeridos'); window.location='../Vista/notificacion_conformidad.php';</script>";  
                             }			
 			        } 
                     else

@@ -16,9 +16,6 @@ if (isset($_POST['grupoempresa'])) {
    else
    {
 
-
-        
-        
         $nombre_fichero = '../Repositorio/asesor/Contrato.tex';
         $existeFile = FALSE;
         if (file_exists($nombre_fichero)) {
@@ -54,11 +51,16 @@ if (isset($_POST['grupoempresa'])) {
                 $selCon = "SELECT p.`CONVOCATORIA` FROM `proyecto` AS p, `inscripcion_proyecto` AS ip WHERE ip.`NOMBRE_U` = '$nombreUGE[0]' AND ip.`CODIGO_P` = p.`CODIGO_P`";
                 $convocatoriaProy = $con->consulta($selCon);
                 $convocatoria = mysql_fetch_array($convocatoriaProy);
-                
-                $SeleccionarDocsSubidos = $con->consulta("SELECT * FROM registro,receptor WHERE NOMBRE_U='$nombreUA' AND NOMBRE_R='Notificacion de Conformidad' AND registro.ID_R = receptor.ID_R");
-                $DocsSubidos = mysql_num_rows($SeleccionarDocsSubidos);
 
-                if ($DocsSubidos >= 1) {
+                $GrupoEmpresaNC = 'Notificacion de Conformidad de '.$nombreCorto[0].'';
+                $SeleccionarNC = $con->consulta("SELECT * FROM registro,receptor WHERE NOMBRE_U='$nombreUA' AND NOMBRE_R='$GrupoEmpresaNC' AND registro.ID_R = receptor.ID_R");
+                $NC = mysql_num_rows($SeleccionarNC);
+
+                $GrupoEmpresaOC = 'Orden de Cambio de '.$nombreCorto[0].'';
+                $SeleccionarOC = $con->consulta("SELECT * FROM registro,receptor WHERE NOMBRE_U='$nombreUA' AND NOMBRE_R='$GrupoEmpresaOC' AND registro.ID_R = receptor.ID_R");
+                $OC = mysql_num_rows($SeleccionarOC);
+
+                if ($NC >= 1 or $OC>=1) {
             
                         
                         $buscar    = array(
@@ -161,7 +163,7 @@ if (isset($_POST['grupoempresa'])) {
                 }
                 else
                 {
-                    echo"<script type=\"text/javascript\">alert('Antes de emitir un contrato debe emitir una notificacion de conformidad para la grupo empresa seleccionada'); window.location='../Vista/contrato.php';</script>";  
+                    echo"<script type=\"text/javascript\">alert('Antes de emitir un contrato debe emitir una notificacion de conformidad u orden de cambio para la grupo empresa seleccionada'); window.location='../Vista/contrato.php';</script>";  
 
                 }
                 

@@ -119,6 +119,9 @@ include '../Modelo/conexion.php';
                                                 <li>
                                                     <a href="EvaluarGrupoEmpresa.php">Evaluar Grupo Empresa </a>   
                                                 </li>
+                                                <li>
+                                                    <a href="../Vista/EvaluacionGeneral.php">Evaluacion Final </a>   
+                                                </li>
                                             </ul>
                                 </li>
                         

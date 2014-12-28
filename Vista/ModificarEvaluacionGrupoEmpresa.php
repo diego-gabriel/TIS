@@ -122,6 +122,9 @@
                                                 <li>
                                                     <a href="../Vista/EvaluarGrupoEmpresa.php">Evaluar Grupo Empresa </a>   
                                                 </li>
+                                                <li>
+                                                    <a href="../Vista/EvaluacionGeneral.php">Evaluacion Final </a>   
+                                                </li>
                                             </ul>
                                 </li>
                         

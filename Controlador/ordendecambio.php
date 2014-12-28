@@ -102,10 +102,14 @@ if (isset($_POST['lista'])) {
             				}
 
 
+                            $cons = "SELECT * FROM registro WHERE NOMBRE_U='$nombreUA' and TIPO_T='documento requerido'";
+                            $SeleccionarDocsRequeridos = $conexion->query($cons);
+                            $DocsRequeridos = $SeleccionarDocsRequeridos->rowCount();
+
                             $SeleccionarDocsSubidos = $conexion->query("SELECT * FROM registro WHERE NOMBRE_U='$nombreUGE' AND TIPO_T='documento subido'");
                             $DocsSubidos = $SeleccionarDocsSubidos->rowCount();
 
-                            if($DocsSubidos >=1)
+                            if($DocsSubidos == $DocsRequeridos)
                             {
                                 if(isset($_GET['id'])){
                              
@@ -263,7 +267,7 @@ if (isset($_POST['lista'])) {
                             }
                             else
                             {
-                                echo"<script type=\"text/javascript\">alert('La grupo empresa escogida no ha registrado ningun documento requerido para la emision de una orden de cambio'); window.location='../Vista/ordenDeCambio.php';</script>"; 
+                                echo"<script type=\"text/javascript\">alert('La grupo empresa seleccionada aun no ha subido todos los documentos requeridos'); window.location='../Vista/ordenDeCambio.php';</script>"; 
 
                             }
 				        }

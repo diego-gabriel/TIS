@@ -21,7 +21,7 @@
             	$this->conexion->conectar();
             	$this->id = $this->conexion->consultaUnDato("SELECT auto_increment
 															 FROM `information_schema`.tables
-															 WHERE TABLE_SCHEMA = 'tis_mbittle' AND TABLE_NAME = 'registro';");
+															 WHERE TABLE_SCHEMA = 'saetis' AND TABLE_NAME = 'registro';");
             	$this->conexion->cerrarConexion();
             	$this->usuario = $args[0];
             	$this->tipo = $args[1];
