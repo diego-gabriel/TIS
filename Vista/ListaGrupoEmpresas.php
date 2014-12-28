@@ -85,6 +85,8 @@
 <link href="css/tabla-div.css" rel="stylesheet" type="text/css" />
 </head>
 
+
+
 <body>
 
    
@@ -105,6 +107,7 @@
                 <a class="navbar-brand" href="principal.php">Inicio </a>
             </div>
             <!-- /.navbar-header -->
+
             <ul class="nav navbar-top-links navbar-right">
             
                 <!-- /.dropdown -->
@@ -123,102 +126,9 @@
                     <!-- /.dropdown-user -->
                 </li>
                 <!-- /.dropdown -->
-            </ul>
-            <!-- /.navbar-top-links -->
-
-    </nav>
-                <!-- /.sidebar-collapse -->
-            </div>
-            <!-- /.navbar-static-side -->
-      
-
-
-      
-
-        <div id="page-wrapper">
-     			<div class="content">
-				<div class="content_resize">
-					<div class="mainbar">
-                        <div class="article"><br><br>
-							<h2><span>Lista de Grupo Empresas</span></h2>
-						</div>                   
-                        <div class="historia1">
-							<div class="contenedor-fila2">
-								<div class="contenedor-columna">
-                                    <h4><strong>Usuario</strong><h4>
-								</div>	
-								<div class="contenedor-columna">
-                                    <h4><strong>Nombre Corto</strong><h4>
-								</div>
-		
-								<div class="contenedor-columna">
-                                    <h4><strong>Nombre Largo</strong><h4>
-								</div>
-								<div class="contenedor-columna">
-								    <h4><strong>Repr. Legal</strong><h4>
-								</div>
-                            </div>  
-							<?php
-
-								//Peticion
-								$peticion = $conect->consulta("SELECT NOMBRE_U, NOMBRE_CORTO_GE, NOMBRE_LARGO_GE, REPRESENTANTE_LEGAL_GE FROM grupo_empresa");
-							
-
-								while($fila = mysql_fetch_array($peticion))
-								{
-                                    $grupo = $fila['NOMBRE_U'];
-							?>
-								<div class="contenedor-fila">
-									   <div class="contenedor-columna">
-										<?php
-											echo $fila['NOMBRE_U'];
-										?>
-									</div>
-									
-									<div class="contenedor-columna">
-										<?php
-											echo $fila['NOMBRE_CORTO_GE'];
-										?>
-									</div>
-			
-									<div class="contenedor-columna">
-										<?php
-											echo $fila['NOMBRE_LARGO_GE'];
-										?>
-									</div>
-									
-									<div class="contenedor-columna">
-										<?php
-											echo $fila['REPRESENTANTE_LEGAL_GE'];
-										?>
-									</div>
-                                    <div class="contenedor-columna">
-                                        <?php
-                                            echo '<a href = "EliminarGrupoEmpresa.php?id_us='.$grupo.'" class="verificar" ><font color="blue">Eliminar</font></a>';
-                                        
-                                                                                        
-                                        ?>
-               
-                                    </div>
-									                                                               
-								</div>
-                                       
-								<?php
-								}
-
-							
-						?>	
-                                                           
-                        </div>                                         	
-					</div>
-			
-					
-			<div class="sidebar">
-                            <br><br>
-				<h2 class="star">Usuario :  <?php echo $_SESSION['usuario'] ?></h2>
-			
-               
-            <div class="navbar-default navbar-static-side" role="navigation">
+            </ul>      
+           <div class="sidebar-collapse">                                          
+             <div class="navbar-default navbar-static-side" role="navigation">
                 <div class="sidebar-collapse">
                     <ul class="nav" id="side-menu">
                         
@@ -313,28 +223,120 @@
                 </div>
                 <!-- /.sidebar-collapse -->
             </div>
-       		
-                        </div></div>
-                        </div>
-			<div class="clr"></div>	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-			<div class="footer">
-			
-			<div class="footer_resize">
-				<p class="lf"></p>
-				<div style="clear:both;"></div>
-				</div>
-			</div>
-		<div align=center>
-			Esta pagina desarrollada por  <a class="registrar" href=''>Bittle.S.R.L.</a>
+                    
+                    
                 </div>
+         
+        
+</nav>          
+                
+                
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                  
+ 					<div class="mainbar">
+                        <div class="article"><br><br>
+							<h2><span>Lista de Grupo Empresas</span></h2>
+						</div>                   
+                        <div class="historia1">
+							<div class="contenedor-fila2">
+								<div class="contenedor-columna">
+                                    <h4><strong>Usuario</strong><h4>
+								</div>	
+								<div class="contenedor-columna">
+                                    <h4><strong>Nombre Corto</strong><h4>
+								</div>
+		
+								<div class="contenedor-columna">
+                                    <h4><strong>Nombre Largo</strong><h4>
+								</div>
+								<div class="contenedor-columna">
+								    <h4><strong>Repr. Legal</strong><h4>
+								</div>
+                            </div>  
+							<?php
 
+								//Peticion
+								$peticion = $conect->consulta("SELECT NOMBRE_U, NOMBRE_CORTO_GE, NOMBRE_LARGO_GE, REPRESENTANTE_LEGAL_GE FROM grupo_empresa");
+							
+
+								while($fila = mysql_fetch_array($peticion))
+								{
+                                    $grupo = $fila['NOMBRE_U'];
+							?>
+								<div class="contenedor-fila">
+									   <div class="contenedor-columna">
+										<?php
+											echo $fila['NOMBRE_U'];
+										?>
+									</div>
+									
+									<div class="contenedor-columna">
+										<?php
+											echo $fila['NOMBRE_CORTO_GE'];
+										?>
+									</div>
+			
+									<div class="contenedor-columna">
+										<?php
+											echo $fila['NOMBRE_LARGO_GE'];
+										?>
+									</div>
+									
+									<div class="contenedor-columna">
+										<?php
+											echo $fila['REPRESENTANTE_LEGAL_GE'];
+										?>
+									</div>
+                                    <div class="contenedor-columna">
+                                        <?php
+                                            echo '<a href = "EliminarGrupoEmpresa.php?id_us='.$grupo.'" class="verificar" ><font color="blue">Eliminar</font></a>';
+                                        
+                                                                                        
+                                        ?>
+               
+                                    </div>
+									                                                               
+								</div>
+                                       
+								<?php
+								}
+
+							
+						?>	
+                                                           
+                        </div>                                         	
+					</div>
+			
+					                   
+                    
+                    
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+     
         </div>
         <!-- /#page-wrapper -->
 
     </div>
+    <!-- /#wrapper -->
 
+    <!-- Core Scripts - Include with every page -->
+    <script src="../Librerias/js/jquery-1.10.2.js"></script>
+    <script src="../Librerias/js/bootstrap.min.js"></script>
     <script src="../Librerias/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+
+    <!-- Page-Level Plugin Scripts - Dashboard -->
+    <script src="../Librerias/js/plugins/morris/raphael-2.1.0.min.js"></script>
+    <script src="../Librerias/js/plugins/morris/morris.js"></script>
+
+    <!-- SB Admin Scripts - Include with every page -->
     <script src="../Librerias/js/sb-admin.js"></script>
+
+    <!-- Page-Level Demo Scripts - Dashboard - Use for reference -->
+    <script src="../Librerias/js/demo/dashboard-demo.js"></script>
+
 </body>
 
 </html>

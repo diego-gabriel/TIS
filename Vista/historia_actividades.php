@@ -34,6 +34,11 @@
              while ($correo1 = mysql_fetch_array($peticion23))
                {        
                       $grupoEmpresa=$correo1["NOMBRE_CORTO_GE"];}   
+                      
+         $peticion233 = $con->consulta("SELECT NOMBRE_LARGO_GE FROM grupo_empresa WHERE NOMBRE_U='$usuario'");
+             while ($correo2 = mysql_fetch_array($peticion233))
+               {        
+                      $grupoEmpresaNL=$correo2["NOMBRE_LARGO_GE"];}                        
                      
 ?>
    
@@ -195,52 +200,30 @@
 
                                         $SeleccionrAsesor = $con->consulta("SELECT NOMBRE_UA FROM inscripcion WHERE NOMBRE_UGE='$UsuarioGE[0]'");
                                         $Asesor = mysql_fetch_row($SeleccionrAsesor);
-                                         $ins_proyecto = $con->consulta("SELECT CODIGO_P FROM inscripcion_proyecto WHERE NOMBRE_U='$UsuarioGE[0]'");
-                                        $id_proyecto = mysql_fetch_row($ins_proyecto);
+                                        $SeleccionarDocReq = $con->consulta("SELECT NOMBRE_R FROM registro WHERE NOMBRE_U = '$Asesor[0]' AND TIPO_T='documento requerido' ");
                                         
-                                        $SeleccionarDocReq = $con->consulta("SELECT  `NOMBRE_R`,`CODIGO_P` FROM registro AS r,documento_r AS d WHERE r.ID_R=d.ID_R AND  `NOMBRE_U`='$Asesor[0]' AND TIPO_T='documento requerido' ");
-
                                         while ($rowDocs = mysql_fetch_row($SeleccionarDocReq))
                                         {
-                                            if($rowDocs[1] == $id_proyecto[0])
-                                            {
-                                                   echo '<li>
-                                                      <a href="SubirDocumento.php?doc='.$rowDocs[0].'">'.$rowDocs[0].'</a>
-                                                   </li>';  
-                                             }
-                                            else 
-                                            {
-
-                                            }
-                                            
+                                          echo '<li>
+                                                   <a href="SubirDocumento.php?doc='.$rowDocs[0].'">'.$rowDocs[0].'</a>
+                                                </li>';    
                                         }
 
                                     }
                                     else
                                     {
-                                       
                                         $SeleccionrAsesor = $con->consulta("SELECT NOMBRE_UA FROM inscripcion WHERE NOMBRE_UGE='$UsuarioActivo'");
+                                      
                                         $Asesor = mysql_fetch_row($SeleccionrAsesor);
-                                        $ins_proyecto = $con->consulta("SELECT CODIGO_P FROM inscripcion_proyecto WHERE NOMBRE_U='$UsuarioActivo'");
-                                        $id_proyecto = mysql_fetch_row($ins_proyecto);
                                           
-                                        $SeleccionarDocReq = $con->consulta("SELECT  `NOMBRE_R`,`CODIGO_P` FROM registro AS r,documento_r AS d WHERE r.ID_R=d.ID_R AND  `NOMBRE_U`='$Asesor[0]' AND TIPO_T='documento requerido' ");
-
+                                        $SeleccionarDocReq = $con->consulta("SELECT NOMBRE_R FROM registro WHERE NOMBRE_U = '$Asesor[0]' AND TIPO_T='documento requerido' ");
                                           
                                         while ($rowDocs = mysql_fetch_row($SeleccionarDocReq))
                                         {
-                                            if($rowDocs[1] == $id_proyecto[0])
-                                            {
-                                                   echo '<li>
+                                            echo '<li>
                                                       <a href="SubirDocumento.php?doc='.$rowDocs[0].'">'.$rowDocs[0].'</a>
-                                                   </li>';  
-                                             }
-                                            else 
-                                            {
-
-                                            }
+                                                   </li>';    
                                         }
-
 
                                     }      
                                     ?>
@@ -514,8 +497,7 @@
                                 //crear conexion---------------------------
               
                                 //Peticion
-                                $peticion = $con->consulta("SELECT `ID_R`,`NOMBRE_U`,`NOMBRE_R`,`FECHA_R`,`HORA_R` FROM `registro` WHERE `TIPO_T`='publicaciones' and `NOMBRE_U`='$asesor'
-               ");
+                                $peticion = $con->consulta("SELECT registro.ID_R,registro.NOMBRE_U,registro.NOMBRE_R,registro.FECHA_R,registro.HORA_R  FROM registro, receptor  WHERE  registro.ID_R=receptor.ID_R  and   (RECEPTOR_R='$grupoEmpresaNL' OR RECEPTOR_R='TODOS')");
                             
 
                                 while($fila = mysql_fetch_array($peticion))

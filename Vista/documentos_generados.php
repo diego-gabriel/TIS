@@ -285,75 +285,87 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h1>Contratos</h1>
-                    <div class="panel panel-default" >
+                   
 
               
                         
                          
 
                              
-                            <table class="table form-group" >
-                                 
-                                                     <tr bgcolor="#888888">
-                                                          <th> Nº</th>
-                                                          <th >Nombre<th>
-                                                          <th >                  </th>  
-                                                          <th></th>
-                                                          
-                                                     </tr> 
+                           
 
  
                                 <?php
                                 
-                                     $c_3="SELECT DISTINCT `NOMBRE_R`,`RUTA_D`,`DESCRIPCION_D`,`fecha_p` ,`hora_p`,`RECEPTOR_R` FROM `registro` AS r,`documento` AS d,`descripcion` AS e,`periodo` AS p,`receptor` AS w WHERE r.`ID_R` = d.`ID_R` AND r.`ID_R` = e.`ID_R` AND r.`ID_R` = p.`ID_R` AND r.`ID_R` = w.`ID_R` AND r.`TIPO_T` LIKE 'publicaciones' ";
+                                     $c_3="SELECT DISTINCT `NOMBRE_R`,`RUTA_D` FROM `registro` AS r,`documento` AS d,`receptor` AS w WHERE r.`ID_R` = d.`ID_R` AND r.`ID_R` = w.`ID_R` AND r.`TIPO_T` LIKE 'Contrato' AND `NOMBRE_U` LIKE '$UsuarioActivo'";
                                      
                                      $r3=$con->consulta($c_3);
                                     
-                                        $carpeta="../Repositorio/".$UsuarioActivo."/Contratos/";
-                             if(is_dir($carpeta)){
-                                if($dir = opendir($carpeta)){
-                                    $i=1;
-                                     while(($archivo = readdir($dir)) !== false){
-                                        if($archivo != '.' && $archivo != '..' && $archivo != '.htaccess'){
-                                            ?>
+                                   
+                             if(mysql_num_rows($r3) != 0)
+                                    { 
+                                        
 
-                                             <tr> 
+                              ?>
+                               <div class="panel panel-default" >
+                                 <table class="table form-group" >
+                                 
+                                                     <tr bgcolor="#888888">
+                                                          <th> Nº</th>
+                                                          <th >Nombre<th>
+                                                          <th ></th>  
+                                                          <th></th>
+                                                          
+                                                     </tr> 
+
+                             <?php
+                                       $i=1;
+                                           while($var3 = mysql_fetch_array($r3))
+                                          {
+                                            
+                                               ?>       <tr> 
                                                           <td><?php echo $i?></td> 
-                                                      <td><b><?php echo $archivo ?></b><td>
+                                                           <td><b><?php echo $var3[0]  ?></b><td>
+                                                          <td><a class="link-dos" target="_blank" href="<?php echo $var3[1] ?>">Ver</a></td>
 
-                                                          <td><a class="link-dos" target="_blank" href= <?php echo $carpeta.$archivo ?>>Ver            </td> 
-                                                          <td> </a> 
-                                                            <?php
-                                                            $direccion=$carpeta.$archivo;
-                                                            echo "<a class='link-dos' href='eliminar_contrato.php?id_us=".$direccion."'
-                                                           ><font color='blue'></font>         Eliminar</a>";
+                                                          
+                                                          <td> <?php
+                                                            
+                                                            echo "<a class='link-dos' href='eliminar_contrato.php?id_us=".$var3[1]."'
+                                                           ><font color='blue'></font> Eliminar</a>";
                                                              ?> </td>
                                                          
-                                            </tr>
-                                            <?php
+                                                     </tr>
+                                               <?php 
+                                               $i++;
+                                            }
 
-                                            //echo '<li><a class='."link-dos".' target="_blank" href="'.$carpeta.$archivo.'">'.$archivo.'</a></li>';
-                                              $i++;  
-                                        } 
-                                      
-                                        }
-           
-                                closedir($dir);
-                            }
-                        }
-                                                
-                                  
-                                  
-                                    
-                                       ?>
+                                              ?>
+                                        
                                        </table>
                                       
-                                       <?php
+                                       
+                                          
+                                                     
+                                                     
+
+                                            <?php
+                                      
+                                    
+                                     }  
+                                  
+                                    
+                                      
                                             //echo "</form>";
                                     //$tabla.="</table>";
                                      //echo $tabla;
                                     
-                                   
+                                    else
+                                    {
+                                        echo '<div class="alert alert-warning">
+                                                    <strong>Usted no emitio ningun contrato</strong>
+                                                </div>';
+                                    }
                                     
                                 
                                 

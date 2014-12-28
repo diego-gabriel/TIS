@@ -60,7 +60,7 @@ $fecha=  date('Y-m-d');
 $hora=  date("G:H:i");
 try {
         $cla=new conexion();
-        $consulta=$cla->consulta("SELECT ge.`NOMBRE_LARGO_GE`,ge.`NOMBRE_CORTO_GE` FROM `grupo_empresa` AS ge");
+        $consulta=$cla->consulta("SELECT NOMBRE_LARGO,NOMBRE_CORTO FROM lista_ge");
         while ($fila=  mysql_fetch_array($consulta))
         {
             $pdf->MultiCell(130,5,  utf8_decode(utf8_decode("$indice.- NOMBRE LARGO: $fila[0]    NOMBRE CORTO: $fila[1]")));

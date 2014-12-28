@@ -1,10 +1,17 @@
+
+
 <?php
+
 	require_once '../Modelo/conexion.php';
 	require_once '../Modelo/Model/GrupoEmpresa.php';
-
+        
+ 
+        
+  
+        
         session_start();
         $usuario = $_SESSION['usuario'];
-        
+     
 	$conexion = new conexion();
 	$conexion->conectar();
 	
@@ -13,31 +20,56 @@
 									  		 FROM reporte");
     $asistencia = $conexion->consultarArreglo("SELECT DISTINCT id_r
 									  		   FROM asistencia");
-	$conexion->cerrarConexion();
+    $evaluacion = $conexion->consultarArreglo("SELECT DISTINCT id_r
+									  		   FROM evaluacion");
+    
+    
+    
+    
 	$filas = '';
+        
+       
 	for ($i = 0; $i < count($ap); $i++) { 
 		$ge = new GrupoEmpresa($ap[$i][1]);
 		$idRegistro = $ap[$i][0];
 		$btnAsistencia = '';
 		$btnReportes = '';
+                 $btnEvaluacion = '';
 		if (in_array($idRegistro, $asistencia)) {
 			$btnAsistencia = '<button id="btnAsistencia'.$ap[$i][0].'" class="btn btn-xs btn-danger btnRegistroAsistencia" disabled="disabled">
-	                     		  <i class="glyphicon glyphicon-check"></i>
+	                     		  Asistencia <i class="glyphicon glyphicon-check"></i>
 	                          </button>';
 		} else {
 			$btnAsistencia = '<button id="btnAsistencia'.$ap[$i][0].'" class="btn btn-xs btn-danger btnRegistroAsistencia">
-	                     		  <i class="glyphicon glyphicon-check"></i>
+	                     		  Asistencia <i class="glyphicon glyphicon-check"></i>
 	                          </button>';
 		}
 		if (in_array($idRegistro, $reportes)) {
 			$btnReportes = '<button id="btnReportes'.$ap[$i][0].'" class="btn btn-xs btn-danger btnRegistroReportes" disabled="disabled">
-	                     		  <i class="glyphicon glyphicon-edit"></i>
+	                     		  Reportes <i class="glyphicon glyphicon-edit"></i>
 	                          </button>';
 		} else {
 			$btnReportes = '<button id="btnReportes'.$ap[$i][0].'" class="btn btn-xs btn-danger btnRegistroReportes">
-	                     		  <i class="glyphicon glyphicon-edit"></i>
+	                     		  Reportes <i class="glyphicon glyphicon-edit"></i>
 	                           </button>';
 		}
+                if (in_array($idRegistro, $evaluacion   )) {
+	
+	                         
+                          $btnEvaluacion1= '<a href="evaluacion.php?GE='.$idRegistro.'" class="btn btn-default btn-xs" disabled="disabled">Evaluacion</a>';
+
+		} else {
+	
+                        
+                              $btnEvaluacion1= '<a href="evaluacion.php?GE='.$idRegistro.'" class="btn btn-default btn-xs">Evaluacion</a>';
+                  
+                }
+            
+    
+   
+   
+   
+   
         $filas .= '<tr data-registro="'.$idRegistro.'">
 				       <td>'.$ap[$i][3].'</td>
 					   <td>'.$ge->getNombreCorto().'</td>
@@ -45,9 +77,24 @@
 			           <td>
                            '.$btnAsistencia.'
                            '.$btnReportes.'
+                              '.$btnEvaluacion1.'
+
+
+
+
+
 			           </td>
 				   </tr>';
-    }
+        
+        
+                          
+     
+       
+    } 
+                             
+                          
+   
+   
     echo '<table class="table table-hover">
 			  <thead>
 		    	  <tr>
@@ -61,4 +108,53 @@
 			  	'.$filas.'
 			  </tbody>
 		  </table>';
-?>
+    //modalRegistroEvaluacion
+    
+    ?>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+               
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

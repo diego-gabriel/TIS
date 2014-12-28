@@ -28,7 +28,7 @@ $fecha=  date('Y-m-d');
 $hora=  date("G:H:i");
 
 $conexion= new conexion();
-$consulta=$conexion->consulta("SELECT ge.`NOMBRE_LARGO_GE`,ge.`NOMBRE_CORTO_GE` FROM `grupo_empresa` AS ge");
+$consulta=$conexion->consulta("SELECT NOMBRE_LARGO,NOMBRE_CORTO FROM lista_ge");
 $existe=FALSE;
 $existe2=FALSE;
 while ($fila=  mysql_fetch_array($consulta))

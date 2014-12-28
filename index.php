@@ -15,22 +15,23 @@
 
     <!-- Core CSS - Include with every page -->
     <link href="Librerias/css/bootstrap.min.css" rel="stylesheet">
+    <link href="Librerias/font-awesome/css/font-awesome.css" rel="stylesheet">
 
     <!-- Page-Level Plugin CSS - Dashboard -->
+    <link href="Librerias/css/plugins/morris/morris-0.4.3.min.css" rel="stylesheet">
+    <link href="Librerias/css/plugins/timeline/timeline.css" rel="stylesheet">
    
 
     <!-- SB Admin CSS - Include with every page -->
     <link href="Librerias/css/sb-admin.css" rel="stylesheet">
-
     
     
-    		<link href="Librerias/css/style11.css" rel="stylesheet" type="text/css" />
+    
+        	<link href="Librerias/css/style11.css" rel="stylesheet" type="text/css" />
 		<link href="Librerias/css/tabla-div.css" rel="stylesheet" type="text/css" />
 		<link rel="stylesheet" type="text/css" href="Librerias/css/coin-slider.css" />
-                
-                
-                    <link href="archivos/estilos.css" rel="stylesheet" type="text/css">
-        <script language="JavaScript" src="archivos/script.js" type="text/javascript"></script>
+                <link href="archivos/estilos.css" rel="stylesheet" type="text/css">
+                <script language="JavaScript" src="archivos/script.js" type="text/javascript"></script>
 
 </head>
 
@@ -45,45 +46,27 @@
 	
         <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
- 
-                <h2 ><IMG SRC="images/umss.png"><font color='white'> <strong>UNIVERSIDAD MAYOR DE SAN SIMON &nbsp;&nbsp;&nbsp;</strong></h2>
-                
+                               <h2 ><IMG SRC="images/umss.png"><font color='white'> <strong>UNIVERSIDAD MAYOR DE SAN SIMON &nbsp;&nbsp;&nbsp;</strong></h2>
             </div>
             <!-- /.navbar-header -->
 
-      
         </nav>
-
-        <div id="page-wrapper">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header"  ></h1>
-                    
-                    
-                </div>
-                <!-- /.col-lg-12 -->
-            </div>
-            <div class="row">
-                
-                
-                
+                <br><br><br><br>
+           <div class="sidebar-collapse" >      
+           <div class="col-lg-12" >
+      
     
-                
-                           
-
-
 		
 			<div class="content">
 				<div class="content_resize">
 					<div class="mainbar">
-                                            
-                                            
-                                            
-                                            
-                                            <h2><span>Avisos Empresa TIS</span></h2>
-                                            
-                                            
-                                         
+            <nav class="star" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <a class="navbar-brand">Avisos Empresa TIS</a>
+                
+            </div></nav><h2 class="star"><span>&nbsp; </span></h2>
+                                           
+              
              <?php                                  
 
                    $valor='0';
@@ -176,12 +159,7 @@ where not exists
                             </div>         
                                 					<?php
                                                                 $numero++;	}                                                                
-                                                                
-                                                                
-                                                                
-
-								//Cerrar
-								
+ 					
 				?>
                         </div>
                     </td>
@@ -194,14 +172,15 @@ where not exists
                             <tr style="height: 20%"><td><img id="abajo" alt="Abajo" src="imagenes/abajo.jpg" style="opacity:0.3; filter:alpha(opacity=29)" onmouseover="control_aviso('abajo')" onmousedown="control_aviso('abajo')" onmouseout="control_salir_aviso('abajo')" /></td></tr>
                             <tr style="height: 20%"><td><img id="masabajo" alt="Abajo Rapido" src="imagenes/masabajo.jpg" style="opacity:0.3; filter:alpha(opacity=29)" onmouseover="control_aviso('masabajo')" onmousedown="control_aviso('masabajo')" onmouseout="control_salir_aviso('masabajo')" /></td></tr>
                         </table></table></table>
-                                      
-                                            
-                                            
-                                            
- 
-						
+         			
 						<div class="article">
-							<h2><span>Registrate como Grupo Empresa</span></h2>
+                                                    
+                                      <nav class="star" role="navigation" style="margin-bottom: 0">
+                                      <div class="navbar-header">
+                                       <a class="navbar-brand">Registrate como Grupo Empresa</a>
+                
+                                        </div></nav><h2 class="star"><span>&nbsp; </span></h2>                                                   
+						
                                                         <p class="infopost"></p>
 							
                                                         
@@ -216,7 +195,15 @@ where not exists
                                     <form method="post" action="Vista/login.php">
 						<div class="sidebar">
                                                     
-							<h2 class="star"><span>Ingresar al Sistema</span></h2>
+                                                    
+                                                    
+            <nav class="star" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <a class="navbar-brand">Ingresar al Sistema</a>
+                
+            </div></nav><h2 class="star"><span>&nbsp; </span></h2>                                                   
+                                                    
+                                                    
                                                         
                                                         
                                          <div class="form-group">
@@ -248,7 +235,14 @@ where not exists
                                       			
 		
 				<div class="gadget">
-					<h2 class="star"><span>Paginas Universitarias</span></h2>
+             <nav class="star" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <a class="navbar-brand">Paginas Universitarias</a>
+                
+            </div></nav><h2 class="star"><span>&nbsp; </span></h2>                                    
+                                    
+                                    
+                                    
 					<div class="clr"></div>
 					<ul class="ex_menu">
 					
@@ -289,7 +283,13 @@ where not exists
 				</div>	
                                         
                                  <div class="gadget">
-                                     <h2 class="star"><span>Verificar Nombre G.E.</h2>
+              <nav class="star" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <a class="navbar-brand">Verificar Nombre G.E.</a>
+                
+            </div></nav><h2 class="star"><span>&nbsp; </span></h2>                                       
+                                     
+                          
 					<div class="clr"></div>
 					<ul class="ex_menu">
 					
@@ -300,18 +300,12 @@ where not exists
 							Verificar Nombre de Grupo Empresa Disponible</li></div>
 						</div>
 					</div>
-					
-			
+	
 				</div>	
 				
 			</div>
                          </form>               
-                                        
-                                        
-                                        
-                                        
-                                        
-                                        
+                                   
 		</div>
 			<div class="clr"></div>
 			<div class="fbg">
@@ -327,21 +321,36 @@ where not exists
 		<div align=center>
 			<font color='black'>Esta pagina desarrollada por  <a class="registrar" href=''>Bittle.S.R.L.</a>
                 </div>
-
-
-
-                 
+     
                 
             </div>
-            
-            
-        </div>
+           
+                             
+           </div>
+           </div>
+        
+                
+                
+    
         <!-- /#page-wrapper -->
 
     </div>
     <!-- /#wrapper -->
 
- 
+    <!-- Core Scripts - Include with every page -->
+    <script src="Librerias/js/jquery-1.10.2.js"></script>
+    <script src="Librerias/js/bootstrap.min.js"></script>
+    <script src="Librerias/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+
+    <!-- Page-Level Plugin Scripts - Dashboard -->
+    <script src="Librerias/js/plugins/morris/raphael-2.1.0.min.js"></script>
+    <script src="Librerias/js/plugins/morris/morris.js"></script>
+
+    <!-- SB Admin Scripts - Include with every page -->
+    <script src="Librerias/js/sb-admin.js"></script>
+
+    <!-- Page-Level Demo Scripts - Dashboard - Use for reference -->
+    <script src="Librerias/js/demo/dashboard-demo.js"></script>
 
 </body>
 

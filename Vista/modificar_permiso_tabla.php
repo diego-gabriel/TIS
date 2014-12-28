@@ -12,14 +12,14 @@ $contrasena = $_SESSION['contrasena'];
 $rolAnt=$_SESSION["Variable1"];
 $idgp=$_SESSION["Variable2"];
 $permiso = $_REQUEST['estado'];
-$rol =$_REQUEST['roll'];
+;
 
 
 //conexion-------------
 
 	//Peticion
 	$peticion = $conectar-> consulta( "UPDATE usuario SET ESTADO_E = '$permiso' WHERE usuario.NOMBRE_U = '$idgp';");
-        $peticion = $conectar-> consulta( "UPDATE usuario_rol SET ROL_R = '$rol' WHERE usuario_rol.NOMBRE_U = '$idgp ' AND usuario_rol.ROL_R = '$rolAnt';");
+     
 	//cerrar conexion--------------------------
 
 	 //volver a la pagina---------------
