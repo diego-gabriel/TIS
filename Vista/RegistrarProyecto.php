@@ -6,6 +6,7 @@
     $nombreU = $_SESSION['usuario']  ;
     $nombreProy = $_POST['nombreProy'];
     $descripProy = $_POST['desProy'];
+    $convocatoria = $_POST['convocatoria'];
     
     $seleccion="SELECT id_g "
         . "FROM gestion "
@@ -16,7 +17,7 @@
     $idGestion_=$idGestion[0];
     
     if(strnatcasecmp($idGestion_, "")!=0){
-        $conect->consulta("INSERT INTO proyecto (NOMBRE_P, DESCRIPCION_P, ID_G) VALUES ('$nombreProy', '$descripProy', '".$idGestion_."')"); 
+        $conect->consulta("INSERT INTO proyecto (NOMBRE_P, DESCRIPCION_P, ID_G, CONVOCATORIA) VALUES ('$nombreProy', '$descripProy', '".$idGestion_."', '$convocatoria')"); 
         echo"<script type=\"text/javascript\">alert('El registro ha sido satisfactorio'); window.location='InscripcionProyecto.php';</script>";    
     }
     else{

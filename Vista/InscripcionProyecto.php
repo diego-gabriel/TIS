@@ -292,6 +292,15 @@
                                  <div class="form-group">
                                      <input type="text" name="desProy" id="" class="form-control" pattern="^[a-zA-Z0-9\s]*$" required>
                                  </div> 
+                                
+                                <p>
+                                    <label class="default" >Nombre de la convocatoria asociada:</label>
+                                </p>
+                                 
+                                 <div class="form-group">
+                                     <input type="text" name="convocatoria" id="" class="form-control" pattern="^[a-zA-Z0-9\s]*$" required>
+                                 </div> 
+                                
                                 </div>     
                                        
                                 <div class="form-group">

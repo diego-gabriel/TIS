@@ -50,13 +50,17 @@ if (isset($_POST['grupoempresa'])) {
                 $selProyecto = "SELECT p.`NOMBRE_P` FROM `proyecto` AS p, `inscripcion_proyecto` AS ip WHERE ip.`NOMBRE_U` = '$nombreUGE[0]' AND ip.`CODIGO_P` = p.`CODIGO_P`";
                 $conProy= $con->consulta($selProyecto);
                 $sistema = mysql_fetch_array($conProy);
-
+                
+                $selCon = "SELECT p.`CONVOCATORIA` FROM `proyecto` AS p, `inscripcion_proyecto` AS ip WHERE ip.`NOMBRE_U` = '$nombreUGE[0]' AND ip.`CODIGO_P` = p.`CODIGO_P`";
+                $convocatoriaProy = $con->consulta($selCon);
+                $convocatoria = mysql_fetch_array($convocatoriaProy);
+                
                 $SeleccionarDocsSubidos = $con->consulta("SELECT * FROM registro,receptor WHERE NOMBRE_U='$nombreUA' AND NOMBRE_R='Notificacion de Conformidad' AND registro.ID_R = receptor.ID_R");
                 $DocsSubidos = mysql_num_rows($SeleccionarDocsSubidos);
 
                 if ($DocsSubidos >= 1) {
-                            $sistema = "SISTEMA";//SISTEMA DE APOYO A LA EMPRESA TIS
-                        //$convocatoria = "CPTIS-1707-2014";
+            
+                        
                         $buscar    = array(
                             'empresa_nombre_largo' => '[[empresa-nombre-largo]]',
                             'empresa_nombre_corto' => '[[empresa-nombre-corto]]',
@@ -65,6 +69,7 @@ if (isset($_POST['grupoempresa'])) {
                             'fecha_actual'         => '[[fecha-actual]]',
                             'hora_actual'          => '[[hora-actual]]',
                             'sistema'              => '[[sistema]]',
+                            'convocatoria'         => '[[convocatoria]]',
                          
                         );
                         $remplazo['empresa_nombre_largo'] = $nombreLargo;
@@ -73,6 +78,7 @@ if (isset($_POST['grupoempresa'])) {
                         $remplazo['asesor']               = $asesor;
                         $remplazo['fecha_actual']         = date('Y/m/d');
                         $remplazo['sistema']              = $sistema[0];
+                        $remplazo['convocatoria']         = $convocatoria[0];
                         
                         $ruta = "../Repositorio/asesor";
                        // echo $ruta;
@@ -96,6 +102,7 @@ if (isset($_POST['grupoempresa'])) {
                         $texto = str_replace($buscar['asesor'], $remplazo['asesor'], $texto);
                         $texto = str_replace($buscar['fecha_actual'], $remplazo['fecha_actual'], $texto);
                         $texto = str_replace($buscar['sistema'], $remplazo['sistema'], $texto);
+                        $texto = str_replace($buscar['convocatoria'], $remplazo['convocatoria'], $texto);
                         
                         file_put_contents($tex,$texto);
                         exec("pdflatex -interaction=nonstopmode $tex",$final);

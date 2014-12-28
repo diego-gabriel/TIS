@@ -98,96 +98,110 @@ if (isset($_POST['lista'])) {
                                                     'septimo_p'            => '[[septimo-puntaje]]',
                                                     );
 
-                                    $remplazo['empresa_nombre_largo'] = $nombreEmpresa;
-                                    $remplazo['fecha_actual'] = $fecha;
-                                    $remplazo['hora_actual']  = $hora;
-                                    $remplazo['lugar'] = $lugar;
-                                               
-                                    $remplazo['primer_p'] = intval($calificaciones[0]);
-                                    $remplazo['segundo_p'] = intval($calificaciones[1]);
-                                    $remplazo['tercer_p'] = intval($calificaciones[2]);
-                                    $remplazo['cuarto_p'] = intval($calificaciones[3]);
-                                    $remplazo['quinto_p'] = intval($calificaciones[4]);
-                                    $remplazo['sexto_p'] = intval($calificaciones[5]);
-                                    $remplazo['septimo_p'] = intval($calificaciones[6]);
-                                           
-                                    $ruta ="../Repositorio/asesor";
-                                            chdir($ruta);
-                
-                                            $id = "NotificacionConformidad";
-                                            $tex = $id.".tex";
-                                            $log = $id.".log"; 
-                                            $aux = $id.".aux";
-                                            $pdf = $id.".pdf"; 
-                                            
+                                $remplazo['empresa_nombre_largo'] = $nombreEmpresa;
+                                $remplazo['fecha_actual'] = $fecha;
+                                $remplazo['hora_actual']  = $hora;
+                                $remplazo['lugar'] = $lugar;
 
-                                            $plantilla = "NotificacionConformidad.tex";
+                                $remplazo['primer_p'] = intval($calificaciones[0]);
+                                $remplazo['segundo_p'] = intval($calificaciones[1]);
+                                $remplazo['tercer_p'] = intval($calificaciones[2]);
+                                $remplazo['cuarto_p'] = intval($calificaciones[3]);
+                                $remplazo['quinto_p'] = intval($calificaciones[4]);
+                                $remplazo['sexto_p'] = intval($calificaciones[5]);
+                                $remplazo['septimo_p'] = intval($calificaciones[6]);
 
-                                            $texto = file_get_contents($plantilla);
-                                            $textoAux = file_get_contents($plantilla);
+                                $ruta ="../Repositorio/asesor";
+                                chdir($ruta);
+
+                                $id = "NotificacionConformidad";
+                                $tex = $id.".tex";
+                                $log = $id.".log"; 
+                                $aux = $id.".aux";
+                                $pdf = $id.".pdf"; 
 
 
-                                            $texto = str_replace($buscar['empresa_nombre_largo'], $remplazo['empresa_nombre_largo'], $texto);
-                                            $texto = str_replace($buscar['fecha_actual'], $remplazo['fecha_actual'], $texto);
-                                            $texto = str_replace($buscar['hora_actual'], $remplazo['hora_actual'], $texto);
-                                            $texto = str_replace($buscar['lugar'], $remplazo['lugar'], $texto);
-                                            $texto = str_replace($buscar['primer_p'], $remplazo['primer_p'], $texto);
-                                            $texto = str_replace($buscar['segundo_p'], $remplazo['segundo_p'], $texto);
-                                            $texto = str_replace($buscar['tercer_p'], $remplazo['tercer_p'], $texto);
-                                            $texto = str_replace($buscar['cuarto_p'], $remplazo['cuarto_p'], $texto);
-                                            $texto = str_replace($buscar['quinto_p'], $remplazo['quinto_p'], $texto);
-                                            $texto = str_replace($buscar['sexto_p'], $remplazo['sexto_p'], $texto);
-                                            $texto = str_replace($buscar['septimo_p'], $remplazo['septimo_p'], $texto);                                  
-                                            
-                                            file_put_contents($tex,$texto);
-                                            
-                                            exec("pdflatex -interaction=nonstopmode $tex",$final);
+                                $plantilla = "NotificacionConformidad.tex";
 
-                                            file_put_contents($tex, $textoAux);
-                                            unlink($log);
-                                            unlink($aux);
-                                            
-                                            
-                                            $rutaDirectorio="../".$nombreUGE."/NC/";
+                                $texto = file_get_contents($plantilla);
+                                $textoAux = file_get_contents($plantilla);
 
-                                            $file = "NotificacionConformidad".'_'.$nombreEmpresa.'.pdf';
-                
-                                           if (!file_exists($rutaDirectorio)) 
-                                            {
-                                                $oldmask = umask(0); 
-                                                mkdir($rutaDirectorio, 0777,TRUE);
-                                                umask($oldmask);
-                                                chown($rutaDirectorio, "bittle2014"); 
-                                                chgrp($rutaDirectorio, "webtis");
 
-                                                if(!file_exists("../".$nombreUGE."/index.html"))
-                                                {
-                                                    fopen("../".$nombreUGE."/index.html", "x");
-                                                }
-                                                
-                                            }
-                                             
-                                            //rename("NotificacionConformidad.pdf", $file);
-                                            rename("NotificacionConformidad.pdf", $rutaDirectorio.$pdf );
-                                           
-                                            
-                                           $nruta="../Repositorio/".$nombreUGE."/NC/"."NotificacionConformidad.pdf";
-                                           $fecha       = date('Y-m-d');
-                                           $hora        =  date("G:H:i");
-                                           $visualizable="TRUE";
-                                           $descargable="TRUE";
-                                           $comentario_add = $conexion->query("INSERT INTO registro (NOMBRE_U,TIPO_T,ESTADO_E,NOMBRE_R,FECHA_R,HORA_R) VALUES ('$nombreUA','publicaciones','Habilitado','Notificacion de Conformidad','$fecha','$hora')")or
-                                           die("Error al s");
-                                           
-                                       $consultar= $conexion->query("SELECT MAX(ID_R) AS 'ID_R' FROM registro");
-                                           $row = $consultar->fetchObject();
-                                           $id = $row -> ID_R;
-                                           
-                                           $guardar_doc = $conexion->query("INSERT INTO documento (ID_R,TAMANIO_D,RUTA_D,VISUALIZABLE_D,DESCARGABLE_D) VALUES('$id','1024','$nruta','$visualizable','$descargable')");
-                                           $des_D=$conexion->query("INSERT INTO descripcion (ID_R,DESCRIPCION_D) VALUES('$id','Notificacion de Conformidad')");
-                                           $destinatario=$conexion->query("INSERT INTO receptor (ID_R,RECEPTOR_R) VALUES('$id','$nombreEmpresa')");
-                                           $guardar = $conexion->query("INSERT INTO periodo (ID_R,fecha_p,hora_p) VALUES ('$id','$fecha','$hora')") or
-                                           die("Error al s");
+                                $texto = str_replace($buscar['empresa_nombre_largo'], $remplazo['empresa_nombre_largo'], $texto);
+                                $texto = str_replace($buscar['fecha_actual'], $remplazo['fecha_actual'], $texto);
+                                $texto = str_replace($buscar['hora_actual'], $remplazo['hora_actual'], $texto);
+                                $texto = str_replace($buscar['lugar'], $remplazo['lugar'], $texto);
+                                $texto = str_replace($buscar['primer_p'], $remplazo['primer_p'], $texto);
+                                $texto = str_replace($buscar['segundo_p'], $remplazo['segundo_p'], $texto);
+                                $texto = str_replace($buscar['tercer_p'], $remplazo['tercer_p'], $texto);
+                                $texto = str_replace($buscar['cuarto_p'], $remplazo['cuarto_p'], $texto);
+                                $texto = str_replace($buscar['quinto_p'], $remplazo['quinto_p'], $texto);
+                                $texto = str_replace($buscar['sexto_p'], $remplazo['sexto_p'], $texto);
+                                $texto = str_replace($buscar['septimo_p'], $remplazo['septimo_p'], $texto);                                  
+
+                                file_put_contents($tex,$texto);
+
+                                exec("pdflatex -interaction=nonstopmode $tex",$final);
+
+                                file_put_contents($tex, $textoAux);
+                                unlink($log);
+                                unlink($aux);
+
+
+                                $rutaDirectorio="../".$nombreUGE."/NC/";
+
+                                $file = "NotificacionConformidad".'_'.$nombreEmpresa.'.pdf';
+
+                               if (!file_exists($rutaDirectorio)) 
+                                {
+                                    $oldmask = umask(0); 
+                                    mkdir($rutaDirectorio, 0777,TRUE);
+                                    umask($oldmask);
+                                    chown($rutaDirectorio, "bittle2014"); 
+                                    chgrp($rutaDirectorio, "webtis");
+
+                                    if(!file_exists("../".$nombreUGE."/index.html"))
+                                    {
+                                        fopen("../".$nombreUGE."/index.html", "x");
+                                    }
+
+                                }
+
+                                    //rename("NotificacionConformidad.pdf", $file);
+                                   rename("NotificacionConformidad.pdf", $rutaDirectorio.$pdf );
+
+                                   $nruta="../Repositorio/".$nombreUGE."/NC/"."NotificacionConformidad.pdf";
+                                   $fecha       = date('Y-m-d');
+                                   $hora        =  date("G:H:i");
+                                   $visualizable="TRUE";
+                                   $descargable="TRUE";
+                                   $nombreDoc = "Notificacion de Conformidad de ".$nombreCGE;
+                                   $nombDoc = "";
+
+                                   $consulta = $conexion->query("SELECT `NOMBRE_R` FROM `registro` WHERE `NOMBRE_R` LIKE '$nombreDoc' ");
+                                   
+                                   $numRows = $consulta->rowCount();
+                                   
+                                   if($numRows>0){
+                                      $row= $consulta->fetchObject();
+                                      $nombDoc = $row->NOMBRE_R;
+                                        
+                                   }
+                                   if (strcasecmp($nombreDoc, $nombDoc)!=0) 
+                                   {
+                                        $comentario_add = $conexion->query("INSERT INTO registro (NOMBRE_U,TIPO_T,ESTADO_E,NOMBRE_R,FECHA_R,HORA_R) VALUES ('$nombreUA','publicaciones','Habilitado','$nombreDoc','$fecha','$hora')")or
+                                        die("Error");
+
+                                        $consultar= $conexion->query("SELECT MAX(ID_R) AS 'ID_R' FROM registro");
+                                        $row = $consultar->fetchObject();
+                                        $id = $row -> ID_R;
+
+                                        $guardar_doc = $conexion->query("INSERT INTO documento (ID_R,TAMANIO_D,RUTA_D,VISUALIZABLE_D,DESCARGABLE_D) VALUES('$id','1024','$nruta','$visualizable','$descargable')");
+                                        $des_D=$conexion->query("INSERT INTO descripcion (ID_R,DESCRIPCION_D) VALUES('$id','Notificacion de Conformidad')");
+                                        $destinatario=$conexion->query("INSERT INTO receptor (ID_R,RECEPTOR_R) VALUES('$id','$nombreEmpresa')");
+                                        $guardar = $conexion->query("INSERT INTO periodo (ID_R,fecha_p,hora_p) VALUES ('$id','$fecha','$hora')") or
+                                        die("Error");
+                                   }
 
                                     $directorioIndex = "../".$nombreUGE."/NC/index.html";
         

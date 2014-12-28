@@ -109,145 +109,156 @@ if (isset($_POST['lista'])) {
                             {
                                 if(isset($_GET['id'])){
                              
-                                 $buscar    = array(
-                                                    'empresa_nombre_largo' => '[[empresa-nombre-largo]]',
-                                                    'fecha_actual'         => '[[fecha-actual]]',
-                                                    'hora_actual'          => '[[hora-actual]]',
-                                                    'lugar'                => '[[lugar]]',
-                                                    'primer_p'             => '[[primer-puntaje]]',
-                                                    'segundo_p'            => '[[segundo-puntaje]]',
-                                                    'tercer_p'             => '[[tercer-puntaje]]',
-                                                    'cuarto_p'             => '[[cuarto-puntaje]]',
-                                                    'quinto_p'             => '[[quinto-puntaje]]',
-                                                    'sexto_p'              => '[[sexto-puntaje]]',
-                                                    'septimo_p'            => '[[septimo-puntaje]]',
-                                                    'obs_det'              => '[[obs-detalle]]',
-                                                    'obs_det_item'         => '[[obs-detalle-item]]',
-                                                 );
+                                     $buscar    = array(
+                                                        'empresa_nombre_largo' => '[[empresa-nombre-largo]]',
+                                                        'fecha_actual'         => '[[fecha-actual]]',
+                                                        'hora_actual'          => '[[hora-actual]]',
+                                                        'lugar'                => '[[lugar]]',
+                                                        'primer_p'             => '[[primer-puntaje]]',
+                                                        'segundo_p'            => '[[segundo-puntaje]]',
+                                                        'tercer_p'             => '[[tercer-puntaje]]',
+                                                        'cuarto_p'             => '[[cuarto-puntaje]]',
+                                                        'quinto_p'             => '[[quinto-puntaje]]',
+                                                        'sexto_p'              => '[[sexto-puntaje]]',
+                                                        'septimo_p'            => '[[septimo-puntaje]]',
+                                                        'obs_det'              => '[[obs-detalle]]',
+                                                        'obs_det_item'         => '[[obs-detalle-item]]',
+                                                     );
 
 
-                                                $remplazo['empresa_nombre_largo'] = $nombreEmpresa;
-                                                $remplazo['fecha_actual'] = $fecha;
-                                                $remplazo['hora_actual']  = $hora;
-                                                $remplazo['lugar'] = $lugar;
-                                               
-                                                $remplazo['primer_p'] = intval($calificaciones[0]);
-                                                $remplazo['segundo_p'] = intval($calificaciones[1]);
-                                                $remplazo['tercer_p'] = intval($calificaciones[2]);
-                                                $remplazo['cuarto_p'] = intval($calificaciones[3]);
-                                                $remplazo['quinto_p'] = intval($calificaciones[4]);
-                                                $remplazo['sexto_p'] = intval($calificaciones[5]);
-                                                $remplazo['septimo_p'] = intval($calificaciones[6]);
-                                
+                                    $remplazo['empresa_nombre_largo'] = $nombreEmpresa;
+                                    $remplazo['fecha_actual'] = $fecha;
+                                    $remplazo['hora_actual']  = $hora;
+                                    $remplazo['lugar'] = $lugar;
 
-                                                $obsDetalle = "[".count($observaciones)."]{";
-                                                
-                                                for ($i=0;$i<count($observaciones);$i++)
-                                                {
-                                                    if($i!=0)
-                                                    {
-                                                        $obsDetalle = $obsDetalle." \item #".($i+1);
-                                                    }
-                                                    else
-                                                    {
-                                                        $obsDetalle = $obsDetalle."\item #".($i+1);
-                                                    }
-                                                }
-                                                $obsDetalle = $obsDetalle."}";
-                                                $remplazo['obs_det'] = $obsDetalle;              
-                                                
-                                                $obsDetalleItem = "";
-                                                
-                                                for ($i=0;$i<count($observaciones);$i++)
-                                                {
-                                                    $obsDetalleItem = $obsDetalleItem."{".$observaciones[$i]."}";         
-                                                }
-                                                
-                                                $remplazo['obs_det_item'] = $obsDetalleItem;
-                                            
-                                                //$ruta = "..\\Repositorio\\asesor";
-                                                $ruta ="../Repositorio/asesor";
-                                                chdir($ruta);
-                                                $rutaDirectorio="../".$nombreUGE."/OC/";
-
-                                                $file = "OrdenCambio".'_'.$nombreEmpresa.'.pdf';
-                    
-                                                if (!file_exists($rutaDirectorio)) 
-                                                {
-                                                    $oldmask = umask(0); 
-                                                    mkdir($rutaDirectorio, 0777,TRUE);
-                                                    umask($oldmask);
-                                                    if(!file_exists("../".$nombreUGE."/index.html"))
-                                                    {
-                                                        fopen("../".$nombreUGE."/index.html", "x");
-                                                    }
-                                                
-                                                }
-                                                $id = "OrdenCambio";
-                                                $tex = $id.".tex";
-                                                $log = $id.".log"; 
-                                                $aux = $id.".aux";
-                                                $pdf = $id.".pdf"; 
-                                                
-
-                                                $plantilla = "OrdenCambio.tex";
-
-                                                $texto = file_get_contents($plantilla);
-                                                $textoAux = file_get_contents($plantilla);
+                                    $remplazo['primer_p'] = intval($calificaciones[0]);
+                                    $remplazo['segundo_p'] = intval($calificaciones[1]);
+                                    $remplazo['tercer_p'] = intval($calificaciones[2]);
+                                    $remplazo['cuarto_p'] = intval($calificaciones[3]);
+                                    $remplazo['quinto_p'] = intval($calificaciones[4]);
+                                    $remplazo['sexto_p'] = intval($calificaciones[5]);
+                                    $remplazo['septimo_p'] = intval($calificaciones[6]);
 
 
-                                                $texto = str_replace($buscar['empresa_nombre_largo'], $remplazo['empresa_nombre_largo'], $texto);
-                                                $texto = str_replace($buscar['fecha_actual'], $remplazo['fecha_actual'], $texto);
-                                                $texto = str_replace($buscar['hora_actual'], $remplazo['hora_actual'], $texto);
-                                                $texto = str_replace($buscar['lugar'], $remplazo['lugar'], $texto);
-                                                $texto = str_replace($buscar['primer_p'], $remplazo['primer_p'], $texto);
-                                                $texto = str_replace($buscar['segundo_p'], $remplazo['segundo_p'], $texto);
-                                                $texto = str_replace($buscar['tercer_p'], $remplazo['tercer_p'], $texto);
-                                                $texto = str_replace($buscar['cuarto_p'], $remplazo['cuarto_p'], $texto);
-                                                $texto = str_replace($buscar['quinto_p'], $remplazo['quinto_p'], $texto);
-                                                $texto = str_replace($buscar['sexto_p'], $remplazo['sexto_p'], $texto);
-                                                $texto = str_replace($buscar['septimo_p'], $remplazo['septimo_p'], $texto);
-                                                $texto = str_replace($buscar['obs_det'], $remplazo['obs_det'], $texto);
-                                                $texto = str_replace($buscar['obs_det_item'], $remplazo['obs_det_item'], $texto);
-                                                
-                                                
-                                                file_put_contents($tex,$texto);
-                                                
-                                                exec("pdflatex -interaction=nonstopmode $tex",$final);
+                                    $obsDetalle = "[".count($observaciones)."]{";
 
-                                                file_put_contents($tex, $textoAux);
-                                                unlink($log);
-                                                unlink($aux);
-                                            
-                                               // rename("OrdenCambio.pdf", $file);
-                                                rename("OrdenCambio.pdf", $rutaDirectorio.$pdf );
-                                                
-                                               $nruta="../Repositorio/".$nombreUGE."/OC/"."OrdenCambio.pdf";
-                                               $fecha       = date('Y-m-d');
-                                               $hora        =  date("G:H:i");
-                                               $visualizable="TRUE";
-                                               $descargable="TRUE";
-                                               $comentario_add = $conexion->query("INSERT INTO registro (NOMBRE_U,TIPO_T,ESTADO_E,NOMBRE_R,FECHA_R,HORA_R) VALUES ('$nombreUA','publicaciones','Habilitado','Orden de Cambio','$fecha','$hora')")or
-                                   die("Error al s");
-                                               
-                                           $consultar= $conexion->query("SELECT MAX(ID_R) AS 'ID_R' FROM registro");
-                                               $row = $consultar->fetchObject();
-                                               $id = $row -> ID_R;
-                                               
-                                               $guardar_doc = $conexion->query("INSERT INTO documento (ID_R,TAMANIO_D,RUTA_D,VISUALIZABLE_D,DESCARGABLE_D) VALUES('$id','1024','$nruta','$visualizable','$descargable')");
-                                               $des_D=$conexion->query("INSERT INTO descripcion (ID_R,DESCRIPCION_D) VALUES('$id','Orden de Cambio')");
-                                               $destinatario=$conexion->query("INSERT INTO receptor (ID_R,RECEPTOR_R) VALUES('$id','$nombreEmpresa')");
-                                               $guardar = $conexion->query("INSERT INTO periodo (ID_R,fecha_p,hora_p) VALUES ('$id','$fecha','$hora')") or
-                                   die("Error al s");
+                                    for ($i=0;$i<count($observaciones);$i++)
+                                    {
+                                        if($i!=0)
+                                        {
+                                            $obsDetalle = $obsDetalle." \item #".($i+1);
+                                        }
+                                        else
+                                        {
+                                            $obsDetalle = $obsDetalle."\item #".($i+1);
+                                        }
+                                    }
+                                    $obsDetalle = $obsDetalle."}";
+                                    $remplazo['obs_det'] = $obsDetalle;              
 
-                                            if (!file_exists("../".$nombreUGE."/OC/index.html")) {
-                                                # code...
-                                                fopen("../".$nombreUGE."/OC/index.html", "x");
-                                            }
+                                    $obsDetalleItem = "";
 
-                                            echo"<script type=\"text/javascript\">alert('Se genero correctamente la orden de cambio'); window.location='../Vista/ordenDeCambio.php';</script>";  
-                                
-                                }
+                                    for ($i=0;$i<count($observaciones);$i++)
+                                    {
+                                        $obsDetalleItem = $obsDetalleItem."{".$observaciones[$i]."}";         
+                                    }
+
+                                    $remplazo['obs_det_item'] = $obsDetalleItem;
+
+                                    //$ruta = "..\\Repositorio\\asesor";
+                                    $ruta ="../Repositorio/asesor";
+                                    chdir($ruta);
+                                    $rutaDirectorio="../".$nombreUGE."/OC/";
+
+                                    $file = "OrdenCambio".'_'.$nombreEmpresa.'.pdf';
+
+                                    if (!file_exists($rutaDirectorio)) 
+                                    {
+                                        $oldmask = umask(0); 
+                                        mkdir($rutaDirectorio, 0777,TRUE);
+                                        umask($oldmask);
+                                        if(!file_exists("../".$nombreUGE."/index.html"))
+                                        {
+                                            fopen("../".$nombreUGE."/index.html", "x");
+                                        }
+
+                                    }
+                                    $id = "OrdenCambio";
+                                    $tex = $id.".tex";
+                                    $log = $id.".log"; 
+                                    $aux = $id.".aux";
+                                    $pdf = $id.".pdf"; 
+
+
+                                    $plantilla = "OrdenCambio.tex";
+
+                                    $texto = file_get_contents($plantilla);
+                                    $textoAux = file_get_contents($plantilla);
+
+
+                                    $texto = str_replace($buscar['empresa_nombre_largo'], $remplazo['empresa_nombre_largo'], $texto);
+                                    $texto = str_replace($buscar['fecha_actual'], $remplazo['fecha_actual'], $texto);
+                                    $texto = str_replace($buscar['hora_actual'], $remplazo['hora_actual'], $texto);
+                                    $texto = str_replace($buscar['lugar'], $remplazo['lugar'], $texto);
+                                    $texto = str_replace($buscar['primer_p'], $remplazo['primer_p'], $texto);
+                                    $texto = str_replace($buscar['segundo_p'], $remplazo['segundo_p'], $texto);
+                                    $texto = str_replace($buscar['tercer_p'], $remplazo['tercer_p'], $texto);
+                                    $texto = str_replace($buscar['cuarto_p'], $remplazo['cuarto_p'], $texto);
+                                    $texto = str_replace($buscar['quinto_p'], $remplazo['quinto_p'], $texto);
+                                    $texto = str_replace($buscar['sexto_p'], $remplazo['sexto_p'], $texto);
+                                    $texto = str_replace($buscar['septimo_p'], $remplazo['septimo_p'], $texto);
+                                    $texto = str_replace($buscar['obs_det'], $remplazo['obs_det'], $texto);
+                                    $texto = str_replace($buscar['obs_det_item'], $remplazo['obs_det_item'], $texto);
+
+
+                                    file_put_contents($tex,$texto);
+
+                                    exec("pdflatex -interaction=nonstopmode $tex",$final);
+
+                                    file_put_contents($tex, $textoAux);
+                                    unlink($log);
+                                    unlink($aux);
+
+                                   // rename("OrdenCambio.pdf", $file);
+                                    rename("OrdenCambio.pdf", $rutaDirectorio.$pdf );
+
+                                    $nruta="../Repositorio/".$nombreUGE."/OC/"."OrdenCambio.pdf";
+                                    $fecha       = date('Y-m-d');
+                                    $hora        =  date("G:H:i");
+                                    $visualizable="TRUE";
+                                    $descargable="TRUE";
+                                    $nombreDoc = "Orden de Cambio de ".$nombreCGE;
+
+                                   $nombDoc = "";
+                                   
+                                   $consulta = $conexion->query("SELECT `NOMBRE_R` FROM `registro` WHERE `NOMBRE_R` LIKE '$nombreDoc' ");
+                                   
+                                   $numRows = $consulta->rowCount();
+                                   
+                                   if($numRows>0){
+                                      $row= $consulta->fetchObject();
+                                      $nombDoc = $row->NOMBRE_R;
+                                        
+                                   }
+                                   
+                                   if (strcasecmp($nombreDoc, $nombDoc)!=0) 
+                                   {
+                                       $comentario_add = $conexion->query("INSERT INTO registro (NOMBRE_U,TIPO_T,ESTADO_E,NOMBRE_R,FECHA_R,HORA_R) VALUES ('$nombreUA','publicaciones','Habilitado','$nombreDoc','$fecha','$hora')")or
+                                       die("Error");
+
+                                       $consultar= $conexion->query("SELECT MAX(ID_R) AS 'ID_R' FROM registro");
+                                       $row = $consultar->fetchObject();
+                                       $id = $row -> ID_R;
+
+                                       $guardar_doc = $conexion->query("INSERT INTO documento (ID_R,TAMANIO_D,RUTA_D,VISUALIZABLE_D,DESCARGABLE_D) VALUES('$id','1024','$nruta','$visualizable','$descargable')");
+                                       $des_D=$conexion->query("INSERT INTO descripcion (ID_R,DESCRIPCION_D) VALUES('$id','Orden de Cambio')");
+                                       $destinatario=$conexion->query("INSERT INTO receptor (ID_R,RECEPTOR_R) VALUES('$id','$nombreEmpresa')");
+                                       $guardar = $conexion->query("INSERT INTO periodo (ID_R,fecha_p,hora_p) VALUES ('$id','$fecha','$hora')") or
+                                       die("Error");
+                                   }
+
+                                echo"<script type=\"text/javascript\">alert('Se genero correctamente la orden de cambio'); window.location='../Vista/ordenDeCambio.php';</script>";  
+                               }
 
                             }
                             else
