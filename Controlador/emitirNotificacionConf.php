@@ -77,7 +77,7 @@ if (isset($_POST['lista'])) {
                             $SeleccionarDocsSubidos = $conexion->query("SELECT * FROM registro WHERE NOMBRE_U='$nombreUGE' AND TIPO_T='documento subido'");
                             $DocsSubidos = $SeleccionarDocsSubidos->rowCount();
 
-                            if($DocsRequeridos == $DocsSubidos)
+                            if(($DocsRequeridos == $DocsSubidos) and $DocsSubidos >= 1)
                             {
                                 if(isset($_GET['id'])){
                          

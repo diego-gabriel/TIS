@@ -52,7 +52,7 @@ if (isset($_POST['grupoempresa'])) {
                 $convocatoriaProy = $con->consulta($selCon);
                 $convocatoria = mysql_fetch_array($convocatoriaProy);
 
-                $VerificarPlanificacion = $con->consulta("SELECT * FROM registro WHERE NOMBRE_U='$nombreUGE[0]' AND TIPO_T='pago planificacion'");
+                $VerificarPlanificacion = $con->consulta("SELECT * FROM planificacion WHERE NOMBRE_U='$nombreUGE[0]' AND ESTADO_E='planificacion registrada'");
                 $planificacion = mysql_fetch_row($VerificarPlanificacion);
 
                 if (is_array($planificacion)) {

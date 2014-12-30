@@ -109,8 +109,8 @@ if (isset($_POST['lista'])) {
                             $SeleccionarDocsSubidos = $conexion->query("SELECT * FROM registro WHERE NOMBRE_U='$nombreUGE' AND TIPO_T='documento subido'");
                             $DocsSubidos = $SeleccionarDocsSubidos->rowCount();
 
-                            if($DocsSubidos == $DocsRequeridos)
-                            {
+                            if(($DocsSubidos == $DocsRequeridos) and $DocsSubidos>=1)
+                            { 
                                 if(isset($_GET['id'])){
                              
                                      $buscar    = array(
