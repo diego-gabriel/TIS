@@ -309,19 +309,19 @@
 
                                 echo '<div class="form-group has-success">';
                                 echo '<h4>Nota 2da etapa:</h4>';
-                                echo '<input type="text" value="'.$Nota2da. ' puntos" class="form-control" disabled>';
+                                echo '<input type="text" value="'.$Nota2da.'" class="form-control" disabled>';
                                 echo '</div>';
 
                                 echo '<div class="form-group has-success">';
                                 echo '<h4>Nota 3era etapa:</h4>';
-                                echo '<input type="text" value="'.$Nota[0]. ' puntos" class="form-control" disabled>';
+                                echo '<input type="text" value="'.$Nota[0].'" class="form-control" disabled>';
                                 echo '</div>';
 
                                 $NotaFinal = $Nota2da*0.60 + $Nota[0]*0.40;
 
                                 echo '<div class="form-group has-success">';
                                 echo '<h4>Nota Final:</h4>';
-                                echo '<input type="text" value="'.$NotaFinal. ' puntos" class="form-control" name="NotaF" readonly>';
+                                echo '<input type="text" value="'.$NotaFinal.'" class="form-control" name="NotaFn" readonly>';
                                 echo '</div>';
 
                                 echo '<div class="form-group">

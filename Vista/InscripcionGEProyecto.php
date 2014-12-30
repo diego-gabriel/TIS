@@ -303,9 +303,17 @@
                           $seleccion = "SELECT NOMBRE_UA FROM inscripcion WHERE NOMBRE_UGE = '$UsuarioActivo'";
                           $consultar = $con ->consulta($seleccion);
                           $nombreUA = mysql_fetch_array($consultar);
-                         
-                          if(strnatcasecmp($nombreUA[0], "") != 0){
+
+                          $VerificarHabilitacion = $con->consulta("SELECT * FROM inscripcion WHERE NOMBRE_UGE='$UsuarioActivo' AND ESTADO_INSCRIPCION='Habilitado'");
+                          $Habilitacion = mysql_fetch_row($VerificarHabilitacion);
+
+                        if(strnatcasecmp($nombreUA[0], "") != 0){
+
+                            if(is_array($Habilitacion))
+                            {        
                         ?>
+
+
                             <div class="form-group">
                                 <form method="POST" <b>Proyectos disponibles :</b>
                                     <select name="proyecto" class="form-control">
@@ -339,7 +347,15 @@
                                 </form>
                             </div>
                         <?php
-                          }
+                            }
+                            else
+                            {
+                                echo '<div class="alert alert-warning">
+                                     <strong>Su inscripcion no ha sido habilitada</strong>
+                                    </div>';
+
+                            }
+                        }
                           else
                           {
                                echo '<div class="alert alert-warning">

@@ -334,16 +334,15 @@
                             $VerificarIns2 = mysql_fetch_row($VerificarIns);
                             if (!is_array($VerificarIns2))
                             {
-                                echo "<h4>Para subir su propuesta primero debe inscribirse a un proyecto</h4>";
+                                echo '<div class="alert alert-warning">
+                                            <strong>Para subir su propuesta primero debe inscribirse a un proyecto</strong>
+                                          </div>';
+            
                             }
                             else{
 
-                                $VerificarEstado = $con->consulta("SELECT * FROM inscripcion WHERE NOMBRE_UGE = '$UsuarioGE' AND ESTADO_INSCRIPCION='Habilitado'"); 
-                                $Estado = mysql_num_rows($VerificarEstado);
-                            
-
-                                if($Estado == 1)
-                                {
+                
+                              
                                     $Doc = $_GET['doc'];
                                     $VerificarDocumento = $conect->consulta("SELECT * FROM registro WHERE NOMBRE_U = '$UsuarioGE' AND NOMBRE_R = '$Doc'");
 
@@ -408,15 +407,7 @@
                                                    
                                         }    
                                     }  
-                                }
-                                else
-                                {
-                                    echo '<div class="alert alert-warning">
-                                            <strong>Su inscripcion no ha sido habilitada</strong>
-                                          </div>';
-                                }
-
-                                
+                              
                             }
                         
                         ?>

@@ -30,22 +30,27 @@
     $VerificarInscripcion = $con->consulta("SELECT NOMBRE_UA FROM inscripcion, inscripcion_proyecto WHERE NOMBRE_UGE = '$UsuarioActivo' and NOMBRE_U = '$UsuarioActivo'");
     $Inscripcion = mysql_fetch_row($VerificarInscripcion);
 
-    //$SeleccionarDocumentosRequeridos = $con->consulta("SELECT * FROM registro WHERE NOMBRE_U='$Inscripcion[0]' AND TIPO_T='documento requerido'");
-    //$DocumentosRequeridos = mysql_num_rows($SeleccionarDocumentosRequeridos);
-
-    //$VerificarDocumentosSubidos = $con->consulta("SELECT * FROM registro WHERE NOMBRE_U = '$UsuarioActivo' AND TIPO_T='documento subido'");
-    //$DocumentosSubidos = mysql_num_rows($VerificarDocumentosSubidos);
-
     $SeleccionarNombreLargo = $con->consulta("SELECT NOMBRE_LARGO_GE FROM grupo_empresa WHERE NOMBRE_U='$UsuarioActivo'");
     $NombreLargo = mysql_fetch_row($SeleccionarNombreLargo);
 
-    $VerificarContrato = $con->consulta("SELECT ESTADO_CONTRATO FROM inscripcion_proyecto WHERE NOMBRE_U='$UsuarioActivo' AND ESTADO_CONTRATO='Firmado'");
-    $Contrato = mysql_num_rows($VerificarContrato);
+    $SeleccionarNombreCorto = $con->consulta("SELECT NOMBRE_CORTO_GE FROM grupo_empresa WHERE NOMBRE_U='$UsuarioActivo'");
+    $NombreCorto = mysql_fetch_row($SeleccionarNombreCorto);
+
+    //$VerificarContrato = $con->consulta("SELECT ESTADO_CONTRATO FROM inscripcion_proyecto WHERE NOMBRE_U='$UsuarioActivo' AND ESTADO_CONTRATO='Firmado'");
+    //$Contrato = mysql_num_rows($VerificarContrato);
+
+    $GrupoEmpresaNC = 'Notificacion de Conformidad de '.$NombreCorto[0].'';
+    $SeleccionarNC = $con->consulta("SELECT * FROM registro,receptor WHERE NOMBRE_U='$Inscripcion[0]' AND NOMBRE_R='$GrupoEmpresaNC' AND registro.ID_R = receptor.ID_R");
+    $NC = mysql_num_rows($SeleccionarNC);
+
+    $GrupoEmpresaOC = 'Orden de Cambio de '.$NombreCorto[0].'';
+    $SeleccionarOC = $con->consulta("SELECT * FROM registro,receptor WHERE NOMBRE_U='$Inscripcion[0]' AND NOMBRE_R='$GrupoEmpresaOC' AND registro.ID_R = receptor.ID_R");
+    $OC = mysql_num_rows($SeleccionarOC);
 
     if(is_array($Inscripcion))
     {
 
-      if($Contrato >= 1)
+      if($NC >= 1 or $OC>=1)
       {
 
         $planificacion = new Planificacion($usuario);
@@ -305,7 +310,7 @@
       else
       {
         echo '<div class="alert alert-warning">
-                <strong>Podra registrar su planificacion una vez haya firmado contrato</strong>
+                <strong>Podra registrar su planificacion una vez se haya emitido una orden de cambio o notificacion de conformidad para su grupo empresa</strong>
               </div>';
       }
     }
