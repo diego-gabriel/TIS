@@ -27,6 +27,10 @@
     
     
 	$filas = '';
+
+	//$nombreGE = $ap[0][1];
+
+	//$VerificarContrato = $conexion->consulta("SELECT * FROM registro, receptor WHERE NOMBRE_U='$usuario' AND TIPO_T='contrato' AND ")
         
        
 	for ($i = 0; $i < count($ap); $i++) { 
