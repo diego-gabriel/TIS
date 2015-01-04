@@ -266,14 +266,12 @@
         </div>
         </div>
         </div>	
-
         <div class="gadget">
         <nav class="star" role="navigation" style="margin-bottom: 0">
         <div class="navbar-header">
         <a class="navbar-brand">Verificar Nombre G.E.</a>
 
         </div></nav><h2 class="star"><span>&nbsp; </span></h2>                                       
-
 
         <div class="clr"></div>
         <ul class="ex_menu">
@@ -315,14 +313,8 @@
         </div>
 
 
-                
-    
-        <!-- /#page-wrapper -->
-
     </div>
-    <!-- /#wrapper -->
 
-    <!-- Core Scripts - Include with every page -->
     <script src="Librerias/js/jquery-1.10.2.js"></script>
     <script src="Librerias/js/bootstrap.min.js"></script>
     <script src="Librerias/js/plugins/metisMenu/jquery.metisMenu.js"></script>
