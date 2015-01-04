@@ -289,9 +289,7 @@ $conect = new conexion();
                                 //crear conexion---------------------------
                                 
                                 //Peticion
-                                $peticion = $conect->consulta("SELECT u.NOMBRE_U, u.ESTADO_E, u.PASSWORD_U, u.TELEFONO_U , u.CORREO_ELECTRONICO_U, r.ROL_R
-FROM usuario u , usuario_rol r
-WHERE  u.NOMBRE_U = r.NOMBRE_U  AND r.ROL_R = 'asesor'");
+                                $peticion = $conect->consulta("SELECT u.NOMBRE_U, u.ESTADO_E, u.PASSWORD_U, u.TELEFONO_U , u.CORREO_ELECTRONICO_U, r.ROL_R FROM usuario u , usuario_rol r WHERE  u.NOMBRE_U = r.NOMBRE_U  AND r.ROL_R = 'asesor'");
                             
 
                                 while($fila = mysql_fetch_array($peticion))
@@ -340,8 +338,7 @@ WHERE  u.NOMBRE_U = r.NOMBRE_U  AND r.ROL_R = 'asesor'");
                                             echo "<a href ='eliminar_asesor.php?id_us=".$fila['NOMBRE_U']."' class='verificar'><font color='blue'>Eliminar</font></a>";
                                         ?>
                                     </div>
-                                                                                                  
-<!--                                                                        <div class="contenedor-columna">
+
                                         <?php
                                                                                     
                                         ?>
@@ -354,7 +351,6 @@ WHERE  u.NOMBRE_U = r.NOMBRE_U  AND r.ROL_R = 'asesor'");
                             
                                 }
 
-                                //Cerrar
                                 
                         ?>  
                                                            

@@ -97,24 +97,24 @@
               if($tamano==6){ $usuario1= $_POST['nota0'];$usuario2= $_POST['nota1'];$usuario3= $_POST['nota2'];$usuario4= $_POST['nota3'];$usuario5= $_POST['nota4'];$usuario6= $_POST['nota5'];$nota=((($usuario1+$usuario2+$usuario3+$usuario4+$usuario5+$usuario6)/6)/100)*($Puntaje);}            
            
             $_SESSION["nota"]=$nota;
-                 echo '<table class="table table-hover">
-			  <thead>
-		    	  <tr>
-		        	  
-                                  <th>Actividad</th>
-	          	          <th>Valor en Porcentaje</th>
-	          		  <th>Nota final</th>
-                            
-	        	  </tr>
-		      </thead>
-			  <tbody>
-			  	<th>'.$Actividad.'</th>
-                                <th>'.$Puntaje.'%</th>    
-                                <th>'.$nota.'</th>
+            echo '<table class="table table-hover">
+            <thead>
+            <tr>
 
-                                
-			  </tbody>
-                </table>'; 
+            <th>Actividad</th>
+            <th>Valor en Porcentaje</th>
+            <th>Nota final</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <th>'.$Actividad.'</th>
+            <th>'.$Puntaje.'%</th>    
+            <th>'.$nota.'</th>
+
+
+            </tbody>
+            </table>'; 
                  
  ?>
              </div>

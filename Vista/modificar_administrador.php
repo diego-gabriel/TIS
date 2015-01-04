@@ -187,179 +187,179 @@
 </nav>          
                 
                 
-        <div id="page-wrapper">
+            <div id="page-wrapper">
             <div class="row">
-                <div class="col-lg-12">
-                  
- 					<div class="mainbar">
-                                            <div class="article"><br><br>
-							
+            <div class="col-lg-12">
 
-                                                
-                                                
-							<h2><span>Modificar Informacion Personal</span></h2>
-			<div id="contenido">
-							<?php
-							
-							
-								
-
-                                                                        $usuario= $_SESSION['usuario'];
-									$contrasena= $_SESSION['contrasena'];
-
-									
-
-								
-
-									//Peticion
-										$peticion =$conectar->consulta("SELECT u.NOMBRE_U,u.PASSWORD_U,u.TELEFONO_U,u.CORREO_ELECTRONICO_U,a.NOMBRES_AD,a.APELLIDOS_AD FROM  usuario u, administrador a WHERE u.NOMBRE_U=a.NOMBRE_U  and u.NOMBRE_U='$usuario'");
-									//cerrar conexion--------------------------
-									 
-								while($fila = mysql_fetch_array($peticion))
-								{
-	
-								echo"
-								<form action='actualizar_integrante.php' method='post'>
-									<center>
-										<table border=0 width=80%>
-											<tr>
-												<td >
-													
-												</td>
-												<td>
-                                                              
-                                        <div class='form-group'>
-                                            <div class='input-group'>
-                                                <span class='input-group-addon'>
-                                                  <span class='glyphicon glyphicon-user'></span>
-                                                </span>
-                                                <input class='form-control' type='text' name='login' id='UserName'  value='".$fila['NOMBRE_U']."' readonly='readonly' required/>
-                                            </div>
-                                        </div>
-	                                                                          </td>
-											</tr>
-                                                                                        <tr>
-										   <td >
-                                                                                   
-							
-										</td>
-										<td>
-                                          <div class='form-group'>
-                                            <div class='input-group'>
-                                                <span class='input-group-addon'>
-                                                  <span class='glyphicon glyphicon-lock'></span>
-                                                </span>
-                                                <input class='form-control' type='text' name='password' id='UserPassword'    minlength='5' pattern='^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$' title='la contraseña debe contener mayusculas, minusculas, caracteres y numeros' value='".$fila['PASSWORD_U']."' required/>
-                                            </div>
-                                        </div>  
-
-										
-												</td>
-											</tr
-											<tr>
-												<td >
-													
-												</td>
-												<td>
-                                        <div class='form-group'>
-                                            <div class='input-group'>
-                                                <span class='input-group-addon'>
-                                                  <span class='glyphicon glyphicon-user'></span>
-                                                </span>
-                                                <input class='form-control' type='text' name='nombre' id='RealName' placeholder='Nombre' pattern='\b[A-Z]{1}[a-z]{2,20}' title='Ejm: Alejandra, Ivan, Ana'	 value='".$fila['NOMBRES_AD']."' required />
-                                            </div>
-                                        </div>                                                                                                
+            <div class="mainbar">
+            <div class="article"><br><br>
 
 
-												
-												</td>
-											</tr>
-											<tr>
-												<td >
-													
-												</td>
-												<td>
-                                        <div class='form-group'>
-                                            <div class='input-group'>
-                                                <span class='input-group-addon'>
-                                                  <span class='glyphicon glyphicon-user'></span>
-                                                </span>
-                                                <input class='form-control' type='text' name='apellido' id='LastName' placeholder='Apellido' pattern='\b[A-Z]{1}[a-z]{3,20}\b' title='Ejm: Vargas, Morales, Medrano' value='".$fila['APELLIDOS_AD']."' required>
-                                            </div>
-                                        </div>                                                                                                
-
-												</td>
-											</tr>
-											<tr>
-												<td>
-													
-												</td>
-												<td>
-                                         <div class='form-group'>
-                                            <div class='input-group'>
-                                                <span class='input-group-addon'>
-                                                  <span class='glyphicon glyphicon-earphone'></span>
-                                                </span>
-                                                <input class='form-control' type='text' name='telefono' id='UserPhone' placeholder='Telefono' title='Ejm: 4022371' pattern='\b[4][0-9]{6}' value='".$fila['TELEFONO_U']."' required/>
-                                            </div>
-                                        </div>                                                                                               
-													
-                                                                                           </td>
-											</tr>
-											<tr>
-												<td>
-													
-												</td>
-												<td >
-                                                                                                
-                                        <div class='form-group'>
-                                            <div class='input-group'>
-                                                <span class='input-group-addon'>
-                                                  <span class='glyphicon glyphicon-envelope'></span>
-                                                </span>
-                                                <input class='form-control' type='email' name='email' id='UserEmail' placeholder='Correo' pattern='^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$' value='".$fila['CORREO_ELECTRONICO_U']."' required/>
-                                            </div>
-                                        </div>
 
 
-												</td>
-											</tr>
-											
-												<tr>
-												<td>
-												</td>
-												<td>
-                                                                                                
-                                        <div class='form-group'>
-                                            <button type='submit'  class='btn btn-primary' id='btn-registrarUser'> <span class='glyphicon glyphicon-ok'></span> Actualizar</button>
-                                        </div>
+            <h2><span>Modificar Informacion Personal</span></h2>
+            <div id="contenido">
+            <?php
 
-													
-												</td>
-											</tr>
-										</table>
-									</center>
-								</form>
-								";
-								}
-							
-								?>
-								
-							</div>
 
-						</div>
-						
-					</div>                   
-                    
-                    
-                </div>
-                <!-- /.col-lg-12 -->
+
+
+            $usuario= $_SESSION['usuario'];
+            $contrasena= $_SESSION['contrasena'];
+
+
+
+
+
+            //Peticion
+            $peticion =$conectar->consulta("SELECT u.NOMBRE_U,u.PASSWORD_U,u.TELEFONO_U,u.CORREO_ELECTRONICO_U,a.NOMBRES_AD,a.APELLIDOS_AD FROM  usuario u, administrador a WHERE u.NOMBRE_U=a.NOMBRE_U  and u.NOMBRE_U='$usuario'");
+            //cerrar conexion--------------------------
+
+            while($fila = mysql_fetch_array($peticion))
+            {
+
+            echo"
+            <form action='actualizar_integrante.php' method='post'>
+            <center>
+            <table border=0 width=80%>
+            <tr>
+            <td >
+
+            </td>
+            <td>
+
+            <div class='form-group'>
+            <div class='input-group'>
+            <span class='input-group-addon'>
+            <span class='glyphicon glyphicon-user'></span>
+            </span>
+            <input class='form-control' type='text' name='login' id='UserName'  value='".$fila['NOMBRE_U']."' readonly='readonly' required/>
             </div>
-     
-        </div>
-        <!-- /#page-wrapper -->
+            </div>
+            </td>
+            </tr>
+            <tr>
+            <td >
 
-    </div>
+
+            </td>
+            <td>
+            <div class='form-group'>
+            <div class='input-group'>
+            <span class='input-group-addon'>
+            <span class='glyphicon glyphicon-lock'></span>
+            </span>
+            <input class='form-control' type='text' name='password' id='UserPassword'    minlength='5' pattern='^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$' title='la contraseña debe contener mayusculas, minusculas, caracteres y numeros' value='".$fila['PASSWORD_U']."' required/>
+            </div>
+            </div>  
+
+
+            </td>
+            </tr
+            <tr>
+            <td >
+
+            </td>
+            <td>
+            <div class='form-group'>
+            <div class='input-group'>
+            <span class='input-group-addon'>
+            <span class='glyphicon glyphicon-user'></span>
+            </span>
+            <input class='form-control' type='text' name='nombre' id='RealName' placeholder='Nombre' pattern='\b[A-Z]{1}[a-z]{2,20}' title='Ejm: Alejandra, Ivan, Ana'	 value='".$fila['NOMBRES_AD']."' required />
+            </div>
+            </div>                                                                                                
+
+
+
+            </td>
+            </tr>
+            <tr>
+            <td >
+
+            </td>
+            <td>
+            <div class='form-group'>
+            <div class='input-group'>
+            <span class='input-group-addon'>
+            <span class='glyphicon glyphicon-user'></span>
+            </span>
+            <input class='form-control' type='text' name='apellido' id='LastName' placeholder='Apellido' pattern='\b[A-Z]{1}[a-z]{3,20}\b' title='Ejm: Vargas, Morales, Medrano' value='".$fila['APELLIDOS_AD']."' required>
+            </div>
+            </div>                                                                                                
+
+            </td>
+            </tr>
+            <tr>
+            <td>
+
+            </td>
+            <td>
+            <div class='form-group'>
+            <div class='input-group'>
+            <span class='input-group-addon'>
+            <span class='glyphicon glyphicon-earphone'></span>
+            </span>
+            <input class='form-control' type='text' name='telefono' id='UserPhone' placeholder='Telefono' title='Ejm: 4022371' pattern='\b[4][0-9]{6}' value='".$fila['TELEFONO_U']."' required/>
+            </div>
+            </div>                                                                                               
+
+            </td>
+            </tr>
+            <tr>
+            <td>
+
+            </td>
+            <td >
+
+            <div class='form-group'>
+            <div class='input-group'>
+            <span class='input-group-addon'>
+            <span class='glyphicon glyphicon-envelope'></span>
+            </span>
+            <input class='form-control' type='email' name='email' id='UserEmail' placeholder='Correo' pattern='^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$' value='".$fila['CORREO_ELECTRONICO_U']."' required/>
+            </div>
+            </div>
+
+
+            </td>
+            </tr>
+
+            <tr>
+            <td>
+            </td>
+            <td>
+
+            <div class='form-group'>
+            <button type='submit'  class='btn btn-primary' id='btn-registrarUser'> <span class='glyphicon glyphicon-ok'></span> Actualizar</button>
+            </div>
+
+
+            </td>
+            </tr>
+            </table>
+            </center>
+            </form>
+            ";
+            }
+
+            ?>
+
+            </div>
+
+            </div>
+
+            </div>                   
+
+
+            </div>
+            <!-- /.col-lg-12 -->
+            </div>
+
+            </div>
+            <!-- /#page-wrapper -->
+
+            </div>
     <!-- /#wrapper -->
 
     <!-- Core Scripts - Include with every page -->

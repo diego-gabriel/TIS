@@ -189,160 +189,121 @@ $UsuarioActivo = $_SESSION['usuario'];
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                  
-                    
-   					<div class="mainbar">
-                                            <div class="article"><br><br>
-							
+   		<div class="mainbar">
+                <div class="article"><br><br>
+		<h2><span> Informacion Personal</span></h2>
+	        <div id="contenido">
+		<?php
+		$usuario= $_SESSION['usuario'];
+		$contrasena= $_SESSION['contrasena'];
+                $idgp = $_GET['id_us'];
+		$peticion =$conectar->consulta("SELECT u.NOMBRE_U,u.ESTADO_E, r.ROL_R FROM  usuario as u,usuario_rol as r  WHERE u.NOMBRE_U=r.NOMBRE_U and u.NOMBRE_U='$idgp'");
+	         
+                 while($fila = mysql_fetch_array($peticion))
+		{
+	         echo"
+                <form action='actualizar_integrante.php' method='post'>
+		<center>
+		<table border=0 width=50%>
+		<tr>
+		<td >
+		<p style='text-align:left;'></p>
+		</td>
+		<td>
+                <div class='form-group'>
+                <div class='input-group'>
+                <span class='input-group-addon'>
+                <span class='glyphicon glyphicon-user'></span>
+                </span>
+                <input class='form-control' type='text' name='Nombre' id='UserName'  value='".$fila['NOMBRE_U']."' readonly='readonly'  required/>
+                </div>
+                </div>                                                                                               
 
-                                                
-                                                
-							<h2><span> Informacion Personal</span></h2>
-			<div id="contenido">
-							<?php
-							
-							
-					                                $usuario= $_SESSION['usuario'];
-								
-
-                                                                    
-									$contrasena= $_SESSION['contrasena'];
-                                                                         $idgp = $_GET['id_us'];
-									
-
-						
-
-									//Peticion
-										$peticion =$conectar->consulta("SELECT u.NOMBRE_U,u.ESTADO_E, r.ROL_R FROM  usuario as u,usuario_rol as r  WHERE u.NOMBRE_U=r.NOMBRE_U and u.NOMBRE_U='$idgp'");
-									//cerrar conexion--------------------------
-									 
-								while($fila = mysql_fetch_array($peticion))
-								{
-	
-								echo"
-								<form action='actualizar_integrante.php' method='post'>
-									<center>
-										<table border=0 width=50%>
-											<tr>
-												<td >
-													<p style='text-align:left;'></p>
-												</td>
-												<td>
-                                         <div class='form-group'>
-                                            <div class='input-group'>
-                                                <span class='input-group-addon'>
-                                                  <span class='glyphicon glyphicon-user'></span>
-                                                </span>
-                                                <input class='form-control' type='text' name='Nombre' id='UserName'  value='".$fila['NOMBRE_U']."' readonly='readonly'  required/>
-                                            </div>
-                                        </div>                                                                                               
-
-												</td>
-											</tr>
-											<tr>
-												<td >
-													<p style='text-align:left;'></p>
-												</td>
+		</td></tr>
+		<tr><td >
+		<p style='text-align:left;'></p>
+		</td><td>
                                                                                                 
-
-												<td>
+                <div class='form-group'>
+                <div class='input-group'>
+                <span class='input-group-addon'>
+                <span class='glyphicon glyphicon-lock'></span>
+                </span>
+                <input class='form-control' type='text' name='Estado' id='UserPassword' readonly='readonly' value='".$fila['ESTADO_E']."'   required/>
+                </div>
+                </div>  
+		</td>
+                </tr>
+		<tr>
+		<td >
+		<p style='text-align:left;'></p>
+		</td>
+		<td>
                                                                                                 
-                                          <div class='form-group'>
-                                            <div class='input-group'>
-                                                <span class='input-group-addon'>
-                                                  <span class='glyphicon glyphicon-lock'></span>
-                                                </span>
-                                                <input class='form-control' type='text' name='Estado' id='UserPassword' readonly='readonly' value='".$fila['ESTADO_E']."'   required/>
-                                            </div>
-                                        </div>  
-											
-												</td>
-                                                                                                
-
-
-
-											</tr
-											<tr>
-												<td >
-													<p style='text-align:left;'></p>
-												</td>
-												<td>
-                                                                                                
-                                          <div class='form-group'>
-                                            <div class='input-group'>
-                                                <span class='input-group-addon'>
-                                                  <span class='glyphicon glyphicon-lock'></span>
-                                                </span>
-                                                <input class='form-control' type='text' name='rol' id='UserPassword' readonly='readonly' value='".$fila['ROL_R']."'   required/>
-                                            </div>
-                                        </div>  
-												</td> 
-											</tr>
-											
-										
-										</table>
-									</center>
-								</form> 
-								";$rolAnt=$fila['ROL_R'];;$estado1=$fila['ESTADO_E'];
-								}
-								?>
+                <div class='form-group'>
+                <div class='input-group'>
+                <span class='input-group-addon'>
+                <span class='glyphicon glyphicon-lock'></span>
+                </span>
+                <input class='form-control' type='text' name='rol' id='UserPassword' readonly='readonly' value='".$fila['ROL_R']."'   required/>
+                </div>
+                </div>  
+		</td> 
+		</tr>
+		</table>
+		</center>
+		</form> 
+		";$rolAnt=$fila['ROL_R'];;$estado1=$fila['ESTADO_E'];
+		}
+		?>
                             
-								<?php 
+		<?php 
                                                                 
-                                                                    $_SESSION["Variable1"] =$rolAnt ;
-                                                                    $_SESSION["Variable2"] = $idgp;
-                                                                      $_SESSION["Variable3"] =$estado1 ;
+                $_SESSION["Variable1"] =$rolAnt ;
+                $_SESSION["Variable2"] = $idgp;
+                $_SESSION["Variable3"] =$estado1 ;
                                                                     
-                                                                ?>
-							</div>
+                 ?>
+		</div>
 
-<h2><span>Modificar Informacion Personal</span></h2>
-							<div id="contenido">
-                                                            <center>
-                                                                    <form action="modificar_permiso_tabla.php" method="post"  >
-									
-										<table border=0 width=50%> 
-                                                                                    <tr>
-												<td >
-													
-												</td>
-												<td>
-                                                                                                    <select required="seleccione un estado" name="estado" class="form-control" ><option value='' >Seleccione Un Estado</option>  
-													<?php     
-														
-                                                                                                              
-														$sql=$conectar ->consulta("SELECT ESTADO_E FROM  estado WHERE ESTADO_E='Habilitado' or ESTADO_E='Deshabilitado' "); 
-														
-															while($row=mysql_fetch_array($sql)) 
-                                                                                                                        {echo "<option  value='".$row["ESTADO_E"]."'>".$row["ESTADO_E"]."</option>";}  
+                <h2><span>Modificar Informacion Personal</span></h2>
+		<div id="contenido">
+                <center>
+                 <form action="modificar_permiso_tabla.php" method="post"  >
+			<table border=0 width=50%> 
+                        <tr>
+			<td >
+			</td>
+			<td>
+                        <select required="seleccione un estado" name="estado" class="form-control" ><option value='' >Seleccione Un Estado</option>  
+			<?php     
+			$sql=$conectar ->consulta("SELECT ESTADO_E FROM  estado WHERE ESTADO_E='Habilitado' or ESTADO_E='Deshabilitado' "); 
+			while($row=mysql_fetch_array($sql)) 
+                        {echo "<option  value='".$row["ESTADO_E"]."'>".$row["ESTADO_E"]."</option>";}  
                                                                                                                      
-                                                                                                        ?>    
+                        ?>    
                                                                                                         
-                                                                                                     
-                                                                                                       </select> 
-                                                                                                </td> 
-                                                                                    </tr>             
-                                                                        
-                                                                                      <tr>
-                                                                                             <td >
-												    <p style="text-align:right;">&nbsp;&nbsp;&nbsp; </p>
-                                                                                                 </td>
-                                                                                     						<td>
+                        </select> 
+                        </td> 
+                         </tr>             
+                        <tr>
+                        <td >
+			<p style="text-align:right;">&nbsp;&nbsp;&nbsp; </p>
+                        </td>
+                         <td>
                                                                                                                                     
-                                                                                                <button type="submit"  align="middle" class="btn btn-primary" id="btn-registrarUser"> <span class="glyphicon glyphicon-ok"></span> Actualizar</button>
+                         <button type="submit"  align="middle" class="btn btn-primary" id="btn-registrarUser"> <span class="glyphicon glyphicon-ok"></span> Actualizar</button>
                                                                                                   
-												</td>    
-                                                                                     </tr>  
-                                                                                     
-										</table>
-									
-                                                            </center>
-								</form>
-							</div>
+			</td>    
+                        </tr>  
+                        </table>
+			 </center>
+			</form>
+			</div>
 					
-						</div>
+			</div>
 						
-					</div>                 
+			</div>                 
                     
                 </div>
                 <!-- /.col-lg-12 -->

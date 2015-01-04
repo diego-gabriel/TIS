@@ -6,8 +6,8 @@ session_start();
 
 $usuario = $_SESSION['usuario'];
 $contrasena = $_SESSION['contrasena'];
-   include '../Modelo/conexion.php';
-    $conectar = new conexion();
+include '../Modelo/conexion.php';
+$conectar = new conexion();
 
 $rolAnt=$_SESSION["Variable1"];
 $idgp=$_SESSION["Variable2"];
@@ -15,22 +15,13 @@ $permiso = $_REQUEST['estado'];
 ;
 
 
-//conexion-------------
-
-	//Peticion
 	$peticion = $conectar-> consulta( "UPDATE usuario SET ESTADO_E = '$permiso' WHERE usuario.NOMBRE_U = '$idgp';");
-     
-	//cerrar conexion--------------------------
-
-	 //volver a la pagina---------------
 	 echo'
 	<html>
 		<head>
 			<meta http-equiv="REFRESH" content="0;url=asignar_permisos.php">
 		</head>
-	</html>
-
-	';
+	</html>';
 
 
 ?>

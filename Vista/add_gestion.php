@@ -190,122 +190,106 @@
             <div class="row">
                 <div class="col-lg-12">
                   
- 					<div class="mainbar">
-						<div class="article">
-                                                           <div class="row">
-                                                               <div class="col-lg-12"></div>
-                                                               <h2><span>Nueva Gestion</span></h2>
+ 		<div class="mainbar">
+		<div class="article">
+                <div class="row">
+                <div class="col-lg-12"></div>
+                <h2><span>Nueva Gestion</span></h2>
 
-								<form action='crear_gestion.php' method='POST'>
+		<form action='crear_gestion.php' method='POST'>
 									
-                                                                            <table>
-                                                                                <tr>
-                                                                            <td>
-										<div class="contenedor-columna">
-										<p style="text-align:right;">Fecha Inicio :</p>
-										</div>
-										<div class="contenedor-columna">
-											<input type='date' class="form-control" required name='ini' placeholder="AAAA-MM-DD">
-										</div>
-                                                                             </td> 
-                                                                            </tr>  <tr>
-                                                                            <td>
-										<div class="contenedor-columna">
-										<p style="text-align:right;">Fecha Fin :</p>
-										</div>
-										<div class="contenedor-columna">
-                                                                                    <input type='date' class="form-control" required name='fin' placeholder="AAAA-MM-DD">
-                                                                                    </div>
-                                                                            </td> 
-                                                                            </tr>
+                <table>
+                <tr>
+                <td>
+		<div class="contenedor-columna">
+		<p style="text-align:right;">Fecha Inicio :</p>
+		</div>
+		<div class="contenedor-columna">
+		<input type='date' class="form-control" required name='ini' placeholder="AAAA-MM-DD">
+		</div>
+                </td> 
+                </tr>  <tr>
+                 <td>
+		<div class="contenedor-columna">
+		<p style="text-align:right;">Fecha Fin :</p>
+		</div>
+		<div class="contenedor-columna">
+                <input type='date' class="form-control" required name='fin' placeholder="AAAA-MM-DD">
+                </div>
+                </td> 
+                </tr>
                                                                               
                                                                                   
-								           <tr>
-                                                                            <td>	
+		<tr>
+                <td>	
 										
-										<div class="contenedor-columna">                                                                            
- 										<p style="text-align:right;">Gestion :</p>
-										</div>
-										<div class="contenedor-columna">
-											<input type='text' size=16%  class="form-control" required name='rol' >
-										</div> 
-                                                                                  </td> 
+		<div class="contenedor-columna">                                                                            
+ 		<p style="text-align:right;">Gestion :</p>
+		</div>
+		<div class="contenedor-columna">
+		<input type='text' size=16%  class="form-control" required name='rol' >
+		</div> 
+                </td> 
                                                                             
-                                                                                <td>  
-										<div class="contenedor-columna">
-                                                                                    
-                                                                                     <button type="submit"  class="btn btn-primary" align="middle" id="btn-registrarUser"> <span class="glyphicon glyphicon-ok"></span> Crear gestion</button>
-											
-										</div>
-                                                                              </td> 
-                                                                            </tr>
+                <td>  
+		<div class="contenedor-columna">
+                <button type="submit"  class="btn btn-primary" align="middle" id="btn-registrarUser"> <span class="glyphicon glyphicon-ok"></span> Crear gestion</button>
+		</div>
+                </td> 
+                </tr>
                                                                                 
                                                                             
                                                                             
-                                                                             </table>   
+         </table>   
 									
-								</form>
-							<h2><span>Listado Gestiones</span></h2>
-							<div class="contenedor-fila2">
-		
-										
-								<div class="contenedor-columna">
-									<?php
-										echo "Gestion";
-									?>
-								</div>
-							</div>
-							<?php
-			
-							
-								$peticion = $conectar->consulta("SELECT * FROM `gestion`");
-							
-
-								while($fila = mysql_fetch_array($peticion))
-								{
-							?>
-								<div class="contenedor-fila">
-					
+		</form>
+		<h2><span>Listado Gestiones</span></h2>
+		<div class="contenedor-fila2">
+		<div class="contenedor-columna">
+		<?php
+		echo "Gestion";
+		?>
+		</div>
+		</div>
+		<?php
+		$peticion = $conectar->consulta("SELECT * FROM `gestion`");
+			while($fila = mysql_fetch_array($peticion))
+			{
+			?>
+			<div class="contenedor-fila">
+			<div class="contenedor-columna">
+			<?php
+			echo $fila['ID_G'];
+			?>
+			</div>
+			<div class="contenedor-columna">
+			<?php
+			echo $fila['NOM_G'];
+			?>
+			</div>			
+			<div class="contenedor-columna">
+			<?php
+			echo $fila['FECHA_INICIO_G'];
+			?>
+			</div>
+			<div class="contenedor-columna">
+			<?php
+			echo $fila['FECHA_FIN_G'];
+			?>
+			</div>                                                                    
+			<div class="contenedor-columna">
+			<?php
+			echo "<a href ='eliminar_gestion.php?id_us=".$fila['ID_G']."'><font color='blue'>Eliminar</font></a>";
+			?>
+			</div>
 									
-									<div class="contenedor-columna">
-										<?php
-											echo $fila['ID_G'];
-										?>
-									</div>
-									<div class="contenedor-columna">
-										<?php
-											echo $fila['NOM_G'];
-										?>
-									</div>			
-									<div class="contenedor-columna">
-										<?php
-											echo $fila['FECHA_INICIO_G'];
-										?>
-									</div>
-									<div class="contenedor-columna">
-										<?php
-											echo $fila['FECHA_FIN_G'];
-										?>
-									</div>                                                                    
-									<div class="contenedor-columna">
-										<?php
-										echo "<a href ='eliminar_gestion.php?id_us=".$fila['ID_G']."'><font color='blue'>Eliminar</font></a>";
-										?>
-									</div>
-									
-								</div>
-								<?php
-								}
-							//Cerrar
-							
-							
-						?>	
-							
-						</div>
-						
-					</div>                                            
-					
-					</div>                   
+			</div>
+			<?php
+			}
+			?>	
+			</div>
+			</div>                                            
+			</div>                   
                     
                     
                 </div>

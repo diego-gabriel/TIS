@@ -190,103 +190,90 @@
             <div class="row">
                 <div class="col-lg-12">
                   
-   					<div class="mainbar">
-						<div class="article">
-                                                           <div class="row">
-                                                               <div class="col-lg-12"></div>
-							<h2><span>Enviar Email</span></h2>	
-							
-                                                        
-                                        
-							<div id="contenido">
-			
-								<form action="crear_mail.php" method="post">
-									<left>
-                                                                            
-                                                                            <table border=0 width=65%>
-											<tr>
-												<td >
-                                                                                                    <p style="text-align:left;"  ></p><br>
-												</td>
-												<td>
-													<select required name='dest' class="form-control"  ><option value=""  size="30%">-     Seleccione Destinatario     -</option>
-													<?php 
+   		<div class="mainbar">
+		<div class="article">
+                <div class="row">
+                <div class="col-lg-12"></div>
+		<h2><span>Enviar Email</span></h2>	
+		<div id="contenido">
+		<form action="crear_mail.php" method="post">
+		<left>
+                 <table border=0 width=65%>
+		<tr>
+		<td >
+                <p style="text-align:left;"  ></p><br>
+		</td>
+		<td>
+		<select required name='dest' class="form-control"  ><option value=""  size="30%">-     Seleccione Destinatario     -</option>
+		<?php 
 													
-														$sql=$conectar->consulta("SELECT NOMBRE_U from usuario"); 
-														
-															while($row=mysql_fetch_array($sql)) 
-																echo "<option  value='".$row["NOMBRE_U"]."'>" 
-																 .$row["NOMBRE_U"]."</option>"; 
-													?>	
-												</td>
+		$sql=$conectar->consulta("SELECT NOMBRE_U from usuario"); 
+		while($row=mysql_fetch_array($sql)) 
+		echo "<option  value='".$row["NOMBRE_U"]."'>" .$row["NOMBRE_U"]."</option>"; ?>	
+		</td>
 
-											</tr>
-                                                                                                                                                       <td >
-													<p style="text-align:left;" ></p>
-												</td>
-												<td>
+		</tr>
+                <td >
+		<p style="text-align:left;" ></p>
+		</td>
+		<td>
 		
                                                                                                         
-                                            <div class="form-group">
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                  <span class="glyphicon glyphicon-envelope"></span>
-                                                </span>
-                                                <input class="form-control" type="date" name="fec" size=48% id="UserEmail" placeholder="AAAA-MM-DD"  required>
-                                            </div>
-                                        </div>                                                                                                         
-                                                                                                        
-                                                                                                        
-												</td>
-											<tr>
-												<td >
+                <div class="form-group">
+                <div class="input-group">
+                <span class="input-group-addon">
+                <span class="glyphicon glyphicon-envelope"></span>
+                </span>
+                <input class="form-control" type="date" name="fec" size=48% id="UserEmail" placeholder="AAAA-MM-DD"  required>
+                </div>
+                </div>                                                                                                         
+                </td>
+		<tr>
+		<td >
 													
-												</td>
-												<td>
+		</td>
+		<td>
                                                                                                     
-                                            <div class="form-group">
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                  <span class="glyphicon glyphicon-envelope"></span>
-                                                </span>
-                                                <input class="form-control" type="text" name="asunto" size=10% id="UserEmail" placeholder="Asunto"  required>
-                                            </div>
-                                        </div>                                              
+                <div class="form-group">
+                <div class="input-group">
+                <span class="input-group-addon">
+                <span class="glyphicon glyphicon-envelope"></span>
+                </span>
+                <input class="form-control" type="text" name="asunto" size=10% id="UserEmail" placeholder="Asunto"  required>
+                </div>
+                </div>                                              
                                                                                                     
-												</td>
-						
-											</tr>
-											<tr>
-												<td >
-                                                                                                    <p style="text-align:left;"></p><br><br><br><br><br><br><br>
-												</td>
-												<td>
-                                                                                                    <textarea name='area_info' class="form-control" cols='50' rows='8' >Usted solicito un registro en saetis,   Ha sido validado satisfactoriamente, verifique haciendo click en el siguiente enlace: http://bittle.cs.umss.edu.bo/index.php</textarea>
-												</td>
-											</tr>
-							
-											<tr>
-												<td>
-												</td>
-                                                                                                <td>  <br>
-                                                                                                    
-                                             <div class="form-group">
-                                            <button type="submit" name="submit" class="btn btn-primary" id="btn-registrarUser"> <span class="glyphicon glyphicon-ok"></span> Enviar Email</button>
-                                        </div>
+		</td>
+		</tr>
+		<tr>
+		<td >
+                <p style="text-align:left;"></p><br><br><br><br><br><br><br>
+		</td>
+		<td>
+                <textarea name='area_info' class="form-control" cols='50' rows='8' >Usted solicito un registro en saetis,   Ha sido validado satisfactoriamente, verifique haciendo click en el siguiente enlace: http://bittle.cs.umss.edu.bo/index.php</textarea>
+		</td>
+		</tr>
+		<tr>
+		<td>
+		</td>
+                 <td>  <br>
+                 <div class="form-group">
+                <button type="submit" name="submit" class="btn btn-primary" id="btn-registrarUser"> <span class="glyphicon glyphicon-ok"></span> Enviar Email</button>
+                 </div>
 													
-												</td>
-											</tr>
-										</table>
-									</center>	
+		</td>
+		</tr>
+		</table>
+		</center>	
 
-								</form>
-							</div>
+		</form>
+		</div>
 							                                                   
-                                                           </div>     
+                </div>     
                                                         
-						</div>
+		</div>
 						
-                                        </div>                 
+                </div>                 
                     
                     
                 </div>

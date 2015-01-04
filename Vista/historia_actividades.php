@@ -323,129 +323,123 @@
             
             
             
-            
-            <!-- /.navbar-static-side -->
+
+        <!-- /.navbar-static-side -->
         </nav>
 
-<!-------------------------------------------NUEVAS PUBLICACIONES------------------------------------------>
-<div id="page-wrapper">
-           
-<form id = "ordenc" method = "post" action="" role="form" enctype="multipart/data-form" onsubmit="return validarCampos(ordenc)">
+        <!-------------------------------------------NUEVAS PUBLICACIONES------------------------------------------>
+        <div id="page-wrapper">
+
+        <form id = "ordenc" method = "post" action="" role="form" enctype="multipart/data-form" onsubmit="return validarCampos(ordenc)">
         <div class ="form-horizontal">
 
 
 
-               <?php 
-                 
-                           $peticion333=$con->consulta("SELECT * FROM inscripcion WHERE NOMBRE_UGE='$usuario' and ESTADO_INSCRIPCION='Habilitado'");
-                           $tamano=mysql_num_rows($peticion333);
-                        
+        <?php 
 
-                           if($tamano>0){
-               ?>
+        $peticion333=$con->consulta("SELECT * FROM inscripcion WHERE NOMBRE_UGE='$usuario' and ESTADO_INSCRIPCION='Habilitado'");
+        $tamano=mysql_num_rows($peticion333);
 
 
-                        <div class="col-lg-12">
-                            <h1> HISTORIA DE ACTIVIDADES</h1><br><br>
-                </div>
+        if($tamano>0){
+        ?>
 
-                    <div class="historia">
-                        
-                               <h2><span>ACTIVIDADES EN LINEA</span></h2>
-            </div>
-                   <hr>
-                                <div class="historia1">
-                            <div class="contenedor-fila2">
-                                    
-                                <div class="contenedor-columna">
-                                    <?php
-                                        echo "Nombre";
-                                    ?>
-                                </div>  
-                                <div class="contenedor-columna">
-                                    <?php
-                                        echo "Fecha Inicio";
-                                    ?>
-                                </div>
-        
-                                <div class="contenedor-columna">
-                                    <?php
-                                        echo "Hora Inicio";
-                                    ?>
-                                </div>
-                                <div class="contenedor-columna">
-                                    <?php
-                                        echo "Fecha Fin ";
-                                    ?>
-                                </div>
-                                <div class="contenedor-columna">
-                                    <?php
-                                        echo "Hora Fin";
-                                    ?>
-                                </div>
-                            </div>  
-                            <?php
-                    
-                                //Peticion
-                                $peticion = $con->consulta("SELECT  r.nombre_r, p.fecha_inicio_pl, p.hora_inicio_pl, p.fecha_fin_pl, p.hora_fin_pl
-                FROM plazo p, registro r, tipo t
-                WHERE t.TIPO_T = r.TIPO_T
-                AND p.ID_R = r.ID_R
-                AND r.TIPO_T =  'documento requerido' 
-                AND r.NOMBRE_U = '$asesor'
-               ");
-                            
 
-                                while($fila = mysql_fetch_array($peticion))
-                                {
-                            ?>
-                                <div class="contenedor-fila">
-                                       <div class="contenedor-columna">
-                                        <?php
-                                            echo $fila['nombre_r'];
-                                        ?>
-                                    </div>
-                                    
-                                    <div class="contenedor-columna">
-                                        <?php
-                                            echo $fila['fecha_inicio_pl'];
-                                        ?>
-                                    </div>
-            
-                                    <div class="contenedor-columna">
-                                        <?php
-                                            echo $fila['hora_inicio_pl'];
-                                        ?>
-                                    </div>
-                                    
-                                    <div class="contenedor-columna">
-                                        <?php
-                                            echo $fila['fecha_fin_pl'];
-                                        ?>
-                                    </div>
-                                    
-                                    <div class="contenedor-columna">
-                                        <?php
-                                            echo $fila['hora_fin_pl'];
-                                        ?>
-                                    </div>
-                                                                      
-                                    
-                                </div>
-                                <?php
-                                }
+        <div class="col-lg-12">
+        <h1> HISTORIA DE ACTIVIDADES</h1><br><br>
+        </div>
 
-                               
-                            
-                
-                        ?>  
-                                                      </div>    
-                    
-                        
-                    
-           
-    <hr>
-                    
+        <div class="historia">
+
+        <h2><span>ACTIVIDADES EN LINEA</span></h2>
+        </div>
+        <hr>
+        <div class="historia1">
+        <div class="contenedor-fila2">
+
+        <div class="contenedor-columna">
+        <?php
+        echo "Nombre";
+        ?>
+        </div>  
+        <div class="contenedor-columna">
+        <?php
+        echo "Fecha Inicio";
+        ?>
+        </div>
+
+        <div class="contenedor-columna">
+        <?php
+        echo "Hora Inicio";
+        ?>
+        </div>
+        <div class="contenedor-columna">
+        <?php
+        echo "Fecha Fin ";
+        ?>
+        </div>
+        <div class="contenedor-columna">
+        <?php
+        echo "Hora Fin";
+        ?>
+        </div>
+        </div>  
+        <?php
+
+        //Peticion
+        $peticion = $con->consulta("SELECT  r.nombre_r, p.fecha_inicio_pl, p.hora_inicio_pl, p.fecha_fin_pl, p.hora_fin_pl FROM plazo p, registro r, tipo t WHERE t.TIPO_T = r.TIPO_T AND p.ID_R = r.ID_R AND r.TIPO_T =  'documento requerido' AND r.NOMBRE_U = '$asesor'");
+
+
+        while($fila = mysql_fetch_array($peticion))
+        {
+        ?>
+        <div class="contenedor-fila">
+        <div class="contenedor-columna">
+        <?php
+        echo $fila['nombre_r'];
+        ?>
+        </div>
+
+        <div class="contenedor-columna">
+        <?php
+        echo $fila['fecha_inicio_pl'];
+        ?>
+        </div>
+
+        <div class="contenedor-columna">
+        <?php
+        echo $fila['hora_inicio_pl'];
+        ?>
+        </div>
+
+        <div class="contenedor-columna">
+        <?php
+        echo $fila['fecha_fin_pl'];
+        ?>
+        </div>
+
+        <div class="contenedor-columna">
+        <?php
+        echo $fila['hora_fin_pl'];
+        ?>
+        </div>
+
+
+        </div>
+        <?php
+        }
+
+
+
+
+        ?>  
+        </div>    
+
+
+
+
+        <hr>
+
 
                     
                     
@@ -455,116 +449,116 @@
                     
                     
                     
-                    
+
         <div class ="form-horizontal">
 
-                    <div class="historia">
-                        
-                               <h2><span>HISTORIAL DE DOCUMENTOS</span></h2>
-            </div>
-                   <hr>
-                                <div class="historia1">
-                            <div class="contenedor-fila2">
-                                    
-                                <div class="contenedor-columna">
-                                    <?php
-                                        echo "ID ";
-                                    ?>
-                                </div>  
-                                <div class="contenedor-columna">
-                                    <?php
-                                        echo "Asesor";
-                                    ?>
-                                </div>
-        
-                                <div class="contenedor-columna">
-                                    <?php
-                                        echo "Descripcion";
-                                    ?>
-                                </div>
-                                <div class="contenedor-columna">
-                                    <?php
-                                        echo "Fecha ";
-                                    ?>
-                                </div>
-                                <div class="contenedor-columna">
-                                    <?php
-                                        echo "Hora";
-                                    ?>
-                                </div>
-                            </div>  
-                            <?php
-                                //crear conexion---------------------------
-              
-                                //Peticion
-                                $peticion = $con->consulta("SELECT registro.ID_R,registro.NOMBRE_U,registro.NOMBRE_R,registro.FECHA_R,registro.HORA_R  FROM registro, receptor  WHERE  registro.ID_R=receptor.ID_R  and   (RECEPTOR_R='$grupoEmpresaNL' OR RECEPTOR_R='TODOS')");
-                            
+        <div class="historia">
 
-                                while($fila = mysql_fetch_array($peticion))
-                                {
-                            ?>
-                                <div class="contenedor-fila">
-                                       <div class="contenedor-columna">
-                                        <?php
-                                            echo $fila['ID_R'];
-                                        ?>
-                                    </div>
-                                    
-                                    <div class="contenedor-columna">
-                                        <?php
-                                            echo $fila['NOMBRE_U'];
-                                        ?>
-                                    </div>
-            
-                                    <div class="contenedor-columna">
-                                        <?php
-                                            echo $fila['NOMBRE_R'];
-                                        ?>
-                                    </div>
-                                    
-                                    <div class="contenedor-columna">
-                                        <?php
-                                            echo $fila['FECHA_R'];
-                                        ?>
-                                    </div>
-                                    
-                                    <div class="contenedor-columna">
-                                        <?php
-                                            echo $fila['HORA_R'];
-                                        ?>
-                                    </div>
-                                                                      
-                                    
-                                </div>
-                                <?php
-                                }
+        <h2><span>HISTORIAL DE DOCUMENTOS</span></h2>
+        </div>
+        <hr>
+        <div class="historia1">
+        <div class="contenedor-fila2">
 
-                                //Cerrar
-                           
-                            
-                
-                        ?>  
-                                                      </div>    
-                    
-                        
-                    </div>
-           
-    <hr>
-                    
-   <?php
-     }
-     else
-     { 
-         echo '<div class="alert alert-warning">
-              <strong>Su inscripcion no ha sido habilitada</strong>
-         </div>';
-     }
-   ?> 
-                    
-                    
-                    
-                    
-                    
+        <div class="contenedor-columna">
+        <?php
+        echo "ID ";
+        ?>
+        </div>  
+        <div class="contenedor-columna">
+        <?php
+        echo "Asesor";
+        ?>
+        </div>
+
+        <div class="contenedor-columna">
+        <?php
+        echo "Descripcion";
+        ?>
+        </div>
+        <div class="contenedor-columna">
+        <?php
+        echo "Fecha ";
+        ?>
+        </div>
+        <div class="contenedor-columna">
+        <?php
+        echo "Hora";
+        ?>
+        </div>
+        </div>  
+        <?php
+        //crear conexion---------------------------
+
+        //Peticion
+        $peticion = $con->consulta("SELECT registro.ID_R,registro.NOMBRE_U,registro.NOMBRE_R,registro.FECHA_R,registro.HORA_R  FROM registro, receptor  WHERE  registro.ID_R=receptor.ID_R  and   (RECEPTOR_R='$grupoEmpresaNL' OR RECEPTOR_R='TODOS')");
+
+
+        while($fila = mysql_fetch_array($peticion))
+        {
+        ?>
+        <div class="contenedor-fila">
+        <div class="contenedor-columna">
+        <?php
+        echo $fila['ID_R'];
+        ?>
+        </div>
+
+        <div class="contenedor-columna">
+        <?php
+        echo $fila['NOMBRE_U'];
+        ?>
+        </div>
+
+        <div class="contenedor-columna">
+        <?php
+        echo $fila['NOMBRE_R'];
+        ?>
+        </div>
+
+        <div class="contenedor-columna">
+        <?php
+        echo $fila['FECHA_R'];
+        ?>
+        </div>
+
+        <div class="contenedor-columna">
+        <?php
+        echo $fila['HORA_R'];
+        ?>
+        </div>
+
+
+        </div>
+        <?php
+        }
+
+        //Cerrar
+
+
+
+        ?>  
+        </div>    
+
+
+        </div>
+
+        <hr>
+
+        <?php
+        }
+        else
+        { 
+        echo '<div class="alert alert-warning">
+        <strong>Su inscripcion no ha sido habilitada</strong>
+        </div>';
+        }
+        ?> 
+
+
+
+
+
                     
                     
                     

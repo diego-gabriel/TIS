@@ -73,13 +73,7 @@
                 </li>
                 <!-- /.dropdown -->
             </ul>
-            
-    
-       
-             
-                  
-                
-         
+ 
            <div class="sidebar-collapse">      
                       
                   
@@ -186,99 +180,97 @@
 </nav>          
                 
                 
-        <div id="page-wrapper">
+            <div id="page-wrapper">
             <div class="row">
-                <div class="col-lg-12">
-                  
-                    
- 					<div class="mainbar">
-                                            <div class="article"><br><br>
-							<h2><span>Permisos de usuario</span></h2>	
-							
-						</div>
-                                            
-                                            
-                                   <div class="historia1">
-							<div class="contenedor-fila2">
-									
-								<div class="contenedor-columna">
-									<?php
-										echo "Nombre";
-									?>
-								</div>	
-								<div class="contenedor-columna">
-									<?php
-										echo "Estado";
-									?>
-								</div>
-		
-								<div class="contenedor-columna">
-									<?php
-										echo "rol";
-									?>
-								</div>
-                                                        </div>  
-							<?php
-								//crear conexion---------------------------
-							
-								//Peticion
-								$peticion =$conectar ->consulta("SELECT u.NOMBRE_U, u.ESTADO_E, r.ROL_R
-FROM usuario u , usuario_rol r
-WHERE  u.NOMBRE_U = r.NOMBRE_U ");
-							
+            <div class="col-lg-12">
 
-								while($fila = mysql_fetch_array($peticion))
-								{
-							?>
-								<div class="contenedor-fila">
-									   <div class="contenedor-columna">
-										<?php
-											echo $fila['NOMBRE_U'];
-										?>
-									</div>
-									
-									<div class="contenedor-columna">
-										<?php
-											echo $fila['ESTADO_E'];
-										?>
-									</div>
-			
-								
-									<div class="contenedor-columna">
-										<?php
-											echo $fila['ROL_R'];
-										?>
-									</div>                                                                    
-                                                                    <div class="contenedor-columna">
-										<?php
-											echo "<a href ='modificar_permiso.php?id_us=".$fila['NOMBRE_U']."'><font color='blue'>Modificar</font></a>";
-                                                                                        
-										?>
-               
-									</div>
-                                                                      
-									
-								</div>
-                                       
-								<?php
-								}
 
-								//Cerrar
-								
-						?>	
-                                                           
-                                                      </div>                                         
-                                  
-					</div>                   
-                    
-                </div>
-                <!-- /.col-lg-12 -->
+            <div class="mainbar">
+            <div class="article"><br><br>
+            <h2><span>Permisos de usuario</span></h2>	
+
             </div>
-     
-        </div>
-        <!-- /#page-wrapper -->
 
-    </div>
+
+            <div class="historia1">
+            <div class="contenedor-fila2">
+
+            <div class="contenedor-columna">
+            <?php
+            echo "Nombre";
+            ?>
+            </div>	
+            <div class="contenedor-columna">
+            <?php
+            echo "Estado";
+            ?>
+            </div>
+
+            <div class="contenedor-columna">
+            <?php
+            echo "rol";
+            ?>
+            </div>
+            </div>  
+            <?php
+            //crear conexion---------------------------
+
+            //Peticion
+            $peticion =$conectar ->consulta("SELECT u.NOMBRE_U, u.ESTADO_E, r.ROL_R FROM usuario u , usuario_rol r WHERE  u.NOMBRE_U = r.NOMBRE_U ");
+
+
+            while($fila = mysql_fetch_array($peticion))
+            {
+            ?>
+            <div class="contenedor-fila">
+            <div class="contenedor-columna">
+            <?php
+            echo $fila['NOMBRE_U'];
+            ?>
+            </div>
+
+            <div class="contenedor-columna">
+            <?php
+            echo $fila['ESTADO_E'];
+            ?>
+            </div>
+
+
+            <div class="contenedor-columna">
+            <?php
+            echo $fila['ROL_R'];
+            ?>
+            </div>                                                                    
+            <div class="contenedor-columna">
+            <?php
+            echo "<a href ='modificar_permiso.php?id_us=".$fila['NOMBRE_U']."'><font color='blue'>Modificar</font></a>";
+
+            ?>
+
+            </div>
+
+
+            </div>
+
+            <?php
+            }
+
+            //Cerrar
+
+            ?>	
+
+            </div>                                         
+
+            </div>                   
+
+            </div>
+            <!-- /.col-lg-12 -->
+            </div>
+
+            </div>
+            <!-- /#page-wrapper -->
+
+            </div>
     <!-- /#wrapper -->
 
     <!-- Core Scripts - Include with every page -->

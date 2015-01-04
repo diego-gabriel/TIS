@@ -191,114 +191,108 @@
                 <div class="col-lg-12">
                   
               
-                                            <div class="article"><br><br>
-							<h2><span>Bitacora de Ingreso</span></h2>	
+                <div class="article"><br><br>
+		<h2><span>Bitacora de Ingreso</span></h2>	
 							
-						</div>
+		</div>
                                             
                                             
-                                   <div class="historia1">
-							<div class="contenedor-fila2">
+                <div class="historia1">
+		<div class="contenedor-fila2">
 									
-								<div class="contenedor-columna">
-									<?php
-										echo "ID";
-									?>
-								</div>	
-								<div class="contenedor-columna">
-									<?php
-										echo "Usuario";
-									?>
-								</div>
+		<div class="contenedor-columna">
+		<?php
+		echo "ID";
+		?>
+		</div>	
+		<div class="contenedor-columna">
+		<?php
+		echo "Usuario";
+		?>
+		</div>
 		
-								<div class="contenedor-columna">
-									<?php
-										echo "Fecha";
-									?>
-								</div>
-								<div class="contenedor-columna">
-									<?php
-										echo "Hora";
-									?>
-								</div>
-								<div class="contenedor-columna">
-									<?php
-										echo "IP";
-									?>
-								</div>
-							</div>  
-							<?php
+		<div class="contenedor-columna">
+		<?php
+		echo "Fecha";
+		?>
+		</div>
+		<div class="contenedor-columna">
+		<?php
+		echo "Hora";
+		?>
+		</div>
+		<div class="contenedor-columna">
+		<?php
+		echo "IP";
+		?>
+		</div>
+		</div>  
+		<?php
 							
 								//Peticion
-								$peticion = $conectar->consulta("SELECT * FROM `sesion` ");
-							
-
-								while($fila = mysql_fetch_array($peticion))
-								{
-							?>
-								<div class="contenedor-fila">
-									   <div class="contenedor-columna">
-										<?php
-											echo $fila['ID_S'];
-										?>
-									</div>
+		$peticion = $conectar->consulta("SELECT * FROM `sesion` ");
+		while($fila = mysql_fetch_array($peticion))
+		{
+		?>
+		<div class="contenedor-fila">
+		<div class="contenedor-columna">
+		<?php
+		echo $fila['ID_S'];
+		?>
+		</div>
 									
-									<div class="contenedor-columna">
-										<?php
-											echo $fila['NOMBRE_U'];
-										?>
-									</div>
+		<div class="contenedor-columna">
+		<?php
+		echo $fila['NOMBRE_U'];
+		?>
+		</div>
 			
-									<div class="contenedor-columna">
-										<?php
-											echo $fila['FECHA_S'];
-										?>
-									</div>
+		<div class="contenedor-columna">
+		<?php
+		echo $fila['FECHA_S'];
+		?>
+		</div>
 									
-									<div class="contenedor-columna">
-										<?php
-											echo $fila['HORA_S'];
-										?>
-									</div>
+		<div class="contenedor-columna">
+		<?php
+		echo $fila['HORA_S'];
+		?>
+		</div>
 									
-									<div class="contenedor-columna">
-										<?php
-											echo $fila['IP_S'];
-										?>
-									</div>
-                                                                        <div class="contenedor-columna">
-										<?php
-											echo "<a href ='eliminar_bitacora.php?id_us=".$fila['ID_S']."'><font color='blue'>Eliminar</font></a>";
-										?>
-									</div>
+		<div class="contenedor-columna">
+		<?php
+		echo $fila['IP_S'];
+		?>
+		</div>
+                <div class="contenedor-columna">
+		<?php
+		echo "<a href ='eliminar_bitacora.php?id_us=".$fila['ID_S']."'><font color='blue'>Eliminar</font></a>";
+		?>
+		</div>
                                                                       
 									
-								</div>
+		</div>
                                        
-								<?php
-								}
+		<?php
+		}
 
 							
 				
-						?>	
-                                                                        <div class="contenedor-columna">
-										<?php
-                                                                                      $peticion333=$conectar->consulta("SELECT * FROM `sesion`");
-                                                                                        $tamano=mysql_num_rows($peticion333);
-                        
-
-                                                                                       if($tamano>1){
-                                                                                    
-											echo "<a href ='eliminar_bitacora_total.php?id_us=".$fila['ID_S']."'><font color='blue'>Eliminar Todo</font></a>";
-                                                                                       }
-                                                                                        ?>
-									</div>
-                                                      </div>                                         
+		?>	
+                <div class="contenedor-columna">
+		<?php
+                 $peticion333=$conectar->consulta("SELECT * FROM `sesion`");
+                 $tamano=mysql_num_rows($peticion333);
+                if($tamano>1){
+                echo "<a href ='eliminar_bitacora_total.php?id_us=".$fila['ID_S']."'><font color='blue'>Eliminar Todo</font></a>"; }
+                 ?>
+		</div>
+                </div>                                         
                                             
                                             
                                             
 						
-					</div>                   
+		</div>                   
                     
                 </div>
                 <!-- /.col-lg-12 -->

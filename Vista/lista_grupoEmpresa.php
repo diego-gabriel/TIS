@@ -193,160 +193,157 @@
             <div class="row">
                 <div class="col-lg-12">
                   
- 					<div class="mainbar">
-                                            <div class="article"><br>
-                                                       <div class="row">
-                                                           <div class="col-lg-12"></div>
-							<h2><span>Escoger Grupo Empresa</span></h2>	
-						</div>
+ 		<div class="mainbar">
+                <div class="article"><br>
+                <div class="row">
+                <div class="col-lg-12"></div>
+		<h2><span>Escoger Grupo Empresa</span></h2>	
+		</div>
                                             
                                             
 
-                                            
-                                            
-                                                                        
-								<div id="contenido">
+  
+		<div id="contenido">
 			
-                                                                    <form action="lista_grupoEmpresa.php" method="post"  >
-									<center>
-										<table border=0 width=80%>
-											<tr>
-												<td >
-													<p style="text-align:right;"> Grupo Empresa :</p>
-												</td>
-												<td>
-                                                                                                    <select required name="NOMBRE_U" class="form-control"><option  value="">Seleccione Un grupo Empresa</option>
-													<?php 
+                <form action="lista_grupoEmpresa.php" method="post"  >
+		<center>
+		<table border=0 width=80%>
+		<tr>
+		<td >
+		<p style="text-align:right;"> Grupo Empresa :</p>
+		</td>
+		<td>
+                 <select required name="NOMBRE_U" class="form-control"><option  value="">Seleccione Un grupo Empresa</option>
+		<?php 
 														
-														$sql= $conectar->consulta("SELECT u.NOMBRE_U FROM usuario u, usuario_rol r WHERE  u.NOMBRE_U=r.NOMBRE_U and r.ROL_R='grupoempresa'"); 
+		$sql= $conectar->consulta("SELECT u.NOMBRE_U FROM usuario u, usuario_rol r WHERE  u.NOMBRE_U=r.NOMBRE_U and r.ROL_R='grupoempresa'"); 
 													
-															while($row=mysql_fetch_array($sql)) 
-													echo "<option  value='".$row["NOMBRE_U"]."'>".$row["NOMBRE_U"]."</option>";  
-                                                                                                                      
-                                                                                                             $addNomInte=$_REQUEST["NOMBRE_U"];
-                                                                                                        ?>    
-                                                                                                     
-                                                                                                       </select> 
-                                                                                                </td>
-                                                                                                <td>&nbsp;
-													<input type="submit" value="Seleccionar"  class="btn btn-primary"> 
-												</td>    
-											</tr>
-										</table>
-									</center>	
+		while($row=mysql_fetch_array($sql)) 
+		echo "<option  value='".$row["NOMBRE_U"]."'>".$row["NOMBRE_U"]."</option>";  
+                $addNomInte=$_REQUEST["NOMBRE_U"];
+                ?>    
 
-								</form>
-							</div>
-							<h2><span>Integrantes</span></h2>
-							<div class="contenedor-fila2">
-								<div class="contenedor-columna">
-									<?php
-										echo"Id       ";  
+                </select> 
+                </td>
+                <td>&nbsp;
+                <input type="submit" value="Seleccionar"  class="btn btn-primary"> 
+                </td>    
+                </tr>
+                </table>
+                </center>	
 
-									?>
-								</div>
-                                                                <div class="contenedor-columna">
-									<?php
-										echo"Empresa";  
+                </form>
+                </div>
+                <h2><span>Integrantes</span></h2>
+                <div class="contenedor-fila2">
+                <div class="contenedor-columna">
+                <?php
+                    echo"Id       ";  
 
-									?>
-								</div>
-										
-								<div class="contenedor-columna">
-									<?php
-										echo "Nombres"; 
-									?>
-								</div>
-		
-								<div class="contenedor-columna">
-									<?php
-										echo "Apellido";
-									?>
-								</div>
-                                                                <div class="contenedor-columna">
-									<?php
-										echo "Login";
-									?>
-								</div>
-                                                                <div class="contenedor-columna">
-									<?php
-										echo "Password";
-									?>
-								</div>
-							</div>
-							<?php     
-                                                        								//crear conexion---------------------------
-							
-								//Peticion
-								$peticion = $conectar->consulta(" SELECT CODIGO_S,NOMBRE_U, NOMBRES_S, APELLIDOS_S,LOGIN_S,PASSWORD_S FROM socio WHERE NOMBRE_U='$addNomInte'");
+                ?>
+                </div>
+                <div class="contenedor-columna">
+                <?php
+                    echo"Empresa";  
 
-								while($fila = mysql_fetch_array($peticion))
-								{
-							?><div class="contenedor-fila">
-									<div class="contenedor-columna">
-										<?php
-											echo $fila['CODIGO_S'];
-										?>
-									</div>
-								<div class="contenedor-columna">
-										<?php
-											echo $fila['NOMBRE_U'];
-										?>
-									</div>
-									<div class="contenedor-columna">
-										<?php
-											echo $fila['NOMBRES_S'];
-										?>
-									</div>
-			
-									<div class="contenedor-columna">
-										<?php
-											echo $fila['APELLIDOS_S'];   
-										?>
-									</div>
-                                                                        <div class="contenedor-columna">
-										<?php
-											echo $fila['LOGIN_S'];   
-										?>
-									</div>
-                                                                        <div class="contenedor-columna">
-										<?php
-											echo $fila['PASSWORD_S'];   
-										?>
-									</div>
-									
-									<div class="contenedor-columna">
-										<?php
-											echo "<a href ='eliminar_grupoEmpresa.php?id_us=".$fila['CODIGO_S']."'><font color='blue'>Eliminar</font></a>";
-										?>
-									</div>
-									
-								</div>
-								<?php
-								}
-							//Cerrar
-							
-                                                      
-                                                            
-                                                            
-                                                        
-						?><?php
-								
-							?>
-						</div>
-						
-					
-                                            
-						
-					</div>                   
-                    
-                    
+                ?>
+                </div>
+
+                <div class="contenedor-columna">
+                <?php
+                    echo "Nombres"; 
+                ?>
+                </div>
+
+                <div class="contenedor-columna">
+                <?php
+                    echo "Apellido";
+                ?>
+                </div>
+                <div class="contenedor-columna">
+                <?php
+                    echo "Login";
+                ?>
+                </div>
+                <div class="contenedor-columna">
+                <?php
+                    echo "Password";
+                ?>
+                </div>
+                </div>
+                <?php     
+                                                            //crear conexion---------------------------
+
+                //Peticion
+                $peticion = $conectar->consulta(" SELECT CODIGO_S,NOMBRE_U, NOMBRES_S, APELLIDOS_S,LOGIN_S,PASSWORD_S FROM socio WHERE NOMBRE_U='$addNomInte'");
+
+                while($fila = mysql_fetch_array($peticion))
+                {
+                ?><div class="contenedor-fila">
+                <div class="contenedor-columna">
+                    <?php
+                            echo $fila['CODIGO_S'];
+                    ?>
+                </div>
+                <div class="contenedor-columna">
+                    <?php
+                            echo $fila['NOMBRE_U'];
+                    ?>
+                </div>
+                <div class="contenedor-columna">
+                    <?php
+                            echo $fila['NOMBRES_S'];
+                    ?>
+                </div>
+
+                <div class="contenedor-columna">
+                    <?php
+                            echo $fila['APELLIDOS_S'];   
+                    ?>
+                </div>
+                <div class="contenedor-columna">
+                    <?php
+                            echo $fila['LOGIN_S'];   
+                    ?>
+                </div>
+                <div class="contenedor-columna">
+                    <?php
+                            echo $fila['PASSWORD_S'];   
+                    ?>
+                </div>
+
+                <div class="contenedor-columna">
+                    <?php
+                            echo "<a href ='eliminar_grupoEmpresa.php?id_us=".$fila['CODIGO_S']."'><font color='blue'>Eliminar</font></a>";
+                    ?>
+                </div>
+
+                </div>
+                <?php
+                }
+                //Cerrar
+
+
+
+
+
+                ?><?php
+
+                ?>
+                </div>
+
+
+
+
+                </div>                   
+
+
                 </div>
                 <!-- /.col-lg-12 -->
-            </div>
-     
-        </div>
-        <!-- /#page-wrapper -->
+                </div>
+
+                </div>
+                <!-- /#page-wrapper -->
 
     </div>
     <!-- /#wrapper -->
