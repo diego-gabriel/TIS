@@ -14,6 +14,12 @@ $clas = new conexion();
     if(!file_exists($rutaDirectorio))
     {
         mkdir($rutaDirectorio, 0777);
+
+        if(!file_exists("../Repositorio/".$UsuarioActivo."/index.html"))
+        {
+            $directorioIndex = "../Repositorio/".$UsuarioActivo."/index.html";
+            fopen($directorioIndex, "x");
+        }
     }
     
     $ruta = "$rutaDirectorio/" . $_FILES['archivoA']['name'];

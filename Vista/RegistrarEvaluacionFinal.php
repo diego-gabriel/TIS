@@ -4,11 +4,12 @@
 	$conect = new conexion();  
 
 	$GrupoEmpresaF = $_POST['GrupoE'];
-	$NotaFinal = $_POST['NotaF'];
+	$NotaFn = $_POST['NotaFn'];
 
 	$VerificarNotaFinal = $conect->consulta("SELECT * FROM nota_final WHERE NOMBRE_U='$GrupoEmpresaF'");
 
 	$NotaFinal = mysql_fetch_row($VerificarNotaFinal);
+
 	if (is_array($NotaFinal)) {
 
 		echo '<script>alert("La grupo empresa seleccionada ya tiene una nota registrada anteriormente");
@@ -17,7 +18,8 @@
 	}
 	else
 	{
-		$conect->consulta('INSERT INTO nota_final(ID_NF, NOMBRE_U, NOTA_F) VALUES("","'.$GrupoEmpresaF.'","'.$NotaFinal.'")');
+	
+		$conect->consulta('INSERT INTO nota_final(NOMBRE_U, NOTA_F) VALUES("'.$GrupoEmpresaF.'","'.$NotaFn.'")');
 
 		echo '<script>alert("Se registro la nota correctamente");
 				window.location="../Vista/EvaluacionGeneral.php";

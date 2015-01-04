@@ -102,15 +102,15 @@ if (isset($_POST['lista'])) {
             				}
 
 
-                            $cons = "SELECT * FROM registro WHERE NOMBRE_U='$nombreUA' and TIPO_T='documento requerido'";
+                            $cons = "SELECT * FROM registro AS r, inscripcion_proyecto AS i, documento_r AS d WHERE r.ID_R=d.ID_R and r.NOMBRE_U='$nombreUA' and r.TIPO_T='documento requerido' and d.CODIGO_P=i.CODIGO_P and i.NOMBRE_U='$nombreUGE'";
                             $SeleccionarDocsRequeridos = $conexion->query($cons);
                             $DocsRequeridos = $SeleccionarDocsRequeridos->rowCount();
 
                             $SeleccionarDocsSubidos = $conexion->query("SELECT * FROM registro WHERE NOMBRE_U='$nombreUGE' AND TIPO_T='documento subido'");
                             $DocsSubidos = $SeleccionarDocsSubidos->rowCount();
 
-                            if($DocsSubidos == $DocsRequeridos)
-                            {
+                            if(($DocsSubidos == $DocsRequeridos) and $DocsSubidos>=1)
+                            { 
                                 if(isset($_GET['id'])){
                              
                                      $buscar    = array(

@@ -52,15 +52,10 @@ if (isset($_POST['grupoempresa'])) {
                 $convocatoriaProy = $con->consulta($selCon);
                 $convocatoria = mysql_fetch_array($convocatoriaProy);
 
-                $GrupoEmpresaNC = 'Notificacion de Conformidad de '.$nombreCorto[0].'';
-                $SeleccionarNC = $con->consulta("SELECT * FROM registro,receptor WHERE NOMBRE_U='$nombreUA' AND NOMBRE_R='$GrupoEmpresaNC' AND registro.ID_R = receptor.ID_R");
-                $NC = mysql_num_rows($SeleccionarNC);
+                $VerificarPlanificacion = $con->consulta("SELECT * FROM planificacion WHERE NOMBRE_U='$nombreUGE[0]' AND ESTADO_E='planificacion registrada'");
+                $planificacion = mysql_fetch_row($VerificarPlanificacion);
 
-                $GrupoEmpresaOC = 'Orden de Cambio de '.$nombreCorto[0].'';
-                $SeleccionarOC = $con->consulta("SELECT * FROM registro,receptor WHERE NOMBRE_U='$nombreUA' AND NOMBRE_R='$GrupoEmpresaOC' AND registro.ID_R = receptor.ID_R");
-                $OC = mysql_num_rows($SeleccionarOC);
-
-                if ($NC >= 1 or $OC>=1) {
+                if (is_array($planificacion)) {
             
                         
                         $buscar    = array(
@@ -163,7 +158,7 @@ if (isset($_POST['grupoempresa'])) {
                 }
                 else
                 {
-                    echo"<script type=\"text/javascript\">alert('Antes de emitir un contrato debe emitir una notificacion de conformidad u orden de cambio para la grupo empresa seleccionada'); window.location='../Vista/contrato.php';</script>";  
+                    echo"<script type=\"text/javascript\">alert('La grupo empresa seleccionada no ha registrado aun su planificacion'); window.location='../Vista/contrato.php';</script>";  
 
                 }
                 
