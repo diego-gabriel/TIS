@@ -4,77 +4,75 @@
 
      session_start();
 
-    $UsuarioActivo = $_SESSION['usuario'];
+    $UserAct = $_SESSION['usuario'];
 	$grupo = $_POST['GrupoEscogido'];
-    $FormularioUtilizado = $_POST['IdFormularioUtilizado'];
+    $Form = $_POST['IdFormularioUtilizado'];
 
         $nota = 0;
 
         $conect = new conexion();
 
-        $SeleccionarIdPlanificacion = $conect->consulta("SELECT ID_R FROM registro WHERE NOMBRE_U='$grupo' AND TIPO_T='actividad planificacion'");
+        $Sel_Plan = $conect->consulta("SELECT ID_R FROM registro WHERE NOMBRE_U='$grupo' AND TIPO_T='actividad planificacion'");
     
-        while ($rowP = mysql_fetch_row($SeleccionarIdPlanificacion)) {
+        while ($Row_Plan = mysql_fetch_row($Sel_Plan)) {
 
-            $IdPlanificacion[] = $rowP[0];
+            $Planif[] = $Row_Plan[0];
     
         }
 
-        if(isset($IdPlanificacion))
+        if(isset($Planif))
         {
-            for ($i=0; $i <count($IdPlanificacion) ; $i++) { 
+            for ($i=0; $i <count($Planif) ; $i++) { 
         
-                $SeleccionarEvaluacion2 = $conect->consulta("SELECT NOTA_E FROM evaluacion WHERE ID_R = '$IdPlanificacion[$i]'");
+                $Sel_Ev2 = $conect->consulta("SELECT NOTA_E FROM evaluacion WHERE ID_R = '$Planif[$i]'");
                        
-                    while ($rowE = mysql_fetch_row($SeleccionarEvaluacion2)) {
+                    while ($Row_Ev2 = mysql_fetch_row($Sel_Ev2)) {
 
-                        $Evaluacion2[] = $rowE[0];
+                        $Eval2[] = $Row_Ev2[0];
                     
                     }
             }
 
-            if(isset($IdPlanificacion) and isset($Evaluacion2))
+            if(isset($Planif) and isset($Eval2))
             {
 
-                if(count($Evaluacion2) == count($IdPlanificacion))
+                if(count($Eval2) == count($Planif))
                 {
-                    $VerificarHabilitado = $conect->consulta("SELECT ID_FORM FROM formulario WHERE ESTADO_FORM = 'Habilitado' AND NOMBRE_U = '$UsuarioActivo'");
+                    $Ver_Form = $conect->consulta("SELECT ID_FORM FROM formulario WHERE ESTADO_FORM = 'Habilitado' AND NOMBRE_U = '$UserAct'");
                                     
-                    $IdForm = mysql_fetch_row($VerificarHabilitado);
+                    $IdForm = mysql_fetch_row($Ver_Form);
 
                     $IdForm2 = $IdForm[0];
                     $cont2=0;
-
-                    /*********************************************************/
                     
-                    $RecuperarPuntajes = $conect->consulta("SELECT PUNTAJE FROM puntaje WHERE ID_FORM = '$FormularioUtilizado'");
+                    $Sel_Ptje = $conect->consulta("SELECT PUNTAJE FROM puntaje WHERE ID_FORM = '$Form'");
                                      
-                    while($row = mysql_fetch_row($RecuperarPuntajes))
+                    while($Row_Ptje = mysql_fetch_row($Sel_Ptje))
                     {
-                        $puntajes[] = $row;
+                        $puntajes[] = $Row_Ptje;
                         
                     }
                        
-                    $prueba = $_POST['valorInput'];
+                    $Escogido = $_POST['valorInput'];
                     
                     $cont = 0;
                     
-                    for($p=0;$p<count($prueba);$p++)
+                    for($p=0;$p<count($Escogido);$p++)
                     {
-                        if((isset($prueba[$p])))
+                        if((isset($Escogido[$p])))
                         {
                             $cont++;
                         }
                     } 
 
                     
-                    if(count($puntajes) == count($prueba))
+                    if(count($puntajes) == count($Escogido))
                     {
 
 
-                        for ($y=0; $y < count($prueba) ; $y++) { 
+                        for ($y=0; $y < count($Escogido) ; $y++) { 
 
-                            if ($prueba[$y] <= 100) {
+                            if ($Escogido[$y] <= 100) {
 
                                 $cont2++;
                                 
@@ -85,13 +83,13 @@
 
                             for ($i=0; $i <count($puntajes) ; $i++) { 
 
-                                $nota = $nota + ($puntajes[$i][0] * ($prueba[$i]*0.01));
+                                $nota = $nota + ($puntajes[$i][0] * ($Escogido[$i]*0.01));
 
                             }
 
-                            $VerificarNota = $conect->consulta("SELECT * FROM nota WHERE NOMBRE_U = '$grupo'");
+                            $Ver_Nota = $conect->consulta("SELECT * FROM nota WHERE NOMBRE_U = '$grupo'");
 
-                            $Verificar = mysql_fetch_row($VerificarNota);
+                            $Verif_N = mysql_fetch_row($Ver_Nota);
 
                             $op = $_POST['Operacion'];
 
@@ -100,13 +98,13 @@
 
                                 $conect->consulta("UPDATE nota SET CALIF_N = '$nota' WHERE NOMBRE_U='$grupo'");
 
-                                $SeleccionarIdNota = $conect->consulta("SELECT MAX(ID_N) FROM nota WHERE NOMBRE_U='$grupo'");
+                                $Sel_IdN = $conect->consulta("SELECT MAX(ID_N) FROM nota WHERE NOMBRE_U='$grupo'");
 
-                                $IdNota = mysql_fetch_row($SeleccionarIdNota);
+                                $IdNota = mysql_fetch_row($Sel_IdN);
 
-                                    for ($i=0; $i < count($prueba) ; $i++) { 
+                                    for ($i=0; $i < count($Escogido) ; $i++) { 
                                         
-                                        $conect->consulta("UPDATE puntaje_ge SET CALIFICACION = '$prueba[$i]' WHERE ID_N ='$IdNota[0]' AND  NUM_CE ='$i'");
+                                        $conect->consulta("UPDATE puntaje_ge SET CALIFICACION = '$Escogido[$i]' WHERE ID_N ='$IdNota[0]' AND  NUM_CE ='$i'");
                                 
                                     }
 
@@ -119,21 +117,21 @@
                             
                             if($op == 'Evaluar')
                             {
-                                if (is_array($Verificar)) {
+                                if (is_array($Verif_N)) {
 
                                     echo '<script>alert("Ya registro una nota anteriormente");</script>';
                                 }
                                 else
                                 {
 
-                                    $conect->consulta('INSERT INTO nota(ID_FORM, NOMBRE_U, CALIF_N) VALUES("'.$FormularioUtilizado.'","'.$grupo.'","'.$nota.'")');
+                                    $conect->consulta('INSERT INTO nota(ID_FORM, NOMBRE_U, CALIF_N) VALUES("'.$Form.'","'.$grupo.'","'.$nota.'")');
 
-                                    $SeleccionarIdNota = $conect->consulta("SELECT MAX(ID_N) FROM nota WHERE NOMBRE_U='$grupo'");
+                                    $Sel_IdN = $conect->consulta("SELECT MAX(ID_N) FROM nota WHERE NOMBRE_U='$grupo'");
 
-                                    $IdNota = mysql_fetch_row($SeleccionarIdNota);
+                                    $IdNota = mysql_fetch_row($Sel_IdN);
 
-                                    for ($i=0; $i < count($prueba) ; $i++) { 
-                                        $conect->consulta('INSERT INTO puntaje_ge(ID_N, NUM_CE, CALIFICACION) VALUES("'.$IdNota[0].'","'.$i.'","'.$prueba[$i].'")');
+                                    for ($i=0; $i < count($Escogido) ; $i++) { 
+                                        $conect->consulta('INSERT INTO puntaje_ge(ID_N, NUM_CE, CALIFICACION) VALUES("'.$IdNota[0].'","'.$i.'","'.$Escogido[$i].'")');
 
                                     }
 

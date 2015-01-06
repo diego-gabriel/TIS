@@ -1,14 +1,10 @@
 <?php
 
 include '../Modelo/conexion.php';
-
-//session_start();
-//$UsuarioActivo = $_SESSION['usuario'];
 $UsuarioActivo = $_POST['Usuario'];
 $DocumentoR = $_POST['Documento'];
 
-$rutaDirectorio="../Repositorio/$UsuarioActivo";  //ruta de nuestro directorio
-//$asesor = $UsuarioActivo;   
+$rutaDirectorio="../Repositorio/$UsuarioActivo";  
 $clas = new conexion();
 
     if(!file_exists($rutaDirectorio))
@@ -24,7 +20,7 @@ $clas = new conexion();
     
     $ruta = "$rutaDirectorio/" . $_FILES['archivoA']['name'];
             $rutaDocumento="/Repositorio/$UsuarioActivo/" . $_FILES['archivoA']['name'];
-            //ahora movemos el archivo
+        
             try{
             $resultado = move_uploaded_file($_FILES['archivoA']['tmp_name'], $ruta);
             if ($resultado) {
@@ -54,13 +50,6 @@ $clas = new conexion();
              catch (Exception $e) {
                     echo 'Ha ocurrido un error: ',  $e->getMessage(), "\n";
                 }
-            
-            
-        //}
-        //else
-        //{
-            //echo 'el formato de archivo o el tamanio de archivo no son permitidos';
-        //}
 
 $clas->cerrarConexion();
     

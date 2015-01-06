@@ -1,10 +1,10 @@
 <?php
     
-   // include 'forms/actions/agregarModalidadEvaluacionCO.php';
+   
     session_start();
-    $UsuarioActivo = $_SESSION['usuario'];
+    $UserAct = $_SESSION['usuario'];
     include '../Modelo/conexion.php';
-    //include("controlSesion.php");
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -33,14 +33,9 @@
 
    
     <div id="wrapper">
-       
         
 		<!--<h2>design by <a href="#" title="flash templates">flash-templates-today.com</a></h2>-->
-        
-	
-      
-                
-	
+    
         <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
@@ -58,7 +53,7 @@
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <?php echo $UsuarioActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                        <?php echo $UserAct.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
   
@@ -81,46 +76,45 @@
                             <a href="AdministrarGrupoEmpresa.php"><i class="fa fa-book"></i> Administrar Grupo Empresas</a>
                         </li>
                         <li>
-                                        <a href="#"><i class="glyphicon glyphicon-th-list"></i> Evaluacion Grupo Empresa<span class="fa arrow"></span></a>
-                                            <ul class="nav nav-third-level">
-                                                <li>
-                                                    <a href="CrearModalidadEvaluacion.php">Criterio de Evaluaci&oacute;n </a>                             
-                                                </li>
-                                                
-                                                <li>
-                                                    <a href="#">Criterio de Calificaci&oacute;n<span class="fa arrow"></span></a>
-                                                    <ul class="nav nav-third-level">
-                                                        <li>
-                                                            <a href="CrearModalidadCalificacion.php"> Crear Criterio de Calificaci&oacute;n</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="EliminarCriterioCalificacion.php"> Eliminar Criterio de Calificaci&oacute;n</a>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                                 
-                                                <li>
-                                                    <a href="#">Formulario de Evaluacion<span class="fa arrow"></span></a>
-                                                    <ul class="nav nav-third-level">
-                                                        <li>
-                                                            <a href="CrearFormulario.php">Crear Formulario de Evaluacion</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="SeleccionarFormulario.php"> Habilitar Formulario de Evaluacion </a>   
-                                                        </li>
-                                                        <li>
-                                                            <a href="EliminarFormulario.php">Eliminar Formulario de Evaluacion</a>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                                <li>
-                                                    <a href="EvaluarGrupoEmpresa.php">Evaluar Grupo Empresa </a>   
-                                                </li>
-                                                <li>
-                                                    <a href="../Vista/EvaluacionGeneral.php">Evaluacion Final </a>   
-                                                </li>
-                                            </ul>
+                            <a href="#"><i class="glyphicon glyphicon-th-list"></i> Evaluacion Grupo Empresa<span class="fa arrow"></span></a>
+                            <ul class="nav nav-third-level">
+                                <li>
+                                   <a href="CrearModalidadEvaluacion.php">Criterio de Evaluaci&oacute;n </a>                             
                                 </li>
+                                <li>
+                                    <a href="#">Criterio de Calificaci&oacute;n<span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                        <li>
+                                            <a href="CrearModalidadCalificacion.php"> Crear Criterio de Calificaci&oacute;n</a>
+                                        </li>
+                                        <li>
+                                            <a href="EliminarCriterioCalificacion.php"> Eliminar Criterio de Calificaci&oacute;n</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                                
+                                <li>
+                                    <a href="#">Formulario de Evaluacion<span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                        <li>
+                                            <a href="CrearFormulario.php">Crear Formulario de Evaluacion</a>
+                                        </li>
+                                        <li>
+                                            <a href="SeleccionarFormulario.php"> Habilitar Formulario de Evaluacion </a>   
+                                        </li>
+                                        <li>
+                                            <a href="EliminarFormulario.php">Eliminar Formulario de Evaluacion</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="EvaluarGrupoEmpresa.php">Evaluar Grupo Empresa </a>   
+                                </li>
+                                <li>
+                                    <a href="../Vista/EvaluacionGeneral.php">Evaluacion Final </a>   
+                                </li>             
+                            </ul>           
+                        </li>
                         
                         
                         <li>
@@ -248,7 +242,7 @@
                 </div>
             </div>
         </div>
-     <!------------------------------------------------------------------------------------------->
+     <!-------------------------------------------------------------------------------------------->
 
         <div id="page-wrapper">
             <div class="row">
@@ -260,42 +254,29 @@
             <!-- /.row -->
             <div class="row">
                 <div class="col-lg-16">
-                  
                     <div class="col-lg-8">
-                               
                         <div class="panel panel-default" id="crearModalidadEvaluacion">
                             <div class="panel-heading">
                                 <label class=" text-warning" for="descripcionDocumento">Describa la nueva modalidad de evaluaci&oacute;n</label>
                             </div>
                             
                             <form method="post" action="forms/actions/agregarModalidadEvaluacionCO.php">
-                                
-                                          <div class="panel-body">
-                                             
-                                              <label class="default" > Llene el campo en blanco para realizar el registro</label>
-                                               
-                                              <div class="form-group">
-                                                  
-                                                  <textarea style="overflow:scroll" class ="form-control fa-align-center "  placeholder="Introduzca la descripci&oacute;n de la nueva Modalidad de evaluaci&oacute;n " name="descripcionDocumento" id="descripcionDocumento" name="descripcionDocumento" cols="40" rows="3"></textarea>
-                                                  <br> 
-                                                  <input type="submit" class="btn btn-primary " value="Agregar" id="btnCrearModalidad" name="btnCrearModalidad">
-                                                  <input type="reset" class="btn btn-default " value="Limpiar" id="btnLimpiarModalidad">
-                                              </div>
-                                          </div>    
+                                <div class="panel-body">
+                                    <label class="default" > Llene el campo en blanco para realizar el registro</label>           
+                                    <div class="form-group">             
+                                        <textarea style="overflow:scroll" class ="form-control fa-align-center "  placeholder="Introduzca la descripci&oacute;n de la nueva Modalidad de evaluaci&oacute;n " name="descripcionDocumento" id="descripcionDocumento" name="descripcionDocumento" cols="40" rows="3"></textarea>
+                                        <br> 
+                                        <input type="submit" class="btn btn-primary " value="Agregar" id="btnCrearModalidad" name="btnCrearModalidad">
+                                        <input type="reset" class="btn btn-default " value="Limpiar" id="btnLimpiarModalidad">
+                                    </div>
+                                </div>    
                             </form> 
-                        </div>                       
-                    </div>  
-                    
-                    <!-- /.panel -->
+                        </div><!-- /.panel -->                       
+                    </div><!-- /.col-lg-8 -->  
                 </div>
-                <!-- /.col-lg-8 -->
-                
-                <!-- /.col-lg-4 -->
-            </div>
-            <!-- /.row -->
+            </div><!-- /.row -->
         </div>
         <!-- /#page-wrapper -->
-
     </div>
     <!-- /#wrapper -->
 

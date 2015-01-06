@@ -1,8 +1,7 @@
 <?php  
 	session_start();
-	$UsuarioActivo = $_SESSION['usuario'];
-
-	$CritEliminar = $_POST['CriterioEliminar'];
+	$UserAct = $_SESSION['usuario'];
+	$Crit_C = $_POST['CriterioEliminar'];
 
 	include '../Modelo/conexion.php';
 						                    
@@ -10,52 +9,45 @@
 
 	$formularios = "";
 
-	if ($CritEliminar == 'PUNTAJE') {
-
-		echo '<script>alert("No puede eliminar ese criterio");</script>';
-		die();
-	}
-
-	$ResIdC = $conect->consulta("SELECT ID_CRITERIO_C FROM criteriocalificacion WHERE NOMBRE_CRITERIO_C = '$CritEliminar' AND NOMBRE_U = '$UsuarioActivo'");
+	$ResIdC = $conect->consulta("SELECT ID_CRITERIO_C FROM criteriocalificacion WHERE NOMBRE_CRITERIO_C = '$Crit_C' AND NOMBRE_U = '$UserAct'");
 
 	$IdC = mysql_fetch_row($ResIdC);
 
-	$ResBuscar = $conect->consulta("SELECT ID_FORM FROM from_crit_c WHERE ID_CRITERIO_C = '$IdC[0]'");
+	$Ver_Form = $conect->consulta("SELECT ID_FORM FROM from_crit_c WHERE ID_CRITERIO_C = '$IdC[0]'");
 
-	while ($rowBuscar = mysql_fetch_row($ResBuscar)) {
+	while ($Row_Form = mysql_fetch_row($Ver_Form)) {
 		
-		$Buscar[] = $rowBuscar;
+		$Form[] = $Row_Form;
 	}
 
 
-	if (isset($Buscar) and is_array($Buscar)) {
+	if (isset($Form) and is_array($Form)) {
 
-		for ($i=0; $i < count($Buscar) ; $i++) { 
+		for ($i=0; $i < count($Form) ; $i++) { 
 
-			$BuscarFormulario = $conect->consulta('SELECT NOMBRE_FORM FROM formulario WHERE ID_FORM = '.$Buscar[$i][0].'');
+			$Sel_Form = $conect->consulta('SELECT NOMBRE_FORM FROM formulario WHERE ID_FORM = '.$Form[$i][0].'');
 
-			$NomForm = mysql_fetch_row($BuscarFormulario);
-
-			//$formularios = $formularios.' '.$NomForm[$i][0];		
+			$NomForm = mysql_fetch_row($Sel_Form);	
 	
 		}
 
-		//var_dump($formularios);
-
-		echo '<script>alert("El criterio esta en uso por los siguiente formularios: '.$NomForm[0].'");</script>';
-		die();
+		echo '<script>alert("El criterio esta en uso por el siguiente formulario: '.$NomForm[0].'");</script>';
 	
 	}
+	else
+	{
+		$Del_Ind = $conect->consulta("DELETE FROM indicador WHERE ID_CRITERIO_C = '$IdC[0]'");
 
-	$EliminarIndicadores = $conect->consulta("DELETE FROM indicador WHERE ID_CRITERIO_C = '$IdC[0]'");
+		$Del_Crit = $conect->consulta("DELETE FROM criteriocalificacion WHERE ID_CRITERIO_C = '$IdC[0]'");
 
-	$EliminarCriterio = $conect->consulta("DELETE FROM criteriocalificacion WHERE ID_CRITERIO_C = '$IdC[0]'");
+		if ($Del_Ind and $Del_Crit) {
 
-	if ($EliminarIndicadores and $EliminarCriterio) {
-
-		echo '<script>alert("Se elimino el criterio correctamente");</script>';
-		echo '<script>location.reload();</script>';
+			echo '<script>alert("Se elimino el criterio correctamente");</script>';
+			echo '<script>location.reload();</script>';
 		
-	}
+		}
+	}	
+
+	
 
 ?>

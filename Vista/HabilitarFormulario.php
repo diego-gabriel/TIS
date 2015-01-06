@@ -1,21 +1,18 @@
 <?php
 
 session_start();
-$UsuarioActivo = $_SESSION['usuario'];
-
-
+$UserAct = $_SESSION['usuario'];
 include '../Modelo/conexion.php';
 
-$formulario = $_POST['formulario'];
+$Form = $_POST['formulario'];
                                                   
     $conect = new conexion();
     
-    $resutado = $conect->consulta("UPDATE formulario SET ESTADO_FORM = 'Habilitado' WHERE NOMBRE_FORM = '$formulario' AND NOMBRE_U = '$UsuarioActivo'");
-    $resultado2 = $conect->consulta("UPDATE formulario SET ESTADO_FORM = 'Deshabilitado' WHERE NOMBRE_FORM <> '$formulario' AND NOMBRE_U = '$UsuarioActivo'");
+    $On_Form = $conect->consulta("UPDATE formulario SET ESTADO_FORM = 'Habilitado' WHERE NOMBRE_FORM = '$Form' AND NOMBRE_U = '$UserAct'");
+    $Off_Form = $conect->consulta("UPDATE formulario SET ESTADO_FORM = 'Deshabilitado' WHERE NOMBRE_FORM <> '$Form' AND NOMBRE_U = '$UserAct'");
     
-    if($resutado and $resultado2) 
+    if($On_Form and $Off_Form) 
     {
-
 
         echo '<script>alert("El formulario esta habilitado para su uso");</script>';
         echo '<script>location.reload();</script>';

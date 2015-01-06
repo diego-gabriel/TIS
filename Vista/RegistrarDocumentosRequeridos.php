@@ -1,9 +1,8 @@
 <?php
-include '../Modelo/conexion.php';
+    include '../Modelo/conexion.php';
     $con=new conexion(); 
-   session_start();
-   $UsuarioActivo = $_SESSION['usuario'];
-   //include("controlSesion.php");
+    session_start();
+    $UserAct = $_SESSION['usuario'];
   
 ?>
 <!DOCTYPE html>
@@ -61,7 +60,7 @@ include '../Modelo/conexion.php';
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <?php echo $UsuarioActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                        <?php echo $UserAct.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
   
@@ -281,16 +280,18 @@ include '../Modelo/conexion.php';
                                      <select name="proyecto" class="form-control">
                                     <option>Seleccione un proyecto</option>
                                     <?php
-                                        $idGE= $UsuarioActivo  ;
+                                        $idGE= $UserAct  ;
 
-                                        $conGestion="SELECT id_g "
+                                        $Con_G = "SELECT id_g "
                                                 . "FROM gestion "
                                                 . "WHERE DATE (NOW()) > DATE(FECHA_INICIO_G) and DATE(NOW()) < DATE(FECHA_FIN_G)";
-                                        $conGestion_=$con->consulta($conGestion);
-                                        $idGestion=mysql_fetch_row($conGestion_);
-                                        $idGestion_=$idGestion[0];
+
+                                        $Sel_G_=$con->consulta($Con_G);
+                                        $Id_G=mysql_fetch_row($Sel_G);
+
+                                        $Id_G2=$Id_G[0];
                                                                        
-                                        $c1="SELECT p.`NOMBRE_P` FROM `proyecto` AS `p`, `gestion` AS `g` WHERE p.`ID_G` = g.`ID_G` AND p.`ID_G` LIKE '".$idGestion_."'";
+                                        $c1="SELECT p.`NOMBRE_P` FROM `proyecto` AS `p`, `gestion` AS `g` WHERE p.`ID_G` = g.`ID_G` AND p.`ID_G` LIKE '".$Id_G2."'";
                                  
                                         $a1=$con->consulta($c1);
                 

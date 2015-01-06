@@ -4,24 +4,22 @@ include '../Modelo/conexion.php';
 
     session_start();
 
-    $UsuarioActivo = $_SESSION['usuario'];
-
-    $nameForm = $_POST['nombreFormulario'];
-                                                  
+    $UserAct = $_SESSION['usuario'];
+    $nameForm = $_POST['nombreFormulario'];                                      
     $conect = new conexion();
 
-    $EvaEscogidos = $_POST['EvaEscogidos'];
-    $CritEscogidos = $_POST['CritEscogidos'];
+    $Crit_E = $_POST['EvaEscogidos'];
+    $Crit_C = $_POST['CritEscogidos'];
 
     $puntaje = $_POST['PuntajeForm'];
 
     $buscador=0;
 
-    for ($v=0; $v < count($EvaEscogidos) ; $v++) { 
+    for ($v=0; $v < count($Crit_E) ; $v++) { 
 
-            for ($b=0; $b < count($EvaEscogidos) ; $b++) { 
+            for ($b=0; $b < count($Crit_E) ; $b++) { 
 
-                if (($EvaEscogidos[$v] == $EvaEscogidos[$b])) {
+                if (($Crit_E[$v] == $Crit_E[$b])) {
                      
                     $buscador++;
                 }
@@ -29,70 +27,55 @@ include '../Modelo/conexion.php';
             }
     }
 
-    if ($buscador > count($EvaEscogidos)) {
+    if ($buscador > count($Crit_E)) {
 
         echo '<script>alert("No puede evaluar el mismo criterio mas de una vez");</script>';
     
     }else{
 
-        $VerificarNombre = $conect->consulta("SELECT NOMBRE_FORM FROM formulario WHERE NOMBRE_FORM = '$nameForm' AND NOMBRE_U = '$UsuarioActivo' ");
+        $Ver_Nom = $conect->consulta("SELECT NOMBRE_FORM FROM formulario WHERE NOMBRE_FORM = '$nameForm' AND NOMBRE_U = '$UserAct' ");
         
-        $ResultadoVerificacion = mysql_fetch_row($VerificarNombre);
+        $Verif_Nom = mysql_fetch_row($Ver_Nom);
         
-        if(!is_array($ResultadoVerificacion))
+        if(!is_array($Verif_Nom))
         {
             
-                $resultado=0;
+                $Res=0;
             
                 for($z=0;$z<count($puntaje);$z++)
                 {
-                    $resultado = $resultado + $puntaje[$z]; 
+                    $Res = $Res + $puntaje[$z]; 
                 }
                 
-                    if($resultado == 100)
+                    if($Res == 100)
                     {
 
-                        $InsertarFormulario = $conect->consulta("INSERT INTO formulario(NOMBRE_U, NOMBRE_FORM, ESTADO_FORM) VALUES('$UsuarioActivo', '$nameForm', 'Deshabilitado')");
+                        $In_Form = $conect->consulta("INSERT INTO formulario(NOMBRE_U, NOMBRE_FORM, ESTADO_FORM) VALUES('$UserAct', '$nameForm', 'Deshabilitado')");
 
-                        $SeleccionID =$conect->consulta("SELECT MAX(ID_FORM) FROM formulario WHERE NOMBRE_U = '$UsuarioActivo'");
+                        $Sel_Id =$conect->consulta("SELECT MAX(ID_FORM) FROM formulario WHERE NOMBRE_U = '$UserAct'");
 
-                        $MaxIdForm = mysql_fetch_row($SeleccionID);
+                        $Id_Form = mysql_fetch_row($Sel_Id);
 
-                        for ($cont1=0; $cont1 < count($EvaEscogidos); $cont1++) { 
+                        for ($cont1=0; $cont1 < count($Crit_E); $cont1++) { 
 
-                            if ($CritEscogidos[$cont1] == 4) {
 
-                          
-                                die();
-
-                                $InsertarCritC = $conect->consulta("INSERT INTO from_crit_c(ID_CRITERIO_C, ID_FORM) VALUES('4','$MaxIdForm[0]') ");
-                                $SeleccionIDE = $conect->consulta("SELECT ID_CRITERIO_E FROM criterio_evaluacion WHERE NOMBRE_CRITERIO_E = '$EvaEscogidos[$cont1]' AND NOMBRE_U = '$UsuarioActivo'");
-                                $idE = mysql_fetch_row($SeleccionIDE);
-                                $InsertarCritE = $conect->consulta("INSERT INTO form_crit_e(ID_FORM, ID_CRITERIO_E) VALUES('$MaxIdForm[0]','$idE[0]') ");
-                                $InsertarPuntaje = $conect->consulta("INSERT INTO puntaje(ID_FORM, PUNTAJE) VALUES('$MaxIdForm[0]','$puntaje[$cont1]')");
-
-                            }else{
-
-                                $SeleccionIDE = $conect->consulta("SELECT ID_CRITERIO_E FROM criterio_evaluacion WHERE NOMBRE_CRITERIO_E = '$EvaEscogidos[$cont1]' AND NOMBRE_U = '$UsuarioActivo'");
+                                $Sel_IdE = $conect->consulta("SELECT ID_CRITERIO_E FROM criterio_evaluacion WHERE NOMBRE_CRITERIO_E = '$Crit_E[$cont1]' AND NOMBRE_U = '$UserAct'");
                             
-                                $SeleccionIDC = $conect->consulta("SELECT ID_CRITERIO_C FROM criteriocalificacion WHERE NOMBRE_CRITERIO_C = '$CritEscogidos[$cont1]' AND NOMBRE_U = '$UsuarioActivo'");
+                                $Sel_IdC = $conect->consulta("SELECT ID_CRITERIO_C FROM criteriocalificacion WHERE NOMBRE_CRITERIO_C = '$Crit_C[$cont1]' AND NOMBRE_U = '$UserAct'");
 
-                                $idE = mysql_fetch_row($SeleccionIDE);
+                                $idE = mysql_fetch_row($Sel_IdE);
 
-                                $idC = mysql_fetch_row($SeleccionIDC);
+                                $idC = mysql_fetch_row($Sel_IdC);
 
-                                //var_dump($idC);
+                                $In_CritE = $conect->consulta("INSERT INTO form_crit_e(ID_FORM, ID_CRITERIO_E) VALUES('$Id_Form[0]','$idE[0]') ");
 
-                                $InsertarCritE = $conect->consulta("INSERT INTO form_crit_e(ID_FORM, ID_CRITERIO_E) VALUES('$MaxIdForm[0]','$idE[0]') ");
+                                $In_CritC = $conect->consulta("INSERT INTO from_crit_c(ID_CRITERIO_C, ID_FORM) VALUES('$idC[0]','$Id_Form[0]') ");
 
-                                $InsertarCritC = $conect->consulta("INSERT INTO from_crit_c(ID_CRITERIO_C, ID_FORM) VALUES('$idC[0]','$MaxIdForm[0]') ");
-
-                                $InsertarPuntaje = $conect->consulta("INSERT INTO puntaje(ID_FORM, PUNTAJE) VALUES('$MaxIdForm[0]','$puntaje[$cont1]')");
-                            }                            
+                                $In_Ptje = $conect->consulta("INSERT INTO puntaje(ID_FORM, PUNTAJE) VALUES('$Id_Form[0]','$puntaje[$cont1]')");                           
                         }
 
                     
-                        if($InsertarFormulario and $InsertarCritE and $InsertarCritC and $InsertarPuntaje)
+                        if($In_Form and $In_CritE and $In_CritC and $In_Ptje)
                         {
 
                             echo '<script>alert("Se guardo el formulario correctamente");</script>';

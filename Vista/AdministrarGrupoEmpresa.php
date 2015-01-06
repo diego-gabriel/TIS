@@ -1,9 +1,7 @@
 <?php  
    
     session_start();
-    $UsuarioActivo = $_SESSION['usuario'];
-    //include("controlSesion.php");
-
+    $UserAct = $_SESSION['usuario'];
     
 ?>
 
@@ -46,9 +44,6 @@
 
 <body>
 
-   
-        
-	
        <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
@@ -66,7 +61,7 @@
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <?php echo $UsuarioActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                        <?php echo $UserAct.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
   
@@ -89,48 +84,45 @@
                             <a href="AdministrarGrupoEmpresa.php"><i class="fa fa-book"></i> Administrar Grupo Empresas</a>
                         </li>
                         <li>
-                                        <a href="#"><i class="glyphicon glyphicon-th-list"></i> Evaluacion Grupo Empresa<span class="fa arrow"></span></a>
-                                            <ul class="nav nav-third-level">
-                                                <li>
-                                                    <a href="CrearModalidadEvaluacion.php">Criterio de Evaluaci&oacute;n </a>                             
-                                                </li>
-                                                
-                                                <li>
-                                                    <a href="#">Criterio de Calificaci&oacute;n<span class="fa arrow"></span></a>
-                                                    <ul class="nav nav-third-level">
-                                                        <li>
-                                                            <a href="CrearModalidadCalificacion.php"> Crear Criterio de Calificaci&oacute;n</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="EliminarCriterioCalificacion.php"> Eliminar Criterio de Calificaci&oacute;n</a>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                                 
-                                                <li>
-                                                    <a href="#">Formulario de Evaluacion<span class="fa arrow"></span></a>
-                                                    <ul class="nav nav-third-level">
-                                                        <li>
-                                                            <a href="CrearFormulario.php">Crear Formulario de Evaluacion</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="SeleccionarFormulario.php"> Habilitar Formulario de Evaluacion </a>   
-                                                        </li>
-                                                        <li>
-                                                            <a href="EliminarFormulario.php">Eliminar Formulario de Evaluacion</a>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                                <li>
-                                                    <a href="EvaluarGrupoEmpresa.php">Evaluar Grupo Empresa </a>   
-                                                </li>
-                                                <li>
-                                                    <a href="../Vista/EvaluacionGeneral.php">Evaluacion Final </a>   
-                                                </li>
-                                            </ul>
+                            <a href="#"><i class="glyphicon glyphicon-th-list"></i> Evaluacion Grupo Empresa<span class="fa arrow"></span></a>
+                            <ul class="nav nav-third-level">
+                                <li>
+                                   <a href="CrearModalidadEvaluacion.php">Criterio de Evaluaci&oacute;n </a>                             
                                 </li>
-                        
-                        
+                                <li>
+                                    <a href="#">Criterio de Calificaci&oacute;n<span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                        <li>
+                                            <a href="CrearModalidadCalificacion.php"> Crear Criterio de Calificaci&oacute;n</a>
+                                        </li>
+                                        <li>
+                                            <a href="EliminarCriterioCalificacion.php"> Eliminar Criterio de Calificaci&oacute;n</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                                
+                                <li>
+                                    <a href="#">Formulario de Evaluacion<span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                        <li>
+                                            <a href="CrearFormulario.php">Crear Formulario de Evaluacion</a>
+                                        </li>
+                                        <li>
+                                            <a href="SeleccionarFormulario.php"> Habilitar Formulario de Evaluacion </a>   
+                                        </li>
+                                        <li>
+                                            <a href="EliminarFormulario.php">Eliminar Formulario de Evaluacion</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="EvaluarGrupoEmpresa.php">Evaluar Grupo Empresa </a>   
+                                </li>
+                                <li>
+                                    <a href="../Vista/EvaluacionGeneral.php">Evaluacion Final </a>   
+                                </li>             
+                            </ul>           
+                        </li>
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-files-o "></i> Documentos <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
@@ -265,16 +257,16 @@
                     <?php 
                         include '../Modelo/conexion.php';
                         $conect = new conexion();
-                        $SeleccionarGruposInscritos = $conect->consulta("SELECT NOMBRE_UGE FROM inscripcion 
-                        WHERE NOMBRE_UA='$UsuarioActivo'");
+                        $SelectGI = $conect->consulta("SELECT NOMBRE_UGE FROM inscripcion 
+                        WHERE NOMBRE_UA='$UserAct'");
 
-                        while ($rowGrupos = mysql_fetch_row($SeleccionarGruposInscritos)) {
+                        while ($rowG = mysql_fetch_row($SelectGI)) {
 
-                            $GruposInscritos[] = $rowGrupos[0];
+                            $GruposIn[] = $rowG[0];
                     
                         }
 
-                        if(isset($GruposInscritos))
+                        if(isset($GruposIn))
                         {
             
                             echo '<table class="table table-hover">
@@ -289,47 +281,47 @@
                                     </thead>
                                     <tbody>';
 
-                            $SeleccionarEstado  = $conect->consulta("SELECT ESTADO_INSCRIPCION FROM inscripcion WHERE NOMBRE_UA ='$UsuarioActivo'");
+                            $S_Estado  = $conect->consulta("SELECT ESTADO_INSCRIPCION FROM inscripcion WHERE NOMBRE_UA ='$UserAct'");
 
-                            while ($rowEstados = mysql_fetch_row($SeleccionarEstado) ) {
+                            while ($rowE = mysql_fetch_row($S_Estado) ) {
 
-                            $Estado[] = $rowEstados[0];
+                            $Estado[] = $rowE[0];
                         
                             }
 
-                            for ($i=0; $i <count($GruposInscritos) ; $i++) { 
+                            for ($i=0; $i <count($GruposIn) ; $i++) { 
                                 
-                                $SeleccionarRepresentante = $conect->consulta("SELECT REPRESENTANTE_LEGAL_GE FROM grupo_empresa WHERE NOMBRE_U = '$GruposInscritos[$i]'");
-                                $SeleccionarNota = $conect->consulta("SELECT CALIF_N FROM nota WHERE NOMBRE_U = '$GruposInscritos[$i]'");
+                                $Sel_Rep = $conect->consulta("SELECT REPRESENTANTE_LEGAL_GE FROM grupo_empresa WHERE NOMBRE_U = '$GruposIn[$i]'");
+                                $Sel_Nota = $conect->consulta("SELECT CALIF_N FROM nota WHERE NOMBRE_U = '$GruposIn[$i]'");
                                 
-                                while($rowRepresentante = mysql_fetch_row($SeleccionarRepresentante))
+                                while($Row_Rep = mysql_fetch_row($Sel_Rep))
                                 {
-                                    $Representante[] = $rowRepresentante[0];
+                                    $Rep[] = $Row_Rep[0];
                                 }
-                                while($rowNota = mysql_fetch_row($SeleccionarNota))
+                                while($Row_Nota = mysql_fetch_row($Sel_Nota))
                                 {
-                                    $Nota[] = $rowNota[0];
+                                    $Nota[] = $Row_Nota[0];
                                 }
                             }
 
-                            for ($i=0; $i < count($GruposInscritos) ; $i++) { 
+                            for ($i=0; $i < count($GruposIn) ; $i++) { 
                                 $j=$i+1;
 
                                 echo '<tr>
                                         <td>'.$j.'</td>
-                                        <td>'.$GruposInscritos[$i].'</td>
-                                        <td>'.$Representante[$i].'</td>
+                                        <td>'.$GruposIn[$i].'</td>
+                                        <td>'.$Rep[$i].'</td>
                                         <td>'.$Estado[$i].'</td>
 
                                     
                                         <td>
-                                            <a href="HabilitarGrupoEmpresa.php?GE='.$GruposInscritos[$i].'&Operacion=Habilitar" 
+                                            <a href="HabilitarGrupoEmpresa.php?GE='.$GruposIn[$i].'&Operacion=Habilitar" 
                                             class="btn btn-default btn-xs">Habilitar</a>
 
-                                            <a href="HabilitarGrupoEmpresa.php?GE='.$GruposInscritos[$i].'&Operacion=Deshabilitar" 
+                                            <a href="HabilitarGrupoEmpresa.php?GE='.$GruposIn[$i].'&Operacion=Deshabilitar" 
                                             class="btn btn-default btn-xs">Deshabilitar</a>
 
-                                            <a href="ModificarEvaluacionGrupoEmpresa.php?GE='.$GruposInscritos[$i].'" 
+                                            <a href="ModificarEvaluacionGrupoEmpresa.php?GE='.$GruposIn[$i].'" 
                                             class="btn btn-default btn-xs">Modificar Evaluacion</a>
                                         </td>   
                                      </tr>'; 
@@ -338,16 +330,7 @@
 
                             echo "No tiene ninguna empresa inscrita";
                         }
-
-
-                        
-
-                    
-
-
-                   
-
-                        
+   
                     ?> 
                         </tbody>
                     </table>

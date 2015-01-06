@@ -1,7 +1,6 @@
 <?php  
     session_start();    
-    $UsuarioActivo = $_SESSION['usuario'];
-    //include("controlSesion.php");
+    $UserAct = $_SESSION['usuario'];
 ?>
 
 <!DOCTYPE html>
@@ -93,7 +92,7 @@
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <?php echo $UsuarioActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                        <?php echo $UserAct.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
   
@@ -116,46 +115,46 @@
                             <a href="AdministrarGrupoEmpresa.php"><i class="fa fa-book"></i> Administrar Grupo Empresas</a>
                         </li>
                         <li>
-                                        <a href="#"><i class="glyphicon glyphicon-th-list"></i> Evaluacion Grupo Empresa<span class="fa arrow"></span></a>
-                                            <ul class="nav nav-third-level">
-                                                <li>
-                                                    <a href="CrearModalidadEvaluacion.php">Criterio de Evaluaci&oacute;n </a>                             
-                                                </li>
-                                                
-                                                <li>
-                                                    <a href="#">Criterio de Calificaci&oacute;n<span class="fa arrow"></span></a>
-                                                    <ul class="nav nav-third-level">
-                                                        <li>
-                                                            <a href="CrearModalidadCalificacion.php"> Crear Criterio de Calificaci&oacute;n</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="EliminarCriterioCalificacion.php"> Eliminar Criterio de Calificaci&oacute;n</a>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                                 
-                                                <li>
-                                                    <a href="#">Formulario de Evaluacion<span class="fa arrow"></span></a>
-                                                    <ul class="nav nav-third-level">
-                                                        <li>
-                                                            <a href="CrearFormulario.php">Crear Formulario de Evaluacion</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="SeleccionarFormulario.php"> Habilitar Formulario de Evaluacion </a>   
-                                                        </li>
-                                                        <li>
-                                                            <a href="EliminarFormulario.php">Eliminar Formulario de Evaluacion</a>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                                <li>
-                                                    <a href="EvaluarGrupoEmpresa.php">Evaluar Grupo Empresa </a>   
-                                                </li>
-                                                <li>
-                                                    <a href="../Vista/EvaluacionGeneral.php">Evaluacion Final </a>   
-                                                </li>
-                                            </ul>
+                            <a href="#"><i class="glyphicon glyphicon-th-list"></i> Evaluacion Grupo Empresa<span class="fa arrow"></span></a>
+                            <ul class="nav nav-third-level">
+                                <li>
+                                    <a href="CrearModalidadEvaluacion.php">Criterio de Evaluaci&oacute;n </a>                             
                                 </li>
+                                                    
+                                <li>
+                                    <a href="#">Criterio de Calificaci&oacute;n<span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                        <li>
+                                            <a href="CrearModalidadCalificacion.php"> Crear Criterio de Calificaci&oacute;n</a>
+                                        </li>
+                                        <li>
+                                            <a href="EliminarCriterioCalificacion.php"> Eliminar Criterio de Calificaci&oacute;n</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                                     
+                                <li>
+                                    <a href="#">Formulario de Evaluacion<span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                        <li>
+                                            <a href="CrearFormulario.php">Crear Formulario de Evaluacion</a>
+                                        </li>
+                                        <li>
+                                            <a href="SeleccionarFormulario.php"> Habilitar Formulario de Evaluacion </a>   
+                                        </li>
+                                        <li>
+                                            <a href="EliminarFormulario.php">Eliminar Formulario de Evaluacion</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="EvaluarGrupoEmpresa.php">Evaluar Grupo Empresa </a>   
+                                </li>
+                                <li>
+                                    <a href="../Vista/EvaluacionGeneral.php">Evaluacion Final </a>   
+                                </li>
+                            </ul>
+                        </li>
                         
                         
                         <li>
@@ -174,15 +173,12 @@
                                 <li>
                                     <a href="#">Publicaci&oacute;n Documentos <span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
-                                        
-                                        
                                         <li>
                                             <a href="../Vista/publicar_asesor.php">Nueva Publicaci&oacute;n </a>
                                         </li>
                                         <li>
                                             <a href="../Controlador/publicaciones.php">Publicaciones </a>
                                         </li>
-                                       
                                     </ul>
                                     <!-- /.nav-third-level -->
                                 </li>
@@ -193,15 +189,11 @@
                                             <a href="documentos_recibidos.php">Documentos Recibidos</a>
                                         </li>
                                         <li>
-                                            <a href="ConfiguracionFechasRecepcion.php" ><span class="fa fa-calendar-o"></span> Configuraci&oacute;n de Fechas para la Recepci&oacute;n de Documentos</a>
-                                            
+                                            <a href="ConfiguracionFechasRecepcion.php" ><span class="fa fa-calendar-o"></span> Configuraci&oacute;n de Fechas para la Recepci&oacute;n de Documentos</a>  
                                         </li>
-         
                                     </ul>
                                 </li>
-                               
                             </ul>
-                            
                             <!-- /.nav-second-level -->
                         </li>
                         
@@ -301,49 +293,48 @@
 					                    
                                         $conect = new conexion();
 
-					                    $SeleccionarCriterios = $conect->consulta("SELECT NOMBRE_CRITERIO_C FROM criteriocalificacion WHERE NOMBRE_U = '$UsuarioActivo'");
+					                    $Sel_Crit = $conect->consulta("SELECT NOMBRE_CRITERIO_C FROM criteriocalificacion WHERE NOMBRE_U = '$UserAct'");
                                         
                                         
-                                        while ($row = mysql_fetch_row($SeleccionarCriterios)) {
+                                        while ($Row_Crit = mysql_fetch_row($Sel_Crit)) {
                                             
-                                            $seleccionarCrit[] = $row; 
+                                            $Criterio[] = $Row_Crit; 
 
                                         }
 
-                                        if(isset($seleccionarCrit) and is_array($seleccionarCrit)){
+                                        if(isset($Criterio) and is_array($Criterio)){
 
                                             echo '<div class="form-group">
-                                                  <label for=""><h4>Seleccione un criterio de calificacion:</h4></label>
-                                                  <select name="CriterioEliminar" id="SeleccionarFormulario" class="form-control" required>
-                                                    <option value="">Seleccione un criterio de calificacion</option>'; 
+                                                    <label for=""><h4>Seleccione un criterio de calificacion:</h4></label>
+                                                    <select name="CriterioEliminar" id="SeleccionarFormulario" class="form-control" required>
+                                                        <option value="">Seleccione un criterio de calificacion</option>'; 
 
-                                                    for ($i=0; $i <count($seleccionarCrit) ; $i++){
+                                                    for ($i=0; $i <count($Criterio) ; $i++){
 
-                                                        echo '<option value='.$seleccionarCrit[$i][0].'>'.$seleccionarCrit[$i][0].'</option>'; 
+                                                        if($Criterio[$i][0] != "PUNTAJE")
+                                                        {
+                                                            echo '<option value='.$Criterio[$i][0].'>'.$Criterio[$i][0].'</option>'; 
+
+                                                        }     
                                                     }
 
-                                                echo '</select>';
-                                                echo '</div>';
+                                              echo '</select>
+                                                  </div>
 
-                                                echo '<div class="form-group">
-                                                        <button type="submit" class="btn btn-primary" id="btn-aceptar"><span class="glyphicon glyphicon-trash"></span>&nbsp&nbspEliminar</button>
-                                                      </div>';
+                                                  <div class="form-group">
+                                                    <button type="submit" class="btn btn-primary" id="btn-aceptar"><span class="glyphicon glyphicon-trash"></span>&nbsp&nbspEliminar</button>
+                                                  </div>';
                                     
                                         }
                                         else
 
                                         {
                                             echo "No tienen ningun criterio...vaya al siguiente link para crear uno";
-
                                             echo '<a href="../Vista/CrearModalidadCalificacion.php" class="btn btn-default btn-xs">Crear Criterio de Calificacion</a>';
                                   
-
-
                                         }
 
-                                          
-                                    ?>
-                                 
+                                    ?>   
                             </form>                                                
 
                             <div id="panelResultado">

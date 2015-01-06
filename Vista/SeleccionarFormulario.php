@@ -1,7 +1,7 @@
 <?php  
     session_start();    
 
-    $UsuarioActivo = $_SESSION['usuario'];
+    $UserAct = $_SESSION['usuario'];
 ?>
 
 <!DOCTYPE html>
@@ -93,7 +93,7 @@
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <?php echo $UsuarioActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                        <?php echo $UserAct.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
   
@@ -301,23 +301,23 @@
 					                    
                                         $conect = new conexion();
 
-					                    $SeleccionarFormulario = $conect->consulta("SELECT NOMBRE_FORM FROM formulario WHERE NOMBRE_U = '$UsuarioActivo'");
+					                    $Sel_Form = $conect->consulta("SELECT NOMBRE_FORM FROM formulario WHERE NOMBRE_U = '$UserAct'");
                                         
-                                        while ($row = mysql_fetch_row($SeleccionarFormulario)) {
+                                        while ($Row_Form = mysql_fetch_row($Sel_Form)) {
                                             
-                                            $seleccionar[] = $row; 
+                                            $Form[] = $Row_Form; 
                                         }
 
-                                        if(isset($seleccionar) and is_array($seleccionar)){
+                                        if(isset($Form) and is_array($Form)){
 
                                             echo '<div class="form-group">
                                                   <label for=""><h4>Seleccione un Formulario para evaluacion:</h4></label>
                                                   <select name="formulario" id="SeleccionarFormulario" class="form-control" required>
                                                     <option value="">Seleccione un Formulario</option>'; 
 
-                                                    for ($i=0; $i <count($seleccionar) ; $i++){
+                                                    for ($i=0; $i <count($Form) ; $i++){
 
-                                                        echo '<option value='.$seleccionar[$i][0].'>'.$seleccionar[$i][0].'</option>'; 
+                                                        echo '<option value='.$Form[$i][0].'>'.$Form[$i][0].'</option>'; 
                                                     }
 
                                                 echo '</select>';

@@ -1,6 +1,6 @@
  <?php  
     session_start();
-    $UsuarioActivo = $_SESSION['usuario'];
+    $UserAct = $_SESSION['usuario'];
     include("controlSesion.php");
         include '../Modelo/conexion.php';
    
@@ -62,40 +62,20 @@
 
     </script>
 
-
-
-
-
     <link href="../Librerias/css/plugins/timeline/timeline.css" rel="stylesheet">
     <!-- SB Admin CSS - Include with every page -->
     <link href="../Librerias/css/sb-admin.css" rel="stylesheet">
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-       		<title>Bienvenidos a SATIS</title>
-		<link href="css/style.css" rel="stylesheet" type="text/css" />
-<link href="css/tabla-div.css" rel="stylesheet" type="text/css" />
+    <title>Bienvenidos a SAETIS</title>
+	<link href="css/style.css" rel="stylesheet" type="text/css" />
+    <link href="css/tabla-div.css" rel="stylesheet" type="text/css" />
 </head>
 
-
-
 <body>
-
-   
     <div id="wrapper">
-       
         
 		<!--<h2>design by <a href="#" title="flash templates">flash-templates-today.com</a></h2>-->
         
-	
         <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
@@ -113,7 +93,7 @@
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <?php echo $UsuarioActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                        <?php echo $UserAct.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
   
@@ -222,10 +202,8 @@
                     <!-- /#side-menu -->
                 </div>
                 <!-- /.sidebar-collapse -->
-            </div>
-                    
-                    
-                </div>
+            </div>         
+    </div>
          
         
 </nav>          
@@ -256,17 +234,14 @@
 								</div>
                             </div>  
 							<?php
-
-								//Peticion
-								$peticion = $conect->consulta("SELECT NOMBRE_U, NOMBRE_CORTO_GE, NOMBRE_LARGO_GE, REPRESENTANTE_LEGAL_GE FROM grupo_empresa");
+								$SelDatos = $conect->consulta("SELECT NOMBRE_U, NOMBRE_CORTO_GE, NOMBRE_LARGO_GE, REPRESENTANTE_LEGAL_GE FROM grupo_empresa");
 							
-
-								while($fila = mysql_fetch_array($peticion))
+								while($fila = mysql_fetch_array($SelDatos))
 								{
                                     $grupo = $fila['NOMBRE_U'];
 							?>
 								<div class="contenedor-fila">
-									   <div class="contenedor-columna">
+									<div class="contenedor-columna">
 										<?php
 											echo $fila['NOMBRE_U'];
 										?>
@@ -292,33 +267,22 @@
                                     <div class="contenedor-columna">
                                         <?php
                                             echo '<a href = "EliminarGrupoEmpresa.php?id_us='.$grupo.'" class="verificar" ><font color="blue">Eliminar</font></a>';
-                                        
-                                                                                        
+                                                                                   
                                         ?>
-               
-                                    </div>
-									                                                               
+                                    </div>                                                               
 								</div>
                                        
-								<?php
+							<?php
 								}
-
-							
-						?>	
-                                                           
+						    ?>	                                 
                         </div>                                         	
-					</div>
-			
-					                   
-                    
-                    
+					</div>  
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
      
         </div>
         <!-- /#page-wrapper -->
-
     </div>
     <!-- /#wrapper -->
 

@@ -3,12 +3,12 @@
 	include '../Modelo/conexion.php';
 	$conect = new conexion();  
 
-	$GrupoEmpresaF = $_POST['GrupoE'];
+	$GrupoEF = $_POST['GrupoE'];
 	$NotaFn = $_POST['NotaFn'];
 
-	$VerificarNotaFinal = $conect->consulta("SELECT * FROM nota_final WHERE NOMBRE_U='$GrupoEmpresaF'");
+	$Verif_NF = $conect->consulta("SELECT * FROM nota_final WHERE NOMBRE_U='$GrupoEF'");
 
-	$NotaFinal = mysql_fetch_row($VerificarNotaFinal);
+	$NotaFinal = mysql_fetch_row($Verif_NF);
 
 	if (is_array($NotaFinal)) {
 
@@ -19,7 +19,7 @@
 	else
 	{
 	
-		$conect->consulta('INSERT INTO nota_final(NOMBRE_U, NOTA_F) VALUES("'.$GrupoEmpresaF.'","'.$NotaFn.'")');
+		$conect->consulta('INSERT INTO nota_final(NOMBRE_U, NOTA_F) VALUES("'.$GrupoEF.'","'.$NotaFn.'")');
 
 		echo '<script>alert("Se registro la nota correctamente");
 				window.location="../Vista/EvaluacionGeneral.php";

@@ -3,14 +3,9 @@
 <?php
 
 	require_once '../Modelo/conexion.php';
-	require_once '../Modelo/Model/GrupoEmpresa.php';
-        
- 
-        
-  
-        
-        session_start();
-        $usuario = $_SESSION['usuario'];
+	require_once '../Modelo/Model/GrupoEmpresa.php';   
+    session_start();
+    $usuario = $_SESSION['usuario'];
      
 	$conexion = new conexion();
 	$conexion->conectar();
@@ -23,15 +18,7 @@
     $evaluacion = $conexion->consultarArreglo("SELECT DISTINCT id_r
 									  		   FROM evaluacion");
     
-    
-    
-    
 	$filas = '';
-
-	//$nombreGE = $ap[0][1];
-
-	//$VerificarContrato = $conexion->consulta("SELECT * FROM registro, receptor WHERE NOMBRE_U='$usuario' AND TIPO_T='contrato' AND ")
-        
        
 	for ($i = 0; $i < count($ap); $i++) { 
 		$ge = new GrupoEmpresa($ap[$i][1]);

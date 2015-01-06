@@ -1,7 +1,6 @@
 <?php  
-session_start();
-$UsuarioActivo = $_SESSION['usuario'];
-//include("controlSesion.php");
+    session_start();
+    $UserAct = $_SESSION['usuario'];
 ?>
 
 <!DOCTYPE html>
@@ -44,7 +43,7 @@ $UsuarioActivo = $_SESSION['usuario'];
 
                 if($("form")[0].checkValidity())
                 {
-                    var url = "EliminarFormulario2.php"
+                    var url = "ProcesarEliminarFormulario.php"
 
                     $.ajax({
                         url: url,
@@ -97,7 +96,7 @@ $UsuarioActivo = $_SESSION['usuario'];
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <?php echo $UsuarioActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                        <?php echo $UserAct.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
   
@@ -120,47 +119,46 @@ $UsuarioActivo = $_SESSION['usuario'];
                             <a href="AdministrarGrupoEmpresa.php"><i class="fa fa-book"></i> Administrar Grupo Empresas</a>
                         </li>
                         <li>
-                                        <a href="#"><i class="glyphicon glyphicon-th-list"></i> Evaluacion Grupo Empresa<span class="fa arrow"></span></a>
-                                            <ul class="nav nav-third-level">
-                                                <li>
-                                                    <a href="CrearModalidadEvaluacion.php">Criterio de Evaluaci&oacute;n </a>                             
-                                                </li>
-                                                
-                                                <li>
-                                                    <a href="#">Criterio de Calificaci&oacute;n<span class="fa arrow"></span></a>
-                                                    <ul class="nav nav-third-level">
-                                                        <li>
-                                                            <a href="CrearModalidadCalificacion.php"> Crear Criterio de Calificaci&oacute;n</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="EliminarCriterioCalificacion.php"> Eliminar Criterio de Calificaci&oacute;n</a>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                                 
-                                                <li>
-                                                    <a href="#">Formulario de Evaluacion<span class="fa arrow"></span></a>
-                                                    <ul class="nav nav-third-level">
-                                                        <li>
-                                                            <a href="CrearFormulario.php">Crear Formulario de Evaluacion</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="SeleccionarFormulario.php"> Habilitar Formulario de Evaluacion </a>   
-                                                        </li>
-                                                        <li>
-                                                            <a href="EliminarFormulario.php">Eliminar Formulario de Evaluacion</a>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                                <li>
-                                                    <a href="EvaluarGrupoEmpresa.php">Evaluar Grupo Empresa </a>   
-                                                </li>
-                                                <li>
-                                                    <a href="../Vista/EvaluacionGeneral.php">Evaluacion Final </a>   
-                                                </li>
-                                            </ul>
+                            <a href="#"><i class="glyphicon glyphicon-th-list"></i> Evaluacion Grupo Empresa<span class="fa arrow"></span></a>
+                            <ul class="nav nav-third-level">
+                                <li>
+                                    <a href="CrearModalidadEvaluacion.php">Criterio de Evaluaci&oacute;n </a>                             
                                 </li>
-                        
+                                                    
+                                <li>
+                                    <a href="#">Criterio de Calificaci&oacute;n<span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                        <li>
+                                            <a href="CrearModalidadCalificacion.php"> Crear Criterio de Calificaci&oacute;n</a>
+                                        </li>
+                                        <li>
+                                            <a href="EliminarCriterioCalificacion.php"> Eliminar Criterio de Calificaci&oacute;n</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                                     
+                                <li>
+                                    <a href="#">Formulario de Evaluacion<span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                        <li>
+                                            <a href="CrearFormulario.php">Crear Formulario de Evaluacion</a>
+                                        </li>
+                                        <li>
+                                            <a href="SeleccionarFormulario.php"> Habilitar Formulario de Evaluacion </a>   
+                                        </li>
+                                        <li>
+                                            <a href="EliminarFormulario.php">Eliminar Formulario de Evaluacion</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="EvaluarGrupoEmpresa.php">Evaluar Grupo Empresa </a>   
+                                </li>
+                                <li>
+                                    <a href="../Vista/EvaluacionGeneral.php">Evaluacion Final </a>   
+                                </li>
+                            </ul>
+                        </li>
                         
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-files-o "></i> Documentos <span class="fa arrow"></span></a>
@@ -302,33 +300,36 @@ $UsuarioActivo = $_SESSION['usuario'];
                                 <div class="form-group">
                                     <label for=""><h4>Seleccione un Formulario:</h4></label>
                                     <select name="EscogidoEliminar" id="" class="form-control" required>
-                                        <option value="">Seleccion un formulario</option>
+                                        <option value="">Seleccione el nombre de su formulario</option>
                                             	     
                                     <?php 
                                     
                                         include '../Modelo/conexion.php';
 					                    $conect = new conexion();
 
-					                    $EliminarFormulario = $conect->consulta("SELECT NOMBRE_FORM FROM formulario WHERE NOMBRE_U = '$UsuarioActivo'");
+					                    $Sel_Form = $conect->consulta("SELECT NOMBRE_FORM FROM formulario WHERE NOMBRE_U = '$UserAct'");
                                         
-                                        while ($row = mysql_fetch_array($EliminarFormulario)) {
+                                        while ($Row_Form = mysql_fetch_array($Sel_Form)) {
                                             
-                                            $Eliminar[] = $row;
+                                            $Form[] = $Row_Form;
                                             
                                         }
 
-                                        $SeleccionarIdFormulario = $conect->consulta("SELECT ID_FORM FROM formulario WHERE NOMBRE_U = '$UsuarioActivo'");
+                                        $Sel_Id = $conect->consulta("SELECT ID_FORM FROM formulario WHERE NOMBRE_U = '$UserAct'");
 
-                                        while ($rowID = mysql_fetch_row($SeleccionarIdFormulario)) {
+                                        while ($Row_Id = mysql_fetch_row($Sel_Id)) {
                                 
-                                            $IdFormulario[] = $rowID;
+                                            $Id_Form[] = $Row_Id;
                                         }
 
-                                        for ($i=0; $i <count($Eliminar) ; $i++){
+                                        if(isset($Form) and isset($Id_Form))
+                                        {
+                                            for ($i=0; $i <count($Form) ; $i++){
 
-                                            echo '<option value='.$IdFormulario[$i][0].'>'.$Eliminar[$i][0].'</option>'; 
-													
-					}
+                                                echo '<option value='.$Id_Form[$i][0].'>'.$Form[$i][0].'</option>';
+                                            } 
+
+                                        }
 
                                         echo '</select>';
                                         echo '</div>';

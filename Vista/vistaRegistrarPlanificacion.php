@@ -10,51 +10,46 @@
         
     $UsuarioActivo = $_SESSION['usuario'];
     $con = new conexion();
-    $VerificarUsuario = $con->consulta("SELECT NOMBRE_U FROM usuario WHERE NOMBRE_U = '$UsuarioActivo' ");
-    $VerificarUsuario2 = mysql_fetch_row($VerificarUsuario);
+    $Ver_Usr = $con->consulta("SELECT NOMBRE_U FROM usuario WHERE NOMBRE_U = '$UsuarioActivo' ");
+    $Ver_Usr2 = mysql_fetch_row($Ver_Usr);
         
     $usuario = $UsuarioActivo;
     
-    if (!is_array($VerificarUsuario2)) {   
-        $consultaGE="SELECT `NOMBRE_U` FROM socio WHERE `NOMBRES_S` = '$UsuarioActivo'";
-        $conGE_=$con->consulta($consultaGE);
-        $NombreUsuario=mysql_fetch_row($conGE_);
+    if (!is_array($Ver_Usr2)) {   
 
-        $usuario=$NombreUsuario[0];
+        $Cons_GE = "SELECT `NOMBRE_U` FROM socio WHERE `NOMBRES_S` = '$UsuarioActivo'";
+        $Cons_GE2 = $con->consulta($Cons_GE);
+        $Nom_User = mysql_fetch_row($Cons_GE2);
+
+        $usuario=$Nom_User[0];
 
     }
-       
-        
-    /*$usuario = 'Bittle';*/
     
-    $VerificarInscripcion = $con->consulta("SELECT NOMBRE_UA FROM inscripcion, inscripcion_proyecto WHERE NOMBRE_UGE = '$UsuarioActivo' and NOMBRE_U = '$UsuarioActivo'");
-    $Inscripcion = mysql_fetch_row($VerificarInscripcion);
+    $Verif_In = $con->consulta("SELECT NOMBRE_UA FROM inscripcion, inscripcion_proyecto WHERE NOMBRE_UGE = '$UsuarioActivo' and NOMBRE_U = '$UsuarioActivo'");
+    $Inscrip = mysql_fetch_row($Verif_In);
 
-    $SeleccionarNombreLargo = $con->consulta("SELECT NOMBRE_LARGO_GE FROM grupo_empresa WHERE NOMBRE_U='$UsuarioActivo'");
-    $NombreLargo = mysql_fetch_row($SeleccionarNombreLargo);
+    $Sel_NL = $con->consulta("SELECT NOMBRE_LARGO_GE FROM grupo_empresa WHERE NOMBRE_U='$UsuarioActivo'");
+    $NombreL = mysql_fetch_row($Sel_NL);
 
-    $SeleccionarNombreCorto = $con->consulta("SELECT NOMBRE_CORTO_GE FROM grupo_empresa WHERE NOMBRE_U='$UsuarioActivo'");
-    $NombreCorto = mysql_fetch_row($SeleccionarNombreCorto);
+    $Sel_NC = $con->consulta("SELECT NOMBRE_CORTO_GE FROM grupo_empresa WHERE NOMBRE_U='$UsuarioActivo'");
+    $NombreC = mysql_fetch_row($Sel_NC);
 
-    //$VerificarContrato = $con->consulta("SELECT ESTADO_CONTRATO FROM inscripcion_proyecto WHERE NOMBRE_U='$UsuarioActivo' AND ESTADO_CONTRATO='Firmado'");
-    //$Contrato = mysql_num_rows($VerificarContrato);
+    $Grupo_NC = 'Notificacion de Conformidad de '.$NombreC[0].'';
+    $Sel_NC = $con->consulta("SELECT * FROM registro,receptor WHERE NOMBRE_U='$Inscrip[0]' AND NOMBRE_R='$Grupo_NC' AND registro.ID_R = receptor.ID_R");
+    $NC = mysql_num_rows($Sel_NC);
 
-    $GrupoEmpresaNC = 'Notificacion de Conformidad de '.$NombreCorto[0].'';
-    $SeleccionarNC = $con->consulta("SELECT * FROM registro,receptor WHERE NOMBRE_U='$Inscripcion[0]' AND NOMBRE_R='$GrupoEmpresaNC' AND registro.ID_R = receptor.ID_R");
-    $NC = mysql_num_rows($SeleccionarNC);
+    $Grupo_OC = 'Orden de Cambio de '.$NombreC[0].'';
+    $Sel_OC = $con->consulta("SELECT * FROM registro,receptor WHERE NOMBRE_U='$Inscrip[0]' AND NOMBRE_R='$Grupo_OC' AND registro.ID_R = receptor.ID_R");
+    $OC = mysql_num_rows($Sel_OC);
 
-    $GrupoEmpresaOC = 'Orden de Cambio de '.$NombreCorto[0].'';
-    $SeleccionarOC = $con->consulta("SELECT * FROM registro,receptor WHERE NOMBRE_U='$Inscripcion[0]' AND NOMBRE_R='$GrupoEmpresaOC' AND registro.ID_R = receptor.ID_R");
-    $OC = mysql_num_rows($SeleccionarOC);
-
-    if(is_array($Inscripcion))
+    if(is_array($Inscrip))
     {
 
       if($NC >= 1 or $OC>=1)
       {
 
-        $planificacion = new Planificacion($usuario);
-        $estado = $planificacion->getEstado();
+        $Planif = new Planificacion($usuario);
+        $estado = $Planif->getEstado();
     
             switch ($estado) {
             case 'registrar planificacion':

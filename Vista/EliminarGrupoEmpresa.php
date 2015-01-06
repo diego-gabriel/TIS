@@ -2,160 +2,127 @@
 
 include '../Modelo/conexion.php';
 $conect = new conexion();
+$GrupoE = $_GET['id_us'];
 
-$GrupoEmpresa = $_GET['id_us'];
-
-$SeleccionarIdRegistroGE = $conect->consulta("SELECT ID_R FROM registro WHERE NOMBRE_U='$GrupoEmpresa'");
-$IdRegistroGE = mysql_fetch_row($SeleccionarIdRegistroGE);
+$Sel_Reg = $conect->consulta("SELECT ID_R FROM registro WHERE NOMBRE_U='$GrupoE'");
+$Reg_GE = mysql_fetch_row($Sel_Reg);
 
 if(isset($_GET['op']))
 {
-	$operacion = $_GET['op'];
+	$accion = $_GET['op'];
 
-	if($operacion == 'si')
+	if($accion == 'si')
 	{
-   
-         //eliminar publicacion
-		 $nombre_largo_actual=$conect->consulta("SELECT NOMBRE_LARGO_GE FROM grupo_empresa WHERE NOMBRE_U='$GrupoEmpresa'");
-         $nombreLargo = mysql_fetch_array($nombre_largo_actual);
-		 $peticion_registro =$conect->consulta(" SELECT ID_R FROM `receptor` WHERE RECEPTOR_R ='$nombreLargo[0]'");
-		 $peticion_regis=mysql_num_rows($peticion_registro);
+  
+		 $Sel_NomL=$conect->consulta("SELECT NOMBRE_LARGO_GE FROM grupo_empresa WHERE NOMBRE_U='$GrupoE'");
+         $Nom_Largo = mysql_fetch_array($Sel_NomL);
+		 $SelIdRec =$conect->consulta("SELECT ID_R FROM `receptor` WHERE RECEPTOR_R ='$Nom_Largo[0]'");
+		 $Id_Recep=mysql_num_rows($SelIdRec);
 
-		if($peticion_regis>0){
+		if($Id_Recep>0){
 
-		        while( $peticion_regis=mysql_fetch_array($peticion_registro))
-				{
-					$id=$peticion_regis[0];
+		    while( $Id_Recep=mysql_fetch_array($SelIdRec))
+			{
+				$id=$Id_Recep[0];
 
-                    $des_eliminar=$conect->consulta(" DELETE FROM `descripcion` WHERE ID_R='$id'");
-                    $doc_eliminar=$conect->consulta(" DELETE FROM `documento` WHERE ID_R='$id'");
-
-                    $periodo_eliminar = $conect->consulta("DELETE FROM periodo WHERE ID_R = '$id' ");
-                    //$periodo_eliminar = $conect->consulta("DELETE FROM plazo WHERE ID_R = '$id' ");
-                    $receptor_eliminar = $conect->consulta("DELETE FROM receptor WHERE ID_R = '$id' ");
-                    $registro_eliminar = $conect->consulta("DELETE FROM registro WHERE ID_R = '$id' ");
+                $Del_Desc=$conect->consulta(" DELETE FROM `descripcion` WHERE ID_R='$id'");
+                $Del_Doc=$conect->consulta(" DELETE FROM `documento` WHERE ID_R='$id'");
+                $Del_Per = $conect->consulta("DELETE FROM periodo WHERE ID_R = '$id' ");
+                $Del_Recep = $conect->consulta("DELETE FROM receptor WHERE ID_R = '$id' ");
+                $Del_Reg = $conect->consulta("DELETE FROM registro WHERE ID_R = '$id' ");
     
-				}
+			}
 		}
 
 	
-		$SeleccionarIdFormulario = $conect->consulta("SELECT ID_N FROM nota WHERE NOMBRE_U='$GrupoEmpresa'"); 
+		$Sel_Id_F = $conect->consulta("SELECT ID_N FROM nota WHERE NOMBRE_U='$GrupoE'"); 
+		$Id_Form = mysql_fetch_row($Sel_Id_F);
+		$Del_Punt = $conect->consulta("DELETE FROM puntaje_ge WHERE ID_N = '$Id_Form[0]'");
+		$Del_Nota = $conect->consulta("DELETE FROM nota WHERE NOMBRE_U = '$GrupoE' ");
+		$Del_NotaF = $conect->consulta("DELETE FROM nota_final WHERE NOMBRE_U = '$GrupoE' ");
 
-		$IdFormulario = mysql_fetch_row($SeleccionarIdFormulario);
-
-		$EliminarPuntajes = $conect->consulta("DELETE FROM puntaje_ge WHERE ID_N = '$IdFormulario[0]'");
-		//Eliminar nota
-		$EliminarNotaGE = $conect->consulta("DELETE FROM nota WHERE NOMBRE_U = '$GrupoEmpresa' ");
-		$EliminarNotaFinalGE = $conect->consulta("DELETE FROM nota_final WHERE NOMBRE_U = '$GrupoEmpresa' ");
-
-
-        /****************************************************/
-        $SeleccionarIdRegistroGE = $conect->consulta("SELECT ID_R FROM registro WHERE NOMBRE_U='$GrupoEmpresa'");
+        $Sel_RegG = $conect->consulta("SELECT ID_R FROM registro WHERE NOMBRE_U='$GrupoE'");
         
-                while ($rowIdRegistroGE = mysql_fetch_row($SeleccionarIdRegistroGE))
-                {
-                    //Eliminar de documento
-                    $EliminarDocumentoGE = $conect->consulta("DELETE FROM documento WHERE ID_R = '$rowIdRegistroGE[0]' ");
-                    $EliminarFechaRealizacion = $conect->consulta("DELETE FROM fecha_realizacion WHERE ID_R='$rowIdRegistroGE[0]'");
-
-                    //Eliminar de entrega
-                    $EliminarEntregaGE = $conect->consulta("DELETE FROM entrega WHERE ID_R='$rowIdRegistroGE[0]'");
-
-                    //Eliminar de asistencia//con id registro
-                    $EliminarAsistencia = $conect->consulta("DELETE FROM asistencia WHERE ID_R='$rowIdRegistroGE[0]'");
-                    $EliminarPago = $conect->consulta("DELETE FROM pago WHERE ID_R='$rowIdRegistroGE[0]'");
-                    $EliminarReporte = $conect->consulta("DELETE FROM reporte WHERE ID_R='$rowIdRegistroGE[0]'");
-                    $EliminarEvaluacion = $conect->consulta("DELETE FROM evaluacion WHERE ID_R='$rowIdRegistroGE[0]'");
-
-
-                }
-                /*****************************************************/
-
-
-            
-		$EliminarRegistroGE = $conect->consulta("DELETE FROM registro WHERE NOMBRE_U = '$GrupoEmpresa' ");
-		//Eliminar Planificacion
-		$EliminarPrecio = $conect->consulta("DELETE FROM precio WHERE NOMBRE_U='$GrupoEmpresa'");
-		//Eliminar Entregable
-		$EliminarEntregable = $conect->consulta("DELETE FROM entregable WHERE NOMBRE_U='$GrupoEmpresa'");
-		$EliminarPlanificacionGE = $conect->consulta("DELETE FROM planificacion WHERE NOMBRE_U = '$GrupoEmpresa' ");
-		//comentarios
-		$EliminarComentarioGE = $conect->consulta("DELETE FROM comentarios WHERE NOMBRE_U = '$GrupoEmpresa' ");
-		//noticia
-		$EliminarNoticia = $conect->consulta("DELETE FROM noticias WHERE NOMBRE_U = '$GrupoEmpresa' ");
-	
-		//inscripcion
-		$EliminarInscripcionGE = $conect->consulta("DELETE FROM inscripcion WHERE NOMBRE_UGE = '$GrupoEmpresa' ");
-		//inscripcion_proyecto
-		$EliminarInscripcionProyecto = $conect->consulta("DELETE FROM inscripcion_proyecto WHERE NOMBRE_U = '$GrupoEmpresa' ");
-		//sesion
-		$EliminarSesionGE = $conect->consulta("DELETE FROM sesion WHERE NOMBRE_U = '$GrupoEmpresa' ");
-		//Eliminar Socios
-		$EliminarSocioGE = $conect->consulta("DELETE FROM socio WHERE NOMBRE_U = '$GrupoEmpresa' ");
-	
-		//grupo_empresa
-		$EliminarGE =$conect->consulta("DELETE FROM grupo_empresa WHERE NOMBRE_U = '$GrupoEmpresa' ");
-		//Eliminar de usuario_rol
-		$EliminarRolGE = $conect->consulta("DELETE FROM usuario_rol WHERE NOMBRE_U = '$GrupoEmpresa' ");
-		//elimiar de usuario
-		$EliminarUsuarioGE = $conect->consulta("DELETE FROM usuario WHERE NOMBRE_U = '$GrupoEmpresa' ");
-
+        while ($Row_Reg = mysql_fetch_row($Sel_RegG))
+        {
+             
+            $Del_DocG = $conect->consulta("DELETE FROM documento WHERE ID_R = '$Row_Reg[0]' ");
+            $Del_FR = $conect->consulta("DELETE FROM fecha_realizacion WHERE ID_R='$Row_Reg[0]'");
+            $Del_Entr = $conect->consulta("DELETE FROM entrega WHERE ID_R='$Row_Reg[0]'");
+            $Del_Asis = $conect->consulta("DELETE FROM asistencia WHERE ID_R='$Row_Reg[0]'");
+            $Del_Pago = $conect->consulta("DELETE FROM pago WHERE ID_R='$Row_Reg[0]'");
+            $Del_Rep = $conect->consulta("DELETE FROM reporte WHERE ID_R='$Row_Reg[0]'");
+            $Del_Eval = $conect->consulta("DELETE FROM evaluacion WHERE ID_R='$Row_Reg[0]'");
+        }
+      
+		$Del_RegG = $conect->consulta("DELETE FROM registro WHERE NOMBRE_U = '$GrupoE' ");
+		$Del_Prec = $conect->consulta("DELETE FROM precio WHERE NOMBRE_U='$GrupoE'");
+		$Del_Eble = $conect->consulta("DELETE FROM entregable WHERE NOMBRE_U='$GrupoE'");
+		$Del_Plan = $conect->consulta("DELETE FROM planificacion WHERE NOMBRE_U = '$GrupoE' ");
+		$Del_Com = $conect->consulta("DELETE FROM comentarios WHERE NOMBRE_U = '$GrupoE' ");
+		$Del_Noti = $conect->consulta("DELETE FROM noticias WHERE NOMBRE_U = '$GrupoE' ");
+		$Del_Insc = $conect->consulta("DELETE FROM inscripcion WHERE NOMBRE_UGE = '$GrupoE' ");
+		$Del_InsP = $conect->consulta("DELETE FROM inscripcion_proyecto WHERE NOMBRE_U = '$GrupoE' ");
+		$Del_Ses = $conect->consulta("DELETE FROM sesion WHERE NOMBRE_U = '$GrupoE' ");
+		$Del_Soc = $conect->consulta("DELETE FROM socio WHERE NOMBRE_U = '$GrupoE' ");
+		$Del_GE =$conect->consulta("DELETE FROM grupo_empresa WHERE NOMBRE_U = '$GrupoE' ");
+		$Del_Rol = $conect->consulta("DELETE FROM usuario_rol WHERE NOMBRE_U = '$GrupoE' ");
+		$Del_Us = $conect->consulta("DELETE FROM usuario WHERE NOMBRE_U = '$GrupoE' ");
 
 		echo '<script>alert("Se elimino la grupo empresa correctamente!!")</script>';
 		echo '<script>window.location="../Vista/ListaGrupoEmpresas.php";</script>';
-		die();
 	}
 
-	if($operacion == 'no')
+	else
 	{
-		header('location:../Vista/ListaGrupoEmpresas.php');
-        die();
+		if($accion == 'no')
+		{
+			header('location:../Vista/ListaGrupoEmpresas.php');
+		}
 	}
 
-}
-
-if(is_array($IdRegistroGE))
-{
-	echo '<script>
-
-			var pagina =  "EliminarGrupoEmpresa.php?id_us='.$GrupoEmpresa.'&op=si"
-			var pagina2 = "EliminarGrupoEmpresa.php?id_us='.$GrupoEmpresa.'&op=no"
-			if(confirm("La grupo empresa tiene registros...desea eliminarla de todas formas??"))
-			{
-
-				location.href = pagina
-			}
-			else{
-
-				location.href = pagina2
-			}
-		  </script>';
-
+	
 
 }
 else
 {
+	if(is_array($Reg_GE))
+	{
+		echo '<script>
+				var pagina =  "EliminarGrupoEmpresa.php?id_us='.$GrupoE.'&op=si"
+				var pagina2 = "EliminarGrupoEmpresa.php?id_us='.$GrupoE.'&op=no"
+				if(confirm("La grupo empresa tiene registros...desea eliminarla de todas formas??"))
+				{
 
-	//$SeleccionarIdFormulario = $conect->consulta("SELECT ID_N FROM nota WHERE NOMBRE_U='$GrupoEmpresa'"); 
-	//$IdFormulario = mysql_fetch_row($SeleccionarIdFormulario);
-	//$EliminarPuntajes = $conect->consulta("DELETE FROM puntaje_ge WHERE ID_N = '$IdFormulario[0]'");
-	//$EliminarNotaGE = $conect->consulta("DELETE FROM nota WHERE NOMBRE_U = '$GrupoEmpresa' ");
+					location.href = pagina
+				}
+				else{
+
+					location.href = pagina2
+				}
+			  </script>';
+
+
+	}
+	else
+	{
+
 	
-	$EliminarPlanificacionGE = $conect->consulta("DELETE FROM planificacion WHERE NOMBRE_U = '$GrupoEmpresa' ");
-	$EliminarNoticia = $conect->consulta("DELETE FROM noticias WHERE NOMBRE_U = '$GrupoEmpresa' ");
+		$Del_Plan = $conect->consulta("DELETE FROM planificacion WHERE NOMBRE_U = '$GrupoE' ");
+		$Del_Noti = $conect->consulta("DELETE FROM noticias WHERE NOMBRE_U = '$GrupoE' ");
+	    $Del_Com = $conect->consulta("DELETE FROM comentarios WHERE NOMBRE_U = '$GrupoE' ");
+	    $Del_InsP = $conect->consulta("DELETE FROM inscripcion_proyecto WHERE NOMBRE_U = '$GrupoE' ");
+	    $Del_Ins = $conect->consulta("DELETE FROM inscripcion WHERE NOMBRE_UGE = '$GrupoE' ");
+	    $Del_Ses = $conect->consulta("DELETE FROM sesion WHERE NOMBRE_U = '$GrupoE' ");
+	    $Del_Soc = $conect->consulta("DELETE FROM socio WHERE NOMBRE_U = '$GrupoE' ");
+	    $Del_GE = $conect->consulta("DELETE FROM grupo_empresa WHERE NOMBRE_U = '$GrupoE' ");
+	    $Del_Rol = $conect->consulta("DELETE FROM usuario_rol WHERE NOMBRE_U = '$GrupoE' ");
+	    $Del_Us = $conect->consulta("DELETE FROM usuario WHERE NOMBRE_U = '$GrupoE' ");
 
-    $EliminarComentarioGE = $conect->consulta("DELETE FROM comentarios WHERE NOMBRE_U = '$GrupoEmpresa' ");
+		echo '<script>alert("Se elimino la grupo empresa correctamente!!")</script>';
+		echo '<script>window.location="../Vista/ListaGrupoEmpresas.php";</script>';
 
-    $EliminarInscripcionProyecto = $conect->consulta("DELETE FROM inscripcion_proyecto WHERE NOMBRE_U = '$GrupoEmpresa' ");
-    $EliminarInscripcionGE = $conect->consulta("DELETE FROM inscripcion WHERE NOMBRE_UGE = '$GrupoEmpresa' ");
-    $EliminarSesionGE = $conect->consulta("DELETE FROM sesion WHERE NOMBRE_U = '$GrupoEmpresa' ");
-    $EliminarSocioGE = $conect->consulta("DELETE FROM socio WHERE NOMBRE_U = '$GrupoEmpresa' ");
-    $EliminarGE =$conect->consulta("DELETE FROM grupo_empresa WHERE NOMBRE_U = '$GrupoEmpresa' ");
-    $EliminarRolGE = $conect->consulta("DELETE FROM usuario_rol WHERE NOMBRE_U = '$GrupoEmpresa' ");
-    $EliminarUsuarioGE = $conect->consulta("DELETE FROM usuario WHERE NOMBRE_U = '$GrupoEmpresa' ");
-
-	echo '<script>alert("Se elimino la grupo empresa correctamente!!")</script>';
-	echo '<script>window.location="../Vista/ListaGrupoEmpresas.php";</script>';
+	}
 
 }
 

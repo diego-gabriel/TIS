@@ -4,39 +4,29 @@
 
     session_start();
 
-    $UsuarioActivo = $_SESSION['usuario'];
+    $UserAct = $_SESSION['usuario'];
 
 	$con = new conexion();
 
 	$con->conectar();
 
         
-        $tipoSelect = $_POST['tipoSelect'];
+        $Tipo = $_POST['tipoSelect'];
         
         if(isset($_POST['Indicador']) and isset($_POST['ValorNumerico']))
         {
             
-            $Indicadores = $_POST['Indicador'];
-        
+            $Ind = $_POST['Indicador'];
             $valores = $_POST['ValorNumerico'];
-
-            $m=0;
-            $cont=0;
-            $cont2=0;
-
             $buscador=0;
-
-
             $nombre="";
-
             $cont5=0;
-            /***********************************************/
 
-            for ($v=0; $v < count($Indicadores) ; $v++) { 
+            for ($v=0; $v < count($Ind) ; $v++) { 
 
-                for ($b=0; $b < count($Indicadores) ; $b++) { 
+                for ($b=0; $b < count($Ind) ; $b++) { 
 
-                    if ((strtoupper(trim($Indicadores[$v])) == strtoupper(trim($Indicadores[$b])) or ($valores[$v] == $valores[$b]))) {
+                    if ((strtoupper(trim($Ind[$v])) == strtoupper(trim($Ind[$b])) or ($valores[$v] == $valores[$b]))) {
 
                         $buscador++;
                     }
@@ -44,49 +34,49 @@
                 }
             }
 
-                if ($buscador > count($Indicadores)) {
+                if ($buscador > count($Ind)) {
 
                     echo '<script>alert("No puede registrar 2 indicadores o puntajes iguales");</script>';
-                    die();
 
-                }else{
+                }
+                else
+                {
 
                     for ($t=0; $t < count($valores) ; $t++) { 
 
-                    if($valores[$t] <= 100)
-                    {
-                        $cont5++;
+                        if($valores[$t] <= 100)
+                        {
+                            $cont5++;
 
+                        }
                     }
-                }
 
                     if($cont5 == count($valores))
                     {
 
-                        for ($j=0; $j <count($Indicadores) ; $j++) { 
+                        for ($j=0; $j <count($Ind) ; $j++) { 
 
-                            $nombre = $nombre.$Indicadores[$j].'('.$valores[$j].')';    
+                            $nombre = $nombre.$Ind[$j].'('.$valores[$j].')';    
                         }
 
-                        $ConsultaNombreCriterio = $con->consulta("SELECT NOMBRE_CRITERIO_C FROM criteriocalificacion WHERE NOMBRE_CRITERIO_C = '$nombre' AND NOMBRE_U='$UsuarioActivo'");
+                        $Sel_NomC = $con->consulta("SELECT NOMBRE_CRITERIO_C FROM criteriocalificacion WHERE NOMBRE_CRITERIO_C = '$nombre' AND NOMBRE_U='$UserAct'");
 
-                        $ArregloCriterios = mysql_fetch_row($ConsultaNombreCriterio);
+                        $Nom_C = mysql_fetch_row($Sel_NomC);
 
-
-                        if (!is_array($ArregloCriterios)) {
+                        if (!is_array($Nom_C)) {
 
                                 $con2 = new conexion();
-                                $con2->consulta("INSERT INTO criteriocalificacion(NOMBRE_CRITERIO_C, NOMBRE_U, TIPO_CRITERIO) VALUES('$nombre', '$UsuarioActivo', '$tipoSelect')");
+                                $con2->consulta("INSERT INTO criteriocalificacion(NOMBRE_CRITERIO_C, NOMBRE_U, TIPO_CRITERIO) VALUES('$nombre', '$UserAct', '$Tipo')");
 
-                                $maxIdRes = $con2->consulta("SELECT MAX(ID_CRITERIO_C) FROM criteriocalificacion WHERE NOMBRE_U = '$UsuarioActivo'");
+                                $maxIdRes = $con2->consulta("SELECT MAX(ID_CRITERIO_C) FROM criteriocalificacion WHERE NOMBRE_U = '$UserAct'");
 
                                  $maxID = mysql_fetch_row($maxIdRes);
 
-                            for ($i=0; $i<count($Indicadores); $i++) {
+                            for ($i=0; $i<count($Ind); $i++) {
 
-                                if (isset($Indicadores[$i]) and isset($valores[$i])) {
+                                if (isset($Ind[$i]) and isset($valores[$i])) {
 
-                                    $con2->consulta("INSERT INTO indicador( ID_CRITERIO_C, NOMBRE_INDICADOR,PUNTAJE_INDICADOR) VALUES('$maxID[0]','$Indicadores[$i]', '$valores[$i]')");
+                                    $con2->consulta("INSERT INTO indicador( ID_CRITERIO_C, NOMBRE_INDICADOR,PUNTAJE_INDICADOR) VALUES('$maxID[0]','$Ind[$i]', '$valores[$i]')");
 
                                 }
                             }
@@ -112,16 +102,11 @@
                         echo '<script>alert("El puntaje no puede ser mayor a 100");</script>';
 
                     }
-                }
-
-            
+                }            
         }
         else
         {
             echo '<script>alert("Debe agregar al menos un criterio");</script>';
         }
         
-        
-		
-
 ?>

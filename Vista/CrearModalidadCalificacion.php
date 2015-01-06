@@ -1,7 +1,6 @@
 <?php  
-session_start();
-$UsuarioActivo = $_SESSION['usuario'];
-//include("controlSesion.php");
+    session_start();
+    $UserAct = $_SESSION['usuario'];
 ?>
 <!DOCTYPE html>
 <html>
@@ -59,7 +58,7 @@ $UsuarioActivo = $_SESSION['usuario'];
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <?php echo $UsuarioActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                        <?php echo $UserAct.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
   
@@ -82,46 +81,46 @@ $UsuarioActivo = $_SESSION['usuario'];
                             <a href="AdministrarGrupoEmpresa.php"><i class="fa fa-book"></i> Administrar Grupo Empresas</a>
                         </li>
                         <li>
-                                        <a href="#"><i class="glyphicon glyphicon-th-list"></i> Evaluacion Grupo Empresa<span class="fa arrow"></span></a>
-                                            <ul class="nav nav-third-level">
-                                                <li>
-                                                    <a href="CrearModalidadEvaluacion.php">Criterio de Evaluaci&oacute;n </a>                             
-                                                </li>
-                                                
-                                                <li>
-                                                    <a href="#">Criterio de Calificaci&oacute;n<span class="fa arrow"></span></a>
-                                                    <ul class="nav nav-third-level">
-                                                        <li>
-                                                            <a href="CrearModalidadCalificacion.php"> Crear Criterio de Calificaci&oacute;n</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="EliminarCriterioCalificacion.php"> Eliminar Criterio de Calificaci&oacute;n</a>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                                 
-                                                <li>
-                                                    <a href="#">Formulario de Evaluacion<span class="fa arrow"></span></a>
-                                                    <ul class="nav nav-third-level">
-                                                        <li>
-                                                            <a href="CrearFormulario.php">Crear Formulario de Evaluacion</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="SeleccionarFormulario.php"> Habilitar Formulario de Evaluacion </a>   
-                                                        </li>
-                                                        <li>
-                                                            <a href="EliminarFormulario.php">Eliminar Formulario de Evaluacion</a>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                                <li>
-                                                    <a href="EvaluarGrupoEmpresa.php">Evaluar Grupo Empresa </a>   
-                                                </li>
-                                                <li>
-                                                    <a href="../Vista/EvaluacionGeneral.php">Evaluacion Final </a>   
-                                                </li>
-                                            </ul>
+                            <a href="#"><i class="glyphicon glyphicon-th-list"></i> Evaluacion Grupo Empresa<span class="fa arrow"></span></a>
+                            <ul class="nav nav-third-level">
+                                <li>
+                                    <a href="CrearModalidadEvaluacion.php">Criterio de Evaluaci&oacute;n </a>                             
                                 </li>
+                                                
+                                <li>
+                                    <a href="#">Criterio de Calificaci&oacute;n<span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                        <li>
+                                            <a href="CrearModalidadCalificacion.php"> Crear Criterio de Calificaci&oacute;n</a>
+                                        </li>
+                                        <li>
+                                            <a href="EliminarCriterioCalificacion.php"> Eliminar Criterio de Calificaci&oacute;n</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                                 
+                                <li>
+                                    <a href="#">Formulario de Evaluacion<span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                        <li>
+                                            <a href="CrearFormulario.php">Crear Formulario de Evaluacion</a>
+                                        </li>
+                                        <li>
+                                            <a href="SeleccionarFormulario.php"> Habilitar Formulario de Evaluacion </a>   
+                                        </li>
+                                        <li>
+                                            <a href="EliminarFormulario.php">Eliminar Formulario de Evaluacion</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="EvaluarGrupoEmpresa.php">Evaluar Grupo Empresa </a>   
+                                </li>
+                                <li>
+                                    <a href="../Vista/EvaluacionGeneral.php">Evaluacion Final </a>   
+                                </li>
+                            </ul>               
+                        </li>
                         
                         
                         <li>
@@ -250,16 +249,14 @@ $UsuarioActivo = $_SESSION['usuario'];
             </div>
         </div>
           
-    <!----------------------------------------------------------------------------------------->
+    <!------------------------------------------------------------------------------------------>
 
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
                     <h2 class="page-header" >Crear Criterio de Calificaci&oacute;n</h2>
                 </div>
-                <!-- /.col-lg-12 -->
             </div>
-            <!-- /.row -->
             <div class="row">
 
                 <div class="col-lg-16">
@@ -267,39 +264,32 @@ $UsuarioActivo = $_SESSION['usuario'];
                     <div class="col-lg-8">
                         <!--Aqui se agregan los cuadros de texto-->
                         <div class="panel panel-default">
-                 
-                                <form id="form-textos" method="post" >
-                                    <div class="panel-body">                                           
-                                        <div class="form-group">
-                                            <select class="form-control" id="tipo_criterio" name="tipoSelect">
-                                                <option value="">Escoja un criterio</option>
-                                                <option value="1">Seleccion Multiple</option>
-                                                <option value="2">Verdadero/Falso</option>
-                                                <option value="3">Si/No</option>
-                                            </select>
-                                        </div>
+                            <form id="form-textos" method="post" >
+                                <div class="panel-body">                                           
+                                    <div class="form-group">
+                                        <select class="form-control" id="tipo_criterio" name="tipoSelect">
+                                            <option value="">Escoja un criterio</option>
+                                            <option value="1">Seleccion Multiple</option>
+                                            <option value="2">Verdadero/Falso</option>
+                                            <option value="3">Si/No</option>
+                                        </select>
                                     </div>
-
-                                    <div class="panel-body">
-                                        <div id="Textos" class="form-group">
+                                </div>
+                                <div class="panel-body">
+                                    <div id="Textos" class="form-group">
                                         
-                                        </div>                     
-                                    </div>   
-                                </form>
-                                    <div id="panelResultado" class="form-group">
+                                    </div>                     
+                                </div>   
+                            </form>
+                            <div id="panelResultado" class="form-group">
                                         
-                                    </div>       
-
-                            <!--div-->     
+                            </div>          
                         </div><!--panel panel-default-->
                     </div><!-- /.col-lg-8 -->
                 </div><!-- /.col-lg-16 -->
             </div><!-- /.row -->
         </div><!-- /#page-wrapper -->
     </div><!-- /#wrapper -->
-
-    
-    
     
     <script src="../Librerias/js/plugins/metisMenu/jquery.metisMenu.js"></script>
     <!-- SB Admin Scripts - Include with every page -->
