@@ -1,22 +1,16 @@
 <?php
-
 session_start();
 include '../Modelo/conexion.php';
 $conect = new conexion();
 //Crear variables--------------------------
-
 $usuario = $_SESSION['usuario'];
 $contrasena = $_SESSION['contrasena'];
-
-$idgp = $_GET['id_us'];
-
-
-
+$idAsesor = $_GET['id_us'];
 //conexion-------------
     
     //Verificar registros
-    $SeleccionarIdRegistroAsesor = $conect->consulta("SELECT ID_R FROM registro WHERE NOMBRE_U='$idgp'");
-    $RegistroAsesor = mysql_fetch_row($SeleccionarIdRegistroAsesor);
+    $selAsesor = $conect->consulta("SELECT ID_R FROM registro WHERE NOMBRE_U='$idAsesor'");
+    $regisAse = mysql_fetch_row($selAsesor);
     
  
     if(isset($_GET['op']))
@@ -26,100 +20,80 @@ $idgp = $_GET['id_us'];
         if($op == 'si')
         {
            
-            $peticion =mysql_num_rows( $conect->consulta(" SELECT * FROM `comentarios` WHERE NOMBRE_U ='$idgp'"));
-
+            $peticion =mysql_num_rows( $conect->consulta(" SELECT * FROM `comentarios` WHERE NOMBRE_U ='$idAsesor'"));
             if($peticion>0){
-                 $peticion1 = $conect->consulta(" DELETE FROM `comentarios` WHERE NOMBRE_U='$idgp'");
+                 $delComen = $conect->consulta(" DELETE FROM `comentarios` WHERE NOMBRE_U='$idAsesor'");
             }
-
-            $peticion2 =mysql_num_rows( $conect->consulta(" SELECT * FROM `noticias` WHERE NOMBRE_U ='$idgp'"));
-
-            if($peticion2>0){
-                 $peticion3 = $conect->consulta(" DELETE FROM `noticias` WHERE NOMBRE_U='$idgp'");
+            $tamNoti =mysql_num_rows( $conect->consulta(" SELECT * FROM `noticias` WHERE NOMBRE_U ='$idAsesor'"));
+            if($tamNoti>0){
+                 $delNoti = $conect->consulta(" DELETE FROM `noticias` WHERE NOMBRE_U='$idAsesor'");
             }
             
-            $peticion_registro =$conect->consulta(" SELECT ID_R FROM `registro` WHERE NOMBRE_U ='$idgp'");
-            $peticion_regis=mysql_num_rows($peticion_registro);
+            $selRegis =$conect->consulta(" SELECT ID_R FROM `registro` WHERE NOMBRE_U ='$idAsesor'");
+            $tamRegis=mysql_num_rows($selRegis);
             
            
-
-            if($peticion_regis>0){
-
-                while($fila = mysql_fetch_array($peticion_registro))
+            if($tamRegis>0){
+                while($filaR = mysql_fetch_array($selRegis))
                 {
-                    $id=$fila[0];
-
-                    $des_eliminar=$conect->consulta(" DELETE FROM `descripcion` WHERE ID_R='$id'");
-                    $doc_eliminar=$conect->consulta(" DELETE FROM `documento` WHERE ID_R='$id'");
-
-                    $periodo_eliminar = $conect->consulta("DELETE FROM periodo WHERE ID_R = '$id' ");
-                    $periodo_eliminar = $conect->consulta("DELETE FROM plazo WHERE ID_R = '$id' ");
-                    $receptor_eliminar = $conect->consulta("DELETE FROM receptor WHERE ID_R = '$id' ");
-                    $registro_eliminar = $conect->consulta("DELETE FROM registro WHERE ID_R = '$id' ");
+                    $idRegis=$filaR[0];
+                    $delDesc=$conect->consulta(" DELETE FROM `descripcion` WHERE ID_R='$idRegis'");
+                    $delDoc=$conect->consulta(" DELETE FROM `documento` WHERE ID_R='$idRegis'");
+                    $delPer = $conect->consulta("DELETE FROM periodo WHERE ID_R = '$idRegis' ");
+                    $delPlazo = $conect->consulta("DELETE FROM plazo WHERE ID_R = '$idRegis' ");
+                    $delRecp = $conect->consulta("DELETE FROM receptor WHERE ID_R = '$idRegis' ");
+                    $delRg = $conect->consulta("DELETE FROM registro WHERE ID_R = '$idRegis' ");
                  }
-
              }
              
-             $peticion_formulario = $conect->consulta("SELECT ID_FORM FROM `formulario` WHERE NOMBRE_U ='$idgp'");
-             $peticion_form=mysql_num_rows($peticion_formulario);
+             $selForm = $conect->consulta("SELECT ID_FORM FROM `formulario` WHERE NOMBRE_U ='$idAsesor'");
+             $tamForm=mysql_num_rows($selForm);
              
-            if($peticion_form>0)
+            if($tamForm>0)
             {
-
-                while($fila1 = mysql_fetch_array($peticion_formulario))
+                while($fila1 = mysql_fetch_array($selForm))
                 {
-
-
-                    $id1=$fila1[0];
-
-                    $puntajeG= $conect->consulta("SELECT ID_N FROM nota WHERE ID_FORM ='$id1'");
+                    $idForm=$fila1[0];
+                    $puntajeG= $conect->consulta("SELECT ID_N FROM nota WHERE ID_FORM ='$idForm'");
                     //var_dump($puntajeG);
-                    $id_puntaje=mysql_fetch_array($puntajeG);
-
-                    $eliminar_puntaje1 = $conect->consulta("DELETE FROM puntaje_ge WHERE ID_N = '$id_puntaje[0]' ");
+                    $idpuntaj=mysql_fetch_array($puntajeG);
+                    $delPuntaG = $conect->consulta("DELETE FROM puntaje_ge WHERE ID_N = '$idpuntaj[0]' ");
                     //var_dump($eliminar_puntaje1);
-                    echo "</br>";
-
-                    $eliminar_puntaje = $conect->consulta("DELETE FROM puntaje WHERE ID_FORM = '$id1' ");
+                  
+                    $delPunta = $conect->consulta("DELETE FROM puntaje WHERE ID_FORM = '$idForm' ");
                     //var_dump($eliminar_puntaje);
-
-                    $eliminar_nota = $conect->consulta("DELETE FROM nota WHERE ID_FORM = '$id1' ");
-
-                    $eliminar_FE= $conect->consulta("DELETE FROM form_crit_e WHERE ID_FORM = '$id1' ");
-                    $eliminar_FC= $conect->consulta("DELETE FROM from_crit_c WHERE ID_FORM = '$id1' ");
-
-
-                    $SeleccionarIDCritC = $conect->consulta("SELECT ID_CRITERIO_C FROM criteriocalificacion WHERE NOMBRE_U = '$idgp'");
-
-                    while($rowIDC = mysql_fetch_row($SeleccionarIDCritC))
+                    $delNota = $conect->consulta("DELETE FROM nota WHERE ID_FORM = '$idForm' ");
+                    $delFE= $conect->consulta("DELETE FROM form_crit_e WHERE ID_FORM = '$idForm' ");
+                    $delFC= $conect->consulta("DELETE FROM from_crit_c WHERE ID_FORM = '$idForm' ");
+                    $selCritC = $conect->consulta("SELECT ID_CRITERIO_C FROM criteriocalificacion WHERE NOMBRE_U = '$idAsesor'");
+                    while($rowIDC = mysql_fetch_row($selCritC))
                     {
-                        $EliminarIndicador = $conect->consulta("DELETE from indicador WHERE ID_CRITERIO_C = '$rowIDC[0]' ");
+                        $delIndi = $conect->consulta("DELETE from indicador WHERE ID_CRITERIO_C = '$rowIDC[0]' ");
                     }
                 }
                 
-                    $eliminar_formulario= $conect->consulta("DELETE FROM formulario WHERE NOMBRE_U = '$idgp' ");  
+                    $delForm1= $conect->consulta("DELETE FROM formulario WHERE NOMBRE_U = '$idAsesor' ");  
                 
-                    $eliminar_cc= $conect->consulta("DELETE FROM criteriocalificacion WHERE NOMBRE_U = '$idgp'  ");
-
-                    $eliminar_ce= $conect->consulta("DELETE FROM criterio_evaluacion WHERE NOMBRE_U = '$idgp' ");          
+                    $delCc= $conect->consulta("DELETE FROM criteriocalificacion WHERE NOMBRE_U = '$idAsesor'  ");
+                    $delCe= $conect->consulta("DELETE FROM criterio_evaluacion WHERE NOMBRE_U = '$idAsesor' ");          
             }
             
            
-            $rol_eliminar = $conect->consulta("DELETE FROM usuario_rol WHERE NOMBRE_U = '$idgp' ");
-            $eliminar_inscrpcion = $conect->consulta("DELETE FROM inscripcion WHERE NOMBRE_UA = '$idgp' ");
-            $SeleccionarIDCritC = $conect->consulta("SELECT ID_CRITERIO_C FROM criteriocalificacion WHERE NOMBRE_U = '$idgp'");
+            $delRol= $conect->consulta("DELETE FROM usuario_rol WHERE NOMBRE_U = '$idAsesor' ");
+            $delIns= $conect->consulta("DELETE FROM inscripcion WHERE NOMBRE_UA = '$idAsesor' ");
+            $selCritC = $conect->consulta("SELECT ID_CRITERIO_C FROM criteriocalificacion WHERE NOMBRE_U = '$idAsesor'");
             
-            while($rowID = mysql_fetch_row($SeleccionarIDCritC))
+            while($rowID = mysql_fetch_row($selCritC))
             {
-                $EliminarIndicador = $conect->consulta("DELETE FROM indicador WHERE ID_CRITERIO_C = '$rowID[0]'");
+                $delIn = $conect->consulta("DELETE FROM indicador WHERE ID_CRITERIO_C = '$rowID[0]'");
             }
             
-            $eliminar_cc= $conect->consulta("DELETE FROM criteriocalificacion WHERE NOMBRE_U = '$idgp'  ");
-            $eliminar_ce= $conect->consulta("DELETE FROM criterio_evaluacion WHERE NOMBRE_U = '$idgp' "); 
-            $eliminar_tipo = $conect->consulta("DELETE FROM asesor WHERE NOMBRE_U = '$idgp' ");
+            $delCc= $conect->consulta("DELETE FROM criteriocalificacion WHERE NOMBRE_U = '$idAsesor'  ");
+            $delCe= $conect->consulta("DELETE FROM criterio_evaluacion WHERE NOMBRE_U = '$idAsesor' "); 
+            $delTipo = $conect->consulta("DELETE FROM asesor WHERE NOMBRE_U = '$idAsesor' ");
             
-            $sesion_eliminarr = $conect->consulta("DELETE FROM sesion WHERE NOMBRE_U = '$idgp' ");
-            $eliminar_usuario = $conect->consulta("DELETE FROM usuario WHERE NOMBRE_U = '$idgp' ");
+            $delSesion = $conect->consulta("DELETE FROM sesion WHERE NOMBRE_U = '$idAsesor' ");
+            $delUser = $conect->consulta("DELETE FROM usuario WHERE NOMBRE_U = '$idAsesor' ");
             
             echo '<script>alert("Se elimino al asesor correctamente!!")</script>';
             echo '<script>window.location="../Vista/lista_asesores.php";</script>';
@@ -139,22 +113,19 @@ $idgp = $_GET['id_us'];
     
   
      
-    if(is_array($RegistroAsesor))
+    if(is_array($regisAse))
     {
         echo '<script>
-
-			var pagina =  "eliminar_asesor.php?id_us='.$idgp.'&op=si"
-			var pagina2 = "eliminar_asesor.php?id_us='.$idgp.'&op=no"
-			if(confirm("El asesor tiene registros...desea eliminarlo de todas formas??"))
-			{
-
-				location.href = pagina
-			}
-			else{
-
-				location.href = pagina2
-			}
-		  </script>';
+            var pagina =  "eliminar_asesor.php?id_us='.$idAsesor.'&op=si"
+            var pagina2 = "eliminar_asesor.php?id_us='.$idAsesor.'&op=no"
+            if(confirm("El asesor tiene registros...desea eliminarlo de todas formas??"))
+            {
+                location.href = pagina
+            }
+            else{
+                location.href = pagina2
+            }
+          </script>';
         
         die();
     }
@@ -163,73 +134,60 @@ $idgp = $_GET['id_us'];
         
         
         
-        $peticion_formulario = $conect->consulta("SELECT ID_FORM FROM `formulario` WHERE NOMBRE_U ='$idgp'");
-        $peticion_form=mysql_num_rows($peticion_formulario);
-
-        if($peticion_form>0){
-
-            while($fila1 = mysql_fetch_array($peticion_formulario))
+        $selFormS = $conect->consulta("SELECT ID_FORM FROM `formulario` WHERE NOMBRE_U ='$idAsesor'");
+        $tamFormS=mysql_num_rows($selFormS);
+        if( $tamFormS>0){
+            while($fila1 = mysql_fetch_array($selFormS))
             {
-                $id1=$fila1[0];
-
-                $puntajeG= $conect->consulta("SELECT ID_N FROM nota WHERE ID_FORM ='$id1'");
+                $idForm=$fila1[0];
+                $puntajeG= $conect->consulta("SELECT ID_N FROM nota WHERE ID_FORM ='$idForm'");
                 //var_dump($puntajeG);
-                $id_puntaje=mysql_fetch_array($puntajeG);
-
-                $eliminar_puntaje1 = $conect->consulta("DELETE FROM puntaje_ge WHERE ID_N = '$id_puntaje[0]' ");
+                $idPuntaj=mysql_fetch_array($puntajeG);
+                $delPuntjG = $conect->consulta("DELETE FROM puntaje_ge WHERE ID_N = '$idPuntaj[0]' ");
                 //var_dump($eliminar_puntaje1);
                 echo "</br>";
-
-                $eliminar_puntaje = $conect->consulta("DELETE FROM puntaje WHERE ID_FORM = '$id1' ");
+                $delPuntaj= $conect->consulta("DELETE FROM puntaje WHERE ID_FORM = '$idForm' ");
                 //var_dump($eliminar_puntaje);
-
-                $eliminar_nota = $conect->consulta("DELETE FROM nota WHERE ID_FORM = '$id1' ");
-                $eliminar_FE= $conect->consulta("DELETE FROM form_crit_e WHERE ID_FORM = '$id1' ");
-                $eliminar_FC= $conect->consulta("DELETE FROM from_crit_c WHERE ID_FORM = '$id1' ");
-                $SeleccionarIDCritC = $conect->consulta("SELECT ID_CRITERIO_C FROM criteriocalificacion WHERE NOMBRE_U = '$idgp'");
-
+                $delNota = $conect->consulta("DELETE FROM nota WHERE ID_FORM = '$idForm1' ");
+                $delFE= $conect->consulta("DELETE FROM form_crit_e WHERE ID_FORM = '$idForm' ");
+                $delFC= $conect->consulta("DELETE FROM from_crit_c WHERE ID_FORM = '$idForm' ");
+                $delCritC = $conect->consulta("SELECT ID_CRITERIO_C FROM criteriocalificacion WHERE NOMBRE_U = '$idAsesor'");
                 while($rowIDC = mysql_fetch_row($SeleccionarIDCritC))
                 {
-                    $EliminarIndicador = $conect->consulta("DELETE from indicador WHERE ID_CRITERIO_C = '$rowIDC[0]' ");
+                    $delIndi = $conect->consulta("DELETE from indicador WHERE ID_CRITERIO_C = '$rowIDC[0]' ");
                 }
-
             }
-
-            $eliminar_formulario= $conect->consulta("DELETE FROM formulario WHERE NOMBRE_U = '$idgp' ");  
-
-            $eliminar_cc= $conect->consulta("DELETE FROM criteriocalificacion WHERE NOMBRE_U = '$idgp'  ");
-
-            $eliminar_ce= $conect->consulta("DELETE FROM criterio_evaluacion WHERE NOMBRE_U = '$idgp' ");
-
-            $rol_eliminar = $conect->consulta("DELETE FROM usuario_rol WHERE NOMBRE_U = '$idgp' ");
-            $eliminar_inscrpcion = $conect->consulta("DELETE FROM inscripcion WHERE NOMBRE_UA = '$idgp' ");
-            $eliminar_tipo = $conect->consulta("DELETE FROM asesor WHERE NOMBRE_U = '$idgp' ");
-            $sesion_eliminarr = $conect->consulta("DELETE FROM sesion WHERE NOMBRE_U = '$idgp' ");
-            $eliminar_usuario = $conect->consulta("DELETE FROM usuario WHERE NOMBRE_U = '$idgp' ");
+            $delFormS= $conect->consulta("DELETE FROM formulario WHERE NOMBRE_U = '$idAsesor' ");  
+            $delCc= $conect->consulta("DELETE FROM criteriocalificacion WHERE NOMBRE_U = '$$idAsesor'  ");
+            $delCe= $conect->consulta("DELETE FROM criterio_evaluacion WHERE NOMBRE_U = '$idAsesor' ");
+            $delRol = $conect->consulta("DELETE FROM usuario_rol WHERE NOMBRE_U = '$idAsesor' ");
+            $delIns= $conect->consulta("DELETE FROM inscripcion WHERE NOMBRE_UA = '$idAsesor' ");
+            $delTipo = $conect->consulta("DELETE FROM asesor WHERE NOMBRE_U = '$idAsesor' ");
+            $delSes = $conect->consulta("DELETE FROM sesion WHERE NOMBRE_U = '$$idAsesor' ");
+            $delUser = $conect->consulta("DELETE FROM usuario WHERE NOMBRE_U = '$idAsesor' ");
         }
         
         
         
-        $peticion1 = $conect->consulta(" DELETE FROM `comentarios` WHERE NOMBRE_U='$idgp'");
-        $peticion3 = $conect->consulta(" DELETE FROM `noticias` WHERE NOMBRE_U='$idgp'");
+        $delComen = $conect->consulta(" DELETE FROM `comentarios` WHERE NOMBRE_U='$idAsesor'");
+        $delNoti = $conect->consulta(" DELETE FROM `noticias` WHERE NOMBRE_U='$idAsesor'");
      
-        $rol_eliminar = $conect->consulta("DELETE FROM usuario_rol WHERE NOMBRE_U = '$idgp' ");
+        $delRolU = $conect->consulta("DELETE FROM usuario_rol WHERE NOMBRE_U = '$idAsesor' ");
               
-        $eliminar_inscrpcion = $conect->consulta("DELETE FROM inscripcion WHERE NOMBRE_UA = '$idgp' ");
+        $delIns = $conect->consulta("DELETE FROM inscripcion WHERE NOMBRE_UA = '$idAsesor' ");
         
-        $eliminar_cc= $conect->consulta("DELETE FROM criteriocalificacion WHERE NOMBRE_U = '$idgp'  ");
+        $delCc= $conect->consulta("DELETE FROM criteriocalificacion WHERE NOMBRE_U = '$idAsesor'  ");
      
-        $eliminar_tipo = $conect->consulta("DELETE FROM asesor WHERE NOMBRE_U = '$idgp' ");
-
-        $sesion_eliminarr = $conect->consulta("DELETE FROM sesion WHERE NOMBRE_U = '$idgp' ");
+        $delAsesor = $conect->consulta("DELETE FROM asesor WHERE NOMBRE_U = '$idAsesor' ");
+        $delSesion = $conect->consulta("DELETE FROM sesion WHERE NOMBRE_U = '$idAsesor' ");
         
-        $eliminar_usuario = $conect->consulta("DELETE FROM usuario WHERE NOMBRE_U = '$idgp' ");
+        $delUser = $conect->consulta("DELETE FROM usuario WHERE NOMBRE_U = '$idAsesor' ");
         
         // mysql_close($conexion);
         
         
         echo '<script>alert("Se elimino al asesor correctamente!!")</script>';
-	echo '<script>window.location="../Vista/lista_asesores.php";</script>';
+    echo '<script>window.location="../Vista/lista_asesores.php";</script>';
     }
          
 ?>

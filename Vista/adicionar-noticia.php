@@ -3,7 +3,7 @@
     include '../Modelo/conexion.php';
    $conect = new conexion();
    session_start();
-   $UsuarioActivo = $_SESSION['usuario'];
+   $userAct = $_SESSION['usuario'];
  
 
 ?>
@@ -58,7 +58,7 @@
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <?php echo $UsuarioActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                        <?php echo $userAct.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
   
@@ -233,35 +233,40 @@
                         </div>
                         </div>
                        <?php
+                           error_reporting(E_ALL ^ E_NOTICE);
+                           // Mensaje con campos vacios
+                           if (!empty($_POST) AND (empty($_POST['titulo']) OR empty($_POST['texto']))) 
+                           {
+                               echo "<font color=\"#ff0000\">Por Favor llene los campos vacios</font>";
+                           } 
+                           else 
+                           {
+                                 if (isset($_POST['titulo'])) 
+                                 {
+                                    $titulo = $_POST["titulo"];
+                                 }
 
-  
-error_reporting(E_ALL ^ E_NOTICE);
-// Mensaje con campos vacios
-if (!empty($_POST) AND (empty($_POST['titulo']) OR empty($_POST['texto']))) {
-    echo "<font color=\"#ff0000\">Por Favor llene los campos vacios</font>";
-} else {
-if (isset($_POST['titulo'])) {
-          $titulo = $_POST["titulo"];
-        }
 
+                                 if (isset($_POST['texto']))
+                                  {
+                                     $texto = $_POST['texto'];
+                                 }
 
-      
-          //$texto = $_POST["texto"];
-       if (isset($_POST['texto'])) {
-        $texto = $_POST['texto'];
-       }
-if($titulo == "" && $texto == ""){} else {
-// Adiciona a Noticia 
-$news_add = "INSERT INTO noticias (NOMBRE_U,TITULO, FECHA_N, VIEWS, TEXTO, POSTEADO) VALUES ('$UsuarioActivo','".addslashes(mysql_real_escape_string($_POST["titulo"]))."', NOW(), '0', '".addslashes(mysql_real_escape_string($_POST['texto']))."','$UsuarioActivo')";
+                                if($titulo == "" && $texto == "")
+                                {
 
-$news_add = $conect->consulta($news_add)
-or die ("Error.");
-echo "Tema Adicionado";
+                                } 
+                                else 
+                                {
+                                   // Adiciona a Noticia 
+                                   $noticia = "INSERT INTO noticias (NOMBRE_U,TITULO, FECHA_N, VIEWS, TEXTO, POSTEADO) VALUES ('$userAct','".addslashes(mysql_real_escape_string($_POST["titulo"]))."', NOW(), '0', '".addslashes(mysql_real_escape_string($_POST['texto']))."','$userAct')";
+                                   $noticia = $conect->consulta($noticia)
+                                   or die ("Error.");
+                                   echo "Tema Adicionado";
+                                 }
 
-}
-
-}
-?>
+                             }
+                         ?>
 
 <form name="input" action="adicionar-noticia.php" method="post">
 

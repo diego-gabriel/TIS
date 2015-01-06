@@ -3,8 +3,8 @@
     $con=new conexion();
     
                                  session_start();
-                                 $UsuarioActivo = $_SESSION['usuario'];
- $VerificarUsuario = $con->consulta("SELECT NOMBRE_U FROM usuario WHERE NOMBRE_U = '$UsuarioActivo' ");
+                                 $userAct = $_SESSION['usuario'];
+ $VerificarUsuario = $con->consulta("SELECT NOMBRE_U FROM usuario WHERE NOMBRE_U = '$userAct' ");
  $VerificarUsuario2 = mysql_fetch_row($VerificarUsuario);
 
     
@@ -93,7 +93,7 @@
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <?php echo $UsuarioActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                        <?php echo $userAct.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
                         <?php
@@ -149,7 +149,7 @@
                                    
                                       $conect = new conexion();
 
-                                      $SeleccionarVerficarSocio = $conect->consulta("SELECT NOMBRES_S FROM socio WHERE NOMBRES_S = '$UsuarioActivo'");
+                                      $SeleccionarVerficarSocio = $conect->consulta("SELECT NOMBRES_S FROM socio WHERE NOMBRES_S = '$userAct'");
 
                                       $VerificarSocio = mysql_fetch_row($SeleccionarVerficarSocio);
 
@@ -186,9 +186,9 @@
                                     }
                                     else
                                     {
-                                        $SeleccionrAsesor = $conect->consulta("SELECT NOMBRE_UA FROM inscripcion WHERE NOMBRE_UGE='$UsuarioActivo'");
+                                        $SeleccionrAsesor = $conect->consulta("SELECT NOMBRE_UA FROM inscripcion WHERE NOMBRE_UGE='$userAct'");
                                         $Asesor = mysql_fetch_row($SeleccionrAsesor);
-                                        $ins_proyecto = $conect->consulta("SELECT CODIGO_P FROM inscripcion_proyecto WHERE NOMBRE_U='$UsuarioActivo'");
+                                        $ins_proyecto = $conect->consulta("SELECT CODIGO_P FROM inscripcion_proyecto WHERE NOMBRE_U='$userAct'");
                                         $id_proyecto = mysql_fetch_row($ins_proyecto);
                                           
                                         $SeleccionarDocReq = $conect->consulta("SELECT  `NOMBRE_R`,`CODIGO_P` FROM registro AS r,documento_r AS d WHERE r.ID_R=d.ID_R AND  `NOMBRE_U`='$Asesor[0]' AND TIPO_T='documento requerido' ");
@@ -334,42 +334,38 @@
  
                                 <?php
                                 
-                                     $c_3="SELECT DISTINCT `NOMBRE_R`,`RUTA_D`,`DESCRIPCION_D`,`fecha_p` ,`hora_p`,`RECEPTOR_R` FROM `registro` AS r,`documento` AS d,`descripcion` AS e,`periodo` AS p,`receptor` AS w WHERE r.`ID_R` = d.`ID_R` AND r.`ID_R` = e.`ID_R` AND r.`ID_R` = p.`ID_R` AND r.`ID_R` = w.`ID_R` AND r.`TIPO_T` LIKE 'publicaciones' ";
+                                     $selDoc=$con->consulta("SELECT DISTINCT `NOMBRE_R`,`RUTA_D`,`DESCRIPCION_D`,`fecha_p` ,`hora_p`,`RECEPTOR_R` FROM `registro` AS r,`documento` AS d,`descripcion` AS e,`periodo` AS p,`receptor` AS w WHERE r.`ID_R` = d.`ID_R` AND r.`ID_R` = e.`ID_R` AND r.`ID_R` = p.`ID_R` AND r.`ID_R` = w.`ID_R` AND r.`TIPO_T` LIKE 'publicaciones' ");
                                      
-                                     $r3=$con->consulta($c_3);
-                                    
-                                       
-                                                
-                                  
-                                    if(mysql_num_rows($r3) != 0)
+                                   
+                                    if(mysql_num_rows($selDoc) != 0)
                                     {    $i=1;
-                                           while($var3 = mysql_fetch_array($r3))
+                                           while($docPubli = mysql_fetch_array($selDoc))
                                           {
-                                            $aux=$var3['2'];
-                                            $numero=$var3[5];
+                                            $auxDoc=$docPubli['2'];
+                                            $docDest=$docPubli[5];
            
-                                            $nombre_largo_actual=$con->consulta("SELECT `NOMBRE_LARGO_GE` FROM `grupo_empresa` WHERE `NOMBRE_U`='$UsuarioActivo'");
-                                            $nombreLargo = mysql_fetch_array($nombre_largo_actual);
+                                            $selNom=$con->consulta("SELECT `NOMBRE_LARGO_GE` FROM `grupo_empresa` WHERE `NOMBRE_U`='$userAct'");
+                                            $nomLargo = mysql_fetch_array($selNom);
                                            
-                                            if($numero=="TODOS" || $numero==$nombreLargo[0] || $numero=="PUBLICO")
+                                            if($docDest=="TODOS" || $docDest==$nomLargo[0] || $docDest=="PUBLICO")
                                             {
-                                                $ubi= $var3[1];
+                                                $docUbi= $docPubli[1];
                                                 
-                                                $fep=$var3[3];
-                                                $hop=$var3[4];
-                                                $fecha       = date('Y-m-d');
-                                                $hora        =  date("G:H:i");
+                                                $fepDoc=$docPubli[3];
+                                                $hopDoc=$docPubli[4];
+                                                $fechaA       = date('Y-m-d');
+                                                $horaA        =  date("G:H:i");
                                            
-                                                if($fecha >= $fep )
+                                                if($fechaA >= $fepDoc )
                                                 {     
-                                                    if($hora >= $hop || $hora <= $hop){
+                                                    if($horaA >= $hopDoc || $horaA <= $hopDoc){
                                                 
                                                 ?>
                                                       <tr> 
                                                           <td><?php echo $i?></td> 
-                                                          <td><a class="link-dos" href="<?php echo $var3[1] ?>"><?php echo $var3[0]?></a><td>
+                                                          <td><a class="link-dos" target="_blank" href="<?php echo $docPubli[1] ?>"><?php echo $docPubli[0]?></a><td>
 
-                                                          <td><?php echo $var3[2]?></td> 
+                                                          <td><?php echo $docPubli[2]?></td> 
                                                           <td> </td>
                                                          
                                                      </tr>

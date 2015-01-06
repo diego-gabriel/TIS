@@ -1,6 +1,6 @@
 <?php  
 session_start();
- $UsuarioActivo = $_SESSION['usuario'];
+ $userAct = $_SESSION['usuario'];
  include("controlSesion.php");
  ?> 
   <!DOCTYPE html>
@@ -101,7 +101,7 @@ session_start();
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <?php echo $UsuarioActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                        <?php echo $userAct.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
                         <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
@@ -291,29 +291,29 @@ session_start();
                 <div class="col-lg-8">
                   
                      
-<?php 
- 
- 
-$dir = "../Repositorio/asesor"; 
-$directorio=opendir($dir); 
-echo "<br><br>"; 
-while ($archivo = readdir($directorio)){ 
- if($archivo=='.' or $archivo=='..'){ 
- echo ""; 
- }else { 
+                   <?php 
+                         $direcRep = "../Repositorio/asesor"; 
+                         $abriRep=opendir($dir); 
+                         echo "<br><br>"; 
+                         while ($archivo = readdir($directorio))
+                         { 
+                             if($archivo=='.' or $archivo=='..')
+                             { 
+                              echo ""; 
+                             }
+                             else
+                             { 
     
- $enlace =$dir.$archivo; 
- echo $enlace;
- echo "<ul type='square'><li>"; 
- echo "<a  class='link-dos' href=$enlace class='menu'>$archivo<br></a>" ; 
- //'eliminar_grupoEmpresa.php?id_us=".$fila['CODIGO_S']."'  //ERROR
- // echo "<a  class='link-dos' href='eliminacion.php?id_us="$enlace"'>Eliminar<br></a>" ; 
- echo "</li></ul>"; 
+                               $enlace =$dir.$archivo; 
+                               echo $enlace;
+                               echo "<ul type='square'><li>"; 
+                               echo "<a  class='link-dos' href=$enlace class='menu'>$archivo<br></a>" ; 
+                               echo "</li></ul>"; 
  
- } 
- } 
-closedir($directorio); 
-?> 
+                            } 
+                        } 
+                        closedir($directorio); 
+               ?> 
                     
                     <!-- /.panel -->
                 </div>

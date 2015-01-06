@@ -404,7 +404,7 @@
                                                       
                                                       <?php
                                                       $ruta="..".$var4['0'];
-                                                            echo "<a class='link-dos' href='".$ruta."'
+                                                            echo "<a class='link-dos'target='_blank' href='".$ruta."'
                                                           ><font color='blue'></font>Ver</a>";
                                                       
                                                    ?>

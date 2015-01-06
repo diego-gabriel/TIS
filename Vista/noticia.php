@@ -4,7 +4,7 @@ include '../Modelo/conexion.php';
     //include '../Modelo/conexion.php';
 session_start();
    $conect = new conexion();
-    $UsuarioActivo = $_SESSION['usuario'];
+    $userAct = $_SESSION['usuario'];
 
 ?>
 <html>
@@ -59,7 +59,7 @@ session_start();
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <?php echo $UsuarioActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                        <?php echo $userAct.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
   
@@ -266,104 +266,108 @@ session_start();
                         <?php
 
 
-$id = $_GET['id'];
-// Adiciona +1 de Visualizaciones a cada pessoa que acessar a noticia
-$views_db = $conect->consulta("SELECT * FROM noticias WHERE ID_N = '$id'");
-$row = mysql_fetch_array($views_db);
-$view = $row['VIEWS'];
-$views = $view + 1;
-$views_db = $conect->consulta("UPDATE noticias SET VIEWS = '$views' WHERE ID_N = '$id'");
+                               $idNoti = $_GET['id'];
+                               // Adiciona +1 de Visualizaciones a cada pessoa que acessar a noticia
+                               $selNoti = $conect->consulta("SELECT * FROM noticias WHERE ID_N = '$idNoti'");
+                               $noticia = mysql_fetch_array($selNoti);
+                               $view = $noticia['VIEWS'];
+                               $views = $view + 1;
+                               $actNoti = $conect->consulta("UPDATE noticias SET VIEWS = '$views' WHERE ID_N = '$idNoti'");
 
-// Seleciona  noticia 
-$selecionar_db = "SELECT * FROM noticias WHERE ID_N = '$id'";
-$final = $conect->consulta($selecionar_db);
+                              $selNoti2 =$conect->consulta("SELECT * FROM noticias WHERE ID_N = '$idNoti'");
+                              
+                             
+                               while ($noticiaF=mysql_fetch_array($selNoti2)) 
+                               { 
+                                   $idNotic = $noticiaF["ID_N"];
+                                   $autor = $noticiaF["NOMBRE_U"];
+                                   $titulo = $noticiaF["TITULO"];
+                                   $fecha = $noticiaF["FECHA_N"];
+                                   $vistos = $noticiaF["VIEWS"];
+                                   $texto = $noticiaF["TEXTO"];
+                                   $posteado=$noticiaF["POSTEADO"];
 
-// Pega los valores de noticia noticia
-while ($new=mysql_fetch_array($final)) { 
-$id = $new["ID_N"];
-$autor = $new["NOMBRE_U"];
-$titulo = $new["TITULO"];
-$date = $new["FECHA_N"];
-$views = $new["VIEWS"];
-$texto = $new["TEXTO"];
-$posteado=$new["POSTEADO"];
-
-$comentarios_db = "SELECT * FROM comentarios WHERE ID_N='$id'";
-$comentarios_db = $conect->consulta($comentarios_db);
-$comentarios = mysql_num_rows($comentarios_db);
-
+                                    $selComen = $conect->consulta("SELECT * FROM comentarios WHERE ID_N='$idNotic'");
+                                    
+                                    $tamComen = mysql_num_rows($selComen);
 
 
-echo "<title>$titulo</title>";
-echo "<h1>$titulo</h1><p>Postado por <b>$posteado</b>  <b>$date</b> - <b>$views</b> Visualizaciones | <b>$comentarios</b> Comentarios | ";
-echo "</br>";
-echo "<b>$texto</b>";
-//echo "______________________________________________________________________________________________________________________________________________________________________";
-?>
- <div class="mainbar">
+
+                                    echo "<title>$titulo</title>";
+                                    echo "<h1>$titulo</h1><p>Postado por <b>$posteado</b>  <b>$fecha</b> - <b>$vistos</b> Visualizaciones | <b>$tamComen</b> Comentarios | ";
+                                    echo "</br>";
+                                    echo "<b>$texto</b>";
+
+                         ?>
+                        <div class="mainbar">
                                             <div class="article"><br>
                             <h2><span>Comentarios</span></h2>   
                             
                         </div>
 
-<?php
-}
+                        <?php
+                         }
 
 
-$id = $_GET['id'];
-$selecionar_db_comentarios = "SELECT * FROM comentarios WHERE ID_N = '$id' ORDER BY ID_N DESC";
-$selecionar_db_comentarios_final = $conect->consulta($selecionar_db_comentarios);
+                       $idNoti= $_GET['id'];
+                       $selCom1 = $conect->consulta("SELECT * FROM comentarios WHERE ID_N = '$idNoti' ORDER BY ID_N DESC");
+                      
 
-// muestra los valores da tabla 'comentarios'
-while ($comentario_db=mysql_fetch_array($selecionar_db_comentarios_final)) { 
-$id = $comentario_db["ID_C"];
-$autor = $comentario_db["NOMBRE_U"];
-$nor = $comentario_db["ID_N"];
-$comentario = $comentario_db["COMENTARIO"];
-$date = $comentario_db["FECHA_C"];
-$autor_c=$comentario_db["AUTOR_C"];
+                        // muestra los valores da tabla 'comentarios'
+                       while ($actualC=mysql_fetch_array($selCom1)) 
+                       { 
+                             $idComen = $actualC["ID_C"];
+                             $autor = $actualC["NOMBRE_U"];
+                             $nor = $actualC["ID_N"];
+                             $textoC = $actualC["COMENTARIO"];
+                             $fecha = $actualC["FECHA_C"];
+                             $autor_c=$actualC["AUTOR_C"];
 
-echo "<b>$autor_c</b> el <b>$date</b> comento:$comentario</br>";
-echo "</br>";
-}
-?>
-______________________________________________________________________________________________________________________________________________________________________
-<h3>Comentar:</h3>
-<?php
-// Mensage  campos vacios
-if (!empty($_POST) AND empty($_POST['comentario'])) {
-    echo "<font color=\"#ff0000\">Por Favor llene los campos vacios</font>";
-} else {
-//$id = $_GET['id'];
-    if (empty($_POST['comentario'])) { $mensagem="";} else { $mensagem=$_POST['comentario'];}
-//$mensagem = $_POST["comentario"];o
+                            echo "<b>$autor_c</b> el <b>$fecha</b> comento:$textoC</br>";
+                            echo "</br>";
+                        }
+                        ?>
+                    ______________________________________________________________________________________________________________________________________________________________________
+                    <h3>Comentar:</h3>
+                    <?php
 
-if($mensagem == ""){} else {
-// Adiciona comentario
+                    if (!empty($_POST) AND empty($_POST['comentario'])) 
+                    {
+                        echo "<font color=\"#ff0000\">Por Favor llene los campos vacios</font>";
+                    }
+                     else 
+                     {
+
+                                if (empty($_POST['comentario'])) { $mensage="";} else { $mensage=$_POST['comentario'];}
+
+
+                                if($mensage == ""){} 
+
+                                else {
+                               // Adiciona comentario
     
-$comentario_add = "INSERT INTO comentarios (NOMBRE_U,ID_N,COMENTARIO,FECHA_C,AUTOR_C) VALUES ('$autor','".addslashes(mysql_real_escape_string($_GET['id']))."', '".addslashes(mysql_real_escape_string(strip_tags($_POST['comentario'])))."', NOW(), '$UsuarioActivo')";
+                                      $agregarC = $conect->consulta("INSERT INTO comentarios (NOMBRE_U,ID_N,COMENTARIO,FECHA_C,AUTOR_C) VALUES ('$autor','".addslashes(mysql_real_escape_string($_GET['id']))."', '".addslashes(mysql_real_escape_string(strip_tags($_POST['comentario'])))."', NOW(), '$userAct')");
 
-$comentario_add = $conect->consulta($comentario_add)
-or die ("Error al Adicionar Comentario.");
-//echo "Comentario Adicionado  | <a  class='link-dos' href=\"noticia.php?id=".$_GET['id']."\">Actualizar Página para ver su comentario</a>";
-echo'
-    <html>
-    <head>
-        <meta http-equiv="REFRESH" content="0;url=lista_asesores.php">
-    </head>
-    </html>
+                                  
 
-    ';
-?>
+                                        echo'
+                                        <html>
+                                        <head>
+                                        <meta http-equiv="REFRESH" content="0;url=lista_asesores.php">
+                                        </head>
+                                        </html>
 
-<script>
-  location.href="noticia.php?id=<?php echo $_GET['id']; ?>";
-</script>
-<?php
-}
-}
+                                         ';
+                ?>
 
-?>
+                <script>
+                location.href="noticia.php?id=<?php echo $_GET['id']; ?>";
+                </script>
+                <?php
+                    }
+                    }
+
+                ?>
 <form name="input" action="noticia.php?id=<?php echo $_GET['id']; ?>" method="post">
 
 <label>Comentario:</label>

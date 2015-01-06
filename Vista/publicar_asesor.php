@@ -386,7 +386,7 @@
      
                    <div class="form-group">
                         <div class="col-sm-8">
-                         <button class="btn-primary" onclick="location='../Controlador/publicaciones.php'">Salir</button>
+                        
                     </div>
                                 
                                

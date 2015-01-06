@@ -130,14 +130,14 @@
                                                    
                     $consultar= $conexion->consulta("SELECT MAX(ID_R) AS 'ID_R' FROM registro");
                     
-                    if ($row = mysql_fetch_row($consultar)) 
+                    if ($regis = mysql_fetch_row($consultar)) 
                     {
-                        $id = trim($row[0]);
+                        $idRegis = trim($regis[0]);
                     }
                                                    
-                    $guardar = $conexion->consulta("INSERT INTO documento (ID_R,TAMANIO_D,RUTA_D,VISUALIZABLE_D,DESCARGABLE_D) VALUES('$id','1024','$descrip','$visible','$descargar')");
-                    $desD = $conexion->consulta("INSERT INTO descripcion (ID_R,DESCRIPCION_D) VALUES('$id','Contrato')");
-                    $destinat = $conexion->consulta("INSERT INTO receptor (ID_R,RECEPTOR_R) VALUES('$id','$nLargoGE')");
+                    $guardar = $conexion->consulta("INSERT INTO documento (ID_R,TAMANIO_D,RUTA_D,VISUALIZABLE_D,DESCARGABLE_D) VALUES('$idRegis','1024','$descrip','$visible','$descargar')");
+                    $desD = $conexion->consulta("INSERT INTO descripcion (ID_R,DESCRIPCION_D) VALUES('$idRegis','Contrato')");
+                    $destinat = $conexion->consulta("INSERT INTO receptor (ID_R,RECEPTOR_R) VALUES('$idRegis','$nLargoGE')");
                         
                     //rename("Contrato.pdf", $pdf);
 

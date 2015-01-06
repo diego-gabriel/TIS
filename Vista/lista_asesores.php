@@ -1,7 +1,7 @@
 <?php 
  include '../Modelo/conexion.php';
     session_start();
-    $UsuarioActivo = $_SESSION['usuario'];
+    $userAct= $_SESSION['usuario'];
     
    
 $conect = new conexion();
@@ -92,9 +92,9 @@ $conect = new conexion();
     <div id="wrapper">
        
         
-		<!--<h2>design by <a href="#" title="flash templates">flash-templates-today.com</a></h2>-->
+        <!--<h2>design by <a href="#" title="flash templates">flash-templates-today.com</a></h2>-->
         
-	
+    
         <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
@@ -112,7 +112,7 @@ $conect = new conexion();
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <?php echo $UsuarioActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                        <?php echo $userAct.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
   
@@ -289,56 +289,59 @@ $conect = new conexion();
                                 //crear conexion---------------------------
                                 
                                 //Peticion
-                                $peticion = $conect->consulta("SELECT u.NOMBRE_U, u.ESTADO_E, u.PASSWORD_U, u.TELEFONO_U , u.CORREO_ELECTRONICO_U, r.ROL_R FROM usuario u , usuario_rol r WHERE  u.NOMBRE_U = r.NOMBRE_U  AND r.ROL_R = 'asesor'");
+                                $peticion = $conect->consulta("SELECT u.NOMBRE_U, u.ESTADO_E, u.PASSWORD_U, u.TELEFONO_U , u.CORREO_ELECTRONICO_U, r.ROL_R
+FROM usuario u , usuario_rol r
+WHERE  u.NOMBRE_U = r.NOMBRE_U  AND r.ROL_R = 'asesor'");
                             
 
-                                while($fila = mysql_fetch_array($peticion))
+                                while($asesor = mysql_fetch_array($peticion))
                                 {
                                       
                             ?>
                                 <div class="contenedor-fila">
                                        <div class="contenedor-columna">
                                         <?php
-                                            echo $fila['NOMBRE_U'];
+                                            echo $asesor['NOMBRE_U'];
                                         ?>
                                     </div>
                                     
                                     <div class="contenedor-columna">
                                         <?php
-                                            echo $fila['ESTADO_E'];
+                                            echo $asesor['ESTADO_E'];
                                         ?>
                                     </div>
             
                                     <div class="contenedor-columna">
                                         <?php
-                                            echo $fila['PASSWORD_U'];
+                                            echo $asesor['PASSWORD_U'];
                                         ?>
                                     </div>
                                     
                                     <div class="contenedor-columna">
                                         <?php
-                                            echo $fila['TELEFONO_U'];
+                                            echo $asesor['TELEFONO_U'];
                                         ?>
                                     </div>
                                     
                                     <div class="contenedor-columna">
                                         <?php
-                                            echo $fila['CORREO_ELECTRONICO_U'];
+                                            echo $asesor['CORREO_ELECTRONICO_U'];
                                         ?>
                                     </div>
                                     <div class="contenedor-columna">
                                         <?php
-                                            echo $fila['ROL_R'];
+                                            echo $asesor['ROL_R'];
                                         ?>
                                     </div>  
                                      
                                     
                                        <div class="contenedor-columna">
                                         <?php
-                                            echo "<a href ='eliminar_asesor.php?id_us=".$fila['NOMBRE_U']."' class='verificar'><font color='blue'>Eliminar</font></a>";
+                                            echo "<a href ='eliminar_asesor.php?id_us=".$asesor['NOMBRE_U']."' class='verificar'><font color='blue'>Eliminar</font></a>";
                                         ?>
                                     </div>
-
+                                                                                                  
+<!--                                                                        <div class="contenedor-columna">
                                         <?php
                                                                                     
                                         ?>
@@ -351,6 +354,7 @@ $conect = new conexion();
                             
                                 }
 
+                                //Cerrar
                                 
                         ?>  
                                                            

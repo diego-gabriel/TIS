@@ -2,17 +2,17 @@
     include '../Modelo/conexion.php';
    
     session_start();
-    $UsuarioActivo = $_SESSION['usuario'];
+    $userAct = $_SESSION['usuario'];
   
 
     $con=new conexion();
-    $VerificarUsuario = $con->consulta("SELECT NOMBRE_U FROM usuario WHERE NOMBRE_U = '$UsuarioActivo' ");
+    $VerificarUsuario = $con->consulta("SELECT NOMBRE_U FROM usuario WHERE NOMBRE_U = '$userAct' ");
     $VerificarUsuario2 = mysql_fetch_row($VerificarUsuario);
     
-    $usuario = $UsuarioActivo;
+    $usuario = $userAct;
     
     if (!is_array($VerificarUsuario2)) {   
-    $consultaGE="SELECT `NOMBRE_U` FROM socio WHERE `NOMBRES_S` = '$UsuarioActivo'";
+    $consultaGE="SELECT `NOMBRE_U` FROM socio WHERE `NOMBRES_S` = '$userAct'";
     $conGE_=$con->consulta($consultaGE);
     $NombreUsuario=mysql_fetch_row($conGE_);
 
@@ -106,7 +106,7 @@
             <ul class="nav navbar-top-links navbar-right">
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <?php echo $UsuarioActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                        <?php echo $userAct.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
                         <?php
@@ -159,7 +159,7 @@
                                    
                                       $conect = new conexion();
 
-                                      $SeleccionarVerficarSocio = $conect->consulta("SELECT NOMBRES_S FROM socio WHERE NOMBRES_S = '$UsuarioActivo'");
+                                      $SeleccionarVerficarSocio = $conect->consulta("SELECT NOMBRES_S FROM socio WHERE NOMBRES_S = '$userAct'");
 
                                       $VerificarSocio = mysql_fetch_row($SeleccionarVerficarSocio);
 
@@ -197,9 +197,9 @@
                                     }
                                     else
                                     {
-                                        $SeleccionrAsesor = $conect->consulta("SELECT NOMBRE_UA FROM inscripcion WHERE NOMBRE_UGE='$UsuarioActivo'");
+                                        $SeleccionrAsesor = $conect->consulta("SELECT NOMBRE_UA FROM inscripcion WHERE NOMBRE_UGE='$userAct'");
                                         $Asesor = mysql_fetch_row($SeleccionrAsesor);
-                                        $ins_proyecto = $conect->consulta("SELECT CODIGO_P FROM inscripcion_proyecto WHERE NOMBRE_U='$UsuarioActivo'");
+                                        $ins_proyecto = $conect->consulta("SELECT CODIGO_P FROM inscripcion_proyecto WHERE NOMBRE_U='$userAct'");
                                         $id_proyecto = mysql_fetch_row($ins_proyecto);
                                           
                                         $SeleccionarDocReq = $conect->consulta("SELECT  `NOMBRE_R`,`CODIGO_P` FROM registro AS r,documento_r AS d WHERE r.ID_R=d.ID_R AND  `NOMBRE_U`='$Asesor[0]' AND TIPO_T='documento requerido' ");
@@ -331,37 +331,41 @@
                         </div>
                             
 
-<?php
+                        <?php
 
+                         error_reporting(E_ALL ^ E_NOTICE);
+                         // Mensaje con campos vacios
+                         if (!empty($_POST) AND (empty($_POST['titulo']) OR empty($_POST['texto']))) 
+                         {
+                           echo "<font color=\"#ff0000\">Por Favor llene los campos vacios</font>";
+                          } 
+                          else {
+                                     if (isset($_POST['titulo'])) 
+                                     {
+                                        $titulo = $_POST["titulo"];
+                                     }
 
-//include('config.php');
-error_reporting(E_ALL ^ E_NOTICE);
-// Mensaje con campos vacios
-if (!empty($_POST) AND (empty($_POST['titulo']) OR empty($_POST['texto']))) {
-    echo "<font color=\"#ff0000\">Por Favor llene los campos vacios</font>";
-} else {
-if (isset($_POST['titulo'])) {
-          $titulo = $_POST["titulo"];
-        }
+                                     if (isset($_POST['texto'])) 
+                                     {
+                                        $texto = $_POST['texto'];
+                                     }
 
+                                    if($titulo == "" && $texto == "")
+                                    {
 
-      
-          //$texto = $_POST["texto"];
-       if (isset($_POST['texto'])) {
-        $texto = $_POST['texto'];
-       }
-if($titulo == "" && $texto == ""){} else {
-// Adiciona a Noticia 
-$news_add = "INSERT INTO noticias (NOMBRE_U,TITULO, FECHA_N, VIEWS, TEXTO, POSTEADO) VALUES ('$usuario','".addslashes(mysql_real_escape_string($_POST["titulo"]))."', NOW(), '0', '".addslashes(mysql_real_escape_string($_POST['texto']))."','$UsuarioActivo')";
+                                    } 
+                                    else 
+                                    {
+                                         // Adiciona a Noticia 
+                                        $noticia = "INSERT INTO noticias (NOMBRE_U,TITULO, FECHA_N, VIEWS, TEXTO, POSTEADO) VALUES ('$usuario','".addslashes(mysql_real_escape_string($_POST["titulo"]))."', NOW(), '0', '".addslashes(mysql_real_escape_string($_POST['texto']))."','$userAct')";
+                                        $noticia = $conect->consulta($noticia)
+                                        or die ("Error.");
+                                        echo "Tema Adicionado";
 
-$news_add = $conect->consulta($news_add)
-or die ("Error.");
-echo "Tema Adicionado";
+                                    }
 
-}
-
-}
-?>
+                                }
+                        ?>
 
 <form name="input" action="adicionar-noticia-grupo.php" method="post">
   <div class="form-group">

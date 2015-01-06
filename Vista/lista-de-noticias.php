@@ -1,10 +1,10 @@
 
- !DOCTYPE html>
+ 
 <?php
     include '../Modelo/conexion.php';
     $conect = new conexion();
     session_start();
-    $UsuarioActivo = $_SESSION['usuario'];
+    $userAct = $_SESSION['usuario'];
 ?>
 <html>
 
@@ -57,7 +57,7 @@
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <?php echo $UsuarioActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                        <?php echo $userAct.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
   
@@ -269,51 +269,45 @@
 
                                    <?php
  
-                                        $selecionar_db = "SELECT * FROM noticias ORDER BY ID_N DESC";
+                                       // Seleciona la tabla de noticias
+                                        $noticia = $conect->consulta("SELECT * FROM noticias ORDER BY ID_N DESC");
 
-                                        $final = $conect->consulta($selecionar_db)
-                                        or die ("<h1>Error</h1>");
-
-
-                                        while ($noticias=mysql_fetch_array($final)) { 
-                                        $id = $noticias["ID_N"];
-                                        $usuario = $noticias["NOMBRE_U"];
-                                        $titulo = $noticias["TITULO"];
-
-                                        $f = $noticias["FECHA_N"];
-
-                                        $views = $noticias["VIEWS"];
+                                
+                                        while ($noticias=mysql_fetch_array($noticia)) 
+                                        { 
+                                           $idNoti = $noticias["ID_N"];
+                                           $usuario = $noticias["NOMBRE_U"];
+                                           $titulo = $noticias["TITULO"];
+                                           $fecha = $noticias["FECHA_N"];
+                                           $vistos = $noticias["VIEWS"];
                                            $posteado=$noticias["POSTEADO"];
 
-
-                                     // numero de comentarios
-                                      $comentarios_db = "SELECT * FROM comentarios WHERE ID_N='$id'";
-                                      $comentarios_db = $conect->consulta($comentarios_db);
-                                      $comentarios = mysql_num_rows($comentarios_db);
+                                            // numero de comentarios
+                                           $selComen = $conect->consulta("SELECT * FROM comentarios WHERE ID_N='$idNoti'");
+                                           $comentarios = mysql_num_rows($selComen);
 
                                     ?>
 
 
 
-                                <a href="#" class="list-group-item">
-                                    <i ></i> <p size="5"><font size="3"><b><?php echo $titulo?></b><p></p>
-                                    <i ></i> Posteado por <b><?php echo $posteado?></b> -
-                                    <i ></i> <b> <?php echo $views?></b> Visualizaciones -
-                                    <i ></i> <b><?php echo $comentarios?></b> Comentarios -
-                                   
-                                    <i ></i> <?php echo $f?>
+                               <a href="#" class="list-group-item">
+                                       <i ></i> <p size="5"><font size="3"><b><?php echo $titulo?></b><p></p>
+                                       <i ></i> Posteado por <b><?php echo $posteado?></b> -
+                                       <i ></i> <b> <?php echo $vistos?></b> Visualizaciones -
+                                       <i ></i> <b><?php echo $comentarios?></b> Comentarios -
+                                       <i ></i> <?php echo $fecha?>s
                                      <?php
-                                    if($posteado==$UsuarioActivo)
+                                    if($posteado==$userAct)
                                         {?>
-                                     <span class="pull-right text-muted small"><em><?php echo"<td> <a  class='link-dos' href=\"noticia.php?id=$id\">Ver </a></td>";?></em>
+                                     <span class="pull-right text-muted small"><em><?php echo"<td> <a  class='link-dos' href=\"noticia.php?id=$idNoti\">Ver </a></td>";?></em>
                                     </span>
-                                    <span class="pull-right text-muted small"><em><?php echo "<td> <a  class='link-dos'href=\"excluir-noticia.php?id=$id\">Eliminar</a></td>"; ?></em>
+                                    <span class="pull-right text-muted small"><em><?php echo "<td> <a  class='link-dos'href=\"excluir-noticia.php?id=$idNoti\">Eliminar</a></td>"; ?></em>
                                     </span>
                                    
                                     <?php } 
                                     else { ?>
                                      
-                                    <span class="pull-right text-muted small"><em><?php echo"<td> <a  class='link-dos' href=\"noticia.php?id=$id\">Ver </a></td>";?></em>
+                                    <span class="pull-right text-muted small"><em><?php echo"<td> <a  class='link-dos' href=\"noticia.php?id=$idNoti\">Ver </a></td>";?></em>
                                     </span>
                                     <?php
                                 } ?>

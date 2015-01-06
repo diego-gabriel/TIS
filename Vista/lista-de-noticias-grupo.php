@@ -2,9 +2,9 @@
     include '../Modelo/conexion.php';
    
    session_start();
-  $UsuarioActivo = $_SESSION['usuario'];
+  $userAct = $_SESSION['usuario'];
   $conexion = new conexion();
-  $VerificarUsuario = $conexion->consulta("SELECT NOMBRE_U FROM usuario WHERE NOMBRE_U = '$UsuarioActivo' ");
+  $VerificarUsuario = $conexion->consulta("SELECT NOMBRE_U FROM usuario WHERE NOMBRE_U = '$userAct ' ");
   $VerificarUsuario2 = mysql_fetch_row($VerificarUsuario);
 ?>
 
@@ -83,7 +83,7 @@
             <ul class="nav navbar-top-links navbar-right">
                                <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <?php echo $UsuarioActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                        <?php echo $userAct .' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
                         <?php
@@ -136,7 +136,7 @@
                                    
                                       $conect = new conexion();
 
-                                      $SeleccionarVerficarSocio = $conect->consulta("SELECT NOMBRES_S FROM socio WHERE NOMBRES_S = '$UsuarioActivo'");
+                                      $SeleccionarVerficarSocio = $conect->consulta("SELECT NOMBRES_S FROM socio WHERE NOMBRES_S = '$userAct '");
 
                                       $VerificarSocio = mysql_fetch_row($SeleccionarVerficarSocio);
 
@@ -172,9 +172,9 @@
                                     }
                                     else
                                     {
-                                        $SeleccionrAsesor = $conect->consulta("SELECT NOMBRE_UA FROM inscripcion WHERE NOMBRE_UGE='$UsuarioActivo'");
+                                        $SeleccionrAsesor = $conect->consulta("SELECT NOMBRE_UA FROM inscripcion WHERE NOMBRE_UGE='$userAct '");
                                         $Asesor = mysql_fetch_row($SeleccionrAsesor);
-                                        $ins_proyecto = $conect->consulta("SELECT CODIGO_P FROM inscripcion_proyecto WHERE NOMBRE_U='$UsuarioActivo'");
+                                        $ins_proyecto = $conect->consulta("SELECT CODIGO_P FROM inscripcion_proyecto WHERE NOMBRE_U=''");
                                         $id_proyecto = mysql_fetch_row($ins_proyecto);
                                           
                                         $SeleccionarDocReq = $conect->consulta("SELECT  `NOMBRE_R`,`CODIGO_P` FROM registro AS r,documento_r AS d WHERE r.ID_R=d.ID_R AND  `NOMBRE_U`='$Asesor[0]' AND TIPO_T='documento requerido' ");
@@ -298,59 +298,51 @@
                             <div class="list-group">
 
                                    <?php
-
-
-                                       
+ 
                                          // Seleciona la tabla de noticias
-                                        $selecionar_db = "SELECT * FROM noticias ORDER BY ID_N DESC";
+                                        $noticia = $conect->consulta("SELECT * FROM noticias ORDER BY ID_N DESC");
 
-                                        $final = $conect->consulta($selecionar_db)
-                                        or die ("<h1>Error</h1>");
+                                
+                                        while ($noticias=mysql_fetch_array($noticia)) 
+                                        { 
+                                           $idNoti = $noticias["ID_N"];
+                                           $usuario = $noticias["NOMBRE_U"];
+                                           $titulo = $noticias["TITULO"];
+                                           $fecha = $noticias["FECHA_N"];
+                                           $vistos = $noticias["VIEWS"];
+                                           $posteado=$noticias["POSTEADO"];
 
+                                            // numero de comentarios
+                                           $selComen = $conect->consulta("SELECT * FROM comentarios WHERE ID_N='$idNoti'");
+                                           $comentarios = mysql_num_rows($selComen);
 
-                                        while ($noticias=mysql_fetch_array($final)) { 
-                                        $id = $noticias["ID_N"];
-                                        $usuario = $noticias["NOMBRE_U"];
-                                        $titulo = $noticias["TITULO"];
-
-                                        $f = $noticias["FECHA_N"];
-
-                                        $views = $noticias["VIEWS"];
-                                        $posteado=$noticias["POSTEADO"];
-
-
-
-                                     // numero de comentarios
-                                      $comentarios_db = "SELECT * FROM comentarios WHERE ID_N='$id'";
-                                      $comentarios_db = $conect->consulta($comentarios_db);
-                                      $comentarios = mysql_num_rows($comentarios_db);
-
-                                    ?>
+                                  ?>
 
 
 
                                 <a href="#" class="list-group-item">
                                        <i ></i> <p size="5"><font size="3"><b><?php echo $titulo?></b><p></p>
-                                    <i ></i> Posteado por <b><?php echo $posteado?></b> -
-                                    <i ></i> <b> <?php echo $views?></b> Visualizaciones -
-                                    <i ></i> <b><?php echo $comentarios?></b> Comentarios -
-                                   
-                                    <i ></i> <?php echo $f?>
+                                       <i ></i> Posteado por <b><?php echo $posteado?></b> -
+                                       <i ></i> <b> <?php echo $vistos?></b> Visualizaciones -
+                                       <i ></i> <b><?php echo $comentarios?></b> Comentarios -
+                                       <i ></i> <?php echo $fecha?>
                                      <?php
-                                    if($posteado==$UsuarioActivo)
-                                        {?>
-                                     <span class="pull-right text-muted small"><em><?php echo"<td> <a  class='link-dos' href=\"noticia-grupo.php?id=$id\">Ver </a></td>";?></em>
-                                    </span>
-                                    <span class="pull-right text-muted small"><em><?php echo "<td> <a  class='link-dos'href=\"excluir-noticia-grupo.php?id=$id\">Eliminar</a></td>"; ?></em>
-                                    </span>
+                                           if($posteado==$userAct )
+                                     {?>
+                                                  <span class="pull-right text-muted small"><em><?php echo"<td> <a  class='link-dos' href=\"noticia-grupo.php?id=$idNoti\">Ver </a></td>";?></em>
+                                                  </span>
+                                                  <span class="pull-right text-muted small"><em><?php echo "<td> <a  class='link-dos'href=\"excluir-noticia-grupo.php?id=$idNoti\">Eliminar</a></td>"; ?></em>
+                                                  </span>
                                    
-                                    <?php } 
+                                    <?php
+                                     } 
                                     else { ?>
                                      
-                                    <span class="pull-right text-muted small"><em><?php echo"<td> <a  class='link-dos' href=\"noticia-grupo.php?id=$id\">Ver </a></td>";?></em>
+                                                  <span class="pull-right text-muted small"><em><?php echo"<td> <a  class='link-dos' href=\"noticia-grupo.php?id=$idNoti\">Ver </a></td>";?></em>
                                     </span>
                                     <?php
-                                } ?>
+                                         } 
+                                    ?>
                                 </a>
                                 
                                 <?php
@@ -365,14 +357,6 @@
                     </div>
 
 
-
-
-
-                       
-      
-            
-
-            
 <br>
 <b><a  class='link-dos' href="adicionar-noticia-grupo.php">Adicionar nuevo  tema</a></b>
                     </div>

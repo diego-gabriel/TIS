@@ -5,7 +5,7 @@
     include '../Modelo/conexion.php';
     session_start();
     $con=new conexion();
-    $UsuarioActivo = $_SESSION['usuario'];
+    $userAct = $_SESSION['usuario'];
  
 ?>
 
@@ -93,7 +93,7 @@
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <?php echo $UsuarioActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                        <?php echo $userAct.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
   
@@ -288,30 +288,19 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h1>Contratos</h1>
-                   
-
-              
-                        
-                         
-
-                             
-                           
-
+                
  
                                 <?php
                                 
-                                     $c_3="SELECT DISTINCT `NOMBRE_R`,`RUTA_D` FROM `registro` AS r,`documento` AS d,`receptor` AS w WHERE r.`ID_R` = d.`ID_R` AND r.`ID_R` = w.`ID_R` AND r.`TIPO_T` LIKE 'Contrato' AND `NOMBRE_U` LIKE '$UsuarioActivo'";
-                                     
+                                     $c_3="SELECT DISTINCT `NOMBRE_R`,`RUTA_D` FROM `registro` AS r,`documento` AS d,`receptor` AS w WHERE r.`ID_R` = d.`ID_R` AND r.`ID_R` = w.`ID_R` AND r.`TIPO_T` LIKE 'Contrato' AND `NOMBRE_U` LIKE '$userAct'";
                                      $r3=$con->consulta($c_3);
                                     
                                    
-                             if(mysql_num_rows($r3) != 0)
+                                     if(mysql_num_rows($r3) != 0)
                                     { 
-                                        
-
-                              ?>
-                               <div class="panel panel-default" >
-                                 <table class="table form-group" >
+                               ?>
+                                       <div class="panel panel-default" >
+                                        <table class="table form-group" >
                                  
                                                      <tr bgcolor="#888888">
                                                           <th> Nº</th>
@@ -321,47 +310,41 @@
                                                           
                                                      </tr> 
 
-                             <?php
+                                 <?php
                                        $i=1;
                                            while($var3 = mysql_fetch_array($r3))
                                           {
                                             
-                                               ?>       <tr> 
+                                ?>      
+                                                     <tr> 
                                                           <td><?php echo $i?></td> 
-                                                           <td><b><?php echo $var3[0]  ?></b><td>
+                                                          <td><b><?php echo $var3[0]  ?></b><td>
                                                           <td><a class="link-dos" target="_blank" href="<?php echo $var3[1] ?>">Ver</a></td>
 
                                                           
-                                                          <td> <?php
+                                                          <td> 
+                                                    <?php
                                                             
                                                             echo "<a class='link-dos' href='eliminar_contrato.php?id_us=".$var3[1]."'
                                                            ><font color='blue'></font> Eliminar</a>";
-                                                             ?> </td>
+                                                    ?> </td>
                                                          
-                                                     </tr>
-                                               <?php 
-                                               $i++;
+                                                         </tr>
+                                                   <?php 
+                                                        $i++;
                                             }
 
-                                              ?>
+                                                    ?>
                                         
                                        </table>
                                       
-                                       
-                                          
-                                                     
-                                                     
-
+                            
                                             <?php
                                       
                                     
-                                     }  
+                                    }  
                                   
-                                    
-                                      
-                                            //echo "</form>";
-                                    //$tabla.="</table>";
-                                     //echo $tabla;
+                            
                                     
                                     else
                                     {
