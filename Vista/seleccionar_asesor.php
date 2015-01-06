@@ -306,8 +306,11 @@
                                     <select name="asesor" class="form-control">
                                         <option>Seleccione un Asesor</option>
                                         <?php
-                                                $c1="SELECT nombres_a, apellidos_a"
-                                                        . " FROM asesor";
+                                                $c1="SELECT a.NOMBRES_A, a.APELLIDOS_A FROM asesor AS a, usuario AS u WHERE a.NOMBRE_U = u.NOMBRE_U AND u.ESTADO_E = 'Habilitado'";
+                                                /*
+                                                 * $c1="SELECT nombres_a, apellidos_a"
+                                                        . " FROM asesor WHERE";
+                                                 */
                                                 $r1=$con->consulta($c1);
                                                 while($v1=  mysql_fetch_array($r1)){
                                                     echo "<option>".$v1[0]. " " . $v1[1] . "</option>";

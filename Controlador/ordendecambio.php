@@ -2,184 +2,190 @@
     
     <head>
         <script src="../Librerias/js/bootstrap-dialog.js"></script>
-  
     </head>
+    
 </html>
 
 <?php
 
 include '../Modelo/conexion_pd.php';
 include '../Modelo/crear_oc_pdf.php';
+session_start();
+
 $conexion = new conexion();
 
-
-session_start();
 $nombreUA = $_SESSION['usuario'] ;
 $nomAp = $conexion->query("SELECT NOMBRES_A, APELLIDOS_A FROM asesor WHERE NOMBRE_U =  '$nombreUA' ");
 $nombreAp = $nomAp->fetchObject();
 $nomA = $nombreAp->NOMBRES_A;
 $apeA = $nombreAp->APELLIDOS_A;
-$nombreAsesor = $nomA." ".$apeA ;
+$nAsesor = $nomA." ".$apeA ;
 
-if (isset($_POST['lista'])) {
-	if (isset($_POST['fecha'])) {
-		if (isset($_POST['hora'])) {
-			if (isset($_POST['lugar'])) {
-			
-                $existeFile = FALSE;
-                $nombre_fichero = '../Repositorio/asesor/OrdenCambio.tex';
-                if (file_exists($nombre_fichero)) {
-                    $existeFile = TRUE;
+if (isset($_POST['lista'])) 
+{
+    if (isset($_POST['fecha']))
+    {
+        if (isset($_POST['hora']))
+        {
+            if (isset($_POST['lugar']))
+            {		
+                $existeF = FALSE;
+                $nombreF = '../Repositorio/asesor/OrdenCambio.tex';
+                if (file_exists($nombreF))
+                {
+                    $existeF = TRUE;
                 }
                             
-                if($existeFile){
-                    $nombreEmpresa=$_POST['lista']; 
+                if($existeF)
+                {
+                    $nEmpresa=$_POST['lista']; 
                            
-                    if(strnatcasecmp($nombreEmpresa, "Seleccione una grupo empresa")!=0){
-        				$fecha=$_POST['fecha'];
-        				$hora=$_POST['hora'];
-        				$lugar=$_POST['lugar'];
-        				$arr=$_POST['text'];
+                    if(strnatcasecmp($nEmpresa, "Seleccione una grupo empresa")!=0)
+                    {
+        		$fecha = $_POST['fecha'];
+                        $hora = $_POST['hora'];
+                        $lugar = $_POST['lugar'];
+                        $arr = $_POST['text'];
         				
-        				$calificaciones = array();
-        				$observaciones =array();
-        				$encontrados=false;
-        				$indice=1;
-        				while (!$encontrados)
-        				{
-        					if(isset($_POST['nombre'.$indice]))
-        					{
-        					 $observaciones[]=$_POST['nombre'.$indice];
-        					}
-        					else {
-        					 $encontrados=true;
-        					}
-        					$indice++;
-        				}
-                        $vacio =FALSE;
-                        for ($i=0;$i<count($observaciones);$i++)
+                        $califi = array();
+                        $observ =array();
+                        $encontrar = false;
+                        $indice = 1;
+                        
+                        while (!$encontrar)
                         {
-                            if($observaciones[$i]==null || $observaciones[$i]=="" || $observaciones[$i]==" ")
+                            if(isset($_POST['nombre'.$indice]))
+                            {
+                              $observ[] = $_POST['nombre'.$indice];
+                            }
+                            else {
+                             $encontrar = true;
+                            }
+                            $indice++;
+                        }
+                        
+                        $vacio =FALSE;
+                        for ($i=0;$i<count($observ);$i++)
+                        {
+                            if($observ[$i]==null || $observ[$i]=="" || $observ[$i]==" ")
                             {
                                 $vacio = TRUE;
                             }
                         }
                                     
-        				if($observaciones == NULL || $vacio == TRUE){
-                                        // echo "<script>  BootstrapDialog.alert('Las observaciones no pueden estar en blanco'); </script>";
-        				 echo "<script type=\"text/javascript\">alert('Las observaciones no pueden estar en blanco '); window.location='../Vista/ordenDeCambio.php';</script>";
-                                         
-        				}
-        				else
+                        if($observ == NULL || $vacio == TRUE)
+                        {
+                            echo "<script type=\"text/javascript\">alert('Las observaciones no pueden estar en blanco '); window.location='../Vista/ordenDeCambio.php';</script>";
+                        }
+                        else
                         {
 			 
-            				$queryStat = "SELECT ge.`NOMBRE_U` FROM `grupo_empresa` AS ge WHERE ge.`NOMBRE_LARGO_GE` LIKE '$nombreEmpresa'";
-            				$stmt      = $conexion->query($queryStat);
-            				$row       = $stmt->fetchObject();
-            				$nombreUGE      = $row->NOMBRE_U;
-                                            
-                                            $queryStat1 = "SELECT ge.`NOMBRE_CORTO_GE` FROM `grupo_empresa` AS ge WHERE ge.`NOMBRE_LARGO_GE` LIKE '$nombreEmpresa'";
-            				$stmt1      = $conexion->query($queryStat1);
-            				$row1       = $stmt1->fetchObject();
-            				$nombreCGE = $row1->NOMBRE_CORTO_GE;  
-            				
-            				$email     = "SELECT u.`CORREO_ELECTRONICO_U` FROM `usuario` AS u WHERE u.`NOMBRE_U` LIKE '$nombreUA'";
-            				$consulta  = $conexion->query($email);
-            				$row       = $consulta->fetchObject();
-            				$correo    = $row->CORREO_ELECTRONICO_U;
+                            $queryStat = "SELECT ge.`NOMBRE_U` FROM `grupo_empresa` AS ge WHERE ge.`NOMBRE_LARGO_GE` LIKE '$nEmpresa'";
+                            $stmt      = $conexion->query($queryStat);
+                            $row       = $stmt->fetchObject();
+                            $nombreUGE = $row->NOMBRE_U;
 
-            				$consultaNombre = "SELECT a.`NOMBRES_A`, a.`APELLIDOS_A` FROM `asesor` AS a WHERE a.`NOMBRE_U` LIKE '$nombreUA'";
-            				$nombre        = $conexion->query($consultaNombre);
-            				$row           = $nombre->fetchObject();
-            				$nomAs = $row->NOMBRES_A;
-            				$apeAs = $row->APELLIDOS_A;
-            				$nombreCompleto = $nomAs."  ".$apeAs;	
-            				
-            				$indice=0;
-            				foreach ($arr as $key => $value) {
-            				    $calificaciones[$indice] = $value;
-            				    $indice++;
-            				}
+                            $queryStat = "SELECT ge.`NOMBRE_CORTO_GE` FROM `grupo_empresa` AS ge WHERE ge.`NOMBRE_LARGO_GE` LIKE '$nEmpresa'";
+                            $stmt      = $conexion->query($queryStat);
+                            $row       = $stmt->fetchObject();
+                            $nombreCGE = $row->NOMBRE_CORTO_GE;  
 
+                            $queryStat = "SELECT u.`CORREO_ELECTRONICO_U` FROM `usuario` AS u WHERE u.`NOMBRE_U` LIKE '$nombreUA'";
+                            $stmt      = $conexion->query($queryStat);
+                            $row       = $stmt->fetchObject();
+                            $correo    = $row->CORREO_ELECTRONICO_U;
 
-                            $cons = "SELECT * FROM registro AS r, inscripcion_proyecto AS i, documento_r AS d WHERE r.ID_R=d.ID_R and r.NOMBRE_U='$nombreUA' and r.TIPO_T='documento requerido' and d.CODIGO_P=i.CODIGO_P and i.NOMBRE_U='$nombreUGE'";
-                            $SeleccionarDocsRequeridos = $conexion->query($cons);
-                            $DocsRequeridos = $SeleccionarDocsRequeridos->rowCount();
+                            $queryStat = "SELECT a.`NOMBRES_A`, a.`APELLIDOS_A` FROM `asesor` AS a WHERE a.`NOMBRE_U` LIKE '$nombreUA'";
+                            $stmt      = $conexion->query($queryStat);
+                            $row       = $stmt ->fetchObject();
+                            $nomAs = $row->NOMBRES_A;
+                            $apeAs = $row->APELLIDOS_A;
+                            $nCompleto = $nomAs."  ".$apeAs;	
 
-                            $SeleccionarDocsSubidos = $conexion->query("SELECT * FROM registro WHERE NOMBRE_U='$nombreUGE' AND TIPO_T='documento subido'");
-                            $DocsSubidos = $SeleccionarDocsSubidos->rowCount();
+                            $indice=0;
+                            foreach ($arr as $key => $value)
+                            {
+                                $califi [$indice] = $value;
+                                $indice++;
+                            }
 
-                            if(($DocsSubidos == $DocsRequeridos) and $DocsSubidos>=1)
+                            $seleccion = "SELECT * FROM registro AS r, inscripcion_proyecto AS i, documento_r AS d WHERE r.ID_R=d.ID_R and r.NOMBRE_U='$nombreUA' and r.TIPO_T='documento requerido' and d.CODIGO_P=i.CODIGO_P and i.NOMBRE_U='$nombreUGE'";
+                            $consulta = $conexion->query($seleccion);
+                            $DocReq = $consulta->rowCount();
+
+                            $consulta = $conexion->query("SELECT * FROM registro WHERE NOMBRE_U='$nombreUGE' AND TIPO_T='documento subido'");
+                            $DocSub = $consulta->rowCount();
+
+                            if(($DocSub== $DocReq) and $$DocSub>=1)
                             { 
-                                if(isset($_GET['id'])){
-                             
-                                     $buscar    = array(
-                                                        'empresa_nombre_largo' => '[[empresa-nombre-largo]]',
-                                                        'fecha_actual'         => '[[fecha-actual]]',
-                                                        'hora_actual'          => '[[hora-actual]]',
-                                                        'lugar'                => '[[lugar]]',
-                                                        'primer_p'             => '[[primer-puntaje]]',
-                                                        'segundo_p'            => '[[segundo-puntaje]]',
-                                                        'tercer_p'             => '[[tercer-puntaje]]',
-                                                        'cuarto_p'             => '[[cuarto-puntaje]]',
-                                                        'quinto_p'             => '[[quinto-puntaje]]',
-                                                        'sexto_p'              => '[[sexto-puntaje]]',
-                                                        'septimo_p'            => '[[septimo-puntaje]]',
-                                                        'obs_det'              => '[[obs-detalle]]',
-                                                        'obs_det_item'         => '[[obs-detalle-item]]',
-                                                     );
+                                if(isset($_GET['id']))
+                                {
+                                    $buscar = array(
+                                        'empresa_nombre_largo' => '[[empresa-nombre-largo]]',
+                                        'fecha_actual'         => '[[fecha-actual]]',
+                                        'hora_actual'          => '[[hora-actual]]',
+                                        'lugar'                => '[[lugar]]',
+                                        'primer_p'             => '[[primer-puntaje]]',
+                                        'segundo_p'            => '[[segundo-puntaje]]',
+                                        'tercer_p'             => '[[tercer-puntaje]]',
+                                        'cuarto_p'             => '[[cuarto-puntaje]]',
+                                        'quinto_p'             => '[[quinto-puntaje]]',
+                                        'sexto_p'              => '[[sexto-puntaje]]',
+                                        'septimo_p'            => '[[septimo-puntaje]]',
+                                        'obs_det'              => '[[obs-detalle]]',
+                                        'obs_det_item'         => '[[obs-detalle-item]]',
+                                    );
 
-
-                                    $remplazo['empresa_nombre_largo'] = $nombreEmpresa;
+                                    $remplazo['empresa_nombre_largo'] = $nEmpresa;
                                     $remplazo['fecha_actual'] = $fecha;
                                     $remplazo['hora_actual']  = $hora;
                                     $remplazo['lugar'] = $lugar;
 
-                                    $remplazo['primer_p'] = intval($calificaciones[0]);
-                                    $remplazo['segundo_p'] = intval($calificaciones[1]);
-                                    $remplazo['tercer_p'] = intval($calificaciones[2]);
-                                    $remplazo['cuarto_p'] = intval($calificaciones[3]);
-                                    $remplazo['quinto_p'] = intval($calificaciones[4]);
-                                    $remplazo['sexto_p'] = intval($calificaciones[5]);
-                                    $remplazo['septimo_p'] = intval($calificaciones[6]);
+                                    $remplazo['primer_p'] = intval($califi [0]);
+                                    $remplazo['segundo_p'] = intval($califi [1]);
+                                    $remplazo['tercer_p'] = intval($califi [2]);
+                                    $remplazo['cuarto_p'] = intval($califi [3]);
+                                    $remplazo['quinto_p'] = intval($califi [4]);
+                                    $remplazo['sexto_p'] = intval($califi [5]);
+                                    $remplazo['septimo_p'] = intval($califi [6]);
 
 
-                                    $obsDetalle = "[".count($observaciones)."]{";
+                                    $obDetalle = "[".count($observ)."]{";
 
-                                    for ($i=0;$i<count($observaciones);$i++)
+                                    for ($i=0;$i<count($observ);$i++)
                                     {
                                         if($i!=0)
                                         {
-                                            $obsDetalle = $obsDetalle." \item #".($i+1);
+                                            $obDetalle = $obDetalle." \item #".($i+1);
                                         }
                                         else
                                         {
-                                            $obsDetalle = $obsDetalle."\item #".($i+1);
+                                            $obDetalle = $obDetalle."\item #".($i+1);
                                         }
                                     }
-                                    $obsDetalle = $obsDetalle."}";
-                                    $remplazo['obs_det'] = $obsDetalle;              
+                                    
+                                    $obDetalle = $obDetalle."}";
+                                    $remplazo['obs_det'] = $obDetalle;              
 
-                                    $obsDetalleItem = "";
+                                    $obDetItem = "";
 
-                                    for ($i=0;$i<count($observaciones);$i++)
+                                    for ($i=0;$i<count($observ);$i++)
                                     {
-                                        $obsDetalleItem = $obsDetalleItem."{".$observaciones[$i]."}";         
+                                        $obDetItem= $obDetItem."{".$observ[$i]."}";         
                                     }
 
-                                    $remplazo['obs_det_item'] = $obsDetalleItem;
+                                    $remplazo['obs_det_item'] = $obDetItem;
 
-                                    //$ruta = "..\\Repositorio\\asesor";
                                     $ruta ="../Repositorio/asesor";
                                     chdir($ruta);
-                                    $rutaDirectorio="../".$nombreUGE."/OC/";
+                                    $rutaD="../".$nombreUGE."/OC/";
 
-                                    $file = "OrdenCambio".'_'.$nombreEmpresa.'.pdf';
+                                    $file = "OrdenCambio".'_'.$nEmpresa.'.pdf';
 
-                                    if (!file_exists($rutaDirectorio)) 
+                                    if (!file_exists($rutaD)) 
                                     {
                                         $oldmask = umask(0); 
-                                        mkdir($rutaDirectorio, 0777,TRUE);
+                                        mkdir($rutaD, 0777,TRUE);
                                         umask($oldmask);
                                         if(!file_exists("../".$nombreUGE."/index.html"))
                                         {
@@ -226,66 +232,61 @@ if (isset($_POST['lista'])) {
                                    // rename("OrdenCambio.pdf", $file);
                                     rename("OrdenCambio.pdf", $rutaDirectorio.$pdf );
 
-                                    $nruta="../Repositorio/".$nombreUGE."/OC/"."OrdenCambio.pdf";
-                                    $fecha       = date('Y-m-d');
-                                    $hora        =  date("G:H:i");
-                                    $visualizable="TRUE";
-                                    $descargable="TRUE";
+                                    $nruta = "../Repositorio/".$nombreUGE."/OC/"."OrdenCambio.pdf";
+                                    $fecha = date('Y-m-d');
+                                    $hora  = date("G:H:i");
+                                    $visible = "TRUE";
+                                    $descargar = "TRUE";
                                     $nombreDoc = "Orden de Cambio de ".$nombreCGE;
 
-                                   $nombDoc = "";
+                                    $nombDoc = "";
+                                    $consulta = $conexion->query("SELECT `NOMBRE_R` FROM `registro` WHERE `NOMBRE_R` LIKE '$nombreDoc' ");
+                                    $numRows = $consulta->rowCount();
                                    
-                                   $consulta = $conexion->query("SELECT `NOMBRE_R` FROM `registro` WHERE `NOMBRE_R` LIKE '$nombreDoc' ");
-                                   
-                                   $numRows = $consulta->rowCount();
-                                   
-                                   if($numRows>0){
+                                    if($numRows>0)
+                                    {
                                       $row= $consulta->fetchObject();
                                       $nombDoc = $row->NOMBRE_R;
-                                        
-                                   }
+                                    }
                                    
-                                   if (strcasecmp($nombreDoc, $nombDoc)!=0) 
-                                   {
-                                       $comentario_add = $conexion->query("INSERT INTO registro (NOMBRE_U,TIPO_T,ESTADO_E,NOMBRE_R,FECHA_R,HORA_R) VALUES ('$nombreUA','publicaciones','Habilitado','$nombreDoc','$fecha','$hora')")or
+                                    if (strcasecmp($nombreDoc, $nombDoc)!=0) 
+                                    {
+                                       $comentar = $conexion->query("INSERT INTO registro (NOMBRE_U,TIPO_T,ESTADO_E,NOMBRE_R,FECHA_R,HORA_R) VALUES ('$nombreUA','publicaciones','Habilitado','$nombreDoc','$fecha','$hora')")or
                                        die("Error");
 
-                                       $consultar= $conexion->query("SELECT MAX(ID_R) AS 'ID_R' FROM registro");
-                                       $row = $consultar->fetchObject();
+                                       $consulta= $conexion->query("SELECT MAX(ID_R) AS 'ID_R' FROM registro");
+                                       $row = $consulta->fetchObject();
                                        $id = $row -> ID_R;
 
-                                       $guardar_doc = $conexion->query("INSERT INTO documento (ID_R,TAMANIO_D,RUTA_D,VISUALIZABLE_D,DESCARGABLE_D) VALUES('$id','1024','$nruta','$visualizable','$descargable')");
-                                       $des_D=$conexion->query("INSERT INTO descripcion (ID_R,DESCRIPCION_D) VALUES('$id','Orden de Cambio')");
-                                       $destinatario=$conexion->query("INSERT INTO receptor (ID_R,RECEPTOR_R) VALUES('$id','$nombreEmpresa')");
+                                       $guardarD = $conexion->query("INSERT INTO documento (ID_R,TAMANIO_D,RUTA_D,VISUALIZABLE_D,DESCARGABLE_D) VALUES('$id','1024','$nruta','$visible','$descargar')");
+                                       $desD=$conexion->query("INSERT INTO descripcion (ID_R,DESCRIPCION_D) VALUES('$id','Orden de Cambio')");
+                                       $destinat=$conexion->query("INSERT INTO receptor (ID_R,RECEPTOR_R) VALUES('$id','$nEmpresa')");
                                        $guardar = $conexion->query("INSERT INTO periodo (ID_R,fecha_p,hora_p) VALUES ('$id','$fecha','$hora')") or
                                        die("Error");
-                                   }
+                                    }
 
-                                echo"<script type=\"text/javascript\">alert('Se genero correctamente la orden de cambio'); window.location='../Vista/ordenDeCambio.php';</script>";  
+                                    echo"<script type=\"text/javascript\">alert('Se genero correctamente la orden de cambio'); window.location='../Vista/ordenDeCambio.php';</script>";  
                                }
 
                             }
                             else
                             {
                                 echo"<script type=\"text/javascript\">alert('La grupo empresa seleccionada aun no ha subido todos los documentos requeridos'); window.location='../Vista/ordenDeCambio.php';</script>"; 
-
                             }
-				        }
-			        }
-                    else{        
+			}
+		    }
+                    else
+                    {        
                         echo"<script type=\"text/javascript\">alert('Por favor, seleccione una grupo empresa'); window.location='../Vista/ordenDeCambio.php';</script>";  
                     }
                 }
-                else{
+                else
+                {
                     echo"<script type=\"text/javascript\">alert('Por favor, suba la plantilla de Orden de Cambio a su repositorio'); window.location='../Vista/ordenDeCambio.php';</script>";                  
-                }
-                        
-            }
-			
-		}
-		
-	}
-
+                }           
+            }		
+        }	
+    }
 }
 
 ?>
