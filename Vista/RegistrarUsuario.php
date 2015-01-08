@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Sistema de Apoyo a la Empresa TIS</title>
+   
+    <link rel="stylesheet" type="text/css" href="../Librerias/lib/css/docs.css">
 
     <!-- Core CSS - Include with every page -->
     <link href="../Librerias/css/bootstrap.min.css" rel="stylesheet">
@@ -85,7 +87,16 @@
         <div class ="form-horizontal">
             <div class="row">
                 <div class="col-lg-12">
+                    
+                    <div class="bs-callout bs-callout-danger">
+                   
+                     <p>
+                         <strong>Nota: </strong> Servicio de Correro valido  <strong>hotmail, gmail, yahoo.</strong>
+                      </p>
+                    </div> 
+                 
                     <h2 class="page-header">Registrar Usuario:</h2>
+
                     <div class="col-lg-6" >
                                     <form method = "post" id="FormularioRegistroUsuario">
                                         
@@ -136,7 +147,7 @@
                                                 <span class="input-group-addon">
                                                   <span class="glyphicon glyphicon-envelope"></span>
                                                 </span>
-                                                <input class="form-control" type="email" name="email" id="UserEmail" placeholder="Correo" pattern="^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$" required>
+                                                <input class="form-control" type="email" name="email" id="UserEmail" placeholder="Correo" pattern="^([a-zA-Z0-9_\.\-])+\@(([hotmail|yahoo|gmail])+\.)+([a-zA-Z0-9]{2,4})+$" title="Ejm: admin@hotmail.com ,admin@yahoo.com, admin@gmail.com"required>
                                             </div>
                                         </div>
                                         <div class="form-group">

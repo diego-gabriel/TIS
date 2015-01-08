@@ -15,7 +15,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Sistema de Apoyo a la Empresa TIS</title>
-
+    <link rel="stylesheet" type="text/css" href="../Librerias/lib/css/docs.css">
     <!-- Core CSS - Include with every page -->
     <link href="../Librerias/css/bootstrap.min.css" rel="stylesheet">
     <link href="../Librerias/font-awesome/css/font-awesome.css" rel="stylesheet">
@@ -194,6 +194,13 @@
 		<div class="article">
                 <div class="row">
                 <div class="col-lg-12"></div>
+                
+                <div class="bs-callout bs-callout-danger">
+                   
+                <p>
+                         <strong>Nota : </strong> Servicio de mensajeria solo para habilitar a usuarios registrados
+                </p>
+                    </div> 
 		<h2><span>Enviar Email</span></h2>	
 		<div id="contenido">
 		<form action="crear_mail.php" method="post">
@@ -207,7 +214,7 @@
 		<select required name='dest' class="form-control"  ><option value=""  size="30%">-     Seleccione Destinatario     -</option>
 		<?php 
 													
-		$sql=$conectar->consulta("SELECT NOMBRE_U from usuario"); 
+		$sql=$conectar->consulta("SELECT u.NOMBRE_U from usuario as u, asesor as a where a.NOMBRE_U=u.NOMBRE_U and `ESTADO_E`='Deshabilitado'"); 
 		while($row=mysql_fetch_array($sql)) 
 		echo "<option  value='".$row["NOMBRE_U"]."'>" .$row["NOMBRE_U"]."</option>"; ?>	
 		</td>

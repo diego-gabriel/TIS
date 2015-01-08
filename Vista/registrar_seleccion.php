@@ -22,7 +22,7 @@ if(isset($_POST['registrar']))
         $seleccion = "SELECT count(*) "
                         . "FROM inscripcion "
                         . "WHERE NOMBRE_UGE='".$grupoE."'";
-        $consulta = $con->consulta($seleccion);
+        $consulta = $conexion->consulta($seleccion);
         $cont =  mysql_fetch_row($consulta);
         $bandera=$cont[0];
         

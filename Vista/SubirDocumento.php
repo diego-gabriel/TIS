@@ -18,6 +18,7 @@
     }
 
 ?>
+
 <html>
 
 <head>
@@ -34,7 +35,7 @@
     <script src="../Librerias/lib/icheck.min.js"></script>
     <!-- Bootstrap -->
     <link rel="stylesheet" href="../Librerias/css/bootstrap.min.css" rel="stylesheet">
-    <!--script type="text/javascript" src="../Librerias/lib/bootstrap.js"></script-->
+    <script type="text/javascript" src="../Librerias/lib/bootstrap.js"></script>
     <!-- Docs -->
     <link rel="stylesheet" type="text/css" href="../Librerias/lib/css/docs.css">
     <!-- Font-Awesome -->
@@ -72,11 +73,6 @@
     <link href="../Librerias/css/plugins/timeline/timeline.css" rel="stylesheet">
     <!-- SB Admin CSS - Include with every page -->
     <link href="../Librerias/css/sb-admin.css" rel="stylesheet">
-
-
-
-
-
 </head>
 
 <body>
@@ -85,10 +81,9 @@
     <div id="wrapper">
        
         
-		<!--<h2>design by <a href="#" title="flash templates">flash-templates-today.com</a></h2>-->
+        <!--<h2>design by <a href="#" title="flash templates">flash-templates-today.com</a></h2>-->
         
-	
-        
+    
         <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
@@ -97,7 +92,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="inicio_grupo_empresa.php">Inicio </a>
+                   <a class="navbar-brand" href="inicio_grupo_empresa.php">Inicio </a>
             </div>
             <!-- /.navbar-header -->
 
@@ -109,19 +104,8 @@
                         <?php echo $UsuarioActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <?php
-                            if (is_array($Ver_Usr2)) {   
-                        ?>
                         <li><a href="ModificarGrupoEmpresa.php"><i class="fa fa-user fa-fw"></i> Modificar Datos personales</a>
                         </li>
-                        <?php
-                            }else{
-                        ?>
-                        <li><a href="ModificarSocio.php"><i class="fa fa-user fa-fw"></i> Modificar Datos personales</a>
-                        </li>
-                         <?php
-                              }        
-                         ?>
                         <li class="divider"></li>
                         <li><a href="unlog.php"><i class="fa fa-sign-out fa-fw"></i>Salir</a>
                         </li>
@@ -131,13 +115,18 @@
                 <!-- /.dropdown -->
             </ul>
             <!-- /.navbar-top-links -->
-            
-            
-            
-            
-            
-            
 
+            
+            
+            
+            
+             
+            
+            
+            
+            
+            
+            
             <div class="navbar-default navbar-static-side" role="navigation">
                 <div class="sidebar-collapse">
                     <ul class="nav" id="side-menu">
@@ -155,27 +144,28 @@
                                    
                                       $conect = new conexion();
 
-                                      $Ver_Soc = $conect->consulta("SELECT NOMBRES_S FROM socio WHERE NOMBRES_S = '$UsuarioActivo'");
+                                      $SeleccionarVerficarSocio = $conect->consulta("SELECT NOMBRES_S FROM socio WHERE NOMBRES_S = '$UsuarioActivo'");
 
-                                      $Socio = mysql_fetch_row($Ver_Soc);
+                                      $VerificarSocio = mysql_fetch_row($SeleccionarVerficarSocio);
 
-                                    if(is_array($Socio))
+
+
+                                    if(is_array($VerificarSocio))
                                     {
-                                        $Sel_UGE = $conect->consulta("SELECT NOMBRE_U FROM socio WHERE NOMBRES_S = '$Socio[0]'");
+                                        $SeleccionarUsuarioGE = $conect->consulta("SELECT NOMBRE_U FROM socio WHERE NOMBRES_S = '$VerificarSocio[0]'");
 
-                                        $User_GE = mysql_fetch_row($Sel_UGE);
+                                        $UsuarioGE = mysql_fetch_row($SeleccionarUsuarioGE);
 
-                                        $S_Asesor = $conect->consulta("SELECT NOMBRE_UA FROM inscripcion WHERE NOMBRE_UGE='$User_GE[0]'");
-                                        $Asesor = mysql_fetch_row($S_Asesor);
-
-                                        $Sel_Proy = $conect->consulta("SELECT CODIGO_P FROM inscripcion_proyecto WHERE NOMBRE_U='$UserGE[0]'");
-                                        $Id_Proy = mysql_fetch_row($Sel_Proy);
-                                        $S_DocReq = $conect->consulta("SELECT  `NOMBRE_R`,`CODIGO_P` FROM registro AS r,documento_r AS d WHERE r.ID_R=d.ID_R AND  `NOMBRE_U`='$Asesor[0]' AND TIPO_T='documento requerido' ");
+                                        $SeleccionrAsesor = $conect->consulta("SELECT NOMBRE_UA FROM inscripcion WHERE NOMBRE_UGE='$UsuarioGE[0]'");
+                                        $Asesor = mysql_fetch_row($SeleccionrAsesor);
+                                         $ins_proyecto = $conect->consulta("SELECT CODIGO_P FROM inscripcion_proyecto WHERE NOMBRE_U='$UsuarioGE[0]'");
+                                        $id_proyecto = mysql_fetch_row($ins_proyecto);
                                         
-                                        
-                                        while ($rowDocs = mysql_fetch_row($S_DocReq))
+                                        $SeleccionarDocReq = $conect->consulta("SELECT  `NOMBRE_R`,`CODIGO_P` FROM registro AS r,documento_r AS d WHERE r.ID_R=d.ID_R AND  `NOMBRE_U`='$Asesor[0]' AND TIPO_T='documento requerido' ");
+
+                                        while ($rowDocs = mysql_fetch_row($SeleccionarDocReq))
                                         {
-                                            if($rowDocs[1] == $Id_Proy[0])
+                                            if($rowDocs[1] == $id_proyecto[0])
                                             {
                                                    echo '<li>
                                                       <a href="SubirDocumento.php?doc='.$rowDocs[0].'">'.$rowDocs[0].'</a>
@@ -191,19 +181,17 @@
                                     }
                                     else
                                     {
-                                        $S_Asesor = $conect->consulta("SELECT NOMBRE_UA FROM inscripcion WHERE NOMBRE_UGE='$UsuarioActivo'");
-                                      
-                                        $Asesor = mysql_fetch_row($S_Asesor);
+                                        $SeleccionrAsesor = $conect->consulta("SELECT NOMBRE_UA FROM inscripcion WHERE NOMBRE_UGE='$UsuarioActivo'");
+                                        $Asesor = mysql_fetch_row($SeleccionrAsesor);
+                                        $ins_proyecto = $conect->consulta("SELECT CODIGO_P FROM inscripcion_proyecto WHERE NOMBRE_U='$UsuarioActivo'");
+                                        $id_proyecto = mysql_fetch_row($ins_proyecto);
                                           
-                                        $Sel_Proy = $conect->consulta("SELECT CODIGO_P FROM inscripcion_proyecto WHERE NOMBRE_U='$UsuarioActivo'");
-                                        $Id_Proy = mysql_fetch_row($Sel_Proy);
+                                        $SeleccionarDocReq = $conect->consulta("SELECT  `NOMBRE_R`,`CODIGO_P` FROM registro AS r,documento_r AS d WHERE r.ID_R=d.ID_R AND  `NOMBRE_U`='$Asesor[0]' AND TIPO_T='documento requerido' ");
+
                                           
-                                        $S_DocReq = $conect->consulta("SELECT  `NOMBRE_R`,`CODIGO_P` FROM registro AS r,documento_r AS d WHERE r.ID_R=d.ID_R AND  `NOMBRE_U`='$Asesor[0]' AND TIPO_T='documento requerido' ");
-                                          
-                                          
-                                        while ($rowDocs = mysql_fetch_row($S_DocReq))
+                                        while ($rowDocs = mysql_fetch_row($SeleccionarDocReq))
                                         {
-                                            if($rowDocs[1] == $Id_Proy[0])
+                                            if($rowDocs[1] == $id_proyecto[0])
                                             {
                                                    echo '<li>
                                                       <a href="SubirDocumento.php?doc='.$rowDocs[0].'">'.$rowDocs[0].'</a>
@@ -228,9 +216,6 @@
                             
                             <!-- /.nav-second-level -->
                         </li>
-                        <?php
-                            if (is_array($Ver_Usr2)) {   
-                        ?>
                          <li>
                              
                             <a href="#"><i class="fa fa-tasks fa-fw"></i> Tareas<span class="fa arrow"></span></a>
@@ -256,11 +241,6 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
-                        <?php
-                                }
-                        ?>
-
-
                         <li>
                             <a href="#"><i class="fa fa-warning fa-fw"></i> Notificaciones<span class="fa arrow"></span></a>
                                                     
@@ -273,31 +253,18 @@
                             </li>
                         </li>
 
-                        <?php  
+                        <li>
+                            <a href="#"><i class="fa fa-building-o fa-fw"></i> Actividades<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a id="registrarPlanificacion" href="#">
+                                        <i class="fa fa-pencil-square-o fa-fw"></i>Registrar Planificaci&oacute;n
+                                    </a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
 
-                            $Ver_Soc = $conect->consulta("SELECT NOMBRES_S FROM socio WHERE NOMBRES_S = '$UsuarioActivo'");
-
-                            $Socio = mysql_fetch_row($Ver_Soc);
-
-                            if(!is_array($Socio))
-                            {
-
-                                echo'<li>
-                                        <a href="#"><i class="fa fa-building-o fa-fw"></i> Actividades<span class="fa arrow"></span></a>
-                                        <ul class="nav nav-second-level">
-                                            <li>
-                                                <a id="registrarPlanificacion" href="#">
-                                                    <i class="fa fa-pencil-square-o fa-fw"></i>Registrar Planificaci&oacute;n
-                                                </a>
-                                            </li>
-                                        </ul>
-                                        <!-- /.nav-second-level -->
-                                    </li>';
-
-                            }
-
-                        ?>
-                    
                         <li>
                             <a href="lista-de-noticias-grupo.php"><i class="fa fa-comment"></i> Foro</a>
                                 
@@ -310,13 +277,14 @@
                 <!-- /.sidebar-collapse -->
             </div>
             
-            
-            
-            
+               
             <!-- /.navbar-static-side -->
         </nav>
-        
+
         <div id="page-wrapper">
+
+            
+            
             <div class="row">
                 <div class="col-lg-12">
                     <h2 class="page-header">Subir Documento</h2>
@@ -414,29 +382,22 @@
                     </div>
                 </div>
                 <!-- /.col-lg-12 -->
-            </div>
-            <!-- /.row -->
+            </div>            
+            
         </div>
+        <!-- /#page-wrapper -->
 
     </div>
     <!-- /#wrapper -->
 
     <!-- Core Scripts - Include with every page -->
-    <script src="../Librerias/js/jquery-1.10.2.js"></script>
-    <script src="../Librerias/js/bootstrap.min.js"></script>
+    
+    <!--script src="../Librerias/js/bootstrap.min.js"></script-->
     <script src="../Librerias/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-
-    <!-- Page-Level Plugin Scripts - Dashboard -->
-    <script src="../Librerias/js/plugins/morris/raphael-2.1.0.min.js"></script>
-    <script src="../Librerias/js/plugins/morris/morris.js"></script>
 
     <!-- SB Admin Scripts - Include with every page -->
     <script src="../Librerias/js/sb-admin.js"></script>
 
-    <!-- Page-Level Demo Scripts - Dashboard - Use for reference -->
-    <script src="../Librerias/js/demo/dashboard-demo.js"></script>
-
 </body>
 
-</html>
-					
+</html><!DOCTYPE html>

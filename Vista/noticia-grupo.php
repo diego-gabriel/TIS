@@ -1,11 +1,16 @@
+
+<!DOCTYPE html>
 <?php
-    include '../Modelo/conexion.php';
-    session_start();
-    $userAct = $_SESSION['usuario'];
-    $con = new conexion();
+
+ include '../Modelo/conexion.php';
+ session_start();
+ include("controlSesion.php");
+
+ $uActivo = $_SESSION['usuario'];
+ $conexion = new conexion();
+ 
 
 ?>
-
 <html>
 
 <head>
@@ -22,7 +27,7 @@
     <script src="../Librerias/lib/icheck.min.js"></script>
     <!-- Bootstrap -->
     <link rel="stylesheet" href="../Librerias/css/bootstrap.min.css" rel="stylesheet">
-    <!--script type="text/javascript" src="../Librerias/lib/bootstrap.js"></script-->
+    <script type="text/javascript" src="../Librerias/lib/bootstrap.js"></script>
     <!-- Docs -->
     <link rel="stylesheet" type="text/css" href="../Librerias/lib/css/docs.css">
     <!-- Font-Awesome -->
@@ -60,19 +65,19 @@
     <link href="../Librerias/css/plugins/timeline/timeline.css" rel="stylesheet">
     <!-- SB Admin CSS - Include with every page -->
     <link href="../Librerias/css/sb-admin.css" rel="stylesheet">
-    
-
-
-
-    <link href="css/style.css" rel="stylesheet" type="text/css" />
+        <link href="css/style.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
 
-   <link href="css/estiloTabla.css" rel="stylesheet" type="text/css" />
-   
-       <div id="wrapper">
-                      <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
+      <link href="css/estiloTabla.css" rel="stylesheet" type="text/css" />
+    <div id="wrapper">
+       
+        
+        <!--<h2>design by <a href="#" title="flash templates">flash-templates-today.com</a></h2>-->
+        
+    
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
                     <span class="sr-only">Toggle navigation</span>
@@ -85,12 +90,13 @@
             <!-- /.navbar-header -->
 
             <ul class="nav navbar-top-links navbar-right">
-                               <li class="dropdown">
+
+                <!-- /.dropdown -->
+                <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <?php echo $userAct.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                        <?php echo $uActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-
                         <li><a href="ModificarGrupoEmpresa.php"><i class="fa fa-user fa-fw"></i> Modificar Datos personales</a>
                         </li>
                         <li class="divider"></li>
@@ -99,6 +105,7 @@
                     </ul>
                     <!-- /.dropdown-user -->
                 </li>
+                <!-- /.dropdown -->
             </ul>
             <!-- /.navbar-top-links -->
 
@@ -106,7 +113,7 @@
             
             
             
-            
+             
             
             
             
@@ -130,13 +137,12 @@
                                    
                                       $conect = new conexion();
 
-                                      $SeleccionarVerficarSocio = $conect->consulta("SELECT NOMBRES_S FROM socio WHERE NOMBRES_S = '$userAct'");
+                                      $SeleccionarVerficarSocio = $conect->consulta("SELECT NOMBRES_S FROM socio WHERE NOMBRES_S = '$uActivo'");
 
                                       $VerificarSocio = mysql_fetch_row($SeleccionarVerficarSocio);
 
 
 
-                                   
                                     if(is_array($VerificarSocio))
                                     {
                                         $SeleccionarUsuarioGE = $conect->consulta("SELECT NOMBRE_U FROM socio WHERE NOMBRES_S = '$VerificarSocio[0]'");
@@ -168,9 +174,9 @@
                                     }
                                     else
                                     {
-                                        $SeleccionrAsesor = $conect->consulta("SELECT NOMBRE_UA FROM inscripcion WHERE NOMBRE_UGE='$userAct'");
+                                        $SeleccionrAsesor = $conect->consulta("SELECT NOMBRE_UA FROM inscripcion WHERE NOMBRE_UGE='$uActivo'");
                                         $Asesor = mysql_fetch_row($SeleccionrAsesor);
-                                        $ins_proyecto = $conect->consulta("SELECT CODIGO_P FROM inscripcion_proyecto WHERE NOMBRE_U='$userAct'");
+                                        $ins_proyecto = $conect->consulta("SELECT CODIGO_P FROM inscripcion_proyecto WHERE NOMBRE_U='$uActivo'");
                                         $id_proyecto = mysql_fetch_row($ins_proyecto);
                                           
                                         $SeleccionarDocReq = $conect->consulta("SELECT  `NOMBRE_R`,`CODIGO_P` FROM registro AS r,documento_r AS d WHERE r.ID_R=d.ID_R AND  `NOMBRE_U`='$Asesor[0]' AND TIPO_T='documento requerido' ");
@@ -190,23 +196,25 @@
                                             }
                                         }
 
-                                    } 
+                                    }      
                                     ?>
                                     </ul>
                                 </li>
                                 <li>
                                     <a href="publicacion_grupo.php">Recepci&oacute;n Documentos </a>
                                     
-                                </li> 
+                                </li>
+                               
                             </ul>
-                      
+                            
                             <!-- /.nav-second-level -->
                         </li>
-
                          <li>
                              
                             <a href="#"><i class="fa fa-tasks fa-fw"></i> Tareas<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
+                                
+                                
                                 <li>
                                     <a href="seleccionar_asesor.php">Seleccionar Asesor</a>
                                 </li>
@@ -226,7 +234,6 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
-
                         <li>
                             <a href="#"><i class="fa fa-warning fa-fw"></i> Notificaciones<span class="fa arrow"></span></a>
                                                     
@@ -266,9 +273,11 @@
                
             <!-- /.navbar-static-side -->
         </nav>
-        
+
         <div id="page-wrapper">
-            <div class="row">
+
+            
+                <div class="row">
                 <div class="col-lg-12">
                     
                     <div class="col-lg-6" >
@@ -400,25 +409,20 @@
             </div>
             <!-- /.row -->
         </div>
+        </div>
+        <!-- /#page-wrapper -->
 
     </div>
     <!-- /#wrapper -->
 
     <!-- Core Scripts - Include with every page -->
-    <script src="../Librerias/js/jquery-1.10.2.js"></script>
-    <script src="../Librerias/js/bootstrap.min.js"></script>
+    
+    <!--script src="../Librerias/js/bootstrap.min.js"></script-->
     <script src="../Librerias/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-
-    <!-- Page-Level Plugin Scripts - Dashboard -->
-    <script src="../Librerias/js/plugins/morris/raphael-2.1.0.min.js"></script>
-    <script src="../Librerias/js/plugins/morris/morris.js"></script>
 
     <!-- SB Admin Scripts - Include with every page -->
     <script src="../Librerias/js/sb-admin.js"></script>
 
-    <!-- Page-Level Demo Scripts - Dashboard - Use for reference -->
-    <script src="../Librerias/js/demo/dashboard-demo.js"></script>
-
 </body>
 
-</html>
+</html><!DOCTYPE html>
