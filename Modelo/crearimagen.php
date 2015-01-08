@@ -42,10 +42,10 @@ class Recurso
 		$result = $stmt->fetchAll();
 		$indice = 0;
 		foreach ($result as $row) {
+
 			$nombre = $row['NOMBRE_R'];
 			$ruta   = $row['RUTA_D'];
 			$tipo  =substr($ruta, -3);
-			
 			$this->mapeoTipo[] =$tipo;
 		}
 		return $this->mapeoTipo;

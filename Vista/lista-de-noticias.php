@@ -1,11 +1,10 @@
-
- 
-<?php
-    include '../Modelo/conexion.php';
-    $conect = new conexion();
-    session_start();
-    $userAct = $_SESSION['usuario'];
-?>
+ <?php  
+ include '../Modelo/conexion.php';
+ session_start();
+ $UsuarioActivo = $_SESSION['usuario'];
+ $conect=new conexion();
+ ?> 
+  <!DOCTYPE html>
 <html>
 
 <head>
@@ -15,30 +14,60 @@
 
     <title>Sistema de Apoyo a la Empresa TIS</title>
 
-    <!-- Core CSS - Include with every page -->
-    <link href="../Librerias/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../Librerias/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <!-- JQuery -->
+    <script type="text/javascript" src="../Librerias/lib/jquery-2.1.0.min.js"></script>
+    <!-- icheck -->
+    <link href="../Librerias/icheck/skins/square/green.css" rel="stylesheet">
+    <script src="../Librerias/lib/icheck.min.js"></script>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="../Librerias/css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" src="../Librerias/lib/bootstrap.js"></script>
+    <!-- Docs -->
+    <link rel="stylesheet" type="text/css" href="../Librerias/lib/css/docs.css">
+    <!-- Font-Awesome -->
+    <link rel="stylesheet" type="text/css" href="../Librerias/font-awesome/css/font-awesome.css">
+    <!-- Bootstrap-datetimepicker -->
+    <link rel="stylesheet" type="text/css" href="../Librerias/lib/css/bootstrap-datetimepicker.css">
+    <script type="text/javascript" src="../Librerias/lib/bootstrap-datetimepicker.js"></script>
+    <script type="text/javascript" src="../Librerias/lib/bootstrap-datetimepicker.es.js"></script>
+    <!-- Bootstrap-multiselect -->
+    <link rel="stylesheet" type="text/css" href="../Librerias/lib/css/bootstrap-multiselect.css">
+    <script type="text/javascript" src="../Librerias/lib/bootstrap-multiselect.js"></script>
+    <!-- Bootstrap-validator -->
+    <link rel="stylesheet" type="text/css" href="../Librerias/lib/css/bootstrapValidator.css">
+    <script type="text/javascript" src="../Librerias/lib/bootstrapValidator.js"></script>
+    <!-- Validators -->
+    <script type="text/javascript" src="../Librerias/lib/validator/diferenteActividadPlanificacion.js"></script>
+    <script type="text/javascript" src="../Librerias/lib/validator/diferenteEntregable.js"></script>
+    <script type="text/javascript" src="../Librerias/lib/validator/stringLength.js"></script>
+    <script type="text/javascript" src="../Librerias/lib/validator/notEmpty.js"></script>
+    <script type="text/javascript" src="../Librerias/lib/validator/callback.js"></script>
+    <script type="text/javascript" src="../Librerias/lib/validator/date.js"></script>
+    <script type="text/javascript" src="../Librerias/lib/validator/numeric.js"></script>
+    <script type="text/javascript" src="../Librerias/lib/validator/porcentajeMax.js"></script>
+    <script type="text/javascript" src="../Librerias/lib/validator/porcentajeMin.js"></script>
+    <!-- JS -->
+    <script type="text/javascript" src="../Librerias/lib/funcion.js"></script>
 
-    <!-- Page-Level Plugin CSS - Dashboard -->
-    <link href="../Librerias/css/plugins/morris/morris-0.4.3.min.css" rel="stylesheet">
+
+
+
+
     <link href="../Librerias/css/plugins/timeline/timeline.css" rel="stylesheet">
-   
-
     <!-- SB Admin CSS - Include with every page -->
     <link href="../Librerias/css/sb-admin.css" rel="stylesheet">
-    <script type="text/javascript" src="../Librerias/js/subir_documento.js"></script>
+    
 
 </head>
 
 <body>
+
    
-       <div id="wrapper">
+    <div id="wrapper">
        
         
         <!--<h2>design by <a href="#" title="flash templates">flash-templates-today.com</a></h2>-->
         
-    
-                
     
         <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
@@ -57,7 +86,7 @@
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <?php echo $userAct.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                        <?php echo $UsuarioActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
   
@@ -126,15 +155,14 @@
                             <a href="#"><i class="fa fa-bar-chart-o fa-files-o "></i> Documentos <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                            <a href="../Vista/subirarchivoasesor.php">Subir Documentos</a>
+                                    <a href="../Vista/subirarchivoasesor.php">Subir Documentos</a>
                                 </li>
                                 <li>
                                     <a href="../Vista/RegistrarDocumentosRequeridos.php">Registrar Documentos</a>
                                 </li>
-                                 <li>
+                                <li>
                                     <a href="../Vista/documentos_generados.php">Contratos Emitidos</a>
                                 </li>
-                                
                                 
                                 <li>
                                     <a href="#">Publicaci&oacute;n Documentos <span class="fa arrow"></span></a>
@@ -145,7 +173,7 @@
                                             <a href="../Vista/publicar_asesor.php">Nueva Publicaci&oacute;n </a>
                                         </li>
                                         <li>
-                                            <a href="../Controlador/publicaciones.php">Publicaciones </a>
+                                            <a href="../Vista/publicaciones.php">Publicaciones </a>
                                         </li>
                                        
                                     </ul>
@@ -176,9 +204,7 @@
                                  <li>
                                     <a href="contrato.php">Emitir Contrato </a>
                                 </li>
-                                <li>
-                                    <a href="../Vista/RegistrarFirma.php">Firma de Contratos</a>
-                                </li>
+                              
                                 <li>
                                     <a href="ordenDeCambio.php">Emitir Orden de Cambio</a>
                                 </li>
@@ -203,12 +229,12 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
-
+              
                          <li>
                               <a href="lista_doc_subidos.php"><i class="fa fa-tasks fa-fw"></i>Documentos Subidos </a>  
                                               
                           </li>
-                      
+                     
                         <li>
                             <a href="lista-de-noticias.php"><i class="fa fa-comment"></i> Foro</a>
                         </li>
@@ -248,7 +274,6 @@
                 </div>
             </div>
         </div>
-<!-------------------------------------------NUEVAS PUBLICACIONES------------------------------------------>
 
         <div id="page-wrapper">
             <div class="row">
@@ -256,10 +281,10 @@
                     <h2 class="page-header">FORO</h2>
                     <div class="col-lg-12" >
 
-                          <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <i ></i><h2> Temas</h2>
-                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <i ></i><h2> Temas</h2>
+                            </div>
                             
 
 
@@ -297,7 +322,7 @@
                                        <i ></i> <b><?php echo $comentarios?></b> Comentarios -
                                        <i ></i> <?php echo $fecha?>s
                                      <?php
-                                    if($posteado==$userAct)
+                                    if($posteado==$UsuarioActivo)
                                         {?>
                                      <span class="pull-right text-muted small"><em><?php echo"<td> <a  class='link-dos' href=\"noticia.php?id=$idNoti\">Ver </a></td>";?></em>
                                     </span>
@@ -317,49 +342,21 @@
                                  }
                                  ?>
                                 
-                            </div>
-                            <!-- /.list-group -->
+                            </div><!-- /.list-group -->
                            <!--<a href="#" class="btn btn-default btn-block">Ver Todas las Alertas</a>-->
-                        </div>
-                        <!-- /.panel-body -->
+                        </div><!-- /.panel-body -->
+                        </div>            
+                        <br>
+                        <b><a  class='link-dos' href="adicionar-noticia.php">Adicionar nuevo  tema</a></b>
                     </div>
-
-
-
-
-
-                       
-      
-            
-
-            
-<br>
-<b><a  class='link-dos' href="adicionar-noticia.php">Adicionar nuevo  tema</a></b>
-                    </div>
-                </div>
-                <!-- /.col-lg-12 -->
-            </div>
-            <!-- /.row -->
-        
+                </div><!-- /.col-lg-12 -->
+            </div><!-- /.row -->            
+        </div><!-- /#page-wrapper -->
 
     </div>
-    <!-- /#wrapper -->
 
-    <!-- Core Scripts - Include with every page -->
-    <script src="../Librerias/js/jquery-1.10.2.js"></script>
-    <script src="../Librerias/js/bootstrap.min.js"></script>
     <script src="../Librerias/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-
-    <!-- Page-Level Plugin Scripts - Dashboard -->
-    <script src="../Librerias/js/plugins/morris/raphael-2.1.0.min.js"></script>
-    <script src="../Librerias/js/plugins/morris/morris.js"></script>
-
-    <!-- SB Admin Scripts - Include with every page -->
     <script src="../Librerias/js/sb-admin.js"></script>
-
-    <!-- Page-Level Demo Scripts - Dashboard - Use for reference -->
-    <script src="../Librerias/js/demo/dashboard-demo.js"></script>
-
 </body>
 
 </html>

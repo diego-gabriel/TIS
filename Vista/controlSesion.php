@@ -1,6 +1,7 @@
 <?php
     
 
+
 $usuariolog = $_SESSION['usuario'];
 $contrasenalog = $_SESSION['contrasena'];
 

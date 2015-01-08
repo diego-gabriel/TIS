@@ -3,8 +3,7 @@ error_reporting (5);
 include '../../../Modelo/conexion.php';
 
 $co=new conexion();
-$usuarioAse="leticia";
-
+$usuarioAse = $_POST['usuarioAsesor'];
 
 $aceptar=$_POST["aceptarFecha"];
 $fechaIni = $_POST["fechaInicioE"];
@@ -27,7 +26,7 @@ $registros=$co->consulta("SELECT *".
         " WHERE tipo_t= 'documento requerido'",$co) or
   die("Problemas en el select:".mysql_error());
 if(isset($documentoR))
-    {
+{
     /**
         $SQL="SELECT fecha_inicio,hora_inicio,fecha_limite,hora_limite".
                 " FROM documento_requerido".
@@ -67,7 +66,8 @@ if(isset($documentoR))
                     $idDocumento = (Int)trim($row[0]);
                 }
            
-    }
+}
+
 if(isset($aceptar))
 {
     if($idDocumento!=0)

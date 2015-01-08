@@ -177,7 +177,7 @@
                                             <a href="../Vista/publicar_asesor.php">Nueva Publicaci&oacute;n </a>
                                         </li>
                                         <li>
-                                            <a href="../Controlador/publicaciones.php">Publicaciones </a>
+                                            <a href="../Vista/publicaciones.php">Publicaciones </a>
                                         </li>
                                        
                                     </ul>
@@ -208,9 +208,7 @@
                                  <li>
                                     <a href="contrato.php">Emitir Contrato </a>
                                 </li>
-                                <li>
-                                    <a href="../Vista/RegistrarFirma.php">Firma de Contratos</a>
-                                </li>
+                             
                                 <li>
                                     <a href="ordenDeCambio.php">Emitir Orden de Cambio</a>
                                 </li>

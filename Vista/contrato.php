@@ -1,14 +1,10 @@
-<!DOCTYPE html>
-
-<?php
-
-    include '../Modelo/conexion.php';
-    session_start();
-    $con=new conexion();
-    $UsuarioActivo = $_SESSION['usuario'];
- 
-?>
-
+ <?php  
+ include '../Modelo/conexion.php';
+ session_start();
+ $UsuarioActivo = $_SESSION['usuario'];
+ $con=new conexion();
+ ?> 
+  <!DOCTYPE html>
 <html>
 
 <head>
@@ -53,9 +49,6 @@
     <!-- JS -->
     <script type="text/javascript" src="../Librerias/lib/funcion.js"></script>
 
-    <script src="../Librerias/js/bootstrap-dialog.js"></script>
-    <link href="../Librerias/css/bootstrap-dialog.css" rel="stylesheet">
-
 
 
 
@@ -68,14 +61,13 @@
 
 <body>
 
-       <div id="wrapper">
+   
+    <div id="wrapper">
        
         
-		<!--<h2>design by <a href="#" title="flash templates">flash-templates-today.com</a></h2>-->
+        <!--<h2>design by <a href="#" title="flash templates">flash-templates-today.com</a></h2>-->
         
-	
-               
-	
+    
         <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
@@ -170,6 +162,7 @@
                                 <li>
                                     <a href="../Vista/documentos_generados.php">Contratos Emitidos</a>
                                 </li>
+                                
                                 <li>
                                     <a href="#">Publicaci&oacute;n Documentos <span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
@@ -179,7 +172,7 @@
                                             <a href="../Vista/publicar_asesor.php">Nueva Publicaci&oacute;n </a>
                                         </li>
                                         <li>
-                                            <a href="../Controlador/publicaciones.php">Publicaciones </a>
+                                            <a href="../Vista/publicaciones.php">Publicaciones </a>
                                         </li>
                                        
                                     </ul>
@@ -210,9 +203,7 @@
                                  <li>
                                     <a href="contrato.php">Emitir Contrato </a>
                                 </li>
-                                <li>
-                                    <a href="../Vista/RegistrarFirma.php">Firma de Contratos</a>
-                                </li>
+                               
                                 <li>
                                     <a href="ordenDeCambio.php">Emitir Orden de Cambio</a>
                                 </li>
@@ -237,12 +228,12 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
-
+              
                          <li>
                               <a href="lista_doc_subidos.php"><i class="fa fa-tasks fa-fw"></i>Documentos Subidos </a>  
                                               
                           </li>
-                        
+                     
                         <li>
                             <a href="lista-de-noticias.php"><i class="fa fa-comment"></i> Foro</a>
                         </li>
@@ -282,80 +273,55 @@
                 </div>
             </div>
         </div>
-<!-------------------------------------------NUEVAS PUBLICACIONES------------------------------------------>
-<div id="page-wrapper">
-           
-<form id = "econtrato" method = "post" action="" role="form" >
-    <div class ="form-horizontal">
-         <div class="row">
-            <div class="col-lg-12">
-                <h2 class="page-header">Emitir Contrato</h2>            
+
+        <div id="page-wrapper">
+            <form id = "econtrato" method = "post" action="" role="form" >
+                <div class ="form-horizontal">
+                     <div class="row">
+                        <div class="col-lg-12">
+                            <h2 class="page-header">Emitir Contrato</h2>            
+                        </div>
+                     </div><!-- /.row -->
+                </div>    
+                            <!--Descripcion de la publicacion--> 
+                            
+             </form>               
+
+            <div class="form-group">
+            Grupo Empresa:
+            <form method="POST" action="emtirContrato.php" enctype="Multipart/form-data">
+                <select name="grupoempresa" class="form-control">
+                    <option>Seleccione una grupo empresa</option>
+                                    <?php
+                                        $idAsesor= $_SESSION['usuario']  ;
+                                        $estado = "Habilitado";
+                                        $c1="SELECT ge.`NOMBRE_LARGO_GE` FROM `inscripcion` AS i,`asesor` AS a,`grupo_empresa` AS `ge` WHERE i.`NOMBRE_UA` = a.`NOMBRE_U` AND i.`NOMBRE_UGE` = ge.`NOMBRE_U` AND a.`NOMBRE_U` LIKE '$idAsesor' AND i.`ESTADO_INSCRIPCION` LIKE '$estado'";
+                                        $a1=$con->consulta($c1);
+                                        
+                                        while($grupoE =  mysql_fetch_array($a1)){
+                                            echo "<option>".$grupoE[0]."</option>";
+                                        }
+                                        echo "<input type='hidden' name='idAsesor' value='$idAsesor'>";           
+                                    ?>
+                </select><br>
+                 <div class   ="col-sm-8">
+                     <input class ="btn btn-primary" type="submit" value= "Generar" id= "Generar PDF" name="Generar PDF" onclick ="this.form.action='../Controlador/emitirContrato.php?id=0'"></input> &nbsp;&nbsp;              
+                     
+                </div>
+            
+            </form>
             </div>
-         </div><!-- /.row -->
-    </div>    
-                <!--Descripcion de la publicacion--> 
-                
- </form>               
-
-    <div class="form-group">
-    Grupo Empresa:
-    <form method="POST" action="emtirContrato.php" enctype="Multipart/form-data">
-        <select name="grupoempresa" class="form-control">
-            <option>Seleccione una grupo empresa</option>
-                            <?php
-                                $idAsesor= $_SESSION['usuario']  ;
-                                $estado = "Habilitado";
-                                $c1="SELECT ge.`NOMBRE_LARGO_GE` FROM `inscripcion` AS i,`asesor` AS a,`grupo_empresa` AS `ge` WHERE i.`NOMBRE_UA` = a.`NOMBRE_U` AND i.`NOMBRE_UGE` = ge.`NOMBRE_U` AND a.`NOMBRE_U` LIKE '$idAsesor' AND i.`ESTADO_INSCRIPCION` LIKE '$estado'";
-                                $a1=$con->consulta($c1);
-                                
-                                while($grupoE =  mysql_fetch_array($a1)){
-                                    echo "<option>".$grupoE[0]."</option>";
-                                }
-                                echo "<input type='hidden' name='idAsesor' value='$idAsesor'>";           
-                            ?>
-        </select><br>
-         <div class   ="col-sm-8">
-             <input class ="btn btn-primary" type="submit" value= "Generar" id= "Generar PDF" name="Generar PDF" onclick ="this.form.action='../Controlador/emitirContrato.php?id=0'"></input> &nbsp;&nbsp;              
-             
-        </div>
     
-    </form>
+            <div class   ="form-group">
+              
+            </div><!--end/submit-->
+            
+        </div><!-- /#page-wrapper -->
+
     </div>
-    
-    <div class   ="form-group">
-      
-    </div><!--end/submit-->
-                
-      
-    
-
-             
-    <!--Modal para adjuntar recursos/documentos-->
-         
-      
-    </div>
-    <!-- /#wrapper -->
-    
-
-    <!-- Core Scripts - Include with every page -->
- 
 
     <script src="../Librerias/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-
-
-    <!-- SB Admin Scripts - Include with every page -->
     <script src="../Librerias/js/sb-admin.js"></script>
-  
-    <!-- Page-Level Demo Scripts - Dashboard - Use for reference -->
-    <script src="../Librerias/js/demo/dashboard-demo.js"></script>
-    <!-- Combo Box scripts -->
- 
-  
-<script type="text/javascript">
-    
-     
-});
-</script>
 </body>
 
 </html>

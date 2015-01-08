@@ -22,7 +22,6 @@ if($peticion_regis>0){
     	$fila = mysql_fetch_row($peticion_registro);
     	
     	 $id=$fila[0];
-    	 echo $id;
     	 
     	    $doc_eliminar=$conect->consulta(" DELETE FROM `descripcion` WHERE ID_R='$id'");
             $doc_eliminar=$conect->consulta(" DELETE FROM `documento` WHERE ID_R='$id'");

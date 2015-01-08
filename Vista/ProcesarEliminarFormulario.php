@@ -1,8 +1,5 @@
 <?php
 
-session_start();
-$Del_Crit = $_SESSION['usuario'];
-
 $Form = $_POST['EscogidoEliminar'];
 
 
@@ -18,7 +15,7 @@ include '../Modelo/conexion.php';
     {
 
         echo '<script>alert("El formulario esta siendo usado y no puede ser eliminado");</script>';
-        echo '<script>location.reload();</script>';
+        echo '<script>window.location="EliminarFormulario.php";</script>';
     
     }
     else{
@@ -35,7 +32,7 @@ include '../Modelo/conexion.php';
         {
 
             echo '<script>alert("Se elimino el formulario correctamente");</script>';
-            echo '<script>location.reload();</script>';
+            echo '<script>window.location="EliminarFormulario.php";</script>';
  
         }
 

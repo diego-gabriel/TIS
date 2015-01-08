@@ -3,7 +3,6 @@
     
    session_start();
    $UsuarioActivo = $_SESSION['usuario'];
-   include("controlSesion.php");
   
 ?>
 <html>
@@ -218,47 +217,39 @@
 
 <!----------------------------------------------Respuesta_Actividad-------------------------------------->
         <div id="page-wrapper">
-        <div class ="form-horizontal">
-        <div class="row">
-        <div class="col-lg-12">
-        <h1> Documentos Publicados</h1>
-        
-        
-         
-        <form id = "publicar" method = "POST" action="" onsubmit = "return validarCampos(this);">
-        <div class="panel panel-default">
-            <div class="panel-body">
-            <fieldset class="campos-border">
-                <legend class="campos-border">Informacion</legend>
-                <table class="table form-group">      
-                <thead>
-                            <tr>
-                              <th># ID </th>
-                              <th>Tipo</th>
-                              <th>Nombre</th>
-                              <th>Descripcion</th>
-                              <th>Accion</th>
-                            </tr>
-                         </thead>
-                          <tbody>                                                    
-                {change}
-            </tbody>
-                </table>
-            </fieldset>
+            <div class ="form-horizontal">
+                <div class="row">
+                    <div class="col-lg-12">
+                    <h1> Documentos Publicados</h1>     
+                        <form id = "publicar" method = "POST" action="" onsubmit = "return validarCampos(this);">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <fieldset class="campos-border">
+                                        <legend class="campos-border">Informacion</legend>
+                                        <table class="table form-group">      
+                                            <thead>
+                                                    <tr>
+                                                      <th># ID </th>
+                                                      <th>Tipo</th>
+                                                      <th>Nombre</th>
+                                                      <th>Descripcion</th>
+                                                      <th>Accion</th>   
+                                                    </tr>
+                                            </thead>
+                                            <tbody>                                                    
+                                            {change}
+                                            </tbody>
+                                        </table>
+                                    </fieldset>
+                                </div>
+                                <div class="panel-footer">
+                                    <a href="../Vista/publicar_asesor.php" class="link" ><i class="fa fa-plus "></i> Agregar recurso<span class="fa arrow"></span></a>
+                                </div>
+                            </div>
+                        </form>
+                    </div><!-- /.col-lg-12 -->
+                </div>
             </div>
-         <div class="panel-footer">
-                  <a href="../Vista/publicar_asesor.php" class="link" ><i class="fa fa-plus "></i> Agregar recurso<span class="fa arrow"></span></a>
-             </div>
-        </div>
-        </div>
-        
-        </form>
-    
-        </div>
-        <!-- /.col-lg-12 -->
-        </div>
-        <!-- /.row -->
-        
         </div>
         <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

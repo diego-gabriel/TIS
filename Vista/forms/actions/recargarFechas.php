@@ -4,6 +4,7 @@
     $hor1="No registrado";
     $fec2="No registrado";
     $hor2="No registrado";
+    //$UsuarioActivo = $_SESSION['usuario'];
 include '../../../Modelo/conexion.php';
 
 $co=new conexion();

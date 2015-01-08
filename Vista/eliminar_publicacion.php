@@ -34,7 +34,7 @@ $idPubli = $_GET['id_us'];
 	 //volver a la pagina---------------
          
          echo '<script>alert("Se elimino el documento correctamente");</script>';
-         echo '<script>window.location="../Controlador/publicaciones.php";</script>';}
+         echo '<script>window.location="../Vista/publicaciones.php";</script>';}
 	
 	
 
