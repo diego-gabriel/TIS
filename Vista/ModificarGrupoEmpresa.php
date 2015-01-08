@@ -2,10 +2,9 @@
  include '../Modelo/conexion.php';
  session_start();
  include("controlSesion.php");
- $UsuarioActivo = $_SESSION['usuario'];
+ $uActivo = $_SESSION['usuario'];
  $conect = new conexion();
- $VerificarUsuario = $conect->consulta("SELECT NOMBRE_U FROM usuario WHERE NOMBRE_U = '$UsuarioActivo' ");
- $VerificarUsuario2 = mysql_fetch_row($VerificarUsuario);
+
 
 ?>
 
@@ -92,22 +91,13 @@
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <?php echo $UsuarioActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                        <?php echo $uActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <?php
-                            if (is_array($VerificarUsuario2)) {   
-                        ?>
+
                         <li><a href="ModificarGrupoEmpresa.php"><i class="fa fa-user fa-fw"></i> Modificar Datos personales</a>
                         </li>
-                        <?php
-                            }else{
-                        ?>
-                        <li><a href="ModificarSocio.php"><i class="fa fa-user fa-fw"></i> Modificar Datos personales</a>
-                        </li>
-                         <?php
-                              }        
-                         ?>
+
                         <li class="divider"></li>
                         <li><a href="unlog.php"><i class="fa fa-sign-out fa-fw"></i>Salir</a>
                         </li>
@@ -136,7 +126,7 @@
                                         <?php
 
                                         
-                                        $SeleccionrAsesor = $conect->consulta("SELECT NOMBRE_UA FROM inscripcion WHERE NOMBRE_UGE='$UsuarioActivo'");
+                                        $SeleccionrAsesor = $conect->consulta("SELECT NOMBRE_UA FROM inscripcion WHERE NOMBRE_UGE='$uActivo'");
                                         
                                         $Asesor = mysql_fetch_row($SeleccionrAsesor);
                                         
@@ -162,9 +152,6 @@
                             <!-- /.nav-second-level -->
                         </li>
                         
-                         <?php
-                            if (is_array($VerificarUsuario2)) {   
-                        ?>
                          <li>
                              
                             <a href="#"><i class="fa fa-tasks fa-fw"></i> Tareas<span class="fa arrow"></span></a>
@@ -188,9 +175,7 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
-                        <?php
-                                }
-                        ?>
+
                         
                         <li>
                             <a href="#"><i class="fa fa-warning fa-fw"></i> Notificaciones<span class="fa arrow"></span></a>
@@ -231,122 +216,112 @@
         </nav>
 <!-------------------------------------------NUEVAS PUBLICACIONES------------------------------------------>
         
-        <div id="page-wrapper">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h2 class="page-header">Modificar Informacion Personal:</h2>
-                    <div class="col-lg-6" >
-                        
-                        
-                        
-                        
-                        
-                        
-                                    
-                                        
-            <?php
-            $nombreLargo;
-            $nombreCorto;
-            $correo;
-            $telefono;
-            $direccion;
-            $contrasena;
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+          <h2 class="page-header">Modificar Informacion Personal:</h2>
+            <div class="col-lg-6" >                              
+                <?php
+                
+                    $nLargo;
+                    $nCorto;
+                    $correo;
+                    $telefono;
+                    $direccion;
+                    $contrase;
 
-            $peticion = $conect->consulta("SELECT G.NOMBRE_LARGO_GE, G.NOMBRE_CORTO_GE, U.CORREO_ELECTRONICO_U, U.TELEFONO_U, G.DIRECCION_GE, U.PASSWORD_U
-                        FROM grupo_empresa G, usuario U WHERE G.NOMBRE_U=U.NOMBRE_U AND U.NOMBRE_U='$UsuarioActivo'");         
-           
-            $VerificarTipoUsuario = $conect->consulta("SELECT LOGIN_S FROM socio WHERE LOGIN_S ='$UsuarioActivo'");
-            
-            $TIpoUsuario = mysql_fetch_row($VerificarTipoUsuario);
-            
-            
-            while($fila = mysql_fetch_array($peticion))
-            {
-                $nombreLargo = $fila["NOMBRE_LARGO_GE"];
-                $nombreCorto = $fila["NOMBRE_CORTO_GE"];
-                $correo = $fila["CORREO_ELECTRONICO_U"];
-                $telefono = $fila["TELEFONO_U"];
-                $direccion = $fila["DIRECCION_GE"];
-                $contrasena = $fila["PASSWORD_U"];
-            }
-           ?>       
-                        
-                        <form method = "post" id="FormularioRegistroUsuarioGE">    
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                  <span class="glyphicon glyphicon-user"></span>
-                                                </span>
-                                                <input class="form-control" type="text" name="nombreU" id="nombreU" value=<?php echo $UsuarioActivo?> " readonly="readonly" pattern="\b[a-zA-z]{5}[a-zA-z0-9]{0,9}" title="Minimo 5 y Maximo 14 caracteres...Ejm: Bittle123, Bitle" required>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                  <span class="glyphicon glyphicon-user"></span>
-                                                </span>
-                                                <input class="form-control" type="text" name="nombreL" id="nombreL" value="<?php echo $nombreLargo ?>"readonly="readonly" minlength="3" pattern=".{3,}" title="Nombre largo muy corto" required  onkeypress="return validarLetras(event)">
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                  <span class="glyphicon glyphicon-user"></span>
-                                                </span>
-                                                <input class="form-control" type="text" name="nombreC" id="nombreC" value="<?php echo $nombreCorto ?>" readonly="readonly" minlength="3" pattern=".{3,}" title="Nombre corto muy corto" required  onkeypress="return validarLetras(event)">
-                                            </div>
-                                        </div>
-                                        
-                                        
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                  <span class="glyphicon glyphicon-envelope"></span>
-                                                </span>
-                                                <input class="form-control" type="email" name="correo" id="correo" value="<?php echo $correo ?>" pattern="^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$" title="Ingrese un correo correcto" required  onkeypress="return validarEmail(event)">
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                  <span class="glyphicon glyphicon-earphone"></span>
-                                                </span>
-                                                <input class="form-control" type="text" name="telefono" id="telefono" value="<?php echo $telefono?>" title="Ejm: 4022371" pattern="\b[4][0-9]{6}"  required  onkeypress="return validarNumeros(event)">
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                  <span class="glyphicon glyphicon-envelope"></span>
-                                                </span>
-                                                <input class="form-control" type="text" name="direccion" id="direccion" value="<?php echo $direccion ?>" required>
-                                            </div>
-                                        </div>
-                                
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                  <span class="glyphicon glyphicon-lock"></span>
-                                                </span>
-                                                <input class="form-control" type="text" name="contrasena1" id="contrasena1" value="<?php echo $contrasena ?>" minlength="8" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$" title="Ingrese una contraseña segura, debe tener como minimo 8 caracteres y como maximo 15, al menos una letra mayuscula, una minuscula, un numero y un caracter especial" required>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="form-group">
-                                            <button type="submit" name="submit" class="btn btn-primary" onclick="this.form.action='ModificarGE.php'">  <span class="glyphicon glyphicon-ok"></span> Actualizar</button>
-                                        </div>
-                                        
-                                     </form> 
+                    $peticion = $conect->consulta("SELECT G.NOMBRE_LARGO_GE, G.NOMBRE_CORTO_GE, U.CORREO_ELECTRONICO_U, U.TELEFONO_U, G.DIRECCION_GE, U.PASSWORD_U
+                                FROM grupo_empresa G, usuario U WHERE G.NOMBRE_U=U.NOMBRE_U AND U.NOMBRE_U='$uActivo'");         
 
-                                
-                            <div id="panelResultadoGE">
-                                
-                            </div>        
-                        </div>
+
+                    while($fila = mysql_fetch_array($peticion))
+                    {
+                        $nLargo = $fila["NOMBRE_LARGO_GE"];
+                        $nCorto = $fila["NOMBRE_CORTO_GE"];
+                        $correo = $fila["CORREO_ELECTRONICO_U"];
+                        $telefono = $fila["TELEFONO_U"];
+                        $direccion = $fila["DIRECCION_GE"];
+                        $contrase = $fila["PASSWORD_U"];
+                    }
+               ?>       
+                        
+            <form method = "post" id="FormularioRegistroUsuarioGE">    
+                
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                          <span class="glyphicon glyphicon-user"></span>
+                        </span>
+                        <input class="form-control" type="text" name="nombreU" id="nombreU" value=<?php echo $uActivo?> " readonly="readonly" pattern="\b[a-zA-z]{5}[a-zA-z0-9]{0,9}" title="Minimo 5 y Maximo 14 caracteres...Ejm: Bittle123, Bitle" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                          <span class="glyphicon glyphicon-user"></span>
+                        </span>
+                        <input class="form-control" type="text" name="nombreL" id="nombreL" value="<?php echo $nLargo ?>"readonly="readonly" minlength="3" pattern=".{3,}" title="Nombre largo muy corto" required  onkeypress="return validarLetras(event)">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                          <span class="glyphicon glyphicon-user"></span>
+                        </span>
+                        <input class="form-control" type="text" name="nombreC" id="nombreC" value="<?php echo $nCorto ?>" readonly="readonly" minlength="3" pattern=".{3,}" title="Nombre corto muy corto" required  onkeypress="return validarLetras(event)">
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                          <span class="glyphicon glyphicon-envelope"></span>
+                        </span>
+                        <input class="form-control" type="email" name="correo" id="correo" value="<?php echo $correo ?>" pattern="^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$" title="Ingrese un correo correcto" required  onkeypress="return validarEmail(event)">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                          <span class="glyphicon glyphicon-earphone"></span>
+                        </span>
+                        <input class="form-control" type="text" name="telefono" id="telefono" value="<?php echo $telefono?>" title="Ejm: 4022371" pattern="\b[4][0-9]{6}"  required  onkeypress="return validarNumeros(event)">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                          <span class="glyphicon glyphicon-envelope"></span>
+                        </span>
+                        <input class="form-control" type="text" name="direccion" id="direccion" value="<?php echo $direccion ?>" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                          <span class="glyphicon glyphicon-lock"></span>
+                        </span>
+                        <input class="form-control" type="text" name="contrasena1" id="contrasena1" value="<?php echo $contrase ?>" minlength="8" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$" title="Ingrese una contraseña segura, debe tener como minimo 8 caracteres y como maximo 15, al menos una letra mayuscula, una minuscula, un numero y un caracter especial" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" name="submit" class="btn btn-primary" onclick="this.form.action='ModificarGE.php'">  <span class="glyphicon glyphicon-ok"></span> Actualizar</button>
+                </div>
+
+            </form> 
+
+
+                <div id="panelResultadoGE">
+                    
+                </div>        
+            </div>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>

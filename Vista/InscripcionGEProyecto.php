@@ -3,11 +3,9 @@
 <?php
     include '../Modelo/conexion.php';
     session_start();
-    $UsuarioActivo = $_SESSION['usuario'];
+    $uActivo = $_SESSION['usuario'];
     include("controlSesion.php");
     $con=new conexion();
-    $VerificarUsuario = $con->consulta("SELECT NOMBRE_U FROM usuario WHERE NOMBRE_U = '$UsuarioActivo' ");
-    $VerificarUsuario2 = mysql_fetch_row($VerificarUsuario);
 
 ?>
 <html>
@@ -88,22 +86,11 @@
             <ul class="nav navbar-top-links navbar-right">
                                <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <?php echo $UsuarioActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                        <?php echo $uActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <?php
-                            if (is_array($VerificarUsuario2)) {   
-                        ?>
                         <li><a href="ModificarGrupoEmpresa.php"><i class="fa fa-user fa-fw"></i> Modificar Datos personales</a>
                         </li>
-                        <?php
-                            }else{
-                        ?>
-                        <li><a href="ModificarSocio.php"><i class="fa fa-user fa-fw"></i> Modificar Datos personales</a>
-                        </li>
-                         <?php
-                              }        
-                         ?>
                         <li class="divider"></li>
                         <li><a href="unlog.php"><i class="fa fa-sign-out fa-fw"></i>Salir</a>
                         </li>
@@ -141,7 +128,7 @@
                                    
                                       $conect = new conexion();
 
-                                      $SeleccionarVerficarSocio = $conect->consulta("SELECT NOMBRES_S FROM socio WHERE NOMBRES_S = '$UsuarioActivo'");
+                                      $SeleccionarVerficarSocio = $conect->consulta("SELECT NOMBRES_S FROM socio WHERE NOMBRES_S = '$uActivo'");
 
                                       $VerificarSocio = mysql_fetch_row($SeleccionarVerficarSocio);
 
@@ -180,11 +167,11 @@
                                     }
                                     else
                                     {
-                                        $SeleccionrAsesor = $conect->consulta("SELECT NOMBRE_UA FROM inscripcion WHERE NOMBRE_UGE='$UsuarioActivo'");
+                                        $SeleccionrAsesor = $conect->consulta("SELECT NOMBRE_UA FROM inscripcion WHERE NOMBRE_UGE='$uActivo'");
                                       
                                         $Asesor = mysql_fetch_row($SeleccionrAsesor);
                                           
-                                        $ins_proyecto = $conect->consulta("SELECT CODIGO_P FROM inscripcion_proyecto WHERE NOMBRE_U='$UsuarioActivo'");
+                                        $ins_proyecto = $conect->consulta("SELECT CODIGO_P FROM inscripcion_proyecto WHERE NOMBRE_U='$uActivo'");
                                         $id_proyecto = mysql_fetch_row($ins_proyecto);
                                           
                                         $SeleccionarDocReq = $conect->consulta("SELECT  `NOMBRE_R`,`CODIGO_P` FROM registro AS r,documento_r AS d WHERE r.ID_R=d.ID_R AND  `NOMBRE_U`='$Asesor[0]' AND TIPO_T='documento requerido' ");
@@ -300,11 +287,11 @@
                     <div class="col-lg-4" >
                          <?php
                          
-                          $seleccion = "SELECT NOMBRE_UA FROM inscripcion WHERE NOMBRE_UGE = '$UsuarioActivo'";
+                          $seleccion = "SELECT NOMBRE_UA FROM inscripcion WHERE NOMBRE_UGE = '$uActivo'";
                           $consultar = $con ->consulta($seleccion);
                           $nombreUA = mysql_fetch_array($consultar);
 
-                          $VerificarHabilitacion = $con->consulta("SELECT * FROM inscripcion WHERE NOMBRE_UGE='$UsuarioActivo' AND ESTADO_INSCRIPCION='Habilitado'");
+                          $VerificarHabilitacion = $con->consulta("SELECT * FROM inscripcion WHERE NOMBRE_UGE='$uActivo' AND ESTADO_INSCRIPCION='Habilitado'");
                           $Habilitacion = mysql_fetch_row($VerificarHabilitacion);
 
                         if(strnatcasecmp($nombreUA[0], "") != 0){
@@ -319,28 +306,27 @@
                                     <select name="proyecto" class="form-control">
                                     <option>Seleccione un proyecto</option>
                                     <?php
-                                        $idGE= $_SESSION['usuario']  ;
-
-                                        $conGestion="SELECT id_g "
+                                        $idGE = $_SESSION['usuario'];
+                                        $seleccion = "SELECT id_g "
                                                 . "FROM gestion "
                                                 . "WHERE DATE (NOW()) > DATE(FECHA_INICIO_G) and DATE(NOW()) < DATE(FECHA_FIN_G)";
-                                        $conGestion_=$con->consulta($conGestion);
-                                        $idGestion=mysql_fetch_row($conGestion_);
-                                        $idGestion_=$idGestion[0];
+                                        $consulta_= $con->consulta($seleccion);
+                                        $idGestion = mysql_fetch_row($consulta_);
+                                        $idGestion_ = $idGestion[0];
                                                                        
-                                        $c1="SELECT p.`NOMBRE_P` FROM `proyecto` AS `p`, `gestion` AS `g` WHERE p.`ID_G` = g.`ID_G` AND p.`ID_G` LIKE '".$idGestion_."'";
+                                        $seleccion = "SELECT p.`NOMBRE_P` FROM `proyecto` AS `p`, `gestion` AS `g` WHERE p.`ID_G` = g.`ID_G` AND p.`ID_G` LIKE '".$idGestion_."'";
                                  
-                                        $a1=$con->consulta($c1);
+                                        $consulta = $con->consulta($seleccion);
                 
-                                        while($v1 =  mysql_fetch_array($a1)){
-                                            echo "<option>".$v1[0]."</option>";
+                                        while($proyecto =  mysql_fetch_array($consulta)){
+                                            echo "<option>".$proyecto[0]."</option>";
                                         }
                                     echo "<input type='hidden' name='idGE' value='$idGE'>";
             
                                     ?>
                                      </select><br>
                                     <br>
-                                    <input type='hidden' name='ge' value=<?php echo $UsuarioActivo; ?>>
+                                    <input type='hidden' name='ge' value=<?php echo $uActivo; ?>>
                                     <div class="form-group">
                                         <button type="submit" name="submit" class="btn btn-primary" onclick="this.form.action='RegistrarProyectoGE.php'">  <span class="glyphicon glyphicon-ok"></span> Aceptar</button>
                                    </div>       

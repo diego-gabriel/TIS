@@ -4,8 +4,7 @@
     $UsuarioActivo = $_SESSION['usuario'];
     include("controlSesion.php");
     $con=new conexion();
-    $VerificarUsuario = $con->consulta("SELECT NOMBRE_U FROM usuario WHERE NOMBRE_U = '$UsuarioActivo' ");
-    $VerificarUsuario2 = mysql_fetch_row($VerificarUsuario);
+
 ?>
 
 <html>
@@ -89,19 +88,10 @@
                         <?php echo $UsuarioActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <?php
-                            if (is_array($VerificarUsuario2)) {   
-                        ?>
+
                         <li><a href="ModificarGrupoEmpresa.php"><i class="fa fa-user fa-fw"></i> Modificar Datos personales</a>
                         </li>
-                        <?php
-                            }else{
-                        ?>
-                        <li><a href="ModificarSocio.php"><i class="fa fa-user fa-fw"></i> Modificar Datos personales</a>
-                        </li>
-                         <?php
-                              }        
-                         ?>
+
                         <li class="divider"></li>
                         <li><a href="unlog.php"><i class="fa fa-sign-out fa-fw"></i>Salir</a>
                         </li>
@@ -299,14 +289,6 @@
                         <form name="agregarSocio" role=form" method="post" enctype="multipart/data-form">
                             <div class="form-group">
                                 
-                                       <div class="form-group">
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                  <span class="glyphicon glyphicon-user"></span>
-                                                </span>
-                                                <input class="form-control" type="text" name="nombreU" id="nombreU" placeholder="Nombre de Usuario" pattern="\b[a-zA-z]{5}[a-zA-z0-9]{0,9}" title="Minimo 5 y Maximo 14 caracteres...Ejm: Bittle123, Bitle" required>
-                                            </div>
-                                        </div>
                                 
                                     <div class="form-group">
                                             <div class="input-group">
@@ -326,14 +308,6 @@
                                         </div>
                                         
                                 
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                  <span class="glyphicon glyphicon-lock"></span>
-                                                </span>
-                                                <input class="form-control" type="password" name="contrasena1" id="contrasena1" placeholder="Contraseña" minlength="8" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$" title="Ingrese una contraseña segura, debe tener como minimo 8 caracteres y como maximo 15, al menos una letra mayuscula, una minuscula, un numero y un caracter especial" required>
-                                            </div>
-                                        </div>
                                 
                                         
                                 <button type="submit" onclick="this.form.action='registrarSocio.php'" class="btn btn-primary"> <span class="glyphicon glyphicon-ok"></span> Registrar</button>

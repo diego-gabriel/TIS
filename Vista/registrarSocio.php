@@ -2,24 +2,15 @@
 session_start();
   
     $nombreU = $_SESSION['usuario']  ;
-    $nombreUS = $_POST['nombreU'];
     $nombreS = $_POST['nombre'];
     $apellidoS = $_POST['apellido'];
-    $contrasenaS = $_POST['contrasena1'];
+    
 
     include '../Modelo/conexion.php';
    
     $conect = new conexion();
 
-    $consulta = $conect->consulta("SELECT LOGIN_S FROM socio WHERE LOGIN_S = '$nombreUS' ");
-    $verifC = mysql_fetch_row($consulta);
     
-    
-    $consulta = $conect->consulta("SELECT NOMBRE_U FROM usuario WHERE NOMBRE_U = '$nombreUS' ");
-    $verifGE = mysql_fetch_row($consulta);
-    
-     if (!is_array($verifC) && !is_array($verifGE)) 
-     {
          
        /* $db = 'tis_mbittle';
         $host = '192.168.2.5';
@@ -37,15 +28,13 @@ session_start();
         $conn->beginTransaction();
         try {
 
-            $sql = 'INSERT INTO socio (NOMBRE_U, NOMBRES_S, APELLIDOS_S, LOGIN_S, PASSWORD_S) VALUES (:nombreU, :nombreS, :apellidoS, :loginS, :passwordS);';
+            $sql = 'INSERT INTO socio (NOMBRE_U, NOMBRES_S, APELLIDOS_S) VALUES (:nombreU, :nombreS, :apellidoS);';
 
             $result = $conn->prepare($sql);
 
             $result->bindValue(':nombreU', $nombreU, PDO::PARAM_STR);
             $result->bindValue(':nombreS', $nombreS, PDO::PARAM_STR);
             $result->bindValue(':apellidoS', $apellidoS, PDO::PARAM_STR);
-            $result->bindValue(':loginS', $nombreUS, PDO::PARAM_STR);
-            $result->bindValue(':passwordS', $contrasenaS, PDO::PARAM_STR);
 
             $result->execute();
 
@@ -57,9 +46,4 @@ session_start();
             $conn->rollback();
             echo $e->getMessage();
         }  
-     }
-     else
-     {
-          echo"<script type=\"text/javascript\">alert('El nombre de usuario ya esta registrado'); window.location='AnadirSocio.php';</script>";
-     }
     ?>

@@ -14,15 +14,11 @@
     
     $conect = new conexion();
     $mail = new PHPMailer();
-   
-    $Sel_Soc = $conect->consulta("SELECT LOGIN_S FROM socio WHERE LOGIN_S = '$Name' ");
-    $Sel_Soc2 = mysql_fetch_row($Sel_Soc);
-    
-    
+
     $Sel_U = $conect->consulta("SELECT NOMBRE_U FROM usuario WHERE NOMBRE_U = '$Name' ");
     $Sel_U2 = mysql_fetch_row($Sel_U);
     
-     if (!is_array($Sel_Soc2) && !is_array($Sel_U2)) 
+     if (!is_array($Sel_U2)) 
      {
            
           //Definir que vamos a usar SMTP

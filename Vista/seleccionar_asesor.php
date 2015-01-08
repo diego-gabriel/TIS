@@ -3,11 +3,10 @@
 <?php
     include '../Modelo/conexion.php';
     session_start();
-    $UsuarioActivo = $_SESSION['usuario'];
+    $uActivo = $_SESSION['usuario'];
     include("controlSesion.php");
-    $con=new conexion();
-    $VerificarUsuario = $con->consulta("SELECT NOMBRE_U FROM usuario WHERE NOMBRE_U = '$UsuarioActivo' ");
-    $VerificarUsuario2 = mysql_fetch_row($VerificarUsuario);
+    $conexion = new conexion();
+
 
 ?>
 <html>
@@ -88,22 +87,13 @@
             <ul class="nav navbar-top-links navbar-right">
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <?php echo $UsuarioActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                        <?php echo $uActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <?php
-                            if (is_array($VerificarUsuario2)) {   
-                        ?>
+
                         <li><a href="ModificarGrupoEmpresa.php"><i class="fa fa-user fa-fw"></i> Modificar Datos personales</a>
                         </li>
-                        <?php
-                            }else{
-                        ?>
-                        <li><a href="ModificarSocio.php"><i class="fa fa-user fa-fw"></i> Modificar Datos personales</a>
-                        </li>
-                         <?php
-                              }        
-                         ?>
+
                         <li class="divider"></li>
                         <li><a href="unlog.php"><i class="fa fa-sign-out fa-fw"></i>Salir</a>
                         </li>
@@ -141,7 +131,7 @@
                                    
                                       $conect = new conexion();
 
-                                      $SeleccionarVerficarSocio = $conect->consulta("SELECT NOMBRES_S FROM socio WHERE NOMBRES_S = '$UsuarioActivo'");
+                                      $SeleccionarVerficarSocio = $conect->consulta("SELECT NOMBRES_S FROM socio WHERE NOMBRES_S = '$uActivo'");
 
                                       $VerificarSocio = mysql_fetch_row($SeleccionarVerficarSocio);
 
@@ -179,9 +169,9 @@
                                     }
                                     else
                                     {
-                                        $SeleccionrAsesor = $conect->consulta("SELECT NOMBRE_UA FROM inscripcion WHERE NOMBRE_UGE='$UsuarioActivo'");
+                                        $SeleccionrAsesor = $conect->consulta("SELECT NOMBRE_UA FROM inscripcion WHERE NOMBRE_UGE='$uActivo'");
                                         $Asesor = mysql_fetch_row($SeleccionrAsesor);
-                                        $ins_proyecto = $conect->consulta("SELECT CODIGO_P FROM inscripcion_proyecto WHERE NOMBRE_U='$UsuarioActivo'");
+                                        $ins_proyecto = $conect->consulta("SELECT CODIGO_P FROM inscripcion_proyecto WHERE NOMBRE_U='$uActivo'");
                                         $id_proyecto = mysql_fetch_row($ins_proyecto);
                                           
                                         $SeleccionarDocReq = $conect->consulta("SELECT  `NOMBRE_R`,`CODIGO_P` FROM registro AS r,documento_r AS d WHERE r.ID_R=d.ID_R AND  `NOMBRE_U`='$Asesor[0]' AND TIPO_T='documento requerido' ");
@@ -274,19 +264,9 @@
             </div>
             
             
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            <!-- /.navbar-static-side -->
+<!-- --------------------------------------------------------------------------------------------------------------------------                 -->            
+
+    <!-- /.navbar-static-side -->
         </nav>
 
            <div id="page-wrapper">
@@ -295,8 +275,8 @@
                     <h2 class="page-header">Eliga un Asesor </h2>
                     <div class="col-lg-4" >
                         <?php
-                         $seleccion = "SELECT REPRESENTANTE_LEGAL_GE FROM grupo_empresa WHERE NOMBRE_U = '$UsuarioActivo'";
-                          $consultar = $con ->consulta($seleccion);
+                          $seleccion = "SELECT REPRESENTANTE_LEGAL_GE FROM grupo_empresa WHERE NOMBRE_U = '$uActivo'";
+                          $consultar = $conexion ->consulta($seleccion);
                           $repLegal = mysql_fetch_array($consultar);
                          
                           if(strnatcasecmp($repLegal[0], "") != 0){
@@ -306,19 +286,15 @@
                                     <select name="asesor" class="form-control">
                                         <option>Seleccione un Asesor</option>
                                         <?php
-                                                $c1="SELECT a.NOMBRES_A, a.APELLIDOS_A FROM asesor AS a, usuario AS u WHERE a.NOMBRE_U = u.NOMBRE_U AND u.ESTADO_E = 'Habilitado'";
-                                                /*
-                                                 * $c1="SELECT nombres_a, apellidos_a"
-                                                        . " FROM asesor WHERE";
-                                                 */
-                                                $r1=$con->consulta($c1);
-                                                while($v1=  mysql_fetch_array($r1)){
-                                                    echo "<option>".$v1[0]. " " . $v1[1] . "</option>";
+                                                $seleccion = "SELECT a.NOMBRES_A, a.APELLIDOS_A FROM asesor AS a, usuario AS u WHERE a.NOMBRE_U = u.NOMBRE_U AND u.ESTADO_E = 'Habilitado'";
+                                                $consulta = $conexion->consulta($seleccion);
+                                                while($asesor =  mysql_fetch_array($consulta)){
+                                                    echo "<option>".$asesor[0]. " " . $asesor[1] . "</option>";
                                                 }
                                         ?>
                                     </select>
                                     <br>
-                                    <input type='hidden' name='ge' value=<?php echo $UsuarioActivo; ?>>
+                                    <input type='hidden' name='ge' value=<?php echo $uActivo; ?>>
                                     <input type='submit' class='btn btn-primary' name='registrar' value='Registrar'>
                                             
                                 </form>

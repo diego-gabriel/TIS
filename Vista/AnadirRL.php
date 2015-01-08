@@ -1,11 +1,9 @@
 <?php
     include '../Modelo/conexion.php';
     session_start();
-    $UsuarioActivo = $_SESSION['usuario'];
+    $uActivo = $_SESSION['usuario'];
     include("controlSesion.php");
-    $con=new conexion();
-    $VerificarUsuario = $con->consulta("SELECT NOMBRE_U FROM usuario WHERE NOMBRE_U = '$UsuarioActivo' ");
-    $VerificarUsuario2 = mysql_fetch_row($VerificarUsuario);
+    $con=new conexion
 ?>
 
 <html>
@@ -88,22 +86,13 @@
             <ul class="nav navbar-top-links navbar-right">
                                <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <?php echo $UsuarioActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                        <?php echo $uActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <?php
-                            if (is_array($VerificarUsuario2)) {   
-                        ?>
+
                         <li><a href="ModificarGrupoEmpresa.php"><i class="fa fa-user fa-fw"></i> Modificar Datos personales</a>
                         </li>
-                        <?php
-                            }else{
-                        ?>
-                        <li><a href="ModificarSocio.php"><i class="fa fa-user fa-fw"></i> Modificar Datos personales</a>
-                        </li>
-                         <?php
-                              }        
-                         ?>
+
                         <li class="divider"></li>
                         <li><a href="unlog.php"><i class="fa fa-sign-out fa-fw"></i>Salir</a>
                         </li>
@@ -141,7 +130,7 @@
                                    
                                       $conect = new conexion();
 
-                                      $SeleccionarVerficarSocio = $conect->consulta("SELECT NOMBRES_S FROM socio WHERE NOMBRES_S = '$UsuarioActivo'");
+                                      $SeleccionarVerficarSocio = $conect->consulta("SELECT NOMBRES_S FROM socio WHERE NOMBRES_S = '$uActivo'");
 
                                       $VerificarSocio = mysql_fetch_row($SeleccionarVerficarSocio);
 
@@ -177,11 +166,11 @@
                                     }
                                     else
                                     {
-                                        $SeleccionrAsesor = $conect->consulta("SELECT NOMBRE_UA FROM inscripcion WHERE NOMBRE_UGE='$UsuarioActivo'");
+                                        $SeleccionrAsesor = $conect->consulta("SELECT NOMBRE_UA FROM inscripcion WHERE NOMBRE_UGE='$uActivo'");
                                       
                                         $Asesor = mysql_fetch_row($SeleccionrAsesor);
                                           
-                                        $ins_proyecto = $conect->consulta("SELECT CODIGO_P FROM inscripcion_proyecto WHERE NOMBRE_U='$UsuarioActivo'");
+                                        $ins_proyecto = $conect->consulta("SELECT CODIGO_P FROM inscripcion_proyecto WHERE NOMBRE_U='$uActivo'");
                                         $id_proyecto = mysql_fetch_row($ins_proyecto);
                                           
                                         $SeleccionarDocReq = $conect->consulta("SELECT  `NOMBRE_R`,`CODIGO_P` FROM registro AS r,documento_r AS d WHERE r.ID_R=d.ID_R AND  `NOMBRE_U`='$Asesor[0]' AND TIPO_T='documento requerido' ");
@@ -297,7 +286,7 @@
 
              <?php
 
-             $VerificarCantidadSocios = $conect->consulta("SELECT * FROM socio WHERE NOMBRE_U='$UsuarioActivo'");
+             $VerificarCantidadSocios = $conect->consulta("SELECT * FROM socio WHERE NOMBRE_U='$uActivo'");
 
 
              $CantidadSocios = mysql_num_rows($VerificarCantidadSocios);  
@@ -319,13 +308,13 @@
                             <select name="repLegal" class="form-control">
                                 <option>Seleccione un representante legal </option>
                                 <?php
-                                session_start();
+                                    session_start();
                                     $idGE = $_SESSION['usuario']  ;
-                                    $c1="SELECT NOMBRES_S, APELLIDOS_S FROM `socio`WHERE NOMBRE_U LIKE '$idGE'";
-                                    $a1=$con->consulta($c1);
+                                    $seleccion = "SELECT NOMBRES_S, APELLIDOS_S FROM `socio`WHERE NOMBRE_U LIKE '$idGE'";
+                                    $consulta = $con->consulta($seleccion);
 
-                                    while($v1 =  mysql_fetch_array($a1)){
-                                        echo "<option>".$v1[0]." ".$v1[1]."</option>";
+                                    while($rLegal =  mysql_fetch_array($consulta)){
+                                        echo "<option>".$rLegal[0]." ".$rLegal[1]."</option>";
                                     }
                                     echo "<input type='hidden' name='idAsesor' value='$idGE'>";
 

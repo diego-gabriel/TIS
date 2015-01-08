@@ -36,14 +36,11 @@ $peticion3 = $conectar ->consulta("SELECT * FROM asesor");
 	}*/
         
     $conect = new conexion();
-    $VerificarUsuarioS = $conect->consulta("SELECT LOGIN_S FROM socio WHERE LOGIN_S = '$addUsuario' ");
-    $VerificarUsuarioS2 = mysql_fetch_row($VerificarUsuarioS);
-    
     
     $VerificarUsuarioGE = $conect->consulta("SELECT NOMBRE_U FROM usuario WHERE NOMBRE_U = '$addUsuario' ");
     $VerificarUsuarioGE2 = mysql_fetch_row($VerificarUsuarioGE);
     
-     if (!is_array($VerificarUsuarioS2) && !is_array($VerificarUsuarioGE2)) 
+     if (!is_array($VerificarUsuarioGE2)) 
      {
 //conexion-------------		
     

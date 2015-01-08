@@ -109,19 +109,10 @@
                         <?php echo $userAct.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <?php
-                            if (is_array($VerificarUsuario2)) {   
-                        ?>
+
                         <li><a href="ModificarGrupoEmpresa.php"><i class="fa fa-user fa-fw"></i> Modificar Datos personales</a>
                         </li>
-                        <?php
-                            }else{
-                        ?>
-                        <li><a href="ModificarSocio.php"><i class="fa fa-user fa-fw"></i> Modificar Datos personales</a>
-                        </li>
-                         <?php
-                              }        
-                         ?>
+
                         <li class="divider"></li>
                         <li><a href="unlog.php"><i class="fa fa-sign-out fa-fw"></i>Salir</a>
                         </li>
@@ -232,9 +223,7 @@
                             
                             <!-- /.nav-second-level -->
                         </li>
-                        <?php
-                            if (is_array($VerificarUsuario2)) {   
-                        ?>
+
                          <li>
                             <a href="#"><i class="fa fa-tasks fa-fw"></i> Tareas<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
@@ -258,9 +247,7 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
-                        <?php
-                                }
-                        ?>
+
                         <li>
                             <a href="#"><i class="fa fa-warning fa-fw"></i> Notificaciones<span class="fa arrow"></span></a>
                                                     
@@ -272,9 +259,7 @@
                             </ul>  
                             </li>
                         </li>
-                         <?php
-                            if (is_array($VerificarUsuario2)) {   
-                        ?>
+
                         <li>
                             <a href="#"><i class="fa fa-building-o fa-fw"></i> Actividades<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
@@ -286,9 +271,7 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
-                        <?php
-                                }
-                        ?>
+
                         <li>
                             <a href="lista-de-noticias-grupo.php"><i class="fa fa-comment"></i> Foro</a>
                                 

@@ -14,14 +14,11 @@
     require '../Vista/class.phpmailer.php';
     
     $conexion = new conexion();
-    $seleccion = $conexion->consulta("SELECT LOGIN_S FROM socio WHERE LOGIN_S = '$nombreUGE' ");
-    $verSocio = mysql_fetch_row($seleccion);
-    
     
     $seleccion = $conexion->consulta("SELECT NOMBRE_U FROM usuario WHERE NOMBRE_U = '$nombreUGE' ");
     $verGE = mysql_fetch_row($seleccion);
     
-     if (!is_array($verSocio) && !is_array($verGE)) 
+     if (!is_array($verGE)) 
      {
         $seleccion = $conexion->consulta("SELECT NOMBRE_CORTO_GE FROM grupo_empresa WHERE NOMBRE_CORTO_GE = '$nombreCGE' ");
         $verNC = mysql_fetch_row($seleccion);
