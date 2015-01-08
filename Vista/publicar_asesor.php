@@ -51,6 +51,29 @@
     <!-- JS -->
     <script type="text/javascript" src="../Librerias/lib/funcion.js"></script>
 
+       <script type="text/javascript">
+<!--
+function mostrarReferencia(){
+//Si la opcion con id Conocido_1 (dentro del documento > formulario con name fcontacto >     y a la vez dentro del array de Conocido) esta activada
+if (document.fcontacto.Conocido[1].checked == true) {
+//muestra (cambiando la propiedad display del estilo) el div con id 'desdeotro'
+document.getElementById('desdeotro').style.display='block';
+//por el contrario, si no esta seleccionada
+} else {
+//oculta el div con id 'desdeotro'
+document.getElementById('desdeotro').style.display='none';
+}
+if (document.fcontacto.Conocido[2].checked == true) {
+//muestra (cambiando la propiedad display del estilo) el div con id 'desdeotro'
+document.getElementById('proyecto').style.display='block';
+//por el contrario, si no esta seleccionada
+} else {
+//oculta el div con id 'desdeotro'
+document.getElementById('proyecto').style.display='none';
+}
+}
+-->
+</script>
 
     
 
@@ -282,82 +305,140 @@
 </div>
 
 <div id="page-wrapper">
-    <form id = "publicar" method = "POST" action="tablas-publicar.php" onsubmit = "return validarCampos(this);">
-                <div class ="form-horizontal">
-                    <div class="row">
-                        <div class="col-lg-12">
-                              <h2> Publicar Recursos</h2>
-                       </div>
-                    </div><!-- /.row -->
-                    <!--Descripcion de la publicacion-->                 
-                    <fieldset class="campos-border">
-                    <legend class="campos-border">Informaci&oacute;n</legend>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">Destinatario</label>
-                        <div class="col-lg-8 ">
-                            <form method="POST" action="#" enctype="Multipart/form-data" action="forms/actions/configurarFechaRecepcionCO.php">
-                                <select name="grupoempresa" class="form-control" >
-                                    <option>Seleccione un destinatario</option>
-                                    <?php
+    <form action="tablas.php" method="post" name="fcontacto" onsubmit = "return validarCampos(this);">
+        <div class ="form-horizontal">
+            <div class="row">
+                    <div class="col-lg-12">
+                          <h2> Publicar Recursos</h2>
+                  </div>
+            </div><!-- /.row -->
+               
+                <!--Descripcion de la publicacion-->                 
+                <fieldset class="campos-border">
+                  <legend class="campos-border">Informaci&oacute;n</legend>
 
-                                        $c1="SELECT ge.`NOMBRE_LARGO_GE` FROM `grupo_empresa` AS ge,`inscripcion` AS i WHERE i.`NOMBRE_UA` = '$UsuarioActivo' AND i.`NOMBRE_UGE` = ge.`NOMBRE_U`";
-                                        $a1=$con->consulta($c1);
-                                        echo "<option>PUBLICO</option>";
-                                        echo "<option>TODOS</option>";
+                 <div class="form-group">
+                      <label class="col-sm-2 control-label">Destinatarios:</label>
+                             <div class="col-xs-8">
+                                  
+                                 </br>
+                                 <input type="radio" name="Conocido" value="Publico" id="Conocido_0" onclick="mostrarReferencia();" /> Publico
+                                 </br><input type="radio" name="Conocido" value="Grupo Empresa" id="Conocido_0" onclick="mostrarReferencia();" /> Grupo Empresa
+                               </br> <input type="radio" name="Conocido" value="Proyectos" id="Conocido_1" onclick="mostrarReferencia();" /> Proyectos
+                              </div>
+                 </div>
+
+
+
+
+               <div class="form-group" id="desdeotro" style="display:none;">
+                      <label class="col-sm-2 control-label">Grupo Empresa</label>
+                             <div class="col-xs-8">
+                                  <select id ="grupo" name="grupoempresa" class="form-control" >
+                                        <option>Seleccione Grupo Empresa</option>
+                                        <?php
+
+                                            $c1="SELECT ge.`NOMBRE_LARGO_GE` FROM `grupo_empresa` AS ge,`inscripcion` AS i WHERE i.`NOMBRE_UA` = '$UsuarioActivo' AND i.`NOMBRE_UGE` = ge.`NOMBRE_U`";
+                                            $a1=$con->consulta($c1);
                                             
+                                             echo "<option>TODOS</option>";
+                                            while($v1 =  mysql_fetch_array($a1)){
+                                                echo "<option>".$v1[0]."</option>";
+                                            }
+                                            echo "<input type='hidden' name='idAsesor' value='$UsuarioActivo'>";
+                                        ?>
+                                    </select>
+                                    
+                            </div>
+
+             </div>
+
+
+             <div class="form-group" id="proyecto" style="display:none;">
+                      <label class="col-sm-2 control-label">Proyecto</label>
+                             <div class="col-xs-8">
+                                 <select name="proyecto" class="form-control">
+                                    <option>Seleccione Proyecto</option>
+                                    <?php
+                                        $idGE= $_SESSION['usuario']  ;
+
+                                        $conGestion="SELECT id_g "
+                                                . "FROM gestion "
+                                                . "WHERE DATE (NOW()) > DATE(FECHA_INICIO_G) and DATE(NOW()) < DATE(FECHA_FIN_G)";
+                                        $conGestion_=$con->consulta($conGestion);
+                                        $idGestion=mysql_fetch_row($conGestion_);
+                                        $idGestion_=$idGestion[0];
+                                                                       
+                                        $c1="SELECT p.`NOMBRE_P` FROM `proyecto` AS `p`, `gestion` AS `g` WHERE p.`ID_G` = g.`ID_G` AND p.`ID_G` LIKE '".$idGestion_."'";
+                                 
+                                        $a1=$con->consulta($c1);
+                                         echo "<option>TODOS</option>";
                                         while($v1 =  mysql_fetch_array($a1)){
                                             echo "<option>".$v1[0]."</option>";
                                         }
-                                        echo "<input type='hidden' name='idAsesor' value='$UsuarioActivo'>";
-                                    ?>
-                                </select><br>
-                                    
-                            </form>
-                        </div>   
-                    </div>
+                                    echo "<input type='hidden' name='idGE' value='$idGE'>";
             
-                    <div class="form-group">
+                                    ?>
+                                     </select>
+                                    
+                            </div>
+
+             </div>
+
+              <div class="form-group">
                       <label class="col-sm-2 control-label">Titulo</label>
                              <div class="col-xs-8">
                                   <input id= "campoTitulo" type="text" name= "campoTitulo"  class="form-control"  data-toggle="tooltip" data-placement="right" title="T&iacute;tulo con el que se mostrar&aacute; el recurso">
+
                             </div>
-                    </div>
+                   </div>
+
+                 
+
+                   
+                  
                       <!--Campo de descripcion-->
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">Descripcion</label>
-                        <div class="col-sm-8">
-                             <textarea class="jqte-test" name="campoDescripcion" id="campoDescripcion" rows="4" style="overflow: auto;"></textarea>
-                        </div>
-                    </div>
+                      <div class="form-group">
+                            <label class="col-sm-2 control-label">Descripcion</label>
+                                <div class="col-sm-8">
+                                     <textarea class="jqte-test" name="campoDescripcion" id="campoDescripcion" rows="4" style="overflow: auto;"></textarea>
+                                </div>
+                      </div>
 
 
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label" >Fecha de publicacion:</label>
-                        <div class="col-xs-8">          
-                            <input class="form-control" type="date" name="fecha1">
+                      <div class="form-group">
+                       <label class="col-sm-2 control-label" >Fecha de publicacion:</label>
+                        <div class="col-xs-8">
+                              
+                                <input class="form-control" type="date" name="fecha1">
+                            </div>
                         </div>
-                    </div>
                             
  
-                    <div class="form-group">
+ <div class="form-group">
                         <label class="col-sm-2 control-label" >Hora de publicacion:</label>
                         <div class="col-sm-8" >
                         <input class="form-control" name="hora1" type="time">
                     </div>
       
-                </div><!--end/fecha-->
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Adjuntar Recurso</label>
-                    <div class="col-sm-8">                        
-                        <input id= "recurso" type="text" name= "recurso"  class="form-control"   data-toggle="tooltip" data-placement="right" title="Adjuntar un recurso" readonly="readonly">
-                        </textarea>
+                    </div><!--end/fecha-->
+                        
+                                 
+
+                      <div class="form-group">
+                        <label class="col-sm-2 control-label">Adjuntar Recurso</label>
+                        <div class="col-sm-8">
+                        
+                              <input id= "recurso" type="text" name= "recurso"  class="form-control"   data-toggle="tooltip" data-placement="right" title="Adjuntar un recurso" readonly="readonly">
+                                 </textarea>
                         <br>
                         <a data-toggle="modal" class="link-dos" href="javascript:void('')" data-target="#myModal"><span class="glyphicon glyphicon-folder-open"></span>
                         Adjuntar</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <input class="btn-primary" type="submit" value= "Publicar" id= "publicar"name="enviar" onClick()="update()"  > </input>                             
-                    </div>
-                </div>                        
-            </form> 
+                        <input class="btn-primary" type="submit" value= "Publicar" id= "publicar"name="enviar" onClick()="update()"  >      </input> 
+
+                       </div>
+                        </div>
+</form>
 
             <div style="display: none;" aria-hidden="true" class="modal fade" id="myModal">
                 <div class="modal-dialog modal-lg">
@@ -421,12 +502,8 @@
                 alert('Por favor, ingrese una descripcion');
             return false;
             }
-            if(formulario.recurso.value.length==0){
-                formulario.recurso.focus();
-                alert('Por favor, ingrese un documento');
-            return false;
-            }
-            return true; 
+           
+            
         
         }
     </script>

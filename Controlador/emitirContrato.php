@@ -138,7 +138,13 @@
                     $guardar = $conexion->consulta("INSERT INTO documento (ID_R,TAMANIO_D,RUTA_D,VISUALIZABLE_D,DESCARGABLE_D) VALUES('$idRegis','1024','$descrip','$visible','$descargar')");
                     $desD = $conexion->consulta("INSERT INTO descripcion (ID_R,DESCRIPCION_D) VALUES('$idRegis','Contrato')");
                     $destinat = $conexion->consulta("INSERT INTO receptor (ID_R,RECEPTOR_R) VALUES('$idRegis','$nLargoGE')");
-                        
+                     
+                     $selGE=$conexion->consulta("SELECT `NOMBRE_U` FROM `grupo_empresa` WHERE `NOMBRE_LARGO_GE` = '$nLargoGE'");
+                     $nomGE=mysql_fetch_array($selGE);
+
+                     $estaFir=  $conexion->consulta("UPDATE `inscripcion_proyecto`
+                     SET `ESTADO_CONTRATO`= 'Firmado'                   
+                    WHERE `NOMBRE_U` = '$nomGE[0]'");  
                     //rename("Contrato.pdf", $pdf);
 
                     if(!file_exists("../".$nombreUA."/Contratos/index.html"))
