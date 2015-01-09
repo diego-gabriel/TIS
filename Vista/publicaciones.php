@@ -305,7 +305,23 @@
                                                     WHERE r.NOMBRE_U = '$UsuarioActivo' AND r.TIPO_T = 'publicaciones' AND r.ID_R=ds.ID_R AND d.ID_R = r.ID_R"); 
 
                                             while ($Desc = mysql_fetch_row($Sel_Desc)) {
+
+                                                if(empty($Desc[0]))
+                                                {
+                                                    echo   '<tr>
+                                                            <td>'.$indice.'</td>
+                                                            
+                                                            <td><b>'.$Desc[1].
+                                                            '</b></td>
+
+                                                            <td>'.$Desc[2].'</td>
+                                                            <td><a class="link-dos" href="../Vista/eliminar_publicacion.php?id_us='.$Desc[1].'">Eliminar</a></td>
+                                                        </tr>';
+
+
+                                                }
                                    
+                                               else{
                                                 echo   '<tr>
                                                             <td>'.$indice.'</td>
                                                             
@@ -317,6 +333,7 @@
                                                             <td>'.$Desc[2].'</td>
                                                             <td><a class="link-dos" href="../Vista/eliminar_publicacion.php?id_us='.$Desc[1].'">Eliminar</a></td>
                                                         </tr>';
+                                                    }
 
                                                 $indice++;
                                             }

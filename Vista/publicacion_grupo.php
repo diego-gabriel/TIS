@@ -335,21 +335,42 @@
                                                 if($fechaA >= $fepDoc )
                                                 {     
                                                     if($horaA >= $hopDoc || $horaA <= $hopDoc){
+                                                        
+
+                                                        if(empty($docUbi))
+                                                        {
                                                 
                                                 ?>
                                                       <tr> 
                                                           <td><?php echo $i?></td> 
-                                                          <td><a class="link-dos" target="_blank" href="<?php echo $docPubli[1] ?>"><?php echo $docPubli[0]?></a><td>
+                                                          <td><b><?php echo $docPubli[0]?></b><td>
 
                                                           <td><?php echo $docPubli[2]?></td> 
                                                           <td> </td>
                                                          
                                                      </tr>
                                                <?php 
-                                                            $i++;  
+                                                            
+                                                    }
+                                                    else{
+
+                                                        ?>
+
+                                                            <tr> 
+                                                          <td><?php echo $i?></td> 
+                                                          <td><a class="link-dos" target="_blank" href="<?php echo $docPubli[1] ?>"><?php echo $docPubli[0]?></a><td>
+
+                                                          <td><?php echo $docPubli[2]?></td> 
+                                                          <td> </td>
+                                                         
+                                                         </tr>
+
+
+                                                        <?php
                                                     }
 
-                                              
+                                              }
+                                              $i++;  
                                              }
                                            else{}
                                                 
@@ -372,11 +393,13 @@
                                                 {     
                                                     if($horaA >= $hopDoc || $horaA <= $hopDoc)
                                                     {
+                                                         if(empty($docUbi))
+                                                        {
                                              ?>
                                              
                                                       <tr> 
                                                           <td><?php echo $i?></td> 
-                                                          <td><a class="link-dos" target="_blank" href="<?php echo $docPubli[1] ?>"><?php echo $docPubli[0]?></a><td>
+                                                          <td><b><?php echo $docPubli[0]?></b><td>
 
                                                           <td><?php echo $docPubli[2]?></td> 
                                                           <td> </td>
@@ -385,8 +408,24 @@
 
 
                                             <?php
-                                                                $i++;  
+                                                               
                                                      }
+                                                     else{
+                                                        ?>
+                                                         <tr> 
+                                                          <td><?php echo $i?></td> 
+                                                          <td><a class="link-dos" target="_blank" href="<?php echo $docPubli[1] ?>"><?php echo $docPubli[0]?></a><td>
+
+                                                          <td><?php echo $docPubli[2]?></td> 
+                                                          <td> </td>
+                                                         
+                                                         </tr>
+
+
+                                                        <?php
+                                                     }
+                                                      $i++;  
+                                                 }
                                                }
 
                                           }
@@ -412,11 +451,13 @@
                                                 {     
                                                     if($horaA >= $hopDoc || $horaA <= $hopDoc)
                                                     {
+                                                        if(empty($docUbi))
+                                                        {
                                              ?>
                                              
                                                       <tr> 
                                                           <td><?php echo $i?></td> 
-                                                          <td><a class="link-dos" target="_blank" href="<?php echo $docPubli[1] ?>"><?php echo $docPubli[0]?></a><td>
+                                                          <td><b><?php echo $docPubli[0]?></b><td>
 
                                                           <td><?php echo $docPubli[2]?></td> 
                                                           <td> </td>
@@ -425,8 +466,25 @@
 
 
                                             <?php
-                                                                $i++;  
+                                                               
                                                      }
+                                                     else{
+                                                        ?>
+                                                            <tr> 
+                                                            <td><?php echo $i?></td> 
+                                                            <td><a class="link-dos" target="_blank" href="<?php echo $docPubli[1] ?>"><?php echo $docPubli[0]?></a><td>
+
+                                                          <td><?php echo $docPubli[2]?></td> 
+                                                          <td> </td>
+                                                         
+                                                     </tr>
+
+
+
+                                                        <?php
+                                                     }
+                                                      $i++;  
+                                                   }  
                                                }
 
                                           }
@@ -453,9 +511,25 @@
                                                 {     
                                                     if($horaA >= $hopDoc || $horaA <= $hopDoc)
                                                     {
+                                                        if(empty($docUbi))
+                                                        {
+
                                              ?>
                                              
                                                       <tr> 
+                                                          <td><?php echo $i?></td> 
+                                                          <td><b><?php echo $docPubli[0]?></b><td>
+
+                                                          <td><?php echo $docPubli[2]?></td> 
+                                                          <td> </td>
+                                                         
+                                                     </tr>
+                                                     <?php
+                                                                
+                                                     }
+                                                     else{
+                                                    ?>
+                                                     <tr> 
                                                           <td><?php echo $i?></td> 
                                                           <td><a class="link-dos" target="_blank" href="<?php echo $docPubli[1] ?>"><?php echo $docPubli[0]?></a><td>
 
@@ -463,11 +537,11 @@
                                                           <td> </td>
                                                          
                                                      </tr>
-                                                     <?php
-                                                                $i++;  
-                                             
 
-                                                   }
+
+                                                    <?php
+                                                     }
+                                                   $i++;  
                                                 }   
 
 
@@ -478,14 +552,19 @@
 
 
                                       }
+									  else{}
                                        ?>
-                                       </table>
+                                      
                                       
                                        <?php
                                             //echo "</form>";
                                     //$tabla.="</table>";
                                      //echo $tabla;
-                                    }
+                                       }
+									   ?>
+									    </table>
+										<?php
+									}
                                     else
                                     {
                                         echo  "<b>NO SE ENCONTRO DOCUMENTOS</b><br><br>";
