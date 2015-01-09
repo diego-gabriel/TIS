@@ -260,22 +260,13 @@
                     echo "Apellido";
                 ?>
                 </div>
-                <div class="contenedor-columna">
-                <?php
-                    echo "Login";
-                ?>
-                </div>
-                <div class="contenedor-columna">
-                <?php
-                    echo "Password";
-                ?>
-                </div>
+
                 </div>
                 <?php     
                                                             //crear conexion---------------------------
 
                 //Peticion
-                $peticion = $conectar->consulta(" SELECT CODIGO_S,NOMBRE_U, NOMBRES_S, APELLIDOS_S,LOGIN_S,PASSWORD_S FROM socio WHERE NOMBRE_U='$addNomInte'");
+                $peticion = $conectar->consulta(" SELECT CODIGO_S,NOMBRE_U, NOMBRES_S, APELLIDOS_S FROM socio WHERE NOMBRE_U='$addNomInte'");
 
                 while($fila = mysql_fetch_array($peticion))
                 {
@@ -301,16 +292,7 @@
                             echo $fila['APELLIDOS_S'];   
                     ?>
                 </div>
-                <div class="contenedor-columna">
-                    <?php
-                            echo $fila['LOGIN_S'];   
-                    ?>
-                </div>
-                <div class="contenedor-columna">
-                    <?php
-                            echo $fila['PASSWORD_S'];   
-                    ?>
-                </div>
+
 
                 <div class="contenedor-columna">
                     <?php
