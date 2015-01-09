@@ -13,6 +13,7 @@ if(isset($_POST['registrar']))
         $grupoE = $_POST['ge'];        
     }
     
+   
     if($asesor == "Seleccione un Asesor")
     {
         echo"<script type=\"text/javascript\">alert('No seleccion\u00f3 ningun asesor'); window.history.back();</script>"; 
@@ -51,9 +52,9 @@ if(isset($_POST['registrar']))
             $nombre =  mysql_fetch_row($consulta);
             $nombreU = $nombre[0];
 
-            $insertar="INSERT INTO inscripcion(NOMBRE_UA, NOMBRE_UGE, ESTADO_INSCRIPCION) VALUES ('".$nombreU."','".$b."', 'Deshabilitado')";
+            $insertar="INSERT INTO inscripcion(NOMBRE_UA, NOMBRE_UGE, ESTADO_INSCRIPCION) VALUES ('".$nombreU."','".$grupoE."', 'Deshabilitado')";
 
-            $conexion->consulta($b1);
+            $conexion->consulta($insertar);
                     
             echo"<script type=\"text/javascript\">alert('Asesor elegido'); window.history.back();</script>";
         }
