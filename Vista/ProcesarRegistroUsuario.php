@@ -17,7 +17,46 @@
 
     $Sel_U = $conect->consulta("SELECT NOMBRE_U FROM usuario WHERE NOMBRE_U = '$Name' ");
     $Sel_U2 = mysql_fetch_row($Sel_U);
+    /////////////////////////////////////////////////////////////////////////////////////////////////
+  
+
+    $mystring = $Email;
+    $findme1   = 'hotmail';
+    $findme2   = 'gmail';
+    $findme3   = 'yahoo';
+    $pos1 = strpos($mystring, $findme1);
+    $pos2 = strpos($mystring, $findme2);
+    $pos3 = strpos($mystring, $findme3);
+    if ($pos1 === false) 
+    {
+        if($pos2 === false)
+        {
+            if($pos3 === false)
+                {
+                 $numeroCorreo=0;
+                }
+            else
+               {
+                 $numeroCorreo=1;
+               }
+        }
+        else
+        {
+           $numeroCorreo=1;
+        }
+         
     
+    } 
+    else 
+    {
+    $numeroCorreo=1;
+    }
+
+    
+    
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
+    if($numeroCorreo=="1")
+    {
      if (!is_array($Sel_U2)) 
      {
            
@@ -76,7 +115,7 @@
             $conect->consulta("INSERT INTO asesor(NOMBRE_U, NOMBRES_A, APELLIDOS_A) VALUES('$Name','$RealName','$Apellido')");  
             $conect->consulta("INSERT INTO usuario_rol(NOMBRE_U, ROL_R) VALUES('$Name','$rol')");  
             $conect->consulta("INSERT INTO criteriocalificacion(NOMBRE_U,NOMBRE_CRITERIO_C,TIPO_CRITERIO) VALUES('$Name','PUNTAJE','4')");
-
+               
             echo '<script>alert("Su solicitud se envio correctamente");</script>';
             echo '<script>window.location="../Vista/RegistrarUsuario.php";</script>';
           }
@@ -89,6 +128,12 @@
         echo '<script>window.location="../Vista/RegistrarUsuario.php";</script>';
         
 
+    }
+    }
+    else
+    {
+        echo '<script>alert("Correo Ingresado no Valido");</script>';
+        echo '<script>window.location="../Vista/RegistrarUsuario.php";</script>';
     }
    
 ?>
