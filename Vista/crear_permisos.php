@@ -1,13 +1,12 @@
 <?php
 
 session_start();
-   include '../Modelo/conexion.php';
-    $conectar = new conexion();
+include '../Modelo/conexion.php';
+$conectar = new conexion();
 //Crear variables--------------------------
 
 $usuario = $_SESSION['usuario'];
 $contrasena = $_SESSION['contrasena'];
-
 $addNomMenu = $_POST['id_menu'];
 $addasesor = $_POST['id_rol'];
 
@@ -22,9 +21,7 @@ $addasesor = $_POST['id_rol'];
 		<head>
 			<meta http-equiv="REFRESH" content="0;url=lista_roles.php">
 		</head>
-	</html>
-
-	';
+	</html>';
 
  
 ?>

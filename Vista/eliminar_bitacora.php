@@ -1,7 +1,7 @@
 <?php
-   include '../Modelo/conexion.php';
+    include '../Modelo/conexion.php';
     $conectar = new conexion();
-session_start();
+    session_start();
 
 
 //Crear variables--------------------------
@@ -21,8 +21,6 @@ $peticion = $conectar->consulta("DELETE FROM `sesion` WHERE `sesion`.`ID_S` ='".
 	<head>
 		<meta http-equiv="REFRESH" content="0;url=bitacora_ingreso.php">
 	</head>
-</html>
-
-';
+</html>';
 ?>
 

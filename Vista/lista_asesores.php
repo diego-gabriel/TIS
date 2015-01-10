@@ -1,5 +1,5 @@
 <?php 
- include '../Modelo/conexion.php';
+    include '../Modelo/conexion.php';
     session_start();
     $userAct= $_SESSION['usuario'];
     
@@ -103,7 +103,7 @@ $conect = new conexion();
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="principal.php">Inicio </a>
+              <a class="navbar-brand" href="principal.php">Inicio </a>
             </div>
             <!-- /.navbar-header -->
 
@@ -153,15 +153,7 @@ $conect = new conexion();
                                 <li>
                                     <a href="asignar_permisos.php">Modificar Permisos Usuarios</a>
                                 </li>
-                                 <li>
-                                     <a href="add_roles.php">Añadir  Roles</a>
-                                </li>
-                                <li>
-                                     <a href="add_gestion.php">Añadir  Gestion</a>
-                                </li>
-                                 <li>
-                                    <a href="lista_roles.php">Asignar Permisos Roles</a>
-                                </li>
+
                                 <li>
                                     <a href="#">Grupo Empresa <span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
@@ -199,7 +191,19 @@ $conect = new conexion();
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
-
+                        <li>
+                            <a href="#"><i class="fa fa-building-o fa-fw"></i>Tareas <span class="fa arrow"></span></a>
+                                 <ul class="nav nav-third-level">
+                                 <li>
+                                     <a href="add_roles.php">Añadir  Roles</a>
+                                </li>
+                                <li>
+                                     <a href="add_gestion.php">Añadir  Gestion</a>
+                                </li>
+  
+                                </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
                         <li>
                             <a href="#"><i class="fa fa-building-o fa-fw"></i>Bitacora de ingresos <span class="fa arrow"></span></a>
                                         <ul class="nav nav-third-level">
@@ -233,10 +237,10 @@ $conect = new conexion();
             </div>
                     
                     
-                </div>
+         </div>
          
         
-</nav>          
+    </nav> 
                 
                 
         <div id="page-wrapper">

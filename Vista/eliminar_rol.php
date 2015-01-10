@@ -1,7 +1,7 @@
 <?php
-   include '../Modelo/conexion.php';
+    include '../Modelo/conexion.php';
     $conectar = new conexion();
-session_start();
+    session_start();
 
 
 $usuario= $_SESSION['usuario'];
@@ -19,7 +19,5 @@ $peticion = $conectar->consulta("DELETE FROM rol WHERE ROL_R='".$delRol."'");
 	<head>
 		<meta http-equiv="REFRESH" content="0;url=add_roles.php">
 	</head>
-</html>
-
-';
+</html>';
 ?>

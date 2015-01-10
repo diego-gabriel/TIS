@@ -1,9 +1,9 @@
 <?php
-      include '../Modelo/conexion.php';
+    include '../Modelo/conexion.php';
     $conectar = new conexion();
-session_start();
+    session_start();
 
--
+
 
 $usuario= $_SESSION['usuario'];
 $contrasena= $_SESSION['contrasena'];
@@ -26,8 +26,6 @@ $peticion = $conectar->consulta ("DELETE FROM grupo_empresa WHERE grupo_empresa.
 	<head>
 		<meta http-equiv="REFRESH" content="0;url=lista_usuarios.php">
 	</head>
-</html>
-
-';
+</html>';
 ?>
 

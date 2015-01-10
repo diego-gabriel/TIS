@@ -25,7 +25,7 @@
 
     <!-- SB Admin CSS - Include with every page -->
     <link href="../Librerias/css/sb-admin.css" rel="stylesheet">
-    
+    <link href="css/style.css" rel="stylesheet" type="text/css" />      
     
 
 
@@ -48,7 +48,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="principal.php">Inicio </a>
+              <a class="navbar-brand" href="principal.php">Inicio </a>
             </div>
             <!-- /.navbar-header -->
 
@@ -98,15 +98,7 @@
                                 <li>
                                     <a href="asignar_permisos.php">Modificar Permisos Usuarios</a>
                                 </li>
-                                 <li>
-                                     <a href="add_roles.php">Añadir  Roles</a>
-                                </li>
-                                <li>
-                                     <a href="add_gestion.php">Añadir  Gestion</a>
-                                </li>
-                                 <li>
-                                    <a href="lista_roles.php">Asignar Permisos Roles</a>
-                                </li>
+
                                 <li>
                                     <a href="#">Grupo Empresa <span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
@@ -144,7 +136,19 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
-
+                        <li>
+                            <a href="#"><i class="fa fa-building-o fa-fw"></i>Tareas <span class="fa arrow"></span></a>
+                                 <ul class="nav nav-third-level">
+                                 <li>
+                                     <a href="add_roles.php">Añadir  Roles</a>
+                                </li>
+                                <li>
+                                     <a href="add_gestion.php">Añadir  Gestion</a>
+                                </li>
+  
+                                </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
                         <li>
                             <a href="#"><i class="fa fa-building-o fa-fw"></i>Bitacora de ingresos <span class="fa arrow"></span></a>
                                         <ul class="nav nav-third-level">
@@ -178,12 +182,12 @@
             </div>
                     
                     
-                </div>
+         </div>
          
         
-</nav>          
-                
-                
+    </nav>          
+
+
             <div id="page-wrapper">
             <div class="row">
             <div class="col-lg-12">
@@ -199,7 +203,7 @@
             <div class="form-group">
             <div class="input-group">
             <span class="input-group-addon">
-              <span class="glyphicon glyphicon-user"></span>
+            <span class="glyphicon glyphicon-user"></span>
             </span>
             <input class="form-control" type="text" name="usuario" id="UserName" placeholder="Nombre de Usuario" pattern="\b[a-zA-z]{5}[a-zA-z0-9]{0,9}" title="Minimo 5 y Maximo 14 caracteres...Ejm: Bittle123, Bitle" required>
             </div>
@@ -207,7 +211,7 @@
             <div class="form-group">
             <div class="input-group">
             <span class="input-group-addon">
-              <span class="glyphicon glyphicon-lock"></span>
+            <span class="glyphicon glyphicon-lock"></span>
             </span>
             <input class="form-control" type="password" name="contrasena" id="UserPassword" placeholder="Contraseña" minlength="5" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$" title="la contraseña debe contener mayusculas, minusculas, caracteres y numeros" required>
             </div>
@@ -215,7 +219,7 @@
             <div class="form-group">
             <div class="input-group">
             <span class="input-group-addon">
-              <span class="glyphicon glyphicon-user"></span>
+            <span class="glyphicon glyphicon-user"></span>
             </span>
             <input class="form-control" type="text" name="nombre" id="RealName" placeholder="Nombre" pattern="\b[A-Z]{1}[a-z]{2,20}" title="Ejm: Alejandra, Ivan, Ana" required>
             </div>
@@ -223,7 +227,7 @@
             <div class="form-group">
             <div class="input-group">
             <span class="input-group-addon">
-              <span class="glyphicon glyphicon-user"></span>
+            <span class="glyphicon glyphicon-user"></span>
             </span>
             <input class="form-control" type="text" name="apellido" id="LastName" placeholder="Apellido" pattern="\b[A-Z]{1}[a-z]{3,20}\b" title="Ejm: Vargas, Morales, Medrano" required>
             </div>
@@ -233,7 +237,7 @@
             <div class="form-group">
             <div class="input-group">
             <span class="input-group-addon">
-              <span class="glyphicon glyphicon-earphone"></span>
+            <span class="glyphicon glyphicon-earphone"></span>
             </span>
             <input class="form-control" type="text" name="telefono" id="UserPhone" placeholder="Telefono" title="Ejm: 4022371" pattern="\b[4][0-9]{6}" required>
             </div>
@@ -241,7 +245,7 @@
             <div class="form-group">
             <div class="input-group">
             <span class="input-group-addon">
-              <span class="glyphicon glyphicon-envelope"></span>
+            <span class="glyphicon glyphicon-envelope"></span>
             </span>
             <input class="form-control" type="email" name="email" id="UserEmail" placeholder="Correo" pattern="^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$" required>
             </div>
@@ -257,26 +261,23 @@
             </div>
             </div>
             </div><!-- /.row -->                          
-                                                                    
-                                                                  
-                                
-                                                        
-                                                        
-						</div>
-						
-					</div>
-			
-                                        
-                                                 
-                    
-                </div>
-                <!-- /.col-lg-12 -->
-            </div>
-     
-        </div>
-        <!-- /#page-wrapper -->
 
-    </div>
+
+
+
+
+            </div>
+
+            </div>
+
+
+
+
+            </div>
+            <!-- /.col-lg-12 -->
+            </div>
+
+
     <!-- /#wrapper -->
 
     <!-- Core Scripts - Include with every page -->

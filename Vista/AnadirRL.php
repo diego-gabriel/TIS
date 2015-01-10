@@ -2,13 +2,11 @@
 <!DOCTYPE html>
 <?php
 
-include '../Modelo/conexion.php';
-session_start();
-include("controlSesion.php");
-
-$uActivo = $_SESSION['usuario'];
-$conexion = new conexion();
-
+ include '../Modelo/conexion.php';
+ session_start();
+ $uActivo = $_SESSION['usuario'];
+ $conexion = new conexion();
+ 
 
 ?>
 <html>
@@ -69,64 +67,76 @@ $conexion = new conexion();
 
 <body>
 
- 
+   
     <div id="wrapper">
-      <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="inicio_grupo_empresa.php">Inicio </a>
-        </div>
-        <!-- /.navbar-header -->
-
-        <ul class="nav navbar-top-links navbar-right">
-
-            <li>
-                <a href="lista-de-noticias-grupo.php"><i class="glyphicon glyphicon-comment"></i> Foro</a>
-            </li>
-
-            <!-- /.dropdown -->
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <?php echo $uActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
-                </a>
-                <ul class="dropdown-menu dropdown-user">
-                    <li><a href="ModificarGrupoEmpresa.php"><i class="fa fa-user fa-fw"></i> Modificar Datos personales</a>
-                    </li>
-                    <li class="divider"></li>
-                    <li><a href="unlog.php"><i class="fa fa-sign-out fa-fw"></i>Salir</a>
-                    </li>
-                </ul>
-                <!-- /.dropdown-user -->
-            </li>
-            <!-- /.dropdown -->
-        </ul>
-        <!-- /.navbar-top-links -->
+       
         
-        <div class="navbar-default navbar-static-side" role="navigation">
-            <div class="sidebar-collapse">
-                <ul class="nav" id="side-menu">
-                    
-                    
-                    <li>
-                        <a href="#"><i class="fa fa-bar-chart-o fa-files-o "></i> Documentos <span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            
-                            <li>
-                                <a href="#" >Subir Documentos <span class="fa arrow"></span></a>
-                                <ul class="nav nav-third-level">
+        <!--<h2>design by <a href="#" title="flash templates">flash-templates-today.com</a></h2>-->
+        
+    
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                   <a class="navbar-brand" href="inicio_grupo_empresa.php">Inicio </a>
+            </div>
+            <!-- /.navbar-header -->
+
+            <ul class="nav navbar-top-links navbar-right">
+
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <?php echo $uActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="ModificarGrupoEmpresa.php"><i class="fa fa-user fa-fw"></i> Modificar Datos personales</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="unlog.php"><i class="fa fa-sign-out fa-fw"></i>Salir</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+            <!-- /.navbar-top-links -->
+
+            
+            
+            
+            
+             
+            
+            
+            
+            
+            
+            
+            <div class="navbar-default navbar-static-side" role="navigation">
+                <div class="sidebar-collapse">
+                    <ul class="nav" id="side-menu">
+                        
+                        
+                        <li>
+                            <a href="#"><i class="fa fa-bar-chart-o fa-files-o "></i> Documentos <span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                
+                                <li>
+                                    <a href="#" >Subir Documentos <span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
                                     <?php
                                     
-                                    
-                                    $conect = new conexion();
+                                   
+                                      $conect = new conexion();
 
-                                    $SeleccionarVerficarSocio = $conect->consulta("SELECT NOMBRES_S FROM socio WHERE NOMBRES_S = '$uActivo'");
+                                      $SeleccionarVerficarSocio = $conect->consulta("SELECT NOMBRES_S FROM socio WHERE NOMBRES_S = '$uActivo'");
 
-                                    $VerificarSocio = mysql_fetch_row($SeleccionarVerficarSocio);
+                                      $VerificarSocio = mysql_fetch_row($SeleccionarVerficarSocio);
 
 
 
@@ -138,7 +148,7 @@ $conexion = new conexion();
 
                                         $SeleccionrAsesor = $conect->consulta("SELECT NOMBRE_UA FROM inscripcion WHERE NOMBRE_UGE='$UsuarioGE[0]'");
                                         $Asesor = mysql_fetch_row($SeleccionrAsesor);
-                                        $ins_proyecto = $conect->consulta("SELECT CODIGO_P FROM inscripcion_proyecto WHERE NOMBRE_U='$UsuarioGE[0]'");
+                                         $ins_proyecto = $conect->consulta("SELECT CODIGO_P FROM inscripcion_proyecto WHERE NOMBRE_U='$UsuarioGE[0]'");
                                         $id_proyecto = mysql_fetch_row($ins_proyecto);
                                         
                                         $SeleccionarDocReq = $conect->consulta("SELECT  `NOMBRE_R`,`CODIGO_P` FROM registro AS r,documento_r AS d WHERE r.ID_R=d.ID_R AND  `NOMBRE_U`='$Asesor[0]' AND TIPO_T='documento requerido' ");
@@ -147,173 +157,200 @@ $conexion = new conexion();
                                         {
                                             if($rowDocs[1] == $id_proyecto[0])
                                             {
-                                             echo '<li>
-                                             <a href="SubirDocumento.php?doc='.$rowDocs[0].'">'.$rowDocs[0].'</a>
-                                             </li>';  
-                                         }
-                                         else 
-                                         {
+                                                   echo '<li>
+                                                      <a href="SubirDocumento.php?doc='.$rowDocs[0].'">'.$rowDocs[0].'</a>
+                                                   </li>';  
+                                             }
+                                            else 
+                                            {
 
-                                         }
-                                         
-                                     }
+                                            }
+                                            
+                                        }
 
-                                 }
-                                 else
-                                 {
-                                    $SeleccionrAsesor = $conect->consulta("SELECT NOMBRE_UA FROM inscripcion WHERE NOMBRE_UGE='$uActivo'");
-                                    $Asesor = mysql_fetch_row($SeleccionrAsesor);
-                                    $ins_proyecto = $conect->consulta("SELECT CODIGO_P FROM inscripcion_proyecto WHERE NOMBRE_U='$uActivo'");
-                                    $id_proyecto = mysql_fetch_row($ins_proyecto);
-                                    
-                                    $SeleccionarDocReq = $conect->consulta("SELECT  `NOMBRE_R`,`CODIGO_P` FROM registro AS r,documento_r AS d WHERE r.ID_R=d.ID_R AND  `NOMBRE_U`='$Asesor[0]' AND TIPO_T='documento requerido' ");
-
-                                    
-                                    while ($rowDocs = mysql_fetch_row($SeleccionarDocReq))
+                                    }
+                                    else
                                     {
-                                        if($rowDocs[1] == $id_proyecto[0])
+                                        $SeleccionrAsesor = $conect->consulta("SELECT NOMBRE_UA FROM inscripcion WHERE NOMBRE_UGE='$uActivo'");
+                                        $Asesor = mysql_fetch_row($SeleccionrAsesor);
+                                        $ins_proyecto = $conect->consulta("SELECT CODIGO_P FROM inscripcion_proyecto WHERE NOMBRE_U='$uActivo'");
+                                        $id_proyecto = mysql_fetch_row($ins_proyecto);
+                                          
+                                        $SeleccionarDocReq = $conect->consulta("SELECT  `NOMBRE_R`,`CODIGO_P` FROM registro AS r,documento_r AS d WHERE r.ID_R=d.ID_R AND  `NOMBRE_U`='$Asesor[0]' AND TIPO_T='documento requerido' ");
+
+                                          
+                                        while ($rowDocs = mysql_fetch_row($SeleccionarDocReq))
                                         {
-                                         echo '<li>
-                                         <a href="SubirDocumento.php?doc='.$rowDocs[0].'">'.$rowDocs[0].'</a>
-                                         </li>';  
-                                     }
-                                     else 
-                                     {
+                                            if($rowDocs[1] == $id_proyecto[0])
+                                            {
+                                                   echo '<li>
+                                                      <a href="SubirDocumento.php?doc='.$rowDocs[0].'">'.$rowDocs[0].'</a>
+                                                   </li>';  
+                                             }
+                                            else 
+                                            {
 
-                                     }
-                                 }
+                                            }
+                                        }
 
-                             }      
-                             ?>
-                         </ul>
-                     </li>
-                     <li>
-                        <a href="publicacion_grupo.php">Recepci&oacute;n Documentos </a>
-                        
-                    </li>
-                    
-                </ul>
-                
-                <!-- /.nav-second-level -->
-            </li>
-            <li>
+                                    }      
+                                    ?>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="publicacion_grupo.php">Recepci&oacute;n Documentos </a>
+                                    
+                                </li>
+                               
+                            </ul>
+                            
+                            <!-- /.nav-second-level -->
+                        </li>
+                         <li>
+                             
+                            <a href="#"><i class="fa fa-tasks fa-fw"></i> Tareas<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                
+                                
+                                <li>
+                                    <a href="seleccionar_asesor.php">Seleccionar Asesor</a>
+                                </li>
+                                
+                                 <li>
+                                     <a href="InscripcionGEProyecto.php">Inscribirse a proyecto</a>
+                                </li>
+                                
+                                <li>
+                                     <a href="AnadirSocio.php">Añadir socios</a>
+                                </li>
+                                
+                                <li>
+                                    <a href="AnadirRL.php">Seleccionar Representante legal</a>
+                                </li>
+
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-warning fa-fw"></i> Notificaciones<span class="fa arrow"></span></a>
+                                                    
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="historia_actividades.php">Historia de actividades</a>
+                                </li>
+                                
+                            </ul>  
+                            </li>
+                        </li>
+
+                        <li>
+                            <a href="#"><i class="fa fa-building-o fa-fw"></i> Actividades<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a id="registrarPlanificacion" href="#">
+                                        <i class="fa fa-pencil-square-o fa-fw"></i>Registrar Planificaci&oacute;n
+                                    </a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+
+                        <li>
+                            <a href="lista-de-noticias-grupo.php"><i class="fa fa-comment"></i> Foro</a>
+                                
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                    </ul>
+                    <!-- /#side-menu -->
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            
                
-                <a href="#"><i class="fa fa-tasks fa-fw"></i> Tareas<span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level">
-                   <li>
-                       <a href="AnadirSocio.php">Añadir socios</a>
-                   </li>
-                   <li>
-                    <a href="AnadirRL.php">Seleccionar Representante legal</a>
-                </li>
-                <li>
-                    <a href="seleccionar_asesor.php">Seleccionar Asesor</a>
-                </li>
-                
-                <li>
-                   <a href="InscripcionGEProyecto.php">Inscribirse a proyecto</a>
-               </li>
-           </ul>
-           <!-- /.nav-second-level -->
-       </li>
-       
-       <li>
-        <a href="historia_actividades.php"><i class="glyphicon glyphicon-calendar"></i> Historia de actividades</a>
-    </li>
-    <li>
-        <a id="registrarPlanificacion" href="#">
-            <i class="fa fa-pencil-square-o fa-fw"></i>Registrar Planificaci&oacute;n
-        </a>
-    </li>        
-</ul>
-<!-- /#side-menu -->
-</div>
-<!-- /.sidebar-collapse -->
-</div>
+            <!-- /.navbar-static-side -->
+        </nav>
+
+        <div id="page-wrapper">
+ 
+            
+            
+            
+            
+           <div class="row">
+         <div class="col-lg-12">
+             <h2 class="page-header">Representante legal</h2> 
+
+             <?php
+
+             $VerificarCantidadSocios = $conect->consulta("SELECT * FROM socio WHERE NOMBRE_U='$uActivo'");
 
 
-<!-- /.navbar-static-side -->
-</nav>
-<div id="page-wrapper">
-   
+             $CantidadSocios = mysql_num_rows($VerificarCantidadSocios);  
+
+            if ($CantidadSocios < 3) {
+
+                echo '<div class="alert alert-warning">
+                           <strong>Primero debe completar el registro de socios en la opcion "Anadir Socios"</strong>
+                       </div>';
+            }
+            else
+            {
+
+            ?>
+
+                    <div class="form-group">
+                        Representante Legal:
+                        <form method="POST" enctype="Multipart/form-data">
+                            <select name="repLegal" class="form-control">
+                                <option>Seleccione un representante legal </option>
+                                <?php
+                                    session_start();
+                                    $idGE = $_SESSION['usuario']  ;
+                                    $seleccion = "SELECT NOMBRES_S, APELLIDOS_S FROM `socio`WHERE NOMBRE_U LIKE '$idGE'";
+                                    $consulta = $conexion->consulta($seleccion);
+
+                                    while($rLegal =  mysql_fetch_array($consulta)){
+                                        echo "<option>".$rLegal[0]." ".$rLegal[1]."</option>";
+                                    }
+                                    echo "<input type='hidden' name='idAsesor' value='$idGE'>";
+
+                                    ?>
+                            </select><br>
+                             <div class   ="col-sm-8">
+                                 <input class ="btn btn-primary" type="submit" value= "Aceptar" id= "aceptar" name="Aceptar" onclick ="this.form.action='../Vista/registrarRP.php?id=0'"></input> &nbsp;&nbsp;              
+                            </div>
+                        </form>
+                    </div>
+
+            <?php  
+
+            }
+
+            ?>
+    </div><!--end/submit-->
+
+    </div>      
+            
+            
+            
+            
+            
+            
+            
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- Core Scripts - Include with every page -->
     
-    
-    
-    
- <div class="row">
-   <div class="col-lg-12">
-       <h2 class="page-header">Representante legal</h2> 
+    <!--script src="../Librerias/js/bootstrap.min.js"></script-->
+    <script src="../Librerias/js/plugins/metisMenu/jquery.metisMenu.js"></script>
 
-       <?php
-
-       $VerificarCantidadSocios = $conect->consulta("SELECT * FROM socio WHERE NOMBRE_U='$uActivo'");
-
-
-       $CantidadSocios = mysql_num_rows($VerificarCantidadSocios);  
-
-       if ($CantidadSocios < 3) {
-
-        echo '<div class="alert alert-warning">
-        <strong>Primero debe completar el registro de socios en la opcion "Anadir Socios"</strong>
-        </div>';
-    }
-    else
-    {
-
-        ?>
-
-        <div class="form-group">
-            Representante Legal:
-            <form method="POST" enctype="Multipart/form-data">
-                <select name="repLegal" class="form-control">
-                    <option>Seleccione un representante legal </option>
-                    <?php
-                    session_start();
-                    $idGE = $_SESSION['usuario']  ;
-                    $seleccion = "SELECT NOMBRES_S, APELLIDOS_S FROM `socio`WHERE NOMBRE_U LIKE '$idGE'";
-                    $consulta = $conexion->consulta($seleccion);
-
-                    while($rLegal =  mysql_fetch_array($consulta)){
-                        echo "<option>".$rLegal[0]." ".$rLegal[1]."</option>";
-                    }
-                    echo "<input type='hidden' name='idAsesor' value='$idGE'>";
-
-                    ?>
-                </select><br>
-                <div class   ="col-sm-8">
-                   <input class ="btn btn-primary" type="submit" value= "Aceptar" id= "aceptar" name="Aceptar" onclick ="this.form.action='../Vista/registrarRP.php?id=0'"></input> &nbsp;&nbsp;              
-               </div>
-           </form>
-       </div>
-
-       <?php  
-
-   }
-
-   ?>
-</div><!--end/submit-->
-
-</div>      
-
-
-
-
-
-
-
-</div>
-<!-- /#page-wrapper -->
-
-</div>
-<!-- /#wrapper -->
-
-<!-- Core Scripts - Include with every page -->
-
-<!--script src="../Librerias/js/bootstrap.min.js"></script-->
-<script src="../Librerias/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-
-<!-- SB Admin Scripts - Include with every page -->
-<script src="../Librerias/js/sb-admin.js"></script>
+    <!-- SB Admin Scripts - Include with every page -->
+    <script src="../Librerias/js/sb-admin.js"></script>
 
 </body>
 

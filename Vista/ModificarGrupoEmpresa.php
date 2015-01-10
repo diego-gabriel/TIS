@@ -1,10 +1,8 @@
 <?php
  include '../Modelo/conexion.php';
  session_start();
- include("controlSesion.php");
  $uActivo = $_SESSION['usuario'];
  $conect = new conexion();
-
 
 ?>
 
@@ -17,13 +15,14 @@
 
     <title>Sistema de Apoyo a la Empresa TIS</title>
 
+    <!-- JQuery -->
     <script type="text/javascript" src="../Librerias/lib/jquery-2.1.0.min.js"></script>
     <!-- icheck -->
     <link href="../Librerias/icheck/skins/square/green.css" rel="stylesheet">
     <script src="../Librerias/lib/icheck.min.js"></script>
     <!-- Bootstrap -->
     <link rel="stylesheet" href="../Librerias/css/bootstrap.min.css" rel="stylesheet">
-
+    <script type="text/javascript" src="../Librerias/lib/bootstrap.js"></script>
     <!-- Docs -->
     <link rel="stylesheet" type="text/css" href="../Librerias/lib/css/docs.css">
     <!-- Font-Awesome -->
@@ -45,7 +44,7 @@
     <script type="text/javascript" src="../Librerias/lib/validator/diferenteEntregable.js"></script>
     <script type="text/javascript" src="../Librerias/lib/validator/stringLength.js"></script>
     <script type="text/javascript" src="../Librerias/lib/validator/notEmpty.js"></script>
-    <script type="text/javascript" src="../Librerias/lib/validator/callback.js"></script
+    <script type="text/javascript" src="../Librerias/lib/validator/callback.js"></script>
     <script type="text/javascript" src="../Librerias/lib/validator/date.js"></script>
     <script type="text/javascript" src="../Librerias/lib/validator/numeric.js"></script>
     <script type="text/javascript" src="../Librerias/lib/validator/porcentajeMax.js"></script>
@@ -61,14 +60,18 @@
     <link href="../Librerias/css/plugins/timeline/timeline.css" rel="stylesheet">
     <!-- SB Admin CSS - Include with every page -->
     <link href="../Librerias/css/sb-admin.css" rel="stylesheet">
-
 </head>
 
 <body>
 
    
-<div id="wrapper">
-      <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
+    <div id="wrapper">
+       
+        
+        <!--<h2>design by <a href="#" title="flash templates">flash-templates-today.com</a></h2>-->
+        
+    
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
                     <span class="sr-only">Toggle navigation</span>
@@ -81,10 +84,6 @@
             <!-- /.navbar-header -->
 
             <ul class="nav navbar-top-links navbar-right">
-
-                <li>
-                    <a href="lista-de-noticias-grupo.php"><i class="glyphicon glyphicon-comment"></i> Foro</a>
-                </li>
 
                 <!-- /.dropdown -->
                 <li class="dropdown">
@@ -103,6 +102,17 @@
                 <!-- /.dropdown -->
             </ul>
             <!-- /.navbar-top-links -->
+
+            
+            
+            
+            
+             
+            
+            
+            
+            
+            
             
             <div class="navbar-default navbar-static-side" role="navigation">
                 <div class="sidebar-collapse">
@@ -197,12 +207,8 @@
                              
                             <a href="#"><i class="fa fa-tasks fa-fw"></i> Tareas<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                                 <li>
-                                     <a href="AnadirSocio.php">Añadir socios</a>
-                                </li>
-                                 <li>
-                                    <a href="AnadirRL.php">Seleccionar Representante legal</a>
-                                </li>
+                                
+                                
                                 <li>
                                     <a href="seleccionar_asesor.php">Seleccionar Asesor</a>
                                 </li>
@@ -210,18 +216,48 @@
                                  <li>
                                      <a href="InscripcionGEProyecto.php">Inscribirse a proyecto</a>
                                 </li>
+                                
+                                <li>
+                                     <a href="AnadirSocio.php">Añadir socios</a>
+                                </li>
+                                
+                                <li>
+                                    <a href="AnadirRL.php">Seleccionar Representante legal</a>
+                                </li>
+
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
-                        
                         <li>
-                            <a href="historia_actividades.php"><i class="glyphicon glyphicon-calendar"></i> Historia de actividades</a>
+                            <a href="#"><i class="fa fa-warning fa-fw"></i> Notificaciones<span class="fa arrow"></span></a>
+                                                    
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="historia_actividades.php">Historia de actividades</a>
+                                </li>
+                                
+                            </ul>  
+                            </li>
                         </li>
+
                         <li>
-                            <a id="registrarPlanificacion" href="#">
-                                <i class="fa fa-pencil-square-o fa-fw"></i>Registrar Planificaci&oacute;n
-                            </a>
-                        </li>        
+                            <a href="#"><i class="fa fa-building-o fa-fw"></i> Actividades<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a id="registrarPlanificacion" href="#">
+                                        <i class="fa fa-pencil-square-o fa-fw"></i>Registrar Planificaci&oacute;n
+                                    </a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+
+                        <li>
+                            <a href="lista-de-noticias-grupo.php"><i class="fa fa-comment"></i> Foro</a>
+                                
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
                     </ul>
                     <!-- /#side-menu -->
                 </div>
@@ -231,8 +267,14 @@
                
             <!-- /.navbar-static-side -->
         </nav>
-<div id="page-wrapper">
-    <div class="row">
+
+        <div id="page-wrapper">
+
+            
+            
+            
+            
+      <div class="row">
         <div class="col-lg-12">
           <h2 class="page-header">Modificar Informacion Personal:</h2>
             <div class="col-lg-6" >                              
@@ -339,34 +381,35 @@
             </div>
                 </div>
                 <!-- /.col-lg-12 -->
-            </div>
-            <!-- /.row -->
+            </div>          
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
         </div>
+        <!-- /#page-wrapper -->
 
     </div>
     <!-- /#wrapper -->
 
-
-
-
-
-
     <!-- Core Scripts - Include with every page -->
-    <script src="../Librerias/js/jquery-1.10.2.js"></script>
-    <script src="../Librerias/js/bootstrap.min.js"></script>
+    
+    <!--script src="../Librerias/js/bootstrap.min.js"></script-->
     <script src="../Librerias/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-
-    <!-- Page-Level Plugin Scripts - Dashboard -->
-    <script src="../Librerias/js/plugins/morris/raphael-2.1.0.min.js"></script>
-    <script src="../Librerias/js/plugins/morris/morris.js"></script>
 
     <!-- SB Admin Scripts - Include with every page -->
     <script src="../Librerias/js/sb-admin.js"></script>
 
-    <!-- Page-Level Demo Scripts - Dashboard - Use for reference -->
-    <script src="../Librerias/js/demo/dashboard-demo.js"></script>
-
 </body>
 
-</html>
-
+</html><!DOCTYPE html>

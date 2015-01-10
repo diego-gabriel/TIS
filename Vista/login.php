@@ -49,6 +49,10 @@
 
                             echo'<html><head><meta http-equiv="REFRESH" content="0;url=inicio_grupo_empresa.php"></head></html>';
                         }
+                        else
+                        {
+                            echo'<html><head><meta http-equiv="REFRESH" content="1;url=../index.php"></head></html>';
+                        }
 
 
                     }

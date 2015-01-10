@@ -1,7 +1,7 @@
  <?php  
     session_start();
     $UsuarioActivo = $_SESSION['usuario'];
-      include '../Modelo/conexion.php';
+    include '../Modelo/conexion.php';
     $conectar = new conexion();
  ?> 
 
@@ -272,10 +272,7 @@
 								//crear conexion---------------------------
 		
 								//Peticion
-								$peticion = $conectar->consulta("SELECT p.id_permiso,m.nom_menu, r.ROL_R  
-
-FROM menu as m,rol as r, permisos as p
-where p.menu_id_menu=m.id_menu and r.ROL_R=p.ROL_R 
+								$peticion = $conectar->consulta("SELECT p.id_permiso,m.nom_menu, r.ROL_R FROM menu as m,rol as r, permisos as p where p.menu_id_menu=m.id_menu and r.ROL_R=p.ROL_R 
 														");
 
 								while($fila = mysql_fetch_array($peticion))

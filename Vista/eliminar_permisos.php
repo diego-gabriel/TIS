@@ -1,7 +1,7 @@
 <?php
     include '../Modelo/conexion.php';
     $con=new conexion();
-session_start();
+    session_start();
 
 
 //Crear variables--------------------------

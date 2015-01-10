@@ -1,6 +1,6 @@
 <?php
-   include '../Modelo/conexion.php';
-    $conectar = new conexion();
+include '../Modelo/conexion.php';
+$conectar = new conexion();
 session_start();
 
 //Crear variables--------------------------
@@ -24,8 +24,6 @@ $addRol = $_POST['rol'];
 		<head>
 			<meta http-equiv="REFRESH" content="0;url=add_gestion.php">
 		</head>
-	</html>
-
-	';
+	</html>';
  
 ?>

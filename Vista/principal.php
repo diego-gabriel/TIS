@@ -26,7 +26,7 @@
 
     <!-- SB Admin CSS - Include with every page -->
     <link href="../Librerias/css/sb-admin.css" rel="stylesheet">
-    
+    <link href="css/style.css" rel="stylesheet" type="text/css" />  
     
 
 
@@ -99,15 +99,7 @@
                                 <li>
                                     <a href="asignar_permisos.php">Modificar Permisos Usuarios</a>
                                 </li>
-                                 <li>
-                                     <a href="add_roles.php">Añadir  Roles</a>
-                                </li>
-                                <li>
-                                     <a href="add_gestion.php">Añadir  Gestion</a>
-                                </li>
-                                 <li>
-                                    <a href="lista_roles.php">Asignar Permisos Roles</a>
-                                </li>
+
                                 <li>
                                     <a href="#">Grupo Empresa <span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
@@ -145,7 +137,19 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
-
+                        <li>
+                            <a href="#"><i class="fa fa-building-o fa-fw"></i>Tareas <span class="fa arrow"></span></a>
+                                 <ul class="nav nav-third-level">
+                                 <li>
+                                     <a href="add_roles.php">Añadir  Roles</a>
+                                </li>
+                                <li>
+                                     <a href="add_gestion.php">Añadir  Gestion</a>
+                                </li>
+  
+                                </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
                         <li>
                             <a href="#"><i class="fa fa-building-o fa-fw"></i>Bitacora de ingresos <span class="fa arrow"></span></a>
                                         <ul class="nav nav-third-level">
@@ -188,8 +192,8 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                  
-                       <h2 class="page-header"  > Bienvenido</h2>
+ 
+                       <h2 class="page-header"  > Bienvenido  </h2>
                     
                 </div>
                 <!-- /.col-lg-12 -->

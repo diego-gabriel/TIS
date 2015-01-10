@@ -1,7 +1,7 @@
 <?php
    
-    include '../Modelo/conexion.php';
-    $conectar = new conexion();
+include '../Modelo/conexion.php';
+$conectar = new conexion();
     
 $addDestino = $_POST['dest'];
 $addAsunto = $_POST['asunto'];

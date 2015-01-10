@@ -4,8 +4,6 @@
 
  include '../Modelo/conexion.php';
  session_start();
- include("controlSesion.php");
-
  $uActivo = $_SESSION['usuario'];
  $conexion = new conexion();
  
@@ -71,8 +69,13 @@
 <body>
 
       <link href="css/estiloTabla.css" rel="stylesheet" type="text/css" />
-<div id="wrapper">
-      <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
+    <div id="wrapper">
+       
+        
+        <!--<h2>design by <a href="#" title="flash templates">flash-templates-today.com</a></h2>-->
+        
+    
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
                     <span class="sr-only">Toggle navigation</span>
@@ -85,10 +88,6 @@
             <!-- /.navbar-header -->
 
             <ul class="nav navbar-top-links navbar-right">
-
-                <li>
-                    <a href="lista-de-noticias-grupo.php"><i class="glyphicon glyphicon-comment"></i> Foro</a>
-                </li>
 
                 <!-- /.dropdown -->
                 <li class="dropdown">
@@ -107,6 +106,17 @@
                 <!-- /.dropdown -->
             </ul>
             <!-- /.navbar-top-links -->
+
+            
+            
+            
+            
+             
+            
+            
+            
+            
+            
             
             <div class="navbar-default navbar-static-side" role="navigation">
                 <div class="sidebar-collapse">
@@ -201,12 +211,8 @@
                              
                             <a href="#"><i class="fa fa-tasks fa-fw"></i> Tareas<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                                 <li>
-                                     <a href="AnadirSocio.php">Añadir socios</a>
-                                </li>
-                                 <li>
-                                    <a href="AnadirRL.php">Seleccionar Representante legal</a>
-                                </li>
+                                
+                                
                                 <li>
                                     <a href="seleccionar_asesor.php">Seleccionar Asesor</a>
                                 </li>
@@ -214,18 +220,48 @@
                                  <li>
                                      <a href="InscripcionGEProyecto.php">Inscribirse a proyecto</a>
                                 </li>
+                                
+                                <li>
+                                     <a href="AnadirSocio.php">Añadir socios</a>
+                                </li>
+                                
+                                <li>
+                                    <a href="AnadirRL.php">Seleccionar Representante legal</a>
+                                </li>
+
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
-                        
                         <li>
-                            <a href="historia_actividades.php"><i class="glyphicon glyphicon-calendar"></i> Historia de actividades</a>
+                            <a href="#"><i class="fa fa-warning fa-fw"></i> Notificaciones<span class="fa arrow"></span></a>
+                                                    
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="historia_actividades.php">Historia de actividades</a>
+                                </li>
+                                
+                            </ul>  
+                            </li>
                         </li>
+
                         <li>
-                            <a id="registrarPlanificacion" href="#">
-                                <i class="fa fa-pencil-square-o fa-fw"></i>Registrar Planificaci&oacute;n
-                            </a>
-                        </li>        
+                            <a href="#"><i class="fa fa-building-o fa-fw"></i> Actividades<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a id="registrarPlanificacion" href="#">
+                                        <i class="fa fa-pencil-square-o fa-fw"></i>Registrar Planificaci&oacute;n
+                                    </a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+
+                        <li>
+                            <a href="lista-de-noticias-grupo.php"><i class="fa fa-comment"></i> Foro</a>
+                                
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
                     </ul>
                     <!-- /#side-menu -->
                 </div>
@@ -234,7 +270,8 @@
             
                
             <!-- /.navbar-static-side -->
-        </nav>     
+        </nav>
+
         <div id="page-wrapper">
 
             

@@ -1,6 +1,6 @@
  <?php  
- session_start();
- $UsuarioActivo = $_SESSION['usuario'];
+    session_start();
+    $UsuarioActivo = $_SESSION['usuario'];
     include '../Modelo/conexion.php';  
     $conectar=new conexion();
  ?> 

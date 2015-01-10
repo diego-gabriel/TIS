@@ -1,8 +1,8 @@
  <?php  
  session_start();
- $UsuarioActivo = $_SESSION['usuario'];
-    include '../Modelo/conexion.php';  
-    $conectar=new conexion();
+$UsuarioActivo = $_SESSION['usuario'];
+include '../Modelo/conexion.php';  
+$conectar=new conexion();
  ?> 
 
 <!DOCTYPE html>
@@ -101,35 +101,20 @@
               $peticion6=$conectar->consulta("SELECT `PORCENTAJE_DEL_TOTAL_P` FROM `pago` WHERE `ID_R`='$IDPago'");
            while ($correo7 = mysql_fetch_array($peticion6))
            { $Puntaje=$correo7["PORCENTAJE_DEL_TOTAL_P"];}   
-           
-           
-           
-           
-           
-           
-                       $peticion333=$conectar->consulta("SELECT `ENTREGABLE_P` FROM `entrega`, entregable WHERE `ID_R`='$IDPago' and entregable.ENTREGABLE_E= entrega.ENTREGABLE_P and `NOMBRE_U`='$usuarioGE'");
-            $tamano=mysql_num_rows($peticion333);
-           
-           $_SESSION["ID"] = $ID;
-           $_SESSION["NombreCorto"] = $NombreCorto;
-           $_SESSION["Actividad"] = $Actividad;
-           $_SESSION["usuarioGE"] = $usuarioGE;
-           $_SESSION["IDPago"] = $IDPago;
-           $_SESSION["Puntaje"] = $Puntaje;
-           $_SESSION["tamano"] = $tamano;
-   
-           
-           
-           
-           
-           
-           
-           
-          
-           
-            
 
-            
+           
+                    $peticion333=$conectar->consulta("SELECT `ENTREGABLE_P` FROM `entrega`, entregable WHERE `ID_R`='$IDPago' and entregable.ENTREGABLE_E= entrega.ENTREGABLE_P and `NOMBRE_U`='$usuarioGE'");
+                    $tamano=mysql_num_rows($peticion333);
+
+                    $_SESSION["ID"] = $ID;
+                    $_SESSION["NombreCorto"] = $NombreCorto;
+                    $_SESSION["Actividad"] = $Actividad;
+                    $_SESSION["usuarioGE"] = $usuarioGE;
+                    $_SESSION["IDPago"] = $IDPago;
+                    $_SESSION["Puntaje"] = $Puntaje;
+                    $_SESSION["tamano"] = $tamano;
+   
+
                 ?>
                        
                 
@@ -150,7 +135,8 @@
                  
             
            
-             <?php   for ($i = 0; $i < $tamano; $i++){  ?>
+             <?php   for ($i = 0; $i < $tamano; $i++)
+                            {  ?>
                    
 			 
 		    	  <tr>
@@ -166,7 +152,7 @@
 
                                 </th>
            
-                          </tr> <?php  } ?>
+                </tr> <?php  } ?>
 		    </thead> 
                 </table> 
      

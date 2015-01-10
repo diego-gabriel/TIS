@@ -2,10 +2,10 @@
 
 <?php
 
-	require_once '../Modelo/conexion.php';
-	require_once '../Modelo/Model/GrupoEmpresa.php';   
-    session_start();
-    $usuario = $_SESSION['usuario'];
+        require_once '../Modelo/conexion.php';
+        require_once '../Modelo/Model/GrupoEmpresa.php';   
+        session_start();
+        $usuario = $_SESSION['usuario'];
      
 	$conexion = new conexion();
 	$conexion->conectar();
@@ -60,22 +60,22 @@
    
    
    
-   
-        $filas .= '<tr data-registro="'.$idRegistro.'">
-				       <td>'.$ap[$i][3].'</td>
-					   <td>'.$ge->getNombreCorto().'</td>
-				       <td><span class="label label-success">'.$ap[$i][2].'</span></td>
-			           <td>
-                           '.$btnAsistencia.'
-                           '.$btnReportes.'
-                              '.$btnEvaluacion1.'
+
+                $filas .= '<tr data-registro="'.$idRegistro.'">
+                <td>'.$ap[$i][3].'</td>
+                <td>'.$ge->getNombreCorto().'</td>
+                <td><span class="label label-success">'.$ap[$i][2].'</span></td>
+                <td>
+                '.$btnAsistencia.'
+                '.$btnReportes.'
+                '.$btnEvaluacion1.'
 
 
 
 
 
-			           </td>
-				   </tr>';
+                </td>
+                </tr>';
         
         
                           

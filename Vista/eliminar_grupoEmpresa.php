@@ -1,7 +1,7 @@
 <?php
-   include '../Modelo/conexion.php';
+    include '../Modelo/conexion.php';
     $conectar = new conexion();
-session_start();
+    session_start();
 
 //Crear variables--------------------------
 
@@ -22,9 +22,7 @@ $idgp = $_GET['id_us'];
 		<head>
 			<meta http-equiv="REFRESH" content="0;url=lista_grupoEmpresa.php">
 		</head>
-	</html>
-
-	';
+	</html>';
 
  
 ?>

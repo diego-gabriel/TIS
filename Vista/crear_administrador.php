@@ -1,7 +1,7 @@
 
 <?php
 
-session_start();
+    session_start();
     include '../Modelo/conexion.php';
     $conectar = new conexion();
 
@@ -26,14 +26,6 @@ $peticion1 =$conectar ->consulta("SELECT * FROM usuario");
 $peticion2 = $conectar ->consulta("SELECT * FROM usuario_rol");
 $peticion3 = $conectar ->consulta("SELECT * FROM asesor");
 	
-       /* while($fila = mysql_fetch_array($peticion1))
-	{
-		if($fila['NOMBRE_U']==$addUsuario)
-		{
-			$contador++;
-		}
-		else{}
-	}*/
         
     $conect = new conexion();
     
@@ -41,7 +33,7 @@ $peticion3 = $conectar ->consulta("SELECT * FROM asesor");
     $VerificarUsuarioGE2 = mysql_fetch_row($VerificarUsuarioGE);
     
      if (!is_array($VerificarUsuarioGE2)) 
-     {
+      {
 //conexion-------------		
     
 
@@ -55,11 +47,11 @@ $peticion3 = $conectar ->consulta("SELECT * FROM asesor");
 	
 	 //volver a la pagina---------------
          
-    echo"<script type=\"text/javascript\">alert('el registro se realizo exitosamente'); window.location='principal.php';</script>";
+        echo"<script type=\"text/javascript\">alert('el registro se realizo exitosamente'); window.location='principal.php';</script>";
 	
- }
+     }
  else{
      
    echo"<script type=\"text/javascript\">alert('El nombre de usuario ya fue registrado por favor cambie de nombre'); window.location='registro_administrador.php';</script>";  
- }
+     }
 
