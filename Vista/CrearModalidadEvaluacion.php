@@ -51,11 +51,14 @@
 
 
 
-
-
+       <!-- Page-Level Plugin CSS - Dashboard -->
+    <link href="../Librerias/css/plugins/morris/morris-0.4.3.min.css" rel="stylesheet">
     <link href="../Librerias/css/plugins/timeline/timeline.css" rel="stylesheet">
     <!-- SB Admin CSS - Include with every page -->
     <link href="../Librerias/css/sb-admin.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+
+
 
 </head>
 
@@ -239,7 +242,7 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h2 class="page-header">Agregar Criterio de Evaluaci&oacute;n</h2>
+                    <h2 class="page-header" >Agregar Criterio de Evaluaci&oacute;n</h2>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>

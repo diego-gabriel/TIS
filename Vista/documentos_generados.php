@@ -238,7 +238,7 @@
 <div id="page-wrapper">
     <div class="row">
         <div class="col-lg-12">
-            <h1>Contratos</h1>
+            <h2 class="page-header">Contratos</h2>
             
             
             <?php

@@ -52,13 +52,16 @@
     <script src="../Librerias/js/CrearFormulario.js"></script> 
     <script src="../Librerias/js/evaluar.js"></script>
 
-
+ <!-- Page-Level Plugin CSS - Dashboard -->
+    <link href="../Librerias/css/plugins/morris/morris-0.4.3.min.css" rel="stylesheet">
+    <link href="../Librerias/css/plugins/timeline/timeline.css" rel="stylesheet">
 
 
 
     <link href="../Librerias/css/plugins/timeline/timeline.css" rel="stylesheet">
     <!-- SB Admin CSS - Include with every page -->
     <link href="../Librerias/css/sb-admin.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
 
 </head>
 

@@ -1,13 +1,14 @@
  <?php  
  
  session_start();
- $UsuarioActivo = $_SESSION['usuario'];
+ $uActivo = $_SESSION['usuario'];
+  include '../Modelo/conexion.php';
+  $con=new conexion();
  
  ?> 
  <!DOCTYPE html>
  <html>
-
- <head>
+<head>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -83,7 +84,7 @@
 
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <?php echo $UsuarioActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                    <?php echo $uActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-user">
 
@@ -241,12 +242,13 @@
         <div class ="form-horizontal">
                 <div class="row">
                     <div class="col-lg-12">
-                    <h1> Documentos Publicados</h1>     
+                    </br></br>
+                    <h2>Publicaciones</h2>     
                         <form id = "publicar" method = "POST" action="" onsubmit = "return validarCampos(this);">
                             <div class="panel panel-default">
                                 <div class="panel-body">
                                     <fieldset class="campos-border">
-                                        <legend class="campos-border">Informacion</legend>
+                                        <legend class="campos-border">Documentos</legend>
                                         <table class="table form-group">      
                                             <thead>
                                                     <tr>
@@ -259,32 +261,18 @@
                                             </thead>
                                             <tbody>                                                    
                                             <?php 
-                                            include '../Modelo/conexion.php';
-                                            $con=new conexion();
+                                           
                                             $indice = 1;
 
                                             $Sel_Desc = $con->consulta("SELECT d.RUTA_D,r.NOMBRE_R, ds.DESCRIPCION_D 
                                                     FROM documento as d, registro as r,descripcion as ds 
-                                                    WHERE r.NOMBRE_U = '$UsuarioActivo' AND r.TIPO_T = 'publicaciones' AND r.ID_R=ds.ID_R AND d.ID_R = r.ID_R"); 
+                                                    WHERE r.NOMBRE_U = '$uActivo' AND r.TIPO_T = 'publicaciones' AND r.ID_R=ds.ID_R AND d.ID_R = r.ID_R"); 
 
                                             while ($Desc = mysql_fetch_row($Sel_Desc)) {
 
-                                                if(empty($Desc[0]))
+                                                if(!empty($Desc[0]))
                                                 {
-                                                    echo   '<tr>
-                                                            <td>'.$indice.'</td>
-                                                            
-                                                            <td><b>'.$Desc[1].
-                                                            '</b></td>
-
-                                                            <td>'.$Desc[2].'</td>
-                                                            <td><a class="link-dos" href="../Vista/eliminar_publicacion.php?id_us='.$Desc[1].'">Eliminar</a></td>
-                                                        </tr>';
-
-
-                                                }
-                                   
-                                               else{
+                                                   
                                                 echo   '<tr>
                                                             <td>'.$indice.'</td>
                                                             
@@ -300,10 +288,73 @@
 
                                                 $indice++;
                                             }
+
+
+
                                             ?>
                                             </tbody>
                                         </table>
                                     </fieldset>
+                             
+
+                                </div>
+                                <div class="panel-footer">
+                                    <a href="../Vista/publicar_asesor.php" class="link" ><i class="fa fa-plus "></i> Agregar recurso<span class="fa arrow"></span></a>
+                                </div>
+                            </div>
+                        </form>
+
+                         <form id = "publicar" method = "POST" action="" onsubmit = "return validarCampos(this);">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <fieldset class="campos-border">
+                                        <legend class="campos-border">Anuncios</legend>
+                                        <table class="table form-group">      
+                                            <thead>
+                                                    <tr>
+                                                      <th># ID </th>
+                                             
+                                                      <th>Nombre</th>
+                                                      <th>Descripcion</th>
+                                                      <th>Accion</th>   
+                                                    </tr>
+                                            </thead>
+                                            <tbody>                                                    
+                                            <?php 
+                                           
+                                            $indiceA = 1;
+
+                                            $Sel_Desc = $con->consulta("SELECT d.RUTA_D,r.NOMBRE_R, ds.DESCRIPCION_D 
+                                                    FROM documento as d, registro as r,descripcion as ds 
+                                                    WHERE r.NOMBRE_U = '$uActivo' AND r.TIPO_T = 'publicaciones' AND r.ID_R=ds.ID_R AND d.ID_R = r.ID_R"); 
+
+                                            while ($Desc = mysql_fetch_row($Sel_Desc)) {
+
+                                                if(empty($Desc[0]))
+                                                {
+                                                     echo   '<tr>
+                                                            <td>'.$indiceA.'</td>
+                                                            
+                                                            <td>'.$Desc[1].
+                                                            '</td>
+                                                            <td>'.$Desc[2].'</td>
+                                                            <td><a class="link-dos" href="../Vista/eliminar_publicacion.php?id_us='.$Desc[1].'">Eliminar</a></td>
+                                                        </tr>';
+                                                        $indiceA++;
+                                               
+                                                }
+
+                                                
+                                            }
+
+
+
+                                            ?>
+                                            </tbody>
+                                        </table>
+                                    </fieldset>
+                             
+
                                 </div>
                                 <div class="panel-footer">
                                     <a href="../Vista/publicar_asesor.php" class="link" ><i class="fa fa-plus "></i> Agregar recurso<span class="fa arrow"></span></a>

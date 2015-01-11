@@ -1,7 +1,7 @@
  <?php  
  include '../Modelo/conexion.php';
  session_start();
- $UsuarioActivo = $_SESSION['usuario'];
+ $uActivo = $_SESSION['usuario'];
  $conect=new conexion();
  ?> 
   <!DOCTYPE html>
@@ -57,7 +57,39 @@
     <!-- SB Admin CSS - Include with every page -->
     <link href="../Librerias/css/sb-admin.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <link href="css/textA.css" rel="stylesheet" type="text/css" />
 
+     <style>
+            .textbox
+            {
+                resize:none;
+                width: 1026px;
+                height: 240px;
+    
+                -moz-border-radius: 4px;
+                -webkit-border-radius: 4px;
+                -o-border-radius: 4px;
+                border-radius: 4px;
+                -moz-border-radius: 4px;
+                -webkit-border-radius: 4px;
+                -o-border-radius: 4px;
+                 background: #FFFFFF;
+                background: linear-gradient(left, #FFFFFF, #F7F9FA);
+                background: -moz-linear-gradient(left, #FFFFFF, #F7F9FA);
+                background: -webkit-linear-gradient(left, #FFFFFF, #F7F9FA);
+                background: -o-linear-gradient(left, #FFFFFF, #F7F9FA);
+                color: #2E3133;
+ 
+            }
+            .textbox:focus
+            {
+                color: #2E3133;
+                border-color: #FBFFAD;
+          }
+  
+    </style>
+
+    
 </head>
 
 <body>
@@ -83,7 +115,7 @@
 
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <?php echo $UsuarioActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                    <?php echo $uActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-user">
 
@@ -240,13 +272,15 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    
-                    <div class="col-lg-6" >
-                         <div class="article"><br>
+                    <div class="article"><br>
                             <div class="panel-heading">
-                            <i ></i><h2> Nuevo </h2>
-                        </div>
-                        </div>
+                              <i ></i><h2> Nuevo </h2>
+                            </div>
+                     </div>
+
+                   
+                   
+                         
                        <?php
                            error_reporting(E_ALL ^ E_NOTICE);
                            // Mensaje con campos vacios
@@ -274,41 +308,40 @@
                                 else 
                                 {
                                    // Adiciona a Noticia 
-                                   $noticia = "INSERT INTO noticias (NOMBRE_U,TITULO, FECHA_N, VIEWS, TEXTO, POSTEADO) VALUES ('$UsuarioActivo','".addslashes(mysql_real_escape_string($_POST["titulo"]))."', NOW(), '0', '".addslashes(mysql_real_escape_string($_POST['texto']))."','$UsuarioActivo')"; $noticia = $conect->consulta($noticia)
+                                   $noticia = "INSERT INTO noticias (NOMBRE_U,TITULO, FECHA_N, VIEWS, TEXTO, POSTEADO) VALUES ('$uActivo','".addslashes(mysql_real_escape_string($_POST["titulo"]))."', NOW(), '0', '".addslashes(mysql_real_escape_string($_POST['texto']))."','$uActivo')"; $noticia = $conect->consulta($noticia)
                                    or die ("Error.");
-                                   echo "Tema Adicionado";
+                                    echo "<script type=\"text/javascript\">alert('Tema Adicionado');</script>";
+
                                  }
 
                              }
                          ?>
 
                     <form name="input" action="adicionar-noticia.php" method="post">
+                        <fieldset class="campos-border">
                         <div class="form-group">
-                        <label class="col-sm-2 control-label">Titulo:</label>
-                            <div class="col-xs-12">
-                                </br>
+                            <label class="col-sm-2 control-label">Titulo:</label>
+                            <div class="col-xs-8">
                                 <input id= "campoTitulo" type="text" name= "titulo"  class="form-control"  data-toggle="tooltip" data-placement="right" title="T&iacute;tulo con el que se mostrar&aacute; el recurso">
                             </div>
                         </div>
                         </br></br>
-
-                        <div class="form-group">
-                            </br>
-                            <label class="col-sm-2 control-label">Texto:</label>
-                            </br>
-                            <div class="col-sm-12">
-                                <textarea class="jqte-test"  type="text" name="texto" id="campoDescripcion" rows="8" cols="101" data-toggle="tooltip" data-placement="right" style="overflow: auto;"></textarea>
+                       <div class="form-group">
+                             <label class="col-sm-2 control-label">Texto:</label>
+                            <div class="col-sm-10">
+                                <textarea  type="text" name="texto" id="campoDescripcion"  class="textbox" ></textarea>
                             </div>
-                        </div>
-                        <br>
-                        <br>
-                        <br>
-                        <div class="col-xs-12">
-                            <input type="submit" class="btn btn-primary" value="Adicionar Tema">
-                        </div>
+                       </div>
+                    <br>
+                      <div class="form-group">
+                         <label class="col-sm-2 control-label"></label>
+                            <div class="col-xs-4">
+                                <p><input type="submit" class="btn btn-primary" value="Adicionar Tema"></p>
+                            </div>
+                      </div>
                     </form>
                             
-                    </div>
+                    
                 </div>
                 <!-- /.col-lg-12 -->
             </div>   

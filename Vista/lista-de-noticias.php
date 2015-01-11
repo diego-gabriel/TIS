@@ -1,7 +1,7 @@
  <?php  
  include '../Modelo/conexion.php';
  session_start();
- $UsuarioActivo = $_SESSION['usuario'];
+ $uActivo = $_SESSION['usuario'];
  $conect=new conexion();
  ?> 
   <!DOCTYPE html>
@@ -55,7 +55,8 @@
 
     <link href="../Librerias/css/plugins/timeline/timeline.css" rel="stylesheet">
     <!-- SB Admin CSS - Include with every page -->
-    <link href="../Librerias/css/sb-admin.css" rel="stylesheet">
+   <link href="../Librerias/css/sb-admin.css" rel="stylesheet">
+   <link href="css/style.css" rel="stylesheet" type="text/css" />
     
 
 </head>
@@ -83,7 +84,7 @@
 
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <?php echo $UsuarioActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                    <?php echo $uActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-user">
 
@@ -240,12 +241,12 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h2 class="page-header">FORO</h2>
+                    <h2 class="page-header">Foro</h2>
                     <div class="col-lg-12" >
 
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <i ></i><h2> Temas</h2>
+                                <i ></i><h3> Temas</h3>
                             </div>
                             
 
@@ -284,7 +285,7 @@
                                        <i ></i> <b><?php echo $comentarios?></b> Comentarios -
                                        <i ></i> <?php echo $fecha?>s
                                      <?php
-                                    if($posteado==$UsuarioActivo)
+                                    if($posteado==$uActivo)
                                         {?>
                                      <span class="pull-right text-muted small"><em><?php echo"<td> <a  class='link-dos' href=\"noticia.php?id=$idNoti\">Ver </a></td>";?></em>
                                     </span>

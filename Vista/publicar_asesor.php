@@ -1,7 +1,7 @@
  <?php  
  include '../Modelo/conexion.php';
  session_start();
- $UsuarioActivo = $_SESSION['usuario'];
+ $uActivo = $_SESSION['usuario'];
  $con = new conexion(); 
 
  ?> 
@@ -51,29 +51,57 @@
     <!-- JS -->
     <script type="text/javascript" src="../Librerias/lib/funcion.js"></script>
 
-       <script type="text/javascript">
-<!--
-function mostrarReferencia(){
-//Si la opcion con id Conocido_1 (dentro del documento > formulario con name fcontacto >     y a la vez dentro del array de Conocido) esta activada
-if (document.fcontacto.Conocido[1].checked == true) {
-//muestra (cambiando la propiedad display del estilo) el div con id 'desdeotro'
-document.getElementById('desdeotro').style.display='block';
-//por el contrario, si no esta seleccionada
-} else {
-//oculta el div con id 'desdeotro'
-document.getElementById('desdeotro').style.display='none';
-}
-if (document.fcontacto.Conocido[2].checked == true) {
-//muestra (cambiando la propiedad display del estilo) el div con id 'desdeotro'
-document.getElementById('proyecto').style.display='block';
-//por el contrario, si no esta seleccionada
-} else {
-//oculta el div con id 'desdeotro'
-document.getElementById('proyecto').style.display='none';
-}
-}
--->
-</script>
+    <script type="text/javascript">
+
+        function mostrarReferencia()
+        {
+          if (document.fcontacto.Conocido[1].checked == true) 
+          {
+            document.getElementById('desdeotro').style.display='block';
+          } 
+          else 
+          {
+            document.getElementById('desdeotro').style.display='none';
+          }
+          if (document.fcontacto.Conocido[2].checked == true) 
+          {
+            document.getElementById('proyecto').style.display='block';
+         } 
+         else 
+         {
+            document.getElementById('proyecto').style.display='none';
+         }
+        }  
+        </script>
+
+     <script type="text/javascript">
+          function validar(obj)
+         {
+            patron = /^\d{4}\/\d{2}\/\d{2}$/
+            if (!patron.test(obj.value)) 
+            {
+                alert('Ingrese la fecha en el formato');
+                obj.focus();
+            }
+        }
+    </script>
+
+    <script type="text/javascript">
+
+      function CheckTime(str)
+     {
+        hora=str.value
+        if (hora=='') {return}
+        if (hora.length!=5) {alert("Introducir HH:MM");return}
+        a=hora.charAt(0) //<=2
+        b=hora.charAt(1) //<4
+        c=hora.charAt(2) //:
+        d=hora.charAt(3) //<=5
+        if ((a==2 && b>3) || (a>2)) {alert("El valor que introdujo en la Hora no corresponde, introduzca un digito entre 00 y 23");return}
+        if (d>5) {alert("El valor que introdujo en los minutos no corresponde, introduzca un digito entre 00 y 59");return}
+        if (c!=':') {alert("Introduzca el caracter ':' para separar la hora y los minutos");return}
+    }
+    </script>
 
     
 
@@ -84,6 +112,7 @@ document.getElementById('proyecto').style.display='none';
     <link href="../Librerias/css/plugins/timeline/timeline.css" rel="stylesheet">
     <!-- SB Admin CSS - Include with every page -->
     <link href="../Librerias/css/sb-admin.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
 
 
     
@@ -111,7 +140,7 @@ document.getElementById('proyecto').style.display='none';
 
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <?php echo $UsuarioActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                    <?php echo $uActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-user">
 
@@ -270,7 +299,7 @@ document.getElementById('proyecto').style.display='none';
         <div class ="form-horizontal">
             <div class="row">
                     <div class="col-lg-12">
-                          <h2> Publicar Recursos</h2>
+                          <h2 class="page-header"> Publicar Recursos</h2>
                   </div>
             </div><!-- /.row -->
                
@@ -299,14 +328,14 @@ document.getElementById('proyecto').style.display='none';
                                         <option>Seleccione Grupo Empresa</option>
                                         <?php
 
-                                            $c1="SELECT ge.`NOMBRE_LARGO_GE` FROM `grupo_empresa` AS ge,`inscripcion` AS i WHERE i.`NOMBRE_UA` = '$UsuarioActivo' AND i.`NOMBRE_UGE` = ge.`NOMBRE_U`";
+                                            $c1="SELECT ge.`NOMBRE_LARGO_GE` FROM `grupo_empresa` AS ge,`inscripcion` AS i WHERE i.`NOMBRE_UA` = '$uActivo' AND i.`NOMBRE_UGE` = ge.`NOMBRE_U`";
                                             $a1=$con->consulta($c1);
                                             
                                              echo "<option>TODOS</option>";
                                             while($v1 =  mysql_fetch_array($a1)){
                                                 echo "<option>".$v1[0]."</option>";
                                             }
-                                            echo "<input type='hidden' name='idAsesor' value='$UsuarioActivo'>";
+                                            echo "<input type='hidden' name='idAsesor' value='$uActivo'>";
                                         ?>
                                     </select>
                                     
@@ -371,7 +400,7 @@ document.getElementById('proyecto').style.display='none';
                        <label class="col-sm-2 control-label" >Fecha de publicacion:</label>
                         <div class="col-xs-8">
                               
-                                <input class="form-control" type="date" name="fecha1">
+                                <input class="form-control" type="date" name="fecha1" placeholder="AAAA-MM-DD" onblur="validar(this)">
                             </div>
                         </div>
                             
@@ -379,7 +408,7 @@ document.getElementById('proyecto').style.display='none';
  <div class="form-group">
                         <label class="col-sm-2 control-label" >Hora de publicacion:</label>
                         <div class="col-sm-8" >
-                        <input class="form-control" name="hora1" type="time">
+                        <input class="form-control" name="hora1" type="time" required placeholder="HH:MM" onBlur="CheckTime(this)">
                     </div>
       
                     </div><!--end/fecha-->

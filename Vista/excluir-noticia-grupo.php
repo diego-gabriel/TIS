@@ -11,9 +11,9 @@ $delNoti = $conect->consulta("DELETE FROM noticias WHERE   ID_N= '$noticia'");
 ?>
 
 <SCRIPT LANGUAGE="JavaScript" TYPE="text/javascript">
-2.s
+
 alert ("Tema eliminado con exito.")
-3.
+
 </SCRIPT>
 <script>
   location.href="lista-de-noticias-grupo.php";

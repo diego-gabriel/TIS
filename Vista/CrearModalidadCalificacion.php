@@ -56,6 +56,7 @@
     <link href="../Librerias/css/plugins/timeline/timeline.css" rel="stylesheet">
     <!-- SB Admin CSS - Include with every page -->
     <link href="../Librerias/css/sb-admin.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
 
 </head>
 
@@ -239,7 +240,11 @@
 <div id="page-wrapper">
     <div class="row">
         <div class="col-lg-12">
-            <h2 class="page-header">Crear Criterio de Calificaci&oacute;n</h2>
+            <div class="mainbar">
+                  <div class="article">
+                        <h2 class="page-header">Crear Criterio de Calificaci&oacute;n</h2>
+                 </div>
+            </div>
         </div>
         <!-- /.col-lg-12 -->
     </div>

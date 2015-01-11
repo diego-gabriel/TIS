@@ -88,6 +88,9 @@
             <!-- /.navbar-header -->
 
             <ul class="nav navbar-top-links navbar-right">
+                 <li>
+                    <a href="lista-de-noticias-grupo.php"><i class="glyphicon glyphicon-comment"></i> Foro</a>
+                </li>
 
                 <!-- /.dropdown -->
                 <li class="dropdown">
@@ -110,15 +113,7 @@
             
             
             
-            
-             
-            
-            
-            
-            
-            
-            
-            <div class="navbar-default navbar-static-side" role="navigation">
+             <div class="navbar-default navbar-static-side" role="navigation">
                 <div class="sidebar-collapse">
                     <ul class="nav" id="side-menu">
                         
@@ -211,8 +206,12 @@
                              
                             <a href="#"><i class="fa fa-tasks fa-fw"></i> Tareas<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                                
-                                
+                                 <li>
+                                     <a href="AnadirSocio.php">Añadir socios</a>
+                                </li>
+                                 <li>
+                                    <a href="AnadirRL.php">Seleccionar Representante legal</a>
+                                </li>
                                 <li>
                                     <a href="seleccionar_asesor.php">Seleccionar Asesor</a>
                                 </li>
@@ -220,49 +219,26 @@
                                  <li>
                                      <a href="InscripcionGEProyecto.php">Inscribirse a proyecto</a>
                                 </li>
-                                
-                                <li>
-                                     <a href="AnadirSocio.php">Añadir socios</a>
-                                </li>
-                                
-                                <li>
-                                    <a href="AnadirRL.php">Seleccionar Representante legal</a>
-                                </li>
-
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
+                        
                         <li>
-                            <a href="#"><i class="fa fa-warning fa-fw"></i> Notificaciones<span class="fa arrow"></span></a>
-                                                    
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="historia_actividades.php">Historia de actividades</a>
-                                </li>
-                                
-                            </ul>  
-                            </li>
+                            <a href="historia_actividades.php"><i class="glyphicon glyphicon-calendar"></i> Historia de actividades</a>
                         </li>
-
                         <li>
-                            <a href="#"><i class="fa fa-building-o fa-fw"></i> Actividades<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a id="registrarPlanificacion" href="#">
-                                        <i class="fa fa-pencil-square-o fa-fw"></i>Registrar Planificaci&oacute;n
-                                    </a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-
-                        <li>
-                            <a href="lista-de-noticias-grupo.php"><i class="fa fa-comment"></i> Foro</a>
-                                
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
+                            <a id="registrarPlanificacion" href="#">
+                                <i class="fa fa-pencil-square-o fa-fw"></i>Registrar Planificaci&oacute;n
+                            </a>
+                        </li>        
                     </ul>
+             
+            
+            
+            
+            
+            
+          
                     <!-- /#side-menu -->
                 </div>
                 <!-- /.sidebar-collapse -->
@@ -277,15 +253,16 @@
             
                 <div class="row">
                 <div class="col-lg-12">
-                    
-                    <div class="col-lg-6" >
-                         <div class="mainbar">
-                                            <div class="article"><br><br>
-                            <h2><span>Foro</span></h2>   
+                       <div class="mainbar">
+                                            <div class="article">
+                            <h2 class="page-header" ><span>Foro</span></h2>   
                             
                         </div>
                         
                     </div>
+                    
+                    
+                      
                        <?php
 
 
@@ -323,10 +300,11 @@
 
                          ?>
                         <div class="mainbar">
-                                         
-                            <h2><span>Comentarios</span></h2>   
-                            
+                            <div class="article">        
+                            <h2 class="page-header"><span>Comentarios</span></h2>   
+                            </div>
                         </div>
+                        <div class="col-lg-6" >
 
                         <?php
                          }
@@ -346,7 +324,7 @@
                              $fecha = $actualC["FECHA_C"];
                              $autor_c=$actualC["AUTOR_C"];
 
-                            echo "<b>$autor_c</b> el <b>$fecha</b> comento:$textoC</br>";
+                            echo "<b>$autor_c</b> el $fecha Comento:<b>$textoC</b></br>";
                             echo "</br>";
                         }
                         ?>
@@ -369,7 +347,7 @@
                                 else {
                                // Adiciona comentario
     
-                                      $agregarC = $conect->consulta("INSERT INTO comentarios (NOMBRE_U,ID_N,COMENTARIO,FECHA_C,AUTOR_C) VALUES ('$autor','".addslashes(mysql_real_escape_string($_GET['id']))."', '".addslashes(mysql_real_escape_string(strip_tags($_POST['comentario'])))."', NOW(), '$userAct')");
+                                      $agregarC = $conect->consulta("INSERT INTO comentarios (NOMBRE_U,ID_N,COMENTARIO,FECHA_C,AUTOR_C) VALUES ('$autor','".addslashes(mysql_real_escape_string($_GET['id']))."', '".addslashes(mysql_real_escape_string(strip_tags($_POST['comentario'])))."', NOW(), '$uActivo')");
 
                                   
 
@@ -384,14 +362,14 @@
                 ?>
 
                 <script>
-                location.href="noticia.php?id=<?php echo $_GET['id']; ?>";
+                location.href="noticia-grupo.php?id=<?php echo $_GET['id']; ?>";
                 </script>
                 <?php
                     }
                     }
 
                 ?>
-<form name="input" action="noticia.php?id=<?php echo $_GET['id']; ?>" method="post">
+<form name="input" action="noticia-grupo.php?id=<?php echo $_GET['id']; ?>" method="post">
 
 <label>Comentario:</label>
 <br>

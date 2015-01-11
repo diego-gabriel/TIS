@@ -58,6 +58,7 @@
     <link href="../Librerias/css/plugins/timeline/timeline.css" rel="stylesheet">
     <!-- SB Admin CSS - Include with every page -->
     <link href="../Librerias/css/sb-admin.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
 
 </head>
 
@@ -242,7 +243,9 @@
     <div class ="form-horizontal">
         <div class="row">
             <div class="col-lg-12">
+                <div class="mainbar">
                 <h2 class="page-header">Crear formulario de evaluacion:</h2>
+               </div>
                 <div class="col-lg-6">
                     <form method = "post" id="criteriosEscogidos">
                         <div class="form-group">

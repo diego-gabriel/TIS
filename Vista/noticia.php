@@ -1,7 +1,7 @@
  <?php  
  include '../Modelo/conexion.php';
  session_start();
- $UsuarioActivo = $_SESSION['usuario'];
+ $uActivo = $_SESSION['usuario'];
  $conect=new conexion();
  ?> 
   <!DOCTYPE html>
@@ -83,7 +83,7 @@
 
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <?php echo $UsuarioActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                    <?php echo $uActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-user">
 
@@ -240,13 +240,14 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                   
-                    <div class="col-lg-6" >
-                         <div class="mainbar">
+                    <div class="mainbar">
                             <div class="article"><br><br>
                                 <h2><span>Foro</span></h2>   
                             </div> 
-                        </div>
+                    </div>
+                   
+                    
+                         
                         <?php
 
 
@@ -284,9 +285,11 @@
 
                          ?>
                         <div class="mainbar">
-                            <div class="article"><br>
-                            <h2><span>Comentarios</span></h2>   
-                        </div>
+                            <div class="article">
+                            <h2 class="page-header"><span>Comentarios</span></h2>   
+                           </div>
+                       </div>
+                       <div class="col-lg-6" >
 
                         <?php
                          }
@@ -306,7 +309,7 @@
                              $fecha = $actualC["FECHA_C"];
                              $autor_c=$actualC["AUTOR_C"];
 
-                            echo "<b>$autor_c</b> el <b>$fecha</b> comento:$textoC</br>";
+                            echo "<b>$autor_c</b> el $fecha Comento:<b>$textoC</b></br>";
                             echo "</br>";
                         }
                         ?>
@@ -329,18 +332,11 @@
                                 else {
                                // Adiciona comentario
     
-                                      $agregarC = $conect->consulta("INSERT INTO comentarios (NOMBRE_U,ID_N,COMENTARIO,FECHA_C,AUTOR_C) VALUES ('$autor','".addslashes(mysql_real_escape_string($_GET['id']))."', '".addslashes(mysql_real_escape_string(strip_tags($_POST['comentario'])))."', NOW(), '$userAct')");
+                                      $agregarC = $conect->consulta("INSERT INTO comentarios (NOMBRE_U,ID_N,COMENTARIO,FECHA_C,AUTOR_C) VALUES ('$autor','".addslashes(mysql_real_escape_string($_GET['id']))."', '".addslashes(mysql_real_escape_string(strip_tags($_POST['comentario'])))."', NOW(), '$uActivo')");
 
                                   
 
-                                        echo'
-                                        <html>
-                                        <head>
-                                        <meta http-equiv="REFRESH" content="0;url=lista_asesores.php">
-                                        </head>
-                                        </html>
-
-                                         ';
+                                       
                 ?>
 
                 <script>

@@ -76,7 +76,17 @@
     <link href="../Librerias/css/plugins/timeline/timeline.css" rel="stylesheet">
     <!-- SB Admin CSS - Include with every page -->
     <link href="../Librerias/css/sb-admin.css" rel="stylesheet">
-        <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+
+    <style>
+            .textbox
+            {
+                resize:none;
+                width: 1026px;
+                height: 240px;
+            }
+    </style>
+
 </head>
 
 <body>
@@ -249,15 +259,13 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
+                    <div class="article">
+                          <div class="panel-heading">
+                            <i ></i><h2 class="page-header"> Nuevo </h2>
+                        </div>
+                   </div>
                   
-                    <div class="col-lg-6" >
-                       <div class="article"><br>
-                             
-                            
-                            <div class="panel-heading">
-                            <i ></i><h2> Nuevo </h2>
-                        </div>
-                        </div>
+                       
                             
 
                         <?php
@@ -289,43 +297,37 @@
                                         $noticia = "INSERT INTO noticias (NOMBRE_U,TITULO, FECHA_N, VIEWS, TEXTO, POSTEADO) VALUES ('$usuario','".addslashes(mysql_real_escape_string($_POST["titulo"]))."', NOW(), '0', '".addslashes(mysql_real_escape_string($_POST['texto']))."','$uActivo')";
                                         $noticia = $conect->consulta($noticia)
                                         or die ("Error.");
-                                        echo "Tema Adicionado";
+                                        echo "<script type=\"text/javascript\">alert('Tema Adicionado');</script>";
 
                                     }
 
                                 }
                         ?>
-
-<form name="input" action="adicionar-noticia-grupo.php" method="post">
-  <div class="form-group">
-                      <label class="col-sm-2 control-label">Titulo:</label>
-                             <div class="col-xs-12">
-                             </br>
-                                  <input id= "campoTitulo" type="text" name= "titulo"  class="form-control"  data-toggle="tooltip" data-placement="right" title="T&iacute;tulo con el que se mostrar&aacute; el recurso">
-
+                    <form name="input" action="adicionar-noticia-grupo.php" method="post">
+                        <fieldset class="campos-border">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Titulo:</label>
+                            <div class="col-xs-8">
+                                <input id= "campoTitulo" type="text" name= "titulo"  class="form-control"  data-toggle="tooltip" data-placement="right" title="T&iacute;tulo con el que se mostrar&aacute; el recurso">
                             </div>
-                   </div>
-</br></br>
-
- <div class="form-group">
- </br>
-                            <label class="col-sm-2 control-label">Texto:</label>
-                        </br>
-                                <div class="col-sm-12">
-                                     <textarea class="jqte-test"  type="text" name="texto" id="campoDescripcion" rows="8" cols="101" data-toggle="tooltip" data-placement="right" style="overflow: auto;"></textarea>
-                                </div>
+                        </div>
+                         </br></br>
+                       <div class="form-group">
+                             <label class="col-sm-2 control-label">Texto:</label>
+                            <div class="col-sm-10">
+                                <textarea  type="text" name="texto" id="campoDescripcion"  class="textbox" ></textarea>
+                            </div>
+                       </div>
+                    <br>
+                      <div class="form-group">
+                         <label class="col-sm-2 control-label"></label>
+                            <div class="col-xs-4">
+                                <p><input type="submit" class="btn btn-primary" value="Adicionar Tema"></p>
+                            </div>
                       </div>
+                    </form>
 
-
-</br>
-
-</br>
-<div class="col-xs-12">
-</br>
-<input type="submit" class="btn btn-primary" value="Adicionar Tema">
-</div>
-
-</form>          </div>
+                 
                 </div>
                 <!-- /.col-lg-12 -->
             </div>

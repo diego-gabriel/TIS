@@ -65,6 +65,7 @@
     <link href="../Librerias/css/plugins/timeline/timeline.css" rel="stylesheet">
     <!-- SB Admin CSS - Include with every page -->
     <link href="../Librerias/css/sb-admin.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -89,6 +90,9 @@
             <!-- /.navbar-header -->
 
             <ul class="nav navbar-top-links navbar-right">
+                  <li>
+                    <a href="lista-de-noticias-grupo.php"><i class="glyphicon glyphicon-comment"></i> Foro</a>
+                </li>
 
                 <!-- /.dropdown -->
                 <li class="dropdown">
@@ -233,36 +237,16 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
-                        <li>
-                            <a href="#"><i class="fa fa-warning fa-fw"></i> Notificaciones<span class="fa arrow"></span></a>
-                                                    
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="historia_actividades.php">Historia de actividades</a>
-                                </li>
-                                
-                            </ul>  
-                            </li>
-                        </li>
 
                         <li>
-                            <a href="#"><i class="fa fa-building-o fa-fw"></i> Actividades<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a id="registrarPlanificacion" href="#">
-                                        <i class="fa fa-pencil-square-o fa-fw"></i>Registrar Planificaci&oacute;n
-                                    </a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
+                            <a href="historia_actividades.php"><i class="glyphicon glyphicon-calendar"></i> Historia de actividades</a>
                         </li>
-
                         <li>
-                            <a href="lista-de-noticias-grupo.php"><i class="fa fa-comment"></i> Foro</a>
-                                
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
+                            <a id="registrarPlanificacion" href="#">
+                                <i class="fa fa-pencil-square-o fa-fw"></i>Registrar Planificaci&oacute;n
+                            </a>
+                        </li>  
+                       
                     </ul>
                     <!-- /#side-menu -->
                 </div>
@@ -276,18 +260,7 @@
         <div id="page-wrapper">
 
             
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-                     <h1>Documentos recibidos</h1>
+                     <h2 class="page-header">Documentos recibidos</h2>
                     <div class="panel panel-default" >
 
               
@@ -335,23 +308,9 @@
                                                     if($horaA >= $hopDoc || $horaA <= $hopDoc){
                                                         
 
-                                                        if(empty($docUbi))
+                                                        if(!empty($docUbi))
                                                         {
-                                                
-                                                ?>
-                                                      <tr> 
-                                                          <td><?php echo $i?></td> 
-                                                          <td><b><?php echo $docPubli[0]?></b><td>
-
-                                                          <td><?php echo $docPubli[2]?></td> 
-                                                          <td> </td>
-                                                         
-                                                     </tr>
-                                               <?php 
-                                                            
-                                                    }
-                                                    else{
-
+                                              
                                                         ?>
 
                                                             <tr> 
@@ -391,24 +350,9 @@
                                                 {     
                                                     if($horaA >= $hopDoc || $horaA <= $hopDoc)
                                                     {
-                                                         if(empty($docUbi))
+                                                         if(!empty($docUbi))
                                                         {
-                                             ?>
-                                             
-                                                      <tr> 
-                                                          <td><?php echo $i?></td> 
-                                                          <td><b><?php echo $docPubli[0]?></b><td>
-
-                                                          <td><?php echo $docPubli[2]?></td> 
-                                                          <td> </td>
-                                                         
-                                                     </tr>
-
-
-                                            <?php
-                                                               
-                                                     }
-                                                     else{
+                                            
                                                         ?>
                                                          <tr> 
                                                           <td><?php echo $i?></td> 
@@ -449,24 +393,9 @@
                                                 {     
                                                     if($horaA >= $hopDoc || $horaA <= $hopDoc)
                                                     {
-                                                        if(empty($docUbi))
+                                                        if(!empty($docUbi))
                                                         {
-                                             ?>
-                                             
-                                                      <tr> 
-                                                          <td><?php echo $i?></td> 
-                                                          <td><b><?php echo $docPubli[0]?></b><td>
-
-                                                          <td><?php echo $docPubli[2]?></td> 
-                                                          <td> </td>
-                                                         
-                                                     </tr>
-
-
-                                            <?php
-                                                               
-                                                     }
-                                                     else{
+                                            
                                                         ?>
                                                             <tr> 
                                                             <td><?php echo $i?></td> 
@@ -509,23 +438,9 @@
                                                 {     
                                                     if($horaA >= $hopDoc || $horaA <= $hopDoc)
                                                     {
-                                                        if(empty($docUbi))
+                                                        if(!empty($docUbi))
                                                         {
 
-                                             ?>
-                                             
-                                                      <tr> 
-                                                          <td><?php echo $i?></td> 
-                                                          <td><b><?php echo $docPubli[0]?></b><td>
-
-                                                          <td><?php echo $docPubli[2]?></td> 
-                                                          <td> </td>
-                                                         
-                                                     </tr>
-                                                     <?php
-                                                                
-                                                     }
-                                                     else{
                                                     ?>
                                                      <tr> 
                                                           <td><?php echo $i?></td> 
