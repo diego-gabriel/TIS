@@ -63,6 +63,7 @@
     <link href="../Librerias/css/plugins/timeline/timeline.css" rel="stylesheet">
     <!-- SB Admin CSS - Include with every page -->
     <link href="../Librerias/css/sb-admin.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -279,7 +280,7 @@
             
            <div class="row">
          <div class="col-lg-12">
-             <h2 class="page-header">Representante legal</h2> 
+             <h2 class="page-header">Seleccione un Representante Legal</h2> 
 
              <?php
 

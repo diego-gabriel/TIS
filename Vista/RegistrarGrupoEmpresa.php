@@ -22,6 +22,7 @@
     <script src="../Librerias/js/jquery-2.1.0.min.js"></script>
     <!--script src="../Librerias/js/jquery-ui.js"></script-->
     <script src="../Librerias/js/bootstrap-dialog.js"></script>
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
     
 </head>
 

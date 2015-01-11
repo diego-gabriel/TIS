@@ -323,7 +323,7 @@
 
                          ?>
                         <div class="mainbar">
-                                            <div class="article"><br>
+                                         
                             <h2><span>Comentarios</span></h2>   
                             
                         </div>
