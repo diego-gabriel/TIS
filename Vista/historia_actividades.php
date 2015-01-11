@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <?php 
     include '../Modelo/conexion.php';
-    
     session_start();
     $uActivo = $_SESSION['usuario'];
     
@@ -11,7 +10,8 @@
     
     $usuario = $uActivo;
     
-    if (!is_array($VerificarUsuario2)) {   
+    if (!is_array($VerificarUsuario2)) 
+  {   
     $consultaGE="SELECT `NOMBRE_U` FROM socio WHERE `NOMBRES_S` = '$uActivo'";
     $conGE_=$con->consulta($consultaGE);
     $NombreUsuario=mysql_fetch_row($conGE_);
@@ -19,26 +19,25 @@
     $usuario=$NombreUsuario[0];
 
   }
-      
-  
-    
-    
 
         //Peticion
         $peticionA = $con->consulta("SELECT `NOMBRE_UA` FROM `inscripcion` WHERE `NOMBRE_UGE`='$usuario'");
              while ($correo = mysql_fetch_array($peticionA))
                {        
-                      $asesor=$correo["NOMBRE_UA"];}
+                      $asesor=$correo["NOMBRE_UA"];
+               }
 
          $peticionGE = $con->consulta("SELECT NOMBRE_CORTO_GE FROM grupo_empresa WHERE NOMBRE_U='$usuario'");
              while ($correo1 = mysql_fetch_array($peticionGE))
                {        
-                      $grupoEmpresa=$correo1["NOMBRE_CORTO_GE"];}   
+                      $grupoEmpresa=$correo1["NOMBRE_CORTO_GE"];   
+               }   
                       
          $peticionNL = $con->consulta("SELECT NOMBRE_LARGO_GE FROM grupo_empresa WHERE NOMBRE_U='$usuario'");
              while ($correo2 = mysql_fetch_array($peticionNL))
                {        
-                      $grupoEmpresaNL=$correo2["NOMBRE_LARGO_GE"];}                        
+                      $grupoEmpresaNL=$correo2["NOMBRE_LARGO_GE"];
+               }                        
                      
 ?>
    
@@ -100,8 +99,9 @@
     
     
     
-        <link href="css/tabla-div1.css" rel="stylesheet" type="text/css" />
+    <link href="css/tabla-div1.css" rel="stylesheet" type="text/css" />
     <link href="css/tabla-div.css" rel="stylesheet" type="text/css" />
+    <link href="css/style.css" rel="stylesheet" type="text/css" /> 
 </head>
 
 <body>
@@ -280,7 +280,7 @@
             
             
             
-            <form id = "ordenc" method = "post" action="" role="form" enctype="multipart/data-form" onsubmit="return validarCampos(ordenc)">
+        <form id = "ordenc" method = "post" action="" role="form" enctype="multipart/data-form" onsubmit="return validarCampos(ordenc)">
         <div class ="form-horizontal">
 
 
@@ -294,10 +294,6 @@
         if($tamano>0){
         ?>
 
-
-        <div class="col-lg-12">
-        <h1> HISTORIA DE ACTIVIDADES</h1><br><br>
-        </div>
 
         <div class="historia">
 
@@ -337,7 +333,7 @@
         <?php
 
         //Peticion
-        $peticion = $con->consulta("SELECT  r.nombre_r, p.fecha_inicio_pl, p.hora_inicio_pl, p.fecha_fin_pl, p.hora_fin_pl FROM plazo p, registro r, tipo t WHERE t.TIPO_T = r.TIPO_T AND p.ID_R = r.ID_R AND r.TIPO_T =  'documento requerido' AND r.NOMBRE_U = '$asesor'");
+        $peticion = $con->consulta("SELECT  r.nombre_r, p.fecha_inicio_pl, p.hora_inicio_pl, p.fecha_fin_pl, p.hora_fin_pl FROM plazo p, registro r, tipo t, inscripcion_proyecto i, documento_r d WHERE t.TIPO_T = r.TIPO_T AND p.ID_R = r.ID_R AND r.TIPO_T =  'documento requerido' AND r.NOMBRE_U = '$asesor' AND i.NOMBRE_U='$uActivo' and  d.CODIGO_P=i.CODIGO_P AND r.ID_R=d.ID_R");
 
 
         while($fila = mysql_fetch_array($peticion))
@@ -379,26 +375,10 @@
         <?php
         }
 
-
-
-
         ?>  
         </div>    
 
-
-
-
         <hr>
-
-
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
 
         <div class ="form-horizontal">
 
@@ -503,34 +483,15 @@
         <strong>Su inscripcion no ha sido habilitada</strong>
         </div>';
         }
-        ?> 
-
-
-
-
-
-                    
-                    
-                    
-                    
+        ?>             
                  
   </form>
              
     <!--Modal para adjuntar recursos/documentos-->
-         
-      
+
     </div>       
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-        </div>
+  
+    </div>
         <!-- /#page-wrapper -->
 
     </div>
