@@ -58,6 +58,7 @@
     <link href="../Librerias/css/sb-admin.css" rel="stylesheet">
     <link href="../Librerias/css/dropzone.css" type="text/css" rel="stylesheet" />
     <script src="../Librerias/js/dropzone.min.js"></script>
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
 
 </head>
 

@@ -27,7 +27,7 @@
     <link href="../Librerias/css/sb-admin.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet" type="text/css" />      
     
-
+    <script type="text/javascript" src="../Librerias/js/validar_registro.js"></script>
 
 </head>
 
@@ -197,8 +197,7 @@
             <div class="col-lg-12">
             <h2 class="page-header">Registrar Usuario:</h2>
             <div class="col-lg-6" >
-            <form action="crear_administrador.php" method="post" enctype="multipart/form-data">
-
+            <form id = "registroU" method = "post" action="crear_administrador.php" role="form" enctype="multipart/data-form" onsubmit="return validar(registroU)">
 
             <div class="form-group">
             <div class="input-group">
@@ -213,9 +212,21 @@
             <span class="input-group-addon">
             <span class="glyphicon glyphicon-lock"></span>
             </span>
-            <input class="form-control" type="password" name="contrasena" id="UserPassword" placeholder="Contraseña" minlength="5" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$" title="la contraseña debe contener mayusculas, minusculas, caracteres y numeros" required>
+            <input class="form-control" type="password" name="contrasena" id="contrasena1" placeholder="Contraseña" minlength="5" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$" title="la contraseña debe contener mayusculas, minusculas, caracteres y numeros" required>
             </div>
-            </div>                                     
+            </div>
+                
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                      <span class="glyphicon glyphicon-lock"></span>
+                    </span>
+                    <input class="form-control" type="password" name="contrasena2" id="contrasena2" placeholder="Introduzca nuevamente la contraseña" minlength="8" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$" title="Ingrese una contraseña segura, debe tener como minimo 8 caracteres y como maximo 15, al menos una letra mayuscula, una minuscula, un numero y un caracter especial" required>
+                </div>
+            </div>                
+                
+            <br> </br>    
+                
             <div class="form-group">
             <div class="input-group">
             <span class="input-group-addon">

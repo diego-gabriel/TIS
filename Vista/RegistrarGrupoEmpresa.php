@@ -24,6 +24,8 @@
     <script src="../Librerias/js/bootstrap-dialog.js"></script>
     <link href="css/style.css" rel="stylesheet" type="text/css" />
     
+    <script type="text/javascript" src="../Librerias/js/validar_registro.js"></script>
+    
 </head>
 
 <body>
@@ -53,7 +55,7 @@
 <!-------------------------------------------NUEVAS PUBLICACIONES------------------------------------------>
 <div id="page-wrapper">
            
-<!--form id = "ordenc" method = "post" action="" role="form" enctype="multipart/data-form" onsubmit="return validarCampos(ordenc)"-->
+<form id = "registroU" method = "post" action="" role="form" enctype="multipart/data-form" onsubmit="return validar(registroU)">
         <div class ="form-horizontal">
             <div class="row">
                 <div class="col-lg-12">
@@ -69,6 +71,26 @@
                                                 <input class="form-control" type="text" name="nombreU" id="nombreU" placeholder="Nombre de Usuario" pattern="\b[a-zA-z]{5}[a-zA-z0-9]{0,9}" title="Minimo 5 y Maximo 14 caracteres...Ejm: Bittle123, Bitle" required>
                                             </div>
                                         </div>
+                                        
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                  <span class="glyphicon glyphicon-lock"></span>
+                                                </span>
+                                                <input class="form-control" type="password" name="contrasena1" id="contrasena1" placeholder="Contraseña" minlength="8" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$" title="Ingrese una contraseña segura, debe tener como minimo 8 caracteres y como maximo 15, al menos una letra mayuscula, una minuscula, un numero y un caracter especial" required>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                  <span class="glyphicon glyphicon-lock"></span>
+                                                </span>
+                                                <input class="form-control" type="password" name="contrasena2" id="contrasena2" placeholder="Introduzca nuevamente la contraseña" minlength="8" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$" title="Ingrese una contraseña segura, debe tener como minimo 8 caracteres y como maximo 15, al menos una letra mayuscula, una minuscula, un numero y un caracter especial" required>
+                                            </div>
+                                        </div>
+                                        
+                                        <br> </br>
                                         
                                         <div class="form-group">
                                             <div class="input-group">
@@ -116,14 +138,7 @@
                                             </div>
                                         </div>
                                 
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                  <span class="glyphicon glyphicon-lock"></span>
-                                                </span>
-                                                <input class="form-control" type="password" name="contrasena1" id="contrasena1" placeholder="Contraseña" minlength="8" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$" title="Ingrese una contraseña segura, debe tener como minimo 8 caracteres y como maximo 15, al menos una letra mayuscula, una minuscula, un numero y un caracter especial" required>
-                                            </div>
-                                        </div>
+
                                         
                                         <button type="submit" onclick="this.form.action='ProcesarRegistroGrupoE.php'" class="btn btn-primary"> <span class="glyphicon glyphicon-ok"></span> Registrarme</button>
                                     </form>              
@@ -132,7 +147,11 @@
                             </div>        
                         </div>
                 </div>
-            </div><!-- /.row -->                   
+            </div><!-- /.row -->  
+            </div>
+    </form>  
+    </div>
+        </div>       
     <script src="../Librerias/js/bootstrap.min.js"></script>
     <script src="../Librerias/js/plugins/metisMenu/jquery.metisMenu.js"></script>
 
