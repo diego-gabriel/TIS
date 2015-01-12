@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <?php
 
+
  include '../Modelo/conexion.php';
  session_start();
  $uActivo = $_SESSION['usuario'];

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <?php
+
     include '../Modelo/conexion.php';
     session_start();
     $con=new conexion();
