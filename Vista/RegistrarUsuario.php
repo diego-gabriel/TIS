@@ -86,8 +86,8 @@
 
 <!-------------------------------------------NUEVAS PUBLICACIONES------------------------------------------>
 <div id="page-wrapper">
-           
-<form id = "registroU" method = "post" action="" role="form" enctype="multipart/data-form" onsubmit="return validar(registroU)">
+    <form method = "post" id="FormularioRegistroUsuario" action="" role="form" enctype="multipart/data-form" onsubmit="return validar(FormularioRegistroUsuario)">
+                                  
         <div class ="form-horizontal">
             <div class="row">
                 <div class="col-lg-12">
@@ -100,10 +100,10 @@
                     </div> 
                  
                     <h2 class="page-header">Registrar Usuario:</h2>
+                    
 
                     <div class="col-lg-6" >
-                                    <form method = "post" id="FormularioRegistroUsuario">
-                                        
+                                         
                                         
                                         <div class="form-group">
                                             <div class="input-group">
@@ -194,7 +194,7 @@
                                         <div class="form-group">
                                             <button type="submit" name="submit" class="btn btn-primary" id="btn-registrarUser"> <span class="glyphicon glyphicon-ok"></span> Registrarme</button>
                                         </div>
-                                    </form>              
+                                               
                             <div id="panelResultado">
                                 
                             </div>        
@@ -202,7 +202,7 @@
                 </div>
             </div><!-- /.row -->       
     </div>
-    </form>  
+   </form>   
     </div>
     </div> 
     
