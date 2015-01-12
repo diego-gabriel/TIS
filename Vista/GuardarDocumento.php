@@ -9,9 +9,9 @@ $UsuarioActivo = $_SESSION['usuario'];
 $proyecto =$_POST['proyecto'];
 
 $nombreDoc = trim($_POST['nombreDocumento']);
-$FechaInicioEntrega = $_POST['fechaInicioE'];
+$FechaInicioEntrega = date("Y-m-d",strtotime($_POST['fechaInicioE']));
 $HoraInicioEntrega = $_POST['horaInicioE'];
-$FechaFinalEntrega = $_POST['fechaFinalE'];
+$FechaFinalEntrega = date("Y-m-d",strtotime($_POST['fechaFinalE']));
 $HoraFinalEntrega = $_POST['horaFinalE'];
 $DescripcionDocumento = $_POST['DescripcionDocumento'];
 

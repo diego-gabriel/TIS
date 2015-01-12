@@ -29,35 +29,6 @@
     
     <script type="text/javascript" src="../Librerias/js/validar_registro.js"></script>
      
-    <script>
-        $(document).ready(function(){
-            
-            $('#btn-registrarUser').click(function(){
-
-    
-                               
-                if($("form")[0].checkValidity()) 
-                {
-                    var url = "ProcesarRegistroUsuario.php"
-
-                    $.ajax({
-                        url: url,
-                        type: 'POST',
-                        data: $('#FormularioRegistroUsuario').serialize(),
-
-                        success: function(data){
-
-                            $('#panelResultado').html(data)
-
-                        }
-                    });
-
-                        return false;
-                }
-       
-            });      
-        });
-    </script>
 </head>
 
 <body>
@@ -86,7 +57,7 @@
 
 <!-------------------------------------------NUEVAS PUBLICACIONES------------------------------------------>
 <div id="page-wrapper">
-    <form method = "post" id="FormularioRegistroUsuario" action="" role="form" enctype="multipart/data-form" onsubmit="return validar(FormularioRegistroUsuario)">
+    <form method = "post" id="FormularioRegistroUsuario" action="ProcesarRegistroUsuario.php" role="form" enctype="multipart/data-form" onsubmit="return validar(FormularioRegistroUsuario)">
                                   
         <div class ="form-horizontal">
             <div class="row">

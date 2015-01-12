@@ -4,36 +4,22 @@
     session_start();
     $uActivo = $_SESSION['usuario'];
     
-    $con=new conexion();
-    $VerificarUsuario = $con->consulta("SELECT NOMBRE_U FROM usuario WHERE NOMBRE_U = '$uActivo' ");
-    $VerificarUsuario2 = mysql_fetch_row($VerificarUsuario);
-    
-    $usuario = $uActivo;
-    
-    if (!is_array($VerificarUsuario2)) 
-  {   
-    $consultaGE="SELECT `NOMBRE_U` FROM socio WHERE `NOMBRES_S` = '$uActivo'";
-    $conGE_=$con->consulta($consultaGE);
-    $NombreUsuario=mysql_fetch_row($conGE_);
-
-    $usuario=$NombreUsuario[0];
-
-  }
+    $conexion=new conexion();
 
         //Peticion
-        $peticionA = $con->consulta("SELECT `NOMBRE_UA` FROM `inscripcion` WHERE `NOMBRE_UGE`='$usuario'");
+        $peticionA = $conexion->consulta("SELECT `NOMBRE_UA` FROM `inscripcion` WHERE `NOMBRE_UGE`='$uActivo'");
              while ($correo = mysql_fetch_array($peticionA))
                {        
                       $asesor=$correo["NOMBRE_UA"];
                }
 
-         $peticionGE = $con->consulta("SELECT NOMBRE_CORTO_GE FROM grupo_empresa WHERE NOMBRE_U='$usuario'");
+         $peticionGE = $conexion->consulta("SELECT NOMBRE_CORTO_GE FROM grupo_empresa WHERE NOMBRE_U='$uActivo'");
              while ($correo1 = mysql_fetch_array($peticionGE))
                {        
                       $grupoEmpresa=$correo1["NOMBRE_CORTO_GE"];   
                }   
                       
-         $peticionNL = $con->consulta("SELECT NOMBRE_LARGO_GE FROM grupo_empresa WHERE NOMBRE_U='$usuario'");
+         $peticionNL = $conexion->consulta("SELECT NOMBRE_LARGO_GE FROM grupo_empresa WHERE NOMBRE_U='$uActivo'");
              while ($correo2 = mysql_fetch_array($peticionNL))
                {        
                       $grupoEmpresaNL=$correo2["NOMBRE_LARGO_GE"];
@@ -108,7 +94,7 @@
 
    
 <div id="wrapper">
-      <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
+       <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
                     <span class="sr-only">Toggle navigation</span>
@@ -158,69 +144,17 @@
                                     <ul class="nav nav-third-level">
                                     <?php
                                     
-                                   
-                                      $conect = new conexion();
-
-                                      $SeleccionarVerficarSocio = $conect->consulta("SELECT NOMBRES_S FROM socio WHERE NOMBRES_S = '$uActivo'");
-
-                                      $VerificarSocio = mysql_fetch_row($SeleccionarVerficarSocio);
-
-
-
-                                    if(is_array($VerificarSocio))
-                                    {
-                                        $SeleccionarUsuarioGE = $conect->consulta("SELECT NOMBRE_U FROM socio WHERE NOMBRES_S = '$VerificarSocio[0]'");
-
-                                        $UsuarioGE = mysql_fetch_row($SeleccionarUsuarioGE);
-
-                                        $SeleccionrAsesor = $conect->consulta("SELECT NOMBRE_UA FROM inscripcion WHERE NOMBRE_UGE='$UsuarioGE[0]'");
-                                        $Asesor = mysql_fetch_row($SeleccionrAsesor);
-                                         $ins_proyecto = $conect->consulta("SELECT CODIGO_P FROM inscripcion_proyecto WHERE NOMBRE_U='$UsuarioGE[0]'");
-                                        $id_proyecto = mysql_fetch_row($ins_proyecto);
-                                        
-                                        $SeleccionarDocReq = $conect->consulta("SELECT  `NOMBRE_R`,`CODIGO_P` FROM registro AS r,documento_r AS d WHERE r.ID_R=d.ID_R AND  `NOMBRE_U`='$Asesor[0]' AND TIPO_T='documento requerido' ");
-
-                                        while ($rowDocs = mysql_fetch_row($SeleccionarDocReq))
+                                        $docsReq = $conexion->consulta("SELECT NOMBRE_R FROM registro, documento_r, inscripcion, inscripcion_proyecto WHERE inscripcion_proyecto.NOMBRE_U = inscripcion.NOMBRE_UGE AND inscripcion_proyecto.CODIGO_P = documento_r.CODIGO_P AND documento_r.ID_R = registro.ID_R");
+                                     
+                                        while ($rowDocs = mysql_fetch_row($docsReq))
                                         {
-                                            if($rowDocs[1] == $id_proyecto[0])
-                                            {
-                                                   echo '<li>
-                                                      <a href="SubirDocumento.php?doc='.$rowDocs[0].'">'.$rowDocs[0].'</a>
+                                            
+                                            echo '<li>
+                                                  <a href="SubirDocumento.php?doc='.$rowDocs[0].'">'.$rowDocs[0].'</a>
                                                    </li>';  
-                                             }
-                                            else 
-                                            {
-
-                                            }
                                             
                                         }
-
-                                    }
-                                    else
-                                    {
-                                        $SeleccionrAsesor = $conect->consulta("SELECT NOMBRE_UA FROM inscripcion WHERE NOMBRE_UGE='$uActivo'");
-                                        $Asesor = mysql_fetch_row($SeleccionrAsesor);
-                                        $ins_proyecto = $conect->consulta("SELECT CODIGO_P FROM inscripcion_proyecto WHERE NOMBRE_U='$uActivo'");
-                                        $id_proyecto = mysql_fetch_row($ins_proyecto);
-                                          
-                                        $SeleccionarDocReq = $conect->consulta("SELECT  `NOMBRE_R`,`CODIGO_P` FROM registro AS r,documento_r AS d WHERE r.ID_R=d.ID_R AND  `NOMBRE_U`='$Asesor[0]' AND TIPO_T='documento requerido' ");
-
-                                          
-                                        while ($rowDocs = mysql_fetch_row($SeleccionarDocReq))
-                                        {
-                                            if($rowDocs[1] == $id_proyecto[0])
-                                            {
-                                                   echo '<li>
-                                                      <a href="SubirDocumento.php?doc='.$rowDocs[0].'">'.$rowDocs[0].'</a>
-                                                   </li>';  
-                                             }
-                                            else 
-                                            {
-
-                                            }
-                                        }
-
-                                    }      
+                                        
                                     ?>
                                     </ul>
                                 </li>
@@ -270,16 +204,9 @@
             
                
             <!-- /.navbar-static-side -->
-        </nav>       
+        </nav>
+     
         <div id="page-wrapper">
-
-            
-            
-            
-            
-            
-            
-            
         <form id = "ordenc" method = "post" action="" role="form" enctype="multipart/data-form" onsubmit="return validarCampos(ordenc)">
         <div class ="form-horizontal">
 
@@ -287,7 +214,7 @@
 
         <?php 
 
-        $peticion333=$con->consulta("SELECT * FROM inscripcion WHERE NOMBRE_UGE='$usuario' and ESTADO_INSCRIPCION='Habilitado'");
+        $peticion333=$conexion->consulta("SELECT * FROM inscripcion WHERE NOMBRE_UGE='$uActivo' and ESTADO_INSCRIPCION='Habilitado'");
         $tamano=mysql_num_rows($peticion333);
 
 
@@ -333,7 +260,7 @@
         <?php
 
         //Peticion
-        $peticion = $con->consulta("SELECT  r.nombre_r, p.fecha_inicio_pl, p.hora_inicio_pl, p.fecha_fin_pl, p.hora_fin_pl FROM plazo p, registro r, tipo t, inscripcion_proyecto i, documento_r d WHERE t.TIPO_T = r.TIPO_T AND p.ID_R = r.ID_R AND r.TIPO_T =  'documento requerido' AND r.NOMBRE_U = '$asesor' AND i.NOMBRE_U='$uActivo' and  d.CODIGO_P=i.CODIGO_P AND r.ID_R=d.ID_R");
+        $peticion = $conexion->consulta("SELECT  r.nombre_r, p.fecha_inicio_pl, p.hora_inicio_pl, p.fecha_fin_pl, p.hora_fin_pl FROM plazo p, registro r, tipo t, inscripcion_proyecto i, documento_r d WHERE t.TIPO_T = r.TIPO_T AND p.ID_R = r.ID_R AND r.TIPO_T =  'documento requerido' AND r.NOMBRE_U = '$asesor' AND i.NOMBRE_U='$uActivo' and  d.CODIGO_P=i.CODIGO_P AND r.ID_R=d.ID_R");
 
 
         while($fila = mysql_fetch_array($peticion))
@@ -421,7 +348,7 @@
         //crear conexion---------------------------
 
         //Peticion
-        $peticion = $con->consulta("SELECT registro.ID_R,registro.NOMBRE_U,registro.NOMBRE_R,registro.FECHA_R,registro.HORA_R  FROM registro, receptor  WHERE  registro.ID_R=receptor.ID_R  and   (RECEPTOR_R='$grupoEmpresaNL' OR RECEPTOR_R='TODOS')");
+        $peticion = $conexion->consulta("SELECT registro.ID_R,registro.NOMBRE_U,registro.NOMBRE_R,registro.FECHA_R,registro.HORA_R  FROM registro, receptor  WHERE  registro.ID_R=receptor.ID_R  and   (RECEPTOR_R='$grupoEmpresaNL' OR RECEPTOR_R='TODOS')");
 
 
         while($fila = mysql_fetch_array($peticion))

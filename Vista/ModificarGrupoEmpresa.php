@@ -2,7 +2,7 @@
  include '../Modelo/conexion.php';
  session_start();
  $uActivo = $_SESSION['usuario'];
- $conect = new conexion();
+ $conexion = new conexion();
 
 ?>
 
@@ -66,13 +66,8 @@
 <body>
 
    
-    <div id="wrapper">
-       
-        
-        <!--<h2>design by <a href="#" title="flash templates">flash-templates-today.com</a></h2>-->
-        
-    
-        <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
+<div id="wrapper">
+       <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
                     <span class="sr-only">Toggle navigation</span>
@@ -85,6 +80,10 @@
             <!-- /.navbar-header -->
 
             <ul class="nav navbar-top-links navbar-right">
+
+                <li>
+                    <a href="lista-de-noticias-grupo.php"><i class="glyphicon glyphicon-comment"></i> Foro</a>
+                </li>
 
                 <!-- /.dropdown -->
                 <li class="dropdown">
@@ -103,17 +102,6 @@
                 <!-- /.dropdown -->
             </ul>
             <!-- /.navbar-top-links -->
-
-            
-            
-            
-            
-             
-            
-            
-            
-            
-            
             
             <div class="navbar-default navbar-static-side" role="navigation">
                 <div class="sidebar-collapse">
@@ -129,69 +117,17 @@
                                     <ul class="nav nav-third-level">
                                     <?php
                                     
-                                   
-                                      $conect = new conexion();
-
-                                      $SeleccionarVerficarSocio = $conect->consulta("SELECT NOMBRES_S FROM socio WHERE NOMBRES_S = '$uActivo'");
-
-                                      $VerificarSocio = mysql_fetch_row($SeleccionarVerficarSocio);
-
-
-
-                                    if(is_array($VerificarSocio))
-                                    {
-                                        $SeleccionarUsuarioGE = $conect->consulta("SELECT NOMBRE_U FROM socio WHERE NOMBRES_S = '$VerificarSocio[0]'");
-
-                                        $UsuarioGE = mysql_fetch_row($SeleccionarUsuarioGE);
-
-                                        $SeleccionrAsesor = $conect->consulta("SELECT NOMBRE_UA FROM inscripcion WHERE NOMBRE_UGE='$UsuarioGE[0]'");
-                                        $Asesor = mysql_fetch_row($SeleccionrAsesor);
-                                         $ins_proyecto = $conect->consulta("SELECT CODIGO_P FROM inscripcion_proyecto WHERE NOMBRE_U='$UsuarioGE[0]'");
-                                        $id_proyecto = mysql_fetch_row($ins_proyecto);
-                                        
-                                        $SeleccionarDocReq = $conect->consulta("SELECT  `NOMBRE_R`,`CODIGO_P` FROM registro AS r,documento_r AS d WHERE r.ID_R=d.ID_R AND  `NOMBRE_U`='$Asesor[0]' AND TIPO_T='documento requerido' ");
-
-                                        while ($rowDocs = mysql_fetch_row($SeleccionarDocReq))
+                                        $docsReq = $conexion->consulta("SELECT NOMBRE_R FROM registro, documento_r, inscripcion, inscripcion_proyecto WHERE inscripcion_proyecto.NOMBRE_U = inscripcion.NOMBRE_UGE AND inscripcion_proyecto.CODIGO_P = documento_r.CODIGO_P AND documento_r.ID_R = registro.ID_R");
+                                     
+                                        while ($rowDocs = mysql_fetch_row($docsReq))
                                         {
-                                            if($rowDocs[1] == $id_proyecto[0])
-                                            {
-                                                   echo '<li>
-                                                      <a href="SubirDocumento.php?doc='.$rowDocs[0].'">'.$rowDocs[0].'</a>
+                                            
+                                            echo '<li>
+                                                  <a href="SubirDocumento.php?doc='.$rowDocs[0].'">'.$rowDocs[0].'</a>
                                                    </li>';  
-                                             }
-                                            else 
-                                            {
-
-                                            }
                                             
                                         }
-
-                                    }
-                                    else
-                                    {
-                                        $SeleccionrAsesor = $conect->consulta("SELECT NOMBRE_UA FROM inscripcion WHERE NOMBRE_UGE='$uActivo'");
-                                        $Asesor = mysql_fetch_row($SeleccionrAsesor);
-                                        $ins_proyecto = $conect->consulta("SELECT CODIGO_P FROM inscripcion_proyecto WHERE NOMBRE_U='$uActivo'");
-                                        $id_proyecto = mysql_fetch_row($ins_proyecto);
-                                          
-                                        $SeleccionarDocReq = $conect->consulta("SELECT  `NOMBRE_R`,`CODIGO_P` FROM registro AS r,documento_r AS d WHERE r.ID_R=d.ID_R AND  `NOMBRE_U`='$Asesor[0]' AND TIPO_T='documento requerido' ");
-
-                                          
-                                        while ($rowDocs = mysql_fetch_row($SeleccionarDocReq))
-                                        {
-                                            if($rowDocs[1] == $id_proyecto[0])
-                                            {
-                                                   echo '<li>
-                                                      <a href="SubirDocumento.php?doc='.$rowDocs[0].'">'.$rowDocs[0].'</a>
-                                                   </li>';  
-                                             }
-                                            else 
-                                            {
-
-                                            }
-                                        }
-
-                                    }      
+                                        
                                     ?>
                                     </ul>
                                 </li>
@@ -208,8 +144,12 @@
                              
                             <a href="#"><i class="fa fa-tasks fa-fw"></i> Tareas<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                                
-                                
+                                 <li>
+                                     <a href="AnadirSocio.php">Añadir socios</a>
+                                </li>
+                                 <li>
+                                    <a href="AnadirRL.php">Seleccionar Representante legal</a>
+                                </li>
                                 <li>
                                     <a href="seleccionar_asesor.php">Seleccionar Asesor</a>
                                 </li>
@@ -217,48 +157,18 @@
                                  <li>
                                      <a href="InscripcionGEProyecto.php">Inscribirse a proyecto</a>
                                 </li>
-                                
-                                <li>
-                                     <a href="AnadirSocio.php">Añadir socios</a>
-                                </li>
-                                
-                                <li>
-                                    <a href="AnadirRL.php">Seleccionar Representante legal</a>
-                                </li>
-
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
+                        
                         <li>
-                            <a href="#"><i class="fa fa-warning fa-fw"></i> Notificaciones<span class="fa arrow"></span></a>
-                                                    
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="historia_actividades.php">Historia de actividades</a>
-                                </li>
-                                
-                            </ul>  
-                            </li>
+                            <a href="historia_actividades.php"><i class="glyphicon glyphicon-calendar"></i> Historia de actividades</a>
                         </li>
-
                         <li>
-                            <a href="#"><i class="fa fa-building-o fa-fw"></i> Actividades<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a id="registrarPlanificacion" href="#">
-                                        <i class="fa fa-pencil-square-o fa-fw"></i>Registrar Planificaci&oacute;n
-                                    </a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-
-                        <li>
-                            <a href="lista-de-noticias-grupo.php"><i class="fa fa-comment"></i> Foro</a>
-                                
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
+                            <a id="registrarPlanificacion" href="#">
+                                <i class="fa fa-pencil-square-o fa-fw"></i>Registrar Planificaci&oacute;n
+                            </a>
+                        </li>        
                     </ul>
                     <!-- /#side-menu -->
                 </div>
@@ -267,8 +177,7 @@
             
                
             <!-- /.navbar-static-side -->
-        </nav>
-
+        </nav>    
         <div id="page-wrapper">
 
             
@@ -288,7 +197,7 @@
                     $direccion;
                     $contrase;
 
-                    $peticion = $conect->consulta("SELECT G.NOMBRE_LARGO_GE, G.NOMBRE_CORTO_GE, U.CORREO_ELECTRONICO_U, U.TELEFONO_U, G.DIRECCION_GE, U.PASSWORD_U
+                    $peticion = $conexion->consulta("SELECT G.NOMBRE_LARGO_GE, G.NOMBRE_CORTO_GE, U.CORREO_ELECTRONICO_U, U.TELEFONO_U, G.DIRECCION_GE, U.PASSWORD_U
                                 FROM grupo_empresa G, usuario U WHERE G.NOMBRE_U=U.NOMBRE_U AND U.NOMBRE_U='$uActivo'");         
 
 
