@@ -116,7 +116,7 @@ if (isset($_POST['lista']))
                             $consulta = $conexion->query("SELECT * FROM registro WHERE NOMBRE_U='$nombreUGE' AND TIPO_T='documento subido'");
                             $DocSub = $consulta->rowCount();
 
-                            if(($DocSub== $DocReq) and $$DocSub>=1)
+                            if(($DocSub== $DocReq) and $DocSub>=1)
                             { 
                                 if(isset($_GET['id']))
                                 {
@@ -230,7 +230,7 @@ if (isset($_POST['lista']))
                                     unlink($aux);
 
                                    // rename("OrdenCambio.pdf", $file);
-                                    rename("OrdenCambio.pdf", $rutaDirectorio.$pdf );
+                                    rename("OrdenCambio.pdf", $rutaD.$pdf );
 
                                     $nruta = "../Repositorio/".$nombreUGE."/OC/"."OrdenCambio.pdf";
                                     $fecha = date('Y-m-d');

@@ -78,7 +78,7 @@ if (isset($_POST['lista']))
                         $consulta = $conexion->query("SELECT * FROM registro WHERE NOMBRE_U='$nombreUGE' AND TIPO_T='documento subido'");
                         $DocSub = $consulta->rowCount();
 
-                        if(($DocSub== $DocReq) and $$DocSub>=1)
+                        if(($DocSub== $DocReq) and $DocSub>=1)
                         {
                             if(isset($_GET['id']))
                             {
@@ -145,7 +145,7 @@ if (isset($_POST['lista']))
 
                                 $rutaD = "../".$nombreUGE."/NC/";
 
-                                $file = "NotificacionConformidad".'_'.$nombreEmpresa.'.pdf';
+                                $file = "NotificacionConformidad".'_'.$nEmpresa.'.pdf';
 
                                    if (!file_exists($rutaD)) 
                                     {
@@ -193,7 +193,7 @@ if (isset($_POST['lista']))
 
                                         $guardarD = $conexion->query("INSERT INTO documento (ID_R,TAMANIO_D,RUTA_D,VISUALIZABLE_D,DESCARGABLE_D) VALUES('$id','1024','$nruta','$visible','$descargar')");
                                         $desD=$conexion->query("INSERT INTO descripcion (ID_R,DESCRIPCION_D) VALUES('$id','Notificacion de Conformidad')");
-                                        $destina=$conexion->query("INSERT INTO receptor (ID_R,RECEPTOR_R) VALUES('$id','$nombreEmpresa')");
+                                        $destina=$conexion->query("INSERT INTO receptor (ID_R,RECEPTOR_R) VALUES('$id','$nEmpresa')");
                                         $guardar = $conexion->query("INSERT INTO periodo (ID_R,fecha_p,hora_p) VALUES ('$id','$fecha','$hora')") or
                                         die("Error");
                                    }
