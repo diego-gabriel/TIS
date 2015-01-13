@@ -3,7 +3,6 @@
 
  include '../Modelo/conexion.php';
  session_start();
- include("controlSesion.php");
 
  $uActivo = $_SESSION['usuario'];
  $conexion = new conexion();

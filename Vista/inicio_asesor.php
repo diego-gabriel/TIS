@@ -2,7 +2,6 @@
  
  session_start();
  $UsuarioActivo = $_SESSION['usuario'];
- include("controlSesion.php");
  ?> 
  <!DOCTYPE html>
  <html>

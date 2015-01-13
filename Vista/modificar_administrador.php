@@ -1,6 +1,6 @@
  <?php  
     session_start();
-    $UsuarioActivo = $_SESSION['usuario'];
+    $uActivo = $_SESSION['usuario'];
     include '../Modelo/conexion.php';
     $conectar = new conexion();
     
@@ -60,7 +60,7 @@
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <?php echo $UsuarioActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                        <?php echo $uActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
   
@@ -224,8 +224,7 @@
 
             echo"
             <form action='actualizar_integrante.php' method='post'>
-            <center>
-            <table border=0 width=80%>
+            <table border=0 width=50%>
             <tr>
             <td >
 

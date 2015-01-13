@@ -11,7 +11,7 @@
 $contador = 0;
 
 $addUsuario = $_POST['usuario'];
-$addContrasena = $_POST['contrasena'];
+$addContra = $_POST['contrasena'];
 $addNombre = $_POST['nombre'];
 $addApellido = $_POST['apellido'];
 $addTelefono = $_POST['telefono'];
@@ -29,17 +29,17 @@ $peticion3 = $conectar ->consulta("SELECT * FROM asesor");
         
     $conect = new conexion();
     
-    $VerificarUsuarioGE = $conect->consulta("SELECT NOMBRE_U FROM usuario WHERE NOMBRE_U = '$addUsuario' ");
-    $VerificarUsuarioGE2 = mysql_fetch_row($VerificarUsuarioGE);
+    $verificarUGE = $conect->consulta("SELECT NOMBRE_U FROM usuario WHERE NOMBRE_U = '$addUsuario' ");
+    $verificarUGE2 = mysql_fetch_row($verificarUGE);
     
-     if (!is_array($VerificarUsuarioGE2)) 
+     if (!is_array($verificarUGE2)) 
       {
 //conexion-------------		
     
 
 	
         
-        $peticion1 = $conectar ->consulta("INSERT INTO `usuario` (`NOMBRE_U`, `ESTADO_E`, `PASSWORD_U`, `TELEFONO_U`, `CORREO_ELECTRONICO_U`) VALUES ('$addUsuario', 'Habilitado', '$addContrasena', '$addTelefono', '$addEmail');");
+        $peticion1 = $conectar ->consulta("INSERT INTO `usuario` (`NOMBRE_U`, `ESTADO_E`, `PASSWORD_U`, `TELEFONO_U`, `CORREO_ELECTRONICO_U`) VALUES ('$addUsuario', 'Habilitado', '$addContra', '$addTelefono', '$addEmail');");
         $peticion2 = $conectar ->consulta("INSERT INTO `usuario_rol` (`NOMBRE_U`, `ROL_R`) VALUES ('$addUsuario', 'administrador');");
         $peticion3 = $conectar ->consulta("INSERT INTO `administrador` (`NOMBRE_U`, `NOMBRES_AD`, `APELLIDOS_AD`) VALUES ('$addUsuario', '$addNombre ', '$addApellido');");
 	

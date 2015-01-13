@@ -12,11 +12,8 @@ $idgp = $_GET['id_us'];
 
 
 
-	$peticion = $conectar->consulta(" DELETE FROM `socio` WHERE CODIGO_S='$idgp'
-													");
-	//cerrar conexion--------------------------
-	
-	 //volver a la pagina---------------
+	$peticion = $conectar->consulta(" DELETE FROM `socio` WHERE CODIGO_S='$idgp'");
+
 	 echo'
 	<html>
 		<head>
