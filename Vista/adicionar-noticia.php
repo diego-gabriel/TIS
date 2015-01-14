@@ -49,6 +49,9 @@
     <!-- JS -->
     <script type="text/javascript" src="../Librerias/lib/funcion.js"></script>
 
+    <link type="text/css" rel="stylesheet" href="../Librerias/css/jquery-te-1.4.0.css">
+    <script src="../Librerias/js/jquery-te-1.4.0.min.js"></script>
+
 
 
 
@@ -306,7 +309,19 @@
                             </tr>
                             <tr>
                                 <td>    
-                                     <textarea  type="text" name="texto" id="campoDescripcion"  cols='200' rows='10' data-toggle="tooltip" data-placement="right"  ></textarea>
+                                     <textarea  type="text" name="texto" id="campoDescripcion"  cols='100' rows='10' data-toggle="tooltip" data-placement="right"  ></textarea>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">Descripcion</label>
+                                            <div class="col-sm-8">
+                                                 <textarea class="jqte-test" name="campoDescripcion" id="campoDescripcion" rows="4" style="overflow: auto;"></textarea>
+                                            </div>
+                                  </div>
+                                    
                                 </td>
                             </tr>
 
@@ -329,6 +344,45 @@
         </div><!-- /#page-wrapper -->
 
     </div>
+<script>
+    $('.jqte-test').jqte();
+    var jqteStatus = true;
+    $(".status").click(function()
+    {
+        jqteStatus = jqteStatus ? false : true;
+        $('.jqte-test').jqte({"status" : jqteStatus})
+    });
+</script>
+<script type="text/javascript">
+function validarCampos(formulario) {
+    var permitidos = /^[0-9a-zA-Z\s/]+$/
+
+            //Controlar campos vacios y caracteres invalidos
+            if(formulario.campoTitulo.value.length==0) {  
+                formulario.campoTitulo.focus();    
+                alert('Por favor, ingresa un titulo');  
+                return false;  
+            }
+            if(!formulario.campoTitulo.value.match(permitidos)) {
+
+                alert('Caracteres no validos:_a,¿?()*,"" ');
+                return false;
+            }
+            if(formulario.campoDescripcion.value.length >= 1000) {
+                formulario.campoDescripcion.focus();
+                alert('Descripcion demasiado larga(max 1000 caracteres)')
+                return false;
+            }
+            if(formulario.campoDescripcion.value.length==0){
+                formulario.campoDescripcion.focus();
+                alert('Por favor, ingrese una descripcion');
+                return false;
+            }
+
+            
+
+        }
+</script>
 
     <script src="../Librerias/js/plugins/metisMenu/jquery.metisMenu.js"></script>
     <script src="../Librerias/js/sb-admin.js"></script>

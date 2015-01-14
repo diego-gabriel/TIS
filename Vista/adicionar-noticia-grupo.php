@@ -243,7 +243,7 @@
                                     {
                                          // Adiciona a Noticia 
                                         $noticia = "INSERT INTO noticias (NOMBRE_U,TITULO, FECHA_N, VIEWS, TEXTO, POSTEADO) VALUES ('$usuario','".addslashes(mysql_real_escape_string($_POST["titulo"]))."', NOW(), '0', '".addslashes(mysql_real_escape_string($_POST['texto']))."','$uActivo')";
-                                        $noticia = $conect->consulta($noticia)
+                                        $noticia = $con->consulta($noticia)
                                         or die ("Error.");
                                         echo "<script type=\"text/javascript\">alert('Tema Adicionado');</script>";
 
@@ -253,7 +253,7 @@
                         ?>
          <div id="contenido">
                     <div class="col-lg-12">
-                    <form name="input" action="adicionar-noticia.php" method="post">
+                    <form name="input" action="adicionar-noticia-grupo.php" method="post">
                         <left>
                         <table border=0 width=20%>
                             <tr>
@@ -274,7 +274,7 @@
                             </tr>
                             <tr>
                                 <td>    
-                                     <textarea  type="text" name="texto" id="campoDescripcion"  cols='192' rows='10' data-toggle="tooltip" data-placement="right"  ></textarea>
+                                     <textarea  type="text" name="texto" id="campoDescripcion"  cols='100' rows='10' data-toggle="tooltip" data-placement="right"  ></textarea>
                                 </td>
                             </tr>
 

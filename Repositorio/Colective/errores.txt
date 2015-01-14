@@ -1,0 +1,26 @@
+adicionar-noticia -- vista
+noticia.php -- vista el campo de comentar es muy corto
+lista_doc_subidos.php - Vista
+Modificar administraddor - vista 
+historia de actividades - vista
+
+EliminarGrupoEmpresa -- no elimina
+publicacion_grupo -  no se publica la nc
+
+Validar Fechas (Ejemplo: AAAA-MM-DD, HH-DD)
+add_gestion
+publicar_asesor 
+enviar_mail
+RegistrarDocumentosRequeridos
+
+Vista GE
+*Modificar Informacion Personal
+*Seleccionar Asesor
+*Añadir Socio
+*Inscribirse a proyecto
+*Seleccionar RL
+
+
+arreglar la carpeta donde se sube en la parte de asesor
+relacionar gestion / bd
+

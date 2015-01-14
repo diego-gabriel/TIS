@@ -308,7 +308,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <textarea name="comentario"  cols='200' rows='10'></textarea>
+                                <textarea name="comentario"  cols='100' rows='10'></textarea>
                             </td>
                         </tr>
                         <tr>

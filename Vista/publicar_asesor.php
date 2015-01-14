@@ -448,9 +448,9 @@
             alert('Caracteres no validos:_a,¿?()*,"" ');
             return false;
             }
-            if(formulario.campoDescripcion.value.length >= 200) {
+            if(formulario.campoDescripcion.value.length >= 1000) {
                 formulario.campoDescripcion.focus();
-                alert('Descripcion demasiado larga(max 200 caracteres)')
+                alert('Descripcion demasiado larga(max 1000 caracteres)')
             return false;
             }
             if(formulario.campoDescripcion.value.length==0){

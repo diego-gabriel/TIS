@@ -1,7 +1,7 @@
  <?php  
     session_start();
     $UserAct = $_SESSION['usuario'];
-    include("controlSesion.php");
+  
     include '../Modelo/conexion.php';
    
     $conect = new conexion();
