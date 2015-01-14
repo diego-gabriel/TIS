@@ -278,15 +278,16 @@
 
 
 
-                                    echo "<title>$titulo</title>";
-                                    echo "<h1>$titulo</h1><p>Postado por <b>$posteado</b>  <b>$fecha</b> - <b>$vistos</b> Visualizaciones | <b>$tamComen</b> Comentarios | ";
+                                   echo"<font face='verdana' Color='Gray' size='6'>$titulo</font></br></br>";
+                                    echo "<font face='arial' Color='Gray' size='4'>$texto</font></br>";
+                                    echo "<p><b>Postado por </b><b>$posteado</b>  <b>$fecha</b> - <font face='arial' Color='Teal' size='3'>$vistos Visualizaciones</font> | <font face='arial' Color='Teal' size='3'>$tamComen Comentarios | </font>";
                                     echo "</br>";
-                                    echo "<b>$texto</b>";
+                                   
 
                          ?>
                         <div class="mainbar">
                             <div class="article">
-                            <h2 class="page-header"><span>Comentarios</span></h2>   
+                            <h2 ><span>Comentarios</span></h2>   
                            </div>
                        </div>
                        <div class="col-lg-6" >
@@ -308,13 +309,15 @@
                              $textoC = $actualC["COMENTARIO"];
                              $fecha = $actualC["FECHA_C"];
                              $autor_c=$actualC["AUTOR_C"];
-
-                            echo "<b>$autor_c</b> el $fecha Comento:<b>$textoC</b></br>";
-                            echo "</br>";
+                       
+                            echo "<font face='arial' Color='Olive' size='3'>$autor_c</font> <font face='arial' Color='Olive' size='3'>el</font><font face='arial' Color='Olive' size='3'> $fecha</font><font face='arial' Color='Olive' size='3'> comento:</font>$textoC</b></br>";
+                           
                         }
                         ?>
+                      
+        
                     ______________________________________________________________________________________________________________________________________________________________________
-                    <h3>Comentar:</h3>
+                   
                     <?php
 
                     if (!empty($_POST) AND empty($_POST['comentario'])) 
@@ -347,13 +350,28 @@
                     }
 
                 ?>
+
                 <form name="input" action="noticia.php?id=<?php echo $_GET['id']; ?>" method="post">
-                    <label>Comentario:</label>
-                    <br>
-                    <textarea name="comentario" rows="5" cols="50"></textarea>
-                    <br>
-                    <br>
-                       &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;   <input type="submit" class="btn btn-primary" value="Enviar Comentario">
+                    <left>
+                    <table border=0 width=30%>
+                        <tr>
+                            <td>
+                                <label>Comentario:</label>
+                            <td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <textarea name="comentario"  cols='187' rows='10'></textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                     &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;   &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+                                      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+                                       <input type="submit" class="btn btn-primary" value="Enviar Comentario">
+                        </td>
+                        </tr>
+                    </table>
                 </form>
                       
                     </div>

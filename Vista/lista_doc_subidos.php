@@ -1,7 +1,7 @@
  <?php  
  session_start();
- $UsuarioActivo = $_SESSION['usuario'];
- include("controlSesion.php");
+ $uActivo = $_SESSION['usuario'];
+ 
  ?> 
   <!DOCTYPE html>
 <html>
@@ -84,7 +84,7 @@
 
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <?php echo $UsuarioActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                    <?php echo $uActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-user">
 
@@ -251,140 +251,89 @@
             </div>
             <!-- /.row -->
             <div class="row">
-                <div class="col-lg-6">
-                       <div class="mainbar">
+                 <div class="mainbar">
                             <div class="article"><br><br>
                             <h2><span>Documentos Subidos</span></h2>   
                             
                         </div>
                         
+                <div class="col-lg-6">
+                      
                     </div>
                   
                     <div class="col-lg-12">
 
+                           <div class="panel panel-default" >
+                                <table class="table form-group" >
+                                    <tr bgcolor="#888888">
+                                        <th >Nº</th>
+                                        <th> Nombre</th>
+                                        <th> Fecha</th>
+                                        <th> Hora</th>
+                                        <th></th>
+                                        <th></th>
+                                     </tr> 
 
-                         <div class="historia1">
-                            <div class="contenedor-fila2">
-                                    
-                                <div class="contenedor-columna">
-                                    <?php
-                                        echo "NOMBRE";
-                                    ?>
-                                </div>  
-                               <div class="contenedor-columna">
-                                    <?php
-                                        echo " FECHA";
-                                    ?>
-                                </div> 
-                                <div class="contenedor-columna">
-                                    <?php
-                                        echo "HORA";
-                                    ?>
-                                </div> 
-                               
-                                                        </div>  
                             <?php
-                               include '../Modelo/conexion.php';
-    $con=new conexion();
+                                include '../Modelo/conexion.php';
+                                $con=new conexion();
 
                               
-                           //error_reporting(E_ALL ^ E_NOTICE);
-
-                                 
-                                 $consulta_subidos1="SELECT DISTINCT  `RUTA_D` , `NOMBRE_R`,FECHA_R,HORA_R FROM `registro` AS r,`documento` AS d WHERE r.`ID_R` = d.`ID_R` AND r.`TIPO_T` LIKE 'documento subido' AND r.`NOMBRE_U` LIKE '$UsuarioActivo' ";
-                                 $r3=$con->consulta($consulta_subidos1);
-                                 //var_dump($r3);
-                               
-                                  
+                            
+                                 $docSubidos="SELECT DISTINCT  `RUTA_D` , `NOMBRE_R`,FECHA_R,HORA_R FROM `registro` AS r,`documento` AS d WHERE r.`ID_R` = d.`ID_R` AND r.`TIPO_T` LIKE 'documento subido' AND r.`NOMBRE_U` LIKE '$uActivo' ";
+                                 $documentos=$con->consulta($docSubidos);
+                                 $contDoc=1;
                                 
-                                                while($var4 = mysql_fetch_array($r3))
-                                               {
+                                        while($subidos = mysql_fetch_array($documentos))
+                                        {
                                                 
-                                                 $aux=$var4['0'];
+                                            $rutaDocSub=$subidos['0'];
                                                
-                                           //echo $aux."entra</br>";
-                                                 
-                                                 $consulta_subidos="SELECT DISTINCT   `RUTA_D` FROM `registro` AS r,`documento` AS d,`descripcion` AS e WHERE r.`ID_R` = d.`ID_R` AND r.`ID_R` = e.`ID_R` AND r.`TIPO_T` LIKE 'publicaciones' AND r.`NOMBRE_U` LIKE '$UsuarioActivo' ";
-                                                 $r4=$con->consulta($consulta_subidos);
-                                                 $tam=mysql_num_rows($r4);
- $cont=0;
-                                                 while($var5 = mysql_fetch_array($r4))
-                                               {
+                                            $docPubli="SELECT DISTINCT   `RUTA_D` FROM `registro` AS r,`documento` AS d,`descripcion` AS e WHERE r.`ID_R` = d.`ID_R` AND r.`ID_R` = e.`ID_R` AND r.`TIPO_T` LIKE 'publicaciones' AND r.`NOMBRE_U` LIKE '$uActivo' ";
+                                            $publicado=$con->consulta($docPubli);
+                                                        $tamDoc=mysql_num_rows($publicado);
+                                                        $contador=0;
+                                                        while($publicacion = mysql_fetch_array($publicado))
+                                                        {
                                                 
-                                                 $aux1=$var5['0'];
-                                                 //$com=substr($aux1, '0','20');
-                                                 //echo $aux1."segunda"."</br";
-                                                 
-                                                 if($aux != $aux1)
-                                                 {
-                                                    $cont=$cont+1;
-                                                    //echo $cont."es cont"."</br>";
-                                                   
-                                                 }
-                                             }
-                                             if($cont==$tam){
-                                                 ?>
-
-                                          <div class="contenedor-fila">
-                                                      <div class="contenedor-columna">
-                                                      
-                                                      <?php
-                                                            echo $var4[1];
-                                                      
-                                                   ?>
-                                                   </div>
-                                                     <div class="contenedor-columna">
-                                                      
-                                                      <?php
-                                                    
-                                                            echo $var4['2'];
-                                                      
-                                                   ?>
-                                                   </div>
-                                                  
-                                                     <div class="contenedor-columna">
-                                                      
-                                                      <?php
-                                                    
-                                                            echo $var4['3'];
-                                                      
-                                                   ?>
-                                                   </div>
-
-                                                   
-
-                                                   
-                                                     <div class="contenedor-columna">
-                                                      
-                                                      <?php
-                                                      $ruta="..".$var4['0'];
-                                                            echo "<a class='link-dos'target='_blank' href='".$ruta."'
-                                                          ><font color='blue'></font>Ver</a>";
-                                                      
-                                                   ?>
-                                                   </div>
-
-                                                     <div class="contenedor-columna">
-                                                      
-                                                      <?php
-                                                      $variable=$var4['1'];
-                                                            echo "<a class='link-dos' href='eliminarDocumentoSubido.php?id_us=".$variable."'
-                                                           ><font color='blue'></font>Eliminar</a>";
-                                                      
-                                                   ?>
-                                                   </div>
+                                                            $rutaDocPubli=$publicacion['0'];
+                                                
+                                                            if($rutaDocSub != $rutaDocPubli)
+                                                            {
+                                                                $contador=$contador+1;
+                                                            }
+                                                        }
+                                                       if($contador==$tamDoc)
+                                                       {
+                                                            $rutaSubido="..".$subidos['0'];
+                                                            $variable=$subidos['1'];
+                                                       ?>
 
 
+                                                               <tr> 
+                                                                   
+                                                                    <td><b><?php echo $contDoc  ?></b></td>
+                                                                    <td><?php echo $subidos[1]  ?></td>
+                                                                    <td><?php echo $subidos[2]  ?></td>
+                                                                    <td><?php echo $subidos[3]  ?></td>
+                                                                    
+                                                                    <td><a class="link-dos" target="_blank" href="<?php echo $rutaSubido ?>">Ver</a></td>
+                                                                    <td> 
+                                                                         <?php
+                                                                             echo "<a class='link-dos' href='eliminarDocumentoSubido.php?id_us=".$variable."'
+                                                                            ><font color='blue'></font>Eliminar</a>";
+                                                                         ?> 
+                                                                     </td>
+                                
+                                                                 </tr>
 
-                                                     </div >
-
-<?php
-                                                    
+                                                        <?php
+                                                   $contDoc++; 
                                                  }
                                                  else{
 
                                                  }
-                                               }
+                                        }
                                                
                                        
 
@@ -392,9 +341,9 @@
                                 
                                                        ?>  
                                                            
-                                                      
+                                                      </table>
             
-                        
+                        </div>
                   
                     
                     <!-- /.panel -->

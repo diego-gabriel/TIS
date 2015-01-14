@@ -12,7 +12,8 @@
                 $grupoE="PUBLICO";
                 $titulo      = $_POST["campoTitulo"];
                 $desDoc  = $_POST["campoDescripcion"];
-                $fechap   = $_POST["fecha1"];
+                $fechap   = date("Y-m-d",strtotime($_POST["fecha1"]));
+
                 $horap        = $_POST["hora1"];
                 $rutap        = $_POST["recurso"];
                 $eshora=strftime($horap).":00";
@@ -216,24 +217,7 @@
             }
 
 
-     /* echo $titulo."</br>";
-       $titulo1      = $_POST["grupoempresa"];
-            echo $titulo1."</br>";
-             $titulo2      = $_POST["proyecto"];
-            echo $titulo2."</br>";
-           }
-	$desDoc  = $_POST["campoDescripcion"];
-            $fechap   = $_POST["fecha1"];
-            $horap        = $_POST["hora1"];
-            $rutap        = $_POST["recurso"];
-            
-            $eshora=strftime($horap).":00";
-
-            $fecha       = date('Y-m-d');
-            $hora        =  date("G:H:i");
-            echo $desDoc."</br>";
-            echo $fechap."</br>";
-            echo $rutap."</br>";*/
+     
           }
             
 ?>

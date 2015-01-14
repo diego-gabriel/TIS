@@ -1,4 +1,4 @@
- <?php  
+<?php  
  include '../Modelo/conexion.php';
  session_start();
  $uActivo = $_SESSION['usuario'];
@@ -59,35 +59,7 @@
     <link href="css/style.css" rel="stylesheet" type="text/css" />
     <link href="css/textA.css" rel="stylesheet" type="text/css" />
 
-     <style>
-            .textbox
-            {
-                resize:none;
-                width: 1026px;
-                height: 240px;
-    
-                -moz-border-radius: 4px;
-                -webkit-border-radius: 4px;
-                -o-border-radius: 4px;
-                border-radius: 4px;
-                -moz-border-radius: 4px;
-                -webkit-border-radius: 4px;
-                -o-border-radius: 4px;
-                 background: #FFFFFF;
-                background: linear-gradient(left, #FFFFFF, #F7F9FA);
-                background: -moz-linear-gradient(left, #FFFFFF, #F7F9FA);
-                background: -webkit-linear-gradient(left, #FFFFFF, #F7F9FA);
-                background: -o-linear-gradient(left, #FFFFFF, #F7F9FA);
-                color: #2E3133;
- 
-            }
-            .textbox:focus
-            {
-                color: #2E3133;
-                border-color: #FBFFAD;
-          }
   
-    </style>
 
     
 </head>
@@ -294,16 +266,12 @@
                                  {
                                     $titulo = $_POST["titulo"];
                                  }
-
-
                                  if (isset($_POST['texto']))
                                   {
                                      $texto = $_POST['texto'];
                                  }
-
                                 if($titulo == "" && $texto == "")
                                 {
-
                                 } 
                                 else 
                                 {
@@ -311,35 +279,48 @@
                                    $noticia = "INSERT INTO noticias (NOMBRE_U,TITULO, FECHA_N, VIEWS, TEXTO, POSTEADO) VALUES ('$uActivo','".addslashes(mysql_real_escape_string($_POST["titulo"]))."', NOW(), '0', '".addslashes(mysql_real_escape_string($_POST['texto']))."','$uActivo')"; $noticia = $conect->consulta($noticia)
                                    or die ("Error.");
                                     echo "<script type=\"text/javascript\">alert('Tema Adicionado');</script>";
-
                                  }
-
                              }
                          ?>
 
+                <div id="contenido">
+                    <div class="col-lg-12">
                     <form name="input" action="adicionar-noticia.php" method="post">
-                        <fieldset class="campos-border">
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Titulo:</label>
-                            <div class="col-xs-8">
-                                <input id= "campoTitulo" type="text" name= "titulo"  class="form-control"  data-toggle="tooltip" data-placement="right" title="T&iacute;tulo con el que se mostrar&aacute; el recurso">
-                            </div>
-                        </div>
-                        </br></br>
-                       <div class="form-group">
-                             <label class="col-sm-2 control-label">Texto:</label>
-                            <div class="col-sm-10">
-                                <textarea  type="text" name="texto" id="campoDescripcion"  class="textbox" ></textarea>
-                            </div>
-                       </div>
-                    <br>
-                      <div class="form-group">
-                         <label class="col-sm-2 control-label"></label>
-                            <div class="col-xs-4">
-                                <p><input type="submit" class="btn btn-primary" value="Adicionar Tema"></p>
-                            </div>
-                      </div>
+                        <left>
+                        <table border=0 width=20%>
+                            <tr>
+                                <td>
+                                    <label class="col-sm-2 control-label">Titulo:</label>
+                                <td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input id= "campoTitulo" type="text" name= "titulo"  size=10%  class="form-control"  data-toggle="tooltip" data-placement="right" title="T&iacute;tulo con el que se mostrar&aacute; el recurso">
+                                </td>
+                            </tr>   
+                            
+                            <tr>
+                                <td>
+                                    <label class="col-sm-2 control-label">Texto:</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>    
+                                     <textarea  type="text" name="texto" id="campoDescripcion"  cols='200' rows='10' data-toggle="tooltip" data-placement="right"  ></textarea>
+                                </td>
+                            </tr>
+
+                           
+                            <tr>
+                                <td>
+                                    <p><input type="submit" class="btn btn-primary" value="Adicionar Tema"></p>
+                                </td>
+                            </tr>
+                                             </table>
                     </form>
+                            
+                    </div>
+            </div>
                             
                     
                 </div>

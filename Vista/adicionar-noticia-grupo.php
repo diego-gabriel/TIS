@@ -251,29 +251,44 @@
 
                                 }
                         ?>
-                    <form name="input" action="adicionar-noticia-grupo.php" method="post">
-                        <fieldset class="campos-border">
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Titulo:</label>
-                            <div class="col-xs-8">
-                                <input id= "campoTitulo" type="text" name= "titulo"  class="form-control"  data-toggle="tooltip" data-placement="right" title="T&iacute;tulo con el que se mostrar&aacute; el recurso">
-                            </div>
-                        </div>
-                         </br></br>
-                       <div class="form-group">
-                             <label class="col-sm-2 control-label">Texto:</label>
-                            <div class="col-sm-10">
-                                <textarea  type="text" name="texto" id="campoDescripcion"  class="textbox" ></textarea>
-                            </div>
-                       </div>
-                    <br>
-                      <div class="form-group">
-                         <label class="col-sm-2 control-label"></label>
-                            <div class="col-xs-4">
-                                <p><input type="submit" class="btn btn-primary" value="Adicionar Tema"></p>
-                            </div>
-                      </div>
+         <div id="contenido">
+                    <div class="col-lg-12">
+                    <form name="input" action="adicionar-noticia.php" method="post">
+                        <left>
+                        <table border=0 width=20%>
+                            <tr>
+                                <td>
+                                    <label class="col-sm-2 control-label">Titulo:</label>
+                                <td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input id= "campoTitulo" type="text" name= "titulo"  size=10%  class="form-control"  data-toggle="tooltip" data-placement="right" title="T&iacute;tulo con el que se mostrar&aacute; el recurso">
+                                </td>
+                            </tr>   
+                            
+                            <tr>
+                                <td>
+                                    <label class="col-sm-2 control-label">Texto:</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>    
+                                     <textarea  type="text" name="texto" id="campoDescripcion"  cols='192' rows='10' data-toggle="tooltip" data-placement="right"  ></textarea>
+                                </td>
+                            </tr>
+
+                           
+                            <tr>
+                                <td>
+                                    <p><input type="submit" class="btn btn-primary" value="Adicionar Tema"></p>
+                                </td>
+                            </tr>
+                                             </table>
                     </form>
+                            
+                    </div>
+            </div>
 
                  
                 </div>

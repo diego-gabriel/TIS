@@ -1,9 +1,8 @@
- <?php  
+<?php  
  include '../Modelo/conexion.php';
  session_start();
  $uActivo = $_SESSION['usuario'];
  $con = new conexion(); 
-
  ?> 
  <!DOCTYPE html>
  <html>
@@ -52,7 +51,6 @@
     <script type="text/javascript" src="../Librerias/lib/funcion.js"></script>
 
     <script type="text/javascript">
-
         function mostrarReferencia()
         {
           if (document.fcontacto.Conocido[1].checked == true) 
@@ -74,34 +72,8 @@
         }  
         </script>
 
-     <script type="text/javascript">
-          function validar(obj)
-         {
-            patron = /^\d{4}\/\d{2}\/\d{2}$/
-            if (!patron.test(obj.value)) 
-            {
-                alert('Ingrese la fecha en el formato');
-                obj.focus();
-            }
-        }
-    </script>
+    
 
-    <script type="text/javascript">
-
-      function CheckTime(str)
-     {
-        hora=str.value
-        if (hora=='') {return}
-        if (hora.length!=5) {alert("Introducir HH:MM");return}
-        a=hora.charAt(0) //<=2
-        b=hora.charAt(1) //<4
-        c=hora.charAt(2) //:
-        d=hora.charAt(3) //<=5
-        if ((a==2 && b>3) || (a>2)) {alert("El valor que introdujo en la Hora no corresponde, introduzca un digito entre 00 y 23");return}
-        if (d>5) {alert("El valor que introdujo en los minutos no corresponde, introduzca un digito entre 00 y 59");return}
-        if (c!=':') {alert("Introduzca el caracter ':' para separar la hora y los minutos");return}
-    }
-    </script>
 
     
 
@@ -327,7 +299,6 @@
                                   <select id ="grupo" name="grupoempresa" class="form-control" >
                                         <option>Seleccione Grupo Empresa</option>
                                         <?php
-
                                             $c1="SELECT ge.`NOMBRE_LARGO_GE` FROM `grupo_empresa` AS ge,`inscripcion` AS i WHERE i.`NOMBRE_UA` = '$uActivo' AND i.`NOMBRE_UGE` = ge.`NOMBRE_U`";
                                             $a1=$con->consulta($c1);
                                             
@@ -351,7 +322,6 @@
                                     <option>Seleccione Proyecto</option>
                                     <?php
                                         $idGE= $_SESSION['usuario']  ;
-
                                         $conGestion="SELECT id_g "
                                                 . "FROM gestion "
                                                 . "WHERE DATE (NOW()) > DATE(FECHA_INICIO_G) and DATE(NOW()) < DATE(FECHA_FIN_G)";
@@ -400,7 +370,7 @@
                        <label class="col-sm-2 control-label" >Fecha de publicacion:</label>
                         <div class="col-xs-8">
                               
-                                <input class="form-control" type="date" name="fecha1" placeholder="AAAA-MM-DD" onblur="validar(this)">
+                                <input class="form-control" type="date" name="fecha1" placeholder="DD-MM-AAAA" pattern="^([0][1-9]|[12][0-9]|3[01])(\/|-)([0][1-9]|[1][0-2])\2(\d{4})$" required/> 
                             </div>
                         </div>
                             
@@ -408,7 +378,7 @@
  <div class="form-group">
                         <label class="col-sm-2 control-label" >Hora de publicacion:</label>
                         <div class="col-sm-8" >
-                        <input class="form-control" name="hora1" type="time" required placeholder="HH:MM" onBlur="CheckTime(this)">
+                        <input class="form-control" name="hora1" type="time" required placeholder="HH:MM" pattern="^([0-1]?[0-9]|[2][0-3]):([0-5][0-9])(:[0-5][0-9])?$" required/>
                     </div>
       
                     </div><!--end/fecha-->
@@ -456,7 +426,6 @@
 <script>
     $('.jqte-test').jqte();
     var jqteStatus = true;
-
     $(".status").click(function()
     {
         jqteStatus = jqteStatus ? false : true;
@@ -465,12 +434,10 @@
 </script>
 
 <script type="text/javascript">
-
         function validarCampos(formulario) {
             var permitidos = /^[0-9a-zA-Z\s/]+$/
             
             //Controlar campos vacios y caracteres invalidos
-
             if(formulario.campoTitulo.value.length==0) {  
                 formulario.campoTitulo.focus();    
                 alert('Por favor, ingresa un titulo');  
@@ -481,7 +448,6 @@
             alert('Caracteres no validos:_a,¿?()*,"" ');
             return false;
             }
-
             if(formulario.campoDescripcion.value.length >= 200) {
                 formulario.campoDescripcion.focus();
                 alert('Descripcion demasiado larga(max 200 caracteres)')
