@@ -14,12 +14,8 @@ $idgp = $_GET['id_us'];
 
 	$peticion = $conectar->consulta(" DELETE FROM `socio` WHERE CODIGO_S='$idgp'");
 
-	 echo'
-	<html>
-		<head>
-			<meta http-equiv="REFRESH" content="0;url=lista_grupoEmpresa.php">
-		</head>
-	</html>';
+         echo '<script>alert("Se elimino  correctamente");</script>';
+         echo '<script>window.location="../Vista/lista_grupoEmpresa.php";</script>';
 
  
 ?>

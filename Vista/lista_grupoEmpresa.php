@@ -17,7 +17,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Sistema de Apoyo a la Empresa TIS</title>
-
+    <script type="text/javascript" src="../Librerias/lib/jquery-2.1.0.min.js"></script>
     <!-- Core CSS - Include with every page -->
     <link href="../Librerias/css/bootstrap.min.css" rel="stylesheet">
     <link href="../Librerias/font-awesome/css/font-awesome.css" rel="stylesheet">
@@ -30,9 +30,19 @@
     <!-- SB Admin CSS - Include with every page -->
     <link href="../Librerias/css/sb-admin.css" rel="stylesheet">
     
- 		<link href="css/style.css" rel="stylesheet" type="text/css" />
-<link href="css/tabla-div.css" rel="stylesheet" type="text/css" />   
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <link href="css/tabla-div.css" rel="stylesheet" type="text/css" />   
+    <script>
+        jQuery(document).ready(function() {
+    
+            $(".verificar").on("click", function(e) {
 
+                return confirm('Esta seguro que quiere eliminar el Socio?');
+
+            });
+        });
+
+    </script>
 
 </head>
 
@@ -300,7 +310,7 @@
 
                 <div class="contenedor-columna">
                     <?php
-                            echo "<a href ='eliminar_grupoEmpresa.php?id_us=".$fila['CODIGO_S']."'><font color='blue'>Eliminar</font></a>";
+                            echo "<a href ='eliminar_grupoEmpresa.php?id_us=".$fila['CODIGO_S']."' class='verificar'><font color='blue'>Eliminar</font></a>";
                     ?>
                 </div>
 

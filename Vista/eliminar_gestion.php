@@ -18,10 +18,6 @@ $peticion1 = $conectar-> consulta("SELECT CODIGO_P FROM proyecto WHERE ID_G='".$
         $peticion2 = $conectar-> consulta("DELETE FROM proyecto WHERE CODIGO_P ='".$codigo."' AND ID_G ='".$delRol."'");
         $peticion3 = $conectar-> consulta("DELETE FROM gestion WHERE ID_G='".$delRol."'");
 
-         echo'
-        <html>
-                <head>
-                        <meta http-equiv="REFRESH" content="0;url=add_gestion.php">
-                </head>
-        </html>';
+         echo '<script>alert("Se elimino  correctamente");</script>';
+         echo '<script>window.location="../Vista/add_gestion.php";</script>';
 ?>
