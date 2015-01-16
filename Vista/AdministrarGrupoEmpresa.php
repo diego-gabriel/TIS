@@ -284,7 +284,11 @@ $UsuarioActivo = $_SESSION['usuario'];
                                                         </table>';
                                     } else {
                                         
-                                        echo "No tiene ninguna empresa inscrita";
+                                        echo '<div class="alert alert-warning">
+                                                    <strong>No tiene ninguna grupo empresa inscrita</strong>
+                                                </div>';
+                                        
+                           
                                     }
                                     ?>
                                 </form>
