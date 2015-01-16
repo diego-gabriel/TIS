@@ -13,6 +13,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Sistema de Apoyo a la Empresa TIS</title>
+     <script src="../Librerias/js/jquery-1.10.2.js"></script>
+    <!-- icheck -->
+    <link href="../Librerias/icheck/skins/square/green.css" rel="stylesheet">
+    <script src="../Librerias/lib/icheck.min.js"></script>
 
     <!-- JQuery -->
     <script type="text/javascript" src="../Librerias/lib/jquery-2.1.0.min.js"></script>
@@ -49,7 +53,9 @@
     <!-- JS -->
     <script type="text/javascript" src="../Librerias/lib/funcion.js"></script>
 
-
+    <link type="text/css" rel="stylesheet" href="../Librerias/css/jquery-te-1.4.0.css">
+     <script src="../Librerias/js/jquery-te-1.4.0.min.js"></script>
+    
 
 
 
@@ -278,7 +284,7 @@
 
 
 
-                                   echo"<font face='verdana' Color='Gray' size='6'>$titulo</font></br></br>";
+                                   echo"<font face='verdana' Color='Black' size='6'>$titulo</font></br></br>";
                                     echo "<font face='arial' Color='Gray' size='4'>$texto</font></br>";
                                     echo "<p><b>Postado por </b><b>$posteado</b>  <b>$fecha</b> - <font face='arial' Color='Teal' size='3'>$vistos Visualizaciones</font> | <font face='arial' Color='Teal' size='3'>$tamComen Comentarios | </font>";
                                     echo "</br>";
@@ -290,8 +296,7 @@
                             <h2 ><span>Comentarios</span></h2>   
                            </div>
                        </div>
-                       <div class="col-lg-6" >
-
+                   
                         <?php
                          }
 
@@ -310,14 +315,14 @@
                              $fecha = $actualC["FECHA_C"];
                              $autor_c=$actualC["AUTOR_C"];
                        
-                            echo "<font face='arial' Color='Olive' size='3'>$autor_c</font> <font face='arial' Color='Olive' size='3'>el</font><font face='arial' Color='Olive' size='3'> $fecha</font><font face='arial' Color='Olive' size='3'> comento:</font>$textoC</b></br>";
+                            echo "<font face='arial' Color='Olive' size='3'>$autor_c</font> <font face='arial' Color='Olive' size='3'>el</font><font face='arial' Color='Olive' size='3'> $fecha</font><font face='arial' Color='Olive' size='3'> comento: </font>$textoC</b></br>";
                            
                         }
                         ?>
                       
         
-                    ______________________________________________________________________________________________________________________________________________________________________
-                   
+                  _______________________________________________________________________________________________________________________________________________________________________________________________________
+                    
                     <?php
 
                     if (!empty($_POST) AND empty($_POST['comentario'])) 
@@ -334,8 +339,10 @@
 
                                 else {
                                // Adiciona comentario
+                                    $comentario=$_POST['comentario'];
+                                    $idnNoticia=$_GET['id'];
     
-                                      $agregarC = $conect->consulta("INSERT INTO comentarios (NOMBRE_U,ID_N,COMENTARIO,FECHA_C,AUTOR_C) VALUES ('$autor','".addslashes(mysql_real_escape_string($_GET['id']))."', '".addslashes(mysql_real_escape_string(strip_tags($_POST['comentario'])))."', NOW(), '$uActivo')");
+                                      $agregarC = $conect->consulta("INSERT INTO comentarios (NOMBRE_U,ID_N,COMENTARIO,FECHA_C,AUTOR_C) VALUES ('$autor','$idnNoticia', '$comentario', NOW(), '$uActivo')");
 
                                   
 
@@ -351,30 +358,23 @@
 
                 ?>
 
-                <form name="input" action="noticia.php?id=<?php echo $_GET['id']; ?>" method="post">
-                    <left>
-                    <table border=0 width=30%>
-                        <tr>
-                            <td>
-                                <label>Comentario:</label>
-                            <td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <textarea name="comentario"  cols='100' rows='10'></textarea>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                     &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;   &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-                                      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+               <form name="input" action="noticia.php?id=<?php echo $_GET['id']; ?>" method="post">
+                          <div class="form-group">
+                             <label class="col-sm-2 control-label"><font face='arial' Color='Black' size='4'>Comentar:</font></label>
+                                <div class="col-sm-8">
+                                    <textarea class="jqte-test"  name="comentario" id="campoDescripcion" rows="10" style="overflow: auto;"></textarea>
+                                </div>
+                        </div>
+
+                                <div class="form-group">
+                                 <div class="col-sm-10">
+                                 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;   &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  
                                        <input type="submit" class="btn btn-primary" value="Enviar Comentario">
-                        </td>
-                        </tr>
-                    </table>
+                                     </div>
+                                 </div>
                 </form>
-                      
-                    </div>
+                           
+                  
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -383,6 +383,45 @@
         </div><!-- /#page-wrapper -->
 
     </div>
+    <script>
+    $('.jqte-test').jqte();
+    var jqteStatus = true;
+    $(".status").click(function()
+    {
+        jqteStatus = jqteStatus ? false : true;
+        $('.jqte-test').jqte({"status" : jqteStatus})
+    });
+</script>
+<script type="text/javascript">
+function validarCampos(formulario) {
+    var permitidos = /^[0-9a-zA-Z\s/]+$/
+
+            //Controlar campos vacios y caracteres invalidos
+            if(formulario.campoTitulo.value.length==0) {  
+                formulario.campoTitulo.focus();    
+                alert('Por favor, ingresa un titulo');  
+                return false;  
+            }
+            if(!formulario.campoTitulo.value.match(permitidos)) {
+
+                alert('Caracteres no validos:_a,¿?()*,"" ');
+                return false;
+            }
+            if(formulario.campoDescripcion.value.length >= 1000) {
+                formulario.campoDescripcion.focus();
+                alert('Descripcion demasiado larga(max 1000 caracteres)')
+                return false;
+            }
+            if(formulario.campoDescripcion.value.length==0){
+                formulario.campoDescripcion.focus();
+                alert('Por favor, ingrese una descripcion');
+                return false;
+            }
+
+            
+
+        }
+</script>
 
     <script src="../Librerias/js/plugins/metisMenu/jquery.metisMenu.js"></script>
     <script src="../Librerias/js/sb-admin.js"></script>

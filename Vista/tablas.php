@@ -12,7 +12,7 @@
                 $grupoE="PUBLICO";
                 $titulo      = $_POST["campoTitulo"];
                 $desDoc  = $_POST["campoDescripcion"];
-                $fechap   = date("Y-m-d",strtotime($_POST["fecha1"]));
+                $fechap   = $_POST["fecha1"];
 
                 $horap        = $_POST["hora1"];
                 $rutap        = $_POST["recurso"];

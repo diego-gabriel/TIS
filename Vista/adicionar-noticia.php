@@ -254,7 +254,7 @@
                      </div>
 
                    
-                   
+                        
                          
                        <?php
                            error_reporting(E_ALL ^ E_NOTICE);
@@ -279,65 +279,57 @@
                                 else 
                                 {
                                    // Adiciona a Noticia 
-                                   $noticia = "INSERT INTO noticias (NOMBRE_U,TITULO, FECHA_N, VIEWS, TEXTO, POSTEADO) VALUES ('$uActivo','".addslashes(mysql_real_escape_string($_POST["titulo"]))."', NOW(), '0', '".addslashes(mysql_real_escape_string($_POST['texto']))."','$uActivo')"; $noticia = $conect->consulta($noticia)
+                                    $nuevaNoti=$_POST['texto'];
+                                    $tituloNoti=$_POST["titulo"];
+                                   $noticia = "INSERT INTO noticias (NOMBRE_U,TITULO, FECHA_N, VIEWS, TEXTO, POSTEADO) VALUES ('$uActivo','$tituloNoti', NOW(), '0', '$nuevaNoti','$uActivo')"; $noticia = $conect->consulta($noticia)
                                    or die ("Error.");
                                     echo "<script type=\"text/javascript\">alert('Tema Adicionado');</script>";
                                  }
                              }
                          ?>
 
-                <div id="contenido">
-                    <div class="col-lg-12">
-                    <form name="input" action="adicionar-noticia.php" method="post">
-                        <left>
-                        <table border=0 width=20%>
-                            <tr>
-                                <td>
-                                    <label class="col-sm-2 control-label">Titulo:</label>
-                                <td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input id= "campoTitulo" type="text" name= "titulo"  size=10%  class="form-control"  data-toggle="tooltip" data-placement="right" title="T&iacute;tulo con el que se mostrar&aacute; el recurso">
-                                </td>
-                            </tr>   
-                            
-                            <tr>
-                                <td>
-                                    <label class="col-sm-2 control-label">Texto:</label>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>    
-                                     <textarea  type="text" name="texto" id="campoDescripcion"  cols='100' rows='10' data-toggle="tooltip" data-placement="right"  ></textarea>
-                                </td>
-                            </tr>
+                <form name="input" action="adicionar-noticia.php" method="post">
+                       
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Titulo:</label>
+                            <div class="col-xs-8">
+                                <input id= "campoTitulo" type="text" name= "titulo"  class="form-control"  data-toggle="tooltip" data-placement="right" title="T&iacute;tulo con el que se mostrar&aacute; el recurso">
+                            </div>
+                        </div>
+                        </br></br>
+                      
+                       <div class="form-group">
+                             <label class="col-sm-2 control-label">Texto:</label>
+                                <div class="col-sm-8">
+                                    <textarea class="jqte-test"  name="texto" id="campoDescripcion" rows="10" style="overflow: auto;"></textarea>
+                                </div>
+                        </div>
+                    <br>
+                      <div class="form-group">
+                         <label class="col-sm-2 control-label"></label>
+                            <div class="col-xs-8">
+                                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                            <tr>
-                                <td>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">Descripcion</label>
-                                            <div class="col-sm-8">
-                                                 <textarea class="jqte-test" name="campoDescripcion" id="campoDescripcion" rows="4" style="overflow: auto;"></textarea>
-                                            </div>
-                                  </div>
-                                    
-                                </td>
-                            </tr>
-
-                           
-                            <tr>
-                                <td>
-                                    <p><input type="submit" class="btn btn-primary" value="Adicionar Tema"></p>
-                                </td>
-                            </tr>
-                                             </table>
+                                    <input type="submit" class="btn btn-primary" value="Adicionar Tema"></p>
+                            </div>
+                      </div>
                     </form>
                             
-                    </div>
-            </div>
-                            
                     
+
                 </div>
                 <!-- /.col-lg-12 -->
             </div>   

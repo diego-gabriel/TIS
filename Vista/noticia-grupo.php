@@ -1,13 +1,10 @@
-
 <!DOCTYPE html>
 <?php
-
  include '../Modelo/conexion.php';
  session_start();
  $uActivo = $_SESSION['usuario'];
  $conexion = new conexion();
  
-
 ?>
 <html>
 
@@ -17,6 +14,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Sistema de Apoyo a la Empresa TIS</title>
+
+    <script src="../Librerias/js/jquery-1.10.2.js"></script>
+    <!-- icheck -->
+    <link href="../Librerias/icheck/skins/square/green.css" rel="stylesheet">
+    <script src="../Librerias/lib/icheck.min.js"></script>
 
     <!-- JQuery -->
     <script type="text/javascript" src="../Librerias/lib/jquery-2.1.0.min.js"></script>
@@ -54,6 +56,8 @@
     <script type="text/javascript" src="../Librerias/lib/validator/porcentajeMin.js"></script>
     <!-- JS -->
     <script type="text/javascript" src="../Librerias/lib/funcion.js"></script>
+    <link type="text/css" rel="stylesheet" href="../Librerias/css/jquery-te-1.4.0.css">
+     <script src="../Librerias/js/jquery-te-1.4.0.min.js"></script>
     
 
 
@@ -197,8 +201,6 @@
                     
                       
                        <?php
-
-
                                  $idNoti = $_GET['id'];
                                // Adiciona +1 de Visualizaciones a cada pessoa que acessar a noticia
                                $selNoti = $conexion->consulta("SELECT * FROM noticias WHERE ID_N = '$idNoti'");
@@ -206,7 +208,6 @@
                                $view = $noticia['VIEWS'];
                                $views = $view + 1;
                                $actNoti = $conexion->consulta("UPDATE noticias SET VIEWS = '$views' WHERE ID_N = '$idNoti'");
-
                               $selNoti2 =$conexion->consulta("SELECT * FROM noticias WHERE ID_N = '$idNoti'");
                               
                              
@@ -219,35 +220,27 @@
                                    $vistos = $noticiaF["VIEWS"];
                                    $texto = $noticiaF["TEXTO"];
                                    $posteado=$noticiaF["POSTEADO"];
-
                                     $selComen = $conexion->consulta("SELECT * FROM comentarios WHERE ID_N='$idNotic'");
                                     
                                     $tamComen = mysql_num_rows($selComen);
-
-
-
-                                   echo"<font face='verdana' Color='Gray' size='6'>$titulo</font></br></br>";
+                                   echo"<font face='verdana' Color='Black' size='6'>$titulo</font></br></br>";
                                     echo "<font face='arial' Color='Teal' size='4'>$texto</font></br>";
                                     echo "<p><b>Postado por </b><b>$posteado</b>  <b>$fecha</b> - <font face='arial' Color='Teal' size='3'>$vistos Visualizaciones</font> | <font face='arial' Color='Teal' size='3'>$tamComen Comentarios | </font>";
                                     echo "</br>";
                                    
-
                          ?>
                         <div class="mainbar">
                             <div class="article">
                             <h2 ><span>Comentarios</span></h2>   
                            </div>
                        </div>
-                       <div class="col-lg-6" >
+                       
 
                         <?php
                          }
-
-
                        $idNoti= $_GET['id'];
                        $selCom1 = $conexion->consulta("SELECT * FROM comentarios WHERE ID_N = '$idNoti' ORDER BY ID_N DESC");
                       
-
                         // muestra los valores da tabla 'comentarios'
                        while ($actualC=mysql_fetch_array($selCom1)) 
                        { 
@@ -258,35 +251,29 @@
                              $fecha = $actualC["FECHA_C"];
                              $autor_c=$actualC["AUTOR_C"];
                        
-                            echo "<font face='arial' Color='Olive' size='3'>$autor_c</font> <font face='arial' Color='Olive' size='3'>el</font><font face='arial' Color='Olive' size='3'> $fecha</font><font face='arial' Color='Olive' size='3'> comento:</font>$textoC</b></br>";
+                            echo "<font face='arial' Color='Olive' size='3'>$autor_c</font> <font face='arial' Color='Olive' size='3'>el</font><font face='arial' Color='Olive' size='3'> $fecha</font><font face='arial' Color='Olive' size='3'> comento: </font>$textoC</b></br>";
                            
                         }
                         ?>
                       
         
-                    ______________________________________________________________________________________________________________________________________________________________________
-                    <h3>Comentar:</h3>
+                    _______________________________________________________________________________________________________________________________________________________________________________________________________
+                     
                     <?php
-
                     if (!empty($_POST) AND empty($_POST['comentario'])) 
                     {
                         echo "<font color=\"#ff0000\">Por Favor llene los campos vacios</font>";
                     }
                      else 
                      {
-
                                 if (empty($_POST['comentario'])) { $mensage="";} else { $mensage=$_POST['comentario'];}
-
-
                                 if($mensage == ""){} 
-
                                 else {
                                // Adiciona comentario
-    
-                                      $agregarC = $conexion->consulta("INSERT INTO comentarios (NOMBRE_U,ID_N,COMENTARIO,FECHA_C,AUTOR_C) VALUES ('$autor','".addslashes(mysql_real_escape_string($_GET['id']))."', '".addslashes(mysql_real_escape_string(strip_tags($_POST['comentario'])))."', NOW(), '$uActivo')");
-
+                                     $idNoticia=$_GET['id'];
+                                    $textoComen=$_POST['comentario'];
+                                      $agregarC = $conexion->consulta("INSERT INTO comentarios (NOMBRE_U,ID_N,COMENTARIO,FECHA_C,AUTOR_C) VALUES ('$autor','$idNoticia', '$textoComen', NOW(), '$uActivo')");
                                   
-
                                    
                 ?>
 
@@ -296,32 +283,26 @@
                 <?php
                     }
                     }
-
                 ?>
                    <form name="input" action="noticia-grupo.php?id=<?php echo $_GET['id']; ?>" method="post">
-                    <left>
-                    <table border=0 width=100%>
-                        <tr>
-                            <td>
-                                <label>Comentario:</label>
-                            <td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <textarea name="comentario"  cols='100' rows='10'></textarea>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                     &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;   &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-                                      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+                          <div class="form-group">
+                              <label class="col-sm-2 control-label"><font face='arial' Color='Black' size='4'>Comentar:</font></label>
+                                <div class="col-sm-8">
+                                    <textarea class="jqte-test"  name="comentario" id="campoDescripcion" rows="10" style="overflow: auto;"></textarea>
+                                </div>
+                        </div>
+
+                                <div class="form-group">
+                                 <div class="col-sm-12">
+                                 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;   &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+                                      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; 
+                                      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; 
                                        <input type="submit" class="btn btn-primary" value="Enviar Comentario">
-                        </td>
-                        </tr>
-                    </table>
+                                     </div>
+                                 </div>
                 </form>
                                   
-                    </div>
+                   
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -336,6 +317,45 @@
     <!-- Core Scripts - Include with every page -->
     
     <!--script src="../Librerias/js/bootstrap.min.js"></script-->
+    <script>
+    $('.jqte-test').jqte();
+    var jqteStatus = true;
+    $(".status").click(function()
+    {
+        jqteStatus = jqteStatus ? false : true;
+        $('.jqte-test').jqte({"status" : jqteStatus})
+    });
+</script>
+<script type="text/javascript">
+function validarCampos(formulario) {
+    var permitidos = /^[0-9a-zA-Z\s/]+$/
+
+            //Controlar campos vacios y caracteres invalidos
+            if(formulario.campoTitulo.value.length==0) {  
+                formulario.campoTitulo.focus();    
+                alert('Por favor, ingresa un titulo');  
+                return false;  
+            }
+            if(!formulario.campoTitulo.value.match(permitidos)) {
+
+                alert('Caracteres no validos:_a,¿?()*,"" ');
+                return false;
+            }
+            if(formulario.campoDescripcion.value.length >= 1000) {
+                formulario.campoDescripcion.focus();
+                alert('Descripcion demasiado larga(max 1000 caracteres)')
+                return false;
+            }
+            if(formulario.campoDescripcion.value.length==0){
+                formulario.campoDescripcion.focus();
+                alert('Por favor, ingrese una descripcion');
+                return false;
+            }
+
+            
+
+        }
+</script>
     <script src="../Librerias/js/plugins/metisMenu/jquery.metisMenu.js"></script>
 
     <!-- SB Admin Scripts - Include with every page -->

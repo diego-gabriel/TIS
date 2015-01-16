@@ -26,10 +26,22 @@
 
 <head>
 
+
+
+
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Sistema de Apoyo a la Empresa TIS</title>
+     <!-- JQuery -->
+    <script src="../Librerias/js/jquery-1.10.2.js"></script>
+    <!-- icheck -->
+    <link href="../Librerias/icheck/skins/square/green.css" rel="stylesheet">
+    <script src="../Librerias/lib/icheck.min.js"></script>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="../Librerias/css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" src="../Librerias/lib/bootstrap.js"></script>
 
     <!-- JQuery -->
     <script type="text/javascript" src="../Librerias/lib/jquery-2.1.0.min.js"></script>
@@ -68,6 +80,8 @@
     <!-- JS -->
     <script type="text/javascript" src="../Librerias/lib/funcion.js"></script>
     
+    <link type="text/css" rel="stylesheet" href="../Librerias/css/jquery-te-1.4.0.css">
+    <script src="../Librerias/js/jquery-te-1.4.0.min.js"></script>
 
 
 
@@ -242,7 +256,9 @@
                                     else 
                                     {
                                          // Adiciona a Noticia 
-                                        $noticia = "INSERT INTO noticias (NOMBRE_U,TITULO, FECHA_N, VIEWS, TEXTO, POSTEADO) VALUES ('$usuario','".addslashes(mysql_real_escape_string($_POST["titulo"]))."', NOW(), '0', '".addslashes(mysql_real_escape_string($_POST['texto']))."','$uActivo')";
+                                        $textoNotiN=$_POST['texto'];
+                                       
+                                        $noticia = "INSERT INTO noticias (NOMBRE_U,TITULO, FECHA_N, VIEWS, TEXTO, POSTEADO) VALUES ('$usuario','".addslashes(mysql_real_escape_string($_POST["titulo"]))."', NOW(), '0', '$textoNotiN','$uActivo')";
                                         $noticia = $con->consulta($noticia)
                                         or die ("Error.");
                                         echo "<script type=\"text/javascript\">alert('Tema Adicionado');</script>";
@@ -251,62 +267,88 @@
 
                                 }
                         ?>
-         <div id="contenido">
-                    <div class="col-lg-12">
-                    <form name="input" action="adicionar-noticia-grupo.php" method="post">
-                        <left>
-                        <table border=0 width=20%>
-                            <tr>
-                                <td>
-                                    <label class="col-sm-2 control-label">Titulo:</label>
-                                <td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input id= "campoTitulo" type="text" name= "titulo"  size=10%  class="form-control"  data-toggle="tooltip" data-placement="right" title="T&iacute;tulo con el que se mostrar&aacute; el recurso">
-                                </td>
-                            </tr>   
-                            
-                            <tr>
-                                <td>
-                                    <label class="col-sm-2 control-label">Texto:</label>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>    
-                                     <textarea  type="text" name="texto" id="campoDescripcion"  cols='100' rows='10' data-toggle="tooltip" data-placement="right"  ></textarea>
-                                </td>
-                            </tr>
-
-                           
-                            <tr>
-                                <td>
-                                    <p><input type="submit" class="btn btn-primary" value="Adicionar Tema"></p>
-                                </td>
-                            </tr>
-                                             </table>
-                    </form>
-                            
-                    </div>
-            </div>
-
-                 
+                            <form name="input" action="adicionar-noticia-grupo.php" method="post">
+                       
+                                    <div class="form-group">
+                                            <label class="col-sm-2 control-label">Titulo:</label>
+                                            <div class="col-xs-8">
+                                                <input id= "campoTitulo" type="text" name= "titulo"  class="form-control"  data-toggle="tooltip" data-placement="right" title="T&iacute;tulo con el que se mostrar&aacute; el recurso">
+                                            </div>
+                                    </div>
+                                    </br></br>
+                      
+                                    <div class="form-group">
+                                            <label class="col-sm-2 control-label">Texto:</label>
+                                            <div class="col-sm-8">
+                                                <textarea class="jqte-test"  name="texto" id="campoDescripcion" rows="10" style="overflow: auto;"></textarea>
+                                            </div>
+                                    </div>
+                                    <br>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label"></label>
+                                        <div class="col-xs-10">
+                                                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <input type="submit" class="btn btn-primary" value="Adicionar Tema"></p>
+                                        </div>
+                                    </div>
+                            </form>
                 </div>
+                 
+         </div>
                 <!-- /.col-lg-12 -->
-            </div>
+     </div>
             <!-- /.row -->
-        </div>
-            </div>
-            <!-- /.row -->
-        </div>
-        <!-- /#page-wrapper -->
-
-    </div>
+ </div>
+            
     <!-- /#wrapper -->
 
     <!-- Core Scripts - Include with every page -->
     
     <!--script src="../Librerias/js/bootstrap.min.js"></script-->
+    <script>
+    $('.jqte-test').jqte();
+    var jqteStatus = true;
+    $(".status").click(function()
+    {
+        jqteStatus = jqteStatus ? false : true;
+        $('.jqte-test').jqte({"status" : jqteStatus})
+    });
+</script>
+<script type="text/javascript">
+function validarCampos(formulario) {
+    var permitidos = /^[0-9a-zA-Z\s/]+$/
+
+            //Controlar campos vacios y caracteres invalidos
+            if(formulario.campoTitulo.value.length==0) {  
+                formulario.campoTitulo.focus();    
+                alert('Por favor, ingresa un titulo');  
+                return false;  
+            }
+            if(!formulario.campoTitulo.value.match(permitidos)) {
+
+                alert('Caracteres no validos:_a,¿?()*,"" ');
+                return false;
+            }
+            if(formulario.campoDescripcion.value.length >= 1000) {
+                formulario.campoDescripcion.focus();
+                alert('Descripcion demasiado larga(max 1000 caracteres)')
+                return false;
+            }
+            if(formulario.campoDescripcion.value.length==0){
+                formulario.campoDescripcion.focus();
+                alert('Por favor, ingrese una descripcion');
+                return false;
+            }
+
+            
+
+        }
+</script>
     <script src="../Librerias/js/plugins/metisMenu/jquery.metisMenu.js"></script>
 
     <!-- SB Admin Scripts - Include with every page -->
