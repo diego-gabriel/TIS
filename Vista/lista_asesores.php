@@ -1,12 +1,8 @@
 <?php 
     include '../Modelo/conexion.php';
     session_start();
-    $userAct= $_SESSION['usuario'];
-    
-   
-$conect = new conexion();
- 
- 
+    $uActivo = $_SESSION['usuario'];
+    $conect = new conexion();
 ?>
     <html>
 
@@ -112,7 +108,7 @@ $conect = new conexion();
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <?php echo $userAct.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                        <?php echo $uActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
   

@@ -4,7 +4,7 @@ error_reporting (5);
 include '../Modelo/conexion.php';
 session_start();
 $con=new conexion();
-$UsuarioActivo = $_SESSION['usuario'];
+$uActivo = $_SESSION['usuario'];
 include 'forms/actions/seleccionarDocumentoConfiguracionFechas.php';
  ?> 
  <!DOCTYPE html>
@@ -86,7 +86,7 @@ include 'forms/actions/seleccionarDocumentoConfiguracionFechas.php';
 
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <?php echo $UsuarioActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                    <?php echo $uActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-user">
 
@@ -342,7 +342,7 @@ include 'forms/actions/seleccionarDocumentoConfiguracionFechas.php';
 
                       <input type="reset"class="btn btn-default" name="btnVover2" id="btnVover2" value="Limpiar Formulario" />
                   </p>
-                    <input type="hidden" name = "usuarioAsesor" value = "<?php echo "$UsuarioActivo"; ?>">
+                    <input type="hidden" name = "usuarioAsesor" value = "<?php echo "$uActivo"; ?>">
 
 
               </form>  

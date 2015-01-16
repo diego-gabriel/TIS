@@ -1,7 +1,7 @@
  <?php  
  
  session_start();
- $UsuarioActivo = $_SESSION['usuario'];
+ $uActivo = $_SESSION['usuario'];
  
  ?> 
  <!DOCTYPE html>
@@ -83,7 +83,7 @@
 
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <?php echo $UsuarioActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                    <?php echo $uActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-user">
 
@@ -252,7 +252,7 @@
                             include '../Modelo/conexion.php';
                             $conect = new conexion();
 
-                            $SelGrupo = $conect->consulta("SELECT NOMBRE_UGE FROM inscripcion WHERE NOMBRE_UA = '$UsuarioActivo' AND ESTADO_INSCRIPCION = 'Habilitado'");                         
+                            $SelGrupo = $conect->consulta("SELECT NOMBRE_UGE FROM inscripcion WHERE NOMBRE_UA = '$uActivo' AND ESTADO_INSCRIPCION = 'Habilitado'");                         
                             while($Row_G = mysql_fetch_array($SelGrupo)){
                                 echo "<option>".$Row_G[0]."</option>";
                             }

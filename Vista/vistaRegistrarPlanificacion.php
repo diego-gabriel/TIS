@@ -8,16 +8,16 @@
     require_once '../Modelo/conexion.php';
     session_start();
         
-    $UsuarioActivo = $_SESSION['usuario'];
+    $uActivo = $_SESSION['usuario'];
     $con = new conexion();
-    $Ver_Usr = $con->consulta("SELECT NOMBRE_U FROM usuario WHERE NOMBRE_U = '$UsuarioActivo' ");
+    $Ver_Usr = $con->consulta("SELECT NOMBRE_U FROM usuario WHERE NOMBRE_U = '$uActivo' ");
     $Ver_Usr2 = mysql_fetch_row($Ver_Usr);
         
-    $usuario = $UsuarioActivo;
+    $usuario = $uActivo;
     
     if (!is_array($Ver_Usr2)) {   
 
-        $Cons_GE = "SELECT `NOMBRE_U` FROM socio WHERE `NOMBRES_S` = '$UsuarioActivo'";
+        $Cons_GE = "SELECT `NOMBRE_U` FROM socio WHERE `NOMBRES_S` = '$uActivo'";
         $Cons_GE2 = $con->consulta($Cons_GE);
         $Nom_User = mysql_fetch_row($Cons_GE2);
 
@@ -25,13 +25,13 @@
 
     }
     
-    $Verif_In = $con->consulta("SELECT NOMBRE_UA FROM inscripcion, inscripcion_proyecto WHERE NOMBRE_UGE = '$UsuarioActivo' and NOMBRE_U = '$UsuarioActivo'");
+    $Verif_In = $con->consulta("SELECT NOMBRE_UA FROM inscripcion, inscripcion_proyecto WHERE NOMBRE_UGE = '$uActivo' and NOMBRE_U = '$uActivo'");
     $Inscrip = mysql_fetch_row($Verif_In);
 
-    $Sel_NL = $con->consulta("SELECT NOMBRE_LARGO_GE FROM grupo_empresa WHERE NOMBRE_U='$UsuarioActivo'");
+    $Sel_NL = $con->consulta("SELECT NOMBRE_LARGO_GE FROM grupo_empresa WHERE NOMBRE_U='$uActivo'");
     $NombreL = mysql_fetch_row($Sel_NL);
 
-    $Sel_NC = $con->consulta("SELECT NOMBRE_CORTO_GE FROM grupo_empresa WHERE NOMBRE_U='$UsuarioActivo'");
+    $Sel_NC = $con->consulta("SELECT NOMBRE_CORTO_GE FROM grupo_empresa WHERE NOMBRE_U='$uActivo'");
     $NombreC = mysql_fetch_row($Sel_NC);
 
     $Grupo_NC = 'Notificacion de Conformidad de '.$NombreC[0].'';

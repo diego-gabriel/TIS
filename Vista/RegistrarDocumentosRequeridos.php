@@ -3,7 +3,7 @@
  include '../Modelo/conexion.php';
  $con = new conexion(); 
  session_start();
- $UsuarioActivo = $_SESSION['usuario'];
+ $uActivo = $_SESSION['usuario'];
  ?> 
  <!DOCTYPE html>
  <html>
@@ -84,7 +84,7 @@
 
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <?php echo $UsuarioActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                    <?php echo $uActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-user">
 
@@ -269,7 +269,7 @@
                                <select name="proyecto" class="form-control">
                                 <option>Seleccione un proyecto</option>
                                 <?php
-                                $idGE= $UsuarioActivo  ;
+                                $idGE= $uActivo  ;
 
                                 $Con_G = "SELECT id_g "
                                 . "FROM gestion "

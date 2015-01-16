@@ -19,8 +19,15 @@
     
     if(strnatcasecmp($idGestion_, "")!=0)
     {
-        $conexion->consulta("INSERT INTO proyecto (NOMBRE_P, DESCRIPCION_P, ID_G, CONVOCATORIA) VALUES ('$nombProy', '$descProy', '".$idGestion_."', '$conv')"); 
-        echo"<script type=\"text/javascript\">alert('El registro ha sido satisfactorio'); window.location='InscripcionProyecto.php';</script>";    
+        $seleccion = $conexion->consulta("SELECT NOMBRE_P FROM proyecto");
+        $verP = mysql_fetch_row($seleccion);
+        
+        if (!is_array($verP)) 
+        {
+            $conexion->consulta("INSERT INTO proyecto (NOMBRE_P, DESCRIPCION_P, ID_G, CONVOCATORIA) VALUES ('$nombProy', '$descProy', '".$idGestion_."', '$conv')"); 
+            echo"<script type=\"text/javascript\">alert('El registro ha sido satisfactorio'); window.location='InscripcionProyecto.php';</script>";     
+        }
+        echo"<script type=\"text/javascript\">alert('El proyecto ya ha sido registrado anteriormente'); window.location='InscripcionProyecto.php';</script>"; 
     }
     else
     {

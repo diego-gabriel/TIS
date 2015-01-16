@@ -47,7 +47,7 @@ $peticion3 = $conectar ->consulta("SELECT * FROM asesor");
 	
 	 //volver a la pagina---------------
          
-        echo"<script type=\"text/javascript\">alert('el registro se realizo exitosamente'); window.location='principal.php';</script>";
+        echo"<script type=\"text/javascript\">alert('El registro se realizo exitosamente'); window.location='principal.php';</script>";
 	
      }
  else{

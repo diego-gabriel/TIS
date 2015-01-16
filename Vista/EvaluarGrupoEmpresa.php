@@ -1,7 +1,7 @@
  <?php  
  
  session_start();
- $UsuarioActivo = $_SESSION['usuario'];
+ $uActivo = $_SESSION['usuario'];
  
  ?> 
  <!DOCTYPE html>
@@ -88,7 +88,7 @@
 
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <?php echo $UsuarioActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                    <?php echo $uActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-user">
 
@@ -255,7 +255,7 @@
                             include '../Modelo/conexion.php';
                             $conect = new conexion();
                             
-                            $Sel_Form = $conect->consulta("SELECT ID_FORM FROM formulario WHERE ESTADO_FORM = 'Habilitado' AND NOMBRE_U = '$UsuarioActivo'");
+                            $Sel_Form = $conect->consulta("SELECT ID_FORM FROM formulario WHERE ESTADO_FORM = 'Habilitado' AND NOMBRE_U = '$uActivo'");
                             
                             $IdForm = mysql_fetch_row($Sel_Form);
 
@@ -267,7 +267,7 @@
                             if(is_array($IdForm)) 
                             {
                                 
-                                $Sel_GE = $conect->consulta("SELECT DISTINCT NOMBRE_UGE FROM inscripcion WHERE NOMBRE_UA = '$UsuarioActivo' AND ESTADO_INSCRIPCION = 'Habilitado'");
+                                $Sel_GE = $conect->consulta("SELECT DISTINCT NOMBRE_UGE FROM inscripcion WHERE NOMBRE_UA = '$uActivo' AND ESTADO_INSCRIPCION = 'Habilitado'");
 
                                 echo '<div class="form-group">';
                                 echo '<label><h4>Seleccione la Grupo Empresa a evaluar:</h4></label>';

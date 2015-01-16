@@ -4,7 +4,7 @@
     include '../Modelo/conexion.php';
     session_start();
     $con=new conexion();
-    $UsuarioActivo = $_SESSION['usuario'];
+    $uActivo = $_SESSION['usuario'];
 ?>
 <html>
 
@@ -230,7 +230,7 @@
                          else
                          {
                             
-                            $VerificarIns= $con->consulta("SELECT NOMBRE_U FROM inscripcion_proyecto WHERE NOMBRE_U = '$UsuarioActivo' ");
+                            $VerificarIns= $con->consulta("SELECT NOMBRE_U FROM inscripcion_proyecto WHERE NOMBRE_U = '$uActivo' ");
                             $VerificarIns2 = mysql_fetch_row($VerificarIns);
                             if (!is_array($VerificarIns2))
                             {

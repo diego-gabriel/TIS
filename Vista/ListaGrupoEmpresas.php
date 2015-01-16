@@ -1,6 +1,6 @@
  <?php  
     session_start();
-    $UserAct = $_SESSION['usuario'];
+    $uActivo = $_SESSION['usuario'];
   
     include '../Modelo/conexion.php';
    
@@ -93,7 +93,7 @@
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <?php echo $UserAct.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                        <?php echo $uActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
   

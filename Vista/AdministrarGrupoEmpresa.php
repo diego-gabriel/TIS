@@ -1,6 +1,6 @@
 <?php
 session_start();
-$UsuarioActivo = $_SESSION['usuario'];
+$uActivo = $_SESSION['usuario'];
 ?>
 <!DOCTYPE html>
 <html>
@@ -67,7 +67,7 @@ $UsuarioActivo = $_SESSION['usuario'];
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <?php
-                        echo $UsuarioActivo . ' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                        echo $uActivo . ' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-user">
                             <li>
@@ -221,7 +221,7 @@ $UsuarioActivo = $_SESSION['usuario'];
                                     include '../Modelo/conexion.php';
                                     $conect = new conexion();
                                     $SelectGI = $conect->consulta("SELECT NOMBRE_UGE FROM inscripcion
-                                                        WHERE NOMBRE_UA='$UsuarioActivo'");
+                                                        WHERE NOMBRE_UA='$uActivo'");
                                     while ($rowG = mysql_fetch_row($SelectGI)) {
                                         
                                         $GruposIn[] = $rowG[0];
@@ -240,7 +240,7 @@ $UsuarioActivo = $_SESSION['usuario'];
                                                             </thead>
                                                             <tbody>';
                                                 
-                                                $S_Estado = $conect->consulta("SELECT ESTADO_INSCRIPCION FROM inscripcion WHERE NOMBRE_UA ='$UsuarioActivo'");
+                                                $S_Estado = $conect->consulta("SELECT ESTADO_INSCRIPCION FROM inscripcion WHERE NOMBRE_UA ='$uActivo'");
                                                 
                                                 while ($rowE = mysql_fetch_row($S_Estado)) {
                                                     

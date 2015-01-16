@@ -1,7 +1,7 @@
  <?php  
  
  session_start();
- $UsuarioActivo = $_SESSION['usuario'];
+ $uActivo = $_SESSION['usuario'];
 
  ?> 
  <!DOCTYPE html>
@@ -85,7 +85,7 @@
 
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <?php echo $UsuarioActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                    <?php echo $uActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-user">
 
@@ -264,9 +264,9 @@
 
                         $conect = new conexion();                                               
 
-                        $Sel_CE = $conect->consulta("SELECT NOMBRE_CRITERIO_E FROM criterio_evaluacion WHERE NOMBRE_U = '$UsuarioActivo'");
+                        $Sel_CE = $conect->consulta("SELECT NOMBRE_CRITERIO_E FROM criterio_evaluacion WHERE NOMBRE_U = '$uActivo'");
 
-                        $Sel_CC = $conect->consulta("SELECT DISTINCT NOMBRE_CRITERIO_C FROM criteriocalificacion WHERE NOMBRE_U ='$UsuarioActivo'");
+                        $Sel_CC = $conect->consulta("SELECT DISTINCT NOMBRE_CRITERIO_C FROM criteriocalificacion WHERE NOMBRE_U ='$uActivo'");
 
                         echo '<div id="todos">
                         <div id="escogidos">

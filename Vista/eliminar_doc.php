@@ -1,8 +1,9 @@
 <?php  
-session_start();
- $userAct = $_SESSION['usuario'];
+ session_start();
+ $uActivo = $_SESSION['usuario'];
  include("controlSesion.php");
- ?> 
+?>
+
   <!DOCTYPE html>
 <html>
 
@@ -101,7 +102,7 @@ session_start();
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <?php echo $userAct.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                        <?php echo $uActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
                         <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>

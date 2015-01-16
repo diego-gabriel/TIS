@@ -1,11 +1,10 @@
  <?php  
- 
- session_start();
- $uActivo = $_SESSION['usuario'];
+  session_start();
+  $uActivo = $_SESSION['usuario'];
   include '../Modelo/conexion.php';
   $con=new conexion();
- 
  ?> 
+
  <!DOCTYPE html>
  <html>
 <head>

@@ -1,7 +1,7 @@
  <?php  
  include '../Modelo/conexion.php';
  session_start();
- $UsuarioActivo = $_SESSION['usuario'];
+ $uActivo = $_SESSION['usuario'];
  $conectar=new conexion();
  ?> 
   <!DOCTYPE html>
@@ -114,7 +114,7 @@
 
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <?php echo $UsuarioActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                    <?php echo $uActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-user">
 
@@ -278,7 +278,7 @@
                     $correo;
             
                     //Peticion
-                    $peticion = $conectar->consulta("SELECT u.PASSWORD_U,u.TELEFONO_U,u.CORREO_ELECTRONICO_U,a.NOMBRES_A,a.APELLIDOS_A FROM  usuario u, asesor a WHERE u.NOMBRE_U=a.NOMBRE_U  and u.NOMBRE_U='$UsuarioActivo'");
+                    $peticion = $conectar->consulta("SELECT u.PASSWORD_U,u.TELEFONO_U,u.CORREO_ELECTRONICO_U,a.NOMBRES_A,a.APELLIDOS_A FROM  usuario u, asesor a WHERE u.NOMBRE_U=a.NOMBRE_U  and u.NOMBRE_U='$uActivo'");
                     //cerrar conexion--------------------------
                    
                     
@@ -311,7 +311,7 @@
                                                 <span class="input-group-addon">
                                                   <span class="glyphicon glyphicon-user"></span>
                                                 </span>
-                                                <input class="form-control" type="text" name="nombreUsuario" id="UserName" value=" <?php echo $UsuarioActivo ?>"  readonly='readonly' >
+                                                <input class="form-control" type="text" name="nombreUsuario" id="UserName" value=" <?php echo $uActivo ?>"  readonly='readonly' >
                                             </div>
                                         </div>
                                         <div class="form-group">

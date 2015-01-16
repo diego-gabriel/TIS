@@ -1,7 +1,7 @@
  <?php  
  include '../Modelo/conexion.php';
  session_start();
- $UsuarioActivo = $_SESSION['usuario'];
+ $uActivo = $_SESSION['usuario'];
  $con=new conexion();
  
  ?> 
@@ -80,7 +80,7 @@
 
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <?php echo $UsuarioActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                    <?php echo $uActivo.' '; ?><i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-user">
 
@@ -243,7 +243,7 @@
             
             <?php
             
-            $c_3="SELECT DISTINCT `NOMBRE_R`,`RUTA_D` FROM `registro` AS r,`documento` AS d,`receptor` AS w WHERE r.`ID_R` = d.`ID_R` AND r.`ID_R` = w.`ID_R` AND r.`TIPO_T` LIKE 'Contrato' AND `NOMBRE_U` LIKE '$UsuarioActivo'";
+            $c_3="SELECT DISTINCT `NOMBRE_R`,`RUTA_D` FROM `registro` AS r,`documento` AS d,`receptor` AS w WHERE r.`ID_R` = d.`ID_R` AND r.`ID_R` = w.`ID_R` AND r.`TIPO_T` LIKE 'Contrato' AND `NOMBRE_U` LIKE '$uActivo'";
             $r3=$con->consulta($c_3);
             
             
