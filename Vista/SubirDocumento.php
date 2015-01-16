@@ -3,7 +3,7 @@
 
     include '../Modelo/conexion.php';
     session_start();
-    $con=new conexion();
+    $conexion = new conexion();
     $uActivo = $_SESSION['usuario'];
 
 ?>
@@ -119,7 +119,7 @@
                                     <ul class="nav nav-third-level">
                                     <?php
                                     
-                                        $docsReq = $con->consulta("SELECT NOMBRE_R FROM registro, documento_r, inscripcion, inscripcion_proyecto WHERE inscripcion_proyecto.NOMBRE_U = inscripcion.NOMBRE_UGE AND inscripcion_proyecto.CODIGO_P = documento_r.CODIGO_P AND documento_r.ID_R = registro.ID_R");
+                                        $docsReq = $conexion->consulta("SELECT NOMBRE_R FROM registro, documento_r, inscripcion, inscripcion_proyecto WHERE inscripcion_proyecto.CODIGO_P = documento_r.CODIGO_P AND documento_r.ID_R = registro.ID_R AND inscripcion_proyecto.NOMBRE_U = '$uActivo'");
                                      
                                         while ($rowDocs = mysql_fetch_row($docsReq))
                                         {
@@ -190,14 +190,14 @@
                     <div class="col-lg-6" >
                         
                         <?php
-                        $selAsesor = $con->consulta("SELECT NOMBRE_UA FROM inscripcion WHERE NOMBRE_UGE='$uActivo'");
+                        $selAsesor = $conexion->consulta("SELECT NOMBRE_UA FROM inscripcion WHERE NOMBRE_UGE='$uActivo'");
                         $Asesor = mysql_fetch_row($selAsesor);
 
                         date_default_timezone_set('America/Puerto_Rico');
                         $horaAct = date("H:i:s");
                         $fechaAct = date('Y-m-j');
 
-                            $verifIns= $con->consulta("SELECT NOMBRE_U FROM inscripcion_proyecto WHERE NOMBRE_U = '$uActivo' ");
+                            $verifIns= $conexion->consulta("SELECT NOMBRE_U FROM inscripcion_proyecto WHERE NOMBRE_U = '$uActivo' ");
                             $inscrip = mysql_fetch_row($verifIns);
 
                             if (!is_array($inscrip))
@@ -212,14 +212,8 @@
                 
                               
                                     $Doc = $_GET['doc'];
-
-                                    $consDoc = $con->consulta("SELECT * FROM registro WHERE NOMBRE_U = '$uActivo' AND NOMBRE_R = '$Doc'");
-
-                                    $consIdDoc = $con->consulta("SELECT ID_R from registro where NOMBRE_R = '$Doc' AND NOMBRE_U ='$Asesor[0]'");
-
-                                    $IdDoc = mysql_fetch_row($consIdDoc);
-
-                                    $consFechas = $con->consulta("SELECT FECHA_INICIO_PL, FECHA_FIN_PL, HORA_INICIO_PL, HORA_FIN_PL from registro r, plazo p WHERE r.ID_R = p.ID_R AND r.ID_R = '$IdDoc[0]' ");
+                                    
+                                    $consFechas = $conexion->consulta("SELECT FECHA_INICIO_PL, FECHA_FIN_PL, HORA_INICIO_PL, HORA_FIN_PL FROM registro, documento_r, inscripcion_proyecto, plazo WHERE inscripcion_proyecto.NOMBRE_U='$uActivo' AND inscripcion_proyecto.CODIGO_P = documento_r.CODIGO_P AND documento_r.ID_R = plazo.ID_R AND documento_r.ID_R = registro.ID_R AND registro.NOMBRE_R = '$Doc'");
 
                                     $fechas = mysql_fetch_row($consFechas);
 
@@ -229,8 +223,11 @@
                                     $stampHoraF = strtotime($fechas[3]);
                                     $stampFechaI = strtotime($fechas[0]);
                                     $stampFechaF = strtotime($fechas[1]);
+                                    
+                                    $consDoc = $conexion->consulta("SELECT * FROM registro WHERE NOMBRE_U = '$uActivo' AND NOMBRE_R = '$Doc'");
 
                                     $verifDoc = mysql_fetch_row($consDoc);
+                                    
 
                                     if(is_array($verifDoc))
                                     {
@@ -244,7 +241,7 @@
                                     {
 
  
-                                        if (($stampFechaA == $stampFechaI and $stampHoraA < $stampHoraI) or ($stampFechaA ==$stampFechaF and $stampHoraA > $stampHoraF)) {
+                                        if (($stampFechaA == $stampFechaI and $stampHoraA < $stampHoraI) or ($stampFechaA ==$stampFechaF and $stampHoraA > $stampHoraF) or ($stampFechaA < $stampFechaI) or ($stampFechaA > $stampFechaF)) {
 
                                     
                                             echo '<div class="alert alert-warning">

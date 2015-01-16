@@ -69,6 +69,8 @@ if(isset($_GET['op']))
 		$Del_Rol = $conect->consulta("DELETE FROM usuario_rol WHERE NOMBRE_U = '$GrupoE' ");
 		$Del_Us = $conect->consulta("DELETE FROM usuario WHERE NOMBRE_U = '$GrupoE' ");
 
+		eliminDir("../Repositorio/".$GrupoE."");
+
 		echo '<script>alert("Se elimino la grupo empresa correctamente!!")</script>';
 		echo '<script>window.location="../Vista/ListaGrupoEmpresas.php";</script>';
 	}
@@ -109,8 +111,8 @@ else
 
 	
 		$Del_Plan = $conect->consulta("DELETE FROM planificacion WHERE NOMBRE_U = '$GrupoE' ");
+		$Del_Com = $conect->consulta("DELETE FROM comentarios WHERE NOMBRE_U = '$GrupoE' ");
 		$Del_Noti = $conect->consulta("DELETE FROM noticias WHERE NOMBRE_U = '$GrupoE' ");
-	    $Del_Com = $conect->consulta("DELETE FROM comentarios WHERE NOMBRE_U = '$GrupoE' ");
 	    $Del_InsP = $conect->consulta("DELETE FROM inscripcion_proyecto WHERE NOMBRE_U = '$GrupoE' ");
 	    $Del_Ins = $conect->consulta("DELETE FROM inscripcion WHERE NOMBRE_UGE = '$GrupoE' ");
 	    $Del_Ses = $conect->consulta("DELETE FROM sesion WHERE NOMBRE_U = '$GrupoE' ");
@@ -127,3 +129,26 @@ else
 }
 
 ?>	
+
+<?php  
+
+	function eliminDir($carpeta)
+	{
+		foreach(glob($carpeta . "/*") as $archivos_carpeta)
+		{
+		 
+			if (is_dir($archivos_carpeta))
+			{
+				eliminDir($archivos_carpeta);
+			}
+			else
+			{
+				unlink($archivos_carpeta);
+			}
+		}
+
+
+		rmdir($carpeta);
+	}
+
+?>
