@@ -304,7 +304,6 @@
                     <div class="panel panel-default" id="configuracionFechas">
                         <div class="panel-body"> 
                                     <form method = "post" id="FormularioRegistroUsuario">
-                                        
                                        
                                         <div class="form-group">
                                             <div class="input-group">
@@ -314,6 +313,16 @@
                                                 <input class="form-control" type="text" name="nombreUsuario" id="UserName" value=" <?php echo $uActivo ?>"  readonly='readonly' >
                                             </div>
                                         </div>
+                                        
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                  <span class="glyphicon glyphicon-lock"></span>
+                                                </span>
+                                                <input class="form-control" type="text" name="password" id="UserPassword" value="<?php echo $contrasena ?>" minlength="5" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$" title="la contraseña debe contener mayusculas, minusculas, caracteres y numeros" required>
+                                            </div>
+                                        </div>
+                                        <br> </br>
                                         <div class="form-group">
                                             <div class="input-group">
                                                 <span class="input-group-addon">
@@ -331,14 +340,7 @@
                                             </div>
                                         </div>
                                         
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                  <span class="glyphicon glyphicon-lock"></span>
-                                                </span>
-                                                <input class="form-control" type="text" name="password" id="UserPassword" value="<?php echo $contrasena ?>" minlength="5" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$" title="la contraseña debe contener mayusculas, minusculas, caracteres y numeros" required>
-                                            </div>
-                                        </div>
+
                                         <div class="form-group">
                                             <div class="input-group">
                                                 <span class="input-group-addon">
