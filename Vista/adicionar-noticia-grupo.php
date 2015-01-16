@@ -40,8 +40,7 @@
     <link href="../Librerias/icheck/skins/square/green.css" rel="stylesheet">
     <script src="../Librerias/lib/icheck.min.js"></script>
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="../Librerias/css/bootstrap.min.css" rel="stylesheet">
-    <script type="text/javascript" src="../Librerias/lib/bootstrap.js"></script>
+    
 
     <!-- JQuery -->
     <script type="text/javascript" src="../Librerias/lib/jquery-2.1.0.min.js"></script>
