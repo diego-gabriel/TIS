@@ -109,14 +109,21 @@ if (isset($_POST['lista']))
                                 $indice++;
                             }
 
-                            $seleccion = "SELECT * FROM registro AS r, inscripcion_proyecto AS i, documento_r AS d WHERE r.ID_R=d.ID_R and r.NOMBRE_U='$nombreUA' and r.TIPO_T='documento requerido' and d.CODIGO_P=i.CODIGO_P and i.NOMBRE_U='$nombreUGE'";
-                            $consulta = $conexion->query($seleccion);
-                            $DocReq = $consulta->rowCount();
+
+
+                            $queryProy = "SELECT proyecto.CODIGO_P FROM proyecto, inscripcion_proyecto WHERE proyecto.CODIGO_P = inscripcion_proyecto.CODIGO_P AND NOMBRE_U = '$nombreUGE'";
+                            $selProy = $conexion->query($queryProy);
+                            $rowProy = $selProy->fetchObject();
+                            $proy = $rowProy->CODIGO_P;
+
+                            $queryDocR = $conexion->query("SELECT * FROM documento_r WHERE documento_r.CODIGO_P = '$proy'");
+                            $docR = $queryDocR->rowCount();
 
                             $consulta = $conexion->query("SELECT * FROM registro WHERE NOMBRE_U='$nombreUGE' AND TIPO_T='documento subido'");
                             $DocSub = $consulta->rowCount();
 
-                            if(($DocSub== $DocReq) and $DocSub>=1)
+                        
+                            if(($DocSub == $docR) and $DocSub>=1)
                             { 
                                 if(isset($_GET['id']))
                                 {

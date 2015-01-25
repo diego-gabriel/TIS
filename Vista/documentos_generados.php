@@ -49,6 +49,7 @@
     <script type="text/javascript" src="../Librerias/lib/validator/porcentajeMin.js"></script>
     <!-- JS -->
     <script type="text/javascript" src="../Librerias/lib/funcion.js"></script>
+    <script type="text/javascript" src="../Librerias/lib/funcionSeguimiento.js"></script>
 
     <link href="../Librerias/css/plugins/timeline/timeline.css" rel="stylesheet">
     <!-- SB Admin CSS - Include with every page -->
@@ -155,6 +156,9 @@
 
                         <a id="Seguimiento" href="#"><i class="glyphicon glyphicon-list-alt"></i> Seguimiento</a>
 
+                    </li>
+                    <li>
+                        <a id="SeguimientoSemanal" href="#"><i class="glyphicon glyphicon-list-alt"></i> Seguimiento Semanal</a>
                     </li>
 
                     <li>

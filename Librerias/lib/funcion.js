@@ -22,7 +22,7 @@ $(document).on('ready', function() {
             registro:registro
         });
         $('.modalRegistroAsistencia').modal('show');
-    });
+    }); 
 
     $(document).on('click', '.btnRegistroReportes', function() {
         var funcion = 'registrar reportes';

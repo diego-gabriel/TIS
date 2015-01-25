@@ -6,17 +6,14 @@
     require_once '../Modelo/Model/FechaRealizacion.php';
     require_once '../Modelo/Model/Reporte.php';
 
-    $usuario = 'freevalue';
     $funcion = $_POST['funcion'];
-    $registro = $_POST['registro'];
+    $u = $_POST['usuario'];
 
     switch ($funcion) {
         case 'registrar asistencia':
         	$conexion = new Conexion();
 			$conexion->conectar();
-			$u = $conexion->consultaUnDato("SELECT nombre_u
-			        						FROM registro
-			        						WHERE id_r = '$registro';");
+
 			$s = $conexion->consultarTabla("SELECT codigo_s, nombres_s, apellidos_s
 			        						FROM socio
 			        						WHERE nombre_u = '$u';");
@@ -41,6 +38,7 @@
 			                       </div>
 			                   </td>
 						   </tr>';
+
 				$scripts .= '<script>
 							   	 $("#registroAsistencia").find("form")
 							          .bootstrapValidator("addField", "Asistencia'.$s[$i][0].'", {
@@ -65,7 +63,7 @@
 						  	  </script>';
 		    }
 		    echo '<div class="container-fluid">
-					  <div id="registroAsistencia" data-registro="'.$registro.'">
+					  <div id="registroAsistencia" data-grupoe="'.$u.'">
 			        	  <form class="form-horizontal"> 
                       		  <legend>Registro de asistencia</legend>
                       		  <table class="table table-bordered table-responsive table-highlight">
@@ -90,12 +88,14 @@
 			           	  </form>
 			       	  </div>
 			  	  </div>
-	           	  <script>registrarAsistencia()</script>                        
+	           	  <script>registrarAsistenciaSemanal()</script>                        
 			  	  '.$scripts;
 			break;
+
 		case 'registrar reportes':
-			$registro = $_POST['registro'];
+
 			$rr = Reporte::listaRolesReporte();
+
             $rolesReporte = '<select class="btn-primary" name="roles" multiple="multiple">';
             for ($i = 0; $i < count($rr); $i++) { 
                 $rolesReporte .= '<option value="'.$rr[$i].'">'.$rr[$i].'</option>';
@@ -130,7 +130,7 @@
                           	  </div>
                       	  </form>
 					  </div>
-					  <div id="registroReportes" data-registro="'.$registro.'" style="display: none;">
+					  <div id="registroReportes" style="display: none;" data-grupoe="'.$u.'">
                       	  <form class="form-horizontal"> 
                       		  <legend>Registro de reportes</legend>
 	                      	  <div class="bs-callout bs-callout-warning">
@@ -167,7 +167,8 @@
                   		  </form>                        
                   	  </div>
                   </div>
-                  <script>registrarReportes()</script>';
+                  <script>registrarReportesSemanal()</script>';
 			break;
     }
+    
 ?>

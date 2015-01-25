@@ -51,7 +51,7 @@ include 'forms/actions/seleccionarDocumentoConfiguracionFechas.php';
     <script type="text/javascript" src="../Librerias/lib/validator/porcentajeMin.js"></script>
     <!-- JS -->
     <script type="text/javascript" src="../Librerias/lib/funcion.js"></script>
-
+    <script type="text/javascript" src="../Librerias/lib/funcionSeguimiento.js"></script>
     <link rel="stylesheet" type="text/css" href="../Librerias/calendario2/jquery.datetimepicker.css"/>
     <script type="text/javascript" src="js/validacionCamposFecha.js"></script>
     <script type="text/javascript" src="../Librerias/calendario2/jquery.datetimepicker.js"></script>
@@ -161,6 +161,9 @@ include 'forms/actions/seleccionarDocumentoConfiguracionFechas.php';
 
                         <a id="Seguimiento" href="#"><i class="glyphicon glyphicon-list-alt"></i> Seguimiento</a>
 
+                    </li>
+                    <li>
+                        <a id="SeguimientoSemanal" href="#"><i class="glyphicon glyphicon-list-alt"></i> Seguimiento Semanal</a>
                     </li>
 
                     <li>
