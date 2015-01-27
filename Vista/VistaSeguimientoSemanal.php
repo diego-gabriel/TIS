@@ -27,6 +27,10 @@
 	    $btnRepor = '<button id="btnReportes" class="btn btn-xs btn-danger btnRegistroReportesSemanal">
 	                     		  Reportes <i class="glyphicon glyphicon-edit"></i>
 	                           </button>';  
+	    //$btnEvaluacion1= '<a href="lista-seguimientos.php?GE='.$ge->getNombreCorto().'" class="btn btn-default btn-xs">Evaluacion</a>';
+	    $btnEvaluacion1='<button id="btnSeguimientos" class="btn btn-xs btn-danger btnSeguimientoSemanal">
+	                    		 Ver Seguimientos 
+	                           </button>';  
 
         $filas .=  '<tr data-usuario="'.$rowGrupos[0].'">
             		
@@ -36,6 +40,7 @@
                 		<td>
                 			'.$btnAsist.'
                 			'.$btnRepor.'
+                			'.$btnEvaluacion1.'
                 		</td>
                 	</tr>';
 

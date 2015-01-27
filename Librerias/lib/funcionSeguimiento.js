@@ -30,6 +30,18 @@ $(document).on('ready', function() {
         });
         $('.modalRegistroReportes').modal('show');
     });
+
+      $(document).on('click', '.btnSeguimientoSemanal', function() {
+
+        var funcion = 'registrar seguimiento';
+        var fila = $(this).parents().get(1);
+        var usuario = $(fila).data('usuario');
+        $('.modalSeguimiento').find('.modal-body').load('VistaModalSeguimientoSemanal.php', {
+            funcion:funcion,
+            usuario:usuario
+        });
+        $('.modalSeguimiento').modal('show');
+    });
 });
 
 function registrarAsistenciaSemanal(){
@@ -74,6 +86,22 @@ function registrarAsistenciaSemanal(){
                 $('.modalRegistroAsistencia').modal('hide');
                 $('#registroAsistencia').find('form').bootstrapValidator('destroy');
                 $('.modalRegistroAsistencia').find('.modal-body').empty();
+          }
+      });
+}
+
+function registrarSeguimientoSemanal(){
+
+    $("#registroSeguimiento").find("form")
+        .bootstrapValidator({
+            excluded: ":disabled",
+            submitHandler: function(validator, form, submitButton) {
+                var funcion = 'registrar seguimiento';
+               
+                var grupoE = $("#registroSeguimiento").data("grupoe")
+
+             
+               
           }
       });
 }

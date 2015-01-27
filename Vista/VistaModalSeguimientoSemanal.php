@@ -92,6 +92,97 @@
 			  	  '.$scripts;
 			break;
 
+
+		  case 'registrar seguimiento':
+        	$conexion = new Conexion();
+			$conexion->conectar();
+
+			$peticionGE = $conexion->consulta("SELECT `ROL_S`,`ACTIVIDAD_S`,`HECHO_S`,`RESULTADO_S`,`CONCLUSION_S`,`OBSERVACION_S` FROM seguimiento WHERE seguimiento.GRUPO_S='$u' ORDER BY ID_S DESC");
+			
+			?>
+			<div class='bs-callout bs-callout-info'>
+              <h4>Seguimientos</h4>
+          </div>
+ 
+
+			<?php
+		    
+             while ($seguimiento = mysql_fetch_array($peticionGE))
+           	{ 
+
+                $rolGE=$seguimiento[0];
+                $actividad=$seguimiento[1];
+                $hechoGE=$seguimiento[2];
+                $resultado=$seguimiento[3];
+                $conclusion=$seguimiento[4];
+                $obserGE=$seguimiento[5];
+                if($hechoGE=="1")
+                {
+                  $hechoGE1="si";
+                }
+                else{
+                      $hechoGE1="no";
+                }
+                $tabla="<b>Rol:</b> ".$rolGE."</br>
+                <b>Hecho:</b> ".$hechoGE1."</br>";
+
+                $tabla.=" <form class='form-horizontal'> <fieldset class='campos-border'> <table class='table table-bordered table-responsive table-highlight'>
+                 <thead>
+                   <tr>
+                      
+                      <th>Actividad</th>
+                      <th>Resultado</th>
+                      <th>Conclusion</th>
+                      <th>Observacion</th>
+                   </tr>";
+             
+					 $tabla.="<tr>
+                          		  
+                                       <td class='col-md-2'>
+                                           <div class='form-group'>
+                                               <div class='col-md-12'>
+                                                   ".$actividad."
+                                               </div>
+                                           </div>
+                                       </td>";
+                                    
+
+
+                    
+                                                   
+                            $tabla.= "
+                                       <td class='col-md-2'>
+                                           <div class='form-group'>
+                                               <div class='col-md-12'>
+                                                   ".$resultado."
+                                               </div>
+                                           </div>
+                                       </td>
+                                       <td class='col-md-2'>
+                                           <div class='form-group'>
+                                               <div class='col-md-12'>
+                                                   ".$conclusion."
+                                               </div>
+                                           </div>
+                                       </td>
+                                       <td class='col-md-2'>
+                                           <div class='form-group'>
+                                               <div class='col-md-12'>
+                                                   ".$obserGE."
+                                               </div>
+                                           </div>
+                                       </td>
+                                       
+                                   </tr>";
+
+                           $tabla.=" </thead> 
+                						</table> </fieldset></form></div>";
+                			echo $tabla;
+			}
+			
+
+			break;
+
 		case 'registrar reportes':
 
 			$rr = Reporte::listaRolesReporte();
