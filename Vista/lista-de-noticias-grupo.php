@@ -206,7 +206,7 @@
                                    <?php
  
                                          // Seleciona la tabla de noticias
-                                        $noticia = $conexion->consulta("SELECT * FROM noticias ORDER BY ID_N DESC");
+                                        $noticia = $conexion->consulta("SELECT * FROM noticias, inscripcion_proyecto, proyecto, gestion WHERE inscripcion_proyecto.CODIGO_P = proyecto.CODIGO_P and proyecto.ID_G = gestion.ID_G and DATE (FECHA_N) >= DATE(FECHA_INICIO_G) and DATE(FECHA_N) <= DATE(FECHA_FIN_G) ORDER BY ID_N DESC");
 
                                 
                                         while ($noticias=mysql_fetch_array($noticia)) 
@@ -219,7 +219,7 @@
                                            $posteado=$noticias["POSTEADO"];
 
                                             // numero de comentarios
-                                           $selComen = $conexion->consulta("SELECT * FROM comentarios WHERE ID_N='$idNoti'");
+                                           $selComen = $conexion->consulta("SELECT * FROM comentarios, inscripcion_proyecto, proyecto, gestion WHERE ID_N='$idNoti' and inscripcion_proyecto.CODIGO_P = proyecto.CODIGO_P and proyecto.ID_G = gestion.ID_G and DATE (FECHA_C) >= DATE(FECHA_INICIO_G) and DATE(FECHA_C) <= DATE(FECHA_FIN_G)");
                                            $comentarios = mysql_num_rows($selComen);
 
                                   ?>
