@@ -654,6 +654,19 @@ function registrarCostoProyecto() {
                             message: 'El costo total del proyecto debe ser un dato numerico. El separador decimal es el punto (.)'
                         }
                     }
+                },
+                porcentajeA: {
+                    validators: {
+                        notEmpty: {
+                            message: 'El porcentaje de aceptacion del proyecto es un dato requerido'
+                        },
+                        integerN: {
+                            message: 'El porcentaje de aceptacion del proyecto debe ser un numero entero.'
+                        },
+                        porcentajeAc:{
+                            message: 'El numero debe ser mayor o igual a 60 y menor o igual a 100'
+                        }
+                    }
                 }
             }
         });

@@ -19,7 +19,7 @@
     
     if(strnatcasecmp($idGestion_, "")!=0)
     {
-        $seleccion = $conexion->consulta("SELECT NOMBRE_P FROM proyecto");
+        $seleccion = $conexion->consulta("SELECT NOMBRE_P FROM proyecto WHERE NOMBRE_P = '$nombProy'");
         $verP = mysql_fetch_row($seleccion);
         
         if (!is_array($verP)) 

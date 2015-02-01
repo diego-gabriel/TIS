@@ -185,7 +185,7 @@
                           <div class="bs-callout bs-callout-warning">
                               <h4>Nota</h4>
                               <p>
-                                  Revise el costo ingresado antes de registrarlo. El registro del costo total del proyecto solo se realiza una vez.
+                                  Revise el costo ingresado y el porcentaje de aceptacion antes de registrarlo. El registro del costo total del proyecto solo se realiza una vez.
                               </p>
                           </div>
                           <form class="form-horizontal"> 
@@ -194,10 +194,16 @@
                                   <div class="col-md-3">
                                       <input type="text" class="form-control" name="costo"> 
                                   </div>
-                              </div>                              
+                              </div>    
+                              <div class="form-group">
+                                  <label class="col-md-2 control-label">Porcentaje de aceptacion del proyecto</label>        
+                                  <div class="col-md-3">
+                                      <input type="text" class="form-control" name="porcentajeA"> 
+                                  </div>
+                              </div> 
                               <div class="form-group">
                                   <div class="col-md-offset-2 col-md-3">
-                                      <button type="submit" class="btn btn-primary btn-block">Registrar costo total proyecto</button>
+                                      <button type="submit" class="btn btn-primary btn-block">Registrar</button>
                                   </div>
                               </div>
                           </form>

@@ -13,8 +13,8 @@
         $usuario=$_SESSION['usuario'];
         
         /*$usuario = 'Bittle';*/
-    $planificacion = new Planificacion($usuario);
-    $estado = $planificacion->getEstado();
+        $planificacion = new Planificacion($usuario);
+        $estado = $planificacion->getEstado();
 
 	switch ($estado) {
         case 'registrar planificacion':
@@ -53,10 +53,14 @@
             break;
         case 'registrar costo total proyecto':
         	$costo = $_POST['costo'];
+                $porcentajeA = $_POST['porcentajeA'];
+                //$porcentajeA = 70;
         	$precio = new Precio($usuario, $costo);
+                $precio->setPorcentajeA($porcentajeA);
         	$precio->insertarBD();
         	$planificacion->setEstado('registrar plan pagos');
-			$planificacion->modificarBD();
+                
+                $planificacion->modificarBD();
             echo ('<div class="alert alert-success">
 				       <strong>Costo total proyecto registrado...</strong>
 				   </div>

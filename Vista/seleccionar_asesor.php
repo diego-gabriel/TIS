@@ -50,6 +50,8 @@
     <script type="text/javascript" src="../Librerias/lib/validator/numeric.js"></script>
     <script type="text/javascript" src="../Librerias/lib/validator/porcentajeMax.js"></script>
     <script type="text/javascript" src="../Librerias/lib/validator/porcentajeMin.js"></script>
+    <script type="text/javascript" src="../Librerias/lib/validator/integerN.js"></script>
+    <script type="text/javascript" src="../Librerias/lib/validator/porcentajeAc.js"></script>
     <!-- JS -->
     <script type="text/javascript" src="../Librerias/lib/funcion.js"></script>
     

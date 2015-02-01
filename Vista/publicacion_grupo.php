@@ -55,6 +55,8 @@
     <script type="text/javascript" src="../Librerias/lib/validator/numeric.js"></script>
     <script type="text/javascript" src="../Librerias/lib/validator/porcentajeMax.js"></script>
     <script type="text/javascript" src="../Librerias/lib/validator/porcentajeMin.js"></script>
+    <script type="text/javascript" src="../Librerias/lib/validator/integerN.js"></script>
+    <script type="text/javascript" src="../Librerias/lib/validator/porcentajeAc.js"></script>
     <!-- JS -->
     <script type="text/javascript" src="../Librerias/lib/funcion.js"></script>
     
@@ -207,8 +209,8 @@
 
  
                                 <?php
-                                
-                                     $selDoc=$conexion->consulta("SELECT DISTINCT `NOMBRE_R`,`RUTA_D`,`DESCRIPCION_D`,`fecha_p` ,`hora_p`,`RECEPTOR_R`,`NOMBRE_U` FROM `registro` AS r,`documento` AS d,`descripcion` AS e,`periodo` AS p,`receptor` AS w WHERE r.`ID_R` = d.`ID_R` AND r.`ID_R` = e.`ID_R` AND r.`ID_R` = p.`ID_R` AND r.`ID_R` = w.`ID_R` AND r.`TIPO_T` LIKE 'publicaciones' ");
+                                   //gestion**
+                                     $selDoc=$conexion->consulta("SELECT DISTINCT `NOMBRE_R`,`RUTA_D`,`DESCRIPCION_D`,`fecha_p` ,`hora_p`,`RECEPTOR_R`,r.`NOMBRE_U` FROM `registro` AS r,`documento` AS d,`descripcion` AS e,`periodo` AS p,`receptor` AS w, `inscripcion_proyecto` AS i, `proyecto` AS a, `gestion` AS g WHERE r.`ID_R` = d.`ID_R` AND r.`ID_R` = e.`ID_R` AND r.`ID_R` = p.`ID_R` AND r.`ID_R` = w.`ID_R` AND r.`TIPO_T` LIKE 'publicaciones' and i.`CODIGO_P` = a.`CODIGO_P` and a.`ID_G` = g.`ID_G` and (DATE (p.`fecha_p`) >= DATE(FECHA_INICIO_G) and DATE(p.`fecha_p`) <= DATE(FECHA_FIN_G))");
                                      
                                    
                                     if(mysql_num_rows($selDoc) != 0)
