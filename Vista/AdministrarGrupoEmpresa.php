@@ -142,12 +142,19 @@ $uActivo = $_SESSION['usuario'];
                             <li>
                                 <a id="SeguimientoSemanal" href="#"><i class="glyphicon glyphicon-list-alt"></i> Seguimiento Semanal</a>
                             </li>
+                    <li>
+                        <a href="#"><i class="glyphicon glyphicon-th-list"></i> Evaluacion<span class="fa arrow"></span></a>
+                        <ul class="nav nav-third-level">
                             <li>
-                                <a href="#"><i class="glyphicon glyphicon-th-list"></i> Evaluacion<span class="fa arrow"></span></a>
+                                <a href="lista_evaluacion.php">Evaluacion 2 Fase </a>                             
+                            </li>
+                            <li>
+                                <a href="#">Evaluacion 3 Fase <span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">
                                     <li>
-                                        <a href="CrearModalidadEvaluacion.php">Criterio de Evaluaci&oacute;n </a>
+                                        <a href="CrearModalidadEvaluacion.php">Criterio de Evaluaci&oacute;n </a>                             
                                     </li>
+
                                     <li>
                                         <a href="#">Criterio de Calificaci&oacute;n<span class="fa arrow"></span></a>
                                         <ul class="nav nav-third-level">
@@ -159,6 +166,7 @@ $uActivo = $_SESSION['usuario'];
                                             </li>
                                         </ul>
                                     </li>
+
                                     <li>
                                         <a href="#">Formulario de Evaluacion<span class="fa arrow"></span></a>
                                         <ul class="nav nav-third-level">
@@ -166,7 +174,7 @@ $uActivo = $_SESSION['usuario'];
                                                 <a href="CrearFormulario.php">Crear Formulario de Evaluacion</a>
                                             </li>
                                             <li>
-                                                <a href="SeleccionarFormulario.php"> Habilitar Formulario de Evaluacion </a>
+                                                <a href="SeleccionarFormulario.php"> Habilitar Formulario de Evaluacion </a>   
                                             </li>
                                             <li>
                                                 <a href="EliminarFormulario.php">Eliminar Formulario de Evaluacion</a>
@@ -174,13 +182,16 @@ $uActivo = $_SESSION['usuario'];
                                         </ul>
                                     </li>
                                     <li>
-                                        <a href="EvaluarGrupoEmpresa.php">Evaluar Grupo Empresa </a>
-                                    </li>
-                                    <li>
-                                        <a href="../Vista/EvaluacionGeneral.php">Evaluacion Final </a>
-                                    </li>
-                                </ul>
+                                        <a href="EvaluarGrupoEmpresa.php">Evaluar Grupo Empresa </a>   
+                                    </li>                                    
+                                    
+                                </ul>    
                             </li>
+                            <li>
+                                <a href="../Vista/EvaluacionGeneral.php">Evaluacion Final </a>   
+                            </li>
+                        </ul>
+                    </li>
                             <li>
                                 <a href="../Vista/publicaciones.php"><i class="fa fa-book"></i> Publicaciones </a>
                             </li>

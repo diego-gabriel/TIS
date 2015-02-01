@@ -178,37 +178,46 @@
                         <a href="#"><i class="glyphicon glyphicon-th-list"></i> Evaluacion<span class="fa arrow"></span></a>
                         <ul class="nav nav-third-level">
                             <li>
-                                <a href="CrearModalidadEvaluacion.php">Criterio de Evaluaci&oacute;n </a>                             
+                                <a href="lista_evaluacion.php">Evaluacion 2 Fase </a>                             
                             </li>
-
                             <li>
-                                <a href="#">Criterio de Calificaci&oacute;n<span class="fa arrow"></span></a>
+                                <a href="#">Evaluacion 3 Fase <span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">
                                     <li>
-                                        <a href="CrearModalidadCalificacion.php"> Crear Criterio de Calificaci&oacute;n</a>
+                                        <a href="CrearModalidadEvaluacion.php">Criterio de Evaluaci&oacute;n </a>                             
                                     </li>
-                                    <li>
-                                        <a href="EliminarCriterioCalificacion.php"> Eliminar Criterio de Calificaci&oacute;n</a>
-                                    </li>
-                                </ul>
-                            </li>
 
-                            <li>
-                                <a href="#">Formulario de Evaluacion<span class="fa arrow"></span></a>
-                                <ul class="nav nav-third-level">
                                     <li>
-                                        <a href="CrearFormulario.php">Crear Formulario de Evaluacion</a>
+                                        <a href="#">Criterio de Calificaci&oacute;n<span class="fa arrow"></span></a>
+                                        <ul class="nav nav-third-level">
+                                            <li>
+                                                <a href="CrearModalidadCalificacion.php"> Crear Criterio de Calificaci&oacute;n</a>
+                                            </li>
+                                            <li>
+                                                <a href="EliminarCriterioCalificacion.php"> Eliminar Criterio de Calificaci&oacute;n</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+
+                                    <li>
+                                        <a href="#">Formulario de Evaluacion<span class="fa arrow"></span></a>
+                                        <ul class="nav nav-third-level">
+                                            <li>
+                                                <a href="CrearFormulario.php">Crear Formulario de Evaluacion</a>
+                                            </li>
+                                            <li>
+                                                <a href="SeleccionarFormulario.php"> Habilitar Formulario de Evaluacion </a>   
+                                            </li>
+                                            <li>
+                                                <a href="EliminarFormulario.php">Eliminar Formulario de Evaluacion</a>
+                                            </li>
+                                        </ul>
                                     </li>
                                     <li>
-                                        <a href="SeleccionarFormulario.php"> Habilitar Formulario de Evaluacion </a>   
-                                    </li>
-                                    <li>
-                                        <a href="EliminarFormulario.php">Eliminar Formulario de Evaluacion</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="EvaluarGrupoEmpresa.php">Evaluar Grupo Empresa </a>   
+                                        <a href="EvaluarGrupoEmpresa.php">Evaluar Grupo Empresa </a>   
+                                    </li>                                    
+                                    
+                                </ul>    
                             </li>
                             <li>
                                 <a href="../Vista/EvaluacionGeneral.php">Evaluacion Final </a>   

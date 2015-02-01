@@ -1,8 +1,8 @@
  <?php  
- 
+ include '../Modelo/conexion.php';
  session_start();
  $uActivo = $_SESSION['usuario'];
-
+ $conexion=new conexion();
  ?> 
  <!DOCTYPE html>
  <html>
@@ -46,30 +46,24 @@
     <script type="text/javascript" src="../Librerias/lib/validator/numeric.js"></script>
     <script type="text/javascript" src="../Librerias/lib/validator/porcentajeMax.js"></script>
     <script type="text/javascript" src="../Librerias/lib/validator/porcentajeMin.js"></script>
-    <script type="text/javascript" src="../Librerias/lib/validator/integerN.js"></script>
-    <script type="text/javascript" src="../Librerias/lib/validator/porcentajeAc.js"></script>
     <!-- JS -->
     <script type="text/javascript" src="../Librerias/lib/funcion.js"></script>
-    <script type="text/javascript" src="../Librerias/lib/funcionSeguimiento.js"></script>
-    <script src="../Librerias/js/CrearModalidadCalificacion.js"></script>
-    <script src="../Librerias/js/CrearFormulario.js"></script> 
-
-
-
-
 
     <link href="../Librerias/css/plugins/timeline/timeline.css" rel="stylesheet">
     <!-- SB Admin CSS - Include with every page -->
     <link href="../Librerias/css/sb-admin.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet" type="text/css" />
 
 </head>
 
 <body>
 
-
 <div id="wrapper">
-     <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
+
+
+      <!--<h2>design by <a href="#" title="flash templates">flash-templates-today.com</a></h2>-->
+
+
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
                 <span class="sr-only">Toggle navigation</span>
@@ -165,7 +159,9 @@
 
                     </li>
                     <li>
+
                         <a id="SeguimientoSemanal" href="#"><i class="glyphicon glyphicon-list-alt"></i> Seguimiento Semanal</a>
+
                     </li>
 
                     <li>
@@ -225,6 +221,7 @@
             </div><!-- /.sidebar-collapse -->
         </div>
     </nav>
+
 <div class="modal fade modalRegistroAsistencia" role="dialog" data-backdrop="static" aria-hidden="true">
     <div class="modal-dialog modal-md">
         <div class="modal-content">
@@ -254,108 +251,137 @@
     </div>
 </div>
 
-<div class="modal fade modalSeguimiento" role="dialog" data-backdrop="static" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Ver Seguimientos</h4>
-            </div>
-            <div class="modal-body">
-
-            </div>
-        </div>
-    </div>
-</div>
-
 <div id="page-wrapper">
-    <div class ="form-horizontal">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="mainbar">
-                <h2 class="page-header">Crear formulario de evaluacion:</h2>
-               </div>
-                <div class="col-lg-6">
-                    <form method = "post" id="criteriosEscogidos">
-                        <div class="form-group">
-                            <div class="panel panel-default">
+            <div class="row">
+                    <div class="col-lg-12">
+                         
                                 <div class="panel-body">
-                                    <label for=""><h4>Ingrese un nombre para su formulario:</h4></label>
-                                    <input type="text" title="Solo use minusculas y numeros: Ejm...formulario1" name="nombreFormulario" id="" pattern="[a-z]{3,20}[0-9]{1,2}" class="form-control" required >
+                                    <fieldset class="campos-border">
+                                        <table class="table form-group">      
+                                            <thead>
+                                                    <tr>
+                                                      <th>Actividad</th>
+                                                      <th>Grupo Empresa</th>
+                                                      <th>Estado</th>
+                                                      <th>Acciones</th>
+                                                      <th>Modificar Fecha</th>   
+                                                    </tr>
+                                            </thead>
+                                            <tbody>                                                    
+                                            <?php 
+                                                    date_default_timezone_set('America/Puerto_Rico');
+                                                    $fechaAct = date('Y-m-j');
+                                                    $stampFechaA = strtotime($fechaAct);
+                                                    $anuncio="";
+                                                    $clase="";
+                                                    $estado="";
+
+                                                   $peticion= $conexion->consulta("SELECT `NOMBRE_R`, NOMBRE_U, ID_R FROM `registro`, inscripcion WHERE `TIPO_T`='actividad planificacion' and `NOMBRE_UA`='$uActivo' and  `NOMBRE_UGE`=`NOMBRE_U`"); 
+                                                   while($fila = mysql_fetch_array($peticion))
+                                                    {
+                                                        if(!empty($fila[0]))
+                                                        {
+                                                            $codigo=$fila['ID_R'];
+                                                            $peticion1= $conexion->consulta("SELECT f.FECHA_FR FROM  fecha_realizacion as f, registro as a WHERE f.ID_R=a.ID_R and f.ID_R='$codigo'");  
+                                                            while ($correo = mysql_fetch_array($peticion1))
+                                                            {
+                                                                $fechaFin=$correo["FECHA_FR"];  
+                                                            }
+                                                            $peticion2= $conexion->consulta("SELECT `NOTA_E` FROM evaluacion where `ID_R`='$codigo'");                                                              
+                                                            $tamano=mysql_num_rows($peticion2);
+                                                            
+                                                            
+                                                            $stampFechaF = strtotime($fechaFin);
+                                                            if($stampFechaA<=$stampFechaF)
+                                                            {
+                                                                if($tamano==0)
+                                                                {
+                                                                    $anuncio="En Proceso";
+                                                                    $estado="En Proceso";
+                                                                    $clase="label label-warning";
+                                                               
+                                                                }
+                                                                else
+                                                                {
+                                                                    $anuncio="&nbsp;Evaluado&nbsp;&nbsp;";
+                                                                    $estado="Registrado";
+                                                                    $clase="label label-success";    
+                                                                }               
+                                                            }
+                                                            else
+                                                            {
+                                                               
+                                                                if($tamano==0)
+                                                                {
+                                                                $anuncio="&nbsp;Retrasado&nbsp;";
+                                                                 $estado="Retraso";
+                                                                $clase="label label-danger";
+                                                               
+                                                                }
+                                                                else
+                                                                {
+                                                                    $anuncio="&nbsp;Evaluado&nbsp;&nbsp;";
+                                                                     $estado="Registrado";
+                                                                    $clase="label label-success";    
+                                                                }                                                                 
+
+                                                            }
+                                                            
+                                                            
+                                                            if ($tamano==0) 
+                                                            {
+                                                             $btnEvaluacion= '<a href="evaluacion.php?GE='.$codigo.'" class="btn btn-default btn-xs">Evaluacion</a>';
+                                                             $btnReportes = '<a href="reportes_evaluacion.php?GE='.$codigo.'" class="btn btn-xs btn-danger" disabled="disabled">Reportes</a>';
+                                                            } 
+                                                            else 
+                                                            {
+                                                            $btnEvaluacion= '<a href="evaluacion.php?GE='.$codigo.'" class="btn btn-default btn-xs" disabled="disabled">Evaluacion</a>';
+                                                            $btnReportes = '<a href="reportes_evaluacion.php?GE='.$codigo.'" class="btn btn-xs btn-danger">Reportes</a>';
+                                                            }
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            if ($estado=="Retraso") 
+                                                            {
+                                                             $btnModificar= '<a href="modificar_fecha.php?GE='.$codigo.'" class="btn btn-default btn-xs">Modificar</a>';                       
+                                                            } 
+                                                            else 
+                                                            {   
+                                                            $btnModificar= '<a href="modificar_fecha.php?GE='.$codigo.'" class="btn btn-default btn-xs" disabled="disabled">Modificar</a>';
+
+                                                            }                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            echo   
+                                                            '<tr>
+                                                                <td>'.$fila['NOMBRE_R'].'</td>  
+                                                                <td>'.$fila['NOMBRE_U'].'</td>
+                                                                <td><span class="'.$clase.'">'.$anuncio.'</span></td>
+                                                                <td>'.$btnEvaluacion.'   '.$btnReportes.'</td>
+                                                                <td>'.$btnModificar.'</td>
+                                                            </tr>';
+                                                        }
+                                                    }
+
+                                            ?>
+                                            </tbody>
+                                        </table>
+                                    </fieldset>
+                             
+
                                 </div>
-                            </div>
-                        </div>
 
-                        <?php 
+                    
 
-                        include '../Modelo/conexion.php';
-
-
-                        $conect = new conexion();                                               
-
-                        $Sel_CE = $conect->consulta("SELECT NOMBRE_CRITERIO_E FROM criterio_evaluacion WHERE NOMBRE_U = '$uActivo'");
-
-                        $Sel_CC = $conect->consulta("SELECT DISTINCT NOMBRE_CRITERIO_C FROM criteriocalificacion WHERE NOMBRE_U ='$uActivo'");
-
-                        echo '<div id="todos">
-                        <div id="escogidos">
-                        <div class="form-group">
-                        Seleccione el criterios a evaluar:
-                        <select class="form-control" name="EvaEscogidos[]" required>
-                        <option value="">Seleccione un Criterio a Evaluar</option>';
-
-                        while ($Row_CE = mysql_fetch_row($Sel_CE)) {
-
-                          echo '<option>'.$Row_CE[0].'</option>';
-                      }
-                      echo '</select>
-                      </div>';
-
-
-
-                      echo '<div class="form-group">
-                      <select class="form-control" name="CritEscogidos[]" required>
-                      <option value="">Seleccione un Tipo de Calificacion</option>';
-
-
-                      while ($Row_CC = mysql_fetch_row($Sel_CC)) {
-
-                          echo '<option value="'.$Row_CC[0].'">'.$Row_CC[0].'</option>';
-
-                      }
-
-                      echo '<select>
-                      </div>';
-
-                      echo '<div class="form-group">
-                      Puntaje en el formulario:
-                      <input type="text" name="PuntajeForm[]" pattern="\b[1-9][0-9]" title="el puntaje no puede ser mayor ni igual a 100"  required>
-                      </div>
-                      <hr>
-                      </div>
-                      </div>';
-
-                      ?>
-
-                      <div id="pruebas">
-
-                      </div>     
-                      <div class="form-group">
-                        <button type="button" class="btn btn-primary" id="btn-probar"><span class="glyphicon glyphicon-th-list"></span>&nbsp&nbspAgregar</button>
-                        <button type="submit" class="btn btn-primary" id="btn-guardar"> <span class="glyphicon glyphicon-ok"></span>&nbsp&nbspGuardar</button> 
-                    </div>                                           
-                </form>                                                
-
-                <div id="panelResultado">
-
-                </div>        
-            </div>
+                    </div><!-- /.col-lg-12 -->
+                </div>
         </div>
-    </div><!-- /.row -->
-</div>      
-
 </div>
 <!-- /#page-wrapper -->
+
 </div>
 
 <script src="../Librerias/js/plugins/metisMenu/jquery.metisMenu.js"></script>

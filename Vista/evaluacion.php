@@ -52,7 +52,7 @@ $conectar=new conexion();
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                     <a href="inicio_asesor.php" type="submit" class="close" aria-hidden="true">&times;</a>
+                <a href="lista_evaluacion.php" type="submit" class="close" aria-hidden="true">&times;</a>
                 <h5 class="modal-title">Evaluacion </h5>
             <div class="modal-header">
                   <h4 class="modal-title">Evaluacion Grupo Empresa</h4>
