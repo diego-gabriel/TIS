@@ -61,7 +61,7 @@
         	$planificacion->setEstado('registrar plan pagos');
                 
                 $planificacion->modificarBD();
-            echo ('<div class="alert alert-success">
+           echo ('<div class="alert alert-success">
 				       <strong>Costo total proyecto registrado...</strong>
 				   </div>
 				   <script>$("#page-wrapper").load("vistaRegistrarPlanificacion.php");</script>');

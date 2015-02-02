@@ -222,7 +222,7 @@
                                    $vistos = $noticiaF["VIEWS"];
                                    $texto = $noticiaF["TEXTO"];
                                    $posteado=$noticiaF["POSTEADO"];
-                                    $selComen = $conexion->consulta("SELECT * FROM comentarios WHERE ID_N='$idNotic'");
+                                    $selComen = $conexion->consulta("SELECT * FROM comentarios, inscripcion_proyecto, proyecto, gestion WHERE ID_N='$idNotic' and inscripcion_proyecto.NOMBRE_U = '$uActivo' and inscripcion_proyecto.CODIGO_P = proyecto.CODIGO_P and proyecto.ID_G = gestion.ID_G and DATE (FECHA_C) >= DATE(FECHA_INICIO_G) and DATE(FECHA_C) <= DATE(FECHA_FIN_G)");
                                     
                                     $tamComen = mysql_num_rows($selComen);
                                    echo"<font face='verdana' Color='Black' size='6'>$titulo</font></br></br>";
@@ -241,7 +241,7 @@
                         <?php
                          }
                        $idNoti= $_GET['id'];
-                       $selCom1 = $conexion->consulta("SELECT * FROM comentarios WHERE ID_N = '$idNoti' ORDER BY ID_N DESC");
+                       $selCom1 = $conexion->consulta("SELECT * FROM comentarios, inscripcion_proyecto, proyecto, gestion WHERE ID_N = '$idNoti' and inscripcion_proyecto.NOMBRE_U = '$uActivo' and inscripcion_proyecto.CODIGO_P = proyecto.CODIGO_P and proyecto.ID_G = gestion.ID_G and DATE (FECHA_C) >= DATE(FECHA_INICIO_G) and DATE(FECHA_C) <= DATE(FECHA_FIN_G) ORDER BY ID_N DESC");
                       
                         // muestra los valores da tabla 'comentarios'
                        while ($actualC=mysql_fetch_array($selCom1)) 

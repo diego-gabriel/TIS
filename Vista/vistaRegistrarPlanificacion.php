@@ -4,7 +4,6 @@
     require_once '../Modelo/Model/Registro.php';
     require_once '../Modelo/Model/Precio.php';
     require_once '../Modelo/Model/FechaRealizacion.php';
-
     require_once '../Modelo/conexion.php';
     session_start();
         
@@ -16,38 +15,28 @@
     $usuario = $uActivo;
     
     if (!is_array($Ver_Usr2)) {   
-
         $Cons_GE = "SELECT `NOMBRE_U` FROM socio WHERE `NOMBRES_S` = '$uActivo'";
         $Cons_GE2 = $con->consulta($Cons_GE);
         $Nom_User = mysql_fetch_row($Cons_GE2);
-
         $usuario=$Nom_User[0];
-
     }
     
     $Verif_In = $con->consulta("SELECT NOMBRE_UA FROM inscripcion, inscripcion_proyecto WHERE NOMBRE_UGE = '$uActivo' and NOMBRE_U = '$uActivo'");
     $Inscrip = mysql_fetch_row($Verif_In);
-
     $Sel_NL = $con->consulta("SELECT NOMBRE_LARGO_GE FROM grupo_empresa WHERE NOMBRE_U='$uActivo'");
     $NombreL = mysql_fetch_row($Sel_NL);
-
     $Sel_NC = $con->consulta("SELECT NOMBRE_CORTO_GE FROM grupo_empresa WHERE NOMBRE_U='$uActivo'");
     $NombreC = mysql_fetch_row($Sel_NC);
-
     $Grupo_NC = 'Notificacion de Conformidad de '.$NombreC[0].'';
     $Sel_NC = $con->consulta("SELECT * FROM registro,receptor WHERE NOMBRE_U='$Inscrip[0]' AND NOMBRE_R='$Grupo_NC' AND registro.ID_R = receptor.ID_R");
     $NC = mysql_num_rows($Sel_NC);
-
     $Grupo_OC = 'Orden de Cambio de '.$NombreC[0].'';
     $Sel_OC = $con->consulta("SELECT * FROM registro,receptor WHERE NOMBRE_U='$Inscrip[0]' AND NOMBRE_R='$Grupo_OC' AND registro.ID_R = receptor.ID_R");
     $OC = mysql_num_rows($Sel_OC);
-
     if(is_array($Inscrip))
     {
-
       if($NC >= 1 or $OC>=1)
       {
-
         $Planif = new Planificacion($usuario);
         $estado = $Planif->getEstado();
     
@@ -224,10 +213,8 @@
                     $entregables .= '<option value="'.$e[$i].'">'.$e[$i].'</option>';
                 }
                 $entregables .= '</select>';
-
                 $p = new Precio($usuario);
                 $costo = $p->getPrecio();
-
                 echo '<div id="registroPago">
                           <legend>Registro de pago para el plan de pagos</legend>
                           <div class="bs-callout bs-callout-info">
@@ -306,7 +293,6 @@
                        </div>');
                 break;
         }
-
       }
       else
       {

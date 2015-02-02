@@ -639,10 +639,14 @@ function registrarCostoProyecto() {
             submitHandler: function(validator, form, submitButton) {
                 if (validator.isValid()) {
                     var costo = validator.getFieldElements('costo').val();
+                    var porcentajeA = validator.getFieldElements('porcentajeA').val();
                     $('#page-wrapper').load('../Controlador/RegistrarPlanificacion.php', {
-                        costo:costo
+                        costo:costo,
+                        porcentajeA:porcentajeA
                     });
+
                 }
+                
             },
             fields: {
                 costo: {
