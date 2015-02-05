@@ -156,11 +156,6 @@
                     </li>
 
                     <li>
-
-                        <a id="Seguimiento" href="#"><i class="glyphicon glyphicon-list-alt"></i> Seguimiento</a>
-
-                    </li>
-                    <li>
                         <a id="SeguimientoSemanal" href="#"><i class="glyphicon glyphicon-list-alt"></i> Seguimiento Semanal</a>
                     </li>
 
@@ -299,7 +294,7 @@
 
                             echo '<div class="form-group">
                             <button type="submit" class="btn btn-primary btn-sm" id="btn-aceptar"><span class="glyphicon glyphicon-ok"></span>&nbsp&nbspAceptar</button>
-                            <a href="EvaluarGrupoEmpresa.php" class="btn btn-primary btn-sm">Ir al formulario</a>
+                            
                             </div>';
 
 

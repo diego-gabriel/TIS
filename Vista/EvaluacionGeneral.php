@@ -156,11 +156,6 @@
                     </li>
 
                     <li>
-
-                        <a id="Seguimiento" href="#"><i class="glyphicon glyphicon-list-alt"></i> Seguimiento</a>
-
-                    </li>
-                    <li>
                         <a id="SeguimientoSemanal" href="#"><i class="glyphicon glyphicon-list-alt"></i> Seguimiento Semanal</a>
                     </li>
 
@@ -270,27 +265,42 @@
         <div class="col-lg-12">
             <h2 class="page-header">Evaluacion Final</h2>
             <div class="col-lg-6">   
-                <form method ="post" id="FormEvaluar" action="../Vista/ProcesarEvaluacionGeneral.php"> 
-
-                    <div class="form-group">
-                        <select name="GrupoEmpresa" id="" class="form-control" required>
-                            <option value="">Seleccione una grupo empresa</option>
+                
                             <?php  
                             include '../Modelo/conexion.php';
                             $conect = new conexion();
 
-                            $SelGrupo = $conect->consulta("SELECT NOMBRE_UGE FROM inscripcion WHERE NOMBRE_UA = '$uActivo' AND ESTADO_INSCRIPCION = 'Habilitado'");                         
-                            while($Row_G = mysql_fetch_array($SelGrupo)){
-                                echo "<option>".$Row_G[0]."</option>";
+                            $SelGrupo = $conect->consulta("SELECT NOMBRE_UGE FROM inscripcion, nota WHERE NOMBRE_UA = '$uActivo' AND ESTADO_INSCRIPCION = 'Habilitado' AND NOMBRE_U = NOMBRE_UGE");                         
+                            
+                            if(mysql_num_rows($SelGrupo) > 0)
+                            {
+                                echo '  <form method ="post" id="FormEvaluar" action="../Vista/ProcesarEvaluacionGeneral.php"> 
+                                            <div class="form-group">
+                                                <select name="GrupoEmpresa" id="" class="form-control" required>
+                                                    <option value="">Seleccione una grupo empresa</option>';
+                                
+                                while($Row_G = mysql_fetch_array($SelGrupo)){
+                                              echo "<option>".$Row_G[0]."</option>";
+                                }
+                                
+                                        echo   '</select> 
+                                            </div>
+                                            <div class="form-group">
+                                                <button type="submit" class="btn btn-primary">Evaluar</button>
+                                            </div>
+                                        </form>';
                             }
+                            else
+                            {
+                                echo   '<div class="alert alert-warning">
+                                            <strong>No tiene ninguna grupo empresa disponible para evaluar</strong>
+                                        </div>';
+                            }
+                            
+                            
 
                             ?>  
-                        </select> 
-                    </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary">Evaluar</button>
-                    </div>
-                </form>
+                        
                 
                 <div id="ResultadoNota">
                     <div class="form-group">

@@ -10,7 +10,7 @@
 	$conexion = new conexion();
 	$conexion->conectar();
 
-    $conGrupos = $conexion->consulta("SELECT inscripcion.NOMBRE_UGE, proyecto.NOMBRE_P FROM inscripcion,inscripcion_proyecto,proyecto WHERE inscripcion.NOMBRE_UA = '$usuario' AND inscripcion.NOMBRE_UGE = inscripcion_proyecto.NOMBRE_U AND inscripcion_proyecto.CODIGO_P = proyecto.CODIGO_P AND inscripcion.ESTADO_INSCRIPCION = 'Habilitado'");   
+    $conGrupos = $conexion->consulta("SELECT inscripcion.NOMBRE_UGE, proyecto.NOMBRE_P FROM inscripcion,inscripcion_proyecto,proyecto WHERE inscripcion.NOMBRE_UA = '$usuario' AND inscripcion.NOMBRE_UGE = inscripcion_proyecto.NOMBRE_U AND inscripcion_proyecto.CODIGO_P = proyecto.CODIGO_P AND inscripcion.ESTADO_INSCRIPCION = 'Habilitado' AND inscripcion_proyecto.ESTADO_CONTRATO='Firmado'");   
 	$filas = '';
 
 	while($rowGrupos = mysql_fetch_row($conGrupos))
@@ -20,9 +20,7 @@
 		$btnAsist = '';
 		$btnRepor = '';
 
-	    $btnAsist = '<button id="btnAsistencia" class="btn btn-xs btn-danger btnRegistroAsistenciaSemanal">
-	                     		  Asistencia <i class="glyphicon glyphicon-check"></i>
-	                          </button>';
+	    
 
 	    $btnRepor = '<button id="btnReportes" class="btn btn-xs btn-danger btnRegistroReportesSemanal">
 	                     		  Reportes <i class="glyphicon glyphicon-edit"></i>

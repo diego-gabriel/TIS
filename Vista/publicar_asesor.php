@@ -185,11 +185,6 @@
                     </li>
 
                     <li>
-
-                        <a id="Seguimiento" href="#"><i class="glyphicon glyphicon-list-alt"></i> Seguimiento</a>
-
-                    </li>
-                    <li>
                         <a id="SeguimientoSemanal" href="#"><i class="glyphicon glyphicon-list-alt"></i> Seguimiento Semanal</a>
                     </li>
 
