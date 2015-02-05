@@ -88,7 +88,7 @@
             { $notaAct=$correo1["NOTA_E"];
               $porcentaje=$correo1["PORCENTAJE"];
             }
-            $peticion=$conectar->consulta("SELECT p.PORCENTAJE_A FROM precio AS p, registro AS u WHERE u.ID_R='10' and p.NOMBRE_U= u.NOMBRE_U");
+            $peticion=$conectar->consulta("SELECT p.PORCENTAJE_A FROM precio AS p, registro AS u WHERE u.ID_R='$ID' and p.NOMBRE_U= u.NOMBRE_U");
              while ($correo1 = mysql_fetch_array($peticion))
             { $porsentajeS=$correo1["PORCENTAJE_A"];
 

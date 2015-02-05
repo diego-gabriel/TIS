@@ -91,8 +91,8 @@
             <tbody>
             <th>'.$actividad.'</th>
             <th>'.$fechaFin.'</th>    
-            <th>  <input type="date" name="campo" placeholder="AAAA-MM-DD" pattern="^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$ required> </th>
-            <th>" "</th>
+            <th>  <input type="date" required name="campo" placeholder="AAAA-MM-DD" pattern="^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$"> </th>
+            
           
             </tbody>
             </table>'; 

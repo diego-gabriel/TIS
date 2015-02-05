@@ -48,7 +48,7 @@
     <script type="text/javascript" src="../Librerias/lib/validator/porcentajeMin.js"></script>
     <!-- JS -->
     <script type="text/javascript" src="../Librerias/lib/funcion.js"></script>
-
+    <script type="text/javascript" src="../Librerias/lib/funcionSeguimiento.js"></script>
     <link href="../Librerias/css/plugins/timeline/timeline.css" rel="stylesheet">
     <!-- SB Admin CSS - Include with every page -->
     <link href="../Librerias/css/sb-admin.css" rel="stylesheet">
@@ -251,6 +251,19 @@
     </div>
 </div>
 
+<div class="modal fade modalSeguimiento" role="dialog" data-backdrop="static" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Ver Seguimientos</h4>
+            </div>
+            <div class="modal-body">
+
+            </div>
+        </div>
+    </div>
+</div>
 <div id="page-wrapper">
             <div class="row">
                     <div class="col-lg-12">
@@ -275,7 +288,10 @@
                                                     $anuncio="";
                                                     $clase="";
                                                     $estado="";
-
+                                                  
+                                                    
+                                                    
+                                                    
                                                    $peticion= $conexion->consulta("SELECT `NOMBRE_R`, NOMBRE_U, ID_R FROM `registro`, inscripcion WHERE `TIPO_T`='actividad planificacion' and `NOMBRE_UA`='$uActivo' and  `NOMBRE_UGE`=`NOMBRE_U`"); 
                                                    while($fila = mysql_fetch_array($peticion))
                                                     {
@@ -327,11 +343,31 @@
 
                                                             }
                                                             
+                                                           $peticion6=$conexion->consulta("SELECT grupo_empresa.NOMBRE_LARGO_GE FROM grupo_empresa, registro WHERE registro.ID_R='$codigo' and grupo_empresa.NOMBRE_U=registro.NOMBRE_U");
+                                                           while ($correo1 = mysql_fetch_array($peticion6))
+                                                           { $nLargoGE=$correo1["NOMBRE_LARGO_GE"];}
+                                                           
+                                                           
+                                                           
+                                                              $consulta="SELECT DISTINCT NOMBRE_R FROM `registro` AS r,`receptor` AS w WHERE  r.`ID_R` = w.`ID_R` AND r.`TIPO_T` LIKE 'Contrato' AND w.`RECEPTOR_R` = '$nLargoGE'";
+                                                              $contrato= $conexion->consulta($consulta);
+                                                              $cantC= mysql_num_rows($contrato);
+                                                           
+                                                           
+                                                                                                                     
                                                             
-                                                            if ($tamano==0) 
-                                                            {
-                                                             $btnEvaluacion= '<a href="evaluacion.php?GE='.$codigo.'" class="btn btn-default btn-xs">Evaluacion</a>';
-                                                             $btnReportes = '<a href="reportes_evaluacion.php?GE='.$codigo.'" class="btn btn-xs btn-danger" disabled="disabled">Reportes</a>';
+                                                            if ($tamano==0)
+                                                            {     if ($cantC == 0) 
+                                                                    {
+                                                                     $btnEvaluacion= '<a href="evaluacion.php?GE='.$codigo.'" class="btn btn-default btn-xs" disabled="disabled">Evaluacion</a>';
+                                                                     $btnReportes = '<a href="reportes_evaluacion.php?GE='.$codigo.'" class="btn btn-xs btn-danger" disabled="disabled">Reportes</a>';
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                     $btnEvaluacion= '<a href="evaluacion.php?GE='.$codigo.'" class="btn btn-default btn-xs">Evaluacion</a>';
+                                                                     $btnReportes = '<a href="reportes_evaluacion.php?GE='.$codigo.'" class="btn btn-xs btn-danger" disabled="disabled">Reportes</a>';                                                                        
+                                                                    }
+                                                            
                                                             } 
                                                             else 
                                                             {
