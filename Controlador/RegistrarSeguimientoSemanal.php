@@ -83,7 +83,7 @@
 					$hecho = 0;
 				}
 
-				$insSeg = $conexion->consulta("INSERT INTO seguimiento(id_r, rol_s, grupo_s, actividad_s, hecho_s, resultado_s, conclusion_s, observacion_s)VALUES('$idReg[0]','$rol','$grupoE', '$actividad', $hecho, '$resultado', '$conclusion', '$observacion');");
+				$insSeg = $conexion->consulta("INSERT INTO seguimiento(id_r, rol_s, grupo_s, actividad_s, hecho_s, resultado_s, conclusion_s, observacion_s,fecha_s)VALUES('$idReg[0]','$rol','$grupoE', '$actividad', $hecho, '$resultado', '$conclusion', '$observacion','$fechaReg');");
 			}
 
 			if($insReg and $selIdReg and $insSeg)

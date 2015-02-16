@@ -1,4 +1,5 @@
 $(document).on('ready', function() {
+    
 
     $(document).on('click', '#SeguimientoSemanal', function(e) {
         
@@ -176,6 +177,7 @@ function registrarReportesSemanal() {
             },
             submitHandler: function(validator, form, submitButton) {
                 if (validator.isValid()) {
+                    
                     var rol = validator.getFieldElements('roles').val();
                     var registro = '<tr>'+
                                        '<td class="col-md-2">'+rol+'</td>'+
@@ -237,7 +239,7 @@ function registrarReportesSemanal() {
                     $('#registroRol').hide();
                     $('#registroReportes').find('legend').text('Registro de reportes');
                     $('#registroReportes').find('form').children().show();
-                    $('option[value="'+rol+'"]', $('#registroRol').find('form').find('[name="roles"]')).remove();
+                    //$('option[value="'+rol+'"]', $('#registroRol').find('form').find('[name="roles"]')).remove();
                     $('#registroRol').find('form').find('[name="roles"]').multiselect('rebuild');
 
                     $('#registroReportes').find('form')
@@ -299,6 +301,7 @@ function registrarReportesSemanal() {
                         });
 
                         $('#registroReportes').find('form')
+
                             .find('[name="'+rol+'Hecho"]')
                                 .iCheck({
                                     checkboxClass: 'icheckbox_square-green',
@@ -306,6 +309,7 @@ function registrarReportesSemanal() {
                                 })
                                 .on('ifChanged', function(e) {
                                     var field = $(this).attr('name');
+
                                     $('#registroReportes').find('form')
                                         .bootstrapValidator('updateStatus', field, 'NOT_VALIDATED')
                                         .bootstrapValidator('validateField', field);
