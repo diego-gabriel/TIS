@@ -126,8 +126,8 @@
                     $descrip = "../Repositorio/".$nombreUA."/Contratos/".$pdf;
                     $fecha = date('Y-m-d');
                     $hora = date("G:H:i");
-                    $visible = "TRUE";
-                    $descargar = "TRUE";
+                    $visible = "1";
+                    $descargar = "1";
                     $comentar = $conexion->consulta("INSERT INTO registro (NOMBRE_U,TIPO_T,ESTADO_E,NOMBRE_R,FECHA_R,HORA_R) VALUES ('$nombreUA','Contrato','Habilitado','$pdf','$fecha','$hora')")or
                     die("Error");
                                                    
