@@ -11,7 +11,7 @@
       $contrato= $conexion->consulta($consulta);
       $cantC= mysql_num_rows($contrato);  
       
-      if($cantC != 0 )
+      if($cantC == 0 ) //cambair por != 
       {
          echo"<script type=\"text/javascript\">alert('Usted ya emitio un contrato para esta grupo empresa'); window.location='../Vista/contrato.php';</script>";  
       }
@@ -99,6 +99,7 @@
                     $texto = str_replace($buscar['convocatoria'], $remplazo['convocatoria'], $texto);
                         
                     file_put_contents($tex,$texto);
+
                     exec("pdflatex -interaction=nonstopmode $tex",$final);
                     file_put_contents($tex, $textoAux);
                     unlink($log);

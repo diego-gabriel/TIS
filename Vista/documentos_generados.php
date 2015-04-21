@@ -3,7 +3,15 @@
  session_start();
  $uActivo = $_SESSION['usuario'];
  $con=new conexion();
- 
+
+ function path_to($file)
+ {
+    if (!file_exists($file))
+        $file = "../Repositorio/Default/Contratos/default.pdf";
+
+    return $file;
+ }
+
  ?> 
  <!DOCTYPE html>
  <html>
@@ -294,12 +302,11 @@
                         <tr> 
                           <td><?php echo $i?></td> 
                           <td><b><?php echo $var3[0]  ?></b><td>
-                              <td><a class="link-dos" target="_blank" href="<?php echo $var3[1] ?>">Ver</a></td>
+                              <td><a class="link-dos" target="_blank" href="<?php echo path_to($var3[1]) ?>">Ver</a></td>
 
                               
                               <td> 
                                 <?php
-                                
                                 echo "<a class='link-dos' href='eliminar_contrato.php?id_us=".$var3[1]."'
                                 ><font color='blue'></font> Eliminar</a>";
                                 ?> </td>

@@ -11,7 +11,6 @@
 include '../Modelo/conexion_pd.php';
 include '../Modelo/crear_oc_pdf.php';
 session_start();
-
 $conexion = new conexion();
 
 $nombreUA = $_SESSION['usuario'] ;
@@ -231,12 +230,13 @@ if (isset($_POST['lista']))
                                     file_put_contents($tex,$texto);
 
                                     exec("pdflatex -interaction=nonstopmode $tex",$final);
+                                    
 
                                     file_put_contents($tex, $textoAux);
                                     unlink($log);
                                     unlink($aux);
 
-                                   // rename("OrdenCambio.pdf", $file);
+                                    //rename("OrdenCambio.pdf", $file);
                                     rename("OrdenCambio.pdf", $rutaD.$pdf );
 
                                     $nruta = "../Repositorio/".$nombreUGE."/OC/"."OrdenCambio.pdf";

@@ -13,7 +13,8 @@ $conexion = mysql_connect("localhost","root","");
  
  $UsuarioActivo = $_SESSION['usuario'];
 
-$rutaDirectorio = '../../Repositorio/asesor/';   //ruta de nuestro directorio
+$rutaDirectorio = '/../Repositorio/asesor/';   //ruta de nuestro directorio
+ 
 $asesor = $UsuarioActivo;    
 
     if(!file_exists($rutaDirectorio))
@@ -21,12 +22,12 @@ $asesor = $UsuarioActivo;
     mkdir($rutaDirectorio, 0777);
     }
     if (!empty($_FILES)) {
-    
+     
     $tempFile = $_FILES['file']['tmp_name'];          //3             
     
     $targetPath = dirname( __FILE__ ) . $rutaDirectorio ;  //absolute path of the destination folder.
     $targetFile =  $targetPath. $_FILES['file']['name'];  //absolute path of the uploaded file destination.
-    
+    $log = $log.$targetPath."\n".$targetFile."\n";
     $subido = move_uploaded_file($tempFile,$targetFile); //6
     
        if ($subido) {
