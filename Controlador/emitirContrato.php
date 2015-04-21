@@ -11,7 +11,7 @@
       $contrato= $conexion->consulta($consulta);
       $cantC= mysql_num_rows($contrato);  
       
-      if($cantC == 0 ) //cambair por != 
+      if($cantC != 0 )
       {
          echo"<script type=\"text/javascript\">alert('Usted ya emitio un contrato para esta grupo empresa'); window.location='../Vista/contrato.php';</script>";  
       }
