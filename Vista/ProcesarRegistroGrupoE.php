@@ -69,7 +69,7 @@
                     $result->execute();
 
                     $conn->commit();
-                    echo"<script type=\"text/javascript\">alert('El registro ha sido satisfactorio'); window.location='RegistrarGrupoEmpresa.php';</script>";
+                    echo"<script type=\"text/javascript\">alert('El registro ha sido satisfactorio'); window.location='RegistrarGrupoEmpresa.php/../../index.php';</script>";
 
                 } catch (PDOException $e) {
                     // si ocurre un error hacemos rollback para anular todos los insert

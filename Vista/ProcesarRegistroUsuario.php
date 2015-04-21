@@ -116,8 +116,7 @@
             $conect->consulta("INSERT INTO usuario_rol(NOMBRE_U, ROL_R) VALUES('$Name','$rol')");  
             $conect->consulta("INSERT INTO criteriocalificacion(NOMBRE_U,NOMBRE_CRITERIO_C,TIPO_CRITERIO) VALUES('$Name','PUNTAJE','4')");
                
-            echo '<script>alert("Su solicitud se envio correctamente");</script>';
-            echo '<script>window.location="../Vista/RegistrarUsuario.php";</script>';
+            echo "<script>alert('Su solicitud se envio correctamente'); window.location='RegistrarUsuario.php/../../index.php';</script>";
           }
         
     }

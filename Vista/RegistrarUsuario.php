@@ -57,7 +57,7 @@
 
 <!-------------------------------------------NUEVAS PUBLICACIONES------------------------------------------>
 <div id="page-wrapper">
-    <form method = "post" id="FormularioRegistroUsuario" action="ProcesarRegistroUsuario.php" role="form" enctype="multipart/data-form" onsubmit="return validar(FormularioRegistroUsuario)">
+    <form method = "post" id="FormularioRegistroUsuario" action="" role="form" enctype="multipart/data-form" onsubmit="return validar(FormularioRegistroUsuario)">
                                   
         <div class ="form-horizontal">
             <div class="row">
@@ -163,7 +163,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <button type="submit" name="submit" class="btn btn-primary" id="btn-registrarUser"> <span class="glyphicon glyphicon-ok"></span> Registrarme</button>
+                                            <button type="submit" name="submit" onclick="this.form.action='ProcesarRegistroUsuario.php'" class="btn btn-primary" id="btn-registrarUser"> <span class="glyphicon glyphicon-ok"></span> Registrarme</button>
                                         </div>
                                                
                             <div id="panelResultado">

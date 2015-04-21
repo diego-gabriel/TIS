@@ -37,17 +37,21 @@ if(isset($_POST['registrar']))
             $idGestion_= $idGestion[0];
 
             $separar = explode(' ', $asesor);
+            $nom = $separar[0];
             $count = count($separar);
-            $apellido = $separar[1];
+
             if( $count == 3)
             {
-                $apellido = $apellido." ".$separar[2];
+                $apellido = $separar[1]." ".$separar[2];
+            } else if( $count == 4){
+                $nom = $nom." ".$separar[1];
+                $apellido = $separar[2]." ".$separar[3];
             }
 
 
-            $seleccion = "SELECT nombre_u "
+            $seleccion = "SELECT NOMBRE_U "
                     . "FROM asesor "
-                    . "WHERE NOMBRES_A LIKE '". $separar[0]."' and APELLIDOS_A LIKE '".$apellido."'";
+                    . "WHERE NOMBRES_A LIKE '". $nom."' and APELLIDOS_A LIKE '".$apellido."'";
             $consulta = $conexion->consulta($seleccion);
             $nombre =  mysql_fetch_row($consulta);
             $nombreU = $nombre[0];
