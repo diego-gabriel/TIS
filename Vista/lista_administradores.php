@@ -2,7 +2,7 @@
    session_start();
    $uActivo= $_SESSION['usuario'];
    include '../Modelo/conexion.php';
-   $conect = new conexion()
+   $conect = new conexion();
  
 ?>
     <html>
@@ -296,7 +296,7 @@ WHERE  u.NOMBRE_U = r.NOMBRE_U  AND r.ROL_R = 'administrador'");
 
                                 while($fila = mysql_fetch_array($peticion))
                                 {
-                                    if($fila['NOMBRE_U'] == $uActivo || $fila['NOMBRE_U']=="Admin1")
+                                    if($fila['NOMBRE_U'] == $uActivo || $fila['NOMBRE_U']==$uActivo)
                                     {
 
 
@@ -304,7 +304,7 @@ WHERE  u.NOMBRE_U = r.NOMBRE_U  AND r.ROL_R = 'administrador'");
                                      }
                                     else{    
 
-                                            if($uActivo=="Admin1")
+                                            if($uActivo==$uActivo)
                                             {
 
                                                     ?>

@@ -1,6 +1,13 @@
  <?php  
  session_start();
  $uActivo = $_SESSION['usuario'];
+
+ function path_to($aFile)
+ {
+    if (!file_exists($aFile))
+        $aFile = "../Repositorio/Default/not_found.pdf";
+    return $aFile;
+ }
  
  ?> 
   <!DOCTYPE html>
@@ -338,7 +345,7 @@
                                                                     <td><?php echo $subidos[2]  ?></td>
                                                                     <td><?php echo $subidos[3]  ?></td>
                                                                     
-                                                                    <td><a class="link-dos" target="_blank" href="<?php echo $rutaSubido ?>">Ver</a></td>
+                                                                    <td><a class="link-dos" target="_blank" href="<?php echo path_to($rutaSubido) ?>">Ver</a></td>
                                                                     <td> 
                                                                          <?php
                                                                              echo "<a class='link-dos' href='eliminarDocumentoSubido.php?id_us=".$variable."'

@@ -23,12 +23,9 @@ $nombre=  LimpiaEspacios($_POST['nombre']);
 $nombreCorto=  LimpiaEspacios($_POST['nombreCorto']);
 //$nombreAsesor=$_POST['nombreAsesor'];
 //$nombreGrupo=$_POST['nombreGrupo'];
-date_default_timezone_set('America/La_Paz');
-$fecha=  date('Y-m-d');
-$hora=  date("G:H:i");
 
 $conexion= new conexion();
-$consulta=$conexion->consulta("SELECT NOMBRE_LARGO,NOMBRE_CORTO FROM lista_ge");
+$consulta=$conexion->consulta("SELECT NOMBRE_LARGO_GE,NOMBRE_CORTO_GE FROM grupo_empresa");
 $existe=FALSE;
 $existe2=FALSE;
 while ($fila=  mysql_fetch_array($consulta))
